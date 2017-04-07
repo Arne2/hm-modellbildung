@@ -17,7 +17,7 @@ dataProbanden= SemanticImport@FileNameJoin@{NotebookDirectory[],pathProbanden};
 
 (*Konstanten f\[UDoubleDot]r die L\[ADoubleDot]nge der Ebene und der Treppe in Meter.Die Treppenstrecke wurde projeziert auf die Horizontale.*)
 l\[ADoubleDot]ngeEbene = 27.3;
-l\[ADoubleDot]ngeTreppe = :9.39;
+l\[ADoubleDot]ngeTreppe = 9.39;
 
 
 (*Nur die relevanten Spalten werden verwendet.*)
@@ -48,7 +48,7 @@ gr\[ODoubleDot]\[SZ]e = dataProbanden[ All,<|
 
 (*Die Daten werden zusammen in eine Tabelle gejoint. Dies stellt sicher, dass die einzelnen Werte passend zur ID des Probanden und der Runde zugeordnet werden.*)
 abauf = JoinAcross[auf, ab, {"id","runde"}];
-abaufebene = JoinAcross[abauf,dataEbene, {"id","runde"}];
+abaufebene = JoinAcross[abauf,ebene, {"id","runde"}];
 data = JoinAcross[abaufebene, gr\[ODoubleDot]\[SZ]e,{"id"}];
 
 
@@ -60,7 +60,6 @@ data = JoinAcross[abaufebene, gr\[ODoubleDot]\[SZ]e,{"id"}];
 data[Select[#bemerkung !=""&]]
 
 data = data[Select[#bemerkung == ""&]];
-
 
 
 (*Modell f\[UDoubleDot]r Abh\[ADoubleDot]ngigkeit von der Ebenengeschwindigkeit*)

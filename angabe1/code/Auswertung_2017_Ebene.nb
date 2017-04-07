@@ -3,10 +3,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[         0,          0]
-NotebookDataLength[    214316,       4555]
-NotebookOptionsPosition[    210889,       4462]
-NotebookOutlinePosition[    211223,       4477]
-CellTagsIndexPosition[    211180,       4474]
+NotebookDataLength[    214158,       4542]
+NotebookOptionsPosition[    210742,       4449]
+NotebookOutlinePosition[    211076,       4464]
+CellTagsIndexPosition[    211033,       4461]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -25,21 +25,22 @@ Cell[BoxData[
 
 Cell[CellGroupData[{
 
-Cell[BoxData[
- RowBox[{"dataEbene", " ", "=", " ", 
+Cell[BoxData[{
+ RowBox[{
   RowBox[{
-  "SemanticImport", "[", 
-   "\"\</home/dima/Dropbox/AAA_Studium/Master/Semester1/Modellbildung_und_\
-Simulation/Gruppe/hm-modellbildung/angabe1/data/2017/Messungen_2017_\
-Geschwindigkeit_Ebene.csv\>\"", "]"}]}]], "Input",
- CellChangeTimes->{{3.700293520291885*^9, 3.70029355526588*^9}, {
-   3.700293626729526*^9, 3.700293659218994*^9}, {3.7004673595508757`*^9, 
-   3.7004673975895643`*^9}, {3.700467482733392*^9, 3.700467488349568*^9}, {
-   3.70046754735918*^9, 3.7004675507709723`*^9}, 3.700467584124237*^9, {
-   3.7004680572219543`*^9, 3.700468057804769*^9}, {3.70046908986395*^9, 
-   3.70046913823337*^9}, {3.700469239946294*^9, 
-   3.700469240304673*^9}},ExpressionUUID->"99b17da3-f533-452e-8bd9-\
-ef740de189c1"],
+  "dataPath", "=", 
+   "\"\<../data/2017/Messungen_2017_Geschwindigkeit_Ebene.csv\>\""}], 
+  ";"}], "\n", 
+ RowBox[{"dataEbene", "=", 
+  RowBox[{"SemanticImport", "@", 
+   RowBox[{"FileNameJoin", "@", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"NotebookDirectory", "[", "]"}], ",", "dataPath"}], 
+     "}"}]}]}]}]}], "Input",
+ CellChangeTimes->{{3.700587311553067*^9, 
+  3.700587311553347*^9}},ExpressionUUID->"f5f73f3a-79dc-4b0e-a299-\
+1fa4d20fa759"],
 
 Cell[BoxData[
  TemplateBox[{TagBox[
@@ -70,7 +71,7 @@ Cell[BoxData[
               TypeSystem`PackageScope`AtomShape[34], "Zeit" -> 
               TypeSystem`PackageScope`AtomShape[60], "Bemerkung" -> 
               TypeSystem`PackageScope`AtomShape[86.4]]]], 20, {}]], 
-        "InitialData" -> TypeSystem`PackageScope`CacheHandle[1471406294], 
+        "InitialData" -> TypeSystem`PackageScope`CacheHandle[1196429790], 
         "Type" -> TypeSystem`Vector[
           
           TypeSystem`Struct[{
@@ -80,7 +81,7 @@ Cell[BoxData[
             TypeSystem`Atom[Integer], 
             TypeSystem`Atom[Real], 
             TypeSystem`Atom[String]}], 66], "HandleQ" -> True, "RowTarget" -> 
-        20, "Data" -> TypeSystem`PackageScope`CacheHandle[1471406294]], 
+        20, "Data" -> TypeSystem`PackageScope`CacheHandle[1196429790]], 
       TypeSystem`NestedGrid`PackagePrivate`$path$$ = {}, 
       TypeSystem`NestedGrid`PackagePrivate`$pos$$ = 1, 
       TypeSystem`NestedGrid`PackagePrivate`$grid$$ = 
@@ -114,11 +115,11 @@ Cell[BoxData[
                    TypeSystem`NestedGrid`PackagePrivate`$state$$, 
                     TypeSystem`NestedGrid`PackagePrivate`$path$$, 
                     TypeSystem`NestedGrid`PackagePrivate`$pos$$, 
-                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 
-                    1155829822][{
+                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 276719836][{
                     All, "\[IDoubleDot]\[RightGuillemet]\[DownQuestion]Runde"}\
 ]], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[
                   All, "\[IDoubleDot]\[RightGuillemet]\[DownQuestion]Runde"]],
                   "Mouse"], Background -> GrayLevel[0.95], 
@@ -148,9 +149,10 @@ Cell[BoxData[
                    TypeSystem`NestedGrid`PackagePrivate`$state$$, 
                     TypeSystem`NestedGrid`PackagePrivate`$path$$, 
                     TypeSystem`NestedGrid`PackagePrivate`$pos$$, 
-                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 
-                    1155829822][{All, "ID_Proband"}]], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 276719836][{
+                    All, "ID_Proband"}]], 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[All, "ID_Proband"]], "Mouse"], 
                 Background -> GrayLevel[0.95], Alignment -> {Left, Baseline}], 
                Item[
@@ -177,9 +179,10 @@ Cell[BoxData[
                    TypeSystem`NestedGrid`PackagePrivate`$state$$, 
                     TypeSystem`NestedGrid`PackagePrivate`$path$$, 
                     TypeSystem`NestedGrid`PackagePrivate`$pos$$, 
-                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 
-                    1155829822][{All, "Zeit"}]], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 276719836][{
+                    All, "Zeit"}]], 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[All, "Zeit"]], "Mouse"], Background -> 
                 GrayLevel[0.95], Alignment -> {Left, Baseline}], 
                Item[
@@ -207,16 +210,18 @@ Cell[BoxData[
                    TypeSystem`NestedGrid`PackagePrivate`$state$$, 
                     TypeSystem`NestedGrid`PackagePrivate`$path$$, 
                     TypeSystem`NestedGrid`PackagePrivate`$pos$$, 
-                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 
-                    1155829822][{All, "Bemerkung"}]], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 276719836][{
+                    All, "Bemerkung"}]], 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[All, "Bemerkung"]], "Mouse"], 
                 Background -> GrayLevel[0.95], 
                 Alignment -> {Left, Baseline}]}, {
                Pane[
                 Annotation[
                  RawBoxes["1"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[1, 
                    Key[
                    "\[IDoubleDot]\[RightGuillemet]\[DownQuestion]Runde"]]], 
@@ -225,7 +230,8 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["1"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[1, 
                    Key["ID_Proband"]]], "Mouse"], 
                 ImageSize -> {{34, Full}, Automatic}, 
@@ -233,14 +239,16 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["17.65"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[1, 
                    Key["Zeit"]]], "Mouse"], 
                 ImageSize -> {{60, Full}, Automatic}, 
                 Alignment -> {Left, Baseline}], 
                Pane[
                 Annotation["", 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[1, 
                    Key["Bemerkung"]]], "Mouse"], 
                 ImageSize -> {{86.4, Full}, Automatic}, 
@@ -248,7 +256,8 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["1"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[2, 
                    Key[
                    "\[IDoubleDot]\[RightGuillemet]\[DownQuestion]Runde"]]], 
@@ -257,7 +266,8 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["2"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[2, 
                    Key["ID_Proband"]]], "Mouse"], 
                 ImageSize -> {{34, Full}, Automatic}, 
@@ -265,14 +275,16 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["17.37"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[2, 
                    Key["Zeit"]]], "Mouse"], 
                 ImageSize -> {{60, Full}, Automatic}, 
                 Alignment -> {Left, Baseline}], 
                Pane[
                 Annotation["", 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[2, 
                    Key["Bemerkung"]]], "Mouse"], 
                 ImageSize -> {{86.4, Full}, Automatic}, 
@@ -280,7 +292,8 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["1"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[3, 
                    Key[
                    "\[IDoubleDot]\[RightGuillemet]\[DownQuestion]Runde"]]], 
@@ -289,7 +302,8 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["3"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[3, 
                    Key["ID_Proband"]]], "Mouse"], 
                 ImageSize -> {{34, Full}, Automatic}, 
@@ -297,14 +311,16 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["17.88"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[3, 
                    Key["Zeit"]]], "Mouse"], 
                 ImageSize -> {{60, Full}, Automatic}, 
                 Alignment -> {Left, Baseline}], 
                Pane[
                 Annotation["", 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[3, 
                    Key["Bemerkung"]]], "Mouse"], 
                 ImageSize -> {{86.4, Full}, Automatic}, 
@@ -312,7 +328,8 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["1"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[4, 
                    Key[
                    "\[IDoubleDot]\[RightGuillemet]\[DownQuestion]Runde"]]], 
@@ -321,7 +338,8 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["4"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[4, 
                    Key["ID_Proband"]]], "Mouse"], 
                 ImageSize -> {{34, Full}, Automatic}, 
@@ -329,14 +347,16 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["15.81"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[4, 
                    Key["Zeit"]]], "Mouse"], 
                 ImageSize -> {{60, Full}, Automatic}, 
                 Alignment -> {Left, Baseline}], 
                Pane[
                 Annotation["", 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[4, 
                    Key["Bemerkung"]]], "Mouse"], 
                 ImageSize -> {{86.4, Full}, Automatic}, 
@@ -344,7 +364,8 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["1"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[5, 
                    Key[
                    "\[IDoubleDot]\[RightGuillemet]\[DownQuestion]Runde"]]], 
@@ -353,7 +374,8 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["5"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[5, 
                    Key["ID_Proband"]]], "Mouse"], 
                 ImageSize -> {{34, Full}, Automatic}, 
@@ -361,14 +383,16 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["15.97"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[5, 
                    Key["Zeit"]]], "Mouse"], 
                 ImageSize -> {{60, Full}, Automatic}, 
                 Alignment -> {Left, Baseline}], 
                Pane[
                 Annotation["", 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[5, 
                    Key["Bemerkung"]]], "Mouse"], 
                 ImageSize -> {{86.4, Full}, Automatic}, 
@@ -376,7 +400,8 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["1"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[6, 
                    Key[
                    "\[IDoubleDot]\[RightGuillemet]\[DownQuestion]Runde"]]], 
@@ -385,7 +410,8 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["6"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[6, 
                    Key["ID_Proband"]]], "Mouse"], 
                 ImageSize -> {{34, Full}, Automatic}, 
@@ -393,14 +419,16 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["18.84"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[6, 
                    Key["Zeit"]]], "Mouse"], 
                 ImageSize -> {{60, Full}, Automatic}, 
                 Alignment -> {Left, Baseline}], 
                Pane[
                 Annotation["", 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[6, 
                    Key["Bemerkung"]]], "Mouse"], 
                 ImageSize -> {{86.4, Full}, Automatic}, 
@@ -408,7 +436,8 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["1"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[7, 
                    Key[
                    "\[IDoubleDot]\[RightGuillemet]\[DownQuestion]Runde"]]], 
@@ -417,7 +446,8 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["7"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[7, 
                    Key["ID_Proband"]]], "Mouse"], 
                 ImageSize -> {{34, Full}, Automatic}, 
@@ -425,14 +455,16 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["22.85"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[7, 
                    Key["Zeit"]]], "Mouse"], 
                 ImageSize -> {{60, Full}, Automatic}, 
                 Alignment -> {Left, Baseline}], 
                Pane[
                 Annotation["getr\[ODoubleDot]delt", 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[7, 
                    Key["Bemerkung"]]], "Mouse"], 
                 ImageSize -> {{86.4, Full}, Automatic}, 
@@ -440,7 +472,8 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["1"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[8, 
                    Key[
                    "\[IDoubleDot]\[RightGuillemet]\[DownQuestion]Runde"]]], 
@@ -449,7 +482,8 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["8"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[8, 
                    Key["ID_Proband"]]], "Mouse"], 
                 ImageSize -> {{34, Full}, Automatic}, 
@@ -457,14 +491,16 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["17.47"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[8, 
                    Key["Zeit"]]], "Mouse"], 
                 ImageSize -> {{60, Full}, Automatic}, 
                 Alignment -> {Left, Baseline}], 
                Pane[
                 Annotation["", 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[8, 
                    Key["Bemerkung"]]], "Mouse"], 
                 ImageSize -> {{86.4, Full}, Automatic}, 
@@ -472,7 +508,8 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["1"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[9, 
                    Key[
                    "\[IDoubleDot]\[RightGuillemet]\[DownQuestion]Runde"]]], 
@@ -481,7 +518,8 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["9"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[9, 
                    Key["ID_Proband"]]], "Mouse"], 
                 ImageSize -> {{34, Full}, Automatic}, 
@@ -489,14 +527,16 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["18.76"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[9, 
                    Key["Zeit"]]], "Mouse"], 
                 ImageSize -> {{60, Full}, Automatic}, 
                 Alignment -> {Left, Baseline}], 
                Pane[
                 Annotation["", 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[9, 
                    Key["Bemerkung"]]], "Mouse"], 
                 ImageSize -> {{86.4, Full}, Automatic}, 
@@ -504,7 +544,8 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["1"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[10, 
                    Key[
                    "\[IDoubleDot]\[RightGuillemet]\[DownQuestion]Runde"]]], 
@@ -513,7 +554,8 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["10"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[10, 
                    Key["ID_Proband"]]], "Mouse"], 
                 ImageSize -> {{34, Full}, Automatic}, 
@@ -521,14 +563,16 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["22.08"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[10, 
                    Key["Zeit"]]], "Mouse"], 
                 ImageSize -> {{60, Full}, Automatic}, 
                 Alignment -> {Left, Baseline}], 
                Pane[
                 Annotation["", 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[10, 
                    Key["Bemerkung"]]], "Mouse"], 
                 ImageSize -> {{86.4, Full}, Automatic}, 
@@ -536,7 +580,8 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["1"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[11, 
                    Key[
                    "\[IDoubleDot]\[RightGuillemet]\[DownQuestion]Runde"]]], 
@@ -545,7 +590,8 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["11"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[11, 
                    Key["ID_Proband"]]], "Mouse"], 
                 ImageSize -> {{34, Full}, Automatic}, 
@@ -553,14 +599,16 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["18.25"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[11, 
                    Key["Zeit"]]], "Mouse"], 
                 ImageSize -> {{60, Full}, Automatic}, 
                 Alignment -> {Left, Baseline}], 
                Pane[
                 Annotation["", 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[11, 
                    Key["Bemerkung"]]], "Mouse"], 
                 ImageSize -> {{86.4, Full}, Automatic}, 
@@ -568,7 +616,8 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["1"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[12, 
                    Key[
                    "\[IDoubleDot]\[RightGuillemet]\[DownQuestion]Runde"]]], 
@@ -577,7 +626,8 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["12"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[12, 
                    Key["ID_Proband"]]], "Mouse"], 
                 ImageSize -> {{34, Full}, Automatic}, 
@@ -585,14 +635,16 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["17.5"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[12, 
                    Key["Zeit"]]], "Mouse"], 
                 ImageSize -> {{60, Full}, Automatic}, 
                 Alignment -> {Left, Baseline}], 
                Pane[
                 Annotation["", 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[12, 
                    Key["Bemerkung"]]], "Mouse"], 
                 ImageSize -> {{86.4, Full}, Automatic}, 
@@ -600,7 +652,8 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["1"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[13, 
                    Key[
                    "\[IDoubleDot]\[RightGuillemet]\[DownQuestion]Runde"]]], 
@@ -609,7 +662,8 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["13"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[13, 
                    Key["ID_Proband"]]], "Mouse"], 
                 ImageSize -> {{34, Full}, Automatic}, 
@@ -617,14 +671,16 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["21.25"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[13, 
                    Key["Zeit"]]], "Mouse"], 
                 ImageSize -> {{60, Full}, Automatic}, 
                 Alignment -> {Left, Baseline}], 
                Pane[
                 Annotation["", 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[13, 
                    Key["Bemerkung"]]], "Mouse"], 
                 ImageSize -> {{86.4, Full}, Automatic}, 
@@ -632,7 +688,8 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["1"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[14, 
                    Key[
                    "\[IDoubleDot]\[RightGuillemet]\[DownQuestion]Runde"]]], 
@@ -641,7 +698,8 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["14"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[14, 
                    Key["ID_Proband"]]], "Mouse"], 
                 ImageSize -> {{34, Full}, Automatic}, 
@@ -649,14 +707,16 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["16.32"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[14, 
                    Key["Zeit"]]], "Mouse"], 
                 ImageSize -> {{60, Full}, Automatic}, 
                 Alignment -> {Left, Baseline}], 
                Pane[
                 Annotation["", 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[14, 
                    Key["Bemerkung"]]], "Mouse"], 
                 ImageSize -> {{86.4, Full}, Automatic}, 
@@ -664,7 +724,8 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["1"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[15, 
                    Key[
                    "\[IDoubleDot]\[RightGuillemet]\[DownQuestion]Runde"]]], 
@@ -673,7 +734,8 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["15"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[15, 
                    Key["ID_Proband"]]], "Mouse"], 
                 ImageSize -> {{34, Full}, Automatic}, 
@@ -681,14 +743,16 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["18.24"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[15, 
                    Key["Zeit"]]], "Mouse"], 
                 ImageSize -> {{60, Full}, Automatic}, 
                 Alignment -> {Left, Baseline}], 
                Pane[
                 Annotation["", 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[15, 
                    Key["Bemerkung"]]], "Mouse"], 
                 ImageSize -> {{86.4, Full}, Automatic}, 
@@ -696,7 +760,8 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["1"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[16, 
                    Key[
                    "\[IDoubleDot]\[RightGuillemet]\[DownQuestion]Runde"]]], 
@@ -705,7 +770,8 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["16"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[16, 
                    Key["ID_Proband"]]], "Mouse"], 
                 ImageSize -> {{34, Full}, Automatic}, 
@@ -713,14 +779,16 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["19.71"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[16, 
                    Key["Zeit"]]], "Mouse"], 
                 ImageSize -> {{60, Full}, Automatic}, 
                 Alignment -> {Left, Baseline}], 
                Pane[
                 Annotation["", 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[16, 
                    Key["Bemerkung"]]], "Mouse"], 
                 ImageSize -> {{86.4, Full}, Automatic}, 
@@ -728,7 +796,8 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["1"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[17, 
                    Key[
                    "\[IDoubleDot]\[RightGuillemet]\[DownQuestion]Runde"]]], 
@@ -737,7 +806,8 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["17"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[17, 
                    Key["ID_Proband"]]], "Mouse"], 
                 ImageSize -> {{34, Full}, Automatic}, 
@@ -745,14 +815,16 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["19.82"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[17, 
                    Key["Zeit"]]], "Mouse"], 
                 ImageSize -> {{60, Full}, Automatic}, 
                 Alignment -> {Left, Baseline}], 
                Pane[
                 Annotation["", 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[17, 
                    Key["Bemerkung"]]], "Mouse"], 
                 ImageSize -> {{86.4, Full}, Automatic}, 
@@ -760,7 +832,8 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["1"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[18, 
                    Key[
                    "\[IDoubleDot]\[RightGuillemet]\[DownQuestion]Runde"]]], 
@@ -769,7 +842,8 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["18"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[18, 
                    Key["ID_Proband"]]], "Mouse"], 
                 ImageSize -> {{34, Full}, Automatic}, 
@@ -777,14 +851,16 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["16.25"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[18, 
                    Key["Zeit"]]], "Mouse"], 
                 ImageSize -> {{60, Full}, Automatic}, 
                 Alignment -> {Left, Baseline}], 
                Pane[
                 Annotation["", 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[18, 
                    Key["Bemerkung"]]], "Mouse"], 
                 ImageSize -> {{86.4, Full}, Automatic}, 
@@ -792,7 +868,8 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["1"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[19, 
                    Key[
                    "\[IDoubleDot]\[RightGuillemet]\[DownQuestion]Runde"]]], 
@@ -801,7 +878,8 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["19"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[19, 
                    Key["ID_Proband"]]], "Mouse"], 
                 ImageSize -> {{34, Full}, Automatic}, 
@@ -809,14 +887,16 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["19.81"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[19, 
                    Key["Zeit"]]], "Mouse"], 
                 ImageSize -> {{60, Full}, Automatic}, 
                 Alignment -> {Left, Baseline}], 
                Pane[
                 Annotation["", 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[19, 
                    Key["Bemerkung"]]], "Mouse"], 
                 ImageSize -> {{86.4, Full}, Automatic}, 
@@ -824,7 +904,8 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["1"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[20, 
                    Key[
                    "\[IDoubleDot]\[RightGuillemet]\[DownQuestion]Runde"]]], 
@@ -833,7 +914,8 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["20"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[20, 
                    Key["ID_Proband"]]], "Mouse"], 
                 ImageSize -> {{34, Full}, Automatic}, 
@@ -841,14 +923,16 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["18.96"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[20, 
                    Key["Zeit"]]], "Mouse"], 
                 ImageSize -> {{60, Full}, Automatic}, 
                 Alignment -> {Left, Baseline}], 
                Pane[
                 Annotation["", 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
+                 
                   GeneralUtilities`Slice[20, 
                    Key["Bemerkung"]]], "Mouse"], 
                 ImageSize -> {{86.4, Full}, Automatic}, 
@@ -1299,8 +1383,8 @@ Cell[BoxData[
                     TypeSystem`NestedGrid`PackagePrivate`$state$$, 
                     TypeSystem`NestedGrid`PackagePrivate`$path$$, 
                     TypeSystem`NestedGrid`PackagePrivate`$pos$$, 
-                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 1155829822},
-                     1, {}]], MenuEvaluator -> Automatic], 
+                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 276719836}, 
+                    1, {}]], MenuEvaluator -> Automatic], 
                     MenuItem["Show up to 10 rows", 
                     KernelExecute[
                     
@@ -1308,8 +1392,8 @@ Cell[BoxData[
                     TypeSystem`NestedGrid`PackagePrivate`$state$$, 
                     TypeSystem`NestedGrid`PackagePrivate`$path$$, 
                     TypeSystem`NestedGrid`PackagePrivate`$pos$$, 
-                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 1155829822},
-                     10, {}]], MenuEvaluator -> Automatic], 
+                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 276719836}, 
+                    10, {}]], MenuEvaluator -> Automatic], 
                     MenuItem["Show up to 30 rows", 
                     KernelExecute[
                     
@@ -1317,8 +1401,8 @@ Cell[BoxData[
                     TypeSystem`NestedGrid`PackagePrivate`$state$$, 
                     TypeSystem`NestedGrid`PackagePrivate`$path$$, 
                     TypeSystem`NestedGrid`PackagePrivate`$pos$$, 
-                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 1155829822},
-                     30, {}]], MenuEvaluator -> Automatic], 
+                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 276719836}, 
+                    30, {}]], MenuEvaluator -> Automatic], 
                     MenuItem["Show up to 100 rows", 
                     KernelExecute[
                     
@@ -1326,8 +1410,8 @@ Cell[BoxData[
                     TypeSystem`NestedGrid`PackagePrivate`$state$$, 
                     TypeSystem`NestedGrid`PackagePrivate`$path$$, 
                     TypeSystem`NestedGrid`PackagePrivate`$pos$$, 
-                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 1155829822},
-                     100, {}]], MenuEvaluator -> Automatic], 
+                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 276719836}, 
+                    100, {}]], MenuEvaluator -> Automatic], 
                     MenuItem["Show all", 
                     KernelExecute[
                     
@@ -1335,8 +1419,8 @@ Cell[BoxData[
                     TypeSystem`NestedGrid`PackagePrivate`$state$$, 
                     TypeSystem`NestedGrid`PackagePrivate`$path$$, 
                     TypeSystem`NestedGrid`PackagePrivate`$pos$$, 
-                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 1155829822},
-                     100000000, {}]], MenuEvaluator -> Automatic]}}], 
+                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 276719836}, 
+                    100000000, {}]], MenuEvaluator -> Automatic]}}], 
                SpanFromLeft, SpanFromLeft, SpanFromLeft}}, 
              BaseStyle -> {ContextMenu -> {
                  MenuItem["Copy position to clipboard", 
@@ -1385,7 +1469,7 @@ Cell[BoxData[
                 TypeSystem`NestedGrid`PackagePrivate`$state$$, 
                  TypeSystem`NestedGrid`PackagePrivate`$path$$, 
                  TypeSystem`NestedGrid`PackagePrivate`$pos$$, 
-                 TypeSystem`NestedGrid`PackagePrivate`$grid$$, 1155829822][
+                 TypeSystem`NestedGrid`PackagePrivate`$grid$$, 276719836][
                 TypeSystem`NestedGrid`PackagePrivate`tmpData$]]; If[
                Not[
                 FailureQ[TypeSystem`NestedGrid`PackagePrivate`tmpGrid$]], 
@@ -1416,14 +1500,14 @@ Cell[BoxData[
            TypeSystem`NestedGrid`PackagePrivate`$state$$, 
             TypeSystem`NestedGrid`PackagePrivate`$path$$, 
             TypeSystem`NestedGrid`PackagePrivate`$pos$$, 
-            TypeSystem`NestedGrid`PackagePrivate`$grid$$, 1155829822]]]], 
+            TypeSystem`NestedGrid`PackagePrivate`$grid$$, 276719836]]]], 
         TrackedSymbols :> {TypeSystem`NestedGrid`PackagePrivate`$path$$}], 
       TypeSystem`NestedGrid`PackagePrivate`$bottomBar$$ = Framed[
         Dynamic[
          Replace[
           MouseAnnotation[Null], {
-          TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][Null] -> 
-           "", TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1155829822][
+          TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][Null] -> 
+           "", TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[276719836][
              Pattern[TypeSystem`NestedGrid`PackagePrivate`path, 
               Blank[]]] :> (
             TypeSystem`NestedGrid`PackagePrivate`$lastPath = 
@@ -1470,9 +1554,9 @@ Cell[BoxData[
   "CopyTag",
   DisplayFunction->(#& ),
   InterpretationFunction->("Dataset[<>]"& )]], "Output",
- CellChangeTimes->{
-  3.7004692528121023`*^9},ExpressionUUID->"8ea2c725-0754-4c2a-8030-\
-0627a00ac8d2"]
+ CellChangeTimes->{{3.70058733152192*^9, 3.7005873407414923`*^9}, 
+   3.700587416873179*^9},ExpressionUUID->"d1135a48-d5e4-46b2-90d9-\
+0da58bc53fea"]
 }, Open  ]],
 
 Cell[BoxData[""], "Input",
@@ -1530,7 +1614,7 @@ Cell[BoxData[
               TypeSystem`PackageScope`AtomShape[60], "Bemerkung" -> 
               TypeSystem`PackageScope`AtomShape[86.4], "Geschwindigkeit" -> 
               TypeSystem`PackageScope`AtomShape[60]]]], 20, {}]], 
-        "InitialData" -> TypeSystem`PackageScope`CacheHandle[143961648], 
+        "InitialData" -> TypeSystem`PackageScope`CacheHandle[38826108], 
         "Type" -> TypeSystem`Vector[
           
           TypeSystem`Struct[{
@@ -1541,7 +1625,7 @@ Cell[BoxData[
             TypeSystem`Atom[Real], 
             TypeSystem`Atom[String], 
             TypeSystem`Atom[Real]}], 66], "HandleQ" -> True, "RowTarget" -> 
-        20, "Data" -> TypeSystem`PackageScope`CacheHandle[143961648]], 
+        20, "Data" -> TypeSystem`PackageScope`CacheHandle[38826108]], 
       TypeSystem`NestedGrid`PackagePrivate`$path$$ = {}, 
       TypeSystem`NestedGrid`PackagePrivate`$pos$$ = 1, 
       TypeSystem`NestedGrid`PackagePrivate`$grid$$ = 
@@ -1575,11 +1659,11 @@ Cell[BoxData[
                    TypeSystem`NestedGrid`PackagePrivate`$state$$, 
                     TypeSystem`NestedGrid`PackagePrivate`$path$$, 
                     TypeSystem`NestedGrid`PackagePrivate`$pos$$, 
-                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 488714196][{
+                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 
+                    1088734830][{
                     All, "\[IDoubleDot]\[RightGuillemet]\[DownQuestion]Runde"}\
 ]], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[
                   All, "\[IDoubleDot]\[RightGuillemet]\[DownQuestion]Runde"]],
                   "Mouse"], Background -> GrayLevel[0.95], 
@@ -1609,10 +1693,9 @@ Cell[BoxData[
                    TypeSystem`NestedGrid`PackagePrivate`$state$$, 
                     TypeSystem`NestedGrid`PackagePrivate`$path$$, 
                     TypeSystem`NestedGrid`PackagePrivate`$pos$$, 
-                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 488714196][{
-                    All, "ID_Proband"}]], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 
+                    1088734830][{All, "ID_Proband"}]], 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[All, "ID_Proband"]], "Mouse"], 
                 Background -> GrayLevel[0.95], Alignment -> {Left, Baseline}], 
                Item[
@@ -1639,10 +1722,9 @@ Cell[BoxData[
                    TypeSystem`NestedGrid`PackagePrivate`$state$$, 
                     TypeSystem`NestedGrid`PackagePrivate`$path$$, 
                     TypeSystem`NestedGrid`PackagePrivate`$pos$$, 
-                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 488714196][{
-                    All, "Zeit"}]], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 
+                    1088734830][{All, "Zeit"}]], 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[All, "Zeit"]], "Mouse"], Background -> 
                 GrayLevel[0.95], Alignment -> {Left, Baseline}], 
                Item[
@@ -1670,10 +1752,9 @@ Cell[BoxData[
                    TypeSystem`NestedGrid`PackagePrivate`$state$$, 
                     TypeSystem`NestedGrid`PackagePrivate`$path$$, 
                     TypeSystem`NestedGrid`PackagePrivate`$pos$$, 
-                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 488714196][{
-                    All, "Bemerkung"}]], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 
+                    1088734830][{All, "Bemerkung"}]], 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[All, "Bemerkung"]], "Mouse"], 
                 Background -> GrayLevel[0.95], Alignment -> {Left, Baseline}], 
                Item[
@@ -1701,18 +1782,16 @@ Cell[BoxData[
                    TypeSystem`NestedGrid`PackagePrivate`$state$$, 
                     TypeSystem`NestedGrid`PackagePrivate`$path$$, 
                     TypeSystem`NestedGrid`PackagePrivate`$pos$$, 
-                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 488714196][{
-                    All, "Geschwindigkeit"}]], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 
+                    1088734830][{All, "Geschwindigkeit"}]], 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[All, "Geschwindigkeit"]], "Mouse"], 
                 Background -> GrayLevel[0.95], 
                 Alignment -> {Left, Baseline}]}, {
                Pane[
                 Annotation[
                  RawBoxes["1"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[1, 
                    Key[
                    "\[IDoubleDot]\[RightGuillemet]\[DownQuestion]Runde"]]], 
@@ -1721,8 +1800,7 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["1"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[1, 
                    Key["ID_Proband"]]], "Mouse"], 
                 ImageSize -> {{34, Full}, Automatic}, 
@@ -1730,16 +1808,14 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["17.65"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[1, 
                    Key["Zeit"]]], "Mouse"], 
                 ImageSize -> {{60, Full}, Automatic}, 
                 Alignment -> {Left, Baseline}], 
                Pane[
                 Annotation["", 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[1, 
                    Key["Bemerkung"]]], "Mouse"], 
                 ImageSize -> {{86.4, Full}, Automatic}, 
@@ -1747,8 +1823,7 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["1.54674"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[1, 
                    Key["Geschwindigkeit"]]], "Mouse"], 
                 ImageSize -> {{60, Full}, Automatic}, 
@@ -1756,8 +1831,7 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["1"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[2, 
                    Key[
                    "\[IDoubleDot]\[RightGuillemet]\[DownQuestion]Runde"]]], 
@@ -1766,8 +1840,7 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["2"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[2, 
                    Key["ID_Proband"]]], "Mouse"], 
                 ImageSize -> {{34, Full}, Automatic}, 
@@ -1775,16 +1848,14 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["17.37"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[2, 
                    Key["Zeit"]]], "Mouse"], 
                 ImageSize -> {{60, Full}, Automatic}, 
                 Alignment -> {Left, Baseline}], 
                Pane[
                 Annotation["", 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[2, 
                    Key["Bemerkung"]]], "Mouse"], 
                 ImageSize -> {{86.4, Full}, Automatic}, 
@@ -1792,8 +1863,7 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["1.57168"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[2, 
                    Key["Geschwindigkeit"]]], "Mouse"], 
                 ImageSize -> {{60, Full}, Automatic}, 
@@ -1801,8 +1871,7 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["1"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[3, 
                    Key[
                    "\[IDoubleDot]\[RightGuillemet]\[DownQuestion]Runde"]]], 
@@ -1811,8 +1880,7 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["3"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[3, 
                    Key["ID_Proband"]]], "Mouse"], 
                 ImageSize -> {{34, Full}, Automatic}, 
@@ -1820,16 +1888,14 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["17.88"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[3, 
                    Key["Zeit"]]], "Mouse"], 
                 ImageSize -> {{60, Full}, Automatic}, 
                 Alignment -> {Left, Baseline}], 
                Pane[
                 Annotation["", 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[3, 
                    Key["Bemerkung"]]], "Mouse"], 
                 ImageSize -> {{86.4, Full}, Automatic}, 
@@ -1837,8 +1903,7 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["1.52685"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[3, 
                    Key["Geschwindigkeit"]]], "Mouse"], 
                 ImageSize -> {{60, Full}, Automatic}, 
@@ -1846,8 +1911,7 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["1"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[4, 
                    Key[
                    "\[IDoubleDot]\[RightGuillemet]\[DownQuestion]Runde"]]], 
@@ -1856,8 +1920,7 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["4"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[4, 
                    Key["ID_Proband"]]], "Mouse"], 
                 ImageSize -> {{34, Full}, Automatic}, 
@@ -1865,16 +1928,14 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["15.81"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[4, 
                    Key["Zeit"]]], "Mouse"], 
                 ImageSize -> {{60, Full}, Automatic}, 
                 Alignment -> {Left, Baseline}], 
                Pane[
                 Annotation["", 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[4, 
                    Key["Bemerkung"]]], "Mouse"], 
                 ImageSize -> {{86.4, Full}, Automatic}, 
@@ -1882,8 +1943,7 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["1.72676"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[4, 
                    Key["Geschwindigkeit"]]], "Mouse"], 
                 ImageSize -> {{60, Full}, Automatic}, 
@@ -1891,8 +1951,7 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["1"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[5, 
                    Key[
                    "\[IDoubleDot]\[RightGuillemet]\[DownQuestion]Runde"]]], 
@@ -1901,8 +1960,7 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["5"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[5, 
                    Key["ID_Proband"]]], "Mouse"], 
                 ImageSize -> {{34, Full}, Automatic}, 
@@ -1910,16 +1968,14 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["15.97"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[5, 
                    Key["Zeit"]]], "Mouse"], 
                 ImageSize -> {{60, Full}, Automatic}, 
                 Alignment -> {Left, Baseline}], 
                Pane[
                 Annotation["", 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[5, 
                    Key["Bemerkung"]]], "Mouse"], 
                 ImageSize -> {{86.4, Full}, Automatic}, 
@@ -1927,8 +1983,7 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["1.70946"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[5, 
                    Key["Geschwindigkeit"]]], "Mouse"], 
                 ImageSize -> {{60, Full}, Automatic}, 
@@ -1936,8 +1991,7 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["1"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[6, 
                    Key[
                    "\[IDoubleDot]\[RightGuillemet]\[DownQuestion]Runde"]]], 
@@ -1946,8 +2000,7 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["6"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[6, 
                    Key["ID_Proband"]]], "Mouse"], 
                 ImageSize -> {{34, Full}, Automatic}, 
@@ -1955,16 +2008,14 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["18.84"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[6, 
                    Key["Zeit"]]], "Mouse"], 
                 ImageSize -> {{60, Full}, Automatic}, 
                 Alignment -> {Left, Baseline}], 
                Pane[
                 Annotation["", 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[6, 
                    Key["Bemerkung"]]], "Mouse"], 
                 ImageSize -> {{86.4, Full}, Automatic}, 
@@ -1972,8 +2023,7 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["1.44904"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[6, 
                    Key["Geschwindigkeit"]]], "Mouse"], 
                 ImageSize -> {{60, Full}, Automatic}, 
@@ -1981,8 +2031,7 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["1"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[7, 
                    Key[
                    "\[IDoubleDot]\[RightGuillemet]\[DownQuestion]Runde"]]], 
@@ -1991,8 +2040,7 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["7"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[7, 
                    Key["ID_Proband"]]], "Mouse"], 
                 ImageSize -> {{34, Full}, Automatic}, 
@@ -2000,16 +2048,14 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["22.85"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[7, 
                    Key["Zeit"]]], "Mouse"], 
                 ImageSize -> {{60, Full}, Automatic}, 
                 Alignment -> {Left, Baseline}], 
                Pane[
                 Annotation["getr\[ODoubleDot]delt", 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[7, 
                    Key["Bemerkung"]]], "Mouse"], 
                 ImageSize -> {{86.4, Full}, Automatic}, 
@@ -2017,8 +2063,7 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["1.19475"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[7, 
                    Key["Geschwindigkeit"]]], "Mouse"], 
                 ImageSize -> {{60, Full}, Automatic}, 
@@ -2026,8 +2071,7 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["1"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[8, 
                    Key[
                    "\[IDoubleDot]\[RightGuillemet]\[DownQuestion]Runde"]]], 
@@ -2036,8 +2080,7 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["8"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[8, 
                    Key["ID_Proband"]]], "Mouse"], 
                 ImageSize -> {{34, Full}, Automatic}, 
@@ -2045,16 +2088,14 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["17.47"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[8, 
                    Key["Zeit"]]], "Mouse"], 
                 ImageSize -> {{60, Full}, Automatic}, 
                 Alignment -> {Left, Baseline}], 
                Pane[
                 Annotation["", 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[8, 
                    Key["Bemerkung"]]], "Mouse"], 
                 ImageSize -> {{86.4, Full}, Automatic}, 
@@ -2062,8 +2103,7 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["1.56268"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[8, 
                    Key["Geschwindigkeit"]]], "Mouse"], 
                 ImageSize -> {{60, Full}, Automatic}, 
@@ -2071,8 +2111,7 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["1"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[9, 
                    Key[
                    "\[IDoubleDot]\[RightGuillemet]\[DownQuestion]Runde"]]], 
@@ -2081,8 +2120,7 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["9"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[9, 
                    Key["ID_Proband"]]], "Mouse"], 
                 ImageSize -> {{34, Full}, Automatic}, 
@@ -2090,16 +2128,14 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["18.76"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[9, 
                    Key["Zeit"]]], "Mouse"], 
                 ImageSize -> {{60, Full}, Automatic}, 
                 Alignment -> {Left, Baseline}], 
                Pane[
                 Annotation["", 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[9, 
                    Key["Bemerkung"]]], "Mouse"], 
                 ImageSize -> {{86.4, Full}, Automatic}, 
@@ -2107,8 +2143,7 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["1.45522"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[9, 
                    Key["Geschwindigkeit"]]], "Mouse"], 
                 ImageSize -> {{60, Full}, Automatic}, 
@@ -2116,8 +2151,7 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["1"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[10, 
                    Key[
                    "\[IDoubleDot]\[RightGuillemet]\[DownQuestion]Runde"]]], 
@@ -2126,8 +2160,7 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["10"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[10, 
                    Key["ID_Proband"]]], "Mouse"], 
                 ImageSize -> {{34, Full}, Automatic}, 
@@ -2135,16 +2168,14 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["22.08"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[10, 
                    Key["Zeit"]]], "Mouse"], 
                 ImageSize -> {{60, Full}, Automatic}, 
                 Alignment -> {Left, Baseline}], 
                Pane[
                 Annotation["", 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[10, 
                    Key["Bemerkung"]]], "Mouse"], 
                 ImageSize -> {{86.4, Full}, Automatic}, 
@@ -2152,8 +2183,7 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["1.23641"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[10, 
                    Key["Geschwindigkeit"]]], "Mouse"], 
                 ImageSize -> {{60, Full}, Automatic}, 
@@ -2161,8 +2191,7 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["1"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[11, 
                    Key[
                    "\[IDoubleDot]\[RightGuillemet]\[DownQuestion]Runde"]]], 
@@ -2171,8 +2200,7 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["11"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[11, 
                    Key["ID_Proband"]]], "Mouse"], 
                 ImageSize -> {{34, Full}, Automatic}, 
@@ -2180,16 +2208,14 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["18.25"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[11, 
                    Key["Zeit"]]], "Mouse"], 
                 ImageSize -> {{60, Full}, Automatic}, 
                 Alignment -> {Left, Baseline}], 
                Pane[
                 Annotation["", 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[11, 
                    Key["Bemerkung"]]], "Mouse"], 
                 ImageSize -> {{86.4, Full}, Automatic}, 
@@ -2197,8 +2223,7 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["1.49589"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[11, 
                    Key["Geschwindigkeit"]]], "Mouse"], 
                 ImageSize -> {{60, Full}, Automatic}, 
@@ -2206,8 +2231,7 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["1"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[12, 
                    Key[
                    "\[IDoubleDot]\[RightGuillemet]\[DownQuestion]Runde"]]], 
@@ -2216,8 +2240,7 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["12"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[12, 
                    Key["ID_Proband"]]], "Mouse"], 
                 ImageSize -> {{34, Full}, Automatic}, 
@@ -2225,16 +2248,14 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["17.5"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[12, 
                    Key["Zeit"]]], "Mouse"], 
                 ImageSize -> {{60, Full}, Automatic}, 
                 Alignment -> {Left, Baseline}], 
                Pane[
                 Annotation["", 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[12, 
                    Key["Bemerkung"]]], "Mouse"], 
                 ImageSize -> {{86.4, Full}, Automatic}, 
@@ -2242,8 +2263,7 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["1.56"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[12, 
                    Key["Geschwindigkeit"]]], "Mouse"], 
                 ImageSize -> {{60, Full}, Automatic}, 
@@ -2251,8 +2271,7 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["1"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[13, 
                    Key[
                    "\[IDoubleDot]\[RightGuillemet]\[DownQuestion]Runde"]]], 
@@ -2261,8 +2280,7 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["13"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[13, 
                    Key["ID_Proband"]]], "Mouse"], 
                 ImageSize -> {{34, Full}, Automatic}, 
@@ -2270,16 +2288,14 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["21.25"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[13, 
                    Key["Zeit"]]], "Mouse"], 
                 ImageSize -> {{60, Full}, Automatic}, 
                 Alignment -> {Left, Baseline}], 
                Pane[
                 Annotation["", 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[13, 
                    Key["Bemerkung"]]], "Mouse"], 
                 ImageSize -> {{86.4, Full}, Automatic}, 
@@ -2287,8 +2303,7 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["1.28471"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[13, 
                    Key["Geschwindigkeit"]]], "Mouse"], 
                 ImageSize -> {{60, Full}, Automatic}, 
@@ -2296,8 +2311,7 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["1"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[14, 
                    Key[
                    "\[IDoubleDot]\[RightGuillemet]\[DownQuestion]Runde"]]], 
@@ -2306,8 +2320,7 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["14"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[14, 
                    Key["ID_Proband"]]], "Mouse"], 
                 ImageSize -> {{34, Full}, Automatic}, 
@@ -2315,16 +2328,14 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["16.32"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[14, 
                    Key["Zeit"]]], "Mouse"], 
                 ImageSize -> {{60, Full}, Automatic}, 
                 Alignment -> {Left, Baseline}], 
                Pane[
                 Annotation["", 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[14, 
                    Key["Bemerkung"]]], "Mouse"], 
                 ImageSize -> {{86.4, Full}, Automatic}, 
@@ -2332,8 +2343,7 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["1.67279"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[14, 
                    Key["Geschwindigkeit"]]], "Mouse"], 
                 ImageSize -> {{60, Full}, Automatic}, 
@@ -2341,8 +2351,7 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["1"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[15, 
                    Key[
                    "\[IDoubleDot]\[RightGuillemet]\[DownQuestion]Runde"]]], 
@@ -2351,8 +2360,7 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["15"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[15, 
                    Key["ID_Proband"]]], "Mouse"], 
                 ImageSize -> {{34, Full}, Automatic}, 
@@ -2360,16 +2368,14 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["18.24"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[15, 
                    Key["Zeit"]]], "Mouse"], 
                 ImageSize -> {{60, Full}, Automatic}, 
                 Alignment -> {Left, Baseline}], 
                Pane[
                 Annotation["", 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[15, 
                    Key["Bemerkung"]]], "Mouse"], 
                 ImageSize -> {{86.4, Full}, Automatic}, 
@@ -2377,8 +2383,7 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["1.49671"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[15, 
                    Key["Geschwindigkeit"]]], "Mouse"], 
                 ImageSize -> {{60, Full}, Automatic}, 
@@ -2386,8 +2391,7 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["1"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[16, 
                    Key[
                    "\[IDoubleDot]\[RightGuillemet]\[DownQuestion]Runde"]]], 
@@ -2396,8 +2400,7 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["16"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[16, 
                    Key["ID_Proband"]]], "Mouse"], 
                 ImageSize -> {{34, Full}, Automatic}, 
@@ -2405,16 +2408,14 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["19.71"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[16, 
                    Key["Zeit"]]], "Mouse"], 
                 ImageSize -> {{60, Full}, Automatic}, 
                 Alignment -> {Left, Baseline}], 
                Pane[
                 Annotation["", 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[16, 
                    Key["Bemerkung"]]], "Mouse"], 
                 ImageSize -> {{86.4, Full}, Automatic}, 
@@ -2422,8 +2423,7 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["1.38508"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[16, 
                    Key["Geschwindigkeit"]]], "Mouse"], 
                 ImageSize -> {{60, Full}, Automatic}, 
@@ -2431,8 +2431,7 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["1"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[17, 
                    Key[
                    "\[IDoubleDot]\[RightGuillemet]\[DownQuestion]Runde"]]], 
@@ -2441,8 +2440,7 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["17"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[17, 
                    Key["ID_Proband"]]], "Mouse"], 
                 ImageSize -> {{34, Full}, Automatic}, 
@@ -2450,16 +2448,14 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["19.82"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[17, 
                    Key["Zeit"]]], "Mouse"], 
                 ImageSize -> {{60, Full}, Automatic}, 
                 Alignment -> {Left, Baseline}], 
                Pane[
                 Annotation["", 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[17, 
                    Key["Bemerkung"]]], "Mouse"], 
                 ImageSize -> {{86.4, Full}, Automatic}, 
@@ -2467,8 +2463,7 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["1.3774"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[17, 
                    Key["Geschwindigkeit"]]], "Mouse"], 
                 ImageSize -> {{60, Full}, Automatic}, 
@@ -2476,8 +2471,7 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["1"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[18, 
                    Key[
                    "\[IDoubleDot]\[RightGuillemet]\[DownQuestion]Runde"]]], 
@@ -2486,8 +2480,7 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["18"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[18, 
                    Key["ID_Proband"]]], "Mouse"], 
                 ImageSize -> {{34, Full}, Automatic}, 
@@ -2495,16 +2488,14 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["16.25"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[18, 
                    Key["Zeit"]]], "Mouse"], 
                 ImageSize -> {{60, Full}, Automatic}, 
                 Alignment -> {Left, Baseline}], 
                Pane[
                 Annotation["", 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[18, 
                    Key["Bemerkung"]]], "Mouse"], 
                 ImageSize -> {{86.4, Full}, Automatic}, 
@@ -2512,8 +2503,7 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["1.68"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[18, 
                    Key["Geschwindigkeit"]]], "Mouse"], 
                 ImageSize -> {{60, Full}, Automatic}, 
@@ -2521,8 +2511,7 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["1"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[19, 
                    Key[
                    "\[IDoubleDot]\[RightGuillemet]\[DownQuestion]Runde"]]], 
@@ -2531,8 +2520,7 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["19"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[19, 
                    Key["ID_Proband"]]], "Mouse"], 
                 ImageSize -> {{34, Full}, Automatic}, 
@@ -2540,16 +2528,14 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["19.81"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[19, 
                    Key["Zeit"]]], "Mouse"], 
                 ImageSize -> {{60, Full}, Automatic}, 
                 Alignment -> {Left, Baseline}], 
                Pane[
                 Annotation["", 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[19, 
                    Key["Bemerkung"]]], "Mouse"], 
                 ImageSize -> {{86.4, Full}, Automatic}, 
@@ -2557,8 +2543,7 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["1.37809"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[19, 
                    Key["Geschwindigkeit"]]], "Mouse"], 
                 ImageSize -> {{60, Full}, Automatic}, 
@@ -2566,8 +2551,7 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["1"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[20, 
                    Key[
                    "\[IDoubleDot]\[RightGuillemet]\[DownQuestion]Runde"]]], 
@@ -2576,8 +2560,7 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["20"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[20, 
                    Key["ID_Proband"]]], "Mouse"], 
                 ImageSize -> {{34, Full}, Automatic}, 
@@ -2585,16 +2568,14 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["18.96"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[20, 
                    Key["Zeit"]]], "Mouse"], 
                 ImageSize -> {{60, Full}, Automatic}, 
                 Alignment -> {Left, Baseline}], 
                Pane[
                 Annotation["", 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[20, 
                    Key["Bemerkung"]]], "Mouse"], 
                 ImageSize -> {{86.4, Full}, Automatic}, 
@@ -2602,8 +2583,7 @@ Cell[BoxData[
                Pane[
                 Annotation[
                  RawBoxes["1.43987"], 
-                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
-                 
+                 TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
                   GeneralUtilities`Slice[20, 
                    Key["Geschwindigkeit"]]], "Mouse"], 
                 ImageSize -> {{60, Full}, Automatic}, 
@@ -3052,8 +3032,8 @@ Cell[BoxData[
                     TypeSystem`NestedGrid`PackagePrivate`$state$$, 
                     TypeSystem`NestedGrid`PackagePrivate`$path$$, 
                     TypeSystem`NestedGrid`PackagePrivate`$pos$$, 
-                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 488714196}, 
-                    1, {}]], MenuEvaluator -> Automatic], 
+                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 1088734830},
+                     1, {}]], MenuEvaluator -> Automatic], 
                     MenuItem["Show up to 10 rows", 
                     KernelExecute[
                     
@@ -3061,8 +3041,8 @@ Cell[BoxData[
                     TypeSystem`NestedGrid`PackagePrivate`$state$$, 
                     TypeSystem`NestedGrid`PackagePrivate`$path$$, 
                     TypeSystem`NestedGrid`PackagePrivate`$pos$$, 
-                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 488714196}, 
-                    10, {}]], MenuEvaluator -> Automatic], 
+                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 1088734830},
+                     10, {}]], MenuEvaluator -> Automatic], 
                     MenuItem["Show up to 30 rows", 
                     KernelExecute[
                     
@@ -3070,8 +3050,8 @@ Cell[BoxData[
                     TypeSystem`NestedGrid`PackagePrivate`$state$$, 
                     TypeSystem`NestedGrid`PackagePrivate`$path$$, 
                     TypeSystem`NestedGrid`PackagePrivate`$pos$$, 
-                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 488714196}, 
-                    30, {}]], MenuEvaluator -> Automatic], 
+                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 1088734830},
+                     30, {}]], MenuEvaluator -> Automatic], 
                     MenuItem["Show up to 100 rows", 
                     KernelExecute[
                     
@@ -3079,8 +3059,8 @@ Cell[BoxData[
                     TypeSystem`NestedGrid`PackagePrivate`$state$$, 
                     TypeSystem`NestedGrid`PackagePrivate`$path$$, 
                     TypeSystem`NestedGrid`PackagePrivate`$pos$$, 
-                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 488714196}, 
-                    100, {}]], MenuEvaluator -> Automatic], 
+                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 1088734830},
+                     100, {}]], MenuEvaluator -> Automatic], 
                     MenuItem["Show all", 
                     KernelExecute[
                     
@@ -3088,8 +3068,8 @@ Cell[BoxData[
                     TypeSystem`NestedGrid`PackagePrivate`$state$$, 
                     TypeSystem`NestedGrid`PackagePrivate`$path$$, 
                     TypeSystem`NestedGrid`PackagePrivate`$pos$$, 
-                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 488714196}, 
-                    100000000, {}]], MenuEvaluator -> Automatic]}}], 
+                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 1088734830},
+                     100000000, {}]], MenuEvaluator -> Automatic]}}], 
                SpanFromLeft, SpanFromLeft, SpanFromLeft, SpanFromLeft}}, 
              BaseStyle -> {ContextMenu -> {
                  MenuItem["Copy position to clipboard", 
@@ -3138,7 +3118,7 @@ Cell[BoxData[
                 TypeSystem`NestedGrid`PackagePrivate`$state$$, 
                  TypeSystem`NestedGrid`PackagePrivate`$path$$, 
                  TypeSystem`NestedGrid`PackagePrivate`$pos$$, 
-                 TypeSystem`NestedGrid`PackagePrivate`$grid$$, 488714196][
+                 TypeSystem`NestedGrid`PackagePrivate`$grid$$, 1088734830][
                 TypeSystem`NestedGrid`PackagePrivate`tmpData$]]; If[
                Not[
                 FailureQ[TypeSystem`NestedGrid`PackagePrivate`tmpGrid$]], 
@@ -3169,14 +3149,14 @@ Cell[BoxData[
            TypeSystem`NestedGrid`PackagePrivate`$state$$, 
             TypeSystem`NestedGrid`PackagePrivate`$path$$, 
             TypeSystem`NestedGrid`PackagePrivate`$pos$$, 
-            TypeSystem`NestedGrid`PackagePrivate`$grid$$, 488714196]]]], 
+            TypeSystem`NestedGrid`PackagePrivate`$grid$$, 1088734830]]]], 
         TrackedSymbols :> {TypeSystem`NestedGrid`PackagePrivate`$path$$}], 
       TypeSystem`NestedGrid`PackagePrivate`$bottomBar$$ = Framed[
         Dynamic[
          Replace[
           MouseAnnotation[Null], {
-          TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][Null] -> 
-           "", TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[488714196][
+          TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][Null] -> 
+           "", TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[1088734830][
              Pattern[TypeSystem`NestedGrid`PackagePrivate`path, 
               Blank[]]] :> (
             TypeSystem`NestedGrid`PackagePrivate`$lastPath = 
@@ -3223,9 +3203,9 @@ Cell[BoxData[
   "CopyTag",
   DisplayFunction->(#& ),
   InterpretationFunction->("Dataset[<>]"& )]], "Output",
- CellChangeTimes->{
-  3.700469263229068*^9},ExpressionUUID->"2d2b3e85-2de0-4bb5-b99e-\
-09bd35826349"]
+ CellChangeTimes->{3.700469263229068*^9, 3.700587341145752*^9, 
+  3.700587417150632*^9},ExpressionUUID->"6ff614d5-5f0c-44dd-ba66-\
+b1fec18b5c4f"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -3264,8 +3244,9 @@ Cell[BoxData[
 5188ebddd7e5"],
 
 Cell[BoxData["1.4807601122405314`"], "Output",
- CellChangeTimes->{
-  3.70047187519591*^9},ExpressionUUID->"3e11f6a9-5a09-498b-8181-e2e0ba7e8b86"]
+ CellChangeTimes->{3.70047187519591*^9, 3.700587341414809*^9, 
+  3.700587417360881*^9},ExpressionUUID->"11f92056-787d-4ca1-9e1d-\
+dd3ac65cf292"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -3281,9 +3262,10 @@ Cell[BoxData[
 2ac75a19b0bb"],
 
 Cell[BoxData["0.14411632354151058`"], "Output",
- CellChangeTimes->{3.700470351239019*^9, 
-  3.700470729809057*^9},ExpressionUUID->"3dd40a73-47de-4f51-90c6-\
-665ea1d4ef41"]
+ CellChangeTimes->{3.700470351239019*^9, 3.700470729809057*^9, 
+  3.700587341465939*^9, 
+  3.700587417382815*^9},ExpressionUUID->"6f06210d-ee0f-44c8-949b-\
+9dc3c1e5ed69"]
 }, Open  ]],
 
 Cell["\<\
@@ -3961,7 +3943,7 @@ djJak2MND2EjbBqaF+yBV+nlWPU2HhafdzIVWdkBCWF3UigODzaP8iNaWe1g
 vEjC0vAAD1f33Mh422yh0jJRQPAYDx6OzJOVHrYQwXZ2B4/HQ8BiWIHvHVv4
 H0c4oFM=
           "]]}},
-       Annotation[#, "Charting`Private`Tag$112790#1"]& ]}}, {}, {}}},
+       Annotation[#, "Charting`Private`Tag$8207#1"]& ]}}, {}, {}}},
   AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
   Axes->{True, True},
   AxesLabel->{None, None},
@@ -3979,12 +3961,13 @@ H0c4oFM=
      Scaled[0.05]}},
   Ticks->{Automatic, Automatic}]], "Output",
  CellChangeTimes->{{3.700471343760992*^9, 3.700471361862815*^9}, {
-  3.70047162096439*^9, 3.70047169776617*^9}, {3.700471729134255*^9, 
-  3.700471753824051*^9}, {3.7004720238950033`*^9, 3.700472131707232*^9}, {
-  3.70047238263026*^9, 3.70047243013566*^9}, {3.700473091447343*^9, 
-  3.700473115555485*^9}, {3.700473812789904*^9, 
-  3.700473822391165*^9}},ExpressionUUID->"03a3c8f4-3004-4e64-822c-\
-74a053e54e17"]
+   3.70047162096439*^9, 3.70047169776617*^9}, {3.700471729134255*^9, 
+   3.700471753824051*^9}, {3.7004720238950033`*^9, 3.700472131707232*^9}, {
+   3.70047238263026*^9, 3.70047243013566*^9}, {3.700473091447343*^9, 
+   3.700473115555485*^9}, {3.700473812789904*^9, 3.700473822391165*^9}, 
+   3.700587341910039*^9, 
+   3.700587417491407*^9},ExpressionUUID->"d3603c8f-b706-4da0-b059-\
+14bd537fb4b3"]
 }, Open  ]]
 }, Open  ]],
 
@@ -4086,9 +4069,9 @@ sLE4VKjH5BnL+gMTPMSX645VSvQoL67LfLlaj4FDG2ID6vW4qHr24LVUD6tJ
      Scaled[0.02], 
      Scaled[0.02]}},
   Ticks->{Automatic, Automatic}]], "Output",
- CellChangeTimes->{
-  3.700474993609137*^9},ExpressionUUID->"708d9bc5-92a3-4fd2-b4a6-\
-d877908a029f"]
+ CellChangeTimes->{3.700474993609137*^9, 3.700587342164691*^9, 
+  3.700587417614602*^9},ExpressionUUID->"4e00591b-5344-4b91-af99-\
+e8e7e7293f66"]
 }, Open  ]]
 }, Open  ]],
 
@@ -4109,10 +4092,12 @@ Cell[BoxData[
      RowBox[{
       RowBox[{"dataEbeneMitGeschw", "[", 
        RowBox[{"All", ",", " ", "\"\<Geschwindigkeit\>\""}], "]"}], ",", " ", 
-      "66"}], "]"}], ",", "Automatic", ",", "\"\<HypothesisTestData\>\""}], 
-   "]"}]}]], "Input",
- CellChangeTimes->{{3.700475205134595*^9, 
-  3.700475234373266*^9}},ExpressionUUID->"08dbc60d-f51c-4df9-b840-\
+      "66"}], "]"}], ",", 
+    RowBox[{"NormalDistribution", "[", 
+     RowBox[{"geschwMean", ",", "geschwDeviation"}], "]"}], ",", 
+    "\"\<HypothesisTestData\>\""}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.700475205134595*^9, 3.700475234373266*^9}, 
+   3.700587410369203*^9},ExpressionUUID->"08dbc60d-f51c-4df9-b840-\
 af92746e10b5"],
 
 Cell[BoxData[
@@ -4211,7 +4196,7 @@ HhYf7kcSN7h3bLCHxUfegdOy63cttYfFR7ef4ONnq2fbw+LDYUfsm8Un+u1h
             RowBox[{
              TagBox["\<\"p-Value: \"\>",
               "SummaryItemAnnotation"], "\[InvisibleSpace]", 
-             TagBox["0.4134740616993479`",
+             TagBox["0.8386937837492364`",
               "SummaryItem"]}]}
           },
           AutoDelete->False,
@@ -4319,7 +4304,7 @@ HhYf7kcSN7h3bLCHxUfegdOy63cttYfFR7ef4ONnq2fbw+LDYUfsm8Un+u1h
             RowBox[{
              TagBox["\<\"p-Value: \"\>",
               "SummaryItemAnnotation"], "\[InvisibleSpace]", 
-             TagBox["0.4134740616993479`",
+             TagBox["0.8386937837492364`",
               "SummaryItem"]}]},
            {
             RowBox[{
@@ -4331,7 +4316,7 @@ HhYf7kcSN7h3bLCHxUfegdOy63cttYfFR7ef4ONnq2fbw+LDYUfsm8Un+u1h
             RowBox[{
              TagBox["\<\"Test statistic: \"\>",
               "SummaryItemAnnotation"], "\[InvisibleSpace]", 
-             TagBox["0.05766809390010628`",
+             TagBox["0.0560718686943419`",
               "SummaryItem"]}]},
            {
             RowBox[{
@@ -4346,15 +4331,15 @@ HhYf7kcSN7h3bLCHxUfegdOy63cttYfFR7ef4ONnq2fbw+LDYUfsm8Un+u1h
              TagBox[
               InterpretationBox[Cell["\<\
 The null hypothesis that the data is distributed according to the \
-NormalDistribution[\[FormalX], \[FormalY]] is not rejected at the 5 percent \
-level based on the Cram\[EAcute]r\[Hyphen]von Mises test.\
+NormalDistribution[1.48076, 0.144116] is not rejected at the 5 percent level \
+based on the Cram\[EAcute]r\[Hyphen]von Mises test.\
 \>",
                 CellSize->{300, Automatic},ExpressionUUID->
-                "bccada07-5c55-41a4-a527-78ceceacaff1"],
+                "3a91b359-bd59-4190-880a-7c79f2d31647"],
                TextCell[
                "The null hypothesis that the data is distributed according to \
-the NormalDistribution[\[FormalX], \[FormalY]] is not rejected at the 5 \
-percent level based on the Cram\[EAcute]r\[Hyphen]von Mises test.", 
+the NormalDistribution[1.48076, 0.144116] is not rejected at the 5 percent \
+level based on the Cram\[EAcute]r\[Hyphen]von Mises test.", 
                 CellSize -> {300, Automatic}]],
               "SummaryItem"]}]}
           },
@@ -4393,14 +4378,16 @@ WSg6y/Z9z2bhXJIvj0VZ186cZCWLa+++KWYHWJgm2t2aYRaTEyuxmL8iHNg/
 x8LS8az+ZwIH48zU0GIFBwunEzp7OPB3p9S5aQ7/AW6fIHY=
     "], "SampleToNull", 1, 
     Rational[1, 20], {
-     NormalDistribution[\[FormalX], \[FormalY]], Automatic}, Automatic, {}}, {
+     NormalDistribution[1.4807601122405314`, 0.14411632354151058`], 
+     Automatic}, Automatic, {}}, {
    "Normality" -> 0, "EqualVariance" -> 0, "Symmetry" -> 0}],
   Editable->False,
   SelectWithContents->True,
   Selectable->False]], "Output",
- CellChangeTimes->{{3.7004752283713903`*^9, 
-  3.7004752354817533`*^9}},ExpressionUUID->"cf1daf59-2070-4c63-88b0-\
-325b6b748772"]
+ CellChangeTimes->{{3.7004752283713903`*^9, 3.7004752354817533`*^9}, 
+   3.7005873423695097`*^9, 
+   3.700587417672431*^9},ExpressionUUID->"10ac805f-233f-44ca-b463-\
+83cdf3e02a68"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -4414,12 +4401,12 @@ Cell[BoxData[
  StyleBox[
   TagBox[GridBox[{
      {"\<\"\"\>", "\<\"Statistic\"\>", "\<\"P\[Hyphen]Value\"\>"},
-     {"\<\"Anderson\[Hyphen]Darling\"\>", "0.4393138238695258`", 
-      "0.2956000666531452`"},
-     {"\<\"Baringhaus\[Hyphen]Henze\"\>", "0.26963367606421684`", 
-      "0.4302130997907593`"},
-     {"\<\"Cram\[EAcute]r\[Hyphen]von Mises\"\>", "0.05766809390010628`", 
-      "0.4134740616993479`"},
+     {"\<\"Anderson\[Hyphen]Darling\"\>", "0.42698780396789004`", 
+      "0.8210014471547689`"},
+     {"\<\"Baringhaus\[Hyphen]Henze\"\>", "0.2696336760642417`", 
+      "0.785710677610624`"},
+     {"\<\"Cram\[EAcute]r\[Hyphen]von Mises\"\>", "0.0560718686943419`", 
+      "0.8386937837492364`"},
      {"\<\"Jarque\[Hyphen]Bera ALM\"\>", "1.5731312716218775`", 
       "0.37638314743312834`"},
      {"\<\"Mardia Combined\"\>", "1.5731312716218775`", 
@@ -4429,7 +4416,7 @@ Cell[BoxData[
      {"\<\"Mardia Skewness\"\>", "0.8260495135065579`", 
       "0.36341734646600266`"},
      {"\<\"Pearson \\!\\(\\*SuperscriptBox[\\(\[Chi]\\),\\(2\\)]\\)\"\>", 
-      "14.666666666666666`", "0.0659603236959947`"},
+      "14.666666666666666`", "0.14469540169795614`"},
      {"\<\"Shapiro\[Hyphen]Wilk\"\>", "0.9755057564647962`", 
       "0.2157668801644439`"}
     },
@@ -4442,9 +4429,9 @@ Cell[BoxData[
     GridBoxSpacings->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
    "Grid"], "DialogStyle",
   StripOnInput->False]], "Output",
- CellChangeTimes->{
-  3.700475287912015*^9},ExpressionUUID->"f1e9bfb1-45db-40d2-9204-\
-243e8b737684"]
+ CellChangeTimes->{3.700475287912015*^9, 3.700587342494245*^9, 
+  3.7005874177109957`*^9},ExpressionUUID->"84e57ec4-a99b-4cca-ae7d-\
+af66e17dcc9c"]
 }, Open  ]],
 
 Cell["\<\
@@ -4461,7 +4448,7 @@ c4ebf348247e"]
 }, Open  ]]
 },
 WindowSize->{1319, 716},
-WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowMargins->{{0, Automatic}, {0, Automatic}},
 FrontEndVersion->"11.1 for Linux x86 (64-bit) (March 13, 2017)",
 StyleDefinitions->"Default.nb"
 ]
@@ -4477,77 +4464,77 @@ CellTagsIndex->{}
 (*NotebookFileOutline
 Notebook[{
 Cell[400, 13, 156, 3, 33, "Text", "ExpressionUUID" -> \
-"6a1cc4d9-bf9a-4648-aef7-ad9855a69548"],
+"3000656a-4137-4d06-bc63-f9fbffcb6541"],
 Cell[559, 18, 219, 5, 34, "Input", "ExpressionUUID" -> \
 "979c8279-4e99-4b9b-afee-9ecec7d55af5"],
 Cell[CellGroupData[{
-Cell[803, 27, 780, 14, 101, "Input", "ExpressionUUID" -> \
-"99b17da3-f533-452e-8bd9-ef740de189c1"],
-Cell[1586, 43, 70204, 1431, 580, "Output", "ExpressionUUID" -> \
-"8ea2c725-0754-4c2a-8030-0627a00ac8d2"]
+Cell[803, 27, 491, 15, 57, "Input", "ExpressionUUID" -> \
+"f5f73f3a-79dc-4b0e-a299-1fa4d20fa759"],
+Cell[1297, 44, 71644, 1514, 580, "Output", "ExpressionUUID" -> \
+"d1135a48-d5e4-46b2-90d9-0da58bc53fea"]
 }, Open  ]],
-Cell[71805, 1477, 154, 3, 32, InheritFromParent, "ExpressionUUID" -> \
-"33dfd8d2-bb52-440e-a108-32cc9317ed8b"],
+Cell[72956, 1561, 154, 3, 32, "Input", "ExpressionUUID" -> \
+"2726b574-cb24-41a7-ab51-1338073c1d55"],
 Cell[CellGroupData[{
-Cell[71984, 1484, 698, 15, 34, "Input", "ExpressionUUID" -> \
+Cell[73135, 1568, 698, 15, 34, "Input", "ExpressionUUID" -> \
 "0384e697-a3e1-4807-9a4c-f3dfb61224eb"],
-Cell[72685, 1501, 81092, 1726, 580, "Output", "ExpressionUUID" -> \
-"2d2b3e85-2de0-4bb5-b99e-09bd35826349"]
+Cell[73836, 1585, 79384, 1622, 580, "Output", "ExpressionUUID" -> \
+"6ff614d5-5f0c-44dd-ba66-b1fec18b5c4f"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[153814, 3232, 155, 3, 65, "Section", "ExpressionUUID" -> \
-"d4d73fe1-7082-4b54-ae2a-35cb8c6b31a2"],
-Cell[153972, 3237, 414, 9, 55, "Text", "ExpressionUUID" -> \
-"79e20a24-930c-4a04-833f-c00b43c8f019"],
-Cell[154389, 3248, 195, 3, 33, "Text", "ExpressionUUID" -> \
-"a16b11ca-55dc-4ad6-8c98-6b8decaff911"],
+Cell[153257, 3212, 155, 3, 65, "Section", "ExpressionUUID" -> \
+"a0541e18-439e-46dd-a279-9149a2f6de1d"],
+Cell[153415, 3217, 414, 9, 55, "Text", "ExpressionUUID" -> \
+"cb05461d-6fc9-4972-8032-d7c5a37a7dd3"],
+Cell[153832, 3228, 195, 3, 33, "Text", "ExpressionUUID" -> \
+"056734d9-0a04-429f-96e0-322bfa3aa421"],
 Cell[CellGroupData[{
-Cell[154609, 3255, 326, 8, 34, "Input", "ExpressionUUID" -> \
+Cell[154052, 3235, 326, 8, 34, "Input", "ExpressionUUID" -> \
 "5072c8c1-450e-472f-b86b-5188ebddd7e5"],
-Cell[154938, 3265, 145, 2, 34, "Output", "ExpressionUUID" -> \
-"3e11f6a9-5a09-498b-8181-e2e0ba7e8b86"]
+Cell[154381, 3245, 191, 3, 34, "Output", "ExpressionUUID" -> \
+"11f92056-787d-4ca1-9e1d-dd3ac65cf292"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[155120, 3272, 347, 8, 34, "Input", "ExpressionUUID" -> \
+Cell[154609, 3253, 347, 8, 34, "Input", "ExpressionUUID" -> \
 "12d82d24-feec-442c-9eff-2ac75a19b0bb"],
-Cell[155470, 3282, 171, 3, 34, "Output", "ExpressionUUID" -> \
-"3dd40a73-47de-4f51-90c6-665ea1d4ef41"]
+Cell[154959, 3263, 218, 4, 34, "Output", "ExpressionUUID" -> \
+"6f06210d-ee0f-44c8-949b-9dc3c1e5ed69"]
 }, Open  ]],
-Cell[155656, 3288, 1395, 22, 143, "Text", "ExpressionUUID" -> \
-"584e14ea-46ca-42b6-b034-298de79823be"],
+Cell[155192, 3270, 1395, 22, 143, "Text", "ExpressionUUID" -> \
+"76c81bb9-424c-45c7-9736-7fd8a7556ce4"],
 Cell[CellGroupData[{
-Cell[157076, 3314, 1288, 27, 57, "Input", "ExpressionUUID" -> \
+Cell[156612, 3296, 1288, 27, 57, "Input", "ExpressionUUID" -> \
 "1c159ca1-8582-4158-9b73-53a69ed78522"],
-Cell[158367, 3343, 32580, 643, 239, "Output", "ExpressionUUID" -> \
-"03a3c8f4-3004-4e64-822c-74a053e54e17"]
+Cell[157903, 3325, 32631, 644, 239, "Output", "ExpressionUUID" -> \
+"d3603c8f-b706-4da0-b059-14bd537fb4b3"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[190996, 3992, 184, 3, 65, "Section", "ExpressionUUID" -> \
+Cell[190583, 3975, 184, 3, 65, "Section", "ExpressionUUID" -> \
 "53f6b59d-1fc5-4ab5-b1d1-8b646998bc65"],
 Cell[CellGroupData[{
-Cell[191205, 3999, 268, 7, 34, "Input", "ExpressionUUID" -> \
+Cell[190792, 3982, 268, 7, 34, "Input", "ExpressionUUID" -> \
 "e266ae07-c548-489a-84a0-712057cdfb6f"],
-Cell[191476, 4008, 3806, 82, 243, "Output", "ExpressionUUID" -> \
-"708d9bc5-92a3-4fd2-b4a6-d877908a029f"]
+Cell[191063, 3991, 3850, 82, 243, "Output", "ExpressionUUID" -> \
+"4e00591b-5344-4b91-af99-e8e7e7293f66"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[195331, 4096, 168, 3, 65, "Section", "ExpressionUUID" -> \
+Cell[194962, 4079, 168, 3, 65, "Section", "ExpressionUUID" -> \
 "11c583b4-e2fd-4871-8077-0f5820dbb924"],
 Cell[CellGroupData[{
-Cell[195524, 4103, 483, 12, 34, "Input", "ExpressionUUID" -> \
+Cell[195155, 4086, 595, 14, 56, "Input", "ExpressionUUID" -> \
 "08dbc60d-f51c-4df9-b840-af92746e10b5"],
-Cell[196010, 4117, 12645, 285, 172, "Output", "ExpressionUUID" -> \
-"cf1daf59-2070-4c63-88b0-325b6b748772"]
+Cell[195753, 4102, 12710, 287, 164, "Output", "ExpressionUUID" -> \
+"10ac805f-233f-44ca-b463-83cdf3e02a68"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[208692, 4407, 168, 3, 34, "Input", "ExpressionUUID" -> \
+Cell[208500, 4394, 168, 3, 34, "Input", "ExpressionUUID" -> \
 "634a28e0-a678-4848-9baf-dc8c288528ee"],
-Cell[208863, 4412, 1540, 34, 160, "Output", "ExpressionUUID" -> \
-"f1e9bfb1-45db-40d2-9204-243e8b737684"]
+Cell[208671, 4399, 1585, 34, 160, "Output", "ExpressionUUID" -> \
+"84e57ec4-a99b-4cca-ae7d-af66e17dcc9c"]
 }, Open  ]],
-Cell[210418, 4449, 455, 10, 55, "Text", "ExpressionUUID" -> \
+Cell[210271, 4436, 455, 10, 55, "Text", "ExpressionUUID" -> \
 "ecbfbafb-ce47-4572-a25d-c4ebf348247e"]
 }, Open  ]]
 }

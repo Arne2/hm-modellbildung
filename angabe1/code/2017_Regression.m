@@ -25,19 +25,19 @@ l\[ADoubleDot]ngeTreppe = 9.39;
 auf = dataGeschwindigkeiten[Select[#Treppe == "auf"&], <|
 "id"->"ID Proband", 
 "runde"->"Runde",
-"bemerkung"-> "Bemerkung",
+"bemerkungAuf"-> "Bemerkung",
  "vAuf"->(l\[ADoubleDot]ngeTreppe/#"Zeit in sec"&)
 |>];
 ab = dataGeschwindigkeiten[Select[#Treppe == "ab"&], <|
 "id"->"ID Proband", 
 "runde"->"Runde",
-"bemerkung"-> "Bemerkung",
+"bemerkungAb"-> "Bemerkung",
  "vAb"->(l\[ADoubleDot]ngeTreppe/#"Zeit in sec"&)
 |>];
 ebene = dataGeschwindigkeiten[Select[#Ebene == "x"&], <|
 "id"->"ID Proband", 
 "runde"->"Runde",
-"bemerkung"-> "Bemerkung",
+"bemerkungEbene"-> "Bemerkung",
  "vEbene"->(l\[ADoubleDot]ngeEbene/#"Zeit in sec"&)
 |>];
 (*Nur die Gr\[ODoubleDot]\[SZ]e der Probanden wird ben\[ODoubleDot]tigt.*)
@@ -57,30 +57,71 @@ data = JoinAcross[abaufebene, gr\[ODoubleDot]\[SZ]e,{"id"}];
 
 
 (*Herausgefilterte Werte: *)
-data[Select[#bemerkung !=""&]]
-
-data = data[Select[#bemerkung == ""&]];
+data[Select[#bemerkungAuf !=""&]]
+dataAuf = data[Select[#bemerkungAuf == ""&]];
 
 
 (*Modell f\[UDoubleDot]r Abh\[ADoubleDot]ngigkeit von der Ebenengeschwindigkeit*)
-d = Normal@Values@data[Select[#bemerkung==""&],{"vAuf","vEbene"}];
+d = Normal@Values@dataAuf[All,{"vEbene","vAuf"}];
 lm = LinearModelFit[d,{x},{x}]
-Show[ListPlot[lm["Data"],PlotStyle->Orange],Plot[lm[x],{x,0,100}]]
+Show[
+	ListPlot[lm["Data"],PlotStyle->Orange, AxesLabel->{"v Ebene in \!\(\*FractionBox[\(m\), \(s\)]\)","v Aufw\[ADoubleDot]rts in \!\(\*FractionBox[\(m\), \(s\)]\) "}],
+	Plot[lm[x],{x,0,100}]
+]
 lm["ANOVATable"]
 
 
 (*Modell f\[UDoubleDot]r Abh\[ADoubleDot]ngigkeit von der Gr\[ODoubleDot]\[SZ]e des Probanden*)
-d = Normal@Values@data[Select[#bemerkung==""&],{"vAuf","gr\[ODoubleDot]\[SZ]e"}];
+d = Normal@Values@dataAuf[All,{"gr\[ODoubleDot]\[SZ]e","vAuf"}];
 lm = LinearModelFit[d,{x},{x}]
-Show[ListPlot[lm["Data"],PlotStyle->Orange],Plot[lm[x],{x,0,100}]]
+Show[
+	ListPlot[lm["Data"],PlotStyle->Orange, AxesLabel->{"Gr\[ODoubleDot]\[SZ]e in cm","v Aufw\[ADoubleDot]rts in \!\(\*FractionBox[\(m\), \(s\)]\) "}],
+	Plot[lm[x],{x, 150,200}]
+]
 lm["ANOVATable"]
 
 
 (*Modell f\[UDoubleDot]r Abh\[ADoubleDot]ngigkeit von der Runde*)
-d = Normal@Values@data[Select[#bemerkung==""&],{"vAuf","runde"}];
+d = Normal@Values@dataAuf[All,{"runde","vAuf"}];
 lm = LinearModelFit[d,{x},{x}]
-Show[ListPlot[lm["Data"],PlotStyle->Orange],Plot[lm[x],{x,0,100}]]
+Show[
+	ListPlot[lm["Data"],PlotStyle->Orange,AxesLabel->{"Runde","v Aufw\[ADoubleDot]rts in \!\(\*FractionBox[\(m\), \(s\)]\) "}],
+	Plot[lm[x],{x,0,100}]
+	]
 lm["ANOVATable"]
 
 
+(* ::Section:: *)
+(*Treppengeschwindigkeit abw\[ADoubleDot]rts*)
 
+
+(*Herausgefilterte Werte*)
+data[Select[#bemerkungAb != ""&]]
+dataAb = data[Select[#bemerkungAb == ""&]];
+
+
+(*Modell f\[UDoubleDot]r Abh\[ADoubleDot]ngigkeit von der Ebenengeschwindigkeit*)
+d = Normal@Values@dataAb[All,{"vEbene","vAb"}];
+lm = LinearModelFit[d,{x},{x}]
+Show[
+	ListPlot[lm["Data"],PlotStyle->Orange, AxesLabel->{"v Ebene in \!\(\*FractionBox[\(m\), \(s\)]\)","v Abw\[ADoubleDot]rts in \!\(\*FractionBox[\(m\), \(s\)]\) "}],
+	Plot[lm[x],{x,0,100}]]
+lm["ANOVATable"]
+
+
+(*Modell f\[UDoubleDot]r Abh\[ADoubleDot]ngigkeit von der Gr\[ODoubleDot]\[SZ]e des Probanden*)
+d = Normal@Values@dataAb[All,{"gr\[ODoubleDot]\[SZ]e","vAb"}];
+lm = LinearModelFit[d,{x},{x}]
+Show[
+	ListPlot[lm["Data"],PlotStyle->Orange, AxesLabel->{"Gr\[ODoubleDot]\[SZ]e in cm","v Abw\[ADoubleDot]rts in \!\(\*FractionBox[\(m\), \(s\)]\) "}],
+	Plot[lm[x],{x,150,200}]]
+lm["ANOVATable"]
+
+
+(*Modell f\[UDoubleDot]r Abh\[ADoubleDot]ngigkeit von der Runde*)
+d = Normal@Values@dataAb[All,{"runde","vAb"}];
+lm = LinearModelFit[d,{x},{x}]
+Show[
+	ListPlot[lm["Data"],PlotStyle->Orange, AxesLabel->{"Runde","v Abw\[ADoubleDot]rts in \!\(\*FractionBox[\(m\), \(s\)]\) "}],
+	Plot[lm[x],{x,0,100}]]
+lm["ANOVATable"]

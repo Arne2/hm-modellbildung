@@ -140,6 +140,16 @@ Show[
 lm["ParameterTable"]
 
 
+(* ::Subsubsection:: *)
+(*Konditionierung*)
+
+
+A = lm["DesignMatrix"];
+LinearAlgebra`MatrixConditionNumber[Transpose[A].A]
+Eigenvalues[Transpose[A].A]
+(199.268)/0.404426
+
+
 (*Modell f\[UDoubleDot]r Abh\[ADoubleDot]ngigkeit von der Gr\[ODoubleDot]\[SZ]e des Probanden*)
 d = Normal@Values@dataAb[All,{"gr\[ODoubleDot]\[SZ]e","vAb"}];
 lm = LinearModelFit[d,{x},{x}]
@@ -180,6 +190,16 @@ lm["ParameterTable"]
 
 
 (* ::Subsubsection:: *)
+(*Konditionierung*)
+
+
+A = lm["DesignMatrix"];
+LinearAlgebra`MatrixConditionNumber[Transpose[A].A]
+Eigenvalues[Transpose[A].A]
+(1.67246*10^6)/0.057277
+
+
+(* ::Subsubsection:: *)
 (*Lineare Regression mit drei Variablen*)
 
 
@@ -187,6 +207,9 @@ lm["ParameterTable"]
 d = Normal@Values@dataAuf[All,{"runde","vEbene","gr\[ODoubleDot]\[SZ]e","vAb"}];
 lm = LinearModelFit[d,{x,y,z},{x,y,z}]
 lm["ParameterTable"]
+
+
+
 
 
 

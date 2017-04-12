@@ -18,9 +18,11 @@
 
 \section{Messexperiment}
 \section{Überprüfung auf Normalverteilung}
-Um zu überprüfen, ob die erhobenen Daten normalverteilt sind, können eine Vielzahl verschiedener Methoden angewandt werden. Für eine aussagekräftige Beurteilung beschränkt sich diese Arbeit auf zwei grafische und drei rechnerische Methoden. Als grafische Verfahren werden ein Histrogramm und ein Quantil-Quantil-Diagramm erstellt. Im Anschluss erfolgt die rechnerische Überprüfung mittels Shapiro-Wilk-, Cramér-von-Mises- und Anderson-Darling-Test. Aus den gemessenen Zeiten werden die Geschwindigkeiten der einzelnen Probanden ermittelt und für erwähnten Testverfahren herangezogen. Die Geschwindigkeiten in der Ebene, beim Treppenaufstieg sowie beim Treppenabstieg werden jeweils gesondert betrachtet.
+Um zu überprüfen, ob die erhobenen Daten normalverteilt sind, können eine Vielzahl verschiedener Methoden angewandt werden. Für eine aussagekräftige Beurteilung beschränkt sich diese Arbeit auf zwei grafische und drei rechnerische Methoden. Als grafische Verfahren werden ein Histrogramm und ein Quantil-Quantil-Diagramm erstellt. Im Anschluss erfolgt die rechnerische Überprüfung mittels Shapiro-Wilk-, Cramér-von-Mises- und Anderson-Darling-Test. Aus den gemessenen Zeiten werden die Geschwindigkeiten der einzelnen Probanden ermittelt und für die erwähnten Testverfahren herangezogen. Die Geschwindigkeiten in der Ebene, beim Treppenaufstieg sowie beim Treppenabstieg werden jeweils gesondert betrachtet.
+
 \subsection{In der Ebene}
-Bei der Betrachtung der einzelnen Messergebnisse fällt auf, dass ein Proband deutlich langsamer als die restlichen Probanden gegangen ist. Trotz dessen werden alle Messdaten berücksichtigt, da anzunehmen ist, dass es immer Personen gibt, die langsamer oder schneller als die Mehrheit gehen. Es ist jedoch anzumerken, dass bei einem Versuch mit nur einer geringen Anzahl von Probanden, solche Ausreisser eventuell eine signifikante Abweichung verursachen.
+Vor der Analyse muss geprüft werden, ob alle Daten plausibel sind, oder ob bestimmte Daten von der Analyse ausgeschlossen werden müssen. Bei der Betrachtung der einzelnen Messergebnisse fällt auf, dass ein Proband deutlich langsamer als die restlichen Probanden gegangen ist. Trotz dessen werden alle Messdaten berücksichtigt, da anzunehmen ist, dass es immer Personen gibt, die langsamer oder schneller als die Mehrheit gehen. Es ist jedoch anzumerken, dass bei einem Versuch mit nur einer geringen Anzahl von Probanden, solche Ausreisser eventuell eine signifikante Abweichung verursachen.
+
 \subsubsection{Grafische Überprüfung}
 In Abbildung \ref{fig:histogramm_ebene} wird die Verteilung der Geschwindigkeiten einer Normalverteilungskurve gegenübergestellt. Für die Berechnung der Normalverteilungskurve wurden Erwartungswert und Standardabweichung der Ergebnisse ermittelt. Der Erwartungswert beträgt $1,48\ \frac{m}{s}$ und die Standardabweichung $0,144\ \frac{m}{s}$. Das Histogramm bildet relative Häufigkeiten ab. Es fällt auf, dass eine deutiche Häufung der Ergebnisse in den Bereich des Maximums der Normalverteilungskurve fällt. Dies ist ein Anzeichen für eine Normalverteilung der Ergebnisse. Allerdings befinden sich auch an den Rändern der Normalverteilungskurve noch kleinere Häufungen der Ergebnisse. Somit kann aus dem Histogramm kein eindeutiger Rückschluss auf eine Normalverteilung der Geschwindigkeiten gezogen werden. Grundsätzlich ist die Darstellung des Histogramms stark von der gewählten Anzahl an Klassen abhängig und ist gerade bei kleineren Messreihen nicht aussagekräftig.
 \begin{figure}[htpb]
@@ -155,10 +157,15 @@ Die Anpassungstests zeigen, dass die Geschwindigkeiten bei einem Treppenaufstieg
 
 \subsection{Beim Treppenabstieg}
 
+Bei der Messung zum Abstieg von der Treppe gibt es wenig besonderse Fälle. Die gemessenen Daten weisen nur wenige unregelmäßige Ausreisser aus. Diese werden erwartungsgemäß geringen Einfluss haben. Beim Treppenaufstieg wurden signifikante Unterschiede durch 
+die Ausreisser festgestellt. Deswegen werden analog zum Aufstieg beim Abstieg auch zwei Analysen durchgeführt.
 
 
 
-\subsection{Grafische Überprüfung}
+\subsubsection{Grafische Überprüfung}
+
+Vergleicht man die Histogramme in Abbildung \ref{fig:Histogramm_TreppeAb_MA} und \ref{fig:Histogramm_TreppeAb_OA} fällt auf, dass der Unterschied gering ist. Beide Histogramme zeigen eine Normalverteilung. Lediglich an der Spitze um den 
+Bereich von 1,1 sind kleine Abweichungen.
 
 \begin{figure}[!htb]
     \centering
@@ -199,6 +206,49 @@ Die Anpassungstests zeigen, dass die Geschwindigkeiten bei einem Treppenaufstieg
     \end{minipage}
 \end{figure}
 
+
+\begin{table}
+    \centering
+    \begin{minipage}{.47\textwidth}
+\centering
+\begin{tabular}{l|ll}
+  \text{} & \text{Statistic} & \text{P-Value} \\
+\hline
+ \text{Anderson-Darling} & 0.440903 & 0.806782 \\
+ \text{Baringhaus-Henze} & 0.420106 & 0.556077 \\
+ \text{Cram{\' e}r-von Mises} & 0.0609776 & 0.807822 \\
+ \text{Jarque-Bera ALM} & 2.23559 & 0.247476 \\
+ \text{Mardia Combined} & 2.23559 & 0.247476 \\
+ \text{Mardia Kurtosis} & -1.43247 & 0.152009 \\
+ \text{Mardia Skewness} & 0.156589 & 0.692316 \\
+ \text{Pearson }$\chi ^2$ & 10.3333 & 0.411752 \\
+ \text{Shapiro-Wilk} & 0.974316 & 0.186898 \\
+\end{tabular}
+\caption{Anpassungstests zur Überprüfung der gemessenen Geschwindigkeiten beim Treppenabstieg mit Ausreissern auf Normalverteilung}
+\label{tab:anpassungstest_TreppeAb_MA}
+    \end{minipage}%
+    \begin{minipage}{0.06\textwidth}
+     \hfill
+    \end{minipage}%
+    \begin{minipage}{0.47\textwidth}
+\centering
+\begin{tabular}{l|ll}
+ \text{} & \text{Statistic} & \text{P-Value} \\
+\hline
+ \text{Anderson-Darling} & 0.54237 & 0.70308 \\
+ \text{Baringhaus-Henze} & 0.484286 & 0.455989 \\
+ \text{Cram{\' e}r-von Mises} & 0.0788816 & 0.698349 \\
+ \text{Jarque-Bera ALM} & 1.99557 & 0.277317 \\
+ \text{Mardia Combined} & 1.99557 & 0.277317 \\
+ \text{Mardia Kurtosis} & -1.32774 & 0.184265 \\
+ \text{Mardia Skewness} & 0.190686 & 0.662346 \\
+ \text{Pearson }$\chi ^2$ & 6.37037 & 0.702354 \\
+ \text{Shapiro-Wilk} & 0.969539 & 0.183952 \\
+\end{tabular}
+\caption{Anpassungstests zur Überprüfung der gemessenen Geschwindigkeiten beim Treppenabstieg ohne Ausreissern auf Normalverteilung}
+\label{tab:anpassungstest_TreppeAbf_OA}
+    \end{minipage}
+\end{table}
 
 \subsection{Rechnerische Überprüfung}
 

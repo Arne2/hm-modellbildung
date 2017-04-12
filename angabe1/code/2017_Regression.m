@@ -59,6 +59,11 @@ data = JoinAcross[abaufebene, gr\[ODoubleDot]\[SZ]e,{"id"}];
 (*Herausgefilterte Werte: *)
 data[Select[#bemerkungAuf !=""&]]
 dataAuf = data[Select[#bemerkungAuf == ""&]];
+(*dataAuf=data;*) (*Ausrei\[SZ]er mit ber\[UDoubleDot]cksichtigen*)
+
+
+(* ::Subsubsection:: *)
+(*Lineare Regression mit einem Parameter *)
 
 
 (*Modell f\[UDoubleDot]r Abh\[ADoubleDot]ngigkeit von der Ebenengeschwindigkeit*)
@@ -68,7 +73,7 @@ Show[
 	ListPlot[lm["Data"],PlotStyle->Orange, AxesLabel->{"v Ebene in \!\(\*FractionBox[\(m\), \(s\)]\)","v Aufw\[ADoubleDot]rts in \!\(\*FractionBox[\(m\), \(s\)]\) "}],
 	Plot[lm[x],{x,0,100}]
 ]
-lm["ANOVATable"]
+lm["ParameterTable"]
 
 
 (*Modell f\[UDoubleDot]r Abh\[ADoubleDot]ngigkeit von der Gr\[ODoubleDot]\[SZ]e des Probanden*)
@@ -78,17 +83,42 @@ Show[
 	ListPlot[lm["Data"],PlotStyle->Orange, AxesLabel->{"Gr\[ODoubleDot]\[SZ]e in cm","v Aufw\[ADoubleDot]rts in \!\(\*FractionBox[\(m\), \(s\)]\) "}],
 	Plot[lm[x],{x, 150,200}]
 ]
-lm["ANOVATable"]
+lm["ParameterTable"]
 
 
 (*Modell f\[UDoubleDot]r Abh\[ADoubleDot]ngigkeit von der Runde*)
 d = Normal@Values@dataAuf[All,{"runde","vAuf"}];
 lm = LinearModelFit[d,{x},{x}]
 Show[
-	ListPlot[lm["Data"],PlotStyle->Orange,AxesLabel->{"Runde","v Aufw\[ADoubleDot]rts in \!\(\*FractionBox[\(m\), \(s\)]\) "}],
-	Plot[lm[x],{x,0,100}]
+	ListPlot[lm["Data"],PlotStyle->Orange, AxesLabel->{"Runde","v Aufw\[ADoubleDot]rts in \!\(\*FractionBox[\(m\), \(s\)]\) "}],
+	Plot[lm[x],{x, 0,100}]
+]
+lm["ParameterTable"]
+
+
+(* ::Subsubsection:: *)
+(*Lineare Regressions mit zwei Parameter*)
+
+
+(*Modell f\[UDoubleDot]r Abh\[ADoubleDot]ngigkeit von Wunschgeschwindigkeit (Ebene) und K\[ODoubleDot]rpergr\[ODoubleDot]\[SZ]e*)
+d = Normal@Values@dataAuf[All,{"vEbene","gr\[ODoubleDot]\[SZ]e","vAuf"}];
+lm = LinearModelFit[d,{x,y},{x,y}]
+Show [
+	ListPointPlot3D[d,PlotStyle->PointSize[0.01]],
+	Plot3D[{Normal@lm},{x,0,3},{y,150,200}]
 	]
-lm["ANOVATable"]
+lm["ParameterTable"]
+
+
+
+(* ::Subsubsection:: *)
+(*Lineare Regression mit drei Variablen*)
+
+
+(*Modell f\[UDoubleDot]r Abh\[ADoubleDot]ngigkeit von Rundennummer, Wunschgeschwindigkeit (Ebene) und K\[ODoubleDot]rpergr\[ODoubleDot]\[SZ]e*)
+d = Normal@Values@dataAuf[All,{"runde","vEbene","gr\[ODoubleDot]\[SZ]e","vAuf"}];
+lm = LinearModelFit[d,{x,y,z},{x,y,z}]
+lm["ParameterTable"]
 
 
 (* ::Section:: *)
@@ -98,6 +128,7 @@ lm["ANOVATable"]
 (*Herausgefilterte Werte*)
 data[Select[#bemerkungAb != ""&]]
 dataAb = data[Select[#bemerkungAb == ""&]];
+(*dataAb = data;*) (*Ausrei\[SZ]er mit ber\[UDoubleDot]cksichtigen*)
 
 
 (*Modell f\[UDoubleDot]r Abh\[ADoubleDot]ngigkeit von der Ebenengeschwindigkeit*)
@@ -106,7 +137,7 @@ lm = LinearModelFit[d,{x},{x}]
 Show[
 	ListPlot[lm["Data"],PlotStyle->Orange, AxesLabel->{"v Ebene in \!\(\*FractionBox[\(m\), \(s\)]\)","v Abw\[ADoubleDot]rts in \!\(\*FractionBox[\(m\), \(s\)]\) "}],
 	Plot[lm[x],{x,0,100}]]
-lm["ANOVATable"]
+lm["ParameterTable"]
 
 
 (*Modell f\[UDoubleDot]r Abh\[ADoubleDot]ngigkeit von der Gr\[ODoubleDot]\[SZ]e des Probanden*)
@@ -115,7 +146,7 @@ lm = LinearModelFit[d,{x},{x}]
 Show[
 	ListPlot[lm["Data"],PlotStyle->Orange, AxesLabel->{"Gr\[ODoubleDot]\[SZ]e in cm","v Abw\[ADoubleDot]rts in \!\(\*FractionBox[\(m\), \(s\)]\) "}],
 	Plot[lm[x],{x,150,200}]]
-lm["ANOVATable"]
+lm["ParameterTable"]
 
 
 (*Modell f\[UDoubleDot]r Abh\[ADoubleDot]ngigkeit von der Runde*)
@@ -124,4 +155,38 @@ lm = LinearModelFit[d,{x},{x}]
 Show[
 	ListPlot[lm["Data"],PlotStyle->Orange, AxesLabel->{"Runde","v Abw\[ADoubleDot]rts in \!\(\*FractionBox[\(m\), \(s\)]\) "}],
 	Plot[lm[x],{x,0,100}]]
-lm["ANOVATable"]
+lm["ParameterTable"]
+
+
+
+
+
+
+
+
+(* ::Subsubsection:: *)
+(*Lineare Regressions mit zwei Parameter*)
+
+
+(*Modell f\[UDoubleDot]r Abh\[ADoubleDot]ngigkeit von Wunschgeschwindigkeit (Ebene) und K\[ODoubleDot]rpergr\[ODoubleDot]\[SZ]e*)
+d = Normal@Values@dataAuf[All,{"vEbene","gr\[ODoubleDot]\[SZ]e","vAb"}];
+lm = LinearModelFit[d,{x,y},{x,y}]
+Show [
+	ListPointPlot3D[d,PlotStyle->PointSize[0.01]],
+	Plot3D[{Normal@lm},{x,0,3},{y,150,200}]
+	]
+lm["ParameterTable"]
+
+
+
+(* ::Subsubsection:: *)
+(*Lineare Regression mit drei Variablen*)
+
+
+(*Modell f\[UDoubleDot]r Abh\[ADoubleDot]ngigkeit von Rundennummer, Wunschgeschwindigkeit (Ebene) und K\[ODoubleDot]rpergr\[ODoubleDot]\[SZ]e*)
+d = Normal@Values@dataAuf[All,{"runde","vEbene","gr\[ODoubleDot]\[SZ]e","vAb"}];
+lm = LinearModelFit[d,{x,y,z},{x,y,z}]
+lm["ParameterTable"]
+
+
+

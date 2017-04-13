@@ -112,48 +112,7 @@ In Abbildung \ref{fig:QQ_TreppeAuf_MA} ist deutlich eine Abweichung von der Norm
 
 \subsubsection{Rechnerische Überprüfung}
 Die Anpassungstests zeigen, dass die Geschwindigkeiten bei einem Treppenaufstieg nicht normalverteilt sind, wenn man die Ausreisser mitberücksichtigt. Die Tabelle \ref{tab:anpassungstest_TreppeAuf_MA} zeigt, dass bei einem Cram{\' e}r-von Mises Test ein p-Wert von nur $0,018$ erreicht wird, welcher somit deutlich geringer als das Signifikanzniveau von $0,05$ ist. Werden die Ausreisser nicht mitberücksichtigt, so ergibt der Cram{\' e}r-von Mises Test einen p-Wert von $0,92$. Auch der Anderson-Darling Test liegt weit über dem Signifikanzniveau. Die rechnerische Überpüfung bestätigt somit das Ergebnis der grafischen Analyse. Wie bereits erwähnt, sind die Ausreisser immer von den selben vier Probanden verursacht worden. Diese haben beim Aufsteigen der Treppen in jeder Runde mehrere Stufen übersprungen. Die Vermutung liegt nahe, dass es eine Gruppe von Menschen gibt, die beim Aufsteigen der Treppen grundsätzlich schneller gehen. Eine genaue Untersuchung ist mit einer deutlich größeren Anzahl der Probanden notwendig.
-\begin{table}
-    \centering
-    \begin{minipage}{.47\textwidth}
-\centering
-\begin{tabular}{l|ll}
- \text{} & \text{Statistic} & \text{P-Value} \\
-\hline
- \text{Anderson-Darling} & 0.33829 & 0.90645 \\
- \text{Baringhaus-Henze} & 0.213705 & 0.858651 \\
- \text{Cram{\' e}r-von Mises} & 0.0421682 & 0.921661 \\
- \text{Jarque-Bera ALM} & 1.31475 & 0.440072 \\
- \text{Mardia Combined} & 1.31475 & 0.440072 \\
- \text{Mardia Kurtosis} & -0.891517 & 0.372652 \\
- \text{Mardia Skewness} & 0.553342 & 0.456956 \\
- \text{Pearson }$\chi ^2$ & 12.2963 & 0.197116 \\
- \text{Shapiro-Wilk} & 0.977864 & 0.414303 \\
-\end{tabular}
-\caption{Anpassungstests zur Überprüfung der gemessenen Geschwindigkeiten beim Treppenaufstieg ohne Ausreissern auf Normalverteilung}
-\label{tab:anpassungstest_TreppeAuf_OA}
-    \end{minipage}%
-    \begin{minipage}{0.06\textwidth}
-     \hfill
-    \end{minipage}%
-    \begin{minipage}{0.47\textwidth}
-\centering
-\begin{tabular}{l|ll}
- \text{} & \text{Statistic} & \text{P-Value} \\
-\hline
- \text{Anderson-Darling} & 3.67396 & 0.0126832 \\
- \text{Baringhaus-Henze} & 4.53865 & 0.000403182 \\
- \text{Cram{\' e}r-von Mises} & 0.638786 & 0.0179638 \\
- \text{Jarque-Bera ALM} & 45.2212 & 0.000864057 \\
- \text{Mardia Combined} & 45.2212 & 0.000864057 \\
- \text{Mardia Kurtosis} & 3.44345 & 0.000574336 \\
- \text{Mardia Skewness} & 26.5574 & \text{2.55817*$10^{-7}$} \\
- \text{Pearson }$\chi ^2$ & 25. & 0.00534551 \\
- \text{Shapiro-Wilk} & 0.835009 & \text{4.31299*$10^{-7}$} \\
-\end{tabular}
-\caption{Anpassungstests zur Überprüfung der gemessenen Geschwindigkeiten beim Treppenaufstieg mit Ausreissern auf Normalverteilung}
-\label{tab:anpassungstest_TreppeAuf_MA}
-    \end{minipage}
-\end{table}
+\input{abbildungen/tab_Anpassungstest_Treppe_Auf}
 
 \subsection{Beim Treppenabstieg}
 
@@ -163,9 +122,9 @@ die Ausreisser festgestellt. Deswegen werden analog zum Aufstieg beim Abstieg au
 
 
 \subsubsection{Grafische Überprüfung}
+Ein Vergleich der Histrograme in Abbildung \ref{fig:Histogramm_TreppeAb_MA} und Abbildung \ref{fig:Histogramm_TreppeAb_OA}, zeigt, dass die Ausreisser nur einen geringen Unterschied verursachen. In den Abbildungen sind jeweils die eine Normalverteilungskurve dargestellt. Es zeigt sich, dass eine Normalverteilung nicht genau erkenntbar ist.
 
-Vergleicht man die Histogramme in Abbildung \ref{fig:Histogramm_TreppeAb_MA} und \ref{fig:Histogramm_TreppeAb_OA} fällt auf, dass der Unterschied gering ist. Beide Histogramme zeigen eine Normalverteilung. Lediglich an der Spitze um den 
-Bereich von 1,1 sind kleine Abweichungen.
+Beim Betrachten des Quantil-Quantil-Diagramms in Abbildung \ref{fig:QQ_TreppeAb_MA} und \ref{fig:QQ_TreppeAb_OA}, zeigt sich ebenfalls, dass der Unterschied der Gesamten Daten und der bereinigten Daten sehr gering ist und mit bloßem Auge nicht zu erkennen. Aus den beiden Diagrammen wird deutlich, dass sich sich bei beiden Fällen um eine Normalverteilung handelt.
 
 \begin{figure}[!htb]
     \centering
@@ -207,50 +166,11 @@ Bereich von 1,1 sind kleine Abweichungen.
 \end{figure}
 
 
-\begin{table}
-    \centering
-    \begin{minipage}{.47\textwidth}
-\centering
-\begin{tabular}{l|ll}
-  \text{} & \text{Statistic} & \text{P-Value} \\
-\hline
- \text{Anderson-Darling} & 0.440903 & 0.806782 \\
- \text{Baringhaus-Henze} & 0.420106 & 0.556077 \\
- \text{Cram{\' e}r-von Mises} & 0.0609776 & 0.807822 \\
- \text{Jarque-Bera ALM} & 2.23559 & 0.247476 \\
- \text{Mardia Combined} & 2.23559 & 0.247476 \\
- \text{Mardia Kurtosis} & -1.43247 & 0.152009 \\
- \text{Mardia Skewness} & 0.156589 & 0.692316 \\
- \text{Pearson }$\chi ^2$ & 10.3333 & 0.411752 \\
- \text{Shapiro-Wilk} & 0.974316 & 0.186898 \\
-\end{tabular}
-\caption{Anpassungstests zur Überprüfung der gemessenen Geschwindigkeiten beim Treppenabstieg mit Ausreissern auf Normalverteilung}
-\label{tab:anpassungstest_TreppeAb_MA}
-    \end{minipage}%
-    \begin{minipage}{0.06\textwidth}
-     \hfill
-    \end{minipage}%
-    \begin{minipage}{0.47\textwidth}
-\centering
-\begin{tabular}{l|ll}
- \text{} & \text{Statistic} & \text{P-Value} \\
-\hline
- \text{Anderson-Darling} & 0.54237 & 0.70308 \\
- \text{Baringhaus-Henze} & 0.484286 & 0.455989 \\
- \text{Cram{\' e}r-von Mises} & 0.0788816 & 0.698349 \\
- \text{Jarque-Bera ALM} & 1.99557 & 0.277317 \\
- \text{Mardia Combined} & 1.99557 & 0.277317 \\
- \text{Mardia Kurtosis} & -1.32774 & 0.184265 \\
- \text{Mardia Skewness} & 0.190686 & 0.662346 \\
- \text{Pearson }$\chi ^2$ & 6.37037 & 0.702354 \\
- \text{Shapiro-Wilk} & 0.969539 & 0.183952 \\
-\end{tabular}
-\caption{Anpassungstests zur Überprüfung der gemessenen Geschwindigkeiten beim Treppenabstieg ohne Ausreissern auf Normalverteilung}
-\label{tab:anpassungstest_TreppeAbf_OA}
-    \end{minipage}
-\end{table}
+
 
 \subsection{Rechnerische Überprüfung}
+Die rechnerische Überprüfung bestätigt die Analyse des Quantil-Quantil-Diagramms. Wie in Tabelle \ref{tab:anpassungstest_TreppeAb_MA} und Tabelle \ref{fig:Histogramm_TreppeAb_OA} zu sehen, liegt in beiden Fällen eine Normalverteilung vor. Es ist zu bemerken, dass ein anpassungstest anhand der Daten mit Ausreissern einen größeren p-Wert erzielt. 
+\input{abbildungen/tab_Anpassungstest_Treppe_Ab}
 
 \section{Modell}
 \section{Lineare Regression}

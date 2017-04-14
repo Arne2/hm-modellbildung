@@ -82,8 +82,10 @@ lm["ParameterTable"]
 
 A = lm["DesignMatrix"];
 R = QRDecomposition[A][[2]];
-LinearAlgebra`MatrixConditionNumber[Transpose[A].A]
-cond = LinearAlgebra`MatrixConditionNumber[R]
+cond1 = LinearAlgebra`MatrixConditionNumber[Transpose[A].A]
+Log[cond1]
+cond2 = LinearAlgebra`MatrixConditionNumber[R]
+Log[cond2]
 
 
 (*Modell f\[UDoubleDot]r Abh\[ADoubleDot]ngigkeit von der Gr\[ODoubleDot]\[SZ]e des Probanden*)
@@ -156,8 +158,10 @@ lm["ParameterTable"]
 
 A = lm["DesignMatrix"];
 R = QRDecomposition[A][[2]];
-LinearAlgebra`MatrixConditionNumber[Transpose[A].A]
-cond = LinearAlgebra`MatrixConditionNumber[R]
+cond1 = LinearAlgebra`MatrixConditionNumber[Transpose[A].A]
+Log[cond1]
+cond2 = LinearAlgebra`MatrixConditionNumber[R]
+Log[cond2]
 
 
 (*Modell f\[UDoubleDot]r Abh\[ADoubleDot]ngigkeit von der Gr\[ODoubleDot]\[SZ]e des Probanden*)
@@ -205,8 +209,10 @@ lm["ParameterTable"]
 
 A = lm["DesignMatrix"];
 R = QRDecomposition[A][[2]];
-LinearAlgebra`MatrixConditionNumber[Transpose[A].A]
-cond = LinearAlgebra`MatrixConditionNumber[R]
+cond1 = LinearAlgebra`MatrixConditionNumber[Transpose[A].A]
+Log[cond1]
+cond2 = LinearAlgebra`MatrixConditionNumber[R]
+Log[cond2]
 
 
 (* ::Subsubsection:: *)
@@ -217,6 +223,9 @@ cond = LinearAlgebra`MatrixConditionNumber[R]
 d = Normal@Values@dataAuf[All,{"runde","vEbene","gr\[ODoubleDot]\[SZ]e","vAb"}];
 lm = LinearModelFit[d,{x,y,z},{x,y,z}]
 lm["ParameterTable"]
+
+
+
 
 
 

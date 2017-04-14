@@ -1,14 +1,14 @@
 (* ::Package:: *)
 
 (* ::Title:: *)
-(*Lineare Regression der Daten von 2017*)
+(*Lineare Regression der Daten von 2012*)
 
 
-ohneAusreisser = 1;
+ohneAusreisser = 0;
 
 outputDir = If[ohneAusreisser > 0, 
-    FileNameJoin@{NotebookDirectory[], "../abbildungen/regression/2017/ohneausreisser/"},
-	FileNameJoin@{NotebookDirectory[], "../abbildungen/regression/2017/"}
+    FileNameJoin@{NotebookDirectory[], "../abbildungen/regression/2012/ohneausreisser/"},
+	FileNameJoin@{NotebookDirectory[], "../abbildungen/regression/2012/"}
 ];
 
 
@@ -17,9 +17,9 @@ outputDir = If[ohneAusreisser > 0,
 
 
 (*Hier werden die Daten aus dem Messexperiment geladen.*)
-pathGeschwindigkeiten= "../data/2017/MessexperimentGeschwindigkeiten.csv";
+pathGeschwindigkeiten= "../data/2012/MessexperimentGeschwindigkeiten.csv";
 dataGeschwindigkeiten= SemanticImport[FileNameJoin@{NotebookDirectory[],pathGeschwindigkeiten}, CharacterEncoding->"UTF8"];
-pathProbanden= "../data/2017/MessexperimentProbanden.csv";
+pathProbanden= "../data/2012/MessexperimentProbanden.csv";
 dataProbanden= SemanticImport[FileNameJoin@{NotebookDirectory[],pathProbanden},CharacterEncoding->"UTF8"];
 
 
@@ -281,6 +281,9 @@ lm = LinearModelFit[d,{runde,vEbene,gr\[ODoubleDot]\[SZ]e},{runde,vEbene,gr\[ODo
 Export[FileNameJoin@{outputDir,"ab-runde-ebene-groesse.tex"},Normal@%,"TeXFragment"];
 lm["ParameterTable"]
 Export[FileNameJoin@{outputDir,"ab-runde-ebene-groesse-table.tex"},%,"TeXFragment"];
+
+
+
 
 
 

@@ -4,6 +4,14 @@
 (*Lineare Regression der Daten von 2017*)
 
 
+ohneAusreisser = 0;
+
+outputDir = If[ohneAusreisser > 0, 
+    FileNameJoin@{NotebookDirectory[], "../abbildungen/regression/2017/ohneausreisser/"},
+	FileNameJoin@{NotebookDirectory[], "../abbildungen/regression/2017/"}
+]
+
+
 (* ::Section::Closed:: *)
 (*Aufbereitung der Daten*)
 
@@ -57,9 +65,16 @@ data = JoinAcross[abaufebene, gr\[ODoubleDot]\[SZ]e,{"id"}];
 
 
 (*Herausgefilterte Werte: *)
-data[Select[#bemerkungAuf !=""&]]
-dataAuf = data[Select[#bemerkungAuf == ""&]];
-(*dataAuf=data;*) (*Ausrei\[SZ]er mit ber\[UDoubleDot]cksichtigen*)
+a = TableForm[
+	Normal@Values@data[Select[#bemerkungAuf !=""&], {"id","runde", "bemerkungAuf", "vAuf"}] ,
+	TableHeadings->{None,{"ID Proband", "Runde", "Bemerkung", "v Treppe aufw\[ADoubleDot]rts in \!\(\*FractionBox[\(m\), \(s\)]\)"}}
+]
+Export[FileNameJoin@{outputDir,"auf-ausreisser.tex"},a, "TexFragment"];
+
+dataAuf = If[ohneAusreisser > 0, 
+	data[Select[#bemerkungAuf == ""&]],
+	dataAuf=data
+];
 
 
 (* ::Subsubsection:: *)
@@ -69,31 +84,43 @@ dataAuf = data[Select[#bemerkungAuf == ""&]];
 (*Modell f\[UDoubleDot]r Abh\[ADoubleDot]ngigkeit von der Ebenengeschwindigkeit*)
 d = Normal@Values@dataAuf[All,{"vEbene","vAuf"}];
 lm = LinearModelFit[d,{x},{x}]
+Export[FileNameJoin@{outputDir,"auf-ebene.tex"},Normal@%, "TexFragment"];
 Show[
 	ListPlot[lm["Data"],PlotStyle->Orange, AxesLabel->{"v Ebene in \!\(\*FractionBox[\(m\), \(s\)]\)","v Aufw\[ADoubleDot]rts in \!\(\*FractionBox[\(m\), \(s\)]\) "}],
 	Plot[lm[x],{x,0,100}]
 ]
+Export[FileNameJoin@{outputDir,"auf-ebene.pdf"},%];
+
 lm["ParameterTable"]
+Export[FileNameJoin@{outputDir,"auf-ebene-table.tex"},%, "TexFragment"];
 
 
 (*Modell f\[UDoubleDot]r Abh\[ADoubleDot]ngigkeit von der Gr\[ODoubleDot]\[SZ]e des Probanden*)
 d = Normal@Values@dataAuf[All,{"gr\[ODoubleDot]\[SZ]e","vAuf"}];
 lm = LinearModelFit[d,{x},{x}]
+Export[FileNameJoin@{outputDir,"auf-groesse.tex"},Normal@%, "TexFragment"];
 Show[
 	ListPlot[lm["Data"],PlotStyle->Orange, AxesLabel->{"Gr\[ODoubleDot]\[SZ]e in cm","v Aufw\[ADoubleDot]rts in \!\(\*FractionBox[\(m\), \(s\)]\) "}],
 	Plot[lm[x],{x, 150,200}]
 ]
+Export[FileNameJoin@{outputDir,"auf-groesse.pdf"},%];
+
 lm["ParameterTable"]
+Export[FileNameJoin@{outputDir,"auf-groesse-table.tex"},%, "TexFragment"];
 
 
 (*Modell f\[UDoubleDot]r Abh\[ADoubleDot]ngigkeit von der Runde*)
 d = Normal@Values@dataAuf[All,{"runde","vAuf"}];
 lm = LinearModelFit[d,{x},{x}]
+Export[FileNameJoin@{outputDir,"auf-runde.tex"},Normal@%, "TexFragment"];
 Show[
 	ListPlot[lm["Data"],PlotStyle->Orange, AxesLabel->{"Runde","v Aufw\[ADoubleDot]rts in \!\(\*FractionBox[\(m\), \(s\)]\) "}],
 	Plot[lm[x],{x, 0,100}]
 ]
+Export[FileNameJoin@{outputDir,"auf-runde.pdf"},%];
+
 lm["ParameterTable"]
+Export[FileNameJoin@{outputDir,"auf-runde-table.tex"},%, "TexFragment"];
 
 
 (* ::Subsubsection:: *)
@@ -102,13 +129,16 @@ lm["ParameterTable"]
 
 (*Modell f\[UDoubleDot]r Abh\[ADoubleDot]ngigkeit von Wunschgeschwindigkeit (Ebene) und K\[ODoubleDot]rpergr\[ODoubleDot]\[SZ]e*)
 d = Normal@Values@dataAuf[All,{"vEbene","gr\[ODoubleDot]\[SZ]e","vAuf"}];
-lm = LinearModelFit[d,{x,y},{x,y}]
+lm = LinearModelFit[d,{vEbene,groesse},{vEbene,groesse}]
+Export[FileNameJoin@{outputDir,"auf-ebene-groesse.tex"},Normal@%, "TexFragment"];
 Show [
 	ListPointPlot3D[d,PlotStyle->PointSize[0.01]],
-	Plot3D[{Normal@lm},{x,0,3},{y,150,200}]
-	]
-lm["ParameterTable"]
+	Plot3D[{Normal@lm},{vEbene,0,3},{groesse,150,200}]
+]
+Export[FileNameJoin@{outputDir,"auf-ebene-groesse.pdf"},%];
 
+lm["ParameterTable"]
+Export[FileNameJoin@{outputDir,"auf-ebene-groesse-table.tex"},%, "TexFragment"];
 
 
 (* ::Subsubsection:: *)
@@ -118,50 +148,66 @@ lm["ParameterTable"]
 (*Modell f\[UDoubleDot]r Abh\[ADoubleDot]ngigkeit von Rundennummer, Wunschgeschwindigkeit (Ebene) und K\[ODoubleDot]rpergr\[ODoubleDot]\[SZ]e*)
 d = Normal@Values@dataAuf[All,{"runde","vEbene","gr\[ODoubleDot]\[SZ]e","vAuf"}];
 lm = LinearModelFit[d,{x,y,z},{x,y,z}]
+Export[FileNameJoin@{outputDir,"auf-runde-ebene-groesse.tex"},Normal@%, "TexFragment"];
 lm["ParameterTable"]
+Export[FileNameJoin@{outputDir,"auf-runde-ebene-groesse-table.tex"},%, "TexFragment"];
 
 
 (* ::Section:: *)
 (*Treppengeschwindigkeit abw\[ADoubleDot]rts*)
 
 
-(*Herausgefilterte Werte*)
-data[Select[#bemerkungAb != ""&]]
-dataAb = data[Select[#bemerkungAb == ""&]];
-(*dataAb = data;*) (*Ausrei\[SZ]er mit ber\[UDoubleDot]cksichtigen*)
+(*Herausgefilterte Werte: *)
+a = TableForm[
+	Normal@Values@data[Select[#bemerkungAb !=""&], {"id","runde", "bemerkungAb", "vAb"}] ,
+	TableHeadings->{None,{"ID Proband", "Runde", "Bemerkung", "v Treppe abw\[ADoubleDot]rts in \!\(\*FractionBox[\(m\), \(s\)]\) "}}
+]
+Export[FileNameJoin@{outputDir,"ab-ausreisser.tex"},a, "TexFragment"];
+
+dataAb = If[ohneAusreisser > 0, 
+	data[Select[#bemerkungAb == ""&]],
+	dataAuf=data
+];
 
 
 (*Modell f\[UDoubleDot]r Abh\[ADoubleDot]ngigkeit von der Ebenengeschwindigkeit*)
 d = Normal@Values@dataAb[All,{"vEbene","vAb"}];
 lm = LinearModelFit[d,{x},{x}]
+Export[FileNameJoin@{outputDir,"ab-ebene.tex"},Normal@%,"TeXFragment"];
 Show[
 	ListPlot[lm["Data"],PlotStyle->Orange, AxesLabel->{"v Ebene in \!\(\*FractionBox[\(m\), \(s\)]\)","v Abw\[ADoubleDot]rts in \!\(\*FractionBox[\(m\), \(s\)]\) "}],
-	Plot[lm[x],{x,0,100}]]
+	Plot[lm[x],{x,0,100}]
+]
+Export[FileNameJoin@{outputDir,"ab-ebene.pdf"},%];
+
 lm["ParameterTable"]
+Export[FileNameJoin@{outputDir,"ab-ebene-table.tex"},%,"TeXFragment"];
 
 
 (*Modell f\[UDoubleDot]r Abh\[ADoubleDot]ngigkeit von der Gr\[ODoubleDot]\[SZ]e des Probanden*)
 d = Normal@Values@dataAb[All,{"gr\[ODoubleDot]\[SZ]e","vAb"}];
 lm = LinearModelFit[d,{x},{x}]
+Export[FileNameJoin@{outputDir,"ab-groesse.tex"},Normal@%,"TeXFragment"];
 Show[
 	ListPlot[lm["Data"],PlotStyle->Orange, AxesLabel->{"Gr\[ODoubleDot]\[SZ]e in cm","v Abw\[ADoubleDot]rts in \!\(\*FractionBox[\(m\), \(s\)]\) "}],
-	Plot[lm[x],{x,150,200}]]
+	Plot[lm[x],{x,150,200}]
+]
+Export[FileNameJoin@{outputDir,"ab-groesse.pdf"},%];
 lm["ParameterTable"]
+Export[FileNameJoin@{outputDir,"ab-groesse-table.tex"},%,"TeXFragment"];
 
 
 (*Modell f\[UDoubleDot]r Abh\[ADoubleDot]ngigkeit von der Runde*)
 d = Normal@Values@dataAb[All,{"runde","vAb"}];
 lm = LinearModelFit[d,{x},{x}]
+Export[FileNameJoin@{outputDir,"ab-runde.tex"},Normal@%,"TeXFragment"];
 Show[
 	ListPlot[lm["Data"],PlotStyle->Orange, AxesLabel->{"Runde","v Abw\[ADoubleDot]rts in \!\(\*FractionBox[\(m\), \(s\)]\) "}],
-	Plot[lm[x],{x,0,100}]]
+	Plot[lm[x],{x,0,100}]
+]
+Export[FileNameJoin@{outputDir,"ab-runde.pdf"},%];
 lm["ParameterTable"]
-
-
-
-
-
-
+Export[FileNameJoin@{outputDir,"ab-runde-table.tex"},%,"TeXFragment"];
 
 
 (* ::Subsubsection:: *)
@@ -171,12 +217,15 @@ lm["ParameterTable"]
 (*Modell f\[UDoubleDot]r Abh\[ADoubleDot]ngigkeit von Wunschgeschwindigkeit (Ebene) und K\[ODoubleDot]rpergr\[ODoubleDot]\[SZ]e*)
 d = Normal@Values@dataAuf[All,{"vEbene","gr\[ODoubleDot]\[SZ]e","vAb"}];
 lm = LinearModelFit[d,{x,y},{x,y}]
+Export[FileNameJoin@{outputDir,"ab-ebene-groesse.tex"},Normal@%,"TeXFragment"];
 Show [
 	ListPointPlot3D[d,PlotStyle->PointSize[0.01]],
 	Plot3D[{Normal@lm},{x,0,3},{y,150,200}]
-	]
-lm["ParameterTable"]
+]
+Export[FileNameJoin@{outputDir,"ab-ebene-groesse.pdf"},%];
 
+lm["ParameterTable"]
+Export[FileNameJoin@{outputDir,"ab-ebene-groesse-table.tex"},%,"TeXFragment"];
 
 
 (* ::Subsubsection:: *)
@@ -186,7 +235,9 @@ lm["ParameterTable"]
 (*Modell f\[UDoubleDot]r Abh\[ADoubleDot]ngigkeit von Rundennummer, Wunschgeschwindigkeit (Ebene) und K\[ODoubleDot]rpergr\[ODoubleDot]\[SZ]e*)
 d = Normal@Values@dataAuf[All,{"runde","vEbene","gr\[ODoubleDot]\[SZ]e","vAb"}];
 lm = LinearModelFit[d,{x,y,z},{x,y,z}]
+Export[FileNameJoin@{outputDir,"ab-runde-ebene-groesse.tex"},Normal@%,"TeXFragment"];
 lm["ParameterTable"]
+Export[FileNameJoin@{outputDir,"ab-runde-ebene-groesse-table.tex"},%,"TeXFragment"];
 
 
 

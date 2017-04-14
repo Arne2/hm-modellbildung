@@ -18,13 +18,13 @@
 
 \section{Messexperiment}
 \section{Überprüfung auf Normalverteilung}
-Um zu überprüfen, ob die erhobenen Daten normalverteilt sind, können eine Vielzahl verschiedener Methoden angewandt werden. Für eine aussagekräftige Beurteilung beschränkt sich diese Arbeit auf zwei grafische und drei rechnerische Methoden. Als grafische Verfahren werden ein Histrogramm und ein Quantil-Quantil-Diagramm erstellt. Im Anschluss erfolgt die rechnerische Überprüfung mittels Shapiro-Wilk-, Cramér-von-Mises- und Anderson-Darling-Test. Aus den gemessenen Zeiten werden die Geschwindigkeiten der einzelnen Probanden ermittelt und für die erwähnten Testverfahren herangezogen. Die Geschwindigkeiten in der Ebene, beim Treppenaufstieg sowie beim Treppenabstieg werden jeweils gesondert betrachtet.
+Um zu überprüfen, ob die erhobenen Daten normalverteilt sind, kann eine Vielzahl verschiedener Methoden angewandt werden. Für eine aussagekräftige Beurteilung beschränkt sich diese Arbeit auf zwei grafische und drei rechnerische Methoden. Als grafische Verfahren werden ein Histogramm und ein Quantil-Quantil-Diagramm erstellt. Im Anschluss erfolgt die rechnerische Überprüfung mittels Shapiro-Wilk-, Cramér-von-Mises- und Anderson-Darling-Test. Aus den gemessenen Zeiten werden die Geschwindigkeiten der einzelnen Probanden ermittelt und für die erwähnten Testverfahren herangezogen. Die Geschwindigkeiten in der Ebene, beim Treppenaufstieg sowie beim Treppenabstieg werden jeweils gesondert betrachtet.
 
 \subsection{In der Ebene}
-Vor der Analyse muss geprüft werden, ob alle Daten plausibel sind, oder ob bestimmte Daten von der Analyse ausgeschlossen werden müssen. Bei der Betrachtung der einzelnen Messergebnisse fällt auf, dass ein Proband deutlich langsamer als die restlichen Probanden gegangen ist. Trotz dessen werden alle Messdaten berücksichtigt, da anzunehmen ist, dass es immer Personen gibt, die langsamer oder schneller als die Mehrheit gehen. Es ist jedoch anzumerken, dass bei einem Versuch mit nur einer geringen Anzahl von Probanden, solche Ausreisser eventuell eine signifikante Abweichung verursachen.
+Vor der Analyse muss geprüft werden, ob alle Daten plausibel sind, oder ob bestimmte Daten von der Analyse ausgeschlossen werden müssen. Bei der Betrachtung der einzelnen Messergebnisse fällt auf, dass ein Proband deutlich langsamer als die restlichen Probanden gegangen ist. Trotz dessen werden alle Messdaten berücksichtigt, da anzunehmen ist, dass es immer Personen gibt, die langsamer oder schneller als die Mehrheit gehen. Es ist jedoch anzumerken, dass bei einem Versuch mit nur einer geringen Anzahl von Probanden, solche Ausreißer eventuell eine signifikante Abweichung verursachen.
 
 \subsubsection{Grafische Überprüfung}
-In Abbildung \ref{fig:histogramm_ebene} wird die Verteilung der Geschwindigkeiten einer Normalverteilungskurve gegenübergestellt. Für die Berechnung der Normalverteilungskurve wurden Erwartungswert und Standardabweichung der Ergebnisse ermittelt. Der Erwartungswert beträgt $1,48\ \frac{m}{s}$ und die Standardabweichung $0,144\ \frac{m}{s}$. Das Histogramm bildet relative Häufigkeiten ab. Es fällt auf, dass eine deutiche Häufung der Ergebnisse in den Bereich des Maximums der Normalverteilungskurve fällt. Dies ist ein Anzeichen für eine Normalverteilung der Ergebnisse. Allerdings befinden sich auch an den Rändern der Normalverteilungskurve noch kleinere Häufungen der Ergebnisse. Somit kann aus dem Histogramm kein eindeutiger Rückschluss auf eine Normalverteilung der Geschwindigkeiten gezogen werden. Grundsätzlich ist die Darstellung des Histogramms stark von der gewählten Anzahl an Klassen abhängig und ist gerade bei kleineren Messreihen nicht aussagekräftig.
+In Abbildung \ref{fig:histogramm_ebene} wird die Verteilung der Geschwindigkeiten einer Normalverteilungskurve gegenübergestellt. Für die Berechnung der Normalverteilungskurve wurden Erwartungswert und Standardabweichung der Ergebnisse ermittelt. Der Erwartungswert beträgt $1,48\ \frac{m}{s}$ und die Standardabweichung $0,144\ \frac{m}{s}$. Das Histogramm bildet relative Häufigkeiten ab. Es fällt auf, dass eine deutliche Häufung der Ergebnisse in den Bereich des Maximums der Normalverteilungskurve fällt. Dies ist ein Anzeichen für eine Normalverteilung der Ergebnisse. Allerdings befinden sich auch an den Rändern der Normalverteilungskurve noch kleinere Häufungen der Ergebnisse. Somit kann aus dem Histogramm kein eindeutiger Rückschluss auf eine Normalverteilung der Geschwindigkeiten gezogen werden. Grundsätzlich ist die Darstellung des Histogramms stark von der gewählten Anzahl an Klassen abhängig und ist gerade bei kleineren Messreihen nicht aussagekräftig.
 \begin{figure}[htpb]
 \centering
 \includegraphics[width=0.8\textwidth]{abbildungen/Histogramm_2017_Ebene.pdf}
@@ -32,7 +32,7 @@ In Abbildung \ref{fig:histogramm_ebene} wird die Verteilung der Geschwindigkeite
 \label{fig:histogramm_ebene}
 \end{figure}
 
-Abbildung \ref{fig:qqplot_ebene} veranschaulicht die Verteilung der Geschwindigkeiten in einem Quantil-Quantil Diagramm. In diesem Diagramm sind die gemessenen Geschwindigkeiten gegenüber der Normalverteilung aufgetragen. Da sich die Mehrheit der geplotteten Punkte auf oder in unmittelbarer Nähe der Diagonalen befinden, spricht dieses Diagramm für eine Normalverteilung der Geschwindigkeiten. Für eine aussagekräftigere Beurteilung wird diese Thematik im Folgenden mit rechnerischen Tests überprüft.
+Abbildung \ref{fig:qqplot_ebene} veranschaulicht die Verteilung der Geschwindigkeiten in einem Quantil-Quantil Diagramm. In diesem Diagramm sind die gemessenen Geschwindigkeiten gegenüber der Normalverteilung aufgetragen. Da sich die Mehrheit der geplotteten Punkte auf oder in unmittelbarer Nähe der Diagonalen befindet, spricht dieses Diagramm für eine Normalverteilung der Geschwindigkeiten. Für eine aussagekräftigere Beurteilung wird diese Thematik im Folgenden mit rechnerischen Tests überprüft.
 \begin{figure}[htpb]
 \centering
 \includegraphics[width=0.7\textwidth]{abbildungen/QQ_Plot_2017_Ebene.pdf}
@@ -44,7 +44,7 @@ Abbildung \ref{fig:qqplot_ebene} veranschaulicht die Verteilung der Geschwindigk
 
 Tabelle \ref{tab:anpassungstest_ebene} zeigt die Ergebnisse von mehreren Anpassungstests. Dabei werden die Messdaten auf Normalverteilung getestet. Exemplarisch werden im Folgenden Shapiro-Wilk-, Cramér-von-Mises- und Anderson-Darling-Test näher betrachtet und analysiert.  
 
-Laut dem Shapiro-Wilk-Test wird die Nullhypothese "Die Geschwindigkeiten sind normalverteilt" nicht verworfen, da der P-Wert das Signifikanzniveau von $0,05$ überschreitet. Auch der Cramér-von-Mises-Test ergibt einen P-Wert von $0,84$ und ist somit ebenfalls deutlich über dem Signifikanzniveau. Analog hierzu liefert der Anderson-Darling-Test einen weiteren Nachweis für die Normalverteilung der Geschwindigkeiten, da der P-Wert von $0,82$ die $0,05$ des Signifikanzniveaus ebenfalls überschreitet. (Der Anderson-Darling-Test gilt als aussagekräftigster Statistischer Test)
+Laut dem Shapiro-Wilk-Test wird die Nullhypothese "Die Geschwindigkeiten sind normalverteilt" nicht verworfen, da der P-Wert das Signifikanzniveau von $0,05$ überschreitet. Auch der Cramér-von-Mises-Test ergibt einen P-Wert von $0,84$ und ist somit ebenfalls deutlich über dem Signifikanzniveau. Analog hierzu liefert der Anderson-Darling-Test einen weiteren Nachweis für die Normalverteilung der Geschwindigkeiten, da der P-Wert von $0,82$ die $0,05$ des Signifikanzniveaus ebenfalls überschreitet. (Der Anderson-Darling-Test gilt als aussagekräftigster statistischer Test)
 
 Betrachtet man abschließend alle ermittelten Ergebnisse, kann man davon ausgehen, dass die Geschwindigkeiten der Probanden in der Ebene normalverteilt sind. 
 \begin{table}
@@ -70,27 +70,27 @@ Betrachtet man abschließend alle ermittelten Ergebnisse, kann man davon ausgehe
 
 \subsection{Beim Treppenaufstieg}
 \subsubsection{Grafische Überprüfung}
-Bei der Betrachtung der Messergebnisse für den Treppenaufstieg fällt auf, dass vier Probanden stets mit höherer Geschwindigkeit gehen, als die restlichen Probanden. Dieses Verhalten wiederholt sich über alle Runden. Aufgrund der geringen Anzahl an Messwerten, fällt dies bei der Auswertung stark ins Gewicht. 
+Bei der Betrachtung der Messergebnisse für den Treppenaufstieg fällt auf, dass vier Probanden stets mit höherer Geschwindigkeit gehen als die restlichen Probanden. Dieses Verhalten wiederholt sich über alle Runden. Aufgrund der geringen Anzahl an Messwerten fällt dies bei der Auswertung stark ins Gewicht. 
 
-Für die weitere Überprüfung auf Normalverteilung werden zwei Auswertungen durchgeführt. Eine Auswertung erfolgt über alle Messreihen hinweg. Die betroffenen Probanden haben beim Aufstieg immer mehrere Treppen übersprungen. Es ist nicht auszuschließen, dass es in der Bevölkerung einen Anteil von Menschen gibt, die dieses Verhalten grundsätzlich aufweisen. Anschließend wird eine Auswertung durchgeführt, bei welcher die Ausreisser ausgeschlossen werden, da die Möglichkeit besteht, dass es sich um eine Anomalie oder um Sabotage handelt. 
+Für die weitere Überprüfung auf Normalverteilung werden zwei Auswertungen durchgeführt. Eine Auswertung erfolgt über alle Messreihen hinweg. Die betroffenen Probanden haben beim Aufstieg immer mehrere Treppen übersprungen. Es ist nicht auszuschließen, dass es in der Bevölkerung einen Anteil von Menschen gibt, die dieses Verhalten grundsätzlich aufweisen. Anschließend wird eine Auswertung durchgeführt, bei welcher die Ausreißer ausgeschlossen werden, da die Möglichkeit besteht, dass es sich um eine Anomalie oder um Sabotage handelt. 
 
 \begin{figure}[!htb]
     \centering
     \begin{minipage}{.5\textwidth}
         \centering
         \includegraphics[width=\textwidth]{abbildungen/Histogramm_2017_TreppeAuf_MitAusreisser.pdf}
-        \caption{Histogramm der Geschwindig-keiten beim Treppenaufstieg mit Ausreissern im Vergleich zur Normalverteilung}
+        \caption{Histogramm der Geschwindig-keiten beim Treppenaufstieg mit Ausreißern im Vergleich zur Normalverteilung}
         \label{fig:Histogramm_TreppeAuf_MA}
     \end{minipage}%
     \begin{minipage}{0.5\textwidth}
         \centering
         \includegraphics[width=\textwidth]{abbildungen/Histogramm_2017_TreppeAuf_OhneAusreisser.pdf}
-        \caption{Histogramm der Geschwindig-keiten beim Treppenaufstieg ohne Ausreisser im Vergleich zur Normalverteilung}
+        \caption{Histogramm der Geschwindig-keiten beim Treppenaufstieg ohne Ausreißer im Vergleich zur Normalverteilung}
         \label{fig:Histogramm_TreppeAuf_OA}
     \end{minipage}
 \end{figure}
 
-Das Histogramm in der Abbildung \ref{fig:Histogramm_TreppeAuf_MA} deutet auf eine reischtsschiefe Verteilung der Geschwindigkeiten hin. Dies stellt ein Indiz gegen eine Normalverteilung der Messwerte dar. Im Gegensatz dazu weist das Histogramm in Abbildung \ref{fig:Histogramm_TreppeAuf_OA} eine symmetrische Verteilung auf. Daher ist anzunehmen, dass die Messwerte ohne Ausreisser normalverteilt sind. Aber wie bereits erwähnt, sind Histogramme nur bedingt Aussagekräftig. Eine genauere grafische Betrachtung erfolgt über ein Qantil-Quantil-Diagramm.
+Das Histogramm in der Abbildung \ref{fig:Histogramm_TreppeAuf_MA} deutet auf eine rechtsschiefe Verteilung der Geschwindigkeiten hin. Dies stellt ein Indiz gegen eine Normalverteilung der Messwerte dar. Im Gegensatz dazu weist das Histogramm in Abbildung \ref{fig:Histogramm_TreppeAuf_OA} eine symmetrische Verteilung auf. Daher ist anzunehmen, dass die Messwerte ohne Ausreißer normalverteilt sind. Aber wie bereits erwähnt, sind Histogramme nur bedingt aussagekräftig. Eine genauere grafische Betrachtung erfolgt über ein Quantil-Quantil-Diagramm.
 
 In Abbildung \ref{fig:QQ_TreppeAuf_MA} ist deutlich eine Abweichung von der Normalverteilung zu sehen, da einige Werte weit von der Diagonalen entfernt sind. Dies ist auf die erwähnten vier Probanden zurückzuführen. Im Gegensatz dazu deutet die Abbildung \ref{fig:QQ_TreppeAuf_OA} auf eine Normalverteilung hin, da alle Quantile auf oder in unmittelbarer Nähe der Diagonalen liegen.
 \begin{figure}[!htb]
@@ -98,40 +98,40 @@ In Abbildung \ref{fig:QQ_TreppeAuf_MA} ist deutlich eine Abweichung von der Norm
     \begin{minipage}{.5\textwidth}
         \centering
         \includegraphics[width=\textwidth]{abbildungen/QQ_Plot_2017_TreppeAuf_MitAusreisser.pdf}
-        \caption{Quantil-Quantil-Diagramm der Geschwindigkeiten beim Treppenaufstieg mit Ausreissern in $\frac{m}{s}$}
+        \caption{Quantil-Quantil-Diagramm der Geschwindigkeiten beim Treppenaufstieg mit Ausreißern in $\frac{m}{s}$}
         \label{fig:QQ_TreppeAuf_MA}
     \end{minipage}%
     \begin{minipage}{0.5\textwidth}
         \centering
         \includegraphics[width=\textwidth]{abbildungen/QQ_Plot_2017_TreppeAuf_OhneAusreisser.pdf}
-        \caption{Quantil-Quantil-Diagramm der Geschwindigkeiten beim Treppenaufstieg ohne Ausreisser in $\frac{m}{s}$}
+        \caption{Quantil-Quantil-Diagramm der Geschwindigkeiten beim Treppenaufstieg ohne Ausreißer in $\frac{m}{s}$}
         \label{fig:QQ_TreppeAuf_OA}
     \end{minipage}
 \end{figure}
 
 
 \subsubsection{Rechnerische Überprüfung}
-Die Anpassungstests zeigen, dass die Geschwindigkeiten bei einem Treppenaufstieg nicht normalverteilt sind, wenn man die Ausreisser mitberücksichtigt. Die Tabelle \ref{tab:anpassungstest_TreppeAuf_MA} zeigt, dass bei einem Cram{\' e}r-von Mises Test ein p-Wert von nur $0,018$ erreicht wird, welcher somit deutlich geringer als das Signifikanzniveau von $0,05$ ist. Werden die Ausreisser nicht mitberücksichtigt, so ergibt der Cram{\' e}r-von Mises Test einen p-Wert von $0,92$. Auch der Anderson-Darling Test liegt weit über dem Signifikanzniveau. Die rechnerische Überpüfung bestätigt somit das Ergebnis der grafischen Analyse. Wie bereits erwähnt, sind die Ausreisser immer von den selben vier Probanden verursacht worden. Diese haben beim Aufsteigen der Treppen in jeder Runde mehrere Stufen übersprungen. Die Vermutung liegt nahe, dass es eine Gruppe von Menschen gibt, die beim Aufsteigen der Treppen grundsätzlich schneller gehen. Eine genaue Untersuchung ist mit einer deutlich größeren Anzahl der Probanden notwendig.
+Die Anpassungstests zeigen, dass die Geschwindigkeiten bei einem Treppenaufstieg nicht normalverteilt sind, wenn man die Ausreißer mitberücksichtigt. Die Tabelle \ref{tab:anpassungstest_TreppeAuf_MA} zeigt, dass bei einem Cram{\' e}r-von Mises Test ein p-Wert von nur $0,018$ erreicht wird, welcher somit deutlich geringer als das Signifikanzniveau von $0,05$ ist. Werden die Ausreißer nicht mitberücksichtigt, so ergibt der Cram{\' e}r-von Mises Test einen p-Wert von $0,92$. Auch der Anderson-Darling Test liegt weit über dem Signifikanzniveau. Die rechnerische Überprüfung bestätigt somit das Ergebnis der grafischen Analyse. Wie bereits erwähnt, sind die Ausreißer immer von denselben vier Probanden verursacht worden. Diese haben beim Aufsteigen der Treppen in jeder Runde mehrere Stufen übersprungen. Die Vermutung liegt nahe, dass es eine Gruppe von Menschen gibt, die beim Aufsteigen der Treppen grundsätzlich schneller gehen. Eine genaue Untersuchung ist mit einer deutlich größeren Anzahl der Probanden notwendig.
 \input{abbildungen/tab_Anpassungstest_Treppe_Auf}
 
 \subsection{Beim Treppenabstieg}
 
-Bei der Messung zum Abstieg von der Treppe gibt es wenig besonderse Fälle. Die gemessenen Daten weisen nur wenige unregelmäßige Ausreisser aus. Diese werden erwartungsgemäß geringen Einfluss haben. Beim Treppenaufstieg wurden signifikante Unterschiede durch 
-die Ausreisser festgestellt. Deswegen werden analog zum Aufstieg beim Abstieg auch zwei Analysen durchgeführt.
+Bei der Messung zum Abstieg von der Treppe gibt es wenig besondere Fälle. Die gemessenen Daten weisen nur wenige unregelmäßige Ausreißer aus. Diese werden erwartungsgemäß geringen Einfluss haben. Beim Treppenaufstieg wurden signifikante Unterschiede durch 
+die Ausreißer festgestellt. Deswegen werden analog zum Aufstieg beim Abstieg auch zwei Analysen durchgeführt.
 
 
 
 \subsubsection{Grafische Überprüfung}
-Ein Vergleich der Histrograme in Abbildung \ref{fig:Histogramm_TreppeAb_MA} und Abbildung \ref{fig:Histogramm_TreppeAb_OA}, zeigt, dass die Ausreisser nur einen geringen Unterschied verursachen. In den Abbildungen sind jeweils die eine Normalverteilungskurve dargestellt. Es zeigt sich, dass eine Normalverteilung nicht genau erkenntbar ist.
+Ein Vergleich der Histogramme in Abbildung \ref{fig:Histogramm_TreppeAb_MA} und Abbildung \ref{fig:Histogramm_TreppeAb_OA}, zeigt, dass die Ausreißer nur einen geringen Unterschied verursachen. In den Abbildungen ist jeweils eine Normalverteilungskurve dargestellt. Es zeigt sich, dass eine Normalverteilung nicht genau erkennbar ist.
 
-Beim Betrachten des Quantil-Quantil-Diagramms in Abbildung \ref{fig:QQ_TreppeAb_MA} und \ref{fig:QQ_TreppeAb_OA}, zeigt sich ebenfalls, dass der Unterschied der Gesamten Daten und der bereinigten Daten sehr gering ist und mit bloßem Auge nicht zu erkennen. Aus den beiden Diagrammen wird deutlich, dass sich sich bei beiden Fällen um eine Normalverteilung handelt.
+Beim Betrachten des Quantil-Quantil-Diagramms in Abbildung \ref{fig:QQ_TreppeAb_MA} und \ref{fig:QQ_TreppeAb_OA}, zeigt sich ebenfalls, dass der Unterschied der gesamten Daten und der bereinigten Daten sehr gering ist und mit bloßem Auge nicht zu erkennen. Aus den beiden Diagrammen wird deutlich, dass es sich bei beiden Fällen um eine Normalverteilung handelt.
 
 \begin{figure}[!htb]
     \centering
     \begin{minipage}{.49\textwidth}
         \centering
         \includegraphics[width=\textwidth]{abbildungen/Histogramm_2017_TreppeAb_MitAusreisser.pdf}
-        \caption{Histogramm der Geschwindig-keiten beim Treppenabstieg mit Ausreissern im Vergleich zur Normalverteilung}
+        \caption{Histogramm der Geschwindig-keiten beim Treppenabstieg mit Ausreißern im Vergleich zur Normalverteilung}
         \label{fig:Histogramm_TreppeAb_MA}
     \end{minipage}%
     \begin{minipage}{0.02\textwidth}
@@ -140,7 +140,7 @@ Beim Betrachten des Quantil-Quantil-Diagramms in Abbildung \ref{fig:QQ_TreppeAb_
     \begin{minipage}{0.49\textwidth}
         \centering
         \includegraphics[width=\textwidth]{abbildungen/Histogramm_2017_TreppeAb_OhneAusreisser.pdf}
-        \caption{Histogramm der Geschwindig-keiten beim Treppenabstieg ohne Ausreisser im Vergleich zur Normalverteilung}
+        \caption{Histogramm der Geschwindig-keiten beim Treppenabstieg ohne Ausreißer im Vergleich zur Normalverteilung}
         \label{fig:Histogramm_TreppeAb_OA}
     \end{minipage}
 \end{figure}
@@ -151,7 +151,7 @@ Beim Betrachten des Quantil-Quantil-Diagramms in Abbildung \ref{fig:QQ_TreppeAb_
     \begin{minipage}{.49\textwidth}
         \centering
         \includegraphics[width=\textwidth]{abbildungen/QQ_Plot_2017_TreppeAb_MitAusreisser.pdf}
-        \caption{Quantil-Quantil-Diagramm der Geschwindigkeiten beim Treppenabstieg mit Ausreissern in $\frac{m}{s}$}
+        \caption{Quantil-Quantil-Diagramm der Geschwindigkeiten beim Treppenabstieg mit Ausreißern in $\frac{m}{s}$}
         \label{fig:QQ_TreppeAb_MA}
     \end{minipage}%
     \begin{minipage}{0.02\textwidth}
@@ -160,7 +160,7 @@ Beim Betrachten des Quantil-Quantil-Diagramms in Abbildung \ref{fig:QQ_TreppeAb_
     \begin{minipage}{0.49\textwidth}
         \centering
         \includegraphics[width=\textwidth]{abbildungen/QQ_Plot_2017_TreppeAb_OhneAusreisser.pdf}
-        \caption{Quantil-Quantil-Diagramm der Geschwindigkeiten beim Treppenabstieg ohne Ausreisser in $\frac{m}{s}$}
+        \caption{Quantil-Quantil-Diagramm der Geschwindigkeiten beim Treppenabstieg ohne Ausreißer in $\frac{m}{s}$}
         \label{fig:QQ_TreppeAb_OA}
     \end{minipage}
 \end{figure}
@@ -169,7 +169,7 @@ Beim Betrachten des Quantil-Quantil-Diagramms in Abbildung \ref{fig:QQ_TreppeAb_
 
 
 \subsection{Rechnerische Überprüfung}
-Die rechnerische Überprüfung bestätigt die Analyse des Quantil-Quantil-Diagramms. Wie in Tabelle \ref{tab:anpassungstest_TreppeAb_MA} und Tabelle \ref{fig:Histogramm_TreppeAb_OA} zu sehen, liegt in beiden Fällen eine Normalverteilung vor. Es ist zu bemerken, dass ein anpassungstest anhand der Daten mit Ausreissern einen größeren p-Wert erzielt. 
+Die rechnerische Überprüfung bestätigt die Analyse des Quantil-Quantil-Diagramms. Wie in Tabelle \ref{tab:anpassungstest_TreppeAb_MA} und Tabelle \ref{fig:Histogramm_TreppeAb_OA} zu sehen, liegt in beiden Fällen eine Normalverteilung vor. Es ist zu bemerken, dass ein Anpassungstest anhand der Daten mit Ausreißern einen größeren p-Wert erzielt. 
 \input{abbildungen/tab_Anpassungstest_Treppe_Ab}
 
 \section{Modell}

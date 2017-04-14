@@ -1,4 +1,4 @@
-Runde;ID Proband;Ebene ;Treppe;Zeit in sec;Bemerkung
+ï»¿Runde;ID Proband;Ebene ;Treppe;Zeit in sec;Bemerkung
 ;;;;;
 1;1;x;;17.65;
 1;2;x;;17.37;
@@ -6,7 +6,7 @@ Runde;ID Proband;Ebene ;Treppe;Zeit in sec;Bemerkung
 1;4;x;;15.81;
 1;5;x;;15.97;
 1;6;x;;18.84;
-1;7;x;;22.85;getrödelt
+1;7;x;;22.85;getrÃ¶delt
 1;8;x;;17.47;
 1;9;x;;18.76;
 1;10;x;;22.08;
@@ -29,7 +29,7 @@ Runde;ID Proband;Ebene ;Treppe;Zeit in sec;Bemerkung
 2;4;x;;15.62;
 2;5;x;;16.15;
 2;6;x;;19.00;
-2;7;x;;22.97;getrödelt
+2;7;x;;22.97;getrÃ¶delt
 2;8;x;;18.29;
 2;9;x;;21.13;
 2;10;x;;22.45;
@@ -52,7 +52,7 @@ Runde;ID Proband;Ebene ;Treppe;Zeit in sec;Bemerkung
 3;4;x;;16.62;
 3;5;x;;16.94;
 3;6;x;;18.47;
-3;7;x;;23.82;getrödelt
+3;7;x;;23.82;getrÃ¶delt
 3;8;x;;18.95;
 3;9;x;;19.65;
 3;10;x;;22.50;
@@ -78,15 +78,15 @@ Runde;ID Proband;Ebene ;Treppe;Zeit in sec;Bemerkung
 1;7;;auf;12.15;
 1;8;;auf;11.83;
 1;9;;auf;12.22;
-1;10;;auf;9.23;"gerannt; Stufen übersprungen"
-1;11;;auf;7.18;"gerannt; Stufen übersprungen"
+1;10;;auf;9.23;"gerannt; Stufen Ã¼bersprungen"
+1;11;;auf;7.18;"gerannt; Stufen Ã¼bersprungen"
 1;12;;auf;10.72;
 1;13;;auf;13.00;
-1;14;;auf;8.78;"gerannt; Stufen übersprungen"
+1;14;;auf;8.78;"gerannt; Stufen Ã¼bersprungen"
 1;15;;auf;11.94;
 1;16;;auf;13.38;
 1;17;;auf;11.25;
-1;18;;auf;6.75;"gerannt; Stufen übersprungen"
+1;18;;auf;6.75;"gerannt; Stufen Ã¼bersprungen"
 1;19;;auf;11.00;
 1;20;;auf;13.35;
 1;21;;auf;11.97;
@@ -101,15 +101,15 @@ Runde;ID Proband;Ebene ;Treppe;Zeit in sec;Bemerkung
 2;7;;auf;12.38;
 2;8;;auf;12.23;
 2;9;;auf;11.62;
-2;10;;auf;9.68;"gerannt; Stufen übersprungen"
-2;11;;auf;7.66;"gerannt; Stufen übersprungen"
+2;10;;auf;9.68;"gerannt; Stufen Ã¼bersprungen"
+2;11;;auf;7.66;"gerannt; Stufen Ã¼bersprungen"
 2;12;;auf;12.16;
 2;13;;auf;12.19;
-2;14;;auf;8.53;"gerannt; Stufen übersprungen"
+2;14;;auf;8.53;"gerannt; Stufen Ã¼bersprungen"
 2;15;;auf;12.12;
 2;16;;auf;13.28;
 2;17;;auf;11.15;
-2;18;;auf;7.28;"gerannt; Stufen übersprungen"
+2;18;;auf;7.28;"gerannt; Stufen Ã¼bersprungen"
 2;19;;auf;11.19;
 2;20;;auf;14.08;
 2;21;;auf;11.50;
@@ -124,15 +124,15 @@ Runde;ID Proband;Ebene ;Treppe;Zeit in sec;Bemerkung
 3;7;;auf;13.40;
 3;8;;auf;11.55;
 3;9;;auf;11.64;
-3;10;;auf;10.07;"gerannt; Stufen übersprungen"
-3;11;;auf;7.94;"gerannt; Stufen übersprungen"
+3;10;;auf;10.07;"gerannt; Stufen Ã¼bersprungen"
+3;11;;auf;7.94;"gerannt; Stufen Ã¼bersprungen"
 3;12;;auf;12.94;
 3;13;;auf;11.28;
-3;14;;auf;8.66;"gerannt; Stufen übersprungen"
+3;14;;auf;8.66;"gerannt; Stufen Ã¼bersprungen"
 3;15;;auf;11.44;
 3;16;;auf;13.18;
 3;17;;auf;10.56;
-3;18;;auf;7.19;"gerannt; Stufen übersprungen"
+3;18;;auf;7.19;"gerannt; Stufen Ã¼bersprungen"
 3;19;;auf;11.22;
 3;20;;auf;13.92;
 3;21;;auf;11.84;
@@ -173,7 +173,7 @@ Runde;ID Proband;Ebene ;Treppe;Zeit in sec;Bemerkung
 2;10;;ab;11.65;
 2;11;;ab;8.81;
 2;12;;ab;9.94;
-2;13;;ab;6.25;Spät gestoppt
+2;13;;ab;6.25;SpÃ¤t gestoppt
 2;14;;ab;6.72;
 2;15;;ab;7.38;
 2;16;;ab;8.56;
@@ -201,7 +201,7 @@ Runde;ID Proband;Ebene ;Treppe;Zeit in sec;Bemerkung
 3;15;;ab;7.16;
 3;16;;ab;8.87;
 3;17;;ab;7.82;
-3;18;;ab;8.34;Letzte Stufe übersprungen
+3;18;;ab;8.34;Letzte Stufe Ã¼bersprungen
 3;19;;ab;8.19;
 3;20;;ab;11.25;Messfehler
 3;21;;ab;7.41;

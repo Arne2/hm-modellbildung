@@ -9,18 +9,18 @@ ohneAusreisser = 0;
 outputDir = If[ohneAusreisser > 0, 
     FileNameJoin@{NotebookDirectory[], "../abbildungen/regression/2017/ohneausreisser/"},
 	FileNameJoin@{NotebookDirectory[], "../abbildungen/regression/2017/"}
-]
+];
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Aufbereitung der Daten*)
 
 
 (*Hier werden die Daten aus dem Messexperiment geladen.*)
-pathGeschwindigkeiten= "../data/2017/MessexperimentGeschwindigkeitenSS2017.csv";
-dataGeschwindigkeiten= SemanticImport@FileNameJoin@{NotebookDirectory[],pathGeschwindigkeiten};
+pathGeschwindigkeiten= "../data/2017/MessexperimentGeschwindigkeiten.csv";
+dataGeschwindigkeiten= SemanticImport[FileNameJoin@{NotebookDirectory[],pathGeschwindigkeiten},CharacterEncoding->"WindowsANSI"];
 pathProbanden= "../data/2017/MessexperimentProbanden.csv";
-dataProbanden= SemanticImport@FileNameJoin@{NotebookDirectory[],pathProbanden};
+dataProbanden= SemanticImport[FileNameJoin@{NotebookDirectory[],pathProbanden},CharacterEncoding->"WindowsANSI"];
 
 
 (*Konstanten f\[UDoubleDot]r die L\[ADoubleDot]nge der Ebene und der Treppe in Meter.Die Treppenstrecke wurde projeziert auf die Horizontale.*)
@@ -238,6 +238,12 @@ lm = LinearModelFit[d,{x,y,z},{x,y,z}]
 Export[FileNameJoin@{outputDir,"ab-runde-ebene-groesse.tex"},Normal@%,"TeXFragment"];
 lm["ParameterTable"]
 Export[FileNameJoin@{outputDir,"ab-runde-ebene-groesse-table.tex"},%,"TeXFragment"];
+
+
+
+
+
+
 
 
 

@@ -32,7 +32,7 @@ In Abbildung \ref{fig:histogramm_ebene} wird die Verteilung der Geschwindigkeite
 \label{fig:histogramm_ebene}
 \end{figure}
 
-Abbildung \ref{fig:qqplot_ebene} veranschaulicht die Verteilung der Geschwindigkeiten in einem Quantil-Quantil Diagramm. In diesem Diagramm sind die gemessenen Geschwindigkeiten gegenüber der Normalverteilung aufgetragen. Da sich die Mehrheit der geplotteten Punkte auf oder in unmittelbarer Nähe der Diagonalen befindet, spricht dieses Diagramm für eine Normalverteilung der Geschwindigkeiten. Für eine aussagekräftigere Beurteilung wird diese Thematik im Folgenden mit rechnerischen Tests überprüft.
+Abbildung \ref{fig:qqplot_ebene} veranschaulicht die Verteilung der Geschwindigkeiten in einem Quantil-Quantil Diagramm. In diesem Diagramm sind die gemessenen Geschwindigkeiten gegenüber der Normalverteilung abgebildet. Da sich die Mehrheit der geplotteten Punkte auf oder in unmittelbarer Nähe der Diagonalen befindet, spricht dieses Diagramm für eine Normalverteilung der Geschwindigkeiten. Für eine aussagekräftigere Beurteilung wird diese Thematik im Folgenden mit rechnerischen Tests überprüft.
 \begin{figure}[htpb]
 \centering
 \includegraphics[width=0.7\textwidth]{abbildungen/QQ_Plot_2017_Ebene.pdf}
@@ -111,7 +111,7 @@ In Abbildung \ref{fig:QQ_TreppeAuf_MA} ist deutlich eine Abweichung von der Norm
 
 
 \subsubsection{Rechnerische Überprüfung}
-Die Anpassungstests zeigen, dass die Geschwindigkeiten bei einem Treppenaufstieg nicht normalverteilt sind, wenn man die Ausreißer mitberücksichtigt. Die Tabelle \ref{tab:anpassungstest_TreppeAuf_MA} zeigt, dass bei einem Cram{\' e}r-von Mises Test ein p-Wert von nur $0,018$ erreicht wird, welcher somit deutlich geringer als das Signifikanzniveau von $0,05$ ist. Werden die Ausreißer nicht mitberücksichtigt, so ergibt der Cram{\' e}r-von Mises Test einen p-Wert von $0,92$. Auch der Anderson-Darling Test liegt weit über dem Signifikanzniveau. Die rechnerische Überprüfung bestätigt somit das Ergebnis der grafischen Analyse. Wie bereits erwähnt, sind die Ausreißer immer von denselben vier Probanden verursacht worden. Diese haben beim Aufsteigen der Treppen in jeder Runde mehrere Stufen übersprungen. Die Vermutung liegt nahe, dass es eine Gruppe von Menschen gibt, die beim Aufsteigen der Treppen grundsätzlich schneller gehen. Eine genaue Untersuchung ist mit einer deutlich größeren Anzahl der Probanden notwendig.
+Die Anpassungstests zeigen, dass die Geschwindigkeiten bei einem Treppenaufstieg nicht normalverteilt sind, wenn man die Ausreißer mitberücksichtigt. Die Tabelle \ref{tab:anpassungstest_TreppeAuf_MA} zeigt, dass bei einem Cram{\' e}r-von Mises Test ein p-Wert von nur $0,018$ erreicht wird, welcher somit deutlich geringer als das Signifikanzniveau von $0,05$ ist. Werden die Ausreißer nicht mitberücksichtigt, so ergibt der Cram{\' e}r-von Mises Test einen p-Wert von $0,92$, wie in Tabelle \ref{tab:anpassungstest_TreppeAuf_OA} zu sehen. Auch der Anderson-Darling Test liegt weit über dem Signifikanzniveau. Die rechnerische Überprüfung bestätigt somit das Ergebnis der grafischen Analyse. Wie bereits erwähnt, sind die Ausreißer immer von denselben vier Probanden verursacht worden. Diese haben beim Aufsteigen der Treppen in jeder Runde mehrere Stufen übersprungen. Die Vermutung liegt nahe, dass es eine Gruppe von Menschen gibt, die beim Aufsteigen der Treppen grundsätzlich schneller gehen. Eine genaue Untersuchung ist mit einer deutlich größeren Anzahl der Probanden notwendig.
 \input{abbildungen/tab_Anpassungstest_Treppe_Auf}
 
 \subsection{Beim Treppenabstieg}
@@ -122,9 +122,9 @@ die Ausreißer festgestellt. Deswegen werden analog zum Aufstieg beim Abstieg au
 
 
 \subsubsection{Grafische Überprüfung}
-Ein Vergleich der Histogramme in Abbildung \ref{fig:Histogramm_TreppeAb_MA} und Abbildung \ref{fig:Histogramm_TreppeAb_OA}, zeigt, dass die Ausreißer nur einen geringen Unterschied verursachen. In den Abbildungen ist jeweils eine Normalverteilungskurve dargestellt. Es zeigt sich, dass eine Normalverteilung nicht genau erkennbar ist.
+Ein Vergleich der Histogramme in den Abbildungen \ref{fig:Histogramm_TreppeAb_MA} und \ref{fig:Histogramm_TreppeAb_OA} zeigt, dass die Ausreißer nur einen geringen Unterschied verursachen. In den Abbildungen ist jeweils eine Normalverteilungskurve dargestellt. Es zeigt sich, dass eine Normalverteilung nicht genau erkennbar ist.
 
-Beim Betrachten des Quantil-Quantil-Diagramms in Abbildung \ref{fig:QQ_TreppeAb_MA} und \ref{fig:QQ_TreppeAb_OA}, zeigt sich ebenfalls, dass der Unterschied der gesamten Daten und der bereinigten Daten sehr gering ist und mit bloßem Auge nicht zu erkennen. Aus den beiden Diagrammen wird deutlich, dass es sich bei beiden Fällen um eine Normalverteilung handelt.
+Beim Betrachten des Quantil-Quantil-Diagramms in Abbildung \ref{fig:QQ_TreppeAb_MA} und \ref{fig:QQ_TreppeAb_OA}, zeigt sich ebenfalls, dass der Unterschied der gesamten Daten und der bereinigten Daten sehr gering und mit bloßem Auge nicht zu erkennen ist. Aus den beiden Diagrammen wird deutlich, dass es sich bei beiden Fällen um eine Normalverteilung handelt, da der P-Wert in beiden Fällen über dem Signifikanzniveau von $0,05$ liegt.
 
 \begin{figure}[!htb]
     \centering
@@ -169,7 +169,7 @@ Beim Betrachten des Quantil-Quantil-Diagramms in Abbildung \ref{fig:QQ_TreppeAb_
 
 
 \subsection{Rechnerische Überprüfung}
-Die rechnerische Überprüfung bestätigt die Analyse des Quantil-Quantil-Diagramms. Wie in Tabelle \ref{tab:anpassungstest_TreppeAb_MA} und Tabelle \ref{fig:Histogramm_TreppeAb_OA} zu sehen, liegt in beiden Fällen eine Normalverteilung vor. Es ist zu bemerken, dass ein Anpassungstest anhand der Daten mit Ausreißern einen größeren p-Wert erzielt. 
+Die rechnerische Überprüfung bestätigt die Analyse des Quantil-Quantil-Diagramms. Wie in Tabelle \ref{tab:anpassungstest_TreppeAb_MA} und Tabelle \ref{tab:anpassungstest_TreppeAbf_OA} zu sehen, liegt in beiden Fällen eine Normalverteilung vor. Es ist zu bemerken, dass ein Anpassungstest anhand der Daten mit Ausreißern einen größeren p-Wert erzielt. 
 \input{abbildungen/tab_Anpassungstest_Treppe_Ab}
 
 \section{Modell}

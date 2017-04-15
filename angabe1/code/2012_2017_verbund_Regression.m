@@ -4,7 +4,7 @@
 (*Lineare Regression der Daten von 2012 und 2017*)
 
 
-ohneAusreisser = 1;
+ohneAusreisser = 0;
 
 outputDir = If[ohneAusreisser > 0, 
     FileNameJoin@{NotebookDirectory[], "../abbildungen/regression/2012_2017_verbund/ohneausreisser/"},
@@ -281,6 +281,9 @@ lm = LinearModelFit[d,{runde,vEbene,gr\[ODoubleDot]\[SZ]e},{runde,vEbene,gr\[ODo
 Export[FileNameJoin@{outputDir,"ab-runde-ebene-groesse.tex"},Normal@%,"TeXFragment"];
 lm["ParameterTable"]
 Export[FileNameJoin@{outputDir,"ab-runde-ebene-groesse-table.tex"},%,"TeXFragment"];
+
+
+
 
 
 

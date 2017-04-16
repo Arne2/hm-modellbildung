@@ -4,7 +4,7 @@
 (*Lineare Regression der Daten von 2012 und 2017*)
 
 
-ohneAusreisser = 0;
+ohneAusreisser = 1;
 
 outputDir = If[ohneAusreisser > 0, 
     FileNameJoin@{NotebookDirectory[], "../abbildungen/regression/2012_2017_verbund/ohneausreisser/"},

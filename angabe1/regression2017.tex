@@ -22,34 +22,34 @@ Hier werden sechs Gleichungen mittels linearer Regression ermittelt:
 \subsubsection{Wunschgeschwindigkeit in der Ebene}
 
 Für die Abhängigkeit Wunschgeschwindigkeit in der Ebene wurde 
-der Zusammenhang wie in den Formeln für die Treppengeschwindigkeit aufwärts (\ref{eq:auf-ebene}) und abwärts (\ref{eq:ab-ebene}) ermittelt. 
+der Zusammenhang wie in den Formeln für die Treppengeschwindigkeit aufwärts (\ref{eq:auf2017-ebene}) und abwärts (\ref{eq:ab2017-ebene}) ermittelt. 
 
-\begin{equation} \label{eq:auf-ebene}
+\begin{equation} \label{eq:auf2017-ebene}
 	v_{auf}(v_{ebene}) = 0.294389 + 0.393467 v_{ebene}
 \end{equation}
-\begin{equation} \label{eq:ab-ebene}
+\begin{equation} \label{eq:ab2017-ebene}
 	v_{ab}(v_{ebene}) = 0.475883 + 0.453419 v_{ebene}
 \end{equation}
 
 Beide Steigungen sind positiv. Hat ein Proband eine schnellere Wunschgeschwindigkeit in der Ebene, verhält er sich auch schneller auf 
-der Treppe. Die Abbildungen \ref{fig:auf-ebene} und \ref{fig:ab-ebene}
+der Treppe. Die Abbildungen \ref{fig:auf2017-ebene} und \ref{fig:ab2017-ebene}
 stellen dies grafisch dar. 
 
 \begin{figure} \centering 
 	\includegraphics[]{abbildungen/regression/2017/auf-ebene.pdf}
 	\input{abbildungen/regression/2017/auf-ebene-table}
-	\caption{Abhängigkeit Wunschgeschwindigkeit in der Ebene zur Treppengeschwindigkeit aufwärts. Messdaten (orange) mit ermittelter Regressionsgerade (blau). \label{fig:auf-ebene}}
+	\caption{Abhängigkeit Wunschgeschwindigkeit in der Ebene zur Treppengeschwindigkeit aufwärts. Messdaten (orange) mit ermittelter Regressionsgerade (blau). \label{fig:auf2017-ebene}}
 \end{figure}
 
 \begin{figure} \centering 
 	\includegraphics[]{abbildungen/regression/2017/ab-ebene.pdf}
 	\input{abbildungen/regression/2017/ab-ebene-table}
-	\caption{Abhängigkeit Wunschgeschwindigkeit in der Ebene zur Treppengeschwindigkeit abwärts. Messdaten (orange) mit ermittelter Regressionsgerade (blau). \label{fig:ab-ebene}}
+	\caption{Abhängigkeit Wunschgeschwindigkeit in der Ebene zur Treppengeschwindigkeit abwärts. Messdaten (orange) mit ermittelter Regressionsgerade (blau). \label{fig:ab2017-ebene}}
 \end{figure}
 
-In Abbildung \ref{fig:auf-ebene} sind wieder
-deutlich die schon in der Betrachtung zur Normalverteilung erwähnten Ausreißer zu erkennen. Deshalb wurde die lineare Regression für den gefilterten Messdatensatz (nur Datensätze ohne Bemerkung) durchgeführt. Es ergeben sich neue Formeln für die Treppengeschwindigkeit aufwärts (\ref{eq:ohne-auf-ebene}) und abwärts (\ref{eq:ohne-ab-ebene}). Dazu gehören Abbildungen \ref{fig:ohne-auf-ebene} und \ref{fig:ohne-ab-ebene}. Die Ausreißer wurden in der Regression hier nicht verwendet, sind aber hervorgehoben eingezeichnet. Bei der Treppengeschwindigkeit sind es deutlich mehr Ausreißer und sie fallen alle in den schnelleren Bereich. Die Regressionsgerade für die Daten ohne Ausreißer liegt dementsprechend 
-etwas weiter unter (langsamer) im Vergleich zu Abbildung \ref{fig:auf-ebene}. Bei Abbildung \ref{fig:ohne-ab-ebene} sind es nur 
+In Abbildung \ref{fig:auf2017-ebene} sind wieder
+deutlich die schon in der Betrachtung zur Normalverteilung erwähnten Ausreißer zu erkennen. Deshalb wurde die lineare Regression für den gefilterten Messdatensatz (nur Datensätze ohne Bemerkung) durchgeführt. Es ergeben sich neue Formeln für die Treppengeschwindigkeit aufwärts (\ref{eq:ohne-auf-ebene}) und abwärts (\ref{eq:ohne-ab-ebene}). Dazu gehören Abbildungen \ref{fig:ohne-auf-ebene} und \ref{fig:ohne-ab-ebene}. Die Ausreißer wurden in der Regression hier nicht verwendet, sind aber hervorgehoben eingezeichnet. Bei der Treppengeschwindigkeit aufwärts sind es deutlich mehr Ausreißer und sie fallen alle in den schnelleren Bereich. Die Regressionsgerade für die Daten ohne Ausreißer liegt dementsprechend 
+etwas weiter unter (langsamer) im Vergleich zu Abbildung \ref{fig:auf2017-ebene}. Bei Abbildung \ref{fig:ohne-ab-ebene} sind es nur 
 vier Ausreißer. Sie sind auch stärker gestreut. Die Regressionsgerade für den Zusammenhang zur Geschwindigkeit abwärts wird nicht besonders von dem Weglassen der Ausreißer beeinflusst. Die Ausreißer werden in den weiteren Regressionen nicht genauer betrachtet. Alle Abbildungen und Plausibilisierungstests dazu sind aber als Dateien angelegt.
 
 \begin{equation} \label{eq:ohne-auf-ebene}
@@ -74,49 +74,49 @@ vier Ausreißer. Sie sind auch stärker gestreut. Die Regressionsgerade für den
 
 Für die Plausibilisierung der Regression wird die Nullhypothese 
 $H_0: \beta_1 = 0$ aufgestellt. Signifikanzniveau $\alpha = 0.05$.
-Die Ergebnisse des Tests sind in Abbildung \ref{fig:auf-ebene} zu sehen.
+Die Ergebnisse des Tests sind in Abbildung \ref{fig:auf2017-ebene} zu sehen.
 Signifikanz liegt vor, weil $p < \alpha$. Man verwirft die
 Nullhypothese. Kein Einfluss von $v_{ebene}$ auf $v_{auf}$ wäre unplausibel, wenn auch nicht ausgeschlossen.
 
-Die Nullhypothese und das Signifikanzniveau sind für alle folgenden Regressionen gleich. Die Ergebnisse für den Abstieg sind in Abbildung \ref{fig:ab-ebene} zu sehen.
+Die Nullhypothese und das Signifikanzniveau sind für alle folgenden Regressionen gleich. Die Ergebnisse für den Abstieg sind in Abbildung \ref{fig:ab2017-ebene} zu sehen.
 Signifikanz liegt vor, weil $p < \alpha$. Man verwirft die
 Nullhypothese. Kein Einfluss von $v_{ebene}$ auf $v_{ab}$ wäre unplausibel, wenn auch nicht ausgeschlossen.
 
 \subsubsection{Körpergröße}
 
 Für die Abhängigkeit Körpergröße wurde 
-der Zusammenhang (\ref{eq:auf-groesse}) und (\ref{eq:ab-groesse}) ermittelt.
+der Zusammenhang (\ref{eq:auf2017-groesse}) und (\ref{eq:ab2017-groesse}) ermittelt.
 
-\begin{equation} \label{eq:auf-groesse}
+\begin{equation} \label{eq:auf2017-groesse}
 	v_{auf}(groesse) = 0.133389 + 0.00419914 groesse
 \end{equation}
-\begin{equation} \label{eq:ab-groesse}
+\begin{equation} \label{eq:ab2017-groesse}
 	v_{ab}(groesse) = 1.59558 - 0.00253145 groesse
 \end{equation}
 
-In den Abbildungen \ref{fig:auf-groesse} und \ref{fig:ab-groesse} ist 
+In den Abbildungen \ref{fig:auf2017-groesse} und \ref{fig:ab2017-groesse} ist 
 zu sehen, dass nach dem Modell größere Personen leicht schneller Treppen besteigen, aber beim herabsteigen etwas langsamer als kleinere
 Personen sind. 
 
 \begin{figure} \centering 
 	\includegraphics[]{abbildungen/regression/2017/auf-groesse.pdf}
 	\input{abbildungen/regression/2017/auf-groesse-table}
-	\caption{Abhängigkeit Körpergröße zur Treppengeschwindigkeit aufwärts. Messdaten (orange) mit ermittelter Regressionsgerade (blau). \label{fig:auf-groesse}}
+	\caption{Abhängigkeit Körpergröße zur Treppengeschwindigkeit aufwärts. Messdaten (orange) mit ermittelter Regressionsgerade (blau). \label{fig:auf2017-groesse}}
 \end{figure}
 
 \begin{figure} \centering 
 	\includegraphics[]{abbildungen/regression/2017/ab-groesse.pdf}
 	\input{abbildungen/regression/2017/ab-groesse-table}
-	\caption{Abhängigkeit Körpergröße zur Treppengeschwindigkeit abwärts. Messdaten (orange) mit ermittelter Regressionsgerade (blau). \label{fig:ab-groesse}}
+	\caption{Abhängigkeit Körpergröße zur Treppengeschwindigkeit abwärts. Messdaten (orange) mit ermittelter Regressionsgerade (blau). \label{fig:ab2017-groesse}}
 \end{figure}
 
 Ergebnisse der Plausibilisierung für den Aufstieg 
-(Abbildung \ref{fig:auf-groesse}):
+(Abbildung \ref{fig:auf2017-groesse}):
 Signifikanz liegt nicht vor, weil $p > \alpha$. Man nimmt die
 Nullhypothese an. Kein Einfluss von $groesse$ auf $v_{auf}$ ist plausibel.
 
 Ergebnisse der Plausibilisierung für den Abstieg
-(Abbildung \ref{fig:ab-groesse}):
+(Abbildung \ref{fig:ab2017-groesse}):
 Signifikanz liegt vor, weil $p > \alpha$. Man nimmt die
 Nullhypothese an. Kein Einfluss von $groesse$ auf $v_{ab}$ ist plausibel.
 
@@ -125,37 +125,37 @@ Nullhypothese an. Kein Einfluss von $groesse$ auf $v_{ab}$ ist plausibel.
 
 
 Für die Abhängigkeit Rundennummer wurde 
-der Zusammenhang (\ref{eq:auf-runde}) und (\ref{eq:ab-runde}) ermittelt.
+der Zusammenhang (\ref{eq:auf2017-runde}) und (\ref{eq:ab2017-runde}) ermittelt.
 
-\begin{equation} \label{eq:auf-runde}
+\begin{equation} \label{eq:auf2017-runde}
 v_{auf}(runde) = 0.890435 - 0.00670795 runde
 \end{equation}
-\begin{equation} \label{eq:ab-runde}
+\begin{equation} \label{eq:ab2017-runde}
 v_{ab}(runde) = 1.14614\, +0.000574582 runde
 \end{equation}
 
-In den Abbildungen \ref{fig:auf-runde} und \ref{fig:ab-runde} ist 
+In den Abbildungen \ref{fig:auf2017-runde} und \ref{fig:ab2017-runde} ist 
 zu sehen, dass sich nach dem Modell die Treppengeschwindigkeit bei Änderung der Runde fast nicht ändert. 
 
 \begin{figure} \centering 
 	\includegraphics[]{abbildungen/regression/2017/auf-runde.pdf}
 	\input{abbildungen/regression/2017/auf-runde-table}
-	\caption{Abhängigkeit Rundennummer zur Treppengeschwindigkeit aufwärts. Messdaten (orange) mit ermittelter Regressionsgerade (blau). \label{fig:auf-runde}}
+	\caption{Abhängigkeit Rundennummer zur Treppengeschwindigkeit aufwärts. Messdaten (orange) mit ermittelter Regressionsgerade (blau). \label{fig:auf2017-runde}}
 \end{figure}
 
 \begin{figure} \centering 
 	\includegraphics[]{abbildungen/regression/2017/ab-runde.pdf}
 	\input{abbildungen/regression/2017/ab-runde-table}
-	\caption{Abhängigkeit Rundennummer zur Treppengeschwindigkeit abwärts. Messdaten (orange) mit ermittelter Regressionsgerade (blau). \label{fig:ab-runde}}
+	\caption{Abhängigkeit Rundennummer zur Treppengeschwindigkeit abwärts. Messdaten (orange) mit ermittelter Regressionsgerade (blau). \label{fig:ab2017-runde}}
 \end{figure}
 
 Ergebnisse der Plausibilisierung für den Aufstieg
-(Abbildung \ref{fig:auf-runde}):
+(Abbildung \ref{fig:auf2017-runde}):
 Signifikanz liegt nicht vor, weil $p > \alpha$. Man nimmt die
 Nullhypothese an. Kein Einfluss von $runde$ auf $v_{auf}$ ist plausibel.
 
 Ergebnisse der Plausibilisierung für den Abstieg
-(Abbildung \ref{fig:ab-runde}):
+(Abbildung \ref{fig:ab2017-runde}):
 Signifikanz liegt vor, weil $p > \alpha$. Man nimmt die
 Nullhypothese an. Kein Einfluss von $runde$ auf $v_{ab}$ ist plausibel.
 
@@ -175,37 +175,37 @@ $H_0: \beta_1 = 0  \lor \beta_2 = 0$ bzw. $H_0: \beta_1 = 0  \lor \beta_2 = 0 \l
 \subsubsection{Ebenengeschwindigkeit und Größe}
 
 Für die Abhängigkeiten Wunschgeschwindigkeit in der Ebene und Körpergröße wurde 
-der Zusammenhang (\ref{eq:auf-ebene-groesse}) und (\ref{eq:ab-ebene-groesse}) ermittelt.
+der Zusammenhang (\ref{eq:auf2017-ebene-groesse}) und (\ref{eq:ab2017-ebene-groesse}) ermittelt.
 
-\begin{equation} \label{eq:auf-ebene-groesse}
+\begin{equation} \label{eq:auf2017-ebene-groesse}
 	v_{auf}(v_{ebene}, groesse) = -0.691667 + 0.425116 v_{ebene} + 0.00530344 groesse
 \end{equation}
-\begin{equation} \label{eq:ab-ebene-groesse}
+\begin{equation} \label{eq:ab2017-ebene-groesse}
 	v_{auf}(v_{ebene}, groesse) = 0.731523 + 0.445214 v_{ebene} + -0.00137494 groesse
 \end{equation}
 
-In den Abbildungen \ref{fig:auf-ebene-groesse} und \ref{fig:ab-ebene-groesse} ist 
+In den Abbildungen \ref{fig:auf2017-ebene-groesse} und \ref{fig:ab2017-ebene-groesse} ist 
 zu sehen, dass ein größerer Proband mit schnellerer Ebenengeschwindigkeit auch eine schnellere Treppengeschwindigkeit aufwärts erreicht. Eine schnellere Treppengeschwindigkeit abwärts wird durch einen Proband mit schnellerer Ebenengeschwindigkeit und kleinerer Größe erreicht. Eine Änderung von $50 cm$ in der Größe wirkt sich auf das Besteigen aufwärts mit ca. $0.25 m/s$ und abwärts mit ca. $0.05 m/s$ aus.
 
 \begin{figure} \centering 
 	\includegraphics[]{abbildungen/regression/2017/auf-ebene-groesse.pdf}
 	\input{abbildungen/regression/2017/auf-ebene-groesse-table}
-	\caption{Abhängigkeiten Ebenengeschwindigkeit und Größe zur Treppengeschwindigkeit aufwärts. Messdaten (orange) mit ermittelter Regressionsebene (blau). \label{fig:auf-ebene-groesse}}
+	\caption{Abhängigkeiten Ebenengeschwindigkeit und Größe zur Treppengeschwindigkeit aufwärts. Messdaten (orange) mit ermittelter Regressionsebene (blau). \label{fig:auf2017-ebene-groesse}}
 \end{figure}
 
 \begin{figure} \centering 
 	\includegraphics[]{abbildungen/regression/2017/ab-ebene-groesse.pdf}
 	\input{abbildungen/regression/2017/ab-ebene-groesse-table}
-	\caption{Abhängigkeiten Ebenengeschwindigkeit und Größe zur Treppengeschwindigkeit abwärts. Messdaten (orange) mit ermittelter Regressionsebene (blau). \label{fig:ab-ebene-groesse}}
+	\caption{Abhängigkeiten Ebenengeschwindigkeit und Größe zur Treppengeschwindigkeit abwärts. Messdaten (orange) mit ermittelter Regressionsebene (blau). \label{fig:ab2017-ebene-groesse}}
 \end{figure}
 
 Ergebnisse der Plausibilisierung für den Aufstieg
-(Abbildung \ref{fig:auf-ebene-groesse}):
+(Abbildung \ref{fig:auf2017-ebene-groesse}):
 Signifikanz liegt vor, weil beide $p < \alpha$. Man lehnt die
 Nullhypothese ab. Kein Einfluss von $v_{ebene}$ und $groesse$ auf $v_{auf}$ ist unplausibel.
 
 Ergebnisse der Plausibilisierung für den Abstieg
-(Abbildung \ref{fig:ab-ebene-groesse}):
+(Abbildung \ref{fig:ab2017-ebene-groesse}):
 Signifikanz liegt nicht vor, weil $p_{\beta_2} > \alpha$. Man nimmt die
 Nullhypothese an. Kein Einfluss von $v_{ebene}$ und $groesse$ auf $v_{ab}$ ist plausibel.
 
@@ -213,31 +213,31 @@ Nullhypothese an. Kein Einfluss von $v_{ebene}$ und $groesse$ auf $v_{ab}$ ist p
 \subsubsection{Ebenengeschwindigkeit, Größe und Rundennummer}
 
 Für die Abhängigkeiten Wunschgeschwindigkeit in der Ebene, Körpergröße und Rundennummer wurde 
-der Zusammenhang (\ref{eq:auf-ebene-groesse-runde}) und (\ref{eq:ab-ebene-groesse-runde}) ermittelt.
+der Zusammenhang (\ref{eq:auf2017-ebene-groesse-runde}) und (\ref{eq:ab2017-ebene-groesse-runde}) ermittelt.
 
-\begin{equation} \label{eq:auf-ebene-groesse-runde}
+\begin{equation} \label{eq:auf2017-ebene-groesse-runde}
 v_{auf}(v_{ebene}, groesse, runde) = -0.68569 + 0.424337 v_{ebene} + 0.00530141 groesse + -0.00223211 runde
 \end{equation}
-\begin{equation} \label{eq:ab-ebene-groesse-runde}
+\begin{equation} \label{eq:ab2017-ebene-groesse-runde}
 v_{auf}(v_{ebene}, groesse, runde) = 0.717358 + 0.447061 v_{ebene} + -0.00137015 groesse + 0.00529011 runde
 \end{equation}
 
 \begin{figure} \centering 
 	\input{abbildungen/regression/2017/auf-ebene-groesse-runde-table}
 	\caption{Abhängigkeiten Ebenengeschwindigkeit, Größe und Runde zur Treppengeschwindigkeit aufwärts.
-	\label{fig:auf-ebene-groesse-runde}}
+	\label{fig:auf2017-ebene-groesse-runde}}
 \end{figure}
 
 \begin{figure} \centering 
 	\input{abbildungen/regression/2017/ab-ebene-groesse-runde-table}
 	\caption{Abhängigkeiten Ebenengeschwindigkeit, Größe und Runde zur Treppengeschwindigkeit abwärts.
-	\label{fig:ab-ebene-groesse-runde}}
+	\label{fig:ab2017-ebene-groesse-runde}}
 \end{figure}
 
 Ergebnisse der Plausibilisierung für den Aufstieg
-(Abbildung \ref{fig:auf-ebene-groesse-runde}):
+(Abbildung \ref{fig:auf2017-ebene-groesse-runde}):
 Signifikanz liegt nicht vor, weil $p_{\beta_2} > \alpha$ und $p_{\beta_3} > \alpha$. Man nimmt die Nullhypothese an.
 
 Ergebnisse der Plausibilisierung für den Abstieg
-(Abbildung \ref{fig:ab-ebene-groesse-runde}):
+(Abbildung \ref{fig:ab2017-ebene-groesse-runde}):
 Signifikanz liegt nicht vor, weil $p_{\beta_2} > \alpha$ und $p_{\beta_3} > \alpha$. Man nimmt die Nullhypothese an.

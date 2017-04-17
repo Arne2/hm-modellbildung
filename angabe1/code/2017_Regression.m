@@ -4,7 +4,7 @@
 (*Lineare Regression der Daten von 2017*)
 
 
-ohneAusreisser = 1;
+ohneAusreisser = 0;
 
 outputDir = If[ohneAusreisser > 0, 
     FileNameJoin@{NotebookDirectory[], "../abbildungen/regression/2017/ohneausreisser/"},
@@ -60,7 +60,7 @@ abaufebene = JoinAcross[abauf,ebene, {"id","runde"}];
 data = JoinAcross[abaufebene, gr\[ODoubleDot]\[SZ]eData,{"id"}];
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Treppengeschwindigkeit aufw\[ADoubleDot]rts*)
 
 
@@ -82,7 +82,7 @@ dataAufAusreisser = If[ohneAusreisser > 0,
 
 
 
-(* ::Subsubsection::Closed:: *)
+(* ::Subsubsection:: *)
 (*Lineare Regression mit einem Parameter *)
 
 
@@ -104,6 +104,9 @@ Export[FileNameJoin@{outputDir,"auf-ebene.pdf"},%];
 lm["ParameterTable"]
 Export[FileNameJoin@{outputDir,"auf-ebene-table.tex"},%, "TexFragment"];
 
+lm["RSquared"]
+Export[FileNameJoin@{outputDir,"auf-ebene-r2.tex"},%, "TexFragment"];
+
 
 (*Modell f\[UDoubleDot]r Abh\[ADoubleDot]ngigkeit von der Gr\[ODoubleDot]\[SZ]e des Probanden*)
 d = Normal@Values@dataAuf[All,{"gr\[ODoubleDot]\[SZ]e","vAuf"}];
@@ -123,6 +126,9 @@ Export[FileNameJoin@{outputDir,"auf-groesse.pdf"},%];
 lm["ParameterTable"]
 Export[FileNameJoin@{outputDir,"auf-groesse-table.tex"},%, "TexFragment"];
 
+lm["RSquared"]
+Export[FileNameJoin@{outputDir,"auf-ebene-r2.tex"},%, "TexFragment"];
+
 
 (*Modell f\[UDoubleDot]r Abh\[ADoubleDot]ngigkeit von der Runde*)
 d = Normal@Values@dataAuf[All,{"runde","vAuf"}];
@@ -141,8 +147,11 @@ Export[FileNameJoin@{outputDir,"auf-runde.pdf"},%];
 lm["ParameterTable"]
 Export[FileNameJoin@{outputDir,"auf-runde-table.tex"},%, "TexFragment"];
 
+lm["RSquared"]
+Export[FileNameJoin@{outputDir,"auf-ebene-r2.tex"},%, "TexFragment"];
 
-(* ::Subsubsection:: *)
+
+(* ::Subsubsection::Closed:: *)
 (*Lineare Regressions mit zwei Parameter*)
 
 
@@ -281,6 +290,9 @@ lm = LinearModelFit[d,{runde,vEbene,gr\[ODoubleDot]\[SZ]e},{runde,vEbene,gr\[ODo
 Export[FileNameJoin@{outputDir,"ab-runde-ebene-groesse.tex"},Normal@%,"TeXFragment"];
 lm["ParameterTable"]
 Export[FileNameJoin@{outputDir,"ab-runde-ebene-groesse-table.tex"},%,"TeXFragment"];
+
+
+
 
 
 

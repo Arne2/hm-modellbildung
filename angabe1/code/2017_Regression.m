@@ -104,9 +104,6 @@ Export[FileNameJoin@{outputDir,"auf-ebene.pdf"},%];
 lm["ParameterTable"]
 Export[FileNameJoin@{outputDir,"auf-ebene-table.tex"},%, "TexFragment"];
 
-lm["RSquared"]
-Export[FileNameJoin@{outputDir,"auf-ebene-r2.tex"},%, "TexFragment"];
-
 
 (*Modell f\[UDoubleDot]r Abh\[ADoubleDot]ngigkeit von der Gr\[ODoubleDot]\[SZ]e des Probanden*)
 d = Normal@Values@dataAuf[All,{"gr\[ODoubleDot]\[SZ]e","vAuf"}];
@@ -126,9 +123,6 @@ Export[FileNameJoin@{outputDir,"auf-groesse.pdf"},%];
 lm["ParameterTable"]
 Export[FileNameJoin@{outputDir,"auf-groesse-table.tex"},%, "TexFragment"];
 
-lm["RSquared"]
-Export[FileNameJoin@{outputDir,"auf-ebene-r2.tex"},%, "TexFragment"];
-
 
 (*Modell f\[UDoubleDot]r Abh\[ADoubleDot]ngigkeit von der Runde*)
 d = Normal@Values@dataAuf[All,{"runde","vAuf"}];
@@ -147,11 +141,8 @@ Export[FileNameJoin@{outputDir,"auf-runde.pdf"},%];
 lm["ParameterTable"]
 Export[FileNameJoin@{outputDir,"auf-runde-table.tex"},%, "TexFragment"];
 
-lm["RSquared"]
-Export[FileNameJoin@{outputDir,"auf-ebene-r2.tex"},%, "TexFragment"];
 
-
-(* ::Subsubsection::Closed:: *)
+(* ::Subsubsection:: *)
 (*Lineare Regressions mit zwei Parameter*)
 
 
@@ -178,11 +169,11 @@ Export[FileNameJoin@{outputDir,"auf-ebene-groesse-table.tex"},%, "TexFragment"];
 
 
 (*Modell f\[UDoubleDot]r Abh\[ADoubleDot]ngigkeit von Rundennummer, Wunschgeschwindigkeit (Ebene) und K\[ODoubleDot]rpergr\[ODoubleDot]\[SZ]e*)
-d = Normal@Values@dataAuf[All,{"runde","vEbene","gr\[ODoubleDot]\[SZ]e","vAuf"}];
-lm = LinearModelFit[d,{runde,vEbene,gr\[ODoubleDot]\[SZ]e},{runde,vEbene,gr\[ODoubleDot]\[SZ]e}]
-Export[FileNameJoin@{outputDir,"auf-runde-ebene-groesse.tex"},Normal@%, "TexFragment"];
+d = Normal@Values@dataAuf[All,{"vEbene","gr\[ODoubleDot]\[SZ]e","runde","vAuf"}];
+lm = LinearModelFit[d,{vEbene,gr\[ODoubleDot]\[SZ]e,runde},{vEbene,gr\[ODoubleDot]\[SZ]e,runde}]
+Export[FileNameJoin@{outputDir,"auf-ebene-groesse-runde-table.tex"},Normal@%, "TexFragment"];
 lm["ParameterTable"]
-Export[FileNameJoin@{outputDir,"auf-runde-ebene-groesse-table.tex"},%, "TexFragment"];
+Export[FileNameJoin@{outputDir,"auf-ebene-groesse-runde-table.tex"},%, "TexFragment"];
 
 
 (* ::Section:: *)
@@ -285,20 +276,11 @@ Export[FileNameJoin@{outputDir,"ab-ebene-groesse-table.tex"},%,"TeXFragment"];
 
 
 (*Modell f\[UDoubleDot]r Abh\[ADoubleDot]ngigkeit von Rundennummer, Wunschgeschwindigkeit (Ebene) und K\[ODoubleDot]rpergr\[ODoubleDot]\[SZ]e*)
-d = Normal@Values@dataAuf[All,{"runde","vEbene","gr\[ODoubleDot]\[SZ]e","vAb"}];
-lm = LinearModelFit[d,{runde,vEbene,gr\[ODoubleDot]\[SZ]e},{runde,vEbene,gr\[ODoubleDot]\[SZ]e}]
-Export[FileNameJoin@{outputDir,"ab-runde-ebene-groesse.tex"},Normal@%,"TeXFragment"];
+d = Normal@Values@dataAuf[All,{"vEbene","gr\[ODoubleDot]\[SZ]e","runde","vAb"}];
+lm = LinearModelFit[d,{vEbene,gr\[ODoubleDot]\[SZ]e,runde},{vEbene,gr\[ODoubleDot]\[SZ]e,runde}]
+Export[FileNameJoin@{outputDir,"ab-ebene-groesse-runde-table.tex"},Normal@%,"TeXFragment"];
 lm["ParameterTable"]
-Export[FileNameJoin@{outputDir,"ab-runde-ebene-groesse-table.tex"},%,"TeXFragment"];
-
-
-
-
-
-
-
-
-
+Export[FileNameJoin@{outputDir,"ab-ebene-groesse-runde-table.tex"},%,"TeXFragment"];
 
 
 

@@ -105,6 +105,18 @@ lm["ParameterTable"]
 Export[FileNameJoin@{outputDir,"auf-ebene-table.tex"},%, "TexFragment"];
 
 
+(* ::Subsubsection:: *)
+(*Konditionierung*)
+
+
+A = lm["DesignMatrix"];
+R = QRDecomposition[A][[2]];
+cond1 = LinearAlgebra`MatrixConditionNumber[Transpose[A].A]
+Log[cond1]
+cond2 = LinearAlgebra`MatrixConditionNumber[R]
+Log[cond2]
+
+
 (*Modell f\[UDoubleDot]r Abh\[ADoubleDot]ngigkeit von der Gr\[ODoubleDot]\[SZ]e des Probanden*)
 d = Normal@Values@dataAuf[All,{"gr\[ODoubleDot]\[SZ]e","vAuf"}];
 dA = If[ohneAusreisser > 0, 
@@ -215,6 +227,18 @@ lm["ParameterTable"]
 Export[FileNameJoin@{outputDir,"ab-ebene-table.tex"},%,"TeXFragment"];
 
 
+(* ::Subsubsection:: *)
+(*Konditionierung*)
+
+
+A = lm["DesignMatrix"];
+R = QRDecomposition[A][[2]];
+cond1 = LinearAlgebra`MatrixConditionNumber[Transpose[A].A]
+Log[cond1]
+cond2 = LinearAlgebra`MatrixConditionNumber[R]
+Log[cond2]
+
+
 (*Modell f\[UDoubleDot]r Abh\[ADoubleDot]ngigkeit von der Gr\[ODoubleDot]\[SZ]e des Probanden*)
 d = Normal@Values@dataAb[All,{"gr\[ODoubleDot]\[SZ]e","vAb"}];
 dA = If[ohneAusreisser > 0, 
@@ -272,6 +296,18 @@ Export[FileNameJoin@{outputDir,"ab-ebene-groesse-table.tex"},%,"TeXFragment"];
 
 
 (* ::Subsubsection:: *)
+(*Konditionierung*)
+
+
+A = lm["DesignMatrix"];
+R = QRDecomposition[A][[2]];
+cond1 = LinearAlgebra`MatrixConditionNumber[Transpose[A].A]
+Log[cond1]
+cond2 = LinearAlgebra`MatrixConditionNumber[R]
+Log[cond2]
+
+
+(* ::Subsubsection:: *)
 (*Lineare Regression mit drei Variablen*)
 
 
@@ -281,6 +317,12 @@ lm = LinearModelFit[d,{vEbene,gr\[ODoubleDot]\[SZ]e,runde},{vEbene,gr\[ODoubleDo
 Export[FileNameJoin@{outputDir,"ab-ebene-groesse-runde-table.tex"},Normal@%,"TeXFragment"];
 lm["ParameterTable"]
 Export[FileNameJoin@{outputDir,"ab-ebene-groesse-runde-table.tex"},%,"TeXFragment"];
+
+
+
+
+
+
 
 
 

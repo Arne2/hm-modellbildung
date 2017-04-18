@@ -189,16 +189,61 @@ Die rechnerische Überprüfung bestätigt die Analyse des Quantil-Quantil-Diagra
 
 \subsection{Konditionierung}
 
-\section{Lineare Regression 2012}
-\input{regression2012}
 
 \section{Ergebnisse}
 \section{Ermitteltes Modell}
 
-\section{Vergleich mit Daten aus 2012}
-\subsection{Überprüfung auf Normalverteilung}
-\subsection{Lineare Regression}
-\subsection{Vergleich}
+\section{Lineare Regression 2012}
+\input{regression2012}
+
+\subsection{Vergleich mit Daten aus 2017}
+
+Vergleicht man die Ergebnisse der Plausibilisierungen der Regressionen fällt sofort auf, das grundsätzlich für beide Jahre nur die Abhängigkeit zur freien Wunschgeschwindigkeit in der Ebene als plausibel bestimmt wurde (siehe Abbildung \ref{fig:plausibilisierung-2017-2012}). Nur das Modell für die Aufwärtsgeschwindigkeit berechnet durch Ebenengeschwindigkeit und Größe ist zusätzlich im Jahr 2017 plausibel. Diese Übereinstimmung ist auch zu erwarten, da ja beide Messexperimente gleich spezifiziert waren.
+
+Der Unterschied im Modell mit der Größe ist durch das Eintreten eines Fehlers bei einem der beiden Hypothesentests, die Ausreißer, zu geringe Datenmenge oder sogar Unterschiede beider Experimente zu erklären.
+
+Für die nicht sofort widerlegten Modelle basierend nur auf der Ebenengeschwindigkeit ist noch von Interesse, ob die Koeffizienten ähnlich sind. In Abbildung \ref{fig:steigung-2017-2012} ist zu sehen, dass die Steigungen zwar beide positiv sind, aber die 
+Stärke unterschiedlich ist. Dies ist auf die extremen Ausreißer im Jahr 2012 zurückzuführen.
+
+
+\begin{figure}
+\[\begin{array}{cc l}
+	\hline
+	 2017 & 2012 & \text{Modell} \\
+	\hline
+	\checkmark&\checkmark& v_{auf}(v_{ebene}) \\
+	\checkmark&\checkmark& v_{ab}(v_{ebene})\\
+	
+	&& v_{auf}(groesse) \\
+	&& v_{ab}(groesse)  \\
+	
+	&& v_{auf}(runde) \\
+	&& v_{ab}(runde)  \\	
+	
+	\checkmark&& v_{auf}(v_{ebene}, groesse) \\
+	&& v_{ab}(v_{ebene}, groesse)  \\
+		
+	&& v_{auf}(v_{ebene}, groesse, runde)  \\
+	&& v_{ab}(v_{ebene}, groesse, runde) \\	
+	\hline
+\end{array}\]
+\caption{Liste aller betrachteten Regressionsmodelle und ob sie für den Datensatz aus dem jeweiligen Jahr plausibel sind.} \label{fig:plausibilisierung-2017-2012}
+\end{figure}
+
+
+\begin{figure}
+	\[\begin{array}{r | cc}
+	\hline
+	 & \text{2017} & \text{2012} \\
+	\hline
+	v_{auf} & 0.393467 v_{ebene}& 1.92532 v_{ebene}  \\
+	v_{ab} & 0.453419 v_{ebene}&1.28244 v_{ebene}  \\
+	\hline
+	\end{array}\]
+	\caption{Steigung für die Ebenengeschwindigkeit aus den beiden Modellen von 2017 und 2012.} \label{fig:steigung-2017-2012}
+\end{figure}
+
+
 
 \section{Verbund von alten und neuen Daten}
 

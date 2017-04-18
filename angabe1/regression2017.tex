@@ -48,28 +48,28 @@ stellen dies grafisch dar.
 \end{figure}
 
 In Abbildung \ref{fig:auf2017-ebene} sind wieder
-deutlich die schon in der Betrachtung zur Normalverteilung erwähnten Ausreißer zu erkennen. Deshalb wurde die lineare Regression für den gefilterten Messdatensatz (nur Datensätze ohne Bemerkung) durchgeführt. Es ergeben sich neue Formeln für die Treppengeschwindigkeit aufwärts (\ref{eq:ohne-auf-ebene}) und abwärts (\ref{eq:ohne-ab-ebene}). Dazu gehören Abbildungen \ref{fig:ohne-auf-ebene} und \ref{fig:ohne-ab-ebene}. Die Ausreißer wurden in der Regression hier nicht verwendet, sind aber hervorgehoben eingezeichnet. Bei der Treppengeschwindigkeit aufwärts sind es deutlich mehr Ausreißer und sie fallen alle in den schnelleren Bereich. Die Regressionsgerade für die Daten ohne Ausreißer liegt dementsprechend 
-etwas weiter unter (langsamer) im Vergleich zu Abbildung \ref{fig:auf2017-ebene}. Bei Abbildung \ref{fig:ohne-ab-ebene} sind es nur 
+deutlich die schon in der Betrachtung zur Normalverteilung erwähnten Ausreißer zu erkennen. Deshalb wurde die lineare Regression für den gefilterten Messdatensatz (nur Datensätze ohne Bemerkung) durchgeführt. Es ergeben sich neue Formeln für die Treppengeschwindigkeit aufwärts (\ref{eq:ohne-auf2017-ebene}) und abwärts (\ref{eq:ohne-ab2017-ebene}). Dazu gehören Abbildungen \ref{fig:ohne-auf2017-ebene} und \ref{fig:ohne-ab2017-ebene}. Die Ausreißer wurden in der Regression hier nicht verwendet, sind aber hervorgehoben eingezeichnet. Bei der Treppengeschwindigkeit aufwärts sind es deutlich mehr Ausreißer und sie fallen alle in den schnelleren Bereich. Die Regressionsgerade für die Daten ohne Ausreißer liegt dementsprechend 
+etwas weiter unter (langsamer) im Vergleich zu Abbildung \ref{fig:auf2017-ebene}. Bei Abbildung \ref{fig:ohne-ab2017-ebene} sind es nur 
 vier Ausreißer. Sie sind auch stärker gestreut. Die Regressionsgerade für den Zusammenhang zur Geschwindigkeit abwärts wird nicht besonders von dem Weglassen der Ausreißer beeinflusst. Die Ausreißer werden in den weiteren Regressionen nicht genauer betrachtet. Alle Abbildungen und Plausibilisierungstests dazu sind aber als Dateien angelegt.
 
-\begin{equation} \label{eq:ohne-auf-ebene}
+\begin{equation} \label{eq:ohne-auf2017-ebene}
 	v'_{auf}(v_{ebene}) = 0.332577 + 0.325892 v_{ebene}
 \end{equation}
-\begin{equation} \label{eq:ohne-ab-ebene}
+\begin{equation} \label{eq:ohne-ab2017-ebene}
 	v'_{ab}(v_{ebene}) = 0.440848 + 0.478525 v_{ebene}
 \end{equation}
 
 \begin{figure} \centering 
 	\includegraphics[]{abbildungen/regression/2017/ohneausreisser/auf-ebene.pdf}
 	\input{abbildungen/regression/2017/ohneausreisser/auf-ebene-table}
-	\caption{Abhängigkeit Wunschgeschwindigkeit in der Ebene zur Treppengeschwindigkeit aufwärts. Gefilterte Messdaten (orange) und Ausreißer (schwarz) mit ermittelter Regressionsgerade (blau). \label{fig:ohne-auf-ebene}}
+	\caption{Abhängigkeit Wunschgeschwindigkeit in der Ebene zur Treppengeschwindigkeit aufwärts. Gefilterte Messdaten (orange) und Ausreißer (schwarz) mit ermittelter Regressionsgerade (blau). \label{fig:ohne-auf2017-ebene}}
 \end{figure}
 
 \begin{figure} \centering 
 	\includegraphics[]{abbildungen/regression/2017/ohneausreisser/ab-ebene.pdf}
 	\input{abbildungen/regression/2017/ohneausreisser/ab-ebene-table}
 	\caption{Abhängigkeit Wunschgeschwindigkeit in der Ebene zur Treppengeschwindigkeit abwärts. Gefilterte Messdaten (orange) und Ausreißer (schwarz) mit ermittelter Regressionsgerade (blau).
-	\label{fig:ohne-ab-ebene}}
+	\label{fig:ohne-ab2017-ebene}}
 \end{figure}
 
 Für die Plausibilisierung der Regression wird die Nullhypothese 
@@ -215,12 +215,14 @@ Nullhypothese an. Kein Einfluss von $v_{ebene}$ und $groesse$ auf $v_{ab}$ ist p
 Für die Abhängigkeiten Wunschgeschwindigkeit in der Ebene, Körpergröße und Rundennummer wurde 
 der Zusammenhang (\ref{eq:auf2017-ebene-groesse-runde}) und (\ref{eq:ab2017-ebene-groesse-runde}) ermittelt.
 
-\begin{equation} \label{eq:auf2017-ebene-groesse-runde}
-v_{auf}(v_{ebene}, groesse, runde) = -0.68569 + 0.424337 v_{ebene} + 0.00530141 groesse + -0.00223211 runde
-\end{equation}
-\begin{equation} \label{eq:ab2017-ebene-groesse-runde}
-v_{auf}(v_{ebene}, groesse, runde) = 0.717358 + 0.447061 v_{ebene} + -0.00137015 groesse + 0.00529011 runde
-\end{equation}
+\begin{multline} \label{eq:auf2017-ebene-groesse-runde}
+v_{auf}(v_{ebene}, groesse, runde) = \\
+-0.68569 + 0.424337 v_{ebene} + 0.00530141 groesse + -0.00223211 runde
+\end{multline}
+\begin{multline} \label{eq:ab2017-ebene-groesse-runde}
+v_{auf}(v_{ebene}, groesse, runde) = \\
+0.717358 + 0.447061 v_{ebene} + -0.00137015 groesse + 0.00529011 runde
+\end{multline}
 
 \begin{figure} \centering 
 	\input{abbildungen/regression/2017/auf-ebene-groesse-runde-table}

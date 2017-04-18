@@ -4,7 +4,7 @@
 (*Lineare Regression der Daten von 2012*)
 
 
-ohneAusreisser = 0;
+ohneAusreisser = 1;
 
 outputDir = If[ohneAusreisser > 0, 
     FileNameJoin@{NotebookDirectory[], "../abbildungen/regression/2012/ohneausreisser/"},
@@ -12,7 +12,7 @@ outputDir = If[ohneAusreisser > 0,
 ];
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Aufbereitung der Daten*)
 
 
@@ -169,11 +169,11 @@ Export[FileNameJoin@{outputDir,"auf-ebene-groesse-table.tex"},%, "TexFragment"];
 
 
 (*Modell f\[UDoubleDot]r Abh\[ADoubleDot]ngigkeit von Rundennummer, Wunschgeschwindigkeit (Ebene) und K\[ODoubleDot]rpergr\[ODoubleDot]\[SZ]e*)
-d = Normal@Values@dataAuf[All,{"runde","vEbene","gr\[ODoubleDot]\[SZ]e","vAuf"}];
-lm = LinearModelFit[d,{runde,vEbene,gr\[ODoubleDot]\[SZ]e},{runde,vEbene,gr\[ODoubleDot]\[SZ]e}]
-Export[FileNameJoin@{outputDir,"auf-runde-ebene-groesse.tex"},Normal@%, "TexFragment"];
+d = Normal@Values@dataAuf[All,{"vEbene","gr\[ODoubleDot]\[SZ]e","runde","vAuf"}];
+lm = LinearModelFit[d,{vEbene,gr\[ODoubleDot]\[SZ]e,runde},{vEbene,gr\[ODoubleDot]\[SZ]e,runde}]
+Export[FileNameJoin@{outputDir,"auf-ebene-groesse-runde-table.tex"},Normal@%, "TexFragment"];
 lm["ParameterTable"]
-Export[FileNameJoin@{outputDir,"auf-runde-ebene-groesse-table.tex"},%, "TexFragment"];
+Export[FileNameJoin@{outputDir,"auf-ebene-groesse-runde-table.tex"},%, "TexFragment"];
 
 
 (* ::Section:: *)
@@ -276,14 +276,11 @@ Export[FileNameJoin@{outputDir,"ab-ebene-groesse-table.tex"},%,"TeXFragment"];
 
 
 (*Modell f\[UDoubleDot]r Abh\[ADoubleDot]ngigkeit von Rundennummer, Wunschgeschwindigkeit (Ebene) und K\[ODoubleDot]rpergr\[ODoubleDot]\[SZ]e*)
-d = Normal@Values@dataAb[All,{"runde","vEbene","gr\[ODoubleDot]\[SZ]e","vAb"}];
-lm = LinearModelFit[d,{runde,vEbene,gr\[ODoubleDot]\[SZ]e},{runde,vEbene,gr\[ODoubleDot]\[SZ]e}]
-Export[FileNameJoin@{outputDir,"ab-runde-ebene-groesse.tex"},Normal@%,"TeXFragment"];
+d = Normal@Values@dataAuf[All,{"vEbene","gr\[ODoubleDot]\[SZ]e","runde","vAb"}];
+lm = LinearModelFit[d,{vEbene,gr\[ODoubleDot]\[SZ]e,runde},{vEbene,gr\[ODoubleDot]\[SZ]e,runde}]
+Export[FileNameJoin@{outputDir,"ab-ebene-groesse-runde-table.tex"},Normal@%,"TeXFragment"];
 lm["ParameterTable"]
-Export[FileNameJoin@{outputDir,"ab-runde-ebene-groesse-table.tex"},%,"TeXFragment"];
-
-
-
+Export[FileNameJoin@{outputDir,"ab-ebene-groesse-runde-table.tex"},%,"TeXFragment"];
 
 
 

@@ -209,11 +209,10 @@ Dadurch, dass Mathematica die QR-Zerlegung benutzt sind diese Ergebnisse auch we
 
 Vergleicht man die Ergebnisse der Plausibilisierungen der Regressionen fällt sofort auf, das grundsätzlich für beide Jahre nur die Abhängigkeit zur freien Wunschgeschwindigkeit in der Ebene als plausibel bestimmt wurde (siehe Abbildung \ref{fig:plausibilisierung-2017-2012}). Nur das Modell für die Aufwärtsgeschwindigkeit berechnet durch Ebenengeschwindigkeit und Größe ist zusätzlich im Jahr 2017 plausibel. Diese Übereinstimmung ist auch zu erwarten, da ja beide Messexperimente gleich spezifiziert waren.
 
-Der Unterschied im Modell mit der Größe ist durch das Eintreten eines Fehlers bei einem der beiden Hypothesentests, die Ausreißer, zu geringe Datenmenge oder sogar Unterschiede beider Experimente zu erklären.
+Der Unterschied im Modell mit der Größe ist durch das Eintreten eines Fehlers bei einem der beiden Hypothesentests, die Ausreißer, oder zu geringer Datenmenge zu erklären.
 
 Für die nicht sofort widerlegten Modelle basierend nur auf der Ebenengeschwindigkeit ist noch von Interesse, ob die Koeffizienten ähnlich sind. In Abbildung \ref{fig:steigung-2017-2012} ist zu sehen, dass die Steigungen zwar beide positiv sind, aber die 
 Stärke unterschiedlich ist. Dies ist auf die extremen Ausreißer im Jahr 2012 zurückzuführen.
-
 
 \begin{figure}
 \[\begin{array}{cc l}
@@ -351,25 +350,6 @@ Grafisch dargestellt wird dieser Zusammenhang in den Abbildungen \ref{fig:2012_u
 	\label{fig:2012_und_2017_MA_ab_groesse}
 \end{figure}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 \subsubsection{Rundennummer}
 Auch für die Abhängigkeit zur Rundennummer wurden die Ausreißer entfernt. Folgender Zusammenhang wurde ermittelt:
 \begin{equation}
@@ -382,16 +362,6 @@ v_{ab}(runde) = 1.03894 + 0.00414082 runde
 \end{equation}
 Die grafische Darstellung für diesen Zusammenhang ist für den Treppenaufstieg in Abbildung \ref{fig:2012_und_2017_MA_auf_runde} und für den Treppenabstieg in Abbildung \ref{fig:2012_und_2017_MA_ab_runde} zu sehen. Die Abbildungen machen bereits deutlich, dass eine Abhängigkeit der Treppengeschwindigkeit von der Rundenzahl nicht plausibel ist. Die Ergebnisse der Plausibilitätsprüfung in den Tabellen jeweils unter den Abbildungen zeigen, dass der P-Wert in beiden Fällen deutlich über dem Signifikanzniveau $\alpha$ liegt. Die Nullhypothese wird angenommen, die Rundenzahl hat keinen Einfluss auf die Treppengeschwindigkeit.
 
-
-
-
-
-
-
-
-
-
-
 \begin{figure}[htpb]
 	\centering
 	\includegraphics[width=0.7\textwidth]{abbildungen/regression/2012_2017_verbund/ohneausreisser/auf-runde.pdf}
@@ -400,8 +370,6 @@ Die grafische Darstellung für diesen Zusammenhang ist für den Treppenaufstieg 
 	\label{fig:2012_und_2017_MA_auf_runde}
 \end{figure}
 
-
-
 \begin{figure}[htpb]
 	\centering
 	\includegraphics[width=0.7\textwidth]{abbildungen/regression/2012_2017_verbund/ohneausreisser/ab-runde.pdf}
@@ -409,8 +377,6 @@ Die grafische Darstellung für diesen Zusammenhang ist für den Treppenaufstieg 
 	\caption{Abhängigkeit der Runde und der Treppengeschwindigkeit abwärts. Messdaten (orange) und Ausreißer (schwarz) mit ermittelter Regressionsgeraden (blau)}
 	\label{fig:2012_und_2017_MA_ab_runde}
 \end{figure}
-
-
 
 \subsection{Prüfung auf mehrere Abhängigkeiten}
 Es wird die Abhängigkeit der Treppengeschwindigkeit von mehreren Parametern untersucht. Mittels linearer Regression werden folgende Gleichungen ermittelt: 

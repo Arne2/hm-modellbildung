@@ -1,14 +1,14 @@
 (* ::Package:: *)
 
 (* ::Title:: *)
-(*Lineare Regression der Daten von 2017*)
+(*Lineare Regression der Daten von 2012 und 2017*)
 
 
-ohneAusreisser = 0;
+ohneAusreisser = 1;
 
 outputDir = If[ohneAusreisser > 0, 
-    FileNameJoin@{NotebookDirectory[], "../abbildungen/regression/2017/ohneausreisser/"},
-	FileNameJoin@{NotebookDirectory[], "../abbildungen/regression/2017/"}
+    FileNameJoin@{NotebookDirectory[], "../abbildungen/regression/2012_2017_verbund/ohneausreisser/"},
+	FileNameJoin@{NotebookDirectory[], "../abbildungen/regression/2012_2017_verbund/"}
 ];
 
 
@@ -17,9 +17,9 @@ outputDir = If[ohneAusreisser > 0,
 
 
 (*Hier werden die Daten aus dem Messexperiment geladen.*)
-pathGeschwindigkeiten= "../data/2017/MessexperimentGeschwindigkeiten.csv";
+pathGeschwindigkeiten= "../data/2012_2017_verbund/MessexperimentGeschwindigkeiten2012_2017_verbund.csv";
 dataGeschwindigkeiten= SemanticImport[FileNameJoin@{NotebookDirectory[],pathGeschwindigkeiten}, CharacterEncoding->"UTF8"];
-pathProbanden= "../data/2017/MessexperimentProbanden.csv";
+pathProbanden= "../data/2012_2017_verbund/MessexperimentProbanden2012_2017_verbund.csv";
 dataProbanden= SemanticImport[FileNameJoin@{NotebookDirectory[],pathProbanden},CharacterEncoding->"UTF8"];
 
 
@@ -105,18 +105,6 @@ lm["ParameterTable"]
 Export[FileNameJoin@{outputDir,"auf-ebene-table.tex"},%, "TexFragment"];
 
 
-(* ::Subsubsection:: *)
-(*Konditionierung*)
-
-
-A = lm["DesignMatrix"];
-R = QRDecomposition[A][[2]];
-cond1 = LinearAlgebra`MatrixConditionNumber[Transpose[A].A]
-Log[10,cond1]
-cond2 = LinearAlgebra`MatrixConditionNumber[R]
-Log[10,cond2]
-
-
 (*Modell f\[UDoubleDot]r Abh\[ADoubleDot]ngigkeit von der Gr\[ODoubleDot]\[SZ]e des Probanden*)
 d = Normal@Values@dataAuf[All,{"gr\[ODoubleDot]\[SZ]e","vAuf"}];
 dA = If[ohneAusreisser > 0, 
@@ -181,11 +169,11 @@ Export[FileNameJoin@{outputDir,"auf-ebene-groesse-table.tex"},%, "TexFragment"];
 
 
 (*Modell f\[UDoubleDot]r Abh\[ADoubleDot]ngigkeit von Rundennummer, Wunschgeschwindigkeit (Ebene) und K\[ODoubleDot]rpergr\[ODoubleDot]\[SZ]e*)
-d = Normal@Values@dataAuf[All,{"vEbene","gr\[ODoubleDot]\[SZ]e","runde","vAuf"}];
-lm = LinearModelFit[d,{vEbene,gr\[ODoubleDot]\[SZ]e,runde},{vEbene,gr\[ODoubleDot]\[SZ]e,runde}]
-Export[FileNameJoin@{outputDir,"auf-ebene-groesse-runde-table.tex"},Normal@%, "TexFragment"];
+d = Normal@Values@dataAuf[All,{"runde","vEbene","gr\[ODoubleDot]\[SZ]e","vAuf"}];
+lm = LinearModelFit[d,{runde,vEbene,gr\[ODoubleDot]\[SZ]e},{runde,vEbene,gr\[ODoubleDot]\[SZ]e}]
+Export[FileNameJoin@{outputDir,"auf-runde-ebene-groesse.tex"},Normal@%, "TexFragment"];
 lm["ParameterTable"]
-Export[FileNameJoin@{outputDir,"auf-ebene-groesse-runde-table.tex"},%, "TexFragment"];
+Export[FileNameJoin@{outputDir,"auf-runde-ebene-groesse-table.tex"},%, "TexFragment"];
 
 
 (* ::Section:: *)
@@ -225,18 +213,6 @@ Export[FileNameJoin@{outputDir,"ab-ebene.pdf"},%];
 
 lm["ParameterTable"]
 Export[FileNameJoin@{outputDir,"ab-ebene-table.tex"},%,"TeXFragment"];
-
-
-(* ::Subsubsection:: *)
-(*Konditionierung*)
-
-
-A = lm["DesignMatrix"];
-R = QRDecomposition[A][[2]];
-cond1 = LinearAlgebra`MatrixConditionNumber[Transpose[A].A]
-Log[10,cond1]
-cond2 = LinearAlgebra`MatrixConditionNumber[R]
-Log[10,cond2]
 
 
 (*Modell f\[UDoubleDot]r Abh\[ADoubleDot]ngigkeit von der Gr\[ODoubleDot]\[SZ]e des Probanden*)
@@ -296,27 +272,15 @@ Export[FileNameJoin@{outputDir,"ab-ebene-groesse-table.tex"},%,"TeXFragment"];
 
 
 (* ::Subsubsection:: *)
-(*Konditionierung*)
-
-
-A = lm["DesignMatrix"];
-R = QRDecomposition[A][[2]];
-cond1 = LinearAlgebra`MatrixConditionNumber[Transpose[A].A]
-Log[10,cond1]
-cond2 = LinearAlgebra`MatrixConditionNumber[R]
-Log[10,cond2]
-
-
-(* ::Subsubsection:: *)
 (*Lineare Regression mit drei Variablen*)
 
 
 (*Modell f\[UDoubleDot]r Abh\[ADoubleDot]ngigkeit von Rundennummer, Wunschgeschwindigkeit (Ebene) und K\[ODoubleDot]rpergr\[ODoubleDot]\[SZ]e*)
-d = Normal@Values@dataAuf[All,{"vEbene","gr\[ODoubleDot]\[SZ]e","runde","vAb"}];
-lm = LinearModelFit[d,{vEbene,gr\[ODoubleDot]\[SZ]e,runde},{vEbene,gr\[ODoubleDot]\[SZ]e,runde}]
-Export[FileNameJoin@{outputDir,"ab-ebene-groesse-runde-table.tex"},Normal@%,"TeXFragment"];
+d = Normal@Values@dataAuf[All,{"runde","vEbene","gr\[ODoubleDot]\[SZ]e","vAb"}];
+lm = LinearModelFit[d,{runde,vEbene,gr\[ODoubleDot]\[SZ]e},{runde,vEbene,gr\[ODoubleDot]\[SZ]e}]
+Export[FileNameJoin@{outputDir,"ab-runde-ebene-groesse.tex"},Normal@%,"TeXFragment"];
 lm["ParameterTable"]
-Export[FileNameJoin@{outputDir,"ab-ebene-groesse-runde-table.tex"},%,"TeXFragment"];
+Export[FileNameJoin@{outputDir,"ab-runde-ebene-groesse-table.tex"},%,"TeXFragment"];
 
 
 

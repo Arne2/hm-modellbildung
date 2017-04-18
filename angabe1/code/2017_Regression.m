@@ -12,7 +12,7 @@ outputDir = If[ohneAusreisser > 0,
 ];
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Aufbereitung der Daten*)
 
 
@@ -60,7 +60,7 @@ abaufebene = JoinAcross[abauf,ebene, {"id","runde"}];
 data = JoinAcross[abaufebene, gr\[ODoubleDot]\[SZ]eData,{"id"}];
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Treppengeschwindigkeit aufw\[ADoubleDot]rts*)
 
 
@@ -103,6 +103,18 @@ Export[FileNameJoin@{outputDir,"auf-ebene.pdf"},%];
 
 lm["ParameterTable"]
 Export[FileNameJoin@{outputDir,"auf-ebene-table.tex"},%, "TexFragment"];
+
+
+(* ::Subsubsection:: *)
+(*Konditionierung*)
+
+
+A = lm["DesignMatrix"];
+R = QRDecomposition[A][[2]];
+cond1 = LinearAlgebra`MatrixConditionNumber[Transpose[A].A]
+Log[10,cond1]
+cond2 = LinearAlgebra`MatrixConditionNumber[R]
+Log[10,cond2]
 
 
 (*Modell f\[UDoubleDot]r Abh\[ADoubleDot]ngigkeit von der Gr\[ODoubleDot]\[SZ]e des Probanden*)
@@ -215,6 +227,18 @@ lm["ParameterTable"]
 Export[FileNameJoin@{outputDir,"ab-ebene-table.tex"},%,"TeXFragment"];
 
 
+(* ::Subsubsection:: *)
+(*Konditionierung*)
+
+
+A = lm["DesignMatrix"];
+R = QRDecomposition[A][[2]];
+cond1 = LinearAlgebra`MatrixConditionNumber[Transpose[A].A]
+Log[10,cond1]
+cond2 = LinearAlgebra`MatrixConditionNumber[R]
+Log[10,cond2]
+
+
 (*Modell f\[UDoubleDot]r Abh\[ADoubleDot]ngigkeit von der Gr\[ODoubleDot]\[SZ]e des Probanden*)
 d = Normal@Values@dataAb[All,{"gr\[ODoubleDot]\[SZ]e","vAb"}];
 dA = If[ohneAusreisser > 0, 
@@ -272,6 +296,18 @@ Export[FileNameJoin@{outputDir,"ab-ebene-groesse-table.tex"},%,"TeXFragment"];
 
 
 (* ::Subsubsection:: *)
+(*Konditionierung*)
+
+
+A = lm["DesignMatrix"];
+R = QRDecomposition[A][[2]];
+cond1 = LinearAlgebra`MatrixConditionNumber[Transpose[A].A]
+Log[10,cond1]
+cond2 = LinearAlgebra`MatrixConditionNumber[R]
+Log[10,cond2]
+
+
+(* ::Subsubsection:: *)
 (*Lineare Regression mit drei Variablen*)
 
 
@@ -281,6 +317,15 @@ lm = LinearModelFit[d,{runde,vEbene,gr\[ODoubleDot]\[SZ]e},{runde,vEbene,gr\[ODo
 Export[FileNameJoin@{outputDir,"ab-runde-ebene-groesse.tex"},Normal@%,"TeXFragment"];
 lm["ParameterTable"]
 Export[FileNameJoin@{outputDir,"ab-runde-ebene-groesse-table.tex"},%,"TeXFragment"];
+
+
+
+
+
+
+
+
+
 
 
 

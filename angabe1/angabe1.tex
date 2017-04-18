@@ -181,9 +181,6 @@ Beim Betrachten des Quantil-Quantil-Diagramms in Abbildung \ref{fig:QQ_TreppeAb_
 	\end{minipage}
 \end{figure}
 
-
-
-
 \subsection{Rechnerische Überprüfung}
 Die rechnerische Überprüfung bestätigt die Analyse des Quantil-Quantil-Diagramms. Wie in Tabelle \ref{tab:anpassungstest_TreppeAb_MA} und Tabelle \ref{tab:anpassungstest_TreppeAbf_OA} zu sehen, liegt in beiden Fällen eine Normalverteilung vor. Es ist zu bemerken, dass ein Anpassungstest anhand der Daten mit Ausreißern einen größeren p-Wert erzielt. 
 \input{abbildungen/tab_Anpassungstest_Treppe_Ab}
@@ -207,8 +204,6 @@ Dadurch, dass Mathematica die QR-Zerlegung benutzt sind diese Ergebnisse auch we
 
 \section{Lineare Regression 2012}
 \input{regression2012}
-
-\section{Vergleich mit Daten aus 2012}
 
 \section{Verbund von alten und neuen Daten}
 Unter der Annahme, dass die Bedingungen zum Zeitpunkt des Messexperiments im Jahr 2012 ähnlich waren wie im Jahr 2017, kann man die erfassten Daten aus beiden Experimenten zu einem gemeinsamen Datensatz zusammenfassen. Dies kann von Vorteil sein, da es sich insgesamt um mehr Teilnehmer handelt und so die Aussagekraft der Berechnungen erhöht wird. Es ist jedoch zu bedenken, dass folgende Faktoren die Aussagekraft verringern können. Zum einen hat eine Abweichung der Messbedingungen von 2012 zum Jahr 2017 direkten Einfluss auf die Messergebnisse. Zum Beispiel hat die Treppenhöhe einen enormen Einfluss auf die Treppengeschwindigkeit. Darüber hinaus ist zu bemerken, dass unter Umständen in beiden Experimenten ein und dieselbe Person teilgenommen hat und unter unterschiedlicher Probanden ID geführt wird. Dies kann zum Beispiel bedeuten, dass es in den Datensätzen zwei Personen mit der gleichen Körpergröße gibt. Diese Doppelerfassung einer Person hat zur Folge, dass die betreffende Person die Auswertung mit mehr Gewicht beeinflusst. 
@@ -278,18 +273,6 @@ Für die Plausibilisierung wird die Nullhypothese $H_0: \beta_1 = 0$ aufgestellt
 	\caption{Abhängigkeit der Wunschgeschwindigkeit in der Ebene und der Treppengeschwindigkeit abwärts. Messdaten (orange) und Ausreißer (schwarz) mit ermittelter Regressionsgeraden (blau)}
 	\label{fig:2012_und_2017_OA_ab_ebene}
 \end{figure}
-
-
-
-
-
-
-
-
-
-
-
-
 
 \subsubsection{Körpergröße}
 Für die Abhängigkeit zu Körpergröße werden nur Daten ohne die zuvor genannten Ausreißer herangezogen. Da es beispielsweise Probanden gab, die gerannt sind, ist es nicht sinnvoll, diese in Beziehung zur Körpergröße zu setzen. Es wurde folgender Zusammenhang ermittelt:
@@ -451,5 +434,11 @@ Für den Abstieg ergibt sich folgende Plausibilitätsprüfung:
 Beim Treppenabstieg ist der P-Wert nur in Bezug auf die Körpergröße unter dem Signifiknazniveau $\alpha$.
 
 \section{Fazit}
+
+Ziel dieser Arbeit war es zu überprüfen, ob ein Zusammenhang zwischen der Wunschgeschwindigkeit einer Person in der Ebene und der Geschwindigkeiten beim Treppensteigen besteht. Dabei wurde das Laufverhalten sowohl beim Treppenaufstieg als auch beim Treppenabstieg betrachtet. Es wurden, wie im Kapitel XXX erläutert, Messreihen durchgeführt und die ermittelten Daten daraufhin auf Normalverteilung untersucht. Anschließend wurde die lineare Regression verwendet um mögliche Zusammenhänge zwischen den Treppengeschwindigkeiten und den Parametern der Probanden, wie Ebenengeschwindigkeit, Körpergröße oder der Rundennummer zu erkennen. Mithilfe der t-Tests wurden die resultierenden Werte auf Plausibilität geprüft. Dabei wurde entschieden ob es Abhängigkeiten gibt. Zur Überprüfung der Relevanz dieser Beobachtungen wurde die Konditionierung des Problems untersucht. Die gewonnenen Erkenntnisse wurden mit Messdaten aus einem, bereits im Jahr 2012 durchgeführten, Experiments verglichen und verbunden.
+
+Die Ergebnisse der Untersuchungen ergaben, dass die Treppengeschwindigkeit sehr wahrscheinlich von der Ebenengenschwindigkeit abhängig ist. Verbindungen zwischen der Treppengeschwindigkeit und der Körpergröße bzw. der Rundennummer konnten nicht gefunden werden.
+
+Die Resultate dieser Arbeit können keine 100\%tige Aussage über das Laufverhalten eines Menschen auf einer Treppe auf Basis der Wunschgeschwindigkeit in der Ebene treffen. Für solch eine Vorhersage ist das Laufverhalten von Personen noch nicht ausreichend untersucht. Für noch genauere Ergebnisse und Vorhersagen würden sich zukünftige Messreihen mit wesentlich mehr als $22$ Probanden anbieten.
 
 \end{document}

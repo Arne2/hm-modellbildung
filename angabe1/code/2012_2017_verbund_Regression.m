@@ -1,14 +1,14 @@
 (* ::Package:: *)
 
 (* ::Title:: *)
-(*Lineare Regression der Daten von 2017*)
+(*Lineare Regression der Daten von 2012 und 2017*)
 
 
 ohneAusreisser = 1;
 
 outputDir = If[ohneAusreisser > 0, 
-    FileNameJoin@{NotebookDirectory[], "../abbildungen/regression/2017/ohneausreisser/"},
-	FileNameJoin@{NotebookDirectory[], "../abbildungen/regression/2017/"}
+    FileNameJoin@{NotebookDirectory[], "../abbildungen/regression/2012_2017_verbund/ohneausreisser/"},
+	FileNameJoin@{NotebookDirectory[], "../abbildungen/regression/2012_2017_verbund/"}
 ];
 
 
@@ -17,9 +17,9 @@ outputDir = If[ohneAusreisser > 0,
 
 
 (*Hier werden die Daten aus dem Messexperiment geladen.*)
-pathGeschwindigkeiten= "../data/2017/MessexperimentGeschwindigkeiten.csv";
+pathGeschwindigkeiten= "../data/2012_2017_verbund/MessexperimentGeschwindigkeiten2012_2017_verbund.csv";
 dataGeschwindigkeiten= SemanticImport[FileNameJoin@{NotebookDirectory[],pathGeschwindigkeiten}, CharacterEncoding->"UTF8"];
-pathProbanden= "../data/2017/MessexperimentProbanden.csv";
+pathProbanden= "../data/2012_2017_verbund/MessexperimentProbanden2012_2017_verbund.csv";
 dataProbanden= SemanticImport[FileNameJoin@{NotebookDirectory[],pathProbanden},CharacterEncoding->"UTF8"];
 
 
@@ -82,7 +82,7 @@ dataAufAusreisser = If[ohneAusreisser > 0,
 
 
 
-(* ::Subsubsection::Closed:: *)
+(* ::Subsubsection:: *)
 (*Lineare Regression mit einem Parameter *)
 
 
@@ -103,18 +103,6 @@ Export[FileNameJoin@{outputDir,"auf-ebene.pdf"},%];
 
 lm["ParameterTable"]
 Export[FileNameJoin@{outputDir,"auf-ebene-table.tex"},%, "TexFragment"];
-
-
-(* ::Subsubsection:: *)
-(*Konditionierung*)
-
-
-A = lm["DesignMatrix"];
-R = QRDecomposition[A][[2]];
-cond1 = LinearAlgebra`MatrixConditionNumber[Transpose[A].A]
-Log[10,cond1]
-cond2 = LinearAlgebra`MatrixConditionNumber[R]
-Log[10,cond2]
 
 
 (*Modell f\[UDoubleDot]r Abh\[ADoubleDot]ngigkeit von der Gr\[ODoubleDot]\[SZ]e des Probanden*)
@@ -227,18 +215,6 @@ lm["ParameterTable"]
 Export[FileNameJoin@{outputDir,"ab-ebene-table.tex"},%,"TeXFragment"];
 
 
-(* ::Subsubsection:: *)
-(*Konditionierung*)
-
-
-A = lm["DesignMatrix"];
-R = QRDecomposition[A][[2]];
-cond1 = LinearAlgebra`MatrixConditionNumber[Transpose[A].A]
-Log[10,cond1]
-cond2 = LinearAlgebra`MatrixConditionNumber[R]
-Log[10,cond2]
-
-
 (*Modell f\[UDoubleDot]r Abh\[ADoubleDot]ngigkeit von der Gr\[ODoubleDot]\[SZ]e des Probanden*)
 d = Normal@Values@dataAb[All,{"gr\[ODoubleDot]\[SZ]e","vAb"}];
 dA = If[ohneAusreisser > 0, 
@@ -296,18 +272,6 @@ Export[FileNameJoin@{outputDir,"ab-ebene-groesse-table.tex"},%,"TeXFragment"];
 
 
 (* ::Subsubsection:: *)
-(*Konditionierung*)
-
-
-A = lm["DesignMatrix"];
-R = QRDecomposition[A][[2]];
-cond1 = LinearAlgebra`MatrixConditionNumber[Transpose[A].A]
-Log[10,cond1]
-cond2 = LinearAlgebra`MatrixConditionNumber[R]
-Log[10,cond2]
-
-
-(* ::Subsubsection:: *)
 (*Lineare Regression mit drei Variablen*)
 
 
@@ -317,12 +281,6 @@ lm = LinearModelFit[d,{runde,vEbene,gr\[ODoubleDot]\[SZ]e},{runde,vEbene,gr\[ODo
 Export[FileNameJoin@{outputDir,"ab-runde-ebene-groesse.tex"},Normal@%,"TeXFragment"];
 lm["ParameterTable"]
 Export[FileNameJoin@{outputDir,"ab-runde-ebene-groesse-table.tex"},%,"TeXFragment"];
-
-
-
-
-
-
 
 
 

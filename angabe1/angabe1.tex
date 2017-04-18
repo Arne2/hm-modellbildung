@@ -1,5 +1,5 @@
 \include{header}
- 
+
 \title{Angabe 1}
 \providecommand{\subtitle}[1]{}
 \subtitle{Untertitel}
@@ -7,219 +7,478 @@
 \date{}
 
 \begin{document}
-\maketitle
-
-
-\tableofcontents
-
-\section{Einführung}
-Da heutzutage das Laufverhalten von Menschen noch nicht vollständig erforscht ist, muss dieses durch Personenstromexperimente weiter untersucht werden. Vor allem sind das Laufverhalten und die Geschwindigkeit auf Treppen noch größtenteils unbekannt und werfen viele Fragen auf. Mit den gewonnenen Erkenntnissen dieser Untersuchungen ist es beispielsweise möglich, bei der Gebäudeplanung die Fluchtwege geeignet zu setzten. Eine schlechte Planung kann daher im Ernstfall schwere Folgen für die Insassen einer Einrichtung haben.
-
-Diese Arbeit untersucht, ob ein möglicher Zusammenhang zwischen der Wunschgeschwindigkeit einer Person auf einer freien Fläche und der Wunschgeschwindigkeit auf einer Treppe. Dabei werden die Faktoren Körpergröße, Alter und Geschlecht betrachtet.
-Dazu werden zwei Hypothesen diskutiert:
-\begin{list}{-}{}
-	\item Die Geschwindigkeit auf der Treppe hängt linear von der Wunschgeschwindigkeit ab.
-	\item Es gibt keinen Zusammenhang der Geschwindigkeit auf der Treppe mit der auf der Ebene durch die Taktung durch die Stufen.
-\end{list}
- 
-Zur Behandlung dieser Problematik wird ein Messexperiment mit Probanden durchgeführt. Auf diesem Experiment basieren die darauffolgenden Untersuchungen und Beobachtungen. Die Daten des Messexperiments werden zunächst auf Normalverteilung untersucht. Anschließend wird über lineare Regression ermittelt, ob ein Zusammenhang zwischen Treppengeschwindigkeit und den Größen Wunschgeschwindigkeit, Körpergröße und Rundennummer besteht. Die daraus entstandenen Regressionsmodelle werden einem t-Test unterzogen, um zu überprüfen, ob tatsächlich ein linearer Zusammenhang besteht. Die gewonnenen Erkenntnisse dieses Experiments werden im Zusammenhang mit bereits gemessenen Daten aus 2012 verglichen und ausgewertet.
-
-\section{Messexperiment}
-
-Das Messexperiment wurde am $05.04.2017$ im Lichthof der Hochschule München (Lothstraße 64) durchgeführt. Es nahmen $22$ Probanden im Alter von $20-29$ Jahren teil. Das Experiment bestand aus drei Teilen. 
-
-Zunächst wurde die Wunschgeschwindigkeit in der Ebene gemessen. Hierfür ging jeder Proband eine markierte Strecke von $27,3m$ ab und stoppte die hierfür benötigte Zeit. Anschließend wurde dieser Vorgang zweimal wiederholt und die entsprechende Rundennummer vermerkt. Im zweiten Teil erfolgte die Messung der benötigten Zeit für einen Treppenaufstieg. Die Treppenlänge betrug $9m$. Jeder Proband führte den Vorgang dreimal durch und vermerkte die benötigte Zeit und die entsprechende Rundennummer. Analog hierzu wurde im dritten Teil des Experiments die Zeit beim Treppenabstieg gemessen. 
-
-Neben den gemessenen Zeiten in jeder Runde, dem Alter und der Körpergröße ist auch das Geschlecht jedes Probanden bekannt. Weitere Informationen sind in der beiliegenden Versuchsbeschreibung "Choreographie\_Treppengeschwindigkeit\_2017" aufgeführt. In den folgenden Kapiteln erfolgt die Auswertung der ermittelten Messwerte.
-
-\section{Überprüfung auf Normalverteilung}
-Um zu überprüfen, ob die erhobenen Daten normalverteilt sind, kann eine Vielzahl verschiedener Methoden angewandt werden. Für eine aussagekräftige Beurteilung beschränkt sich diese Arbeit auf zwei grafische und drei rechnerische Methoden. Als grafische Verfahren werden ein Histogramm und ein Quantil-Quantil-Diagramm erstellt. Im Anschluss erfolgt die rechnerische Überprüfung mittels Shapiro-Wilk-, Cramér-von-Mises- und Anderson-Darling-Test. Aus den gemessenen Zeiten werden die Geschwindigkeiten der einzelnen Probanden ermittelt und für die erwähnten Testverfahren herangezogen. Die Geschwindigkeiten in der Ebene, beim Treppenaufstieg sowie beim Treppenabstieg werden jeweils gesondert betrachtet.
-
-\subsection{In der Ebene}
-Vor der Analyse muss geprüft werden, ob alle Daten plausibel sind, oder ob bestimmte Daten von der Analyse ausgeschlossen werden müssen. Bei der Betrachtung der einzelnen Messergebnisse fällt auf, dass ein Proband deutlich langsamer als die restlichen Probanden gegangen ist. Trotz dessen werden alle Messdaten berücksichtigt, da anzunehmen ist, dass es immer Personen gibt, die langsamer oder schneller als die Mehrheit gehen. Es ist jedoch anzumerken, dass bei einem Versuch mit nur einer geringen Anzahl von Probanden, solche Ausreißer eventuell eine signifikante Abweichung verursachen.
-
-\subsubsection{Grafische Überprüfung}
-In Abbildung \ref{fig:histogramm_ebene} wird die Verteilung der Geschwindigkeiten einer Normalverteilungskurve gegenübergestellt. Für die Berechnung der Normalverteilungskurve wurden Erwartungswert und Standardabweichung der Ergebnisse ermittelt. Der Erwartungswert beträgt $1,48\ \frac{m}{s}$ und die Standardabweichung $0,144\ \frac{m}{s}$. Das Histogramm bildet relative Häufigkeiten ab. Es fällt auf, dass eine deutliche Häufung der Ergebnisse in den Bereich des Maximums der Normalverteilungskurve fällt. Dies ist ein Anzeichen für eine Normalverteilung der Ergebnisse. Allerdings befinden sich auch an den Rändern der Normalverteilungskurve noch kleinere Häufungen der Ergebnisse. Somit kann aus dem Histogramm kein eindeutiger Rückschluss auf eine Normalverteilung der Geschwindigkeiten gezogen werden. Grundsätzlich ist die Darstellung des Histogramms stark von der gewählten Anzahl an Klassen abhängig und ist gerade bei kleineren Messreihen nicht aussagekräftig.
-\begin{figure}[htpb]
-\centering
-\includegraphics[width=0.8\textwidth]{abbildungen/Histogramm_2017_Ebene.pdf}
-\caption{Histogramm der Geschwindigkeiten in der Ebene im Vergleich zur Normalverteilung}
-\label{fig:histogramm_ebene}
-\end{figure}
-
-Abbildung \ref{fig:qqplot_ebene} veranschaulicht die Verteilung der Geschwindigkeiten in einem Quantil-Quantil Diagramm. In diesem Diagramm sind die gemessenen Geschwindigkeiten gegenüber der Normalverteilung abgebildet. Da sich die Mehrheit der geplotteten Punkte auf oder in unmittelbarer Nähe der Diagonalen befindet, spricht dieses Diagramm für eine Normalverteilung der Geschwindigkeiten. Für eine aussagekräftigere Beurteilung wird diese Thematik im Folgenden mit rechnerischen Tests überprüft.
-\begin{figure}[htpb]
-\centering
-\includegraphics[width=0.7\textwidth]{abbildungen/QQ_Plot_2017_Ebene.pdf}
-\caption{Quantil-Quantil-Diagramm der Geschwindigkeiten in der Ebene in $\frac{m}{s}$}
-\label{fig:qqplot_ebene}
-\end{figure}
-
-\subsubsection{Rechnerische Überprüfung}
-
-Tabelle \ref{tab:anpassungstest_ebene} zeigt die Ergebnisse von mehreren Anpassungstests. Dabei werden die Messdaten auf Normalverteilung getestet. Exemplarisch werden im Folgenden Shapiro-Wilk-, Cramér-von-Mises- und Anderson-Darling-Test näher betrachtet und analysiert.  
-
-Laut dem Shapiro-Wilk-Test wird die Nullhypothese "Die Geschwindigkeiten sind normalverteilt" nicht verworfen, da der P-Wert das Signifikanzniveau von $0,05$ überschreitet. Auch der Cramér-von-Mises-Test ergibt einen P-Wert von $0,84$ und ist somit ebenfalls deutlich über dem Signifikanzniveau. Analog hierzu liefert der Anderson-Darling-Test einen weiteren Nachweis für die Normalverteilung der Geschwindigkeiten, da der P-Wert von $0,82$ die $0,05$ des Signifikanzniveaus ebenfalls überschreitet. (Der Anderson-Darling-Test gilt als aussagekräftigster statistischer Test)
-
-Betrachtet man abschließend alle ermittelten Ergebnisse, kann man davon ausgehen, dass die Geschwindigkeiten der Probanden in der Ebene normalverteilt sind. 
-\begin{table}
-\centering
-\begin{tabular}{l|ll}
- \text{} & \text{Statistic} & \text{P-Value} \\
-\hline
- \text{Anderson-Darling} & 0.426988 & 0.821001 \\
- \text{Baringhaus-Henze} & 0.269634 & 0.785711 \\
- \text{Cram{\' e}r-von Mises} & 0.0560719 & 0.838694 \\
- \text{Jarque-Bera ALM} & 1.57313 & 0.376383 \\
- \text{Mardia Combined} & 1.57313 & 0.376383 \\
- \text{Mardia Kurtosis} & -0.879486 & 0.379138 \\
- \text{Mardia Skewness} & 0.82605 & 0.363417 \\
- \text{Pearson }$\chi ^2$ & 14.6667 & 0.144695 \\
- \text{Shapiro-Wilk} & 0.975506 & 0.215767 \\
-\end{tabular}
-\caption{Anpassungstests zur Überprüfung der gemessenen Geschwindigkeiten in der Ebene auf Normalverteilung}
-\label{tab:anpassungstest_ebene}
-\end{table}
-
-
-
-\subsection{Beim Treppenaufstieg}
-\subsubsection{Grafische Überprüfung}
-Bei der Betrachtung der Messergebnisse für den Treppenaufstieg fällt auf, dass vier Probanden stets mit höherer Geschwindigkeit gehen als die restlichen Probanden. Dieses Verhalten wiederholt sich über alle Runden. Aufgrund der geringen Anzahl an Messwerten fällt dies bei der Auswertung stark ins Gewicht. 
-
-Für die weitere Überprüfung auf Normalverteilung werden zwei Auswertungen durchgeführt. Eine Auswertung erfolgt über alle Messreihen hinweg. Die betroffenen Probanden haben beim Aufstieg immer mehrere Treppen übersprungen. Es ist nicht auszuschließen, dass es in der Bevölkerung einen Anteil von Menschen gibt, die dieses Verhalten grundsätzlich aufweisen. Anschließend wird eine Auswertung durchgeführt, bei welcher die Ausreißer ausgeschlossen werden, da die Möglichkeit besteht, dass es sich um eine Anomalie oder um Sabotage handelt. 
-
-\begin{figure}[!htb]
-    \centering
-    \begin{minipage}{.5\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{abbildungen/Histogramm_2017_TreppeAuf_MitAusreisser.pdf}
-        \caption{Histogramm der Geschwindig-keiten beim Treppenaufstieg mit Ausreißern im Vergleich zur Normalverteilung}
-        \label{fig:Histogramm_TreppeAuf_MA}
-    \end{minipage}%
-    \begin{minipage}{0.5\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{abbildungen/Histogramm_2017_TreppeAuf_OhneAusreisser.pdf}
-        \caption{Histogramm der Geschwindig-keiten beim Treppenaufstieg ohne Ausreißer im Vergleich zur Normalverteilung}
-        \label{fig:Histogramm_TreppeAuf_OA}
-    \end{minipage}
-\end{figure}
-
-Das Histogramm in der Abbildung \ref{fig:Histogramm_TreppeAuf_MA} deutet auf eine rechtsschiefe Verteilung der Geschwindigkeiten hin. Dies stellt ein Indiz gegen eine Normalverteilung der Messwerte dar. Im Gegensatz dazu weist das Histogramm in Abbildung \ref{fig:Histogramm_TreppeAuf_OA} eine symmetrische Verteilung auf. Daher ist anzunehmen, dass die Messwerte ohne Ausreißer normalverteilt sind. Aber wie bereits erwähnt, sind Histogramme nur bedingt aussagekräftig. Eine genauere grafische Betrachtung erfolgt über ein Quantil-Quantil-Diagramm.
-
-In Abbildung \ref{fig:QQ_TreppeAuf_MA} ist deutlich eine Abweichung von der Normalverteilung zu sehen, da einige Werte weit von der Diagonalen entfernt sind. Dies ist auf die erwähnten vier Probanden zurückzuführen. Im Gegensatz dazu deutet die Abbildung \ref{fig:QQ_TreppeAuf_OA} auf eine Normalverteilung hin, da alle Quantile auf oder in unmittelbarer Nähe der Diagonalen liegen.
-\begin{figure}[!htb]
-    \centering
-    \begin{minipage}{.5\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{abbildungen/QQ_Plot_2017_TreppeAuf_MitAusreisser.pdf}
-        \caption{Quantil-Quantil-Diagramm der Geschwindigkeiten beim Treppenaufstieg mit Ausreißern in $\frac{m}{s}$}
-        \label{fig:QQ_TreppeAuf_MA}
-    \end{minipage}%
-    \begin{minipage}{0.5\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{abbildungen/QQ_Plot_2017_TreppeAuf_OhneAusreisser.pdf}
-        \caption{Quantil-Quantil-Diagramm der Geschwindigkeiten beim Treppenaufstieg ohne Ausreißer in $\frac{m}{s}$}
-        \label{fig:QQ_TreppeAuf_OA}
-    \end{minipage}
-\end{figure}
-
-
-\subsubsection{Rechnerische Überprüfung}
-Die Anpassungstests zeigen, dass die Geschwindigkeiten bei einem Treppenaufstieg nicht normalverteilt sind, wenn man die Ausreißer mitberücksichtigt. Die Tabelle \ref{tab:anpassungstest_TreppeAuf_MA} zeigt, dass bei einem Cram{\' e}r-von Mises Test ein p-Wert von nur $0,018$ erreicht wird, welcher somit deutlich geringer als das Signifikanzniveau von $0,05$ ist. Werden die Ausreißer nicht mitberücksichtigt, so ergibt der Cram{\' e}r-von Mises Test einen p-Wert von $0,92$, wie in Tabelle \ref{tab:anpassungstest_TreppeAuf_OA} zu sehen. Auch der Anderson-Darling Test liegt weit über dem Signifikanzniveau. Die rechnerische Überprüfung bestätigt somit das Ergebnis der grafischen Analyse. Wie bereits erwähnt, sind die Ausreißer immer von denselben vier Probanden verursacht worden. Diese haben beim Aufsteigen der Treppen in jeder Runde mehrere Stufen übersprungen. Die Vermutung liegt nahe, dass es eine Gruppe von Menschen gibt, die beim Aufsteigen der Treppen grundsätzlich schneller gehen. Eine genaue Untersuchung ist mit einer deutlich größeren Anzahl der Probanden notwendig.
-\input{abbildungen/tab_Anpassungstest_Treppe_Auf}
-
-\subsection{Beim Treppenabstieg}
-
-Bei der Messung zum Abstieg von der Treppe gibt es wenig besondere Fälle. Die gemessenen Daten weisen nur wenige unregelmäßige Ausreißer aus. Diese werden erwartungsgemäß geringen Einfluss haben. Beim Treppenaufstieg wurden signifikante Unterschiede durch 
-die Ausreißer festgestellt. Deswegen werden analog zum Aufstieg beim Abstieg auch zwei Analysen durchgeführt.
-
-
-
-\subsubsection{Grafische Überprüfung}
-Ein Vergleich der Histogramme in den Abbildungen \ref{fig:Histogramm_TreppeAb_MA} und \ref{fig:Histogramm_TreppeAb_OA} zeigt, dass die Ausreißer nur einen geringen Unterschied verursachen. In den Abbildungen ist jeweils eine Normalverteilungskurve dargestellt. Es zeigt sich, dass eine Normalverteilung nicht genau erkennbar ist.
-
-Beim Betrachten des Quantil-Quantil-Diagramms in Abbildung \ref{fig:QQ_TreppeAb_MA} und \ref{fig:QQ_TreppeAb_OA}, zeigt sich ebenfalls, dass der Unterschied der gesamten Daten und der bereinigten Daten sehr gering und mit bloßem Auge nicht zu erkennen ist. Aus den beiden Diagrammen wird deutlich, dass es sich bei beiden Fällen um eine Normalverteilung handelt, da der P-Wert in beiden Fällen über dem Signifikanzniveau von $0,05$ liegt.
-
-\begin{figure}[!htb]
-    \centering
-    \begin{minipage}{.49\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{abbildungen/Histogramm_2017_TreppeAb_MitAusreisser.pdf}
-        \caption{Histogramm der Geschwindig-keiten beim Treppenabstieg mit Ausreißern im Vergleich zur Normalverteilung}
-        \label{fig:Histogramm_TreppeAb_MA}
-    \end{minipage}%
-    \begin{minipage}{0.02\textwidth}
-     \hfill
-    \end{minipage}%
-    \begin{minipage}{0.49\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{abbildungen/Histogramm_2017_TreppeAb_OhneAusreisser.pdf}
-        \caption{Histogramm der Geschwindig-keiten beim Treppenabstieg ohne Ausreißer im Vergleich zur Normalverteilung}
-        \label{fig:Histogramm_TreppeAb_OA}
-    \end{minipage}
-\end{figure}
-
-
-\begin{figure}[!htb]
-    \centering
-    \begin{minipage}{.49\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{abbildungen/QQ_Plot_2017_TreppeAb_MitAusreisser.pdf}
-        \caption{Quantil-Quantil-Diagramm der Geschwindigkeiten beim Treppenabstieg mit Ausreißern in $\frac{m}{s}$}
-        \label{fig:QQ_TreppeAb_MA}
-    \end{minipage}%
-    \begin{minipage}{0.02\textwidth}
-     \hfill
-    \end{minipage}%
-    \begin{minipage}{0.49\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{abbildungen/QQ_Plot_2017_TreppeAb_OhneAusreisser.pdf}
-        \caption{Quantil-Quantil-Diagramm der Geschwindigkeiten beim Treppenabstieg ohne Ausreißer in $\frac{m}{s}$}
-        \label{fig:QQ_TreppeAb_OA}
-    \end{minipage}
-\end{figure}
-
-
-
-
-\subsection{Rechnerische Überprüfung}
-Die rechnerische Überprüfung bestätigt die Analyse des Quantil-Quantil-Diagramms. Wie in Tabelle \ref{tab:anpassungstest_TreppeAb_MA} und Tabelle \ref{tab:anpassungstest_TreppeAbf_OA} zu sehen, liegt in beiden Fällen eine Normalverteilung vor. Es ist zu bemerken, dass ein Anpassungstest anhand der Daten mit Ausreißern einen größeren p-Wert erzielt. 
-\input{abbildungen/tab_Anpassungstest_Treppe_Ab}
-
-\section{Modell}
-\section{Lineare Regression}
-\subsection{Prüfung auf eine Abhängigkeit}
-\subsection{Mehrere Abhängigkeiten}
-\subsection{Konditionierung}
-Die Konditionierung des Problems wurde anhand der Desingmatrix des linearen Modells untersucht. Je näher ein ermittelter Wert an 1 liegt, desto besser ist das Problem konditioniert.
-
-Bei der Untersuchung der Treppengeschwindigkeit aufwärts wurde ein Konditionierungswert von $744.683$ ermittelt. Auch bei der Betrachtung der Treppengeschwindigkeit abwärts wurde ähnliches Ergebnis von $654.274$ berechnet. Die Betrachtung zweier Parameter (Ebenengeschwindigkeit und Körpergröße) ergab sogar den Wert $3.27621*10^7$.
-Diese schlechte Konditionierung erfolgt durch Rechenfehlern, die bei numerischen Berechnungen erfolgen. In diesen Berechnungen wurden 3 ($2.87197$, $2.81576$) bzw. $7.47687$ Dezimalstellen verloren. Diese Zahlen wurden mit wurden mit dem dekadischen Logarithmus (zur Basis 10) der Kondition bestimmt.
-
-Wenn man die Konditionierung mit der QR-Zerlegung betrachtet, welche auch in Wirklichkeit von Mathematica verwendet wird, wurde eine wesentlich bessere Konditionierung ermittelt.
-
-Die Betrachtung der Konditionierung der oberen Dreiecksmatrix R ergab bei der Treppengeschwindigkeit aufwärts nun einen Wert von $29.6338$. Hierbei wurden auch weniger verlorene Dezimalstellen festgestellt. Diese betrugen nur noch $1.47179$. Bei der Treppengeschwindigkeit abwärts wurde eine Konditionierung von $27.9171$ und $7164.48$ bei zwei Parametern (Verlorene Dezimalstellen bei $1.44587$ bzw. $3.83839$). Bei einem Parameter - der Ebenengeschwindigkeit - ist die Konditionierung nun deutlich besser. Für zwei Parameter (Körpergröße und Ebenengeschwindigkeit) lässt sich schließen, dass für diese Auswertung das Problem tatsächlich schlecht Konditioniert ist und die Aussagekraft der Ergebnisse bei dieser Untersuchung in Frage gestellt werden kann.
-
-Dadurch, dass Mathematica die QR-Zerlegung benutzt sind diese Ergebnisse auch wesentlich aussagekräftiger als die erste Untersuchung der Konditionierung.
-
-
-
-\section{Ergebnisse}
-\section{Ermitteltes Modell}
-
-\section{Vergleich mit Daten aus 2012}
-\subsection{Überprüfung auf Normalverteilung}
-\subsection{Lineare Regression}
-\subsection{Vergleich}
-
-\section{Verbund von alten und neuen Daten}
-
-\section{Fazit}
-Ziel dieser Arbeit war es zu überprüfen, ob ein Zusammenhang zwischen der Wunschgeschwindigkeit einer Person in der Ebene und der Geschwindigkeiten beim Treppensteigen besteht. Dabei wurde das Laufverhalten sowohl beim Treppenaufstieg als auch beim Treppenabstieg betrachtet. Es wurden, wie im Kapitel XXX erläutert, Messreihen durchgeführt und die ermittelten Daten daraufhin auf Normalverteilung untersucht. Anschließend wurde die lineare Regression verwendet um mögliche Zusammenhänge zwischen den Treppengeschwindigkeiten und den Parametern der Probanden, wie Ebenengeschwindigkeit, Körpergröße oder der Rundennummer zu erkennen. Mithilfe der t-Tests wurden die resultierenden Werte auf Plausibilität geprüft. Dabei wurde entschieden ob es Abhängigkeiten gibt. Zur Überprüfung der Relevanz dieser Beobachtungen wurde die Konditionierung des Problems untersucht. Die gewonnenen Erkenntnisse wurden mit Messdaten aus einem, bereits im Jahr 2012 durchgeführten, Experiments verglichen und verbunden.
-
-Die Ergebnisse der Untersuchungen ergaben, dass die Treppengeschwindigkeit sehr wahrscheinlich von der Ebenengenschwindigkeit abhängig ist. Verbindungen zwischen der Treppengeschwindigkeit und der Körpergröße bzw. der Rundennummer konnten nicht gefunden werden.
-
-ie Resultate dieser Arbeit können keine 100\%tige Aussage über das Laufverhaltens eines Menschen auf einer Treppe auf Basis der Wunschgeschwindigkeit in der Ebene treffen. Für solch eine Vorhersage ist das Laufverhalten von Personen noch nicht ausreichend untersucht. Für noch genauere Ergebnisse und Vorhersagen würden sich zukünftige Messreihen mit wesentlich mehr als $22$ Probanden anbieten.
-
+	\maketitle
+	
+	
+	\tableofcontents
+	
+	\section{Einführung}
+	Da heutzutage das Laufverhalten von Menschen noch nicht vollständig erforscht ist, muss dieses durch Personenstromexperimente weiter untersucht werden. Vor allem sind das Laufverhalten und die Geschwindigkeit auf Treppen noch größtenteils unbekannt und werfen viele Fragen auf. Mit den gewonnenen Erkenntnissen dieser Untersuchungen ist es beispielsweise möglich, bei der Gebäudeplanung die Fluchtwege geeignet zu setzten. Eine schlechte Planung kann daher im Ernstfall schwere Folgen für die Insassen einer Einrichtung haben.
+	
+	Diese Arbeit untersucht, ob ein möglicher Zusammenhang zwischen der Wunschgeschwindigkeit einer Person auf einer freien Fläche und der Wunschgeschwindigkeit auf einer Treppe. Dabei werden die Faktoren Körpergröße, Alter und Geschlecht betrachtet.
+	Dazu werden zwei Hypothesen diskutiert:
+	\begin{list}{-}{}
+		\item Die Geschwindigkeit auf der Treppe hängt linear von der Wunschgeschwindigkeit ab.
+		\item Es gibt keinen Zusammenhang der Geschwindigkeit auf der Treppe mit der auf der Ebene durch die Taktung durch die Stufen.
+	\end{list}
+	
+	Zur Behandlung dieser Problematik wird ein Messexperiment mit Probanden durchgeführt. Auf diesem Experiment basieren die darauffolgenden Untersuchungen und Beobachtungen. Die Daten des Messexperiments werden zunächst auf Normalverteilung untersucht. Anschließend wird über lineare Regression ermittelt, ob ein Zusammenhang zwischen Treppengeschwindigkeit und den Größen Wunschgeschwindigkeit, Körpergröße und Rundennummer besteht. Die daraus entstandenen Regressionsmodelle werden einem t-Test unterzogen, um zu überprüfen, ob tatsächlich ein linearer Zusammenhang besteht. Die gewonnenen Erkenntnisse dieses Experiments werden im Zusammenhang mit bereits gemessenen Daten aus 2012 verglichen und ausgewertet.
+	
+	\section{Messexperiment}
+	
+	Das Messexperiment wurde am $05.04.2017$ im Lichthof der Hochschule München (Lothstraße 64) durchgeführt. Es nahmen $22$ Probanden im Alter von $20-29$ Jahren teil. Das Experiment bestand aus drei Teilen. 
+	
+	Zunächst wurde die Wunschgeschwindigkeit in der Ebene gemessen. Hierfür ging jeder Proband eine markierte Strecke von $27,3m$ ab und stoppte die hierfür benötigte Zeit. Anschließend wurde dieser Vorgang zweimal wiederholt und die entsprechende Rundennummer vermerkt. Im zweiten Teil erfolgte die Messung der benötigten Zeit für einen Treppenaufstieg. Die Treppenlänge betrug $9m$. Jeder Proband führte den Vorgang dreimal durch und vermerkte die benötigte Zeit und die entsprechende Rundennummer. Analog hierzu wurde im dritten Teil des Experiments die Zeit beim Treppenabstieg gemessen. 
+	
+	Neben den gemessenen Zeiten in jeder Runde, dem Alter und der Körpergröße ist auch das Geschlecht jedes Probanden bekannt. Weitere Informationen sind in der beiliegenden Versuchsbeschreibung "Choreographie\_Treppengeschwindigkeit\_2017" aufgeführt. In den folgenden Kapiteln erfolgt die Auswertung der ermittelten Messwerte.
+	
+	\section{Überprüfung auf Normalverteilung}
+	Um zu überprüfen, ob die erhobenen Daten normalverteilt sind, kann eine Vielzahl verschiedener Methoden angewandt werden. Für eine aussagekräftige Beurteilung beschränkt sich diese Arbeit auf zwei grafische und drei rechnerische Methoden. Als grafische Verfahren werden ein Histogramm und ein Quantil-Quantil-Diagramm erstellt. Im Anschluss erfolgt die rechnerische Überprüfung mittels Shapiro-Wilk-, Cramér-von-Mises- und Anderson-Darling-Test. Aus den gemessenen Zeiten werden die Geschwindigkeiten der einzelnen Probanden ermittelt und für die erwähnten Testverfahren herangezogen. Die Geschwindigkeiten in der Ebene, beim Treppenaufstieg sowie beim Treppenabstieg werden jeweils gesondert betrachtet.
+	
+	\subsection{In der Ebene}
+	Vor der Analyse muss geprüft werden, ob alle Daten plausibel sind, oder ob bestimmte Daten von der Analyse ausgeschlossen werden müssen. Bei der Betrachtung der einzelnen Messergebnisse fällt auf, dass ein Proband deutlich langsamer als die restlichen Probanden gegangen ist. Trotz dessen werden alle Messdaten berücksichtigt, da anzunehmen ist, dass es immer Personen gibt, die langsamer oder schneller als die Mehrheit gehen. Es ist jedoch anzumerken, dass bei einem Versuch mit nur einer geringen Anzahl von Probanden, solche Ausreißer eventuell eine signifikante Abweichung verursachen.
+	
+	\subsubsection{Grafische Überprüfung}
+	In Abbildung \ref{fig:histogramm_ebene} wird die Verteilung der Geschwindigkeiten einer Normalverteilungskurve gegenübergestellt. Für die Berechnung der Normalverteilungskurve wurden Erwartungswert und Standardabweichung der Ergebnisse ermittelt. Der Erwartungswert beträgt $1,48\ \frac{m}{s}$ und die Standardabweichung $0,144\ \frac{m}{s}$. Das Histogramm bildet relative Häufigkeiten ab. Es fällt auf, dass eine deutliche Häufung der Ergebnisse in den Bereich des Maximums der Normalverteilungskurve fällt. Dies ist ein Anzeichen für eine Normalverteilung der Ergebnisse. Allerdings befinden sich auch an den Rändern der Normalverteilungskurve noch kleinere Häufungen der Ergebnisse. Somit kann aus dem Histogramm kein eindeutiger Rückschluss auf eine Normalverteilung der Geschwindigkeiten gezogen werden. Grundsätzlich ist die Darstellung des Histogramms stark von der gewählten Anzahl an Klassen abhängig und ist gerade bei kleineren Messreihen nicht aussagekräftig.
+	\begin{figure}[htpb]
+		\centering
+		\includegraphics[width=0.8\textwidth]{abbildungen/Histogramm_2017_Ebene.pdf}
+		\caption{Histogramm der Geschwindigkeiten in der Ebene im Vergleich zur Normalverteilung}
+		\label{fig:histogramm_ebene}
+	\end{figure}
+	
+	Abbildung \ref{fig:qqplot_ebene} veranschaulicht die Verteilung der Geschwindigkeiten in einem Quantil-Quantil Diagramm. In diesem Diagramm sind die gemessenen Geschwindigkeiten gegenüber der Normalverteilung abgebildet. Da sich die Mehrheit der geplotteten Punkte auf oder in unmittelbarer Nähe der Diagonalen befindet, spricht dieses Diagramm für eine Normalverteilung der Geschwindigkeiten. Für eine aussagekräftigere Beurteilung wird diese Thematik im Folgenden mit rechnerischen Tests überprüft.
+	\begin{figure}[htpb]
+		\centering
+		\includegraphics[width=0.7\textwidth]{abbildungen/QQ_Plot_2017_Ebene.pdf}
+		\caption{Quantil-Quantil-Diagramm der Geschwindigkeiten in der Ebene in $\frac{m}{s}$}
+		\label{fig:qqplot_ebene}
+	\end{figure}
+	
+	\subsubsection{Rechnerische Überprüfung}
+	
+	Tabelle \ref{tab:anpassungstest_ebene} zeigt die Ergebnisse von mehreren Anpassungstests. Dabei werden die Messdaten auf Normalverteilung getestet. Exemplarisch werden im Folgenden Shapiro-Wilk-, Cramér-von-Mises- und Anderson-Darling-Test näher betrachtet und analysiert.  
+	
+	Laut dem Shapiro-Wilk-Test wird die Nullhypothese "Die Geschwindigkeiten sind normalverteilt" nicht verworfen, da der P-Wert das Signifikanzniveau von $0,05$ überschreitet. Auch der Cramér-von-Mises-Test ergibt einen P-Wert von $0,84$ und ist somit ebenfalls deutlich über dem Signifikanzniveau. Analog hierzu liefert der Anderson-Darling-Test einen weiteren Nachweis für die Normalverteilung der Geschwindigkeiten, da der P-Wert von $0,82$ die $0,05$ des Signifikanzniveaus ebenfalls überschreitet. (Der Anderson-Darling-Test gilt als aussagekräftigster statistischer Test)
+	
+	Betrachtet man abschließend alle ermittelten Ergebnisse, kann man davon ausgehen, dass die Geschwindigkeiten der Probanden in der Ebene normalverteilt sind. 
+	\begin{table}
+		\centering
+		\begin{tabular}{l|ll}
+			\text{} & \text{Statistic} & \text{P-Value} \\
+			\hline
+			\text{Anderson-Darling} & 0.426988 & 0.821001 \\
+			\text{Baringhaus-Henze} & 0.269634 & 0.785711 \\
+			\text{Cram{\' e}r-von Mises} & 0.0560719 & 0.838694 \\
+			\text{Jarque-Bera ALM} & 1.57313 & 0.376383 \\
+			\text{Mardia Combined} & 1.57313 & 0.376383 \\
+			\text{Mardia Kurtosis} & -0.879486 & 0.379138 \\
+			\text{Mardia Skewness} & 0.82605 & 0.363417 \\
+			\text{Pearson }$\chi ^2$ & 14.6667 & 0.144695 \\
+			\text{Shapiro-Wilk} & 0.975506 & 0.215767 \\
+		\end{tabular}
+		\caption{Anpassungstests zur Überprüfung der gemessenen Geschwindigkeiten in der Ebene auf Normalverteilung}
+		\label{tab:anpassungstest_ebene}
+	\end{table}
+	
+	
+	
+	\subsection{Beim Treppenaufstieg}
+	\subsubsection{Grafische Überprüfung}
+	Bei der Betrachtung der Messergebnisse für den Treppenaufstieg fällt auf, dass vier Probanden stets mit höherer Geschwindigkeit gehen als die restlichen Probanden. Dieses Verhalten wiederholt sich über alle Runden. Aufgrund der geringen Anzahl an Messwerten fällt dies bei der Auswertung stark ins Gewicht. 
+	
+	Für die weitere Überprüfung auf Normalverteilung werden zwei Auswertungen durchgeführt. Eine Auswertung erfolgt über alle Messreihen hinweg. Die betroffenen Probanden haben beim Aufstieg immer mehrere Treppen übersprungen. Es ist nicht auszuschließen, dass es in der Bevölkerung einen Anteil von Menschen gibt, die dieses Verhalten grundsätzlich aufweisen. Anschließend wird eine Auswertung durchgeführt, bei welcher die Ausreißer ausgeschlossen werden, da die Möglichkeit besteht, dass es sich um eine Anomalie oder um Sabotage handelt. 
+	
+	\begin{figure}[!htb]
+		\centering
+		\begin{minipage}{.5\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{abbildungen/Histogramm_2017_TreppeAuf_MitAusreisser.pdf}
+			\caption{Histogramm der Geschwindig-keiten beim Treppenaufstieg mit Ausreißern im Vergleich zur Normalverteilung}
+			\label{fig:Histogramm_TreppeAuf_MA}
+		\end{minipage}%
+		\begin{minipage}{0.5\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{abbildungen/Histogramm_2017_TreppeAuf_OhneAusreisser.pdf}
+			\caption{Histogramm der Geschwindig-keiten beim Treppenaufstieg ohne Ausreißer im Vergleich zur Normalverteilung}
+			\label{fig:Histogramm_TreppeAuf_OA}
+		\end{minipage}
+	\end{figure}
+	
+	Das Histogramm in der Abbildung \ref{fig:Histogramm_TreppeAuf_MA} deutet auf eine rechtsschiefe Verteilung der Geschwindigkeiten hin. Dies stellt ein Indiz gegen eine Normalverteilung der Messwerte dar. Im Gegensatz dazu weist das Histogramm in Abbildung \ref{fig:Histogramm_TreppeAuf_OA} eine symmetrische Verteilung auf. Daher ist anzunehmen, dass die Messwerte ohne Ausreißer normalverteilt sind. Aber wie bereits erwähnt, sind Histogramme nur bedingt aussagekräftig. Eine genauere grafische Betrachtung erfolgt über ein Quantil-Quantil-Diagramm.
+	
+	In Abbildung \ref{fig:QQ_TreppeAuf_MA} ist deutlich eine Abweichung von der Normalverteilung zu sehen, da einige Werte weit von der Diagonalen entfernt sind. Dies ist auf die erwähnten vier Probanden zurückzuführen. Im Gegensatz dazu deutet die Abbildung \ref{fig:QQ_TreppeAuf_OA} auf eine Normalverteilung hin, da alle Quantile auf oder in unmittelbarer Nähe der Diagonalen liegen.
+	\begin{figure}[!htb]
+		\centering
+		\begin{minipage}{.5\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{abbildungen/QQ_Plot_2017_TreppeAuf_MitAusreisser.pdf}
+			\caption{Quantil-Quantil-Diagramm der Geschwindigkeiten beim Treppenaufstieg mit Ausreißern in $\frac{m}{s}$}
+			\label{fig:QQ_TreppeAuf_MA}
+		\end{minipage}%
+		\begin{minipage}{0.5\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{abbildungen/QQ_Plot_2017_TreppeAuf_OhneAusreisser.pdf}
+			\caption{Quantil-Quantil-Diagramm der Geschwindigkeiten beim Treppenaufstieg ohne Ausreißer in $\frac{m}{s}$}
+			\label{fig:QQ_TreppeAuf_OA}
+		\end{minipage}
+	\end{figure}
+	
+	
+	\subsubsection{Rechnerische Überprüfung}
+	Die Anpassungstests zeigen, dass die Geschwindigkeiten bei einem Treppenaufstieg nicht normalverteilt sind, wenn man die Ausreißer mitberücksichtigt. Die Tabelle \ref{tab:anpassungstest_TreppeAuf_MA} zeigt, dass bei einem Cram{\' e}r-von Mises Test ein p-Wert von nur $0,018$ erreicht wird, welcher somit deutlich geringer als das Signifikanzniveau von $0,05$ ist. Werden die Ausreißer nicht mitberücksichtigt, so ergibt der Cram{\' e}r-von Mises Test einen p-Wert von $0,92$, wie in Tabelle \ref{tab:anpassungstest_TreppeAuf_OA} zu sehen. Auch der Anderson-Darling Test liegt weit über dem Signifikanzniveau. Die rechnerische Überprüfung bestätigt somit das Ergebnis der grafischen Analyse. Wie bereits erwähnt, sind die Ausreißer immer von denselben vier Probanden verursacht worden. Diese haben beim Aufsteigen der Treppen in jeder Runde mehrere Stufen übersprungen. Die Vermutung liegt nahe, dass es eine Gruppe von Menschen gibt, die beim Aufsteigen der Treppen grundsätzlich schneller gehen. Eine genaue Untersuchung ist mit einer deutlich größeren Anzahl der Probanden notwendig.
+	\input{abbildungen/tab_Anpassungstest_Treppe_Auf}
+	
+	\subsection{Beim Treppenabstieg}
+	
+	Bei der Messung zum Abstieg von der Treppe gibt es wenig besondere Fälle. Die gemessenen Daten weisen nur wenige unregelmäßige Ausreißer aus. Diese werden erwartungsgemäß geringen Einfluss haben. Beim Treppenaufstieg wurden signifikante Unterschiede durch 
+	die Ausreißer festgestellt. Deswegen werden analog zum Aufstieg beim Abstieg auch zwei Analysen durchgeführt.
+	
+	
+	
+	\subsubsection{Grafische Überprüfung}
+	Ein Vergleich der Histogramme in den Abbildungen \ref{fig:Histogramm_TreppeAb_MA} und \ref{fig:Histogramm_TreppeAb_OA} zeigt, dass die Ausreißer nur einen geringen Unterschied verursachen. In den Abbildungen ist jeweils eine Normalverteilungskurve dargestellt. Es zeigt sich, dass eine Normalverteilung nicht genau erkennbar ist.
+	
+	Beim Betrachten des Quantil-Quantil-Diagramms in Abbildung \ref{fig:QQ_TreppeAb_MA} und \ref{fig:QQ_TreppeAb_OA}, zeigt sich ebenfalls, dass der Unterschied der gesamten Daten und der bereinigten Daten sehr gering und mit bloßem Auge nicht zu erkennen ist. Aus den beiden Diagrammen wird deutlich, dass es sich bei beiden Fällen um eine Normalverteilung handelt, da der P-Wert in beiden Fällen über dem Signifikanzniveau von $0,05$ liegt.
+	
+	\begin{figure}[!htb]
+		\centering
+		\begin{minipage}{.49\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{abbildungen/Histogramm_2017_TreppeAb_MitAusreisser.pdf}
+			\caption{Histogramm der Geschwindig-keiten beim Treppenabstieg mit Ausreißern im Vergleich zur Normalverteilung}
+			\label{fig:Histogramm_TreppeAb_MA}
+		\end{minipage}%
+		\begin{minipage}{0.02\textwidth}
+			\hfill
+		\end{minipage}%
+		\begin{minipage}{0.49\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{abbildungen/Histogramm_2017_TreppeAb_OhneAusreisser.pdf}
+			\caption{Histogramm der Geschwindig-keiten beim Treppenabstieg ohne Ausreißer im Vergleich zur Normalverteilung}
+			\label{fig:Histogramm_TreppeAb_OA}
+		\end{minipage}
+	\end{figure}
+	
+	
+	\begin{figure}[!htb]
+		\centering
+		\begin{minipage}{.49\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{abbildungen/QQ_Plot_2017_TreppeAb_MitAusreisser.pdf}
+			\caption{Quantil-Quantil-Diagramm der Geschwindigkeiten beim Treppenabstieg mit Ausreißern in $\frac{m}{s}$}
+			\label{fig:QQ_TreppeAb_MA}
+		\end{minipage}%
+		\begin{minipage}{0.02\textwidth}
+			\hfill
+		\end{minipage}%
+		\begin{minipage}{0.49\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{abbildungen/QQ_Plot_2017_TreppeAb_OhneAusreisser.pdf}
+			\caption{Quantil-Quantil-Diagramm der Geschwindigkeiten beim Treppenabstieg ohne Ausreißer in $\frac{m}{s}$}
+			\label{fig:QQ_TreppeAb_OA}
+		\end{minipage}
+	\end{figure}
+	
+	
+	
+	
+	\subsection{Rechnerische Überprüfung}
+	Die rechnerische Überprüfung bestätigt die Analyse des Quantil-Quantil-Diagramms. Wie in Tabelle \ref{tab:anpassungstest_TreppeAb_MA} und Tabelle \ref{tab:anpassungstest_TreppeAbf_OA} zu sehen, liegt in beiden Fällen eine Normalverteilung vor. Es ist zu bemerken, dass ein Anpassungstest anhand der Daten mit Ausreißern einen größeren p-Wert erzielt. 
+	\input{abbildungen/tab_Anpassungstest_Treppe_Ab}
+	
+	\section{Modell}
+	\section{Lineare Regression}
+	\subsection{Prüfung auf eine Abhängigkeit}
+	\subsection{Mehrere Abhängigkeiten}
+	\subsection{Konditionierung}
+	Die Konditionierung des Problems wurde anhand der Desingmatrix des linearen Modells untersucht. Je näher ein ermittelter Wert an 1 liegt, desto besser ist das Problem konditioniert.
+	
+	Bei der Untersuchung der Treppengeschwindigkeit aufwärts wurde ein Konditionierungswert von $744.683$ ermittelt. Auch bei der Betrachtung der Treppengeschwindigkeit abwärts wurde ähnliches Ergebnis von $654.274$ berechnet. Die Betrachtung zweier Parameter (Ebenengeschwindigkeit und Körpergröße) ergab sogar den Wert $3.27621*10^7$.
+	Diese schlechte Konditionierung erfolgt durch Rechenfehlern, die bei numerischen Berechnungen erfolgen. In diesen Berechnungen wurden 3 ($2.87197$, $2.81576$) bzw. $7.47687$ Dezimalstellen verloren. Diese Zahlen wurden mit wurden mit dem dekadischen Logarithmus (zur Basis 10) der Kondition bestimmt.
+	
+	Wenn man die Konditionierung mit der QR-Zerlegung betrachtet, welche auch in Wirklichkeit von Mathematica verwendet wird, wurde eine wesentlich bessere Konditionierung ermittelt.
+	
+	Die Betrachtung der Konditionierung der oberen Dreiecksmatrix R ergab bei der Treppengeschwindigkeit aufwärts nun einen Wert von $29.6338$. Hierbei wurden auch weniger verlorene Dezimalstellen festgestellt. Diese betrugen nur noch $1.47179$. Bei der Treppengeschwindigkeit abwärts wurde eine Konditionierung von $27.9171$ und $7164.48$ bei zwei Parametern (Verlorene Dezimalstellen bei $1.44587$ bzw. $3.83839$). Bei einem Parameter - der Ebenengeschwindigkeit - ist die Konditionierung nun deutlich besser. Für zwei Parameter (Körpergröße und Ebenengeschwindigkeit) lässt sich schließen, dass für diese Auswertung das Problem tatsächlich schlecht Konditioniert ist und die Aussagekraft der Ergebnisse bei dieser Untersuchung in Frage gestellt werden kann.
+	
+	Dadurch, dass Mathematica die QR-Zerlegung benutzt sind diese Ergebnisse auch wesentlich aussagekräftiger als die erste Untersuchung der Konditionierung.
+	
+	
+	
+	\section{Ergebnisse}
+	\section{Ermitteltes Modell}
+	
+	\section{Vergleich mit Daten aus 2012}
+	\subsection{Überprüfung auf Normalverteilung}
+	\subsection{Lineare Regression}
+	\subsection{Vergleich}
+	
+	\section{Verbund von alten und neuen Daten}
+	Unter der Annahme, dass die Bedingungen zum Zeitpunkt des Messexperiments im Jahr 2012 ähnlich waren wie im Jahr 2017, kann man die erfassten Daten aus beiden Experimenten zu einem gemeinsamen Datensatz zusammenfassen. Dies kann von Vorteil sein, da es sich insgesamt um mehr Teilnehmer handelt und so die Aussagekraft der Berechnungen erhöht wird. Es ist jedoch zu bedenken, dass folgende Faktoren die Aussagekraft verringern können. Zum einen hat eine Abweichung der Messbedingungen von 2012 zum Jahr 2017 direkten Einfluss auf die Messergebnisse. Zum Beispiel hat die Treppenhöhe einen enormen Einfluss auf die Treppengeschwindigkeit. Darüber hinaus ist zu bemerken, dass unter Umständen in beiden Experimenten ein und dieselbe Person teilgenommen hat und unter unterschiedlicher Probanden ID geführt wird. Dies kann zum Beispiel bedeuten, dass es in den Datensätzen zwei Personen mit der gleichen Körpergröße gibt. Diese Doppelerfassung einer Person hat zur Folge, dass die betreffende Person die Auswertung mit mehr Gewicht beeinflusst. 
+	Für die weitere Auswertung wird angenommen, dass die Messbedingungen beider Experimente annähernd gleich sind und es durch die lange Zeit zwischen den beiden Experimenten keine Doppelfassungen von Personen gibt. Der Fokus liegt vor allem auf der Analyse der linearen Regression. 
+	
+	Es ist zu beachten, dass für alle Abbildungen und Gleichungen die Geschwindigkeiten in $\frac{m}{s}$ und die Größe in $cm$ angegeben sind. Die Rundenzahl hat keine Einheit bzw. die Einheit $1$.
+	\subsection{Prüfung auf eine einfache Abhängigkeit}
+	Zunächst wird die Abhängigkeit der Treppengeschwindigkeit von einem Parameter untersucht. Dabei werden jeweils die Parameter Wunschgeschwindigkeit in der Ebene, Größe und Rundenzahl beleuchtet. Mittels linearer Regression werden folgende Gleichungen ermittelt: 
+	\begin{align*}
+		v_{auf}(v_{ebene}) = \beta _0 + \beta _1 v_{ebene} \\
+		v_{ab}(v_{ebene}) = \beta _0 + \beta _1 v_{ebene} \\
+		v_{auf}(groesse) = \beta _0 + \beta _1 groesse \\
+		v_{ab}(groesse) = \beta _0 + \beta _1 groesse \\
+		v_{auf}(runde) = \beta _0 + \beta _1 runde \\
+		v_{ab}(runde) = \beta _0 + \beta _1 runde
+	\end{align*}
+	\subsubsection{Wunschgeschwindigkeit in der Ebene}
+	Aus der Erstellung eines linearen Regressionsmodells der Treppengeschwindigkeit in Abhängigkeit von der Wunschgeschwindigkeit in der Ebene ergeben sich folgende Gleichungen:
+	\begin{equation}
+	v_{auf}(v_{ebene}) = -0.908778 + 1.183660 v_{ebene}
+	\label{eq:2012_2017_AufEbene_MA}
+	\end{equation}
+	\begin{equation}
+	v_{ab}(v_{ebene}) = -0.0207308+0.724824 v_{ebene}
+	\label{eq:2012_2017_AbEbene_MA}
+	\end{equation}
+	Die zugehörigen Abbildungen \ref{fig:2012_und_2017_MA_auf_ebene} und \ref{fig:2012_und_2017_MA_ab_ebene} zeigen, dass die Regressionsgerade in beiden Fällen eine positive Steigung aufweist. Die Steigung der Treppengeschwindigkeit beim Aufwärtsgehen der Treppen (Gleichung \ref{eq:2012_2017_AufEbene_MA}) ist höher als im Jahr 2017 (Gleichungen \ref{eq:auf2017-ebene} und \ref{eq:ab2017-ebene}). Auch beim Abwärtsgehen ist die Regressionsgerade deutlich steiler als im Jahr 2017. In den Abbildungen \ref{fig:2012_und_2017_MA_auf_ebene} und \ref{fig:2012_und_2017_MA_ab_ebene} wird gezeigt, dass einige wenige Probanden deutlich schneller sind als der Rest. Die Entfernung der Ausreißer aus der Analyse wie in Abbildungen \ref{fig:2012_und_2017_OA_auf_ebene} und \ref{fig:2012_und_2017_OA_ab_ebene} zu sehen ist, ergibt folgende Gleichungen: 
+	\begin{equation}
+	v_{auf}'(v_{ebene}) = 0.44619 +0.232299 v_{ebene}
+	\label{eq:2012_2017_AufEbene_OA}
+	\end{equation}
+	\begin{equation}
+	v_{ab}'(v_{ebene}) = 0.759833 +0.191744 v_{ebene}
+	\label{eq:2012_2017_AbEbene_OA}
+	\end{equation}
+	Die Steigung der Regressionsgeraden ist deutlich geringer, wenn man die Ausreißer entfernt. 
+	Für die Plausibilisierung wird die Nullhypothese $H_0: \beta_1 = 0$ aufgestellt. Das Signifikanzniveau $\alpha= 0.05$. In beiden Fällen liegt Signifikanz vor, da der P-Wert $p<\alpha$ ist.
+	
+	\begin{figure}[htpb]
+		\centering
+		\includegraphics[width=0.7\textwidth]{abbildungen/regression/2012_2017_verbund/auf-ebene.pdf}
+		\justify \ \\
+		Ergebnisse der Plausibilisierung für den Aufstieg:
+		\input{abbildungen/regression/2012_2017_verbund/auf-ebene-table}
+		\caption{Abhängigkeit der Wunschgeschwindigkeit in der Ebene und der Treppengeschwindigkeit aufwärts. Messdaten (orange) mit ermittelter Regressionsgeraden (blau)}
+		\label{fig:2012_und_2017_MA_auf_ebene}
+	\end{figure}
+	
+	\begin{figure}[htpb]
+		\centering
+		\includegraphics[width=0.7\textwidth]{abbildungen/regression/2012_2017_verbund/ab-ebene.pdf}
+		\justify \ \\
+		Ergebnisse der Plausibilisierung für den Abstieg:
+		\input{abbildungen/regression/2012_2017_verbund/ab-ebene-table}
+		\caption{Abhängigkeit der Wunschgeschwindigkeit in der Ebene und der Treppengeschwindigkeit abwärts. Messdaten (orange) mit ermittelter Regressionsgeraden (blau)}
+		\label{fig:2012_und_2017_MA_ab_ebene}
+	\end{figure}
+	
+	\begin{figure}[htpb]
+		\centering
+		\includegraphics[width=0.7\textwidth]{abbildungen/regression/2012_2017_verbund/ohneausreisser/auf-ebene.pdf}
+		\justify \ \\
+		Ergebnisse der Plausibilisierung für den Aufstieg:
+		\input{abbildungen/regression/2012_2017_verbund/ohneausreisser/auf-ebene-table}
+		\caption{Abhängigkeit der Wunschgeschwindigkeit in der Ebene und der Treppengeschwindigkeit aufwärts. Messdaten (orange) und Ausreißer (schwarz) mit ermittelter Regressionsgeraden (blau)}
+		\label{fig:2012_und_2017_OA_auf_ebene}
+	\end{figure}
+	
+	\begin{figure}[htpb]
+		\centering
+		\includegraphics[width=0.7\textwidth]{abbildungen/regression/2012_2017_verbund/ohneausreisser/ab-ebene.pdf}
+		\justify \ \\
+		Ergebnisse der Plausibilisierung für den Abstieg:
+		\input{abbildungen/regression/2012_2017_verbund/ohneausreisser/ab-ebene-table}
+		\caption{Abhängigkeit der Wunschgeschwindigkeit in der Ebene und der Treppengeschwindigkeit abwärts. Messdaten (orange) und Ausreißer (schwarz) mit ermittelter Regressionsgeraden (blau)}
+		\label{fig:2012_und_2017_OA_ab_ebene}
+	\end{figure}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	\subsubsection{Körpergröße}
+	Für die Abhängigkeit zu Körpergröße werden nur Daten ohne die zuvor genannten Ausreißer herangezogen. Da es beispielsweise Probanden gab, die gerannt sind, ist es nicht sinnvoll, diese in Beziehung zur Körpergröße zu setzen. Es wurde folgender Zusammenhang ermittelt:
+	\begin{equation}
+	v_{auf}(groesse) = 1.4018 -0.00342982 groesse
+	\label{eq:2012_2017_AufGroesse_MA}
+	\end{equation}
+	\begin{equation}
+	v_{ab}(groesse) = 1.85077 -0.0045234 groesse
+	\label{eq:2012_2017_AbGroesse_MA}
+	\end{equation}
+	Grafisch dargestellt wird dieser Zusammenhang in den Abbildungen \ref{fig:2012_und_2017_MA_auf_groesse} und \ref{fig:2012_und_2017_MA_ab_groesse}. In den darunterliegenden Tabellen sind die Ergebnisse der Plausibilisierungstests zu sehen. Beim Treppenaufstieg ist der P-Wert $p<\alpha$. Signifikanz liegt vor und die Nullhypothese wird abgelehnt. Die Körpergröße hat beim Aufstieg einen direkten Einfluss auf die Treppengeschwindigkeit. Beim Abstieg ist der P-Wert nur geringfügig größer als das Signifikanzniveau $\alpha$. Es ist also anzunehmen, dass die Körpergröße beim Abstieg keine Auswirkung auf die Treppengeschwindigkeit hat. Diese Erkenntnis ist plausibel, da beim Aufstieg die Beinlänge eine bedeutendere Rolle spielt als beim Abstieg. Interessant ist die  Tatsache, dass beide Regressionsgeraden eine negative Steigung haben. Je größer ein Proband, desto niedriger ist die Geschwindigkeit beim Treppensteigen.
+	
+	\begin{figure}[htpb]
+		\centering
+		\includegraphics[width=0.7\textwidth]{abbildungen/regression/2012_2017_verbund/ohneausreisser/auf-groesse.pdf}
+		\justify \ \\
+		Ergebnisse der Plausibilisierung für den Aufstieg:
+		\input{abbildungen/regression/2012_2017_verbund/ohneausreisser/auf-groesse-table}
+		\caption{Abhängigkeit der Körpergröße und der Treppengeschwindigkeit aufwärts. Messdaten (orange) und Ausreißer (schwarz) mit ermittelter Regressionsgeraden (blau)}
+		\label{fig:2012_und_2017_MA_auf_groesse}
+	\end{figure}
+	
+	
+	
+	\begin{figure}[htpb]
+		\centering
+		\includegraphics[width=0.7\textwidth]{abbildungen/regression/2012_2017_verbund/ohneausreisser/ab-groesse.pdf}
+		\justify \ \\
+		Ergebnisse der Plausibilisierung für den Abstieg:
+		\input{abbildungen/regression/2012_2017_verbund/ohneausreisser/ab-groesse-table}
+		\caption{Abhängigkeit der Körpergröße und der Treppengeschwindigkeit abwärts. Messdaten (orange) und Ausreißer (schwarz) mit ermittelter Regressionsgeraden (blau)}
+		\label{fig:2012_und_2017_MA_ab_groesse}
+	\end{figure}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	\subsubsection{Rundennummer}
+	Auch für die Abhängigkeit zur Rundennummer wurden die Ausreißer entfernt. Folgender Zusammenhang wurde ermittelt:
+	\begin{equation}
+	v_{auf}(runde) = 0.800529 -0.00319011 runde
+	\label{eq:2012_2017_AufRunde_MA}
+	\end{equation}
+	\begin{equation}
+	v_{ab}(runde) = 1.03894 + 0.00414082 runde
+	\label{eq:2012_2017_AbRunde_MA}
+	\end{equation}
+	Die grafische Darstellung für diesen Zusammenhang ist für den Treppenaufstieg in Abbildung \ref{fig:2012_und_2017_MA_auf_runde} und für den Treppenabstieg in Abbildung \ref{fig:2012_und_2017_MA_ab_runde} zu sehen. Die Abbildungen machen bereits deutlich, dass eine Abhängigkeit der Treppengeschwindigkeit von der Rundenzahl nicht plausibel ist. Die Ergebnisse der Plausibilitätsprüfung in den Tabellen jeweils unter den Abbildungen zeigen, dass der P-Wert in beiden Fällen deutlich über dem Signifikanzniveau $\alpha$ liegt. Die Nullhypothese wird angenommen, die Rundenzahl hat keinen Einfluss auf die Treppengeschwindigkeit.
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	\begin{figure}[htpb]
+		\centering
+		\includegraphics[width=0.7\textwidth]{abbildungen/regression/2012_2017_verbund/ohneausreisser/auf-runde.pdf}
+		\justify \ \\
+		Ergebnisse der Plausibilisierung für den Aufstieg:
+		\input{abbildungen/regression/2012_2017_verbund/ohneausreisser/auf-runde-table}
+		\caption{Abhängigkeit der Runde und der Treppengeschwindigkeit aufwärts. Messdaten (orange) und Ausreißer (schwarz) mit ermittelter Regressionsgeraden (blau)}
+		\label{fig:2012_und_2017_MA_auf_runde}
+	\end{figure}
+	
+	
+	
+	\begin{figure}[htpb]
+		\centering
+		\includegraphics[width=0.7\textwidth]{abbildungen/regression/2012_2017_verbund/ohneausreisser/ab-runde.pdf}
+		\justify \ \\
+		Ergebnisse der Plausibilisierung für den Abstieg:
+		\input{abbildungen/regression/2012_2017_verbund/ohneausreisser/ab-runde-table}
+		\caption{Abhängigkeit der Runde und der Treppengeschwindigkeit abwärts. Messdaten (orange) und Ausreißer (schwarz) mit ermittelter Regressionsgeraden (blau)}
+		\label{fig:2012_und_2017_MA_ab_runde}
+	\end{figure}
+	
+	
+	
+	\subsection{Prüfung auf mehrere Abhängigkeiten}
+	Es wird die Abhängigkeit der Treppengeschwindigkeit von mehreren Parametern untersucht. Mittels linearer Regression werden folgende Gleichungen ermittelt: 
+	\begin{align*}
+		v_{auf}(v_{ebene}, groesse) = \beta _0 + \beta _1 v_{ebene} + \beta _2 groesse \\
+		v_{ab}(v_{ebene}, groesse) = \beta _0 + \beta _1 v_{ebene} + \beta _2 groesse \\
+		v_{auf}(v_{ebene}, groesse, runde) = \beta _0 + \beta _1 v_{ebene} + \beta _2 groesse + \beta _3 runde \\
+		v_{ab}(v_{ebene}, groesse, runde) = \beta _0 + \beta _1 v_{ebene} + \beta _2 groesse + \beta _3 runde \\
+	\end{align*}
+	Auch hier werden die Ausreißer vor der Berechnung entfernt. In den Abbildungen sind die Ausreißer schwarz dargestellt. Analog zu den vorherigen Kapiteln wird eine Nullhypothese $H_0: \beta _1 = 0,\ \beta _2 = 0,\ \beta _3 = 0$ aufgestellt und eine Plausibilitätsprüfung durchgeführt. Das Signifikanzniveau $\alpha$ wird mit $0,05$ definiert.
+	\subsubsection{Lineare Regression mit zwei Parametern}
+	Bei der Erstellung eines linearen Regressionsmodells der Treppengeschwindigkeit in Abhängigkeit von Ebenengeschwindigkeit und Körpergröße ergibt sich folgender Zusammenhang:
+	\begin{equation}
+	v_{auf}(v_{ebene}, groesse) = 1.0165 -0.00294506 groesse+0.199894 v_{ebene}
+	\end{equation}
+	\begin{equation}
+	v_{ab}(v_{ebene}, groesse) = 1.55685 -0.00417799 groesse +0.155209 v_{ebene}
+	\end{equation}
+	Grafisch dargestellt ergibt dies eine Fläche wie in Abbildungen \ref{fig:2012_und_2017_OA_auf_ebene_groesse} und  \ref{fig:2012_und_2017_OA_ab_ebene_groesse} zu sehen ist. Die Plausibilitätsprüfung ergibt für den Aufstieg eine Abhängigkeit der Treppengeschwindigkeit von den Parametern Wunschgeschwindigkeit in der Ebene und der Größe. Für den Treppenabstieg wird die Nullhypothese angenommen, da der P-Wert über dem Signifikanzniveau liegt. Die Treppengeschwindigkeit beim Abstieg ist nicht von den Parameter Ebenengeschwindigkeit und Größe abhängig. 
+	
+	
+	
+	
+	\begin{figure}[htpb]
+		\centering
+		\includegraphics[width=0.7\textwidth]{abbildungen/regression/2012_2017_verbund/ohneausreisser/auf-ebene-groesse.pdf}
+		\justify \ \\
+		Ergebnisse der Plausibilisierung für den Aufstieg:
+		\input{abbildungen/regression/2012_2017_verbund/ohneausreisser/auf-ebene-groesse-table}
+		\caption{Abhängigkeit der Ebenengeschwindigkeit, der Größe und der Treppengeschwindigkeit aufwärts. Messdaten (orange) und Ausreißer (schwarz) mit ermittelter Regressionsfläche (blau)}
+		\label{fig:2012_und_2017_OA_auf_ebene_groesse}
+	\end{figure}
+	
+	
+	
+	\begin{figure}[htpb]
+		\centering
+		\includegraphics[width=0.7\textwidth]{abbildungen/regression/2012_2017_verbund/ohneausreisser/ab-ebene-groesse.pdf}
+		\justify \ \\
+		Ergebnisse der Plausibilisierung für den Abstieg:
+		\input{abbildungen/regression/2012_2017_verbund/ohneausreisser/ab-ebene-groesse-table}
+		\caption{Abhängigkeit der Ebenengeschwindigkeit, der Größe und der Treppengeschwindigkeit abfwärts. Messdaten (orange) und Ausreißer (schwarz) mit ermittelter Regressionsfläche (blau)}
+		\label{fig:2012_und_2017_OA_ab_ebene_groesse}
+	\end{figure}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	\subsubsection{Lineare Regression mit drei Parametern}
+	Bei der Erstellung eines linearen Regressionsmodells der Treppengeschwindigkeit in Bezug zu Ebenengeschwindigkeit, Körpergröße und Rundenzahl ergibt sich folgender Zusammenhang:
+	\begin{multline}
+		v_{auf}(v_{ebene}, groesse, runde) = \\ 
+		1.02175 -0.00294612 groesse -0.00220598 runde +0.199456 v_{ebene}
+	\end{multline}
+	\begin{multline}
+		v_{ab}(v_{ebene}, groesse, runde ) = \\ 
+		2.17485 -0.0057147 groesse+0.00132958 runde -0.0829226 v_{ebene}
+	\end{multline}
+	Eine sinnvolle grafische Abbildung dieses Zusammenhangs ist leider nicht möglich. 
+	Eine Plausibilitätsprüfung ergibt folgende Ergebnisse für den Aufstieg:
+	\input{abbildungen/regression/2012_2017_verbund/ohneausreisser/auf-runde-ebene-groesse-table}
+	Vor allem im Bezug auf die Rundenzahl ergibt sich ein P-Wert deutlich höher als das Signifikanzniveau $\alpha$. Der P-Wert in Bezug auf die Ebenengeschwindigkeit und die Körpergröße liegt unter dem Signifikanzniveau.
+	
+	
+	Für den Abstieg ergibt sich folgende Plausibilitätsprüfung:
+	\input{abbildungen/regression/2012_2017_verbund/ohneausreisser/ab-runde-ebene-groesse-table}
+	Beim Treppenabstieg ist der P-Wert nur in Bezug auf die Körpergröße unter dem Signifiknazniveau $\alpha$.
+	
+	
+	\section{Fazit}
+	Ziel dieser Arbeit war es zu überprüfen, ob ein Zusammenhang zwischen der Wunschgeschwindigkeit einer Person in der Ebene und der Geschwindigkeiten beim Treppensteigen besteht. Dabei wurde das Laufverhalten sowohl beim Treppenaufstieg als auch beim Treppenabstieg betrachtet. Es wurden, wie im Kapitel XXX erläutert, Messreihen durchgeführt und die ermittelten Daten daraufhin auf Normalverteilung untersucht. Anschließend wurde die lineare Regression verwendet um mögliche Zusammenhänge zwischen den Treppengeschwindigkeiten und den Parametern der Probanden, wie Ebenengeschwindigkeit, Körpergröße oder der Rundennummer zu erkennen. Mithilfe der t-Tests wurden die resultierenden Werte auf Plausibilität geprüft. Dabei wurde entschieden ob es Abhängigkeiten gibt. Zur Überprüfung der Relevanz dieser Beobachtungen wurde die Konditionierung des Problems untersucht. Die gewonnenen Erkenntnisse wurden mit Messdaten aus einem, bereits im Jahr 2012 durchgeführten, Experiments verglichen und verbunden.
+	
+	Die Ergebnisse der Untersuchungen ergaben, dass die Treppengeschwindigkeit sehr wahrscheinlich von der Ebenengenschwindigkeit abhängig ist. Verbindungen zwischen der Treppengeschwindigkeit und der Körpergröße bzw. der Rundennummer konnten nicht gefunden werden.
+	
+	Die Resultate dieser Arbeit können keine 100\%tige Aussage über das Laufverhaltens eines Menschen auf einer Treppe auf Basis der Wunschgeschwindigkeit in der Ebene treffen. Für solch eine Vorhersage ist das Laufverhalten von Personen noch nicht ausreichend untersucht. Für noch genauere Ergebnisse und Vorhersagen würden sich zukünftige Messreihen mit wesentlich mehr als $22$ Probanden anbieten.
+	
 \end{document}

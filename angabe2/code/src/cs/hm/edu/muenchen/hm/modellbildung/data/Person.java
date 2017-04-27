@@ -6,7 +6,18 @@ package cs.hm.edu.muenchen.hm.modellbildung.data;
 public class Person {
     private final int id;
 
-    public Person(int id) {
+    private final boolean resident;
+
+    public Person(int id, boolean resident) {
         this.id = id;
+        this.resident = resident;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public boolean isResident() {
+        return resident;
     }
 }

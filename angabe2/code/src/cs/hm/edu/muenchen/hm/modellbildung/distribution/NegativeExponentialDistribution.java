@@ -1,7 +1,6 @@
 package cs.hm.edu.muenchen.hm.modellbildung.distribution;
 
 import java.util.Random;
-import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * @author peter-mueller

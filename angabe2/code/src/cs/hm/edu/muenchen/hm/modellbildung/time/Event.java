@@ -4,18 +4,24 @@ package cs.hm.edu.muenchen.hm.modellbildung.time;
  * @author peter-mueller
  */
 public class Event implements Comparable<Event> {
-    private final int timeStamp;
+    private final EventType type;
+    private final double timeStamp;
 
-    public Event(int timeStamp) {
+    public Event(EventType type, double timeStamp) {
+        this.type = type;
         this.timeStamp = timeStamp;
     }
 
-    public int getTimeStamp() {
+    public EventType getType() {
+        return type;
+    }
+
+    public double getTimeStamp() {
         return timeStamp;
     }
     @Override
     public int compareTo(Event o) {
-        return Float.compare(o.getTimeStamp(), this.getTimeStamp());
+        return Double.compare(this.getTimeStamp(), o.getTimeStamp());
     }
 
 }

@@ -10,4 +10,5 @@ public interface Queue {
     public Person dequeue();
 
     public long count();
+    public boolean isEmpty();
 }

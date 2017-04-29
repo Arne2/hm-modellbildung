@@ -14,6 +14,9 @@ public class Clock {
     }
 
     public void advance(double time) {
+        if (time < 0) {
+            throw new IllegalArgumentException("Time must not be negative!");
+        }
         this.time += time;
     }
     public void advanceTo(double time) {

@@ -11,7 +11,7 @@ import cs.hm.edu.muenchen.hm.modellbildung.onephone.SimulationState;
  * @author peter-mueller
  */
 public class BeginServeEvent extends BaseEvent {
-    private Distribution dist = new NegativeExponentialDistribution();
+    private final Distribution dist = new NegativeExponentialDistribution();
 
     public BeginServeEvent(double timeStamp) {
         super(timeStamp);

@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class ListQueue implements Queue {
 
-    private List<Person> list = new LinkedList<>();
+    private final List<Person> list = new LinkedList<>();
 
     public void enqueue(Person person) {
         list.add(person);

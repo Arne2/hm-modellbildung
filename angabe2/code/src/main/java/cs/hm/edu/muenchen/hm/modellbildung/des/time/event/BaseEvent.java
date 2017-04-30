@@ -1,4 +1,4 @@
-package cs.hm.edu.muenchen.hm.modellbildung.des.time;
+package cs.hm.edu.muenchen.hm.modellbildung.des.time.event;
 
 import cs.hm.edu.muenchen.hm.modellbildung.des.time.event.Event;
 
@@ -7,13 +7,6 @@ import cs.hm.edu.muenchen.hm.modellbildung.des.time.event.Event;
  */
 public abstract class BaseEvent implements Event {
     private final double timeStamp;
-
-    @Override
-    public String toString() {
-        return getClass().getSimpleName() + "{" +
-                "timeStamp: " + timeStamp +
-                "}";
-    }
 
     public BaseEvent(double timeStamp) {
         this.timeStamp = timeStamp;

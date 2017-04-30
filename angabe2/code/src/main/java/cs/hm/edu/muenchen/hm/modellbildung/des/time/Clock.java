@@ -6,13 +6,6 @@ package cs.hm.edu.muenchen.hm.modellbildung.des.time;
 public class Clock {
     private double time = 0;
 
-    @Override
-    public String toString() {
-        return "{" +
-                "time: " + time +
-                '}';
-    }
-
     public void advance(double time) {
         if (time < 0) {
             throw new IllegalArgumentException("Time must not be negative!");

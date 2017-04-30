@@ -8,18 +8,20 @@ import java.util.List;
  * @author peter-mueller
  */
 public class EventList {
-    @Override
-    public String toString() {
-        return eventList.toString();
-    }
-
     private final List<Event> eventList = new LinkedList<>();
+
     public Event nextEvent() {
+        if (eventList.isEmpty()) {
+            return null;
+        }
         Collections.sort(eventList);
         return eventList.remove(0);
     }
 
     public void add(Event event) {
+        if (event == null) {
+            throw new IllegalArgumentException("Event must not be null!");
+        }
         eventList.add(event);
     }
 }

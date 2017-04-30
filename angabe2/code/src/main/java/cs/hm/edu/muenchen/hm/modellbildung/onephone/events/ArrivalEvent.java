@@ -3,7 +3,7 @@ package cs.hm.edu.muenchen.hm.modellbildung.onephone.events;
 import cs.hm.edu.muenchen.hm.modellbildung.onephone.data.Person;
 import cs.hm.edu.muenchen.hm.modellbildung.des.distribution.Distribution;
 import cs.hm.edu.muenchen.hm.modellbildung.des.distribution.NegativeExponentialDistribution;
-import cs.hm.edu.muenchen.hm.modellbildung.des.time.BaseEvent;
+import cs.hm.edu.muenchen.hm.modellbildung.des.time.event.BaseEvent;
 import cs.hm.edu.muenchen.hm.modellbildung.onephone.config.CallShopConfiguration;
 import cs.hm.edu.muenchen.hm.modellbildung.onephone.SimulationState;
 

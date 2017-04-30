@@ -6,13 +6,6 @@ import cs.hm.edu.muenchen.hm.modellbildung.onephone.data.Person;
  * Created by Arne on 27.04.2017.
  */
 public class Phone {
-    @Override
-    public String toString() {
-        return "{" +
-                "user: " + user +
-                '}';
-    }
-
     private Person user = null;
 
     public boolean isOccupied() {

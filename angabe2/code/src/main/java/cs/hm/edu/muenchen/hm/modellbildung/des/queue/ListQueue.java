@@ -28,9 +28,4 @@ public class ListQueue implements Queue {
     public boolean isEmpty() {
         return list.isEmpty();
     }
-
-    @Override
-    public String toString() {
-        return list.toString();
-    }
 }

@@ -16,16 +16,6 @@ public class CallShopSimulation {
         private final Clock clock = new Clock();
         private final Queue queue = new ListQueue();
 
-        @Override
-        public String toString() {
-            return "{" +
-                    "clock: " + clock +
-                    ", queue: " + queue +
-                    ", phone: " + phone +
-                    ", eventList: " + eventList +
-                    '}';
-        }
-
         private final Phone phone = new Phone();
         private final EventList eventList = new EventList();
 

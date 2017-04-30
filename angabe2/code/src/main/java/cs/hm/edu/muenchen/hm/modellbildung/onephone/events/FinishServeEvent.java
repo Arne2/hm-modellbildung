@@ -1,8 +1,7 @@
 package cs.hm.edu.muenchen.hm.modellbildung.onephone.events;
 
-import cs.hm.edu.muenchen.hm.modellbildung.des.time.BaseEvent;
+import cs.hm.edu.muenchen.hm.modellbildung.des.time.event.BaseEvent;
 import cs.hm.edu.muenchen.hm.modellbildung.onephone.SimulationState;
-import cs.hm.edu.muenchen.hm.modellbildung.onephone.events.BeginServeEvent;
 
 /**
  * @author peter-mueller

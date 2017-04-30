@@ -12,6 +12,12 @@ public class NegativeExponentialDistributionTest {
     private final Distribution dist = new NegativeExponentialDistribution(SEED);
 
     @Test
+    public void testRandomSeed() {
+        final Distribution dist = new NegativeExponentialDistribution();
+        dist.getNextValue(1);
+    }
+
+    @Test
     public void getNextValue() throws Exception {
         for (int mean = -10; mean < 10; mean++) {
             double sum = 0;

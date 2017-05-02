@@ -3,6 +3,7 @@ package cs.hm.edu.muenchen.hm.modellbildung.des.log;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,6 +18,11 @@ public class Log {
         try {
             file.createNewFile();
             fw = new FileWriter(file);
+            List<String> fields = new ArrayList<>();
+            fields.add("Person");
+            fields.add("Timestamp");
+            fields.add("Queuelength");
+            CSVUtils.writeLine(fw, fields);
         } catch (IOException e) {
             e.printStackTrace();
         }

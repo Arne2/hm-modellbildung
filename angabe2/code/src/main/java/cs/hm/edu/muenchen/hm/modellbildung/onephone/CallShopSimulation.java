@@ -14,6 +14,7 @@ import java.io.IOException;
 import static cs.hm.edu.muenchen.hm.modellbildung.onephone.config.CallShopConfiguration.arrivalLog;
 import static cs.hm.edu.muenchen.hm.modellbildung.onephone.config.CallShopConfiguration.serveLog;
 import static cs.hm.edu.muenchen.hm.modellbildung.onephone.config.CallShopConfiguration.finishLog;
+import static cs.hm.edu.muenchen.hm.modellbildung.onephone.config.CallShopConfiguration.queueLog;
 /**
  * @author peter-mueller
  */
@@ -55,6 +56,7 @@ public class CallShopSimulation {
             arrivalLog.close();
             serveLog.close();
             finishLog.close();
+            queueLog.close();
         } catch (IOException e) {
             e.printStackTrace();
         }

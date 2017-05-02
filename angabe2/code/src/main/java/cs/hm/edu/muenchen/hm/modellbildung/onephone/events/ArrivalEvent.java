@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static cs.hm.edu.muenchen.hm.modellbildung.onephone.config.CallShopConfiguration.arrivalLog;
+import static cs.hm.edu.muenchen.hm.modellbildung.onephone.config.CallShopConfiguration.queueLog;
 
 
 /**
@@ -38,6 +39,7 @@ public class ArrivalEvent extends BaseEvent {
         list.add(getTimeStamp()+"");
         list.add(state.queue().count()+"");
         arrivalLog.writeLine(list);
+        queueLog.writeLine(list);
 
         final double nextArrivalIn = dist.getNextValue(CallShopConfiguration.MEAN_ARRIVAL);
         final double absoluteTime = state.clock().systemTime() + nextArrivalIn;

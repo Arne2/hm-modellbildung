@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static cs.hm.edu.muenchen.hm.modellbildung.onephone.config.CallShopConfiguration.serveLog;
+import static cs.hm.edu.muenchen.hm.modellbildung.onephone.config.CallShopConfiguration.queueLog;
 
 /**
  * @author peter-mueller
@@ -35,6 +36,7 @@ public class BeginServeEvent extends BaseEvent {
         list.add(getTimeStamp()+"");
         list.add(state.queue().count()+"");
         serveLog.writeLine(list);
+        queueLog.writeLine(list);
 
         final double serveTime = dist.getNextValue(CallShopConfiguration.MEAN_CALL);
         final double absoluteTime = state.clock().systemTime() + serveTime;

@@ -13,4 +13,5 @@ public class CallShopConfiguration {
     public static final Log arrivalLog = new Log("arrival.csv");
     public static final Log serveLog = new Log("serve.csv");
     public static final Log finishLog = new Log("finish.csv");
+    public static final Log queueLog = new Log("queue.csv");
 }

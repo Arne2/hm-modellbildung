@@ -37,12 +37,19 @@ dataServe = SemanticImport[FileNameJoin@{NotebookDirectory[],servePath},Characte
 finishPath = "./finish.csv";
 dataFinish = SemanticImport[FileNameJoin@{NotebookDirectory[],finishPath},CharacterEncoding->"UTF8"];
 
-(*dataServe/. {x_, y_, z_} -> {x, 2 y, z}*)
-(*{#[[1]], #[[2]], #[[3]],} & /@ dataServe*)
-dataset = Append[#, "Timestamp" -> #["Timestamp"] * -1] & /@ dataArrivals;
-dataFinish
-dataset
-dataAll = JoinAcross[dataFinish, dataset, {"Person"}]
+dataOfFinish = dataFinish[All,<|
+"Person"->"Person",
+"TimestampF"->"Timestamp"
+|>];
+dataOfArrivals =  dataArrivals[All,<|
+"Person"->"Person",
+"TimestampA"->"Timestamp"
+|>];
+
+dataFinishArrival = JoinAcross[dataOfArrivals, dataOfFinish, {"Person"}];
+
+dataset2 = Append[#, "deltaT" -> #TimestampF - #TimestampA] & /@ dataFinishArrival
+meanDeltaT = Mean[dataset2[[All,4]]]
 (*dataArrivals = data[Select[#Queuelength != ""&],<|
 "t"->"Time",
 "Q(t)"->"Queuelength"|>];

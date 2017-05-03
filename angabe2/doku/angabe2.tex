@@ -13,6 +13,24 @@
 \tableofcontents
 
 \section{Einführung}
+Simulationen haben in der moderne einen sehr hohen Stellenwert erlangt, da durch sie zahlreiche, oftmals sehr genaue, Zukunftsprognosen erstellt werden können. Das Thema dieser Studienarbeit ist die Simulation eines Callshops, bzw. des Telefons in einem Callshop, in einem Inseldorf. Dieser wird für günstige Telefonate ins Ausland verwendet. 
+
+Mit Hilfe der Simulation sollen anschließend Aussagen bezüglich der zukünftigen Auslastung des Telefons getroffen werden können. Konkret wird die Fragestellung betrachtet, ob ein zweites Telefon im Callshop sinnvoll oder unnötig ist. 
+
+Als Basis für die erläuterten Prognosen werden folgende Werte der Simulation ermittelt:
+\begin{itemize}
+	\item mittlere Länge der Warteschlage (anstehende Kunden)
+	\item mittlere Wartezeit bis zum Telefonat
+	\item mittlere Verweildauer im Callshop (Wartezeit + Gesprächsdauer) 
+	\item Mittlere Auslastung des Telefons
+\end{itemize}
+
+\section{Beschreibung des Modells}
+Für die Simulation des Insel-Callshops wird ein Warteschlagenmodell mit jeweils einem Client und Server verwendet. Jede Person die den CallShop betritt wird durch einen neuen Client repräsentiert. Das Telefon des Shops ist durch den Server dargestellt. Möchte eine Person das Telefon zu einem Zeitpunkt benützen, zu dem bereits eine andere Person telefoniert, muss sie sich hinten anstellen und warten, bis die Person ihr Telefonat beendet hat. Im Modell wird dieses durch eine Warteschlage (Queue) realisiert, in die sich die wartenden Clients einordnen und nach dem FIFO (first in first out) Prinzip bedient werden. 
+
+Im Modell werden sowohl die Ankunftszeiten der Clients, als auch die Dauer der Telefonate durch eine negative Exponentialverteilung beschrieben, da diese sehr nah an den real beoachteten Verhalten liegt. Der mathematische Hintergrund liegt in der Eigenschaft der Exponentialfunktion zugrunde. Die Exponentialverteilung ist die einzige kontinuierliche Verteilung, welche zugleich die Markoveigenschaft, die sogenannte Gedächtnislosigkeit, erfüllt. Diese besagt, dass die seit dem letzten Ereignis vergangene Zeit (in diesem Beispiel Anrufer) keinen Einfluss auf die Verteilung der Zeit bis zum nächsten Ereignis (bis zum nächsten Anruf) hat. 
+Quelle: http://www.mathepedia.de/Exponentialverteilung.aspx
+
 
 \section{Anforderungen/Requirements}
 

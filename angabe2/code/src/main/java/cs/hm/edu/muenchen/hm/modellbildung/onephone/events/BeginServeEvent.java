@@ -1,6 +1,7 @@
 package cs.hm.edu.muenchen.hm.modellbildung.onephone.events;
 
-import cs.hm.edu.muenchen.hm.modellbildung.onephone.data.Person;
+import cs.hm.edu.muenchen.hm.modellbildung.des.data.Person;
+import cs.hm.edu.muenchen.hm.modellbildung.des.data.Phone;
 import cs.hm.edu.muenchen.hm.modellbildung.des.distribution.Distribution;
 import cs.hm.edu.muenchen.hm.modellbildung.des.distribution.NegativeExponentialDistribution;
 import cs.hm.edu.muenchen.hm.modellbildung.des.time.event.BaseEvent;
@@ -18,21 +19,21 @@ import static cs.hm.edu.muenchen.hm.modellbildung.onephone.config.CallShopConfig
  */
 public class BeginServeEvent extends BaseEvent {
     private final Distribution dist = new NegativeExponentialDistribution();
+    private final Phone phone;
 
-    public BeginServeEvent(double timeStamp) {
+    public BeginServeEvent(double timeStamp, Phone phone) {
         super(timeStamp);
+        this.phone = phone;
     }
 
     @Override
     public void execute(SimulationState state) {
-        if (state.phone().isOccupied()) {
-            throw new AssertionError("Phone must not be occupied on begin serve!");
-        }
-        final Person person = state.queue().dequeue();
-        state.phone().setUser(person);
+        Person person = (phone.isResidentPhone()) ? state.queue().dequeueVip() : state.queue().dequeue();
+        phone.setUser(person);
 
         List<String> list = new ArrayList();
         list.add(person.getId()+"");
+        list.add(person.isResident()+"");
         list.add(getTimeStamp()+"");
         list.add(state.queue().count()+"");
         serveLog.writeLine(list);
@@ -40,7 +41,7 @@ public class BeginServeEvent extends BaseEvent {
 
         final double serveTime = dist.getNextValue(CallShopConfiguration.MEAN_CALL);
         final double absoluteTime = state.clock().systemTime() + serveTime;
-        final FinishServeEvent event = new FinishServeEvent(absoluteTime);
+        final FinishServeEvent event = new FinishServeEvent(absoluteTime, phone);
         state.events().add(event);
     }
 }

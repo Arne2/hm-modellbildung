@@ -1,4 +1,4 @@
-package cs.hm.edu.muenchen.hm.modellbildung.onephone.data;
+package cs.hm.edu.muenchen.hm.modellbildung.des.data;
 
 /**
  * @author peter-mueller

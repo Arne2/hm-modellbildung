@@ -1,6 +1,7 @@
 package cs.hm.edu.muenchen.hm.modellbildung.onephone.events;
 
-import cs.hm.edu.muenchen.hm.modellbildung.onephone.data.Person;
+import cs.hm.edu.muenchen.hm.modellbildung.des.data.Person;
+import cs.hm.edu.muenchen.hm.modellbildung.des.data.Phone;
 import cs.hm.edu.muenchen.hm.modellbildung.des.distribution.Distribution;
 import cs.hm.edu.muenchen.hm.modellbildung.des.distribution.NegativeExponentialDistribution;
 import cs.hm.edu.muenchen.hm.modellbildung.des.time.event.BaseEvent;
@@ -9,7 +10,9 @@ import cs.hm.edu.muenchen.hm.modellbildung.onephone.SimulationState;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
+import static cs.hm.edu.muenchen.hm.modellbildung.onephone.config.CallShopConfiguration.VIP_PERCENTAGE;
 import static cs.hm.edu.muenchen.hm.modellbildung.onephone.config.CallShopConfiguration.arrivalLog;
 import static cs.hm.edu.muenchen.hm.modellbildung.onephone.config.CallShopConfiguration.queueLog;
 
@@ -19,6 +22,7 @@ import static cs.hm.edu.muenchen.hm.modellbildung.onephone.config.CallShopConfig
  */
 public class ArrivalEvent extends BaseEvent {
     private final Distribution dist = new NegativeExponentialDistribution();
+    private final Random random = new Random();
 
     public ArrivalEvent(double timeStamp) {
         super(timeStamp);
@@ -26,16 +30,20 @@ public class ArrivalEvent extends BaseEvent {
 
     @Override
     public void execute(SimulationState state) {
-        if (!state.phone().isOccupied()) {
-            final BeginServeEvent event = new BeginServeEvent(state.clock().systemTime());
-            state.events().add(event);
+        for (Phone next : state.phones()){
+            if (!next.isOccupied()){
+                final BeginServeEvent event = new BeginServeEvent(state.clock().systemTime(), next);
+                state.events().add(event);
+                break;
+            }
         }
 
-        final Person person = new Person(true);
+        final Person person = new Person(random.nextInt(100) < VIP_PERCENTAGE);
         state.queue().enqueue(person);
 
         List<String> list = new ArrayList();
         list.add(person.getId()+"");
+        list.add(person.isResident()+"");
         list.add(getTimeStamp()+"");
         list.add(state.queue().count()+"");
         arrivalLog.writeLine(list);

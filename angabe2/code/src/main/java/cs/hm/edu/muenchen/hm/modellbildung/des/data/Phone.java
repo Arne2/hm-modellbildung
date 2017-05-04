@@ -1,12 +1,24 @@
-package cs.hm.edu.muenchen.hm.modellbildung.onephone.data;
-
-import cs.hm.edu.muenchen.hm.modellbildung.onephone.data.Person;
+package cs.hm.edu.muenchen.hm.modellbildung.des.data;
 
 /**
  * Created by Arne on 27.04.2017.
  */
 public class Phone {
     private Person user = null;
+
+    private final boolean residentPhone;
+
+    public Phone(){
+        this(false);
+    }
+
+    public Phone(boolean residentPhone) {
+        this.residentPhone = residentPhone;
+    }
+
+    public boolean isResidentPhone() {
+        return residentPhone;
+    }
 
     public boolean isOccupied() {
         return user != null;

@@ -6,11 +6,12 @@ import cs.hm.edu.muenchen.hm.modellbildung.des.queue.Queue;
 import cs.hm.edu.muenchen.hm.modellbildung.des.time.Clock;
 import cs.hm.edu.muenchen.hm.modellbildung.des.time.event.Event;
 import cs.hm.edu.muenchen.hm.modellbildung.des.time.event.EventList;
-import cs.hm.edu.muenchen.hm.modellbildung.onephone.config.CallShopConfiguration;
-import cs.hm.edu.muenchen.hm.modellbildung.onephone.data.Phone;
+import cs.hm.edu.muenchen.hm.modellbildung.des.data.Phone;
 import cs.hm.edu.muenchen.hm.modellbildung.onephone.events.ArrivalEvent;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import static cs.hm.edu.muenchen.hm.modellbildung.onephone.config.CallShopConfiguration.*;
 
@@ -22,11 +23,15 @@ public class CallShopSimulation {
         private final Clock clock = new Clock();
         private final Queue queue = new ListQueue();
 
-        private final Phone phone = new Phone();
         private final EventList eventList = new EventList();
 
-        public Phone phone() {
-            return phone;
+        public List<Phone> phones() {
+            List<Phone> result = new ArrayList();
+            result.add(new Phone(CONFIGURATION>1));
+            if(CONFIGURATION == 3){
+                result.add(new Phone(false));
+            }
+            return result;
         }
         public Queue queue() {
             return queue;
@@ -48,8 +53,8 @@ public class CallShopSimulation {
             state.clock().advanceTo(event.getTimeStamp());
             event.execute(state);
 
-            System.out.print("    " + event + ":\n");
-            System.out.println(state);
+//            System.out.print("    " + event + ":\n");
+//            System.out.println(state);
         }
         try {
             arrivalLog.close();
@@ -59,6 +64,7 @@ public class CallShopSimulation {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        System.out.println("Done");
     }
 
     private void init() {
@@ -67,9 +73,11 @@ public class CallShopSimulation {
     }
 
     public static void main(String[] args) {
-        if(args.length == 2){
+        if(args.length == 4){
             MEAN_ARRIVAL = Integer.parseInt(args[0]);
             MEAN_CALL = Integer.parseInt(args[1]);
+            VIP_PERCENTAGE = Integer.parseInt(args[2]);
+            CONFIGURATION = Integer.parseInt(args[3]);
         }
 
         arrivalLog = new Log("../data/Arrival" + MEAN_ARRIVAL +"/" ,"arrival.csv");

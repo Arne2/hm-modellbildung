@@ -23,9 +23,9 @@ public class Log {
 
             file.createNewFile();
             fw = new FileWriter(file);
-            System.out.println(fw.toString());
             List<String> fields = new ArrayList<>();
             fields.add("Person");
+            fields.add("VIP");
             fields.add("Timestamp");
             fields.add("Queuelength");
             CSVUtils.writeLine(fw, fields);

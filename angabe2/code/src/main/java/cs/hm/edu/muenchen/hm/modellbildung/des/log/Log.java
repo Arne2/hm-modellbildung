@@ -13,11 +13,17 @@ public class Log {
 
     private FileWriter fw;
 
-    public Log(String filename){
-        File file = new File(filename);
+    public Log(String pathname, String filename){
         try {
+            File path = new File(pathname);
+            if(!path.exists()){
+                path.mkdirs();
+            }
+            File file = new File(pathname + filename);
+
             file.createNewFile();
             fw = new FileWriter(file);
+            System.out.println(fw.toString());
             List<String> fields = new ArrayList<>();
             fields.add("Person");
             fields.add("Timestamp");

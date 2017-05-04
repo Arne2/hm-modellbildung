@@ -1,5 +1,6 @@
 package cs.hm.edu.muenchen.hm.modellbildung.onephone;
 
+import cs.hm.edu.muenchen.hm.modellbildung.des.log.Log;
 import cs.hm.edu.muenchen.hm.modellbildung.des.queue.ListQueue;
 import cs.hm.edu.muenchen.hm.modellbildung.des.queue.Queue;
 import cs.hm.edu.muenchen.hm.modellbildung.des.time.Clock;
@@ -11,10 +12,8 @@ import cs.hm.edu.muenchen.hm.modellbildung.onephone.events.ArrivalEvent;
 
 import java.io.IOException;
 
-import static cs.hm.edu.muenchen.hm.modellbildung.onephone.config.CallShopConfiguration.arrivalLog;
-import static cs.hm.edu.muenchen.hm.modellbildung.onephone.config.CallShopConfiguration.serveLog;
-import static cs.hm.edu.muenchen.hm.modellbildung.onephone.config.CallShopConfiguration.finishLog;
-import static cs.hm.edu.muenchen.hm.modellbildung.onephone.config.CallShopConfiguration.queueLog;
+import static cs.hm.edu.muenchen.hm.modellbildung.onephone.config.CallShopConfiguration.*;
+
 /**
  * @author peter-mueller
  */
@@ -68,6 +67,17 @@ public class CallShopSimulation {
     }
 
     public static void main(String[] args) {
+        if(args.length == 2){
+            MEAN_ARRIVAL = Integer.parseInt(args[0]);
+            MEAN_CALL = Integer.parseInt(args[1]);
+        }
+
+        arrivalLog = new Log("../data/Arrival" + MEAN_ARRIVAL +"/" ,"arrival.csv");
+        serveLog = new Log("../data/Arrival" + MEAN_ARRIVAL + "/","serve.csv");
+        finishLog = new Log("../data/Arrival" + MEAN_ARRIVAL + "/","finish.csv");
+        queueLog = new Log("../data/Arrival" + MEAN_ARRIVAL + "/", "queue.csv");
+
+
         final CallShopSimulation callShopSimulation = new CallShopSimulation();
         callShopSimulation.run(100000);
     }

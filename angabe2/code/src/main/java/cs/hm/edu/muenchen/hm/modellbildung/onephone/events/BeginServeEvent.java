@@ -28,6 +28,9 @@ public class BeginServeEvent extends BaseEvent {
 
     @Override
     public void execute(SimulationState state) {
+        if (phone.isOccupied()){
+            throw new AssertionError("Phone Taken");
+        }
         Person person = (phone.isResidentPhone()) ? state.queue().dequeueVip() : state.queue().dequeue();
         phone.setUser(person);
 

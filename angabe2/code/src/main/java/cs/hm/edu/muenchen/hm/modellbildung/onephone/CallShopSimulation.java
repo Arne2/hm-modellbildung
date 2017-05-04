@@ -22,16 +22,12 @@ public class CallShopSimulation {
     private final SimulationState state = new SimulationState() {
         private final Clock clock = new Clock();
         private final Queue queue = new ListQueue();
+        private final List<Phone> phones = new ArrayList<>();
 
         private final EventList eventList = new EventList();
 
         public List<Phone> phones() {
-            List<Phone> result = new ArrayList();
-            result.add(new Phone(CONFIGURATION>1));
-            if(CONFIGURATION == 3){
-                result.add(new Phone(false));
-            }
-            return result;
+            return phones;
         }
         public Queue queue() {
             return queue;
@@ -68,6 +64,10 @@ public class CallShopSimulation {
     }
 
     private void init() {
+        state.phones().add(new Phone(CONFIGURATION>1));
+        if(CONFIGURATION == 3){
+            state.phones().add(new Phone(false));
+        }
         Event event = new ArrivalEvent(state.clock().systemTime());
         state.events().add(event);
     }
@@ -79,6 +79,8 @@ public class CallShopSimulation {
             VIP_PERCENTAGE = Integer.parseInt(args[2]);
             CONFIGURATION = Integer.parseInt(args[3]);
         }
+
+
 
         arrivalLog = new Log("../data/Arrival" + MEAN_ARRIVAL +"/" ,"arrival.csv");
         serveLog = new Log("../data/Arrival" + MEAN_ARRIVAL + "/","serve.csv");

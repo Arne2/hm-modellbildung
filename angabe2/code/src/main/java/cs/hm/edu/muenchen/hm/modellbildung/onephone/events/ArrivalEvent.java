@@ -7,6 +7,13 @@ import cs.hm.edu.muenchen.hm.modellbildung.des.time.event.BaseEvent;
 import cs.hm.edu.muenchen.hm.modellbildung.onephone.config.CallShopConfiguration;
 import cs.hm.edu.muenchen.hm.modellbildung.onephone.SimulationState;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static cs.hm.edu.muenchen.hm.modellbildung.onephone.config.CallShopConfiguration.arrivalLog;
+import static cs.hm.edu.muenchen.hm.modellbildung.onephone.config.CallShopConfiguration.queueLog;
+
+
 /**
  * @author peter-mueller
  */
@@ -26,6 +33,13 @@ public class ArrivalEvent extends BaseEvent {
 
         final Person person = new Person(true);
         state.queue().enqueue(person);
+
+        List<String> list = new ArrayList();
+        list.add(person.getId()+"");
+        list.add(getTimeStamp()+"");
+        list.add(state.queue().count()+"");
+        arrivalLog.writeLine(list);
+        queueLog.writeLine(list);
 
         final double nextArrivalIn = dist.getNextValue(CallShopConfiguration.MEAN_ARRIVAL);
         final double absoluteTime = state.clock().systemTime() + nextArrivalIn;

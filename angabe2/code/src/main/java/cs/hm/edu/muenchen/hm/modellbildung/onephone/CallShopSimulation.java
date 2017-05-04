@@ -5,9 +5,16 @@ import cs.hm.edu.muenchen.hm.modellbildung.des.queue.Queue;
 import cs.hm.edu.muenchen.hm.modellbildung.des.time.Clock;
 import cs.hm.edu.muenchen.hm.modellbildung.des.time.event.Event;
 import cs.hm.edu.muenchen.hm.modellbildung.des.time.event.EventList;
+import cs.hm.edu.muenchen.hm.modellbildung.onephone.config.CallShopConfiguration;
 import cs.hm.edu.muenchen.hm.modellbildung.onephone.data.Phone;
 import cs.hm.edu.muenchen.hm.modellbildung.onephone.events.ArrivalEvent;
 
+import java.io.IOException;
+
+import static cs.hm.edu.muenchen.hm.modellbildung.onephone.config.CallShopConfiguration.arrivalLog;
+import static cs.hm.edu.muenchen.hm.modellbildung.onephone.config.CallShopConfiguration.serveLog;
+import static cs.hm.edu.muenchen.hm.modellbildung.onephone.config.CallShopConfiguration.finishLog;
+import static cs.hm.edu.muenchen.hm.modellbildung.onephone.config.CallShopConfiguration.queueLog;
 /**
  * @author peter-mueller
  */
@@ -44,6 +51,14 @@ public class CallShopSimulation {
 
             System.out.print("    " + event + ":\n");
             System.out.println(state);
+        }
+        try {
+            arrivalLog.close();
+            serveLog.close();
+            finishLog.close();
+            queueLog.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

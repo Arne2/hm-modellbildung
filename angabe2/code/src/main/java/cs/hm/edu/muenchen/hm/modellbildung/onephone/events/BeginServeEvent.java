@@ -5,14 +5,8 @@ import cs.hm.edu.muenchen.hm.modellbildung.des.data.Phone;
 import cs.hm.edu.muenchen.hm.modellbildung.des.distribution.Distribution;
 import cs.hm.edu.muenchen.hm.modellbildung.des.distribution.NegativeExponentialDistribution;
 import cs.hm.edu.muenchen.hm.modellbildung.des.time.event.BaseEvent;
-import cs.hm.edu.muenchen.hm.modellbildung.onephone.config.CallShopConfiguration;
 import cs.hm.edu.muenchen.hm.modellbildung.onephone.SimulationState;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static cs.hm.edu.muenchen.hm.modellbildung.onephone.config.CallShopConfiguration.serveLog;
-import static cs.hm.edu.muenchen.hm.modellbildung.onephone.config.CallShopConfiguration.queueLog;
+import cs.hm.edu.muenchen.hm.modellbildung.onephone.config.CallShopConfiguration;
 
 /**
  * @author peter-mueller
@@ -31,20 +25,25 @@ public class BeginServeEvent extends BaseEvent {
         if (phone.isOccupied()){
             throw new AssertionError("Phone Taken");
         }
-        Person person = (phone.isResidentPhone()) ? state.queue().dequeueVip() : state.queue().dequeue();
+        Person person = (phone.isResidentPhone()) ? state.queue.dequeueVip() : state.queue.dequeue();
         phone.setUser(person);
+        makeFinishEvent(state);
 
-        List<String> list = new ArrayList();
-        list.add(person.getId()+"");
-        list.add(person.isResident()+"");
-        list.add(getTimeStamp()+"");
-        list.add(state.queue().count()+"");
-        serveLog.writeLine(list);
-        queueLog.writeLine(list);
+        log(state, person);
+    }
 
+    private void makeFinishEvent(SimulationState state) {
         final double serveTime = dist.getNextValue(CallShopConfiguration.MEAN_CALL);
-        final double absoluteTime = state.clock().systemTime() + serveTime;
+        final double absoluteTime = state.clock.systemTime() + serveTime;
         final FinishServeEvent event = new FinishServeEvent(absoluteTime, phone);
-        state.events().add(event);
+        state.events.add(event);
+    }
+
+    private void log(SimulationState state, Person person) {
+        state.beginServeLog.log(
+                person.getId(),
+                person.isResident(),
+                getTimeStamp()
+        );
     }
 }

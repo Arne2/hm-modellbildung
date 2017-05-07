@@ -12,6 +12,7 @@
     <groupId>cs.hm.edu.muenchen.hm.modellbildung</groupId>
     <artifactId>queue</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
@@ -42,6 +43,16 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>cs.hm.edu.muenchen.hm.modellbildung.onephone.CallShopSimulation</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
             </plugin>
         </plugins>
     </build>

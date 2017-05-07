@@ -30,37 +30,40 @@
 (*Eigene Resultate*)
 
 
-arrivalPath = "./arrival.csv";
-dataArrivals = SemanticImport[FileNameJoin@{NotebookDirectory[],arrivalPath},CharacterEncoding->"UTF8"];
-servePath = "./serve.csv";
-dataServe = SemanticImport[FileNameJoin@{NotebookDirectory[],servePath},CharacterEncoding->"UTF8"];
-finishPath = "./finish.csv";
-dataFinish = SemanticImport[FileNameJoin@{NotebookDirectory[],finishPath},CharacterEncoding->"UTF8"];
+SetDirectory[FileNameJoin@{NotebookDirectory[], "../code"}]
 
-dataOfFinish = dataFinish[All,<|
-"Person"->"Person",
-"TimestampF"->"Timestamp"
-|>];
-dataOfArrivals =  dataArrivals[All,<|
-"Person"->"Person",
-"TimestampA"->"Timestamp"
-|>];
+If[Run["mvn package"] == 1, "mvn nicht istalliert in Intellij maven target package ausf\[UDoubleDot]hren "]
+If[
+	Run["java -jar " <> FileNameJoin@{NotebookDirectory[], "../code/target","queue-1.0-SNAPSHOT.jar"}] == 1,
+	"konnte simulation nicht ausf\[UDoubleDot]hren",
+	"Simulation beendet"
+]
 
-dataFinishArrival = JoinAcross[dataOfArrivals, dataOfFinish, {"Person"}];
 
-dataset2 = Append[#, "deltaT" -> #TimestampF - #TimestampA] & /@ dataFinishArrival
-meanDeltaT = Mean[dataset2[[All,4]]]
-(*dataArrivals = data[Select[#Queuelength != ""&],<|
-"t"->"Time",
-"Q(t)"->"Queuelength"|>];
-\[Micro] = 0.01;
-ListStepPlot[dataArrivals]
-(*Arrival Distribution for the Queueing Process*)
-tmp = data[Select[#Time != ""&],<|
-"t"->"Time"|>];
-arrivalDistribution = Normal[tmp[[All,"t"]]];
-ourqueue = QueueingProcess[arrivalDistribution,\[Micro]];
-QueueProperties[ourqueue]*)
+Load[type_] := Module[{data},
+	data = SemanticImport[FileNameJoin@{NotebookDirectory[],"../data", type <> ".csv"},HeaderLines->1];
+	data[All, <| "id"->"id", "resident"->"resident",type->"time"|>]
+]
+
+data = JoinAcross[
+	JoinAcross[Load["arrival"],Load["begin"],{"id"}],
+	Load["finish"],{"id"}
+]
+
+
+f[time_]:=Mean@data[Select[#begin < time&],#begin - #arrival&]
+lastTime=Max@data[All,"begin"];
+DiscretePlot[f[x], {x,1,lastTime, lastTime/100}]
+
+
+f[time_]:=Mean@data[Select[#finish < time&],#finish - #begin&]
+lastTime=Max@data[All,"finish"];
+DiscretePlot[f[x], {x,1,lastTime, lastTime/100}]
+
+
+f[time_]:=Mean@data[Select[#finish < time&],#finish - #arrival&]
+lastTime=Max@data[All,"finish"];
+DiscretePlot[f[x], {x,1,lastTime, lastTime/100}]
 
 
 (* ::Subsection:: *)
@@ -83,3 +86,23 @@ QueueProperties[ourqueue]*)
 
 (* ::Text:: *)
 (**)
+
+
+d = Import[FileNameJoin@{NotebookDirectory[],"../data", "queue" <> ".csv"},HeaderLines->1]
+queue
+
+
+AreaQueueSize[data_, n_]:=data[[n,2]] * (data[[n+1,1]] - data[[n,1]])
+MeanQueueSize[d_] := 
+	Sum[AreaQueueSize[d,t], {t, 1 ,Length@d - 1  }] / (Last@d)[[1]]
+	
+AreaRoomSize[data_, n_]:=data[[n,3]] * (data[[n+1,1]] - data[[n,1]])
+MeanQueueSize[d_] := 
+	Sum[AreaRoomSize[d,t], {t, 1 ,Length@d - 1  }] / (Last@d)[[1]]
+
+
+MeanQueueSize[d]
+
+
+AreaRoomSize[data_, n_]:=data[[n,3]] * (data[[n+1,1]] - data[[n,1]])
+Sum[AreaRoomSize[d,t], {t, 1 ,Length@d - 1  }] / (Last@d)[[1]]

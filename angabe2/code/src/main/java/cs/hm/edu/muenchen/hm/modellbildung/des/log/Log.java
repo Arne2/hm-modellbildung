@@ -1,49 +1,40 @@
 package cs.hm.edu.muenchen.hm.modellbildung.des.log;
 
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.Writer;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 /**
  * @author peter-mueller
  */
-public class Log {
+public class Log implements AutoCloseable {
+    private static final String DEFAULT_SEPARATOR = ",";
 
-    private FileWriter fw;
+    private final Writer writer;
 
-    public Log(String pathname, String filename){
-        try {
-            File path = new File(pathname);
-            if(!path.exists()){
-                path.mkdirs();
-            }
-            File file = new File(pathname + filename);
+    public Log(Path file) throws IOException {
+        createFolders(file);
+        this.writer = Files.newBufferedWriter(file);
+    }
 
-            file.createNewFile();
-            fw = new FileWriter(file);
-            List<String> fields = new ArrayList<>();
-            fields.add("Person");
-            fields.add("VIP");
-            fields.add("Timestamp");
-            fields.add("Queuelength");
-            CSVUtils.writeLine(fw, fields);
-        } catch (IOException e) {
-            e.printStackTrace();
+    private void createFolders(Path path) throws IOException {
+        if (!path.toFile().exists()) {
+            final Path parent = path.getParent();
+            parent.toFile().mkdirs();
         }
     }
 
-    public void writeLine(List<String> values){
+    public void log(String... strings) {
+        final String line = String.join(DEFAULT_SEPARATOR, strings);
         try {
-            CSVUtils.writeLine(fw, values);
+            writer.write(line + "\n");
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 
     public void close() throws IOException {
-        fw.flush();
-        fw.close();
+        writer.close();
     }
 }

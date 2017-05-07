@@ -54,11 +54,12 @@ public class CallShopSimulation {
     }
 
     public static void main(String[] args) {
-        if (args.length == 4) {
+        if (args.length == 5) {
             MEAN_ARRIVAL = Integer.parseInt(args[0]);
             MEAN_CALL = Integer.parseInt(args[1]);
-            VIP_PERCENTAGE = Integer.parseInt(args[2]);
-            CONFIGURATION = Integer.parseInt(args[3]);
+            DURATION = Integer.parseInt(args[2]);
+            VIP_PERCENTAGE = Integer.parseInt(args[3]);
+            CONFIGURATION = Integer.parseInt(args[4]);
         }
 
         final Path folder = Paths.get("../data/");

@@ -37,6 +37,7 @@ public class ArrivalEvent extends BaseEvent {
 
     private void makeNextArrival(SimulationState state) {
         final double nextArrivalIn = dist.getNextValue(CallShopConfiguration.MEAN_ARRIVAL);
+        state.arrivalDistributionLog.log(nextArrivalIn);
         final double absoluteTime = state.clock.systemTime() + nextArrivalIn;
         final ArrivalEvent event = new ArrivalEvent(absoluteTime);
         state.events.add(event);

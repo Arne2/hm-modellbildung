@@ -24,10 +24,10 @@ public class CallShopSimulation {
         this.state = state;
     }
 
-    private void run(double duration) {
+    private void run() {
         init();
 
-        while (state.clock.systemTime() < duration) {
+        while (state.clock.systemTime() < DURATION) {
             final Event event = state.events.nextEvent();
             state.clock.advanceTo(event.getTimeStamp());
 
@@ -65,7 +65,7 @@ public class CallShopSimulation {
         final Path folder = Paths.get("../data/");
         try (final SimulationState state = new SimulationState(folder)) {
             final CallShopSimulation callShopSimulation = new CallShopSimulation(state);
-            callShopSimulation.run(100000000.0);
+            callShopSimulation.run();
         } catch (IOException e) {
             e.printStackTrace();
         }

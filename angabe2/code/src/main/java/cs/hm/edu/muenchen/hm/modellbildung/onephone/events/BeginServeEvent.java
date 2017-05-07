@@ -34,6 +34,7 @@ public class BeginServeEvent extends BaseEvent {
 
     private void makeFinishEvent(SimulationState state) {
         final double serveTime = dist.getNextValue(CallShopConfiguration.MEAN_CALL);
+        state.serveDistributionLog.log(serveTime);
         final double absoluteTime = state.clock.systemTime() + serveTime;
         final FinishServeEvent event = new FinishServeEvent(absoluteTime, phone);
         state.events.add(event);

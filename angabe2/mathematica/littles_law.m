@@ -8,7 +8,7 @@
 (* Littles Theorem auf unsere Warteschlange*)
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Little Law*)
 
 
@@ -33,8 +33,10 @@
 SetDirectory[FileNameJoin@{NotebookDirectory[], "../code"}]
 
 If[Run["mvn package"] == 1, "mvn nicht istalliert in Intellij maven target package ausf\[UDoubleDot]hren "]
+
+args = " 1000 100 0 1";
 If[
-	Run["java -jar " <> FileNameJoin@{NotebookDirectory[], "../code/target","queue-1.0-SNAPSHOT.jar"}] == 1,
+	Run["java -jar " <> FileNameJoin@{NotebookDirectory[], "../code/target","queue-1.0-SNAPSHOT.jar"} <> args] == 1,
 	"konnte simulation nicht ausf\[UDoubleDot]hren",
 	"Simulation beendet"
 ]
@@ -48,7 +50,7 @@ Load[type_] := Module[{data},
 data = JoinAcross[
 	JoinAcross[Load["arrival"],Load["begin"],{"id"}],
 	Load["finish"],{"id"}
-]
+];
 
 
 f[time_]:=Mean@data[Select[#begin < time&],#begin - #arrival&]

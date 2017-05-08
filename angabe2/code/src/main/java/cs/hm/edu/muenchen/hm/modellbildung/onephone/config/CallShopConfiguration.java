@@ -12,4 +12,5 @@ public class CallShopConfiguration {
     public static double DURATION = 100000000.0;
     public static int VIP_PERCENTAGE = 10;
     public static int CONFIGURATION = 1;
+    public static String OUTPATH = "../data/";
 }

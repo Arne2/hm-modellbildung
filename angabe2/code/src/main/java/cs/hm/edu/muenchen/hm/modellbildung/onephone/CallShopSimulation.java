@@ -4,7 +4,11 @@ import cs.hm.edu.muenchen.hm.modellbildung.des.data.Phone;
 import cs.hm.edu.muenchen.hm.modellbildung.des.time.event.Event;
 import cs.hm.edu.muenchen.hm.modellbildung.onephone.events.ArrivalEvent;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Writer;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
@@ -86,12 +90,35 @@ public class CallShopSimulation {
             String s = arguments.get(index+1);
             CONFIGURATION = Integer.parseInt(s);
         }
+        index = arguments.indexOf("-o");
+        if (index >= 0 && arguments.size() > index){
+            OUTPATH = arguments.get(index+1);
+        }
+    }
+
+    private static void logConfiguration(Path folder){
+        if (!folder.toFile().exists()) {
+            final Path parent = folder.getParent();
+            parent.toFile().mkdirs();
+        }
+        try {
+            Writer fw = Files.newBufferedWriter(folder);
+            fw.write("Programmstart mit folgenden Parametern: \n Mittlere Ankunftszeit: " +
+                    MEAN_ARRIVAL + "\n Mittlere Telefonierzeit: " + MEAN_CALL + "\n Gesamtdauer: " + DURATION +
+                    "\n Wahrscheinlichkeit auf Dorfbewohner: " + VIP_PERCENTAGE + "\n Konfiguration: " + CONFIGURATION);
+            fw.flush();
+            fw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void main(String[] args) {
-        loadConfiguration(args);
 
-        final Path folder = Paths.get("../data/");
+        loadConfiguration(args);
+        final Path folder = Paths.get(OUTPATH);
+        logConfiguration(folder.resolve("starting_configuration.txt"));
+
         try (final SimulationState state = new SimulationState(folder)) {
             final CallShopSimulation callShopSimulation = new CallShopSimulation(state);
             callShopSimulation.run();

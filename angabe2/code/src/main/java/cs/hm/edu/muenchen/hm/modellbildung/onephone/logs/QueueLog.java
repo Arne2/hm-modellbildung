@@ -4,6 +4,7 @@ import cs.hm.edu.muenchen.hm.modellbildung.des.log.Log;
 import cs.hm.edu.muenchen.hm.modellbildung.onephone.SimulationState;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.nio.file.Path;
 
 /**
@@ -17,9 +18,9 @@ public class QueueLog implements AutoCloseable {
         log.log("time", "size", "room");
     }
 
-    public void log(double timeStamp, long size, long roomSize) {
+    public void log(BigDecimal timeStamp, long size, long roomSize) {
         final String[] strings = {
-                String.valueOf(timeStamp),
+                timeStamp.toString(),
                 String.valueOf(size),
                 String.valueOf(roomSize)
         };

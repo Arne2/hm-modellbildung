@@ -2,23 +2,25 @@ package cs.hm.edu.muenchen.hm.modellbildung.des.time.event;
 
 import cs.hm.edu.muenchen.hm.modellbildung.des.time.event.Event;
 
+import java.math.BigDecimal;
+
 /**
  * @author peter-mueller
  */
 public abstract class BaseEvent implements Event {
-    private final double timeStamp;
+    private final BigDecimal timeStamp;
 
-    public BaseEvent(double timeStamp) {
+    public BaseEvent(BigDecimal timeStamp) {
         this.timeStamp = timeStamp;
     }
 
     @Override
-    public double getTimeStamp() {
+    public BigDecimal getTimeStamp() {
         return timeStamp;
     }
     @Override
     public int compareTo(Event o) {
-        return Double.compare(this.getTimeStamp(), o.getTimeStamp());
+        return getTimeStamp().compareTo(o.getTimeStamp());
     }
 
 }

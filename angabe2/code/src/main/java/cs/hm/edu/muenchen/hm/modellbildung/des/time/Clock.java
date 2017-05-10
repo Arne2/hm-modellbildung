@@ -1,24 +1,26 @@
 package cs.hm.edu.muenchen.hm.modellbildung.des.time;
 
+import java.math.BigDecimal;
+
 /**
  * @author peter-mueller
  */
 public class Clock {
-    private double time = 0;
+    private BigDecimal time = new BigDecimal(0);
 
-    public void advance(double time) {
-        if (time < 0) {
+    public void advance(BigDecimal time) {
+        if (time.compareTo(new BigDecimal(0)) < 0) {
             throw new IllegalArgumentException("Time must not be negative!");
         }
-        this.time += time;
+        this.time.add(time);
     }
-    public void advanceTo(double time) {
-        if (time < this.time) {
+    public void advanceTo(BigDecimal time) {
+        if (this.time.compareTo(time) > 0) {
             throw new IllegalArgumentException("Time must be greater than the current system time!");
         }
         this.time = time;
     }
-    public double systemTime() {
+    public BigDecimal systemTime() {
         return time;
     }
 }

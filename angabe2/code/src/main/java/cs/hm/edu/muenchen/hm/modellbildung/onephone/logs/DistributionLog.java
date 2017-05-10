@@ -17,7 +17,6 @@ public class DistributionLog implements AutoCloseable{
     }
 
     public void log(double time) {
-        System.out.println(time);
         final String[] strings = {
                 String.valueOf(time),
         };

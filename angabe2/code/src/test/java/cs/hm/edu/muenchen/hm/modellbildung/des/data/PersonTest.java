@@ -1,9 +1,7 @@
-package cs.hm.edu.muenchen.hm.modellbildung.onephone.data;
+package cs.hm.edu.muenchen.hm.modellbildung.des.data;
 
 import org.junit.Assert;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 /**
  * @author peter-mueller

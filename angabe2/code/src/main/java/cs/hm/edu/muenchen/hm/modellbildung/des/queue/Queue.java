@@ -1,6 +1,6 @@
 package cs.hm.edu.muenchen.hm.modellbildung.des.queue;
 
-import cs.hm.edu.muenchen.hm.modellbildung.onephone.data.Person;
+import cs.hm.edu.muenchen.hm.modellbildung.des.data.Person;
 
 /**
  * @author peter-mueller
@@ -8,6 +8,7 @@ import cs.hm.edu.muenchen.hm.modellbildung.onephone.data.Person;
 public interface Queue {
     void enqueue(Person person);
     Person dequeue();
+    Person dequeueVip();
 
     long count();
     boolean isEmpty();

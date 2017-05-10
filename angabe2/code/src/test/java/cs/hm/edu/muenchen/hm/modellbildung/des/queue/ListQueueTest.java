@@ -1,6 +1,6 @@
 package cs.hm.edu.muenchen.hm.modellbildung.des.queue;
 
-import cs.hm.edu.muenchen.hm.modellbildung.onephone.data.Person;
+import cs.hm.edu.muenchen.hm.modellbildung.des.data.Person;
 import org.junit.Assert;
 import org.junit.Test;
 

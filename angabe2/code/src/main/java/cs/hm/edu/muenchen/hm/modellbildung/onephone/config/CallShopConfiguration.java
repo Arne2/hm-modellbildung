@@ -7,11 +7,10 @@ import cs.hm.edu.muenchen.hm.modellbildung.des.log.Log;
  */
 
 public class CallShopConfiguration {
-    public static final int MEAN_ARRIVAL = 1000;
-    public static final int MEAN_CALL = 100;
-
-    public static final Log arrivalLog = new Log("arrival.csv");
-    public static final Log serveLog = new Log("serve.csv");
-    public static final Log finishLog = new Log("finish.csv");
-    public static final Log queueLog = new Log("queue.csv");
+    public static int MEAN_ARRIVAL = 1000;
+    public static int MEAN_CALL = 100;
+    public static double DURATION = 100000000.0;
+    public static int VIP_PERCENTAGE = 10;
+    public static int CONFIGURATION = 1;
+    public static String OUTPATH = "../data/";
 }

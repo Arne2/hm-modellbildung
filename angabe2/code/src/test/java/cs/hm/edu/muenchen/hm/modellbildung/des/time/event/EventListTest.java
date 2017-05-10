@@ -4,8 +4,6 @@ import cs.hm.edu.muenchen.hm.modellbildung.onephone.SimulationState;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 /**
  * @author peter-mueller
  */

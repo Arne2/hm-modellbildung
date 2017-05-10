@@ -1,46 +1,50 @@
 package cs.hm.edu.muenchen.hm.modellbildung.onephone.events;
 
-import cs.hm.edu.muenchen.hm.modellbildung.onephone.data.Person;
+import cs.hm.edu.muenchen.hm.modellbildung.des.data.Person;
+import cs.hm.edu.muenchen.hm.modellbildung.des.data.Phone;
 import cs.hm.edu.muenchen.hm.modellbildung.des.distribution.Distribution;
 import cs.hm.edu.muenchen.hm.modellbildung.des.distribution.NegativeExponentialDistribution;
 import cs.hm.edu.muenchen.hm.modellbildung.des.time.event.BaseEvent;
-import cs.hm.edu.muenchen.hm.modellbildung.onephone.config.CallShopConfiguration;
 import cs.hm.edu.muenchen.hm.modellbildung.onephone.SimulationState;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static cs.hm.edu.muenchen.hm.modellbildung.onephone.config.CallShopConfiguration.serveLog;
-import static cs.hm.edu.muenchen.hm.modellbildung.onephone.config.CallShopConfiguration.queueLog;
+import cs.hm.edu.muenchen.hm.modellbildung.onephone.config.CallShopConfiguration;
 
 /**
  * @author peter-mueller
  */
 public class BeginServeEvent extends BaseEvent {
     private final Distribution dist = new NegativeExponentialDistribution();
+    private final Phone phone;
 
-    public BeginServeEvent(double timeStamp) {
+    public BeginServeEvent(double timeStamp, Phone phone) {
         super(timeStamp);
+        this.phone = phone;
     }
 
     @Override
     public void execute(SimulationState state) {
-        if (state.phone().isOccupied()) {
-            throw new AssertionError("Phone must not be occupied on begin serve!");
+        if (phone.isOccupied()){
+            throw new AssertionError("Phone Taken");
         }
-        final Person person = state.queue().dequeue();
-        state.phone().setUser(person);
+        Person person = (phone.isResidentPhone()) ? state.queue.dequeueVip() : state.queue.dequeue();
+        phone.setUser(person);
+        makeFinishEvent(state);
 
-        List<String> list = new ArrayList();
-        list.add(person.getId()+"");
-        list.add(getTimeStamp()+"");
-        list.add(state.queue().count()+"");
-        serveLog.writeLine(list);
-        queueLog.writeLine(list);
+        log(state, person);
+    }
 
+    private void makeFinishEvent(SimulationState state) {
         final double serveTime = dist.getNextValue(CallShopConfiguration.MEAN_CALL);
-        final double absoluteTime = state.clock().systemTime() + serveTime;
-        final FinishServeEvent event = new FinishServeEvent(absoluteTime);
-        state.events().add(event);
+        state.serveDistributionLog.log(serveTime);
+        final double absoluteTime = state.clock.systemTime() + serveTime;
+        final FinishServeEvent event = new FinishServeEvent(absoluteTime, phone);
+        state.events.add(event);
+    }
+
+    private void log(SimulationState state, Person person) {
+        state.beginServeLog.log(
+                person.getId(),
+                person.isResident(),
+                getTimeStamp()
+        );
     }
 }

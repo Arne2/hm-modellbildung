@@ -1,38 +1,38 @@
 package cs.hm.edu.muenchen.hm.modellbildung.onephone.events;
 
+import cs.hm.edu.muenchen.hm.modellbildung.des.data.Phone;
 import cs.hm.edu.muenchen.hm.modellbildung.des.time.event.BaseEvent;
+import cs.hm.edu.muenchen.hm.modellbildung.des.data.Person;
 import cs.hm.edu.muenchen.hm.modellbildung.onephone.SimulationState;
-import cs.hm.edu.muenchen.hm.modellbildung.onephone.data.Person;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static cs.hm.edu.muenchen.hm.modellbildung.onephone.config.CallShopConfiguration.finishLog;
 
 /**
  * @author peter-mueller
  */
 public class FinishServeEvent extends BaseEvent {
-    public FinishServeEvent(double timeStamp) {
+    private final Phone phone;
+
+    public FinishServeEvent(double timeStamp, Phone phone) {
         super(timeStamp);
+        this.phone = phone;
     }
 
     @Override
     public void execute(SimulationState state) {
-        if (!state.phone().isOccupied()) {
-            throw new AssertionError("Phone must have been in use!");
-        }
-        Person person = state.phone().removeUser();
+        Person person = phone.removeUser();
 
-        List<String> list = new ArrayList();
-        list.add(person.getId()+"");
-        list.add(getTimeStamp()+"");
-        list.add(state.queue().count()+"");
-        finishLog.writeLine(list);
-
-        if (!state.queue().isEmpty()){
-            final BeginServeEvent event = new BeginServeEvent(state.clock().systemTime());
-            state.events().add(event);
+        if (!state.queue.isEmpty()){
+            final BeginServeEvent event = new BeginServeEvent(state.clock.systemTime(), phone);
+            state.events.add(event);
         }
+
+        log(state, person);
+    }
+
+    private void log(SimulationState state, Person person) {
+        state.finishServeLog.log(
+                person.getId(),
+                person.isResident(),
+                state.clock.systemTime()
+        );
     }
 }

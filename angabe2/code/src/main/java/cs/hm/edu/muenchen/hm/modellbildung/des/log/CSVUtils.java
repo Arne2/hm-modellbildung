@@ -9,8 +9,6 @@ public class CSVUtils {
     private static final char DEFAULT_SEPARATOR = ',';
 
     public static void writeLine(Writer w, List<String> values) throws IOException {
-        System.out.println(w.toString());
-        System.out.println(values);
         writeLine(w, values, DEFAULT_SEPARATOR, ' ');
     }
 

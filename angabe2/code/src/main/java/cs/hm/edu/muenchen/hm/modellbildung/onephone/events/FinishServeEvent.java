@@ -5,13 +5,15 @@ import cs.hm.edu.muenchen.hm.modellbildung.des.time.event.BaseEvent;
 import cs.hm.edu.muenchen.hm.modellbildung.des.data.Person;
 import cs.hm.edu.muenchen.hm.modellbildung.onephone.SimulationState;
 
+import java.math.BigDecimal;
+
 /**
  * @author peter-mueller
  */
 public class FinishServeEvent extends BaseEvent {
     private final Phone phone;
 
-    public FinishServeEvent(double timeStamp, Phone phone) {
+    public FinishServeEvent(BigDecimal timeStamp, Phone phone) {
         super(timeStamp);
         this.phone = phone;
     }

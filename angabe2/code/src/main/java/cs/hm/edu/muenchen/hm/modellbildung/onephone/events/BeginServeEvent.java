@@ -8,6 +8,8 @@ import cs.hm.edu.muenchen.hm.modellbildung.des.time.event.BaseEvent;
 import cs.hm.edu.muenchen.hm.modellbildung.onephone.SimulationState;
 import cs.hm.edu.muenchen.hm.modellbildung.onephone.config.CallShopConfiguration;
 
+import java.math.BigDecimal;
+
 /**
  * @author peter-mueller
  */
@@ -15,7 +17,7 @@ public class BeginServeEvent extends BaseEvent {
     private final Distribution dist = new NegativeExponentialDistribution();
     private final Phone phone;
 
-    public BeginServeEvent(double timeStamp, Phone phone) {
+    public BeginServeEvent(BigDecimal timeStamp, Phone phone) {
         super(timeStamp);
         this.phone = phone;
     }
@@ -35,7 +37,7 @@ public class BeginServeEvent extends BaseEvent {
     private void makeFinishEvent(SimulationState state) {
         final double serveTime = dist.getNextValue(CallShopConfiguration.MEAN_CALL);
         state.serveDistributionLog.log(serveTime);
-        final double absoluteTime = state.clock.systemTime() + serveTime;
+        final BigDecimal absoluteTime = state.clock.systemTime().add(new BigDecimal(serveTime));
         final FinishServeEvent event = new FinishServeEvent(absoluteTime, phone);
         state.events.add(event);
     }

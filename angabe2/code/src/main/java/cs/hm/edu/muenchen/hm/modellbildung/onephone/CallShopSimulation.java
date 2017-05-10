@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -33,7 +34,7 @@ public class CallShopSimulation {
     private void run() {
         init();
 
-        while (state.clock.systemTime() < DURATION) {
+        while (state.clock.systemTime().compareTo(DURATION) < 0) {
             final Event event = state.events.nextEvent();
             state.clock.advanceTo(event.getTimeStamp());
 
@@ -78,7 +79,7 @@ public class CallShopSimulation {
         index = arguments.indexOf("-d");
         if (index >= 0 && arguments.size() > index){
             String s = arguments.get(index+1);
-            DURATION = Integer.parseInt(s);
+            DURATION = new BigDecimal(Integer.parseInt(s));
         }
         index = arguments.indexOf("-vip");
         if (index >= 0 && arguments.size() > index){

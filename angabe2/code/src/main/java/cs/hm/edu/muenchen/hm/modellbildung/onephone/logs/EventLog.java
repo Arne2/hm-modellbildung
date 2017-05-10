@@ -3,6 +3,7 @@ package cs.hm.edu.muenchen.hm.modellbildung.onephone.logs;
 import cs.hm.edu.muenchen.hm.modellbildung.des.log.Log;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.nio.file.Path;
 
 /**
@@ -16,11 +17,11 @@ public class EventLog implements AutoCloseable{
         log.log("id", "resident", "time");
     }
 
-    public void log(int id, boolean resident, double time) {
+    public void log(int id, boolean resident, BigDecimal time) {
         final String[] strings = {
                 String.valueOf(id),
                 String.valueOf(resident),
-                String.valueOf(time)
+                time.toString()
         };
         log.log(strings);
     }

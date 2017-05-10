@@ -4,6 +4,8 @@ import cs.hm.edu.muenchen.hm.modellbildung.onephone.SimulationState;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.math.BigDecimal;
+
 /**
  * @author peter-mueller
  */
@@ -15,8 +17,8 @@ public class EventListTest {
         if (list.nextEvent() != null) {
             Assert.fail("Next Event on empty list must return null!");
         }
-        final SimpleEvent now = new SimpleEvent(0);
-        final SimpleEvent later = new SimpleEvent(1);
+        final SimpleEvent now = new SimpleEvent(new BigDecimal(0));
+        final SimpleEvent later = new SimpleEvent(new BigDecimal(1));
         list.add(later);
         list.add(now);
         if (!list.nextEvent().equals(now)) {
@@ -27,7 +29,7 @@ public class EventListTest {
     @Test
     public void add() throws Exception {
         final EventList list = new EventList();
-        final SimpleEvent event = new SimpleEvent(1);
+        final SimpleEvent event = new SimpleEvent(new BigDecimal(1));
         list.add(event);
     }
 
@@ -39,7 +41,7 @@ public class EventListTest {
 
     private class SimpleEvent extends BaseEvent {
 
-        public SimpleEvent(double timeStamp) {
+        public SimpleEvent(BigDecimal timeStamp) {
             super(timeStamp);
         }
 

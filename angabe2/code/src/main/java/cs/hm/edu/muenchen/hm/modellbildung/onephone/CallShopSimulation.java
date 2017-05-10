@@ -4,9 +4,15 @@ import cs.hm.edu.muenchen.hm.modellbildung.des.data.Phone;
 import cs.hm.edu.muenchen.hm.modellbildung.des.time.event.Event;
 import cs.hm.edu.muenchen.hm.modellbildung.onephone.events.ArrivalEvent;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Writer;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.List;
 
 import static cs.hm.edu.muenchen.hm.modellbildung.onephone.config.CallShopConfiguration.*;
 
@@ -24,10 +30,10 @@ public class CallShopSimulation {
         this.state = state;
     }
 
-    private void run(double duration) {
+    private void run() {
         init();
 
-        while (state.clock.systemTime() < duration) {
+        while (state.clock.systemTime() < DURATION) {
             final Event event = state.events.nextEvent();
             state.clock.advanceTo(event.getTimeStamp());
 
@@ -53,18 +59,69 @@ public class CallShopSimulation {
         state.events.add(event);
     }
 
-    public static void main(String[] args) {
-        if (args.length == 4) {
-            MEAN_ARRIVAL = Integer.parseInt(args[0]);
-            MEAN_CALL = Integer.parseInt(args[1]);
-            VIP_PERCENTAGE = Integer.parseInt(args[2]);
-            CONFIGURATION = Integer.parseInt(args[3]);
+    /**
+     * Sets the constants of the Configuration at the begin of the program.
+     * @param args array of strings
+     */
+    private static void loadConfiguration(String[] args){
+        List<String> arguments = Arrays.asList(args);
+        int index = arguments.indexOf("-a");
+        if (index >= 0 && arguments.size() > index){
+            String s = arguments.get(index+1);
+            MEAN_ARRIVAL = Integer.parseInt(s);
         }
+        index = arguments.indexOf("-c");
+        if (index >= 0 && arguments.size() > index){
+            String s = arguments.get(index+1);
+            MEAN_CALL = Integer.parseInt(s);
+        }
+        index = arguments.indexOf("-d");
+        if (index >= 0 && arguments.size() > index){
+            String s = arguments.get(index+1);
+            DURATION = Integer.parseInt(s);
+        }
+        index = arguments.indexOf("-vip");
+        if (index >= 0 && arguments.size() > index){
+            String s = arguments.get(index+1);
+            VIP_PERCENTAGE = Integer.parseInt(s);
+        }
+        index = arguments.indexOf("-conf");
+        if (index >= 0 && arguments.size() > index){
+            String s = arguments.get(index+1);
+            CONFIGURATION = Integer.parseInt(s);
+        }
+        index = arguments.indexOf("-o");
+        if (index >= 0 && arguments.size() > index){
+            OUTPATH = arguments.get(index+1);
+        }
+    }
 
-        final Path folder = Paths.get("../data/");
+    private static void logConfiguration(Path folder){
+        if (!folder.toFile().exists()) {
+            final Path parent = folder.getParent();
+            parent.toFile().mkdirs();
+        }
+        try {
+            Writer fw = Files.newBufferedWriter(folder);
+            fw.write("Programmstart mit folgenden Parametern: \n Mittlere Ankunftszeit: " +
+                    MEAN_ARRIVAL + "\n Mittlere Telefonierzeit: " + MEAN_CALL + "\n Gesamtdauer: " + DURATION +
+                    "\n Wahrscheinlichkeit auf Dorfbewohner: " + VIP_PERCENTAGE + "\n Konfiguration: " + CONFIGURATION);
+            fw.flush();
+            fw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void main(String[] args) {
+
+        loadConfiguration(args);
+        final Path folder = Paths.get(OUTPATH);
+        logConfiguration(folder.resolve("starting_configuration.txt"));
+
         try (final SimulationState state = new SimulationState(folder)) {
             final CallShopSimulation callShopSimulation = new CallShopSimulation(state);
-            callShopSimulation.run(100000000.0);
+            callShopSimulation.run();
         } catch (IOException e) {
             e.printStackTrace();
         }

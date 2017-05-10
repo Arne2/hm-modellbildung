@@ -24,26 +24,21 @@ public class ListQueue implements Queue {
         return list.remove(0);
     }
 
+    /**
+     * Returns the first vip. If there is none the first non-vip will be returned.
+     * @return the next person in line
+     */
     @Override
     public Person dequeueVip() {
         if(list.isEmpty()) {
             return null;
         }
         Optional<Person> person = list.stream().filter(Person::isResident).findFirst();
-//        for (Person person : list){
-//            if (person.isResident()){
-//                list.remove(person);
-//                return person;
-//            }
-//        }
-//        return list.remove(0);
-
         if (person.isPresent()) {
             list.remove(person.get());
             return person.get();
-        } else {
-            return list.remove(0);
         }
+        return dequeue();
 
     }
 

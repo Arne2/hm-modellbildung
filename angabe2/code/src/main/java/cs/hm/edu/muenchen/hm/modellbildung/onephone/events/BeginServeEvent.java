@@ -28,6 +28,7 @@ public class BeginServeEvent extends BaseEvent {
             throw new AssertionError("Phone Taken");
         }
         Person person = (phone.isResidentPhone()) ? state.queue.dequeueVip() : state.queue.dequeue();
+        person.setBeginTimeStamp(state.clock.systemTime());
         phone.setUser(person);
         makeFinishEvent(state);
 

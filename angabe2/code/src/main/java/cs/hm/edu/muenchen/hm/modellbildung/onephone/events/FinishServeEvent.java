@@ -1,5 +1,6 @@
 package cs.hm.edu.muenchen.hm.modellbildung.onephone.events;
 
+import cs.hm.edu.muenchen.hm.modellbildung.des.calculation.calculation;
 import cs.hm.edu.muenchen.hm.modellbildung.des.data.Phone;
 import cs.hm.edu.muenchen.hm.modellbildung.des.time.event.BaseEvent;
 import cs.hm.edu.muenchen.hm.modellbildung.des.data.Person;
@@ -21,12 +22,12 @@ public class FinishServeEvent extends BaseEvent {
     @Override
     public void execute(SimulationState state) {
         Person person = phone.removeUser();
-
+        person.setFinishTimeStamp(state.clock.systemTime());
         if (!state.queue.isEmpty()){
             final BeginServeEvent event = new BeginServeEvent(state.clock.systemTime(), phone);
             state.events.add(event);
         }
-
+        calculation.calculate(person);
         log(state, person);
     }
 

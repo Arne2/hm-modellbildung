@@ -8,7 +8,7 @@
 (* Littles Theorem auf unsere Warteschlange*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Little Law*)
 
 
@@ -56,8 +56,8 @@ data = JoinAcross[
 dataQueuePath = FileNameJoin@{NotebookDirectory[],"../data/queue.csv"};
 dataQueue = SemanticImport[dataQueuePath];
 dataQueue = dataQueue[Select[#room == 0 || #room != #size& ]];
-dataQueue = Drop[dataQueue, None, {3}];
-ListStepPlot[dataQueue]
+dataQueuePlot = Drop[dataQueue, None, {3}];
+ListStepPlot[dataQueuePlot]
 Export[FileNameJoin@{outputDir,"queueLengthPlot.pdf"},%];
 
 
@@ -92,6 +92,9 @@ MeanCallingTime[time_]:=Mean@data[Select[#finish <= time&],#finish - #begin&]
 lastTime=Max@data[All,"finish"];
 DiscretePlot[MeanCallingTime[x], {x,1,lastTime, lastTime/100}]
 Export[FileNameJoin@{outputDir,"meanCallingTimePlot.pdf"},%];
+
+
+DiscretePlot[{data[x,"time"],Mean@data[1;;x,#finish - #begin&]}, {x,1,2000}]
 
 
 meanCallingtimeValue = MeanCallingTime[lastTime]

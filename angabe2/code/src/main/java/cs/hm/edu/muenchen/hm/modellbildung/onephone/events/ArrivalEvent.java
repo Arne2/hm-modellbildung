@@ -30,6 +30,7 @@ public class ArrivalEvent extends BaseEvent {
         findFreePhones(state);
 
         final Person person = new Person(random.nextInt(100) < VIP_PERCENTAGE);
+        person.setArrivalTimeStamp(state.clock.systemTime());
         state.queue.enqueue(person);
         makeNextArrival(state);
 

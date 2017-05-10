@@ -1,11 +1,18 @@
 package cs.hm.edu.muenchen.hm.modellbildung.des.data;
 
+import java.math.BigDecimal;
+
 /**
  * @author peter-mueller
  */
 public class Person {
     private static int UNIQUE_ID = 0;
     private final int id = ++UNIQUE_ID;
+
+    private BigDecimal ArrivalTime = new BigDecimal(0);
+    private BigDecimal BeginTime = new BigDecimal(0);
+    private BigDecimal FinishTime = new BigDecimal(0);
+
 
     private final boolean resident;
 
@@ -37,4 +44,25 @@ public class Person {
     public int hashCode() {
         return id;
     }
+
+    public void setArrivalTimeStamp(BigDecimal time){
+        ArrivalTime = time;
+    }
+    public void setBeginTimeStamp(BigDecimal time){
+        BeginTime = time;
+    }
+    public void setFinishTimeStamp(BigDecimal time){
+        FinishTime = time;
+    }
+
+    public BigDecimal getArrivalTime(){
+        return ArrivalTime;
+    }
+    public BigDecimal getBeginTime(){
+        return BeginTime;
+    }
+    public BigDecimal getFinishTime(){
+        return FinishTime;
+    }
+
 }

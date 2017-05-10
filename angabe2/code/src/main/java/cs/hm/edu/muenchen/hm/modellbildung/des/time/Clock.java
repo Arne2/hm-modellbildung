@@ -12,7 +12,7 @@ public class Clock {
         if (time.compareTo(new BigDecimal(0)) < 0) {
             throw new IllegalArgumentException("Time must not be negative!");
         }
-        this.time.add(time);
+        this.time = this.time.add(time);
     }
     public void advanceTo(BigDecimal time) {
         if (this.time.compareTo(time) > 0) {

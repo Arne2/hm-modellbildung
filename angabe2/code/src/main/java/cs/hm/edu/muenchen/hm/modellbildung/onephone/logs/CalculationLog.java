@@ -5,6 +5,7 @@ import cs.hm.edu.muenchen.hm.modellbildung.des.log.Log;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.nio.file.Path;
+import java.text.Bidi;
 
 /**
  * @author peter-mueller
@@ -22,7 +23,8 @@ public class CalculationLog implements AutoCloseable{
                 "meanSystemSize",
                 "meanWaitingTime",
                 "meanCallingTime",
-                "meanSystemTime");
+                "meanSystemTime",
+                "LittlesLaw");
     }
 
     public void log(BigDecimal time,
@@ -33,7 +35,8 @@ public class CalculationLog implements AutoCloseable{
                     BigDecimal meanSystemSize,
                     BigDecimal meanWaitingTime,
                     BigDecimal meanCallingTime,
-                    BigDecimal meanSystemTime
+                    BigDecimal meanSystemTime,
+                    BigDecimal LittlesLaw
                     ) {
         final String[] strings = {
                 time.toString(),
@@ -44,7 +47,8 @@ public class CalculationLog implements AutoCloseable{
                 meanSystemSize.toString(),
                 meanWaitingTime.toString(),
                 meanCallingTime.toString(),
-                meanSystemTime.toString()
+                meanSystemTime.toString(),
+                LittlesLaw.toString()
         };
         log.log(strings);
     }

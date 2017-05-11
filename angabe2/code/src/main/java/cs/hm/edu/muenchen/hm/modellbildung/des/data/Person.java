@@ -9,9 +9,9 @@ public class Person {
     private static int UNIQUE_ID = 0;
     private final int id = ++UNIQUE_ID;
 
-    private BigDecimal ArrivalTime = new BigDecimal(0);
-    private BigDecimal BeginTime = new BigDecimal(0);
-    private BigDecimal FinishTime = new BigDecimal(0);
+    private BigDecimal ArrivalTime = new BigDecimal(-1);
+    private BigDecimal BeginTime = new BigDecimal(-1);
+    private BigDecimal FinishTime = new BigDecimal(-1);
 
 
     private final boolean resident;

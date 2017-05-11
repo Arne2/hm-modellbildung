@@ -23,7 +23,7 @@ import static cs.hm.edu.muenchen.hm.modellbildung.onephone.config.CallShopConfig
 /**
  * Created by dima on 10.05.17.
  */
-public final class calculation {
+public final class Calculation {
     private static BigDecimal lastArrivalTime = new BigDecimal(0);
     private static BigDecimal lastBeginTime = new BigDecimal(0);
     private static BigDecimal lastFinishTime = new BigDecimal(0);
@@ -42,13 +42,12 @@ public final class calculation {
     private static BigDecimal SystemTimeSum = new BigDecimal(0);
     private static BigDecimal CallingTimeSum = new BigDecimal(0);
     private static BigDecimal WaitingTimeSum = new BigDecimal(0);
-    private calculation(){
+
+    private Calculation(){
     }
 
 
-
-    public static void calculate(Event ev, SimulationState state){
-
+    private static void CalcMeanQueueSize(Event ev, SimulationState state){
         BigDecimal delta_t = state.clock.systemTime().subtract(lastClockTime);
         BigDecimal queuesize = new BigDecimal(state.queue.count());
         BigDecimal queuesizeTime = queuesize.multiply(delta_t);
@@ -56,7 +55,11 @@ public final class calculation {
         if (!state.clock.systemTime().equals(new BigDecimal(0))){
             MeanQueueSize = MeanQueueSizeSum.divide(state.clock.systemTime(), 100, BigDecimal.ROUND_HALF_EVEN);
         }
+    }
 
+
+    private static void CalcMeanSystemSize(Event ev, SimulationState state){
+        BigDecimal delta_t = state.clock.systemTime().subtract(lastClockTime);
         BigDecimal SystemSize = new BigDecimal(state.queue.count());
         final long phonesInUse = state.phones.stream()
                 .filter(Phone::isOccupied)
@@ -69,7 +72,15 @@ public final class calculation {
         if (!state.clock.systemTime().equals(new BigDecimal(0))) {
             MeanSystemSize = SysSizeSum.divide(state.clock.systemTime(), 100, BigDecimal.ROUND_HALF_EVEN);
         }
-        //System.out.println(MeanSystemSize);
+    }
+
+
+    public static void calculate(Event ev, SimulationState state){
+        CalcMeanQueueSize(ev, state);
+        CalcMeanSystemSize(ev, state);
+
+
+        System.out.println(MeanWaitingTime);
         lastClockTime = state.clock.systemTime();
 
         String event = "";
@@ -82,7 +93,7 @@ public final class calculation {
         if (ev instanceof FinishServeEvent){
             event = "finish";
         }
-        state.calculationLog.log(
+        /*state.calculationLog.log(
                 state.clock.systemTime(),
                 event,
                 queuesize,
@@ -94,10 +105,11 @@ public final class calculation {
                 MeanSystemTime
 
 
-        );
+        );*/
     }
 
     public static void calculate(Person person){
+        /*
         numOfPersons = numOfPersons.add(new BigDecimal(1));
 
         BigDecimal waitingTime = person.getBeginTime().subtract(person.getArrivalTime());
@@ -109,7 +121,7 @@ public final class calculation {
         MeanWaitingTime = WaitingTimeSum.divide(numOfPersons, 100, BigDecimal.ROUND_HALF_EVEN);
         MeanCallingTime = CallingTimeSum.divide(numOfPersons, 100, BigDecimal.ROUND_HALF_EVEN);
         MeanSystemTime = SystemTimeSum.divide(numOfPersons, 100, BigDecimal.ROUND_HALF_EVEN);
-        //System.out.println(MeanWaitingTime);
+        //System.out.println(MeanWaitingTime);*/
     }
 
 

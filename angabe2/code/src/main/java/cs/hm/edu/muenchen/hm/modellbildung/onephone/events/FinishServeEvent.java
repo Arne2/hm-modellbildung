@@ -1,6 +1,6 @@
 package cs.hm.edu.muenchen.hm.modellbildung.onephone.events;
 
-import cs.hm.edu.muenchen.hm.modellbildung.des.calculation.calculation;
+import cs.hm.edu.muenchen.hm.modellbildung.des.calculation.Calculation;
 import cs.hm.edu.muenchen.hm.modellbildung.des.data.Phone;
 import cs.hm.edu.muenchen.hm.modellbildung.des.time.event.BaseEvent;
 import cs.hm.edu.muenchen.hm.modellbildung.des.data.Person;
@@ -27,7 +27,7 @@ public class FinishServeEvent extends BaseEvent {
             final BeginServeEvent event = new BeginServeEvent(state.clock.systemTime(), phone);
             state.events.add(event);
         }
-        calculation.calculate(person);
+        Calculation.calculate(person);
         log(state, person);
     }
 

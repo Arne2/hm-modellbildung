@@ -2,7 +2,7 @@ package cs.hm.edu.muenchen.hm.modellbildung.onephone;
 
 import cs.hm.edu.muenchen.hm.modellbildung.des.data.Phone;
 import cs.hm.edu.muenchen.hm.modellbildung.des.time.event.Event;
-import cs.hm.edu.muenchen.hm.modellbildung.des.calculation.calculation;
+import cs.hm.edu.muenchen.hm.modellbildung.des.calculation.Calculation;
 import cs.hm.edu.muenchen.hm.modellbildung.onephone.events.ArrivalEvent;
 
 import java.io.File;
@@ -37,7 +37,7 @@ public class CallShopSimulation {
         while (state.clock.systemTime().compareTo(DURATION) < 0) {
             final Event event = state.events.nextEvent();
             state.clock.advanceTo(event.getTimeStamp());
-            calculation.calculate(event, state);
+            Calculation.calculate(event, state);
             event.execute(state);
 
 

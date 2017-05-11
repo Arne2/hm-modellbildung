@@ -16,6 +16,10 @@ public class ListQueue implements Queue {
     public void enqueue(Person person) {
         list.add(person);
     }
+    @Override
+    public List<Person> getList() {
+        return list;
+    }
 
     public Person dequeue() {
         if(list.isEmpty()) {

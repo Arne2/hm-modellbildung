@@ -75,12 +75,14 @@ Sowohl die Maßnahmen für die Verifikation der implementierten Simulation, als 
 - Plot Little-Law
 - MeanSystemSize, MeanSystemTime, MeanQueueSize,MeanQueueTime aufführen
 \paragraph{Verwendung der implementierten Java-Simulation, Berechnung in Mathematica}
+Die berechneten Werte sind im folgenden aufgeführt:
 \begin{figure}[htpb]
 	\centering
 	\includegraphics[width=0.8\textwidth]{abbildungen/auswertung1000/meanQueueTimePlot.pdf}
 	\caption{Mittlere Warteschlangenlänge, MeanAr = 1000}
 	\label{fig:meanQueueTime1000}
 \end{figure}
+Betrachtet man die in \ref{fig:meanQueueTime1000} abgebildete mittlere Warteschlangenlänge, fällt auf, dass sich diese bei ca. 11,1 einpendelt. Ab einer Simulationsdauer von $460 000$ ändert sich der Wert nur noch minimal. Dies deutet auf den sog. \glqq Steady State\grqq, den eingeschwungenen Zustand hin.
 
 \begin{figure}[htpb]
 	\centering
@@ -89,6 +91,8 @@ Sowohl die Maßnahmen für die Verifikation der implementierten Simulation, als 
 	\label{fig:meanCallingTime1000}
 \end{figure}
 
+Abbildung \ref{fig:meanCallingTime1000} zeigt die Änderung der mittleren Telefonierdauer über die Zeit. Wie auch in Abbildung \ref{fig:meanQueueTime1000} werden die Sprünge zwischen den einzelnen Werten erwartungsgemäß immer geringer mit fortschreitender Simulationsdauer. Allerdings weißt die mittlere Telefonierdauer bis zum Ende der Simulation noch kleinere Wertänderungen auf. Wenn überhaupt, kann, basieren auf diesem Wert, erst ab einer Simulationsdauer von ca. $650 000$ von einem eingeschwungenen System ausgegangen werden.
+
 \begin{figure}[htpb]
 	\centering
 	\includegraphics[width=0.8\textwidth]{abbildungen/auswertung1000/meanSystemTimePlot.pdf}
@@ -96,6 +100,7 @@ Sowohl die Maßnahmen für die Verifikation der implementierten Simulation, als 
 	\label{fig:meanSystemTime1000}
 \end{figure}
 
+Im Vergleich dazu zeigt \ref{fig:meanSystemTime1000} die durchschnittliche Zeit eines Clients im System. Diese berechnet sich durch die Summe aus durchschnittlicher Wartezeit und durchschnittlicher Telefonierdauer. Die Schwankungen zwischen den einzelnen Werten sind auf die erläuterten Wertänderungen bei der durchschnittlichen Telefonierdauer zurückzuführen. Gegen Ende der Simulation pendelt sich die durchschnittliche Systemzeit bei ca. $111,1$ ein.
 \paragraph{Simulation und Berechnung in Java}
 
 
@@ -135,7 +140,7 @@ Sowohl die Maßnahmen für die Verifikation der implementierten Simulation, als 
 - MeanSystemSize, MeanSystemTime, MeanQueueSize,MeanQueueTime aufführen
 
 \paragraph{Verwendung der implementierten Java-Simulation, Berechnung in Mathematica}
-Die berechneten Werte sind im folgenden aufgeführt:
+
 \include{abbildungen/auswertung100/ResultsTable}
 \begin{figure}[htpb]
 	\centering
@@ -143,7 +148,6 @@ Die berechneten Werte sind im folgenden aufgeführt:
 	\caption{Mittlere Warteschlangenlänge, MeanAr = 100}
 	\label{fig:meanQueueTime100}
 \end{figure}
-Betrachtet man die in \ref{fig:meanQueueTime100} abgebildete mittlere Warteschlangenlänge, fällt auf, dass sich diese bei ca. 11,1 einpendelt. Ab einer Simulationsdauer von $4*10^7$ ändert sich der Wert nur noch minimal. Dies deutet auf den sog. \glqq Steady State\grqq, den eingeschwungenen Zustand hin.
 
 \begin{figure}[htpb]
 	\centering
@@ -152,16 +156,12 @@ Betrachtet man die in \ref{fig:meanQueueTime100} abgebildete mittlere Warteschla
 	\label{fig:meanCallingTime100}
 \end{figure}
 
-Abbildung \ref{fig:meanCallingTime100} zeigt die Änderung der mittleren Telefonierdauer über die Zeit. Wie auch in Abbildung \ref{fig:meanQueueTime100} werden die Sprünge zwischen den einzelnen Werten erwartungsgemäß immer geringer mit fortschreitender Simulationsdauer. Allerdings weißt die mittlere Telefonierdauer bis zum Ende der Simulation noch kleinere Wertänderungen auf. Wenn überhaupt, kann, basieren auf diesem Wert, erst ab einer Simulationsdauer von ca. $8*10^7$ von einem eingeschwungenen System ausgegangen werden.
-
 \begin{figure}[htpb]
 	\centering
 	\includegraphics[width=0.8\textwidth]{abbildungen/auswertung100/meanSystemTimePlot.pdf}
 	\caption{Mittlere Zeit im System (Wartezeit + Telefonierdauer), MeanAr = 100}
 	\label{fig:meanSystemTime100}
 \end{figure}
-
-Im Vergleich dazu zeigt \ref{fig:meanSystemTime100} die durchschnittliche Zeit eines Clients im System. Diese berechnet sich durch die Summe aus durchschnittlicher Wartezeit und durchschnittlicher Telefonierdauer. Die Schwankungen zwischen den einzelnen Werten sind auf die erläuterten Wertänderungen bei der durchschnittlichen Telefonierdauer zurückzuführen. Gegen Ende der Simulation pendelt sich die durchschnittliche Systemzeit bei ca. $111,1$ ein.
   
 \paragraph{Simulation und Berechnung in Java}
 

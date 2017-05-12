@@ -31,19 +31,12 @@
 
 
 SetDirectory[FileNameJoin@{NotebookDirectory[], "../code"}]
-outputDir =  FileNameJoin@{NotebookDirectory[], "../doku/abbildungen/auswertung1000/"};
-If[Run["mvn package"] == 1, "mvn nicht istalliert in Intellij maven target package ausf\[UDoubleDot]hren "]
+outputDir =  FileNameJoin@{NotebookDirectory[], "../doku/abbildungen/auswertung100/"};
 
-args = " ";
-If[
-	Run["java -jar " <> FileNameJoin@{NotebookDirectory[], "../code/target","queue-1.0-SNAPSHOT.jar"} <> args] == 1,
-	"konnte simulation nicht ausf\[UDoubleDot]hren",
-	"Simulation beendet"
-]
 
 
 Load[type_] := Module[{data},
-	data = SemanticImport[FileNameJoin@{NotebookDirectory[],"../data", type <> ".csv"},HeaderLines->1];
+	data = SemanticImport[FileNameJoin@{NotebookDirectory[],"../data/data1_Phone_ 100", type <> ".csv"},HeaderLines->1];
 	data[All, <| "id"->"id", "resident"->"resident",type->"time"|>]
 ]
 
@@ -53,7 +46,7 @@ data = JoinAcross[
 ];
 
 
-dataQueuePath = FileNameJoin@{NotebookDirectory[],"../data/queue.csv"};
+dataQueuePath = FileNameJoin@{NotebookDirectory[],"../data/data1_Phone_ 100/queue.csv"};
 dataQueue = SemanticImport[dataQueuePath];
 dataQueue = dataQueue[Select[#room == 0 || #room != #size& ]];
 dataQueuePlot = Drop[dataQueue, None, {3}];
@@ -61,7 +54,7 @@ ListStepPlot[dataQueuePlot]
 Export[FileNameJoin@{outputDir,"queueLengthPlot.pdf"},%];
 
 
-d = Import[FileNameJoin@{NotebookDirectory[],"../data", "queue" <> ".csv"},HeaderLines->1];
+d = Import[FileNameJoin@{NotebookDirectory[],"../data/data1_Phone_ 100", "queue" <> ".csv"},HeaderLines->1];
 
 
 AreaQueueSize[data_, n_]:=data[[n,2]] * (data[[n+1,1]] - data[[n,1]])

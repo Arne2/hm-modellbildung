@@ -27,16 +27,16 @@
 
 
 (* ::Subsection:: *)
-(*Eigene Resultate (mittlere Ankunftszeit =  500s)*)
+(*Eigene Resultate (mittlere Ankunftszeit =  1500s)*)
 
 
 SetDirectory[FileNameJoin@{NotebookDirectory[], "../code"}]
-outputDir =  FileNameJoin@{NotebookDirectory[], "../doku/abbildungen/auswertung500/"};
+outputDir =  FileNameJoin@{NotebookDirectory[], "../doku/abbildungen/auswertung1500/"};
 
 
 
 Load[type_] := Module[{data},
-	data = SemanticImport[FileNameJoin@{NotebookDirectory[],"../data/data1_Phone_ 500", type <> ".csv"},HeaderLines->1];
+	data = SemanticImport[FileNameJoin@{NotebookDirectory[],"../data/data1_Phone_ 1500", type <> ".csv"},HeaderLines->1];
 	data[All, <| "id"->"id", "resident"->"resident",type->"time"|>]
 ]
 
@@ -46,7 +46,7 @@ data = JoinAcross[
 ];
 
 
-dataQueuePath = FileNameJoin@{NotebookDirectory[],"../data/data1_Phone_ 500/queue.csv"};
+dataQueuePath = FileNameJoin@{NotebookDirectory[],"../data/data1_Phone_ 1500/queue.csv"};
 dataQueue = SemanticImport[dataQueuePath];
 dataQueue = dataQueue[Select[#room == 0 || #room != #size& ]];
 dataQueuePlot = Drop[dataQueue, None, {3}];
@@ -54,7 +54,7 @@ ListStepPlot[dataQueuePlot]
 Export[FileNameJoin@{outputDir,"queueLengthPlot.pdf"},%];
 
 
-d = Import[FileNameJoin@{NotebookDirectory[],"../data/data1_Phone_ 500", "queue" <> ".csv"},HeaderLines->1];
+d = Import[FileNameJoin@{NotebookDirectory[],"../data/data1_Phone_ 1500", "queue" <> ".csv"},HeaderLines->1];
 
 
 AreaQueueSize[data_, n_]:=data[[n,2]] * (data[[n+1,1]] - data[[n,1]])

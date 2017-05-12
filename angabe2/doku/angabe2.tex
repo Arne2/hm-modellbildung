@@ -36,7 +36,9 @@ Im Zuge dieses Kapitels werden alle Ergebnisse der Simulation und die daraus err
 \subsection{Modell \glqq Ein Telefon\grqq} 
 Für den in Kapitel \ref{sec:Requirements} REFERENZAUFANFORDERUNG aufgelisteten ersten Betriebsmodus (ein Server, welcher alle Clients bedient) werden im folgenden die Auswertungen aufgeführt. Exemplarisch werden vier verschiedene durchschnittliche Ankunftszeiten für die Clients verwendet. Zunächst wird eine durchschnittliche Ankunftszeit von 1500 angenommen, was bei einer durchschnittlichen Telefonierdauer (Dauer der Serverbelegung) einer sehr geringen Serverauslastung entspricht. Anschließend werden mit den durchschnittlichen Ankunftszeiten von 1000, 500 und 100 die Auswirkungen von höherer Serverauslastung auf das Ergebnis der Simulation erläutert. \\
 Für jede durchschnittliche Ankunftszeit werden die Ergebnisse auf unterschiedliche Arten ermittelt. Zunächst erfolgt die Auswertung der Werte, basierend auf dem Mathematica internen Warteschlangenmodell. Diese Werte werden anschließend mit den durch die implementierte Simulation erzeugten und von Mathematica ausgewerteten Werden verglichen. Abschließend erfolgt ein erneuter Vergleich mit Werten, die von der implementierten Simulation erzeugt und berechnet wurden. Durch die zweifache Überprüfung mittels unterschiedlicher Simulationen und Rechenwege sollen mögliche, unerkannte Fehler in der implementierten Simulation vermieden werden. \\
-Sowohl die Maßnahmen für die Verifikation der implementierten Simulation, als auch für die Validierung der errechneten Durschnittswerte, werden in den Kapitel (REFERENZ AUF DIE ZWEI KAPITEL) näher beschrieben.
+Sowohl die Maßnahmen für die Verifikation der implementierten Simulation, als auch für die Validierung der errechneten Durschnittswerte, werden in den Kapitel (REFERENZ AUF DIE ZWEI KAPITEL) näher beschrieben. In den folgenden Abbildungen wird die durchschnittliche Ankunftszeit mit \glqq MeanAr\grqq abgekürzt.
+
+
 \subsubsection{Durchschnittliche Ankunftszeit der Clients: 1500}
 \paragraph{Verwendung der Mathematica Simulation}
 - Bild der Simulation 
@@ -44,34 +46,101 @@ Sowohl die Maßnahmen für die Verifikation der implementierten Simulation, als 
 - MeanSystemSize, MeanSystemTime, MeanQueueSize,MeanQueueTime aufführen
 
 \paragraph{Verwendung der implementierten Java-Simulation, Berechnung in Mathematica}
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{abbildungen/auswertung1500/meanQueueTimePlot.pdf}
+	\caption{Mittlere Warteschlangenlänge, MeanAr = 1500}
+	\label{fig:meanQueueTime1500}
+\end{figure}
 
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{abbildungen/auswertung1500/meanCallingTimePlot.pdf}
+	\caption{Mittlere Telefonierdauer, MeanAr = 1500}
+	\label{fig:meanCallingTime1500}
+\end{figure}
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{abbildungen/auswertung1500/meanSystemTimePlot.pdf}
+	\caption{Mittlere Zeit im System (Wartezeit + Telefonierdauer), MeanAr = 1500}
+	\label{fig:meanSystemTime1500}
+\end{figure}
 \paragraph{Simulation und Berechnung in Java}
+
+
 \subsubsection{Durchschnittliche Ankunftszeit der Clients: 1000}
 \paragraph{Verwendung der Mathematica Simulation}
 - Bild der Simulation 
 - Plot Little-Law
 - MeanSystemSize, MeanSystemTime, MeanQueueSize,MeanQueueTime aufführen
 \paragraph{Verwendung der implementierten Java-Simulation, Berechnung in Mathematica}
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{abbildungen/auswertung1000/meanQueueTimePlot.pdf}
+	\caption{Mittlere Warteschlangenlänge, MeanAr = 1000}
+	\label{fig:meanQueueTime1000}
+\end{figure}
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{abbildungen/auswertung1000/meanCallingTimePlot.pdf}
+	\caption{Mittlere Telefonierdauer, MeanAr = 1000}
+	\label{fig:meanCallingTime1000}
+\end{figure}
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{abbildungen/auswertung1000/meanSystemTimePlot.pdf}
+	\caption{Mittlere Zeit im System (Wartezeit + Telefonierdauer), MeanAr = 1000}
+	\label{fig:meanSystemTime1000}
+\end{figure}
+
 \paragraph{Simulation und Berechnung in Java}
+
+
 \subsubsection{Durchschnittliche Ankunftszeit der Clients: 500}
 \paragraph{Verwendung der Mathematica Simulation}
 - Bild der Simulation 
 - Plot Little-Law
 - MeanSystemSize, MeanSystemTime, MeanQueueSize,MeanQueueTime aufführen
 \paragraph{Verwendung der implementierten Java-Simulation, Berechnung in Mathematica}
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{abbildungen/auswertung500/meanQueueTimePlot.pdf}
+	\caption{Mittlere Warteschlangenlänge, MeanAr = 500}
+	\label{fig:meanQueueTime500}
+\end{figure}
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{abbildungen/auswertung500/meanCallingTimePlot.pdf}
+	\caption{Mittlere Telefonierdauer, MeanAr = 500}
+	\label{fig:meanCallingTime500}
+\end{figure}
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{abbildungen/auswertung500/meanSystemTimePlot.pdf}
+	\caption{Mittlere Zeit im System (Wartezeit + Telefonierdauer), MeanAr = 500}
+	\label{fig:meanSystemTime500}
+\end{figure}
 \paragraph{Simulation und Berechnung in Java}
+
+
 \subsubsection{Durchschnittliche Ankunftszeit der Clients: 100}
 \paragraph{Verwendung der Mathematica Simulation}
 - Bild der Simulation 
 - Plot Little-Law
 - MeanSystemSize, MeanSystemTime, MeanQueueSize,MeanQueueTime aufführen
+
 \paragraph{Verwendung der implementierten Java-Simulation, Berechnung in Mathematica}
 Die berechneten Werte sind im folgenden aufgeführt:
 \include{abbildungen/auswertung100/ResultsTable}
 \begin{figure}[htpb]
 	\centering
 	\includegraphics[width=0.8\textwidth]{abbildungen/auswertung100/meanQueueTimePlot.pdf}
-	\caption{Mittlere Warteschlangenlänge}
+	\caption{Mittlere Warteschlangenlänge, MeanAr = 100}
 	\label{fig:meanQueueTime100}
 \end{figure}
 Betrachtet man die in \ref{fig:meanQueueTime100} abgebildete mittlere Warteschlangenlänge, fällt auf, dass sich diese bei ca. 11,1 einpendelt. Ab einer Simulationsdauer von $4*10^7$ ändert sich der Wert nur noch minimal. Dies deutet auf den sog. \glqq Steady State\grqq, den eingeschwungenen Zustand hin.
@@ -79,7 +148,7 @@ Betrachtet man die in \ref{fig:meanQueueTime100} abgebildete mittlere Warteschla
 \begin{figure}[htpb]
 	\centering
 	\includegraphics[width=0.8\textwidth]{abbildungen/auswertung100/meanCallingTimePlot.pdf}
-	\caption{Mittlere Telefonierdauer}
+	\caption{Mittlere Telefonierdauer, MeanAr = 100}
 	\label{fig:meanCallingTime100}
 \end{figure}
 
@@ -88,7 +157,7 @@ Abbildung \ref{fig:meanCallingTime100} zeigt die Änderung der mittleren Telefon
 \begin{figure}[htpb]
 	\centering
 	\includegraphics[width=0.8\textwidth]{abbildungen/auswertung100/meanSystemTimePlot.pdf}
-	\caption{Mittlere Zeit im System (Wartezeit + Telefonierdauer)}
+	\caption{Mittlere Zeit im System (Wartezeit + Telefonierdauer), MeanAr = 100}
 	\label{fig:meanSystemTime100}
 \end{figure}
 

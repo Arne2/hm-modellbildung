@@ -16,13 +16,14 @@ public class ListQueue implements Queue {
     public void enqueue(Person person) {
         list.add(person);
     }
+
     @Override
     public List<Person> getList() {
         return list;
     }
 
     public Person dequeue() {
-        if(list.isEmpty()) {
+        if (list.isEmpty()) {
             return null;
         }
         return list.remove(0);
@@ -30,11 +31,12 @@ public class ListQueue implements Queue {
 
     /**
      * Returns the first vip. If there is none the first non-vip will be returned.
+     *
      * @return the next person in line
      */
     @Override
     public Person dequeueVip() {
-        if(list.isEmpty()) {
+        if (list.isEmpty()) {
             return null;
         }
         Optional<Person> person = list.stream().filter(Person::isResident).findFirst();
@@ -43,12 +45,20 @@ public class ListQueue implements Queue {
             return person.get();
         }
         return dequeue();
-
     }
 
-    public long count() {
+    public long countNormal() {
+        return list.stream().filter(p -> !p.isResident()).count();
+    }
+
+    public long countResident() {
+        return list.stream().filter(Person::isResident).count();
+    }
+
+    public long countAll() {
         return list.size();
     }
+
     public boolean isEmpty() {
         return list.isEmpty();
     }

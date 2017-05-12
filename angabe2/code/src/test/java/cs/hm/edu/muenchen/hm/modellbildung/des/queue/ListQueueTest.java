@@ -16,7 +16,7 @@ public class ListQueueTest {
         final ListQueue queue = new ListQueue();
         final Person person = new Person();
         queue.enqueue(person);
-        if (queue.count() != 1 || queue.isEmpty()) {
+        if (queue.countAll() != 1 || queue.isEmpty()) {
             Assert.fail("Person was not added!");
         }
         final Person personFromQueue = queue.dequeue();
@@ -53,20 +53,20 @@ public class ListQueueTest {
     @Test
     public void count() throws Exception {
         final Queue queue = new ListQueue();
-        if (queue.count() != 0) {
-            Assert.fail("Queue count should be zero but is: " + queue.count());
+        if (queue.countAll() != 0) {
+            Assert.fail("Queue count should be zero but is: " + queue.countAll());
         }
         for (int i=1; i <= AMOUNT; i++) {
             queue.enqueue(new Person());
-            if (queue.count() != i) {
-                Assert.fail("Queue count should be " + i + " but is: " + queue.count());
+            if (queue.countAll() != i) {
+                Assert.fail("Queue count should be " + i + " but is: " + queue.countAll());
             }
         }
 
         for (int i=AMOUNT - 1 ; i >= 0; i--) {
             queue.dequeue();
-            if (queue.count() != i) {
-                Assert.fail("Queue count should be " + i + " but is: " + queue.count());
+            if (queue.countAll() != i) {
+                Assert.fail("Queue count should be " + i + " but is: " + queue.countAll());
             }
         }
     }

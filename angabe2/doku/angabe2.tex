@@ -11,51 +11,106 @@
 \maketitle
 
 \tableofcontents
-
 \section{Einführung}
-Simulationen haben in der moderne einen sehr hohen Stellenwert erlangt, da durch sie zahlreiche, oftmals sehr genaue, Zukunftsprognosen erstellt werden können. Das Thema dieser Studienarbeit ist die Simulation eines Callshops, bzw. des Telefons in einem Callshop, in einem Inseldorf. Dieser wird für günstige Telefonate ins Ausland verwendet. 
-
-Mit Hilfe der Simulation sollen anschließend Aussagen bezüglich der zukünftigen Auslastung des Telefons getroffen werden können. Konkret wird die Fragestellung betrachtet, ob ein zweites Telefon im Callshop sinnvoll oder unnötig ist. 
-
-Als Basis für die erläuterten Prognosen werden folgende Werte der Simulation ermittelt:
-\begin{itemize}
-	\item mittlere Länge der Warteschlage (anstehende Kunden)
-	\item mittlere Wartezeit bis zum Telefonat
-	\item mittlere Verweildauer im Callshop (Wartezeit + Gesprächsdauer) 
-	\item Mittlere Auslastung des Telefons
-\end{itemize}
+Simulationen haben in der moderne einen sehr hohen Stellenwert erlangt, da durch sie zahlreiche, oftmals sehr genaue, Zukunftsprognosen erstellt werden können. Als Grundlage für die Simulationen dienen in der Regel Modelle, welche einen Ausschnitt der Wirklichkeit abbilden. Das Thema dieser Studienarbeit ist die Simulation eines Callshops, bzw. des Telefons in einem Callshop, in einem Inseldorf. Dieser wird für günstige Telefonate ins Ausland verwendet. 
 
 \section{Beschreibung des Modells}
-Für die Simulation des Insel-Callshops wird ein Warteschlagenmodell mit jeweils einem Client und Server verwendet. Jede Person die den CallShop betritt wird durch einen neuen Client repräsentiert. Das Telefon des Shops ist durch den Server dargestellt. Möchte eine Person das Telefon zu einem Zeitpunkt benützen, zu dem bereits eine andere Person telefoniert, muss sie sich hinten anstellen und warten, bis die Person ihr Telefonat beendet hat. Im Modell wird dieses durch eine Warteschlage (Queue) realisiert, in die sich die wartenden Clients einordnen und nach dem FIFO (first in first out) Prinzip bedient werden. 
+Für die Simulation des Insel-Callshops wird ein Warteschlagenmodell mit Clients und zunächst nur einem Server verwendet. Jede Person die den CallShop betritt wird durch einen neuen Client repräsentiert. Das Telefon des Shops ist durch den Server dargestellt. Möchte eine Person das Telefon zu einem Zeitpunkt benützen, zu dem bereits eine andere Person telefoniert, muss sie sich hinten anstellen und warten, bis die Person ihr Telefonat beendet hat. Im Modell wird dieses durch eine Warteschlage (Queue) realisiert, in die sich ankommende Clients einordnen und sobald der Server nichtmehr belegt ist nach dem FIFO (first in first out) Prinzip bedient werden. 
 
 Im Modell werden sowohl die Ankunftszeiten der Clients, als auch die Dauer der Telefonate durch eine negative Exponentialverteilung beschrieben, da diese sehr nah an den real beoachteten Verhalten liegt. Der mathematische Hintergrund liegt in der Eigenschaft der Exponentialfunktion zugrunde. Die Exponentialverteilung ist die einzige kontinuierliche Verteilung, welche zugleich die Markoveigenschaft, die sogenannte Gedächtnislosigkeit, erfüllt. Diese besagt, dass die seit dem letzten Ereignis vergangene Zeit (in diesem Beispiel Anrufer) keinen Einfluss auf die Verteilung der Zeit bis zum nächsten Ereignis (bis zum nächsten Anruf) hat. 
 Quelle: http://www.mathepedia.de/Exponentialverteilung.aspx
 
+Darüber hinaus wird ein zweites Modell betrachtet, in welchem die Bewohner des Inseldorfes (Einheimische) bevorzugt werden. Im weiteren Verlauf der Studienarbeit werden diese mit VIP bezeichnet. 
+
+In einem dritten Modell befindet sich ein weiteres Telefon im Callshop. Von den nun zwei Telefonen (zwei Server), behandelt eines alle ankommenden Personen (Clients) gleichberechtigt. Das zweite Telefon bevorzugt die VIPs und behandelt andere Personen nur, wenn kein VIP wartet.
 
 \section{Anforderungen/Requirements}
 
 \section{Softwaredesign}
 
-\section{Implementierung}
-
 \section{Softwaretest}
 
 \section{Auswertung der Ergebnisse}
+Im Zuge dieses Kapitels werden alle Ergebnisse der Simulation und die daraus errechneten Werte erläutert. Zusätzlich werden relevante Größen durch Plots veranschaulicht.
+
 \subsection{Modell \glqq Ein Telefon\grqq} 
-\subsubsection{Durchschnittliche Ankunftszeit der Clients: 100}
-\subsubsection{Durchschnittliche Ankunftszeit der Clients: 500}
-\subsubsection{Durchschnittliche Ankunftszeit der Clients: 1000}
+Für den in Kapitel \ref{sec:Requirements} REFERENZAUFANFORDERUNG aufgelisteten ersten Betriebsmodus (ein Server, welcher alle Clients bedient) werden im folgenden die Auswertungen aufgeführt. Exemplarisch werden vier verschiedene durchschnittliche Ankunftszeiten für die Clients verwendet. Zunächst wird eine durchschnittliche Ankunftszeit von 1500 angenommen, was bei einer durchschnittlichen Telefonierdauer (Dauer der Serverbelegung) einer sehr geringen Serverauslastung entspricht. Anschließend werden mit den durchschnittlichen Ankunftszeiten von 1000, 500 und 100 die Auswirkungen von höherer Serverauslastung auf das Ergebnis der Simulation erläutert. \\
+Für jede durchschnittliche Ankunftszeit werden die Ergebnisse auf unterschiedliche Arten ermittelt. Zunächst erfolgt die Auswertung der Werte, basierend auf dem Mathematica internen Warteschlangenmodell. Diese Werte werden anschließend mit den durch die implementierte Simulation erzeugten und von Mathematica ausgewerteten Werden verglichen. Abschließend erfolgt ein erneuter Vergleich mit Werten, die von der implementierten Simulation erzeugt und berechnet wurden. Durch die zweifache Überprüfung mittels unterschiedlicher Simulationen und Rechenwege sollen mögliche, unerkannte Fehler in der implementierten Simulation vermieden werden. \\
+Sowohl die Maßnahmen für die Verifikation der implementierten Simulation, als auch für die Validierung der errechneten Durschnittswerte, werden in den Kapitel (REFERENZ AUF DIE ZWEI KAPITEL) näher beschrieben.
 \subsubsection{Durchschnittliche Ankunftszeit der Clients: 1500}
+\paragraph{Verwendung der Mathematica Simulation}
+- Bild der Simulation 
+- Plot Little-Law
+- MeanSystemSize, MeanSystemTime, MeanQueueSize,MeanQueueTime aufführen
+
+\paragraph{Verwendung der implementierten Java-Simulation, Berechnung in Mathematica}
+
+\paragraph{Simulation und Berechnung in Java}
+\subsubsection{Durchschnittliche Ankunftszeit der Clients: 1000}
+\paragraph{Verwendung der Mathematica Simulation}
+- Bild der Simulation 
+- Plot Little-Law
+- MeanSystemSize, MeanSystemTime, MeanQueueSize,MeanQueueTime aufführen
+\paragraph{Verwendung der implementierten Java-Simulation, Berechnung in Mathematica}
+\paragraph{Simulation und Berechnung in Java}
+\subsubsection{Durchschnittliche Ankunftszeit der Clients: 500}
+\paragraph{Verwendung der Mathematica Simulation}
+- Bild der Simulation 
+- Plot Little-Law
+- MeanSystemSize, MeanSystemTime, MeanQueueSize,MeanQueueTime aufführen
+\paragraph{Verwendung der implementierten Java-Simulation, Berechnung in Mathematica}
+\paragraph{Simulation und Berechnung in Java}
+\subsubsection{Durchschnittliche Ankunftszeit der Clients: 100}
+\paragraph{Verwendung der Mathematica Simulation}
+- Bild der Simulation 
+- Plot Little-Law
+- MeanSystemSize, MeanSystemTime, MeanQueueSize,MeanQueueTime aufführen
+\paragraph{Verwendung der implementierten Java-Simulation, Berechnung in Mathematica}
+Die berechneten Werte sind im folgenden aufgeführt:
+\include{abbildungen/auswertung100/ResultsTable}
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{abbildungen/auswertung100/meanQueueTimePlot.pdf}
+	\caption{Mittlere Warteschlangenlänge}
+	\label{fig:meanQueueTime100}
+\end{figure}
+Betrachtet man die in \ref{fig:meanQueueTime100} abgebildete mittlere Warteschlangenlänge, fällt auf, dass sich diese bei ca. 11,1 einpendelt. Ab einer Simulationsdauer von $4*10^7$ ändert sich der Wert nur noch minimal. Dies deutet auf den sog. \glqq Steady State\grqq, den eingeschwungenen Zustand hin.
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{abbildungen/auswertung100/meanCallingTimePlot.pdf}
+	\caption{Mittlere Telefonierdauer}
+	\label{fig:meanCallingTime100}
+\end{figure}
+
+Abbildung \ref{fig:meanCallingTime100} zeigt die Änderung der mittleren Telefonierdauer über die Zeit. Wie auch in Abbildung \ref{fig:meanQueueTime100} werden die Sprünge zwischen den einzelnen Werten erwartungsgemäß immer geringer mit fortschreitender Simulationsdauer. Allerdings weißt die mittlere Telefonierdauer bis zum Ende der Simulation noch kleinere Wertänderungen auf. Wenn überhaupt, kann, basieren auf diesem Wert, erst ab einer Simulationsdauer von ca. $8*10^7$ von einem eingeschwungenen System ausgegangen werden.
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{abbildungen/auswertung100/meanSystemTimePlot.pdf}
+	\caption{Mittlere Zeit im System (Wartezeit + Telefonierdauer)}
+	\label{fig:meanSystemTime100}
+\end{figure}
+
+Im Vergleich dazu zeigt \ref{fig:meanSystemTime100} die durchschnittliche Zeit eines Clients im System. Diese berechnet sich durch die Summe aus durchschnittlicher Wartezeit und durchschnittlicher Telefonierdauer. Die Schwankungen zwischen den einzelnen Werten sind auf die erläuterten Wertänderungen bei der durchschnittlichen Telefonierdauer zurückzuführen. Gegen Ende der Simulation pendelt sich die durchschnittliche Systemzeit bei ca. $111,1$ ein.
+  
+\paragraph{Simulation und Berechnung in Java}
+
+
+
+
 \subsection{Modell \glqq Bevorzugte VIP\grqq} 
 \subsubsection{Durchschnittliche Ankunftszeit der Clients: 100}
 \subsubsection{Durchschnittliche Ankunftszeit der Clients: 500}
 \subsubsection{Durchschnittliche Ankunftszeit der Clients: 1000}
 \subsubsection{Durchschnittliche Ankunftszeit der Clients: 1500}
+
 \subsection{Modell \glqq Zusätzliches VIP Telefon\grqq} 
 \subsubsection{Durchschnittliche Ankunftszeit der Clients: 100}
 \subsubsection{Durchschnittliche Ankunftszeit der Clients: 500}
 \subsubsection{Durchschnittliche Ankunftszeit der Clients: 1000}
 \subsubsection{Durchschnittliche Ankunftszeit der Clients: 1500}
+
 \section{Fazit}
 
 \end{document}

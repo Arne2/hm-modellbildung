@@ -195,7 +195,7 @@ public final class Calculation {
         CalcLittle();
 
         lastClockTime = state.clock.systemTime();
-        System.out.println(MeanQueueSize);
+        //System.out.println(MeanQueueSize);
         /*count people on Phone: for systemsize*/
         int pplOnPhone = 0;
         for (Phone phone:state.phones) {

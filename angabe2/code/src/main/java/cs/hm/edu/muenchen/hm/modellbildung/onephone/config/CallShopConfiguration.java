@@ -1,7 +1,5 @@
 package cs.hm.edu.muenchen.hm.modellbildung.onephone.config;
 
-import cs.hm.edu.muenchen.hm.modellbildung.des.log.Log;
-
 import java.io.IOException;
 import java.io.Writer;
 import java.math.BigDecimal;

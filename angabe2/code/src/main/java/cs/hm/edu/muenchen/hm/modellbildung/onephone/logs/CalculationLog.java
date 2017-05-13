@@ -5,7 +5,6 @@ import cs.hm.edu.muenchen.hm.modellbildung.des.log.Log;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.nio.file.Path;
-import java.text.Bidi;
 
 /**
  * @author peter-mueller

@@ -34,8 +34,6 @@ public class ArrivalEvent extends BaseEvent {
         person.setArrivalTimeStamp(state.clock.systemTime());
         state.queue.enqueue(person);
         makeNextArrival(state);
-
-        log(state, person);
     }
 
     /**
@@ -48,9 +46,6 @@ public class ArrivalEvent extends BaseEvent {
         final BigDecimal absoluteTime = state.clock.systemTime().add(new BigDecimal(nextArrivalIn));
         final ArrivalEvent event = new ArrivalEvent(absoluteTime);
         state.events.add(event);
-    }
-
-    private void log(SimulationState state, Person person) {
     }
 
     /**

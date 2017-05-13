@@ -3,7 +3,6 @@ package cs.hm.edu.muenchen.hm.modellbildung.onephone.logs;
 import cs.hm.edu.muenchen.hm.modellbildung.des.log.Log;
 
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.nio.file.Path;
 
 /**

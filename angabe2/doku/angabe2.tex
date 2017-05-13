@@ -28,7 +28,44 @@ In einem dritten Modell befindet sich ein weiteres Telefon im Callshop. Von den 
 
 \section{Softwaredesign}
 
-\section{Softwaretest}
+\section{Überprüfung auf Exponentialverteilung}
+Im Zuge dieses Kapitels erfolgt die Überprüfung der, im Zuge der implementierten Simulation, generierten Zufallszahlen. Diese sollen, wie in den Anforderungen definiert, negativ exponentialverteilt sein. \\
+Die Überprüfung erfolgt zunächst graphisch mittels eines Histogramms und eines Qunatil-Quantil-Plots. Im Anschluss erfolgt die rechnerische Überprüfung mittels Shapiro-Wilk-, Cramér-von-Mises- und Anderson-Darling-Test.
+
+\subsection{Graphische Überprüfung}
+\begin{figure}[!htb]
+	\centering
+	\begin{minipage}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.8\textwidth]{abbildungen/distribution/histogramm.pdf}
+		\caption{Histogramm der generierten Zufallszahlen}
+		\label{fig:Histogramm}
+	\end{minipage}%
+	\begin{minipage}{0.5\textwidth}
+		\centering
+		\includegraphics[width=0.8\textwidth]{abbildungen/distribution/histogrammExpVerteilung.pdf}
+		\caption{Histogramm einer Exponentialverteilung}
+		\label{fig:HistogrammExp}
+	\end{minipage}
+\end{figure}
+
+Abbildung \ref{fig:Histogramm} zeigt die von der Simulation generierten Zufallszahlen in einem Histogramm. Zum besseren Vergleich zeigt Abbildung \ref{fig:HistogrammExp} das Histogramm einer Exponentialverteilung. Beide Abbildungen weisen einen nahezu identischen Verlauf auf, was ein Indiz für eine Exponentialverteilung der Daten darstellt.
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{abbildungen/distribution/quantilePlot.pdf}
+	\caption{Quantil-Quantil-Diagramm der generierten Zufallszahlen}
+	\label{fig:QQPlot}
+\end{figure}
+
+In Abbildung \ref{fig:QQPlot} werden die generierten Zufallszahlen in einem Quantil-Quantil-Diagramm dargestellt. Die blaue, gestrichelte Ursprungsgerade zeigt den Verlauf einer Exponentialverteilung im Quantil-Quantil-Diagramm. Die generierten Daten werden durch die blaue Linie repräsentiert. Die Abbildung zeigt somit, dass beide Linien nahezu deckungsgleich sind und es nur eine sehr geringe Abweichung gibt. Das Quantil-Quantil-Diagramm liefert ist einen weiteres Indiz, dass die generierten Zufallszahlen tatsächlich exponentialverteilt sind.
+
+\subsection{Rechnerische Überprüfung}
+Für eine weitere Überprüfung werden die generierten Daten mittels Shapiro-Wilk-, Cramér-von-Mises- und Anderson-Darling-Test auf eine Exponentialverteilung überprüft. Die Hypothese H0 lautet hierbei: \\
+$H_0:$ Die generierten Zufallszahlen sind exponentialverteilt, Signifikanzniveau $\alpha =0,05$ Die Ergebnisse der einzelnen Tests sind in der folgenden Tabelle aufgelistet: 
+\input{abbildungen/distribution/dis_fit_test_table}
+\\
+Laut dem Shapiro-Wilk-Test kann die Nullhypothese nicht abgelehnt werden, da der p-Wert mit $0,80994$ deutlich über dem Signifikanzniveau von $0,05$ liegt. Ebenso kann die Nullhypothese bei den Cramér-von-Mises- und Anderson-Darling-Tests nicht abgelehnt werden, da der p-Wert hier ebenso mit $0,764349$ bzw. $0,0764349$ deutlich über dem Signifikanznievau liegt. Durch die Tests kann somit eine Exponentialverteilung der generierten Zufallszahlen nicht wiederlegt werden. In Kombination mit der graphischen Überprüfung ist es plausibel, wenn von exponentialverteilten Werten ausgegangen wird. Ein entgültiger Beweis kann nicht erbracht werden.
 
 \section{Auswertung der Ergebnisse}
 Im Zuge dieses Kapitels werden alle Ergebnisse der Simulation und die daraus errechneten Werte erläutert. Zusätzlich werden relevante Größen durch Plots veranschaulicht.
@@ -104,7 +141,7 @@ Anhand dieser Gleichung werden im weiteren Verlauf der Studienarbeit die einzeln
 
 \subsubsection{Durchschnittliche Zwischenankunftszeit der Clients: 1000}
 \paragraph{Theoretische Erwartungswerte laut M/M/1 Warteschlangenmodell}
-Bei einer durchschnittlichen Zwischenankunftszeit von 1000 ($\lambda=\frac{1}{1000}$, $\mu=\frac{1}{100}$)ergeben sich, basierend auf den in Abschnitt \label{Formeln} aufgeführten Formeln, folgende Erwartungswerte:
+Bei einer durchschnittlichen Zwischenankunftszeit von 1000 ($\lambda=\frac{1}{1000}$, $\mu=\frac{1}{100}$)ergeben sich, basierend auf den in Abschnitt \ref{Formeln} aufgeführten Formeln, folgende Erwartungswerte:
 \begin{equation}
 Ls=0,111111
 \end{equation}

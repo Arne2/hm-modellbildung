@@ -8,6 +8,10 @@ import java.math.BigDecimal;
  * @author peter-mueller
  */
 public interface Event extends Comparable<Event> {
+    /**
+     * Executes the event´s logic.
+     * @param state
+     */
     void execute(SimulationState state);
     BigDecimal getTimeStamp();
 }

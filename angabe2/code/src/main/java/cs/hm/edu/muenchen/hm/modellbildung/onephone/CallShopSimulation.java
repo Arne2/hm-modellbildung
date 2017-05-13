@@ -12,6 +12,7 @@ import java.nio.file.Paths;
 import java.util.Objects;
 
 /**
+ * The main class.
  * @author peter-mueller
  */
 public class CallShopSimulation {
@@ -25,6 +26,9 @@ public class CallShopSimulation {
         this.state = state;
     }
 
+    /**
+     * Starts the simulation.
+     */
     private void run() {
         init();
         while (state.clock.systemTime().compareTo(CallShopConfiguration.DURATION) < 0) {
@@ -35,6 +39,10 @@ public class CallShopSimulation {
         }
     }
 
+    /**
+     * Begins the logging for a certain event.
+     * @param event
+     */
     private void log(Event event) {
         final CallShopLogs logs = state.logs;
         final BigDecimal time = state.clock.systemTime();
@@ -59,6 +67,10 @@ public class CallShopSimulation {
         logs.meanSystemSizeAll.log(time, calculation.meanSystemSizeAll.getMean());
     }
 
+    /**
+     * Begins the calculation for a certain event.
+     * @param event
+     */
     private void calculate(Event event) {
         final BigDecimal queueSizeNormal = BigDecimal.valueOf(state.queue.countNormal());
         final BigDecimal queueSizeResident = BigDecimal.valueOf(state.queue.countResident());
@@ -85,6 +97,9 @@ public class CallShopSimulation {
         state.calculation.meanSystemSizeAll.calculate(systemSizeAll, event.getTimeStamp());
     }
 
+    /**
+     * Initial method for the simulation.
+     */
     private void init() {
         state.phones.add(new Phone(CallShopConfiguration.CONFIGURATION > 1));
         if (CallShopConfiguration.CONFIGURATION == 3) {

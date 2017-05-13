@@ -5,6 +5,7 @@ import cs.hm.edu.muenchen.hm.modellbildung.des.time.event.Event;
 import java.math.BigDecimal;
 
 /**
+ * The base class for every Event
  * @author peter-mueller
  */
 public abstract class BaseEvent implements Event {

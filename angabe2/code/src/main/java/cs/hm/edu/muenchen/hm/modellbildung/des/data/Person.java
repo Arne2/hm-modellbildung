@@ -3,6 +3,7 @@ package cs.hm.edu.muenchen.hm.modellbildung.des.data;
 import java.math.BigDecimal;
 
 /**
+ * This class represents a Customer of the Callshop.
  * @author peter-mueller
  */
 public class Person {

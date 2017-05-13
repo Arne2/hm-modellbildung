@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
+ * This class represents the queue a Person has to enter before being able to use a Phone.
  * Created by Arne on 27.04.2017.
  */
 public class ListQueue implements Queue {
@@ -29,11 +30,6 @@ public class ListQueue implements Queue {
         return list.remove(0);
     }
 
-    /**
-     * Returns the first vip. If there is none the first non-vip will be returned.
-     *
-     * @return the next person in line
-     */
     @Override
     public Person dequeueVip() {
         if (list.isEmpty()) {

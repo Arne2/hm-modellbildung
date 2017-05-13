@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 /**
+ * This class represents the logic to log information into csv files.
  * @author peter-mueller
  */
 public class Log implements AutoCloseable {

@@ -15,6 +15,7 @@ import static cs.hm.edu.muenchen.hm.modellbildung.onephone.config.CallShopConfig
 
 
 /**
+ * Represents an event when a customer arrives.
  * @author peter-mueller
  */
 public class ArrivalEvent extends BaseEvent {
@@ -37,6 +38,10 @@ public class ArrivalEvent extends BaseEvent {
         log(state, person);
     }
 
+    /**
+     * Loads the next Event for a customer to come into the EventList.
+     * @param state
+     */
     private void makeNextArrival(SimulationState state) {
         final double nextArrivalIn = dist.getNextValue(CallShopConfiguration.MEAN_ARRIVAL);
         state.logs.arrivalDelta.log(nextArrivalIn);
@@ -48,6 +53,10 @@ public class ArrivalEvent extends BaseEvent {
     private void log(SimulationState state, Person person) {
     }
 
+    /**
+     * Tries to find a phone that´s currently not used. If there is at least one, a BeginEvent will be added to the EventList.
+     * @param state
+     */
     private void findFreePhones(SimulationState state) {
         for (Phone next : state.phones) {
             if (!next.isOccupied()) {

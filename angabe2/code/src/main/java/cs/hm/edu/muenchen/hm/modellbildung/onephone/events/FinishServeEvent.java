@@ -46,6 +46,13 @@ public class FinishServeEvent extends BaseEvent {
         little(calculation, logs, time);
     }
 
+    /**
+     * Starts the calculation for the mean time for the evaluation of the simulation´s results.
+     * @param person
+     * @param calculation
+     * @param logs
+     * @param time
+     */
     private void meanTime(Person person, CallShopCalculation calculation, CallShopLogs logs, BigDecimal time) {
         final BigDecimal diff = person.getFinishTime().subtract(person.getArrivalTime());
 
@@ -61,7 +68,12 @@ public class FinishServeEvent extends BaseEvent {
         }
     }
 
-
+    /**
+     * Starts the calculation to check if the simulation passes the requirements of the little´s law.
+     * @param calculation
+     * @param logs
+     * @param time
+     */
     private void little(CallShopCalculation calculation, CallShopLogs logs, BigDecimal time) {
         final BigDecimal meanSystemSizeNormal = calculation.meanSystemSizeNormal.getMean();
         final BigDecimal littleNormal = meanSystemSizeNormal.subtract(

@@ -10,6 +10,9 @@ import java.util.List;
 public class EventList {
     private final List<Event> eventList = new LinkedList<>();
 
+    /**
+     * @return the next element in chronological order.
+     */
     public Event nextEvent() {
         if (eventList.isEmpty()) {
             return null;
@@ -18,6 +21,10 @@ public class EventList {
         return eventList.remove(0);
     }
 
+    /**
+     * Adds an Event to the list.
+     * @param event
+     */
     public void add(Event event) {
         if (event == null) {
             throw new IllegalArgumentException("Event must not be null!");

@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 
 /**
+ * This class contains all Logs for the documentation of the results.
  * @author peter-mueller
  */
 public class CallShopLogs implements AutoCloseable {

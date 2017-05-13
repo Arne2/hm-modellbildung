@@ -4,6 +4,10 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.List;
 
+/**
+ * Helping class to write information into csv files.
+ * @author dalmadima
+ */
 public class CSVUtils {
 
     private static final char DEFAULT_SEPARATOR = ',';

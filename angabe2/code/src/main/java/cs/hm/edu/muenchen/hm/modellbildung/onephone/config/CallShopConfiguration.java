@@ -11,9 +11,9 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
+ * This class contains the configuration for the simulation
  * @author peter-mueller
  */
-
 public class CallShopConfiguration {
     public static long SKIP_N = 0;
     public static int MEAN_ARRIVAL = 1000;
@@ -66,6 +66,10 @@ public class CallShopConfiguration {
         }
     }
 
+    /**
+     * Writes the program parameters into a file for documentation.
+     * @param folder
+     */
     public static void logConfiguration(Path folder) {
         if (!folder.toFile().exists()) {
             final Path parent = folder.getParent();

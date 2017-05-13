@@ -5,6 +5,7 @@ import cs.hm.edu.muenchen.hm.modellbildung.des.calculation.MeanCalculator;
 import cs.hm.edu.muenchen.hm.modellbildung.onephone.config.CallShopConfiguration;
 
 /**
+ * This class contains the configuration for the calculation.
  * @author peter-mueller
  */
 public class CallShopCalculation {

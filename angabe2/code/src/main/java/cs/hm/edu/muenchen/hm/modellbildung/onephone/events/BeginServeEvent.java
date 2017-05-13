@@ -38,6 +38,10 @@ public class BeginServeEvent extends BaseEvent {
         log(state, person);
     }
 
+    /**
+     * Adds the Event to the EventList when the customer will be finished with his call.
+     * @param state
+     */
     private void makeFinishEvent(SimulationState state) {
         final double serveTime = dist.getNextValue(CallShopConfiguration.MEAN_CALL);
         state.logs.serveDelta.log(serveTime);
@@ -55,6 +59,13 @@ public class BeginServeEvent extends BaseEvent {
         little(calculation, logs, time);
     }
 
+    /**
+     * Starts the calculation for the mean time for the evaluation of the simulation´s results.
+     * @param person
+     * @param calculation
+     * @param logs
+     * @param time
+     */
     private void meanTime(Person person, CallShopCalculation calculation, CallShopLogs logs, BigDecimal time) {
         final BigDecimal diff = person.getBeginTime().subtract(person.getArrivalTime());
 
@@ -70,6 +81,12 @@ public class BeginServeEvent extends BaseEvent {
         }
     }
 
+    /**
+     * Starts the calculation to check if the simulation passes the requirements of the little´s law.
+     * @param calculation
+     * @param logs
+     * @param time
+     */
     private void little(CallShopCalculation calculation, CallShopLogs logs, BigDecimal time) {
         final BigDecimal meanQueueSizeNormal = calculation.meanQueueSizeNormal.getMean();
         final BigDecimal littleNormal = meanQueueSizeNormal.subtract(

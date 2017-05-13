@@ -1,6 +1,8 @@
 package cs.hm.edu.muenchen.hm.modellbildung.des.data;
 
 /**
+ * This class represents a phone of the Callshop.
+ * Its occupied when a Person uses it.
  * Created by Arne on 27.04.2017.
  */
 public class Phone {
@@ -31,6 +33,10 @@ public class Phone {
         this.user = person;
     }
 
+    /**
+     * When the current user is done the variable is set to null.
+     * @return the user
+     */
     public Person removeUser() {
         final Person person = this.user;
         this.user = null;

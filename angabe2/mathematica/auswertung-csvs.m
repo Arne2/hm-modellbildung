@@ -8,12 +8,12 @@ Simulate[args_] := If[
 	"konnte simulation nicht ausf\[UDoubleDot]hren",
 	"Simulation beendet"
 ]
-Load[name_]:= Import[FileNameJoin@{NotebookDirectory[],"../data/1_Phone_Arrival_1000", name <> ".csv"},HeaderLines->1];
+Load[name_]:= Import[FileNameJoin@{NotebookDirectory[],"../data", name <> ".csv"},HeaderLines->1];
 
 
 
 (* umso n\[ADoubleDot]her a an c umso gr\[ODoubleDot]\[SZ]er skip probieren *)
-(*Simulate["-a 1000 -c 100 -d 1000000 -vip 0 -conf 1 -skip 100"]*)
+Simulate["-a 1000 -c 100 -d 1000000 -vip 0 -conf 1 -skip 100"]
 
 "Plots gefordert aus angabe:"
 {
@@ -42,7 +42,7 @@ queueSize = Load@"queue-size-normal";
 
 
 
-(*Simulate["-a 1000 -c 100 -d 10000000 -vip 50 -conf 2 -skip 1000"]*)
+Simulate["-a 1000 -c 100 -d 10000000 -vip 50 -conf 2 -skip 1000"]
 
 "Plots f\[UDoubleDot]r ausschlie\[SZ]lich VIPS: (passt glaub noch nicht so ganz, vllt logik falsch)"
 {
@@ -68,9 +68,6 @@ queueSize = Load@"queue-size-resident";
   ListPlot[Load@"little-queue-resident",PlotRange->All],
   ListPlot[Load@"little-system-resident",PlotRange->All]
 }
-
-
-
 
 
 

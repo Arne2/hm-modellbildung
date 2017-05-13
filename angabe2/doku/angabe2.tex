@@ -35,72 +35,116 @@ Im Zuge dieses Kapitels werden alle Ergebnisse der Simulation und die daraus err
 
 \subsection{Modell \glqq Ein Telefon\grqq} 
 Für den in Kapitel \ref{sec:Requirements} REFERENZAUFANFORDERUNG aufgelisteten ersten Betriebsmodus (ein Server, welcher alle Clients bedient) werden im folgenden die Auswertungen aufgeführt. Exemplarisch werden vier verschiedene durchschnittliche Ankunftszeiten für die Clients verwendet. Zunächst wird eine durchschnittliche Ankunftszeit von 1500 angenommen, was bei einer durchschnittlichen Telefonierdauer (Dauer der Serverbelegung) einer sehr geringen Serverauslastung entspricht. Anschließend werden mit den durchschnittlichen Ankunftszeiten von 1000, 500 und 100 die Auswirkungen von höherer Serverauslastung auf das Ergebnis der Simulation erläutert. \\
-Für jede durchschnittliche Ankunftszeit werden die Ergebnisse auf unterschiedliche Arten ermittelt. Zunächst erfolgt die Auswertung der Werte, basierend auf dem Mathematica internen Warteschlangenmodell. Diese Werte werden anschließend mit den durch die implementierte Simulation erzeugten und von Mathematica ausgewerteten Werden verglichen. Abschließend erfolgt ein erneuter Vergleich mit Werten, die von der implementierten Simulation erzeugt und berechnet wurden. Durch die zweifache Überprüfung mittels unterschiedlicher Simulationen und Rechenwege sollen mögliche, unerkannte Fehler in der implementierten Simulation vermieden werden. \\
-Sowohl die Maßnahmen für die Verifikation der implementierten Simulation, als auch für die Validierung der errechneten Durschnittswerte, werden in den Kapitel (REFERENZ AUF DIE ZWEI KAPITEL) näher beschrieben. In den folgenden Abbildungen wird die durchschnittliche Ankunftszeit mit \glqq MeanAr\grqq abgekürzt.
 
+Für jede durchschnittliche Ankunftszeit werden zunächst die zu erwartenden Werte, basierend auf den Formeln für M/M/1 Warteschlangenmodelle ermittelt. Die einzelnen Formeln sind im folgenden Kapitel aufgeführt. Betrachtet werden hierbei, wie in den \ref{sec:Requirements} erläutert die durchschnittliche Anzahl von Kunden im System, durchschnittliche Warteschlangenlänge, durchschnittliche Verweildauer im System und die durchschnittliche Verweildauer in der Warteschlange. Die berechneten Größen werden als Erwartungswerte betrachtet gegen die die durch die Simulation ermittelten Werte geprüft werden. 
 
-\subsubsection{Durchschnittliche Ankunftszeit der Clients: 1500}
-\paragraph{Verwendung der Mathematica Simulation}
-- Bild der Simulation 
-- Plot Little-Law
-- MeanSystemSize, MeanSystemTime, MeanQueueSize,MeanQueueTime aufführen
+Sowohl die Maßnahmen für die Verifikation der implementierten Simulation, als auch für die Validierung der errechneten Durschnittswerte, werden in den Kapitel (REFERENZ AUF DIE ZWEI KAPITEL) näher beschrieben. In den folgenden Abbildungen wird die durchschnittliche Zwischenankunftszeit mit \glqq MeanAr\grqq abgekürzt.
 
-\paragraph{Verwendung der implementierten Java-Simulation, Berechnung in Mathematica}
-\begin{figure}[htpb]
-	\centering
-	\includegraphics[width=0.8\textwidth]{abbildungen/auswertung1500/meanQueueTimePlot.pdf}
-	\caption{Mittlere Warteschlangenlänge, MeanAr = 1500}
-	\label{fig:meanQueueTime1500}
-\end{figure}
+%\subsubsection{Durchschnittliche Ankunftszeit der Clients: 1500}
+%\paragraph{Verwendung der Mathematica Simulation}
+%- Bild der Simulation 
+%- Plot Little-Law
+%- MeanSystemSize, MeanSystemTime, MeanQueueSize,MeanQueueTime aufführen
+%
+%\paragraph{Verwendung der implementierten Java-Simulation, Berechnung in Mathematica}
+%\begin{figure}[htpb]
+%	\centering
+%	\includegraphics[width=0.8\textwidth]{abbildungen/auswertung1500/meanQueueTimePlot.pdf}
+%	\caption{Mittlere Warteschlangenlänge, MeanAr = 1500}
+%	\label{fig:meanQueueTime1500}
+%\end{figure}
+%
+%\begin{figure}[htpb]
+%	\centering
+%	\includegraphics[width=0.8\textwidth]{abbildungen/auswertung1500/meanCallingTimePlot.pdf}
+%	\caption{Mittlere Telefonierdauer, MeanAr = 1500}
+%	\label{fig:meanCallingTime1500}
+%\end{figure}
+%
+%\begin{figure}[htpb]
+%	\centering
+%	\includegraphics[width=0.8\textwidth]{abbildungen/auswertung1500/meanSystemTimePlot.pdf}
+%	\caption{Mittlere Zeit im System (Wartezeit + Telefonierdauer), MeanAr = 1500}
+%	\label{fig:meanSystemTime1500}
+%\end{figure}
+%\paragraph{Simulation und Berechnung in Java}
 
-\begin{figure}[htpb]
-	\centering
-	\includegraphics[width=0.8\textwidth]{abbildungen/auswertung1500/meanCallingTimePlot.pdf}
-	\caption{Mittlere Telefonierdauer, MeanAr = 1500}
-	\label{fig:meanCallingTime1500}
-\end{figure}
+\subsubsection{Formeln für M/M/1 Warteschlangenmodelle}
+\label{Formeln}
+Die im folgenden aufgeführten Formeln gelten für M/M/1 Warteschlangenmodelle. Mit $Ls$ wird die durchschnittliche Anzahl von Kunden im System bezeichnet. $Lq$ gibt die durchschnittliche Länge der Warteschlange an. $Ws$ definiert die durchschnittliche Verweildauer der einzelnen Kunden im System und $Wq$ die durchschnittliche Verweildauer in der Warteschlange. 
 
-\begin{figure}[htpb]
-	\centering
-	\includegraphics[width=0.8\textwidth]{abbildungen/auswertung1500/meanSystemTimePlot.pdf}
-	\caption{Mittlere Zeit im System (Wartezeit + Telefonierdauer), MeanAr = 1500}
-	\label{fig:meanSystemTime1500}
-\end{figure}
-\paragraph{Simulation und Berechnung in Java}
+\begin{equation}
+Ls=\frac{\lambda}{\mu - \lambda}
+\end{equation}
+\begin{equation}
+Lq=\frac{\rho\lambda}{\mu - \lambda}
+\end{equation}
+\begin{equation}
+Ws=\frac{1}{\mu - \lambda}
+\end{equation}
+\begin{equation}
+Wq=\frac{\rho}{\mu - \lambda}
+\end{equation}
+In den einzelnen Gleichungen beschreibt $\lambda$, $\mu$ und $\rho$ wie folgt definiert: $\lambda$ beschreibt die durchschnittliche Ankunftszeit der Kunden pro Zeiteinheit. $\mu$ definiert die durchschnittliche Telefonierdauer der Kunden pro Zeiteinheit. Und $\rho$ beschreibt die durchschnittliche Auslastung des Telefons. Quelle: $http://www.business.uzh.ch/dam/jcr:00000000-0451-792f-ffff-fffffe13aac9/ServiceManagement_Warteschlangenmodelle.pdf$
 
+\begin{equation}
+\rho=\frac{\lambda}{\mu}
+\end{equation}
 
 \subsubsection{Durchschnittliche Ankunftszeit der Clients: 1000}
-\paragraph{Verwendung der Mathematica Simulation}
-- Bild der Simulation 
-- Plot Little-Law
-- MeanSystemSize, MeanSystemTime, MeanQueueSize,MeanQueueTime aufführen
+\paragraph{Theoretische Erwartungswerte laut M/M/1 Warteschlangenmodell}
+Bei einer durchschnittlichen Zwischenankunftszeit von 1000 ($\lambda=\frac{1}{1000}$, $\mu=\frac{1}{100}$)ergeben sich, basierend auf den in Abschnitt \label{Formeln} aufgeführten Formeln, folgende Erwartungswerte:
+\begin{equation}
+Ls=0,111111
+\end{equation}
+\begin{equation}
+Lq=0,0111111
+\end{equation}
+\begin{equation}
+Ws=111,111
+\end{equation}
+\begin{equation}
+Wq=11,1111
+\end{equation}
+Die einzelnen Erwartungswerte sind in den nachfolgenden Plots durch eine gelbe Linie hervorgehoben.
 \paragraph{Verwendung der implementierten Java-Simulation, Berechnung in Mathematica}
-Die berechneten Werte sind im folgenden aufgeführt:
-\begin{figure}[htpb]
-	\centering
-	\includegraphics[width=0.8\textwidth]{abbildungen/auswertung1000/meanQueueTimePlot.pdf}
-	\caption{Mittlere Warteschlangenlänge, MeanAr = 1000}
-	\label{fig:meanQueueTime1000}
-\end{figure}
-Betrachtet man die in \ref{fig:meanQueueTime1000} abgebildete mittlere Warteschlangenlänge, fällt auf, dass sich diese bei ca. 11,1 einpendelt. Ab einer Simulationsdauer von $460 000$ ändert sich der Wert nur noch minimal. Dies deutet auf den sog. \glqq Steady State\grqq, den eingeschwungenen Zustand hin.
 
 \begin{figure}[htpb]
 	\centering
-	\includegraphics[width=0.8\textwidth]{abbildungen/auswertung1000/meanCallingTimePlot.pdf}
-	\caption{Mittlere Telefonierdauer, MeanAr = 1000}
-	\label{fig:meanCallingTime1000}
+	\includegraphics[width=0.8\textwidth]{abbildungen/1_Phone/Arrival_1000_Serve_100_dur_1000000_Skip_0/MeanSystemSize.pdf}
+	\caption{Durchschnittliche Anzahl an Kunden im System, MeanAr = 1000}
+	\label{fig:meanSystemSize1000}
 \end{figure}
 
-Abbildung \ref{fig:meanCallingTime1000} zeigt die Änderung der mittleren Telefonierdauer über die Zeit. Wie auch in Abbildung \ref{fig:meanQueueTime1000} werden die Sprünge zwischen den einzelnen Werten erwartungsgemäß immer geringer mit fortschreitender Simulationsdauer. Allerdings weißt die mittlere Telefonierdauer bis zum Ende der Simulation noch kleinere Wertänderungen auf. Wenn überhaupt, kann, basieren auf diesem Wert, erst ab einer Simulationsdauer von ca. $650 000$ von einem eingeschwungenen System ausgegangen werden.
+Abbildung \ref{fig:meanSystemSize1000} zeigt die durchschnittliche Anzahl an Kunden im System an. Ab einer Simulationszeit von ca $200000$ liegt diese konstant bei $0.111111$, was mit dem Erwartungswert übereinstimmt und somit ein Indiz für die Richtigkeit der Simulation darstellt. Durch die Vergleichsweise kurze Telefonierzeit und lange Zwischenankunftszeit befinden sich über den Zeitverlauf nur wenige Kunden im System. 
 
 \begin{figure}[htpb]
 	\centering
-	\includegraphics[width=0.8\textwidth]{abbildungen/auswertung1000/meanSystemTimePlot.pdf}
-	\caption{Mittlere Zeit im System (Wartezeit + Telefonierdauer), MeanAr = 1000}
+	\includegraphics[width=0.8\textwidth]{abbildungen/1_Phone/Arrival_1000_Serve_100_dur_1000000_Skip_0/MeanSystemTime.pdf}
+	\caption{Durchschnittliche Verweildauer der Kunden im System, MeanAr = 1000}
 	\label{fig:meanSystemTime1000}
 \end{figure}
 
-Im Vergleich dazu zeigt \ref{fig:meanSystemTime1000} die durchschnittliche Zeit eines Clients im System. Diese berechnet sich durch die Summe aus durchschnittlicher Wartezeit und durchschnittlicher Telefonierdauer. Die Schwankungen zwischen den einzelnen Werten sind auf die erläuterten Wertänderungen bei der durchschnittlichen Telefonierdauer zurückzuführen. Gegen Ende der Simulation pendelt sich die durchschnittliche Systemzeit bei ca. $111,1$ ein.
+Betrachtet man Abbildung \ref{fig:meanSystemTime1000}, wird deutlich, dass die durchschnittliche Verweilsdauer im System bis zu einer Simulationszeit von $300000$ noch stark variiert. Anschließend ändert sie sich nur noch geringfügig, bleibt jedoch unter dem erwarteten Wert von $111.111$. Der Grund hierfür könnte entweder eine Ungenauigkeit aufgrund von Runden bei der Division oder ein Fehler in der Berechnung sein.
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{abbildungen/1_Phone/Arrival_1000_Serve_100_dur_1000000_Skip_0/MeanQueueSize.pdf}
+	\caption{Durchschnittliche Warteschlangenlänge, MeanAr = 1000}
+	\label{fig:meanQueueSize1000}
+\end{figure}
+
+Bei der Betrachtung der in Abbildung \ref{fig:meanQueueSize1000} gezeigte durchschnittlichen Warteschlangenlänge fällt auf, dass die Werte zu Beginn der Simulation um ca. $0,004$ schwanken. Auch gegen Ende der Simulation schwanken die Werte noch um ca. $0,0018$. Während der gesamten Simulationsdauer liegen die Werte unter dem Erwartungswert von $0,0111111$, nähern sich diesem jedoch gegen Ende der Simulationszeit immer weiter an. Grund hierfür könnte ein nicht vollkommen eingeschwungenes System sein. Die Simulation müsste hierfür erneut durchgeführt werden, mit einer größeren Simulationsdauer.
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{abbildungen/1_Phone/Arrival_1000_Serve_100_dur_1000000_Skip_0/MeanQueueTime.pdf}
+	\caption{Durchschnittliche Verweildauer in der Warteschlange , MeanAr = 1000}
+	\label{fig:meanQueueTime1000}
+\end{figure} 
+
+Die in Abbildung \ref{fig:meanQueueTime1000} aufgeführte durchschnittliche Verweildauer in der Warteschlange weißt einen ähnlichen Verlauf auf wie die in Abbildung \ref{fig:meanQueueSize1000} gezeigte durchschnittliche Warteschlangenlänge. Dieses Verhalten ist plausibel, da bei einer größeren Warteschlangenlänge auch die Wartezeit in der Warteschlange steigt. Gegen Ende der Simulation näher sich die durchschnittliche Verweildauer in der Warteschlange dem Erwartungswert von $11,1111$ an, erreicht ihn jedoch nicht. Wie bereits erläutert müsste die Simulation für eine genauere Beurteilung erneut mit einer längeren Simulationsdauer durchgeführt werden. 
+
 \paragraph{Simulation und Berechnung in Java}
 
 
@@ -110,26 +154,21 @@ Im Vergleich dazu zeigt \ref{fig:meanSystemTime1000} die durchschnittliche Zeit 
 - Plot Little-Law
 - MeanSystemSize, MeanSystemTime, MeanQueueSize,MeanQueueTime aufführen
 \paragraph{Verwendung der implementierten Java-Simulation, Berechnung in Mathematica}
-\begin{figure}[htpb]
-	\centering
-	\includegraphics[width=0.8\textwidth]{abbildungen/auswertung500/meanQueueTimePlot.pdf}
-	\caption{Mittlere Warteschlangenlänge, MeanAr = 500}
-	\label{fig:meanQueueTime500}
-\end{figure}
+%\begin{figure}[htpb]
+%	\centering
+%	\includegraphics[width=0.8\textwidth]{abbildungen/auswertung500/meanQueueTimePlot.pdf}
+%	\caption{Mittlere Warteschlangenlänge, MeanAr = 500}
+%	\label{fig:meanQueueTime500}
+%\end{figure}
 
-\begin{figure}[htpb]
-	\centering
-	\includegraphics[width=0.8\textwidth]{abbildungen/auswertung500/meanCallingTimePlot.pdf}
-	\caption{Mittlere Telefonierdauer, MeanAr = 500}
-	\label{fig:meanCallingTime500}
-\end{figure}
+%\begin{figure}[htpb]
+%	\centering
+%	\includegraphics[width=0.8\textwidth]{abbildungen/auswertung500/meanCallingTimePlot.pdf}
+%	\caption{Mittlere Telefonierdauer, MeanAr = 500}
+%	\label{fig:meanCallingTime500}
+%\end{figure}
+%
 
-\begin{figure}[htpb]
-	\centering
-	\includegraphics[width=0.8\textwidth]{abbildungen/auswertung500/meanSystemTimePlot.pdf}
-	\caption{Mittlere Zeit im System (Wartezeit + Telefonierdauer), MeanAr = 500}
-	\label{fig:meanSystemTime500}
-\end{figure}
 \paragraph{Simulation und Berechnung in Java}
 
 
@@ -142,26 +181,26 @@ Im Vergleich dazu zeigt \ref{fig:meanSystemTime1000} die durchschnittliche Zeit 
 \paragraph{Verwendung der implementierten Java-Simulation, Berechnung in Mathematica}
 
 \include{abbildungen/auswertung100/ResultsTable}
-\begin{figure}[htpb]
-	\centering
-	\includegraphics[width=0.8\textwidth]{abbildungen/auswertung100/meanQueueTimePlot.pdf}
-	\caption{Mittlere Warteschlangenlänge, MeanAr = 100}
-	\label{fig:meanQueueTime100}
-\end{figure}
-
-\begin{figure}[htpb]
-	\centering
-	\includegraphics[width=0.8\textwidth]{abbildungen/auswertung100/meanCallingTimePlot.pdf}
-	\caption{Mittlere Telefonierdauer, MeanAr = 100}
-	\label{fig:meanCallingTime100}
-\end{figure}
-
-\begin{figure}[htpb]
-	\centering
-	\includegraphics[width=0.8\textwidth]{abbildungen/auswertung100/meanSystemTimePlot.pdf}
-	\caption{Mittlere Zeit im System (Wartezeit + Telefonierdauer), MeanAr = 100}
-	\label{fig:meanSystemTime100}
-\end{figure}
+%\begin{figure}[htpb]
+%	\centering
+%	\includegraphics[width=0.8\textwidth]{abbildungen/auswertung100/meanQueueTimePlot.pdf}
+%	\caption{Mittlere Warteschlangenlänge, MeanAr = 100}
+%	\label{fig:meanQueueTime100}
+%\end{figure}
+%
+%\begin{figure}[htpb]
+%	\centering
+%	\includegraphics[width=0.8\textwidth]{abbildungen/auswertung100/meanCallingTimePlot.pdf}
+%	\caption{Mittlere Telefonierdauer, MeanAr = 100}
+%	\label{fig:meanCallingTime100}
+%\end{figure}
+%
+%\begin{figure}[htpb]
+%	\centering
+%	\includegraphics[width=0.8\textwidth]{abbildungen/auswertung100/meanSystemTimePlot.pdf}
+%	\caption{Mittlere Zeit im System (Wartezeit + Telefonierdauer), MeanAr = 100}
+%	\label{fig:meanSystemTime100}
+%\end{figure}
   
 \paragraph{Simulation und Berechnung in Java}
 

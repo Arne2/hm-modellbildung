@@ -33,7 +33,7 @@ NotebookDirectory[], StringJoin["../doku/abbildungen/1_Phone/Arrival_", ToString
 "_Skip_", ToString@skip, 
 "/"]};
 (*Wirft ein Fehler falls directory bereits vorhanden... ist aber OK so *)
-CreateDirectory[outputDir, CreateIntermediateDirectories -> False]
+CreateDirectory[outputDir, CreateIntermediateDirectories -> True]
 (*DatenPfad erzeugt sich automatisch aus den Paramtern*)
 dataPath = StringJoin["../data/1_Phone_Arrival_", ToString@meanArrivalTime, "_Skip_", ToString@skip];
 Load[name_]:= Import[FileNameJoin@{NotebookDirectory[],dataPath, name <> ".csv"},HeaderLines->1];

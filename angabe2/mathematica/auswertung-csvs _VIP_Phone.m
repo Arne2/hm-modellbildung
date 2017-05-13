@@ -15,8 +15,8 @@ Simulate[args_] := If[
 
 (*Falls neue Simulation ansteuern wert auf true setzen *)
 (*Falls wert auf false, dann wird keine neue Simulation durchgef\[UDoubleDot]hrt, sondern alte Daten herangezoogen *)
-startNewSimulation = false;
-meanArrivalTime = 1000;
+startNewSimulation = true;
+meanArrivalTime = 400;
 meanServeTime = 100;
 durationSimulation = 1000000;
 vip = 10;
@@ -33,7 +33,7 @@ NotebookDirectory[], StringJoin["../doku/abbildungen/1_Phone_VIP/Arrival_", ToSt
 "_Skip_", ToString@skip, 
 "/"]};
 (*Wirft ein Fehler falls directory bereits vorhanden... ist aber OK so *)
-CreateDirectory[outputDir, CreateIntermediateDirectories -> False]
+CreateDirectory[outputDir, CreateIntermediateDirectories -> True]
 (*DatenPfad erzeugt sich automatisch aus den Paramtern*)
 dataPath = StringJoin["../data/1_Phone_VIP_", ToString@vip ,"_Arrival_", ToString@meanArrivalTime, "_Skip_", ToString@skip]
 Load[name_]:= Import[FileNameJoin@{NotebookDirectory[],dataPath, name <> ".csv"},HeaderLines->1];
@@ -209,35 +209,35 @@ Export[FileNameJoin@{outputDir,"MeanSystemTimeAll.pdf"},%];
 
 
 queueSizeNormal = Load@"queue-size-normal";
-  ListStepPlot[queueSize,Filling->Bottom]
+  ListStepPlot[queueSizeNormal,Filling->Bottom]
   Export[FileNameJoin@{outputDir,"QueueStepPlotNormalAll.pdf"},%];
   (* startphase anfang leer!*)
-  ListStepPlot[queueSize[[;;100]],Filling->Bottom]
+  ListStepPlot[queueSizeNormal[[;;100]],Filling->Bottom]
   Export[FileNameJoin@{outputDir,"QueueStepPlotNormalFirst.pdf"},%];
   (* ende (wo es l\[ADoubleDot]uft) *)
-  ListStepPlot[queueSize[[-100;;]],Filling->Bottom]
+  ListStepPlot[queueSizeNormal[[-100;;]],Filling->Bottom]
   Export[FileNameJoin@{outputDir,"QueueStepPlotNormalLast.pdf"},%];
 
 
 queueSizeResident = Load@"queue-size-resident";
-  ListStepPlot[queueSize,Filling->Bottom]
+  ListStepPlot[queueSizeResident,Filling->Bottom]
   Export[FileNameJoin@{outputDir,"QueueStepPlotResidentAll.pdf"},%];
   (* startphase anfang leer!*)
-  ListStepPlot[queueSize[[;;100]],Filling->Bottom]
+  ListStepPlot[queueSizeResident[[;;100]],Filling->Bottom]
   Export[FileNameJoin@{outputDir,"QueueStepPlotResidentFirst.pdf"},%];
   (* ende (wo es l\[ADoubleDot]uft) *)
-  ListStepPlot[queueSize[[-100;;]],Filling->Bottom]
+  ListStepPlot[queueSizeResident[[-100;;]],Filling->Bottom]
   Export[FileNameJoin@{outputDir,"QueueStepPlotResidentLast.pdf"},%];
 
 
 queueSizeAll = Load@"queue-size-all";
-  ListStepPlot[queueSize,Filling->Bottom]
+  ListStepPlot[queueSizeAll,Filling->Bottom]
   Export[FileNameJoin@{outputDir,"QueueStepPlotAllAll.pdf"},%];
   (* startphase anfang leer!*)
-  ListStepPlot[queueSize[[;;100]],Filling->Bottom]
+  ListStepPlot[queueSizeAll[[;;100]],Filling->Bottom]
   Export[FileNameJoin@{outputDir,"QueueStepPlotAllFirst.pdf"},%];
   (* ende (wo es l\[ADoubleDot]uft) *)
-  ListStepPlot[queueSize[[-100;;]],Filling->Bottom]
+  ListStepPlot[queueSizeAll[[-100;;]],Filling->Bottom]
   Export[FileNameJoin@{outputDir,"QueueStepPlotAllLast.pdf"},%];
 
 

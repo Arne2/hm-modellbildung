@@ -36,4 +36,8 @@ public class Phone {
         this.user = null;
         return person;
     }
+
+    public Person getUser() {
+        return user;
+    }
 }

@@ -30,6 +30,7 @@ public class ArrivalEvent extends BaseEvent {
         findFreePhones(state);
 
         final Person person = new Person(random.nextInt(100) < VIP_PERCENTAGE);
+        person.setArrivalTimeStamp(state.clock.systemTime());
         state.queue.enqueue(person);
         makeNextArrival(state);
 
@@ -38,18 +39,13 @@ public class ArrivalEvent extends BaseEvent {
 
     private void makeNextArrival(SimulationState state) {
         final double nextArrivalIn = dist.getNextValue(CallShopConfiguration.MEAN_ARRIVAL);
-        state.arrivalDistributionLog.log(nextArrivalIn);
+        state.logs.arrivalDelta.log(nextArrivalIn);
         final BigDecimal absoluteTime = state.clock.systemTime().add(new BigDecimal(nextArrivalIn));
         final ArrivalEvent event = new ArrivalEvent(absoluteTime);
         state.events.add(event);
     }
 
     private void log(SimulationState state, Person person) {
-        state.arrivalLog.log(
-                person.getId(),
-                person.isResident(),
-                state.clock.systemTime()
-        );
     }
 
     private void findFreePhones(SimulationState state) {

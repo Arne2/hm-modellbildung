@@ -90,8 +90,19 @@ In den einzelnen Gleichungen beschreibt $\lambda$, $\mu$ und $\rho$ wie folgt de
 \begin{equation}
 \rho=\frac{\lambda}{\mu}
 \end{equation}
+\subsubsection{Validierung der einzelnen Auswertung auf Basis des Little Theorems}
+Laut dem Theorem von Little muss die durchschnittliche Anzahl von Kunden in einem Warteschlangensystem gleich dem Produkt aus der durchschnittlichen Ankunftsrate ($\Lambda$) und der durchschnittlichen Verweildauer ($Ws$) im System sein, wenn das System sich in einem eingeschwungenen Zustand befindet.
+\begin{equation}
+Ls=\lambda*Ws
+\end{equation}
+Stellt man die Formel um, muss im eingeschwungenen Zustand gelten:
+\begin{equation}
+\label{eq:little}
+\lambda*Ws - Ls=0
+\end{equation}
+Anhand dieser Gleichung werden im weiteren Verlauf der Studienarbeit die einzelnen Auswertungen validiert.
 
-\subsubsection{Durchschnittliche Ankunftszeit der Clients: 1000}
+\subsubsection{Durchschnittliche Zwischenankunftszeit der Clients: 1000}
 \paragraph{Theoretische Erwartungswerte laut M/M/1 Warteschlangenmodell}
 Bei einer durchschnittlichen Zwischenankunftszeit von 1000 ($\lambda=\frac{1}{1000}$, $\mu=\frac{1}{100}$)ergeben sich, basierend auf den in Abschnitt \label{Formeln} aufgeführten Formeln, folgende Erwartungswerte:
 \begin{equation}
@@ -107,7 +118,7 @@ Ws=111,111
 Wq=11,1111
 \end{equation}
 Die einzelnen Erwartungswerte sind in den nachfolgenden Plots durch eine gelbe Linie hervorgehoben.
-\paragraph{Verwendung der implementierten Java-Simulation, Berechnung in Mathematica}
+\paragraph{Verwendung der implementierten Java-Simulation, Berechnung in Java}
 
 \begin{figure}[htpb]
 	\centering
@@ -145,68 +156,100 @@ Bei der Betrachtung der in Abbildung \ref{fig:meanQueueSize1000} gezeigte durchs
 
 Die in Abbildung \ref{fig:meanQueueTime1000} aufgeführte durchschnittliche Verweildauer in der Warteschlange weißt einen ähnlichen Verlauf auf wie die in Abbildung \ref{fig:meanQueueSize1000} gezeigte durchschnittliche Warteschlangenlänge. Dieses Verhalten ist plausibel, da bei einer größeren Warteschlangenlänge auch die Wartezeit in der Warteschlange steigt. Gegen Ende der Simulation näher sich die durchschnittliche Verweildauer in der Warteschlange dem Erwartungswert von $11,1111$ an, erreicht ihn jedoch nicht. Wie bereits erläutert müsste die Simulation für eine genauere Beurteilung erneut mit einer längeren Simulationsdauer durchgeführt werden. 
 
-\paragraph{Simulation und Berechnung in Java}
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{abbildungen/1_Phone/Arrival_1000_Serve_100_dur_1000000_Skip_0/QueueStepPlotAll.pdf}
+	\caption{Warteschlangenlänge (ungefiltert) , MeanAr = 1000}
+	\label{fig:QueueStepPlotAll1000}
+\end{figure} 
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{abbildungen/1_Phone/Arrival_1000_Serve_100_dur_1000000_Skip_0/QueueStepPlotAllFiltered.pdf}
+	\caption{Warteschlangenlänge (gefiltert) , MeanAr = 1000}
+	\label{fig:QueueStepPlotAllFiltered1000}
+\end{figure} 
 
+Die Abbildung \ref{fig:QueueStepPlotAll1000} zeigt die einzelnen Werte für die Warteschlangenlänge über die Simulationszeit. Diese Abbildung ist nicht aussagekräftig. Hintergrund dafür ist die Implementierung der Simulation. Im Warteschlangenmodell wird zwischen drei verschiedenen Events unterschieden. Betritt ein neuer Kunde den Telefonshop, wird ein Arrival Event ausgelöst und die Warteschlangenlänge wird um 1 erhöht. Ist das Telefon frei, wird ein Begin Event ausgelöst und die Warteschlangenlänge wird um 1 reduziert. Hat ein Kunde sein Telefonat beendet, wird ein Finish Event ausgelöst, was wiederum ein Begin Event auslöst, da das Telefon frei ist. Ein Problem gibt es hierbei für den Fall, dass kein Kunde im Laden steht und somit auch die Warteschlange leer und das Telefon frei ist. Betritt nun ein neuer Kunde den Laden, wird ein Arrival Event ausgelöst und direkt anschließend ein Begin Event, da das Telefon frei ist und der Kunde sein Telefonat sofort beginnen kann. Er befindet sich somit für $0s$ in der Warteschlange. Aufgrund der Events wird die Warteschlangenlänge jedoch trotzdem erhöht und direkt wieder gesenkt. Es gibt somit für den gleichen Zeitstempel zwei unterschiedliche Warteschlangenlängen. Abbildung \ref{fig:QueueStepPlotAllFiltered} zeigt die gleiche Situation ohne die eben erläuterte Situation. Es wird hierbei nur eine Warteschlangenlänge angezeigt, wenn auch wirklich ein Kunde länger als $0s$ in der Warteschlange wartet. Da das System nur sehr gering ausgelastet ist, ist die geringe Warteschlangenlänge plausibel.\\
+Abschließend sind im folgenden die berechneten Werte für die durchschnittliche Warteschlangenlänge, Wartezeit in der Warteschlange, Anzahl an Clients im System und Zeit im System aufgeführt:
+%\include{abbildungen/auswertung100/ResultsTable}
+FEHLT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+\paragraph{Validierung der Simulation}
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{abbildungen/1_Phone/Arrival_1000_Serve_100_dur_1000000_Skip_0/LittleSystem.pdf}
+	\caption{Durchschnittliche Verweildauer in der Warteschlange , MeanAr = 1000}
+	\label{fig:LittleSystem1000}
+\end{figure} 
+In Abbildung \ref{fig:LittleSystem1000} ist der Verlauf der Gleichung \ref{eq:little} über die Simulationszeit aufgeführt. Ab einer Simulationsdauer von ca. $350000$ liegt der Wert sehr nach an dem geforderten Erwartungswert von $0$, schwankt jedoch bis zum Ende der Simulation im Bereich von $0,004$. Darauf folgt, dass entweder ein Fehler in der Berechnung oder, was aufgrund der sehr geringen Abweichung vom Erwartungswert wahrscheinlicher ist, das System noch nicht vollständig eingeschwungen war. Für weitere Erkenntnisse müsste, wie bereits erwähnt die Simulation mit längerer Simulationsdauer erneut ausgeführt werden.  
 
-\subsubsection{Durchschnittliche Ankunftszeit der Clients: 500}
-\paragraph{Verwendung der Mathematica Simulation}
-- Bild der Simulation 
-- Plot Little-Law
-- MeanSystemSize, MeanSystemTime, MeanQueueSize,MeanQueueTime aufführen
-\paragraph{Verwendung der implementierten Java-Simulation, Berechnung in Mathematica}
-%\begin{figure}[htpb]
-%	\centering
-%	\includegraphics[width=0.8\textwidth]{abbildungen/auswertung500/meanQueueTimePlot.pdf}
-%	\caption{Mittlere Warteschlangenlänge, MeanAr = 500}
-%	\label{fig:meanQueueTime500}
-%\end{figure}
-
-%\begin{figure}[htpb]
-%	\centering
-%	\includegraphics[width=0.8\textwidth]{abbildungen/auswertung500/meanCallingTimePlot.pdf}
-%	\caption{Mittlere Telefonierdauer, MeanAr = 500}
-%	\label{fig:meanCallingTime500}
-%\end{figure}
+%\subsubsection{Durchschnittliche Ankunftszeit der Clients: 500}
+%\paragraph{Verwendung der Mathematica Simulation}
+%- Bild der Simulation 
+%- Plot Little-Law
+%- MeanSystemSize, MeanSystemTime, MeanQueueSize,MeanQueueTime aufführen
+%\paragraph{Verwendung der implementierten Java-Simulation, Berechnung in Mathematica}
 %
-
-\paragraph{Simulation und Berechnung in Java}
+%
+%\paragraph{Simulation und Berechnung in Java}
 
 
 \subsubsection{Durchschnittliche Ankunftszeit der Clients: 100}
-\paragraph{Verwendung der Mathematica Simulation}
-- Bild der Simulation 
-- Plot Little-Law
-- MeanSystemSize, MeanSystemTime, MeanQueueSize,MeanQueueTime aufführen
+\paragraph{Theoretische Erwartungswerte laut M/M/1 Warteschlangenmodell}
+Für durchschnittliche Zwischenankunftszeit und durchschnittliche Telefonierdauer 100 ($\lambda=\frac{1}{100}$, $\mu=\frac{1}{100}$), lassen sich die durchschnittliche Warteschlangenlänge, Wartezeit in der Warteschlange, Anzahl an Clients im System und Zeit im System nicht berechnen. Die Warteschlangenlänge steigt gegen unendlich. Somit steigen auch die anderen drei Größen mit zunehmender Simulationsdauer gegen unendlich.
 
-\paragraph{Verwendung der implementierten Java-Simulation, Berechnung in Mathematica}
+\paragraph{Verwendung der implementierten Java-Simulation, Berechnung in Java}
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{abbildungen/1_Phone/Arrival_100_Serve_100_dur_1000000_Skip_0/MeanSystemSize.pdf}
+	\caption{Durchschnittliche Anzahl an Kunden im System, MeanAr = 100}
+	\label{fig:meanSystemSize100}
+\end{figure}
 
-\include{abbildungen/auswertung100/ResultsTable}
-%\begin{figure}[htpb]
-%	\centering
-%	\includegraphics[width=0.8\textwidth]{abbildungen/auswertung100/meanQueueTimePlot.pdf}
-%	\caption{Mittlere Warteschlangenlänge, MeanAr = 100}
-%	\label{fig:meanQueueTime100}
-%\end{figure}
-%
-%\begin{figure}[htpb]
-%	\centering
-%	\includegraphics[width=0.8\textwidth]{abbildungen/auswertung100/meanCallingTimePlot.pdf}
-%	\caption{Mittlere Telefonierdauer, MeanAr = 100}
-%	\label{fig:meanCallingTime100}
-%\end{figure}
-%
-%\begin{figure}[htpb]
-%	\centering
-%	\includegraphics[width=0.8\textwidth]{abbildungen/auswertung100/meanSystemTimePlot.pdf}
-%	\caption{Mittlere Zeit im System (Wartezeit + Telefonierdauer), MeanAr = 100}
-%	\label{fig:meanSystemTime100}
-%\end{figure}
-  
-\paragraph{Simulation und Berechnung in Java}
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{abbildungen/1_Phone/Arrival_100_Serve_100_dur_1000000_Skip_0/MeanSystemTime.pdf}
+	\caption{Durchschnittliche Verweildauer der Kunden im System, MeanAr = 100}
+	\label{fig:meanSystemTime100}
+\end{figure}
 
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{abbildungen/1_Phone/Arrival_100_Serve_100_dur_1000000_Skip_0/MeanQueueSize.pdf}
+	\caption{Durchschnittliche Warteschlangenlänge, MeanAr = 100}
+	\label{fig:meanQueueSize100}
+\end{figure}
 
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{abbildungen/1_Phone/Arrival_100_Serve_100_dur_1000000_Skip_0/MeanQueueTime.pdf}
+	\caption{Durchschnittliche Verweildauer in der Warteschlange , MeanAr = 100}
+	\label{fig:meanQueueTime100}
+\end{figure} 
 
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{abbildungen/1_Phone/Arrival_100_Serve_100_dur_1000000_Skip_0/QueueStepPlotAll.pdf}
+	\caption{Warteschlangenlänge (ungefiltert) , MeanAr = 100}
+	\label{fig:QueueStepPlotAll100}
+\end{figure} 
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{abbildungen/1_Phone/Arrival_100_Serve_100_dur_1000000_Skip_0/QueueStepPlotAllFiltered.pdf}
+	\caption{Warteschlangenlänge (gefiltert) , MeanAr = 100}
+	\label{fig:QueueStepPlotAllFiltered100}
+\end{figure} 
+Abschließend sind im folgenden die berechneten Werte für die durchschnittliche Warteschlangenlänge, Wartezeit in der Warteschlange, Anzahl an Clients im System und Zeit im System aufgeführt:
+%\include{abbildungen/auswertung100/ResultsTable}
+FEHLT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
+\paragraph{Validierung der Simulation}
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{abbildungen/1_Phone/Arrival_100_Serve_100_dur_1000000_Skip_0/LittleSystem.pdf}
+	\caption{Durchschnittliche Verweildauer in der Warteschlange , MeanAr = 1000}
+	\label{fig:LittleSystem100}
+\end{figure} 
+In Abbildung \ref{fig:LittleSystem1000} ist der Verlauf der Gleichung \ref{eq:little} über die Simulationszeit aufgeführt.
 \subsection{Modell \glqq Bevorzugte VIP\grqq} 
 \subsubsection{Durchschnittliche Ankunftszeit der Clients: 100}
 \subsubsection{Durchschnittliche Ankunftszeit der Clients: 500}

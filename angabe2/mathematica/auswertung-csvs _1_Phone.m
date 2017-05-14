@@ -80,8 +80,7 @@ If[startNewSimulation == true, Simulate[arguments], ]
 (*Plot Mean QueueSize*)
 
 
-Show[ListPlot[ {Load@"mean-queue-size-normal"},
-PlotRange->All], 
+Show[ListPlot[ {Load@"mean-queue-size-normal"}], 
 Plot[Evaluate[y = MeanQueueSizeTheoretical], 
 {x, 0, durationSimulation},
 PlotStyle -> {Orange, Dashed, Thick}], 
@@ -89,8 +88,7 @@ AxesLabel->{"t","mean queue size"}]
 Export[FileNameJoin@{outputDir,"MeanQueueSize.pdf"},%];
 
 
-Show[ListPlot[ {Load@"mean-system-size-normal"},
-PlotRange->All] , 
+Show[ListPlot[ {Load@"mean-system-size-normal"}] , 
 Plot[Evaluate[y = MeanSystemSizeTheoretical], 
 {x, 0, durationSimulation},
 PlotStyle -> {Orange, Dashed, Thick}],  
@@ -98,8 +96,7 @@ AxesLabel->{"t","mean system size"}]
 Export[FileNameJoin@{outputDir,"MeanSystemSize.pdf"},%];
 
 
-Show[ListPlot[ {Load@"mean-queue-time-normal"},
-PlotRange->All], 
+Show[ListPlot[ {Load@"mean-queue-time-normal"}] , 
 Plot[Evaluate[y = MeanQueueTimeTheoretical], 
 {x, 0, durationSimulation},
 PlotStyle -> {Orange, Dashed, Thick}], 
@@ -107,8 +104,7 @@ AxesLabel->{"t","mean queue time"}]
 Export[FileNameJoin@{outputDir,"MeanQueueTime.pdf"},%];
 
 
-Show[ListPlot[ {Load@"mean-system-time-normal"},
-PlotRange->All] , 
+Show[ListPlot[ {Load@"mean-system-time-normal"}] , 
 Plot[Evaluate[y = MeanSystemTimeTheoretical], 
 {x, 0, durationSimulation},
 PlotStyle -> {Orange, Dashed, Thick}], 
@@ -122,9 +118,13 @@ Export[FileNameJoin@{outputDir,"MeanSystemTime.pdf"},%];
 
 queueSize = Load@"queue-size-normal";
 
-  ListStepPlot[queueSize,Filling->Bottom]
+  Show[ListStepPlot[ {queueSize}, Filling->Bottom] ,  
+  AxesLabel->{"t","Queue Size"}]
   Export[FileNameJoin@{outputDir,"QueueStepPlotAll.pdf"},%];
+(*  ListStepPlot[queueSize,Filling->Bottom]
+  Export[FileNameJoin@{outputDir,"QueueStepPlotAll.pdf"},%];*)
   (* startphase anfang leer!*)
+  
   ListStepPlot[queueSize[[;;100]],Filling->Bottom]
   Export[FileNameJoin@{outputDir,"QueueStepPlotFirst.pdf"},%];
   (* ende (wo es l\[ADoubleDot]uft) *)
@@ -153,8 +153,12 @@ dataSet = DeleteDuplicatesBy[dataSet, First];
 dataSet = Reverse[dataSet];
 
 
-  ListStepPlot[dataSet,Filling->Bottom]
+  Show[ListStepPlot[ {dataSet}, Filling->Bottom] ,  
+  AxesLabel->{"t","Queue Size"}]
   Export[FileNameJoin@{outputDir,"QueueStepPlotAllFiltered.pdf"},%];
+  
+(*  ListStepPlot[dataSet,Filling->Bottom]
+  Export[FileNameJoin@{outputDir,"QueueStepPlotAllFiltered.pdf"},%];*)
   (* startphase anfang leer!*)
   ListStepPlot[dataSet[[;;100]],Filling->Bottom]
   Export[FileNameJoin@{outputDir,"QueueStepPlotFirstFiltered.pdf"},%];
@@ -171,5 +175,7 @@ dataSet = Reverse[dataSet];
 (*Im eingeschwungenen Zustand muss der Wert 0 betragen*)
 
 
-ListPlot[Load@"little-system-normal"]
+(*ListPlot[Load@"little-system-normal"]*)
+Show[ListPlot[ {Load@"little-system-normal"}], 
+AxesLabel->{"t","\[Lambda] * Ws - Ls"}]
 Export[FileNameJoin@{outputDir,"LittleSystem.pdf"},%];

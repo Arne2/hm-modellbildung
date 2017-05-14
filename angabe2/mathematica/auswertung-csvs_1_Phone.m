@@ -116,19 +116,19 @@ AxesLabel->{"t","mean system time"}]
 Export[FileNameJoin@{outputDir,"MeanSystemTime.pdf"},%];
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Queue Size StepPlot*)
 
 
 queueSize = Load@"queue-size-normal";
 
-  ListStepPlot[queueSize,Filling->Bottom]
+  ListStepPlot[queueSize,{ AxesLabel->{"t","queue"}, Filling->Axis}]
   Export[FileNameJoin@{outputDir,"QueueStepPlotAll.pdf"},%];
   (* startphase anfang leer!*)
-  ListStepPlot[queueSize[[;;100]],Filling->Bottom]
+  ListStepPlot[queueSize[[;;100]],{ AxesLabel->{"t","queue"}, Filling->Axis}]
   Export[FileNameJoin@{outputDir,"QueueStepPlotFirst.pdf"},%];
   (* ende (wo es l\[ADoubleDot]uft) *)
-  ListStepPlot[queueSize[[-100;;]],Filling->Bottom]
+  ListStepPlot[queueSize[[-100;;]],{ AxesLabel->{"t","queue"}, Filling->Axis}]
   Export[FileNameJoin@{outputDir,"QueueStepPlotLast.pdf"},%];
 
 
@@ -136,7 +136,7 @@ queueSize = Load@"queue-size-normal";
 
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*Daten Filtern (Doppelte Zeitpunkte werden entfernt)*)
 
 
@@ -153,17 +153,17 @@ dataSet = DeleteDuplicatesBy[dataSet, First];
 dataSet = Reverse[dataSet];
 
 
-  ListStepPlot[dataSet,Filling->Bottom]
+  ListStepPlot[dataSet,{ AxesLabel->{"t","queue"}, Filling->Axis}]
   Export[FileNameJoin@{outputDir,"QueueStepPlotAllFiltered.pdf"},%];
   (* startphase anfang leer!*)
-  ListStepPlot[dataSet[[;;100]],Filling->Bottom]
+  ListStepPlot[dataSet[[;;100]],{ AxesLabel->{"t","queue"}, Filling->Axis}]
   Export[FileNameJoin@{outputDir,"QueueStepPlotFirstFiltered.pdf"},%];
   (* ende (wo es l\[ADoubleDot]uft) *)
-  ListStepPlot[dataSet[[-100;;]],Filling->Bottom]
+  ListStepPlot[dataSet[[-100;;]],{ AxesLabel->{"t","queue"}, Filling->Axis}]
     Export[FileNameJoin@{outputDir,"QueueStepPlotLastFiltered.pdf"},%];
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*Theorem von Little : lambda * MeanSystemTime - MeanSystemSize = 0 f\[UDoubleDot]r t-> inf*)
 
 
@@ -171,5 +171,5 @@ dataSet = Reverse[dataSet];
 (*Im eingeschwungenen Zustand muss der Wert 0 betragen*)
 
 
-ListPlot[Load@"little-system-normal"]
+ListPlot[Load@"little-system-normal", { AxesLabel->{"t","\!\(\*SubscriptBox[\(\[Lambda]M\), \(s\)]\) - \!\(\*SubscriptBox[\(L\), \(s\)]\)"}, Filling->Axis}]
 Export[FileNameJoin@{outputDir,"LittleSystem.pdf"},%];

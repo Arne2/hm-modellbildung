@@ -16,7 +16,7 @@ Simulate[args_] := If[
 (*Falls neue Simulation ansteuern wert auf true setzen *)
 (*Falls wert auf false, dann wird keine neue Simulation durchgef\[UDoubleDot]hrt, sondern alte Daten herangezoogen *)
 startNewSimulation = true;
-meanArrivalTime = 1500;
+meanArrivalTime = 50;
 meanServeTime = 100;
 durationSimulation = 1000000;
 vip = 10;
@@ -47,7 +47,8 @@ Load[name_]:= Import[FileNameJoin@{NotebookDirectory[],dataPath, name <> ".csv"}
 
 (* ::Text:: *)
 (*Links zu den Dokumenten mit Formeln:*)
-(*file:///home/dima/Downloads/Lec13_MMs_Queueing%20System2.pdf*)
+(*https://www.google.de/url?sa=t&rct=j&q=&esrc=s&source=web&cd=3&cad=rja&uact=8&ved=0ahUKEwjW6tSPsO_TAhUG1RoKHeeFACEQFgg4MAI&url=http%3A%2F%2Ffaculty.ksu.edu.sa%2F9766%2FOR372%2FLec13_MMs_Queueing%2520System2.pdf&usg=AFQjCNHgfbvYXBn9EUGB2iAHBZEyVCZsVg*)
+(**)
 (*https://en.wikipedia.org/wiki/M/M/c_queue*)
 (*http://personal.maths.surrey.ac.uk/st/K.Young/Modules/MS334/M-M-c.pdf   <--- erste Formel f\[UDoubleDot]r P0... Andere Formeln scheinen falsch zu sein*)
 (*http://www.supositorio.com/rcalc/rcalclite.htm    <---- Online rechner f\[UDoubleDot]r Warteschlangen*)
@@ -103,7 +104,7 @@ If[startNewSimulation == true, Simulate[arguments], ]
 (*Plot Mean QueueSize / SystemSize / QueueTime / SystemTime*)
 
 
-(* ::Subsubsection::Closed:: *)
+(* ::Subsubsection:: *)
 (*Mean Queue Size*)
 
 
@@ -170,7 +171,7 @@ AxesLabel->{"t","mean queue time all"}]
 Export[FileNameJoin@{outputDir,"MeanQueueTimeAll.pdf"},%];
 
 
-(* ::Subsubsection::Closed:: *)
+(* ::Subsubsection:: *)
 (*Mean System Time*)
 
 
@@ -193,7 +194,7 @@ AxesLabel->{"t","mean system time all"}]
 Export[FileNameJoin@{outputDir,"MeanSystemTimeAll.pdf"},%];
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Queue Size StepPlot*)
 
 
@@ -230,7 +231,7 @@ queueSizeAll = Load@"queue-size-all";
   Export[FileNameJoin@{outputDir,"QueueStepPlotAllLast.pdf"},%];
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Daten Filtern (Doppelte Zeitpunkte werden entfernt)*)
 
 
@@ -295,7 +296,7 @@ ListStepPlot[dataSet,{ AxesLabel->{"t","queue all"}, Filling->Axis}]
     Export[FileNameJoin@{outputDir,"QueueStepPlotAllLastFiltered.pdf"},%];
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Theorem von Little : lambda * MeanSystemTime - MeanSystemSize = 0 f\[UDoubleDot]r t-> inf*)
 
 

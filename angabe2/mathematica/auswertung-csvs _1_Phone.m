@@ -16,7 +16,7 @@ Simulate[args_] := If[
 (*Falls neue Simulation ansteuern wert auf true setzen *)
 (*Falls wert auf false, dann wird keine neue Simulation durchgef\[UDoubleDot]hrt, sondern alte Daten herangezoogen *)
 startNewSimulation = false;
-meanArrivalTime = 100;
+meanArrivalTime = 1500;
 meanServeTime = 100;
 durationSimulation = 1000000;
 vip = 0;
@@ -80,7 +80,8 @@ If[startNewSimulation == true, Simulate[arguments], ]
 (*Plot Mean QueueSize*)
 
 
-Show[ListPlot[ {Load@"mean-queue-size-normal"}], 
+Show[ListPlot[ {Load@"mean-queue-size-normal"},
+PlotRange->All], 
 Plot[Evaluate[y = MeanQueueSizeTheoretical], 
 {x, 0, durationSimulation},
 PlotStyle -> {Orange, Dashed, Thick}], 
@@ -88,7 +89,8 @@ AxesLabel->{"t","mean queue size"}]
 Export[FileNameJoin@{outputDir,"MeanQueueSize.pdf"},%];
 
 
-Show[ListPlot[ {Load@"mean-system-size-normal"}] , 
+Show[ListPlot[ {Load@"mean-system-size-normal"},
+PlotRange->All] , 
 Plot[Evaluate[y = MeanSystemSizeTheoretical], 
 {x, 0, durationSimulation},
 PlotStyle -> {Orange, Dashed, Thick}],  
@@ -96,7 +98,8 @@ AxesLabel->{"t","mean system size"}]
 Export[FileNameJoin@{outputDir,"MeanSystemSize.pdf"},%];
 
 
-Show[ListPlot[ {Load@"mean-queue-time-normal"}] , 
+Show[ListPlot[ {Load@"mean-queue-time-normal"},
+PlotRange->All] , 
 Plot[Evaluate[y = MeanQueueTimeTheoretical], 
 {x, 0, durationSimulation},
 PlotStyle -> {Orange, Dashed, Thick}], 
@@ -104,7 +107,8 @@ AxesLabel->{"t","mean queue time"}]
 Export[FileNameJoin@{outputDir,"MeanQueueTime.pdf"},%];
 
 
-Show[ListPlot[ {Load@"mean-system-time-normal"}] , 
+Show[ListPlot[ {Load@"mean-system-time-normal"},
+PlotRange->All] , 
 Plot[Evaluate[y = MeanSystemTimeTheoretical], 
 {x, 0, durationSimulation},
 PlotStyle -> {Orange, Dashed, Thick}], 
@@ -112,19 +116,15 @@ AxesLabel->{"t","mean system time"}]
 Export[FileNameJoin@{outputDir,"MeanSystemTime.pdf"},%];
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*Queue Size StepPlot*)
 
 
 queueSize = Load@"queue-size-normal";
 
-  Show[ListStepPlot[ {queueSize}, Filling->Bottom] ,  
-  AxesLabel->{"t","Queue Size"}]
+  ListStepPlot[queueSize,Filling->Bottom]
   Export[FileNameJoin@{outputDir,"QueueStepPlotAll.pdf"},%];
-(*  ListStepPlot[queueSize,Filling->Bottom]
-  Export[FileNameJoin@{outputDir,"QueueStepPlotAll.pdf"},%];*)
   (* startphase anfang leer!*)
-  
   ListStepPlot[queueSize[[;;100]],Filling->Bottom]
   Export[FileNameJoin@{outputDir,"QueueStepPlotFirst.pdf"},%];
   (* ende (wo es l\[ADoubleDot]uft) *)
@@ -153,12 +153,8 @@ dataSet = DeleteDuplicatesBy[dataSet, First];
 dataSet = Reverse[dataSet];
 
 
-  Show[ListStepPlot[ {dataSet}, Filling->Bottom] ,  
-  AxesLabel->{"t","Queue Size"}]
+  ListStepPlot[dataSet,Filling->Bottom]
   Export[FileNameJoin@{outputDir,"QueueStepPlotAllFiltered.pdf"},%];
-  
-(*  ListStepPlot[dataSet,Filling->Bottom]
-  Export[FileNameJoin@{outputDir,"QueueStepPlotAllFiltered.pdf"},%];*)
   (* startphase anfang leer!*)
   ListStepPlot[dataSet[[;;100]],Filling->Bottom]
   Export[FileNameJoin@{outputDir,"QueueStepPlotFirstFiltered.pdf"},%];
@@ -175,7 +171,14 @@ dataSet = Reverse[dataSet];
 (*Im eingeschwungenen Zustand muss der Wert 0 betragen*)
 
 
-(*ListPlot[Load@"little-system-normal"]*)
-Show[ListPlot[ {Load@"little-system-normal"}], 
-AxesLabel->{"t","\[Lambda] * Ws - Ls"}]
+ListPlot[Load@"little-system-normal"]
 Export[FileNameJoin@{outputDir,"LittleSystem.pdf"},%];
+
+
+TableOfResults = Grid[{
+{"value", "theoretical", "simulation", },
+{"mean queue size", N@MeanQueueSizeTheoretical, Last@Last[Load@"mean-queue-size-normal"]},
+{"mean queue time", N@MeanQueueTimeTheoretical, Last@Last[Load@"mean-queue-time-normal"]},
+{"mean system size", N@MeanSystemSizeTheoretical, Last@Last[Load@"mean-system-size-normal"]},
+{"mean system time", N@MeanSystemTimeTheoretical, Last@Last[Load@"mean-system-time-normal"] }}]
+Export[FileNameJoin@{outputDir,"ResultsTable.tex"},%, "TexFragment"];

@@ -265,9 +265,6 @@ Die in Abbildung \ref{fig:meanQueueTime1000} aufgeführte durchschnittliche Verw
 \end{figure} 
 
 Die Abbildung \ref{fig:QueueStepPlotAll1000} zeigt die einzelnen Werte für die Warteschlangenlänge über die Simulationszeit. Diese Abbildung ist nicht aussagekräftig. Hintergrund dafür ist die Implementierung der Simulation. Im Warteschlangenmodell wird zwischen drei verschiedenen Events unterschieden. Betritt ein neuer Kunde den Telefonshop, wird ein Arrival Event ausgelöst und die Warteschlangenlänge wird um 1 erhöht. Ist das Telefon frei, wird ein Begin Event ausgelöst und die Warteschlangenlänge wird um 1 reduziert. Hat ein Kunde sein Telefonat beendet, wird ein Finish Event ausgelöst, was wiederum ein Begin Event auslöst, da das Telefon frei ist. Ein Problem gibt es hierbei für den Fall, dass kein Kunde im Laden steht und somit auch die Warteschlange leer und das Telefon frei ist. Betritt nun ein neuer Kunde den Laden, wird ein Arrival Event ausgelöst und direkt anschließend ein Begin Event, da das Telefon frei ist und der Kunde sein Telefonat sofort beginnen kann. Er befindet sich somit für $0s$ in der Warteschlange. Aufgrund der Events wird die Warteschlangenlänge jedoch trotzdem erhöht und direkt wieder gesenkt. Es gibt somit für den gleichen Zeitstempel zwei unterschiedliche Warteschlangenlängen. Abbildung \ref{fig:QueueStepPlotAllFiltered1000} zeigt die gleiche Situation ohne die eben erläuterte Situation. Es wird hierbei nur eine Warteschlangenlänge angezeigt, wenn auch wirklich ein Kunde länger als $0s$ in der Warteschlange wartet. Da das System nur sehr gering ausgelastet ist, ist die geringe Warteschlangenlänge plausibel.\\
-Abschließend sind im folgenden die von der implementierten Simulation berechneten Werte für die durchschnittliche Warteschlangenlänge, Wartezeit in der Warteschlange, Anzahl an Clients im System und Zeit im System aufgeführt:
-%\include{abbildungen/auswertung100/ResultsTable}
-FEHLT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 \paragraph{Validierung der Simulation}
 \\
@@ -279,6 +276,9 @@ FEHLT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 \end{figure} 
 
 In Abbildung \ref{fig:LittleSystem1000} ist der Verlauf der Gleichung \ref{eq:little} über die Simulationszeit aufgeführt. Ab einer Simulationsdauer von ca. $350000s$ liegt der Wert sehr nach an dem geforderten Erwartungswert von $0$, schwankt jedoch bis zum Ende der Simulation im Bereich von $0,004$. Da die Differenz zum Erwartungswert sehr gering ist, liegt die Ursache für diese Abweichung vermutlich in Ungenauigkeiten bei der Berechung der Werte. Die durchschnittliche Anzahl an Kunden im System wird entweder um $0,004$ zu gering angenommen, oder die Verweildauer der Kunden im System um $0,004$ zu lang. Ebenso ist eine Kombination der beiden Fehler möglich. Insgesamt deckt sich diese Aussage mit den Abweichungen in den einzelnen Abbildungen.
+
+Abschließend sind im folgenden die von der implementierten Simulation berechneten Werte für die durchschnittliche Warteschlangenlänge, Wartezeit in der Warteschlange, Anzahl an Clients im System und Zeit im System im Vergleich zu den entsprechenden theoretisch errechneten Werten (für ein eingeschwungenes System) aufgelistet:
+\input{abbildungen/1_Phone/Arrival_1000_Serve_100_dur_1000000_Skip_0/ResultsTable}
 
 Alle vier ermittelten Durchschnittswerte liegen, ab einer Simulationsdauer von ca. $400000s$ sehr nah an den Werten, welche für ein eingeschwungenes Warteschlangensystem errechnet wurden. Da auch das in Abbildung  \ref{fig:LittleSystem1000} ersichtliche Ergebnis der Differenz zeigt, dass das System, abgesehen vom erläuterten systematischen Fehler, ab einer Simulationszeit von ca. $400000s$ der für ein eingeschwungenes System erforderliche Wert von $0$ näherungsweise erreicht wird. Es kann somit davon ausgegangen werden, dass der Steady State (eingeschwungene Zustand) bei dieser Simulationsdauer erreicht wurde.
 
@@ -338,10 +338,6 @@ Die in Abbildung \ref{fig:meanQueueSize400} gezeigte durchschnittliche Warteschl
 
 Die in Abbildung \ref{fig:meanQueueTime400} aufgeführte durchschnittliche Verweildauer in der Warteschlange weißt einen ähnlichen Verlauf auf wie die in Abbildung \ref{fig:meanQueueSize400} gezeigte durchschnittliche Warteschlangenlänge. Dieses Verhalten ist plausibel, da bei einer größeren Warteschlangenlänge auch die Wartezeit in der Warteschlange steigt. Beide Werte schwanken ab einer Simulationsdauer von ca. $400000s$ um den Erwartungswert. Die durchschnittliche Verweildauer in der Warteschlange schwankt um ca. $2$ um den Erwartungswert von $33,3333$. 
 
-Im der folgenden Tabelle sind die von der implementierten Simulation berechneten Werte für die durchschnittliche Warteschlangenlänge, Wartezeit in der Warteschlange, Anzahl an Clients im System und Zeit im System aufgeführt:
-%\include{abbildungen/auswertung100/ResultsTable}
-FEHLT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
 \begin{figure}[htpb]
 	\centering
 	\includegraphics[width=0.8\textwidth]{abbildungen/1_Phone/Arrival_400_Serve_100_dur_1000000_Skip_0/QueueStepPlotAll.pdf}
@@ -368,6 +364,9 @@ Abschließend sind in den Abbildungen \ref{fig:QueueStepPlotAll400} und \ref{fig
 \end{figure}
 
 In Abbildung \ref{fig:LittleSystem400} ist der Verlauf der Gleichung \ref{eq:little} über die Simulationszeit aufgeführt. Ab einer Simulationsdauer von ca. $400000s$ schwankt der Wert nur noch geringfügig. Die Werte liegen jedoch bis zum Ende der Simulation bei durchschnittlich ca. $0,009$. Wie auch bei der Auswertung der Simulation mit einer durchschnittlichen Zwischenankunftszeit von $1000s$, kann hier wiederum von einem systematischen Fehler von $0,009$ mit den selben Ursachen ausgegangen werden. Die Abweichung ist hier größer, da aufgrund der niedrigeren Zwischenankunftszeit deutlich mehr Kunden den Laden besucht haben und somit mehr Zeiten verrechnet wurden. Insgesamt deckt sich dieser Fehler mit den Abweichungen in den einzelnen Abbildungen.
+
+Abschließend sind im folgenden die von der implementierten Simulation berechneten Werte für die durchschnittliche Warteschlangenlänge, Wartezeit in der Warteschlange, Anzahl an Clients im System und Zeit im System im Vergleich zu den entsprechenden theoretisch errechneten Werten (für ein eingeschwungenes System) aufgelistet:
+\input{abbildungen/1_Phone/Arrival_1000_Serve_100_dur_1000000_Skip_0/ResultsTable}
 
 Alle vier ermittelten Durchschnittswerte liegen, ab einer Simulationsdauer von ca. $400000s$ sehr nah an den Werten, welche für ein eingeschwungenes Warteschlangensystem errechnet wurden. Das in Abbildung  \ref{fig:LittleSystem400} ersichtliche Ergebnis der Differenz zeigt, dass das System, abgesehen vom erläuterten systematischen Fehler, ab einer Simulationszeit von ca. $600000s$ der für ein eingeschwungenes System erforderliche Wert von $0$ näherungsweise erreicht wird. Es kann somit davon ausgegangen werden, dass der Steady State (eingeschwungene Zustand) ab einer Simulationsdauer von $600000s$ erreicht wurde.
 
@@ -426,10 +425,6 @@ Abschließend sind in den Abbildungen \ref{fig:QueueStepPlotAll100} und \ref{fig
 	\caption{Warteschlangenlänge (gefiltert) , MeanAr = 100}
 	\label{fig:QueueStepPlotAllFiltered100}
 \end{figure} 
-
-Abschließend sind im folgenden die von der implementierten Simulation berechneten Werte für die durchschnittliche Warteschlangenlänge, Wartezeit in der Warteschlange, Anzahl an Clients im System und Zeit im System aufgeführt:
-%\include{abbildungen/auswertung100/ResultsTable}
-FEHLT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 \paragraph{Validierung der Simulation}
 \begin{figure}[htpb]

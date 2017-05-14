@@ -12,6 +12,8 @@ public interface Queue {
     Person dequeue();
     Person dequeueVip();
     List<Person> getList();
-    long count();
+    long countNormal();
+    long countResident();
+    long countAll();
     boolean isEmpty();
 }

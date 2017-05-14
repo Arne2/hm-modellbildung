@@ -49,7 +49,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>cs.hm.edu.muenchen.hm.modellbildung.onephone.CallShopSimulation</mainClass>
+                            <mainClass>cs.hm.edu.muenchen.hm.modellbildung.CallShopSimulation</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

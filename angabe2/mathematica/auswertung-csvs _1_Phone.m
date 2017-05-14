@@ -15,7 +15,7 @@ Simulate[args_] := If[
 
 (*Falls neue Simulation ansteuern wert auf true setzen *)
 (*Falls wert auf false, dann wird keine neue Simulation durchgef\[UDoubleDot]hrt, sondern alte Daten herangezoogen *)
-startNewSimulation = true;
+startNewSimulation = false;
 meanArrivalTime = 100;
 meanServeTime = 100;
 durationSimulation = 10000000;

@@ -113,7 +113,7 @@ Export[FileNameJoin@{outputDir,"MeanQueueTime.pdf"},%];
 
 
 Show[ListPlot[ {LoadNormal@"mean-system-time-normal"}], 
-Plot[Evaluate[y = MeanQueueSizeTheoretical], 
+Plot[Evaluate[y = MeanSystemTimeTheoretical], 
 {x, 0, durationSimulation},
 PlotStyle -> {Orange, Dashed, Thick}],
 ListPlot[{LoadVIP@"mean-system-time-all"},PlotStyle -> {Purple, Dashed, Thick}] ,

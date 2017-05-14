@@ -17,10 +17,9 @@ Simulationen haben in der moderne einen sehr hohen Stellenwert erlangt, da durch
 \section{Beschreibung des Modells}
 Für die Simulation des Insel-Callshops wird ein Warteschlagenmodell mit Clients und zunächst nur einem Server verwendet. Jede Person die den CallShop betritt wird durch einen neuen Client repräsentiert. Das Telefon des Shops ist durch den Server dargestellt. Möchte eine Person das Telefon zu einem Zeitpunkt benützen, zu dem bereits eine andere Person telefoniert, muss sie sich hinten anstellen und warten, bis die Person ihr Telefonat beendet hat. Im Modell wird dieses durch eine Warteschlage (Queue) realisiert, in die sich ankommende Clients einordnen und sobald der Server nichtmehr belegt ist nach dem FIFO (first in first out) Prinzip bedient werden. 
 
-Im Modell werden sowohl die Ankunftszeiten der Clients, als auch die Dauer der Telefonate durch eine negative Exponentialverteilung beschrieben, da diese sehr nah an den real beoachteten Verhalten liegt. Der mathematische Hintergrund liegt in der Eigenschaft der Exponentialfunktion zugrunde. Die Exponentialverteilung ist die einzige kontinuierliche Verteilung, welche zugleich die Markoveigenschaft, die sogenannte Gedächtnislosigkeit, erfüllt. Diese besagt, dass die seit dem letzten Ereignis vergangene Zeit (in diesem Beispiel Anrufer) keinen Einfluss auf die Verteilung der Zeit bis zum nächsten Ereignis (bis zum nächsten Anruf) hat. 
-Quelle: http://www.mathepedia.de/Exponentialverteilung.aspx
+Im Modell werden sowohl die Ankunftszeiten der Clients, als auch die Dauer der Telefonate durch eine negative Exponentialverteilung beschrieben, da diese sehr nah an den real beoachteten Verhalten liegt. Der mathematische Hintergrund liegt in der Eigenschaft der Exponentialfunktion zugrunde. Die Exponentialverteilung ist die einzige kontinuierliche Verteilung, welche zugleich die Markoveigenschaft, die sogenannte Gedächtnislosigkeit, erfüllt. Diese besagt, dass die seit dem letzten Ereignis vergangene Zeit (in diesem Beispiel Anrufer) keinen Einfluss auf die Verteilung der Zeit bis zum nächsten Ereignis (bis zum nächsten Anruf) hat \cite{ExpoVert}. 
 
-Darüber hinaus wird ein zweites Modell betrachtet, in welchem die Bewohner des Inseldorfes (Einheimische) bevorzugt werden. Im weiteren Verlauf der Studienarbeit werden diese mit VIP bezeichnet. Der grundlegende Ablauf verläuft wie beim ersten Modell. Allerdings wird, bevor der nächste Client (FIFO Prinzip) telefonieren darf, die Queue nach einem VIP durchsucht. Befindet sich ein VIP in der Queue, wird dieser bevorzugt und darf zuerst telfonieren. 
+Darüber hinaus wird ein zweites Modell betrachtet, in welchem die Bewohner des Inseldorfes (Einheimische) bevorzugt werden. Im weiteren Verlauf der Studienarbeit werden diese als VIP oder resident bezeichnet. Der grundlegende Ablauf verläuft wie beim ersten Modell. Allerdings wird, bevor der nächste Client (FIFO Prinzip) telefonieren darf, die Queue nach einem VIP durchsucht. Befindet sich ein VIP in der Queue, wird dieser bevorzugt und darf zuerst telfonieren. 
 
 In einem dritten Modell befindet sich ein weiteres Telefon im Callshop. Von den nun zwei Telefonen (zwei Server), behandelt eines alle ankommenden Personen (Clients) gleichberechtigt (analog zum ersten Modell). Das zweite Telefon bevorzugt die VIPs und behandelt andere Personen nur, wenn kein VIP wartet (analog zum zweiten Modell).
 
@@ -141,7 +140,7 @@ In Abbildung \ref{fig:QQPlot} werden die generierten Zufallszahlen in einem Quan
 Für eine weitere Überprüfung werden die generierten Daten mittels Shapiro-Wilk-, Cramér-von-Mises- und Anderson-Darling-Test auf eine Exponentialverteilung überprüft. Die Hypothese H0 lautet hierbei: \\
 $H_0:$ Die generierten Zufallszahlen sind exponentialverteilt, Signifikanzniveau $\alpha =0,05$ Die Ergebnisse der einzelnen Tests sind in der folgenden Tabelle aufgelistet: 
 \input{abbildungen/distribution/dis_fit_test_table}
-\\
+
 Laut dem Shapiro-Wilk-Test kann die Nullhypothese nicht abgelehnt werden, da der p-Wert mit $0,80994$ deutlich über dem Signifikanzniveau von $0,05$ liegt. Ebenso kann die Nullhypothese bei den Cramér-von-Mises- und Anderson-Darling-Tests nicht abgelehnt werden, da der p-Wert hier ebenso mit $0,764349$ bzw. $0,0764349$ deutlich über dem Signifikanznievau liegt.\\
 Durch die Tests kann somit eine Exponentialverteilung der generierten Zufallszahlen nicht wiederlegt werden. In Kombination mit der graphischen Überprüfung ist es plausibel, wenn von exponentialverteilten Werten ausgegangen wird. Ein entgültiger Beweis kann nicht erbracht werden.
 
@@ -157,7 +156,7 @@ Die Maßnahmen für die Verifikation der implementierten Simulation werden im Ka
 
 \subsubsection{Formeln für M/M/1 Warteschlangenmodelle}
 \label{Formeln}
-Die im folgenden aufgeführten Formeln gelten für M/M/1 Warteschlangenmodelle. Mit $Ls$ wird die durchschnittliche Anzahl von Kunden im System bezeichnet. $Lq$ gibt die durchschnittliche Länge der Warteschlange an. $Ws$ definiert die durchschnittliche Verweildauer der einzelnen Kunden im System und $Wq$ die durchschnittliche Verweildauer in der Warteschlange. 
+Die im folgenden aufgeführten Formeln gelten für M/M/1 Warteschlangenmodelle im eingeschwungenen Zustand. Mit $Ls$ wird die durchschnittliche Anzahl von Kunden im System bezeichnet. $Lq$ gibt die durchschnittliche Länge der Warteschlange an. $Ws$ definiert die durchschnittliche Verweildauer der einzelnen Kunden im System und $Wq$ die durchschnittliche Verweildauer in der Warteschlange. 
 
 \begin{equation}
 Ls=\frac{\lambda}{\mu - \lambda}
@@ -172,13 +171,11 @@ Ws=\frac{1}{\mu - \lambda}
 Wq=\frac{\rho}{\mu - \lambda}
 \end{equation}
 
-In den einzelnen Gleichungen sind $\lambda$, $\mu$ und $\rho$ wie folgt definiert: $\lambda$ beschreibt die durchschnittliche Ankunftszeit der Kunden pro Sekunde. $\mu$ definiert die durchschnittliche Telefonierdauer der Kunden pro Sekunde. Und $\rho$ beschreibt die durchschnittliche Auslastung des Telefons. 
+In den einzelnen Gleichungen sind $\lambda$, $\mu$ und $\rho$ wie folgt definiert: $\lambda$ beschreibt die durchschnittliche Ankunftszeit der Kunden pro Sekunde. $\mu$ definiert die durchschnittliche Telefonierdauer der Kunden pro Sekunde. Und $\rho$ beschreibt die durchschnittliche Auslastung des Telefons \cite{MM1Formeln}. 
 
 \begin{equation}
 \rho=\frac{\lambda}{\mu}
 \end{equation}
-
-Quelle: $http://www.business.uzh.ch/dam/jcr:00000000-0451-792f-ffff-fffffe13aac9/ServiceManagement_Warteschlangenmodelle.pdf$
 
 \subsubsection{Validierung der einzelnen Auswertung auf Basis des Little Theorems}
 Laut dem Theorem von Little muss die durchschnittliche Anzahl von Kunden in einem Warteschlangensystem gleich dem Produkt aus der durchschnittlichen Ankunftsrate ($\Lambda$) und der durchschnittlichen Verweildauer ($Ws$) im System sein, wenn das System sich in einem eingeschwungenen Zustand befindet.
@@ -283,6 +280,8 @@ FEHLT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 In Abbildung \ref{fig:LittleSystem1000} ist der Verlauf der Gleichung \ref{eq:little} über die Simulationszeit aufgeführt. Ab einer Simulationsdauer von ca. $350000s$ liegt der Wert sehr nach an dem geforderten Erwartungswert von $0$, schwankt jedoch bis zum Ende der Simulation im Bereich von $0,004$. Da die Differenz zum Erwartungswert sehr gering ist, liegt die Ursache für diese Abweichung vermutlich in Ungenauigkeiten bei der Berechung der Werte. Die durchschnittliche Anzahl an Kunden im System wird entweder um $0,004$ zu gering angenommen, oder die Verweildauer der Kunden im System um $0,004$ zu lang. Ebenso ist eine Kombination der beiden Fehler möglich. Insgesamt deckt sich diese Aussage mit den Abweichungen in den einzelnen Abbildungen.
 
+Alle vier ermittelten Durchschnittswerte liegen, ab einer Simulationsdauer von ca. $400000s$ sehr nah an den Werten, welche für ein eingeschwungenes Warteschlangensystem errechnet wurden. Da auch das in Abbildung  \ref{fig:LittleSystem1000} ersichtliche Ergebnis der Differenz zeigt, dass das System, abgesehen vom erläuterten systematischen Fehler, ab einer Simulationszeit von ca. $400000s$ der für ein eingeschwungenes System erforderliche Wert von $0$ näherungsweise erreicht wird. Es kann somit davon ausgegangen werden, dass der Steady State (eingeschwungene Zustand) bei dieser Simulationsdauer erreicht wurde.
+
 \subsubsection{Durchschnittliche Zwischenankunftszeit der Clients: $400s$}
 \paragraph{Theoretische Erwartungswerte laut M/M/1 Warteschlangenmodell}
 \\
@@ -370,6 +369,8 @@ Abschließend sind in den Abbildungen \ref{fig:QueueStepPlotAll400} und \ref{fig
 
 In Abbildung \ref{fig:LittleSystem400} ist der Verlauf der Gleichung \ref{eq:little} über die Simulationszeit aufgeführt. Ab einer Simulationsdauer von ca. $400000s$ schwankt der Wert nur noch geringfügig. Die Werte liegen jedoch bis zum Ende der Simulation bei durchschnittlich ca. $0,009$. Wie auch bei der Auswertung der Simulation mit einer durchschnittlichen Zwischenankunftszeit von $1000s$, kann hier wiederum von einem systematischen Fehler von $0,009$ mit den selben Ursachen ausgegangen werden. Die Abweichung ist hier größer, da aufgrund der niedrigeren Zwischenankunftszeit deutlich mehr Kunden den Laden besucht haben und somit mehr Zeiten verrechnet wurden. Insgesamt deckt sich dieser Fehler mit den Abweichungen in den einzelnen Abbildungen.
 
+Alle vier ermittelten Durchschnittswerte liegen, ab einer Simulationsdauer von ca. $400000s$ sehr nah an den Werten, welche für ein eingeschwungenes Warteschlangensystem errechnet wurden. Das in Abbildung  \ref{fig:LittleSystem400} ersichtliche Ergebnis der Differenz zeigt, dass das System, abgesehen vom erläuterten systematischen Fehler, ab einer Simulationszeit von ca. $600000s$ der für ein eingeschwungenes System erforderliche Wert von $0$ näherungsweise erreicht wird. Es kann somit davon ausgegangen werden, dass der Steady State (eingeschwungene Zustand) ab einer Simulationsdauer von $600000s$ erreicht wurde.
+
 \subsubsection{Durchschnittliche Ankunftszeit der Clients: $100s$}
 \paragraph{Theoretische Erwartungswerte laut M/M/1 Warteschlangenmodell}
 \\
@@ -437,7 +438,11 @@ FEHLT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	\caption{Darstellung der Differenz: $\lambda * Ws - Ls$ über die Simulationszeit (Little Theorem)}
 	\label{fig:LittleSystem100}
 \end{figure} 
-In Abbildung \ref{fig:LittleSystem100} ist der Verlauf der Gleichung \ref{eq:little} über die Simulationszeit aufgeführt. Im Vergleich zu den beiden Auswertungen mit Zwischenankunftszeiten von $1000s$ bzw. $400s$ wird deutlich, dass die Abweichung vom den geforderten Wert $0$ in dieser Abbildung deutlich größer ist. Es kann somit nicht von einem eingeschwungenen System ausgegangen werden. Bis zum Ende der Simulation stimmt das implementierte Modell dadurch mit der Theorie überein, welche besagt, dass wenn die durchschnittliche Zwischenankunftszeit gleich der durchschnittlichen Bediendauer ist, das System nie einschwingen kann. Ein Beweis, dass das System auch bei einer längeren Simulationsdauer nicht einschwingen würde, kann nicht erbracht werden.
+In Abbildung \ref{fig:LittleSystem100} ist der Verlauf der Gleichung \ref{eq:little} über die Simulationszeit aufgeführt. Im Vergleich zu den beiden Auswertungen mit Zwischenankunftszeiten von $1000s$ bzw. $400s$ wird deutlich, dass die Abweichung vom den geforderten Wert $0$ in dieser Abbildung deutlich größer ist.  
+
+Alle vier ermittelten Durchschnittswerte schwanken bis zum Ende der Simulation deutlich. Das in Abbildung \ref{fig:LittleSystem100} ersichtliche Ergebnis der Differenz zeigt, dass das System während der gesamten Simulationsdauer den für ein eingeschwungenes System erforderlichen Wert von $0$ nicht erreicht. Aufgrund der großen Abweichung kann davon ausgegangen werden, dass der Steady State (eingeschwungene Zustand) in dieser Simulation nicht erreicht wurde. 
+
+Das beschriebene Verhalten des implementierten Modells stimmt somit mit der Theorie überein, welche besagt, dass wenn die durchschnittliche Zwischenankunftszeit gleich der durchschnittlichen Bediendauer ist, das System nie einschwingen kann. Ein Beweis, dass das System auch bei einer längeren Simulationsdauer nicht einschwingen würde, kann nicht erbracht werden.
 
 \subsection{Modell \glqq Bevorzugte VIP\grqq} 
 
@@ -452,4 +457,9 @@ In Abbildung \ref{fig:LittleSystem100} ist der Verlauf der Gleichung \ref{eq:lit
 
 \section{Fazit}
 
+%	REFERENCE LIST
+%----------------------------------------------------------------------------------------
+%\input{References}
+\bibliography{Bibliographie} 
+\bibliographystyle{plain}
 \end{document}

@@ -4,8 +4,8 @@ import cs.hm.edu.muenchen.hm.modellbildung.config.CallShopCalculation;
 import cs.hm.edu.muenchen.hm.modellbildung.config.CallShopConfiguration;
 import cs.hm.edu.muenchen.hm.modellbildung.config.CallShopLogs;
 import cs.hm.edu.muenchen.hm.modellbildung.domain.Phone;
-import cs.hm.edu.muenchen.hm.modellbildung.time.event.Event;
 import cs.hm.edu.muenchen.hm.modellbildung.time.event.ArrivalEvent;
+import cs.hm.edu.muenchen.hm.modellbildung.time.event.Event;
 
 import java.io.IOException;
 import java.math.BigDecimal;

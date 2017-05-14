@@ -2,10 +2,10 @@ package cs.hm.edu.muenchen.hm.modellbildung.time.event;
 
 import cs.hm.edu.muenchen.hm.modellbildung.SimulationState;
 import cs.hm.edu.muenchen.hm.modellbildung.config.CallShopConfiguration;
-import cs.hm.edu.muenchen.hm.modellbildung.domain.Person;
-import cs.hm.edu.muenchen.hm.modellbildung.domain.Phone;
 import cs.hm.edu.muenchen.hm.modellbildung.distribution.Distribution;
 import cs.hm.edu.muenchen.hm.modellbildung.distribution.NegativeExponentialDistribution;
+import cs.hm.edu.muenchen.hm.modellbildung.domain.Person;
+import cs.hm.edu.muenchen.hm.modellbildung.domain.Phone;
 
 import java.math.BigDecimal;
 import java.util.Random;

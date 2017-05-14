@@ -1,11 +1,11 @@
 package cs.hm.edu.muenchen.hm.modellbildung.time.event;
 
-import cs.hm.edu.muenchen.hm.modellbildung.config.CallShopLogs;
 import cs.hm.edu.muenchen.hm.modellbildung.SimulationState;
+import cs.hm.edu.muenchen.hm.modellbildung.config.CallShopCalculation;
 import cs.hm.edu.muenchen.hm.modellbildung.config.CallShopConfiguration;
+import cs.hm.edu.muenchen.hm.modellbildung.config.CallShopLogs;
 import cs.hm.edu.muenchen.hm.modellbildung.domain.Person;
 import cs.hm.edu.muenchen.hm.modellbildung.domain.Phone;
-import cs.hm.edu.muenchen.hm.modellbildung.config.CallShopCalculation;
 
 import java.math.BigDecimal;
 

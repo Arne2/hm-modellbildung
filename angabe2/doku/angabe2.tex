@@ -25,6 +25,83 @@ Darüber hinaus wird ein zweites Modell betrachtet, in welchem die Bewohner des 
 In einem dritten Modell befindet sich ein weiteres Telefon im Callshop. Von den nun zwei Telefonen (zwei Server), behandelt eines alle ankommenden Personen (Clients) gleichberechtigt (analog zum ersten Modell). Das zweite Telefon bevorzugt die VIPs und behandelt andere Personen nur, wenn kein VIP wartet (analog zum zweiten Modell).
 
 \section{Anforderungen/Requirements}
+\label{requirements}
+\subsection{Allgemeines}
+Die Software soll die Simulation eines Warteschlangensystems durchführen. Zu Beginn der Simulation wird davon ausgegangen, dass die Warteschlange keine Elemente enthält, da sich auch in der Realität beim Öffnen eines Ladens noch keine Personen in einer Warteschlange im Laden befinden.
+\subsection{Verteilung der Zwischenankunfszeiten}
+Die Zwischenankunftszeiten sollen zufällig genieriert werden. Die Verteilung der Zufallszahlen soll eine negative Exponentialverteilung aufweisen. Die Exponentialverteilung für eine zufällige Zwischenankunftszeit x ist erfüllt falls sie folgende Dichtefunktion besitzt:
+$$
+f(x) = \left\{\begin{matrix}
+\lambda e^{-\lambda x}
+\\ 
+0  
+\end{matrix}\right.für \begin{matrix}
+x \geqslant 0
+\\ 
+x < 0
+\end{matrix}
+$$
+Die mittelre Zwischenankunftszeit hat den Erwartungswert $\frac{1}{\lambda}$. Die mittlere Zwischenankunftszeit soll parametrisierbar sein. 
+\subsection{Verteilung der Telefonierzeiten}
+Die Telefonierzeiten sollen zufällig generiert werden. Die Verteilung der Zufallszahlen soll analog zur Zwischenankunftszeiten eine Exponentialverteilung aufweisen. Die mittlere Telefonierzeit soll ebennfalls parametrisierbar sein.
+
+\subsection{Zeitmodelierung}
+Die Applikation unterliegt keinen harten Echtzeitanforderungen. Die Simulation soll für die gesamte Simmulationsdauer so schnell wie möglich durchgeführt werden. Es soll keine Globale Uhr modelliert werden.
+
+\subsection{Berechnungen}
+Die Grundfunktion der Applikation ist die Simulation eines Warteschlangenmodells und die Ausgabe relevanter Rohdaten für weitere Berechnungen. Die Berechnungen selbst werden von der Applikation und mit Hilfe von Mathematica durchgeführt.
+
+\subsection{Reports}
+Alle errechneten Ergebnisse sollen über Reports ausgeleitet werden. Die Reports sollen im .CSV format ausgeleitet werden um eine gute Weiterverarbeitung der Ergebnisse zu gewährleisten. Folgende Reports sollen ausgeleitet werden:
+\begin{list}{•}
+	\item arrival.csv enthält alle Arrival-Ereignisse mit Zeitstempel und Personen ID.
+	\item begin.csv  enthält alle Begin-Ereignisse mit Zeitstempel und Personen ID.
+	\item finish.csv  enthält alle Finish-Ereignisse mit Zeitstempel und Personen ID.
+	\item queue.csv enthält die Länder der Warteschlange und die Anzahl der Personen im System mit Zeitstempel.
+	\item arrival\_ distribution.csv enthält alle zufällig generierten Zahlen für die Zwischenankunfszeiten.
+	\item serve\_ distribution.csv enthält alle zufällig generierten Zahlen für die Dauer der Telefonnutzung.
+\end{list}
+\subsection{Parameter}
+Die Tabelle \ref{tab:parameter} zeigt alle möglichen Parameter, welche die Software steuern. Alle Parameter sind optional. 
+\begin{table}[htpb]
+	\centering
+	\begin{tabular}{lll}
+		Parameter & Beschreibung  &  Default\\ \hline
+		-a & durschnittliche Zwischenankunftszeit der Besucher in Sekunden [s] & 1000 \\
+		-c & durschnittliche Telefonierdauer in Sekunden [s] & 100 \\
+		-d & Dauer der Simulation in Sekunden [s] & 100.000.000 \\
+		-vip & Anteil der Inselbewohner an den Besuchern in Prozent [\%] &  10 \\
+		-conf & Betriebsmodus (1, 2, oder 3) & 1 \\
+		-o & Ausgabepfad zur Reporterstellung & ../data/
+	\end{tabular}
+	\caption{Parameter und Defaultwerte}
+	\label{tab:parameter}
+\end{table}
+
+
+\subsection{Betriebsmodi}
+Die Software hat drei Betriebsmodi:
+\begin{list}{}
+	\item Betriebsmodus 1: In diesem Modus gibt es ein Telefon und eine Warteschlange. Alle Personen in der Warteschlange werden gleichberechtigt behandelt.
+	\item Betriebsmodus 2: In diesem Modus gibt es ein Telefon und eine Warteschlange. Die Personen werden jedoch unterschieden nach Einheimischen (VIP) und Touristen. Einheimische werden bevorzugt behandelt. Befindet sich ein Einheimischer in der Warteschlange, wird dieser zuerst telefonieren, sobald das Telefon frei ist. Befinden sich mehrere Einheimische in der Warteschlange, wird der erste zuerst abgearbeitet. Das Verhältnis von Einheimischen zu Touristen kann mittels des Parameters percVIP geregelt werden.
+	\item Betriebsmodus 3: In diesem Modus gibt es eine Warteschlange und zwei Telefone. Das erste Telefon behandelt die Warteschlange analog zu Betriebsmodus 2. Das zweite Telefon behandelt die Warteschlange der Reihe nach unabhängig davon, ob es sich um einen Touristen oder einen Einheimischen handelt.
+\end{list}
+
+\subsection{Werte für die Auswertung}
+Alle in der Tabelle \ref{tab:WerteAuswertung} aufgeführten Werte sollen auf Basis der Simulation ermittelt und ausgewertet werden.
+\begin{table}[htpb]
+	\centering
+	\begin{tabular}{lll}
+		Ermittelte Werte & Beschreibung \\ \hline
+		Mittlere Warteschlangenlänge & Durchschnittliche Anzahl der anstehenden Kunden \\
+		Mittlere Anstehzeit & Durchschnittliche Wartezeit eines Kunden \\
+		Mittlere Verweildauer im Shop & Mittlere Anstehzeit + Mittlere Telefonierdauer\\
+		Mittlere Serverauslastung & Anteil an der Gesamtzeit, in der das Telefon belegt ist\\
+	\end{tabular}
+	\caption{Werte für die Auswertung}
+	\label{tab:WerteAuswertung}
+\end{table}
+
 
 \section{Softwaredesign}
 
@@ -72,9 +149,9 @@ Durch die Tests kann somit eine Exponentialverteilung der generierten Zufallszah
 Im Zuge dieses Kapitels werden alle Ergebnisse der Simulation und die daraus errechneten Werte erläutert. Zusätzlich werden relevante Größen durch Plots veranschaulicht. Die einzelnen Auswertungen werden mit Hilfe des Theorems von Little validiert.
 
 \subsection{Modell \glqq Ein Telefon\grqq} 
-Für den in Kapitel \ref{sec:Requirements} REFERENZAUFANFORDERUNG aufgelisteten ersten Betriebsmodus (ein Server, welcher alle Clients bedient) werden im folgenden die Auswertungen aufgeführt. Exemplarisch werden vier verschiedene durchschnittliche Ankunftszeiten für die Clients verwendet. Zunächst wird eine durchschnittliche Ankunftszeit von $1000s$ angenommen, was bei einer durchschnittlichen Telefonierdauer von $100s$ (Dauer der Serverbelegung) einer sehr geringen Serverauslastung entspricht. Anschließend werden mit den durchschnittlichen Ankunftszeiten von $800s$, $400s$ und $100s$ die Auswirkungen von höherer Serverauslastung auf das Ergebnis der Simulation erläutert. \\
+Für den in Kapitel \ref{requirements} aufgelisteten ersten Betriebsmodus (ein Server, welcher alle Clients bedient) werden im folgenden die Auswertungen aufgeführt. Exemplarisch werden vier verschiedene durchschnittliche Ankunftszeiten für die Clients verwendet. Zunächst wird eine durchschnittliche Ankunftszeit von $1000s$ angenommen, was bei einer durchschnittlichen Telefonierdauer von $100s$ (Dauer der Serverbelegung) einer sehr geringen Serverauslastung entspricht. Anschließend werden mit den durchschnittlichen Ankunftszeiten von $800s$, $400s$ und $100s$ die Auswirkungen von höherer Serverauslastung auf das Ergebnis der Simulation erläutert. \\
 
-Für jede durchschnittliche Ankunftszeit werden zunächst die zu erwartenden Werte, basierend auf den Formeln für M/M/1 Warteschlangenmodelle ermittelt. Die einzelnen Formeln sind im folgenden Kapitel aufgeführt. Betrachtet werden hierbei, wie in den \ref{sec:Requirements} erläutert die durchschnittliche Anzahl von Kunden im System, durchschnittliche Warteschlangenlänge, durchschnittliche Verweildauer im System und die durchschnittliche Verweildauer in der Warteschlange. Die berechneten Größen werden als Erwartungswerte betrachtet gegen die die durch die Simulation ermittelten Werte geprüft werden. 
+Für jede durchschnittliche Ankunftszeit werden zunächst die zu erwartenden Werte, basierend auf den Formeln für M/M/1 Warteschlangenmodelle ermittelt. Die einzelnen Formeln sind im folgenden Kapitel aufgeführt. Betrachtet werden hierbei, wie in den \ref{requirements} erläutert die durchschnittliche Anzahl von Kunden im System, durchschnittliche Warteschlangenlänge, durchschnittliche Verweildauer im System und die durchschnittliche Verweildauer in der Warteschlange. Die berechneten Größen werden als Erwartungswerte betrachtet gegen die die durch die Simulation ermittelten Werte geprüft werden. 
 
 Die Maßnahmen für die Verifikation der implementierten Simulation werden im Kapitel (REFERENZ AUF DIE UNITTEST KAPITEL) näher beschrieben. In den folgenden Abbildungen wird die durchschnittliche Zwischenankunftszeit mit \glqq MeanAr\grqq abgekürzt.
 

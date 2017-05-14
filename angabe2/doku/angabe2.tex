@@ -40,7 +40,7 @@ x \geqslant 0
 x < 0
 \end{matrix}
 $$
-Die mittelre Zwischenankunftszeit hat den Erwartungswert $\frac{1}{\lambda}$. Die mittlere Zwischenankunftszeit soll parametrisierbar sein. 
+Die mittlere Zwischenankunftszeit hat den Erwartungswert $\frac{1}{\lambda}$. Die mittlere Zwischenankunftszeit soll parametrisierbar sein. 
 \subsection{Verteilung der Telefonierzeiten}
 Die Telefonierzeiten sollen zufällig generiert werden. Die Verteilung der Zufallszahlen soll analog zur Zwischenankunftszeiten eine Exponentialverteilung aufweisen. Die mittlere Telefonierzeit soll ebennfalls parametrisierbar sein.
 
@@ -446,7 +446,45 @@ Das beschriebene Verhalten des implementierten Modells stimmt somit mit der Theo
 \subsubsection{Durchschnittliche Ankunftszeit der Clients: 100}
 
 \subsection{Modell \glqq Zusätzliches VIP Telefon\grqq} 
+Im dritten Betriebsmodus wird zu einem Telefon wie im Betriebsmodus 1 ein VIP Telefon hinzugefügt. Wie vorhin werden auch hier die drei verschiedenen mittleren Ankunftszeiten betrachtet. In diesem Szenario werden die Formeln für M/M/2 Warteschlangenmodelle verwendet. 
+\subsubsection{Formeln für M/M/2 Warteschlangenmodelle}
+\label{Formeln2}
+Für die theoretischen Größen und Zeiten des Systems bzw. der Warteschlange werden folgende Formeln genutzt.
+\begin{equation}
+P0=(1+\rho+\rho^2/(2-\rho))^{-1}
+\end{equation}
+\begin{equation}
+Ls=\rho + \frac{P0*\rho^{c+1}}{(c-\rho)!(c-\rho)^2}
+\end{equation}
+\begin{equation}
+Lq=\frac{P0*\rho^{c+1}}{(c-1)!(c-\rho)^2}
+\end{equation}
+\begin{equation}
+Wq=\frac{Lq}{\lambda}
+\end{equation}
+\begin{equation}
+Ws=\frac{Ls}{\lambda}
+\end{equation}
 \subsubsection{Durchschnittliche Ankunftszeit der Clients: 1000}
+\paragraph{Theoretische Erwartungswerte laut M/M/1 Warteschlangenmodell}
+\\
+Bei einer durchschnittlichen Zwischenankunftszeit von $1000s$ ($\lambda=\frac{1}{1000}$, $\mu=\frac{1}{100}$)ergeben sich, basierend auf den in Abschnitt \ref{Formeln2} aufgeführten Formeln, folgende Erwartungswerte:
+\begin{equation}
+Ls=0,100137
+\end{equation}
+\begin{equation}
+Lq=0,000250627
+\end{equation}
+\begin{equation}
+Ws=100,137
+\end{equation}
+\begin{equation}
+Wq=0,250627
+\end{equation}
+
+
+
+
 \subsubsection{Durchschnittliche Ankunftszeit der Clients: 400}
 \subsubsection{Durchschnittliche Ankunftszeit der Clients: 100}
 

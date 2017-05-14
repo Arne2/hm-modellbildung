@@ -15,7 +15,7 @@ Simulate[args_] := If[
 
 (*Falls neue Simulation ansteuern wert auf true setzen *)
 (*Falls wert auf false, dann wird keine neue Simulation durchgef\[UDoubleDot]hrt, sondern alte Daten herangezoogen *)
-startNewSimulation = true;
+startNewSimulation = false;
 meanArrivalTime = 400;
 meanServeTime = 100;
 durationSimulation = 1000000;
@@ -80,25 +80,17 @@ If[startNewSimulation == true, Simulate[arguments], ]
 (*Plot Mean QueueSize*)
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*Mean Queue Size*)
 
 
-Show[ListPlot[ {Load@"mean-queue-size-normal"},
-PlotRange->All], 
-Plot[Evaluate[y = MeanQueueSizeTheoretical], 
-{x, 0, durationSimulation},
-PlotStyle -> {Orange, Dashed, Thick}], 
-AxesLabel->{"t","mean queue size"}]
-Export[FileNameJoin@{outputDir,"MeanQueueSizeNormal.pdf"},%];
+Show[ListPlot[ {Load@"mean-queue-size-normal"}], 
+AxesLabel->{"t","mean queue size tourist"}]
+Export[FileNameJoin@{outputDir,"MeanQueueSizeTourist.pdf"},%];
 
 
-Show[ListPlot[ {Load@"mean-queue-size-resident"},
-PlotRange->All], 
-Plot[Evaluate[y = MeanQueueSizeTheoretical], 
-{x, 0, durationSimulation},
-PlotStyle -> {Orange, Dashed, Thick}], 
-AxesLabel->{"t","mean queue size"}]
+Show[ListPlot[ {Load@"mean-queue-size-resident"}], 
+AxesLabel->{"t","mean queue size resident"}]
 Export[FileNameJoin@{outputDir,"MeanQueueSizeResident.pdf"},%];
 
 
@@ -107,29 +99,21 @@ PlotRange->All],
 Plot[Evaluate[y = MeanQueueSizeTheoretical], 
 {x, 0, durationSimulation},
 PlotStyle -> {Orange, Dashed, Thick}], 
-AxesLabel->{"t","mean queue size"}]
+AxesLabel->{"t","mean queue size all"}]
 Export[FileNameJoin@{outputDir,"MeanQueueSizeAll.pdf"},%];
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*Mean System Size*)
 
 
-Show[ListPlot[ {Load@"mean-system-size-normal"},
-PlotRange->All] , 
-Plot[Evaluate[y = MeanSystemSizeTheoretical], 
-{x, 0, durationSimulation},
-PlotStyle -> {Orange, Dashed, Thick}],  
-AxesLabel->{"t","mean system size"}]
-Export[FileNameJoin@{outputDir,"MeanSystemSize.pdf"},%];
+Show[ListPlot[ {Load@"mean-system-size-normal"}], 
+AxesLabel->{"t","mean system size tourist"}]
+Export[FileNameJoin@{outputDir,"MeanSystemSizeTourist.pdf"},%];
 
 
-Show[ListPlot[ {Load@"mean-system-size-resident"},
-PlotRange->All] , 
-Plot[Evaluate[y = MeanSystemSizeTheoretical], 
-{x, 0, durationSimulation},
-PlotStyle -> {Orange, Dashed, Thick}],  
-AxesLabel->{"t","mean system size"}]
+Show[ListPlot[ {Load@"mean-system-size-resident"}],  
+AxesLabel->{"t","mean system size resident"}]
 Export[FileNameJoin@{outputDir,"MeanSystemSizeResident.pdf"},%];
 
 
@@ -142,25 +126,17 @@ AxesLabel->{"t","mean system size"}]
 Export[FileNameJoin@{outputDir,"MeanSystemSizeAll.pdf"},%];
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*Mean Queue Time*)
 
 
-Show[ListPlot[ {Load@"mean-queue-time-normal"},
-PlotRange->All] , 
-Plot[Evaluate[y = MeanQueueTimeTheoretical], 
-{x, 0, durationSimulation},
-PlotStyle -> {Orange, Dashed, Thick}], 
-AxesLabel->{"t","mean queue time"}]
-Export[FileNameJoin@{outputDir,"MeanQueueTime.pdf"},%];
+Show[ListPlot[ {Load@"mean-queue-time-normal"}],
+AxesLabel->{"t","mean queue time tourist"}]
+Export[FileNameJoin@{outputDir,"MeanQueueTimeTourist.pdf"},%];
 
 
-Show[ListPlot[ {Load@"mean-queue-time-resident"},
-PlotRange->All] , 
-Plot[Evaluate[y = MeanQueueTimeTheoretical], 
-{x, 0, durationSimulation},
-PlotStyle -> {Orange, Dashed, Thick}], 
-AxesLabel->{"t","mean queue time"}]
+Show[ListPlot[ {Load@"mean-queue-time-resident"}], 
+AxesLabel->{"t","mean queue time resident"}]
 Export[FileNameJoin@{outputDir,"MeanQueueTimeResident.pdf"},%];
 
 
@@ -169,29 +145,21 @@ PlotRange->All] ,
 Plot[Evaluate[y = MeanQueueTimeTheoretical], 
 {x, 0, durationSimulation},
 PlotStyle -> {Orange, Dashed, Thick}], 
-AxesLabel->{"t","mean queue time"}]
+AxesLabel->{"t","mean queue time all"}]
 Export[FileNameJoin@{outputDir,"MeanQueueTimeAll.pdf"},%];
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*Mean System Time*)
 
 
-Show[ListPlot[ {Load@"mean-system-time-normal"},
-PlotRange->All] , 
-Plot[Evaluate[y = MeanSystemTimeTheoretical], 
-{x, 0, durationSimulation},
-PlotStyle -> {Orange, Dashed, Thick}], 
-AxesLabel->{"t","mean system time"}]
-Export[FileNameJoin@{outputDir,"MeanSystemTime.pdf"},%];
+Show[ListPlot[ {Load@"mean-system-time-normal"}], 
+AxesLabel->{"t","mean system time tourist"}]
+Export[FileNameJoin@{outputDir,"MeanSystemTimeTourist.pdf"},%];
 
 
-Show[ListPlot[ {Load@"mean-system-time-resident"},
-PlotRange->All] , 
-Plot[Evaluate[y = MeanSystemTimeTheoretical], 
-{x, 0, durationSimulation},
-PlotStyle -> {Orange, Dashed, Thick}], 
-AxesLabel->{"t","mean system time"}]
+Show[ListPlot[ {Load@"mean-system-time-resident"}],
+AxesLabel->{"t","mean system time resident"}]
 Export[FileNameJoin@{outputDir,"MeanSystemTimeResident.pdf"},%];
 
 
@@ -200,7 +168,7 @@ PlotRange->All] ,
 Plot[Evaluate[y = MeanSystemTimeTheoretical], 
 {x, 0, durationSimulation},
 PlotStyle -> {Orange, Dashed, Thick}], 
-AxesLabel->{"t","mean system time"}]
+AxesLabel->{"t","mean system time all"}]
 Export[FileNameJoin@{outputDir,"MeanSystemTimeAll.pdf"},%];
 
 
@@ -209,35 +177,35 @@ Export[FileNameJoin@{outputDir,"MeanSystemTimeAll.pdf"},%];
 
 
 queueSizeNormal = Load@"queue-size-normal";
-  ListStepPlot[queueSizeNormal,Filling->Bottom]
-  Export[FileNameJoin@{outputDir,"QueueStepPlotNormalAll.pdf"},%];
+  ListStepPlot[queueSizeNormal,{ AxesLabel->{"t","queue tourist"}, Filling->Axis}]
+  Export[FileNameJoin@{outputDir,"QueueStepPlotTouristAll.pdf"},%];
   (* startphase anfang leer!*)
-  ListStepPlot[queueSizeNormal[[;;100]],Filling->Bottom]
-  Export[FileNameJoin@{outputDir,"QueueStepPlotNormalFirst.pdf"},%];
+  ListStepPlot[queueSizeNormal[[;;100]],{ AxesLabel->{"t","queue tourist"}, Filling->Axis}]
+  Export[FileNameJoin@{outputDir,"QueueStepPlotTouristFirst.pdf"},%];
   (* ende (wo es l\[ADoubleDot]uft) *)
-  ListStepPlot[queueSizeNormal[[-100;;]],Filling->Bottom]
-  Export[FileNameJoin@{outputDir,"QueueStepPlotNormalLast.pdf"},%];
+  ListStepPlot[queueSizeNormal[[-100;;]],{ AxesLabel->{"t","queue tourist"}, Filling->Axis}]
+  Export[FileNameJoin@{outputDir,"QueueStepPlotTouristlLast.pdf"},%];
 
 
 queueSizeResident = Load@"queue-size-resident";
-  ListStepPlot[queueSizeResident,Filling->Bottom]
+  ListStepPlot[queueSizeResident,{ AxesLabel->{"t","queue resident"}, Filling->Axis}]
   Export[FileNameJoin@{outputDir,"QueueStepPlotResidentAll.pdf"},%];
   (* startphase anfang leer!*)
-  ListStepPlot[queueSizeResident[[;;100]],Filling->Bottom]
+  ListStepPlot[queueSizeResident[[;;100]],{ AxesLabel->{"t","queue resident"}, Filling->Axis}]
   Export[FileNameJoin@{outputDir,"QueueStepPlotResidentFirst.pdf"},%];
   (* ende (wo es l\[ADoubleDot]uft) *)
-  ListStepPlot[queueSizeResident[[-100;;]],Filling->Bottom]
+  ListStepPlot[queueSizeResident[[-100;;]],{ AxesLabel->{"t","queue resident"}, Filling->Axis}]
   Export[FileNameJoin@{outputDir,"QueueStepPlotResidentLast.pdf"},%];
 
 
 queueSizeAll = Load@"queue-size-all";
-  ListStepPlot[queueSizeAll,Filling->Bottom]
+  ListStepPlot[queueSizeAll,{ AxesLabel->{"t","queue all"}, Filling->Axis}]
   Export[FileNameJoin@{outputDir,"QueueStepPlotAllAll.pdf"},%];
   (* startphase anfang leer!*)
-  ListStepPlot[queueSizeAll[[;;100]],Filling->Bottom]
+  ListStepPlot[queueSizeAll[[;;100]],{ AxesLabel->{"t","queue all"}, Filling->Axis}]
   Export[FileNameJoin@{outputDir,"QueueStepPlotAllFirst.pdf"},%];
   (* ende (wo es l\[ADoubleDot]uft) *)
-  ListStepPlot[queueSizeAll[[-100;;]],Filling->Bottom]
+  ListStepPlot[queueSizeAll[[-100;;]],{ AxesLabel->{"t","queue all"}, Filling->Axis}]
   Export[FileNameJoin@{outputDir,"QueueStepPlotAllLast.pdf"},%];
 
 
@@ -258,14 +226,14 @@ dataSet = DeleteDuplicatesBy[dataSet, First];
 dataSet = Reverse[dataSet];
 
 
-ListStepPlot[dataSet,Filling->Bottom]
-  Export[FileNameJoin@{outputDir,"QueueStepPlotAllFiltered.pdf"},%];
+ListStepPlot[dataSet,{ AxesLabel->{"t","queue tourist"}, Filling->Axis}]
+  Export[FileNameJoin@{outputDir,"QueueStepPlotTouristFiltered.pdf"},%];
   (* startphase anfang leer!*)
-  ListStepPlot[dataSet[[;;100]],Filling->Bottom]
-  Export[FileNameJoin@{outputDir,"QueueStepPlotFirstFiltered.pdf"},%];
+  ListStepPlot[dataSet[[;;100]],{ AxesLabel->{"t","queue tourist"}, Filling->Axis}]
+  Export[FileNameJoin@{outputDir,"QueueStepPlotTouristFirstFiltered.pdf"},%];
   (* ende (wo es l\[ADoubleDot]uft) *)
-  ListStepPlot[dataSet[[-100;;]],Filling->Bottom]
-    Export[FileNameJoin@{outputDir,"QueueStepPlotLastFiltered.pdf"},%];
+  ListStepPlot[dataSet[[-100;;]],{ AxesLabel->{"t","queue tourist"}, Filling->Axis}]
+    Export[FileNameJoin@{outputDir,"QueueStepPlotTouristLastFiltered.pdf"},%];
 
 
 dataSet = queueSizeResident;
@@ -277,14 +245,14 @@ dataSet = DeleteDuplicatesBy[dataSet, First];
 dataSet = Reverse[dataSet];
 
 
-ListStepPlot[dataSet,Filling->Bottom]
-  Export[FileNameJoin@{outputDir,"QueueStepPlotAllFiltered.pdf"},%];
+ListStepPlot[dataSet,{ AxesLabel->{"t","queue resident"}, Filling->Axis}]
+  Export[FileNameJoin@{outputDir,"QueueStepPlotResidentFiltered.pdf"},%];
   (* startphase anfang leer!*)
-  ListStepPlot[dataSet[[;;100]],Filling->Bottom]
-  Export[FileNameJoin@{outputDir,"QueueStepPlotFirstFiltered.pdf"},%];
+  ListStepPlot[dataSet[[;;100]],{ AxesLabel->{"t","queue resident"}, Filling->Axis}]
+  Export[FileNameJoin@{outputDir,"QueueStepPlotResidentFirstFiltered.pdf"},%];
   (* ende (wo es l\[ADoubleDot]uft) *)
-  ListStepPlot[dataSet[[-100;;]],Filling->Bottom]
-    Export[FileNameJoin@{outputDir,"QueueStepPlotLastFiltered.pdf"},%];
+  ListStepPlot[dataSet[[-100;;]],{ AxesLabel->{"t","queue resident"}, Filling->Axis}]
+    Export[FileNameJoin@{outputDir,"QueueStepPlotResidentLastFiltered.pdf"},%];
 
 
 dataSet = queueSizeAll;
@@ -296,14 +264,14 @@ dataSet = DeleteDuplicatesBy[dataSet, First];
 dataSet = Reverse[dataSet];
 
 
-ListStepPlot[dataSet,Filling->Bottom]
+ListStepPlot[dataSet,{ AxesLabel->{"t","queue all"}, Filling->Axis}]
   Export[FileNameJoin@{outputDir,"QueueStepPlotAllFiltered.pdf"},%];
   (* startphase anfang leer!*)
-  ListStepPlot[dataSet[[;;100]],Filling->Bottom]
-  Export[FileNameJoin@{outputDir,"QueueStepPlotFirstFiltered.pdf"},%];
+  ListStepPlot[dataSet[[;;100]],{ AxesLabel->{"t","queue all"}, Filling->Axis}]
+  Export[FileNameJoin@{outputDir,"QueueStepPlotAllFirstFiltered.pdf"},%];
   (* ende (wo es l\[ADoubleDot]uft) *)
-  ListStepPlot[dataSet[[-100;;]],Filling->Bottom]
-    Export[FileNameJoin@{outputDir,"QueueStepPlotLastFiltered.pdf"},%];
+  ListStepPlot[dataSet[[-100;;]],{ AxesLabel->{"t","queue all"}, Filling->Axis}]
+    Export[FileNameJoin@{outputDir,"QueueStepPlotAllLastFiltered.pdf"},%];
 
 
 (* ::Section:: *)
@@ -314,7 +282,7 @@ ListStepPlot[dataSet,Filling->Bottom]
 (*Im eingeschwungenen Zustand muss der Wert 0 betragen*)
 
 
-ListPlot[Load@"little-system-all"]
+ListPlot[Load@"little-system-all", { AxesLabel->{"t","\!\(\*SubscriptBox[\(\[Lambda]M\), \(s\)]\) - \!\(\*SubscriptBox[\(L\), \(s\)]\)"}, Filling->Axis}]
 Export[FileNameJoin@{outputDir,"LittleSystem.pdf"},%];
 
 

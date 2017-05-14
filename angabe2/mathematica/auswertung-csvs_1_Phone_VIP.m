@@ -287,3 +287,20 @@ Export[FileNameJoin@{outputDir,"LittleSystem.pdf"},%];
 
 
 
+
+
+(* ::Section:: *)
+(*Ausgabe der Ergebnisse in Tabelle*)
+
+
+(* ::Text:: *)
+(*Achtung: hier wird ienfach der letzte Wert der Simulation verwendet*)
+
+
+TableOfResults = Grid[{
+{"value", "theoretical", "simulation", },
+{"mean queue size", N@MeanQueueSizeTheoretical, Last@Last[Load@"mean-queue-size-normal"]},
+{"mean queue time", N@MeanQueueTimeTheoretical, Last@Last[Load@"mean-queue-time-normal"]},
+{"mean system size", N@MeanSystemSizeTheoretical, Last@Last[Load@"mean-system-size-normal"]},
+{"mean system time", N@MeanSystemTimeTheoretical, Last@Last[Load@"mean-system-time-normal"] }}]
+Export[FileNameJoin@{outputDir,"ResultsTable.tex"},%, "TexFragment"];

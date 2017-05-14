@@ -15,10 +15,10 @@ Simulate[args_] := If[
 
 (*Falls neue Simulation ansteuern wert auf true setzen *)
 (*Falls wert auf false, dann wird keine neue Simulation durchgef\[UDoubleDot]hrt, sondern alte Daten herangezoogen *)
-startNewSimulation = false;
-meanArrivalTime = 1500;
+startNewSimulation = true;
+meanArrivalTime = 100;
 meanServeTime = 100;
-durationSimulation = 1000000;
+durationSimulation = 10000000;
 vip = 0;
 skip = 0;
 configuration = 1;
@@ -35,7 +35,7 @@ NotebookDirectory[], StringJoin["../doku/abbildungen/1_Phone/Arrival_", ToString
 (*Wirft ein Fehler falls directory bereits vorhanden... ist aber OK so *)
 CreateDirectory[outputDir, CreateIntermediateDirectories -> False]
 (*DatenPfad erzeugt sich automatisch aus den Paramtern*)
-dataPath = StringJoin["../data/1_Phone_Arrival_", ToString@meanArrivalTime, "_Skip_", ToString@skip];
+dataPath = StringJoin["../data/1_Phone_Arrival_", ToString@meanArrivalTime, "_dur_", ToString@durationSimulation, "_Skip_", ToString@skip];
 Load[name_]:= Import[FileNameJoin@{NotebookDirectory[],dataPath, name <> ".csv"},HeaderLines->1];
 
 
@@ -116,7 +116,7 @@ AxesLabel->{"t","mean system time"}]
 Export[FileNameJoin@{outputDir,"MeanSystemTime.pdf"},%];
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Queue Size StepPlot*)
 
 

@@ -16,7 +16,7 @@ Simulate[args_] := If[
 (*Falls neue Simulation ansteuern wert auf true setzen *)
 (*Falls wert auf false, dann wird keine neue Simulation durchgef\[UDoubleDot]hrt, sondern alte Daten herangezoogen *)
 startNewSimulation = false;
-meanArrivalTime = 800;
+meanArrivalTime = 400;
 meanServeTime = 100;
 durationSimulation = 1000000;
 vip = 0;
@@ -116,7 +116,7 @@ AxesLabel->{"t","mean system time"}]
 Export[FileNameJoin@{outputDir,"MeanSystemTime.pdf"},%];
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*Queue Size StepPlot*)
 
 
@@ -163,7 +163,7 @@ dataSet = Reverse[dataSet];
     Export[FileNameJoin@{outputDir,"QueueStepPlotLastFiltered.pdf"},%];
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Theorem von Little : lambda * MeanSystemTime - MeanSystemSize = 0 f\[UDoubleDot]r t-> inf*)
 
 
@@ -173,3 +173,20 @@ dataSet = Reverse[dataSet];
 
 ListPlot[Load@"little-system-normal", { AxesLabel->{"t","\!\(\*SubscriptBox[\(\[Lambda]M\), \(s\)]\) - \!\(\*SubscriptBox[\(L\), \(s\)]\)"}, Filling->Axis}]
 Export[FileNameJoin@{outputDir,"LittleSystem.pdf"},%];
+
+
+(* ::Section:: *)
+(*Ausgabe der Ergebnisse in Tabelle*)
+
+
+(* ::Text:: *)
+(*Achtung: hier wird ienfach der letzte Wert der Simulation verwendet*)
+
+
+TableOfResults = Grid[{
+{"value", "theoretical", "simulation", },
+{"mean queue size", N@MeanQueueSizeTheoretical, Last@Last[Load@"mean-queue-size-normal"]},
+{"mean queue time", N@MeanQueueTimeTheoretical, Last@Last[Load@"mean-queue-time-normal"]},
+{"mean system size", N@MeanSystemSizeTheoretical, Last@Last[Load@"mean-system-size-normal"]},
+{"mean system time", N@MeanSystemTimeTheoretical, Last@Last[Load@"mean-system-time-normal"] }}]
+Export[FileNameJoin@{outputDir,"ResultsTable.tex"},%, "TexFragment"];

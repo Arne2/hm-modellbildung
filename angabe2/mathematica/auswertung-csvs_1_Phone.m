@@ -16,7 +16,7 @@ Simulate[args_] := If[
 (*Falls neue Simulation ansteuern wert auf true setzen *)
 (*Falls wert auf false, dann wird keine neue Simulation durchgef\[UDoubleDot]hrt, sondern alte Daten herangezoogen *)
 startNewSimulation = false;
-meanArrivalTime = 400;
+meanArrivalTime = 100;
 meanServeTime = 100;
 durationSimulation = 1000000;
 vip = 0;
@@ -76,8 +76,8 @@ arguments = StringJoin[
 If[startNewSimulation == true, Simulate[arguments], ]
 
 
-(* ::Section:: *)
-(*Plot Mean QueueSize*)
+(* ::Section::Closed:: *)
+(*Plot Mean QueueSize / SystemSize / QueueTime / SystemTime*)
 
 
 Show[ListPlot[ {Load@"mean-queue-size-normal"},
@@ -114,6 +114,19 @@ Plot[Evaluate[y = MeanSystemTimeTheoretical],
 PlotStyle -> {Orange, Dashed, Thick}], 
 AxesLabel->{"t","mean system time"}]
 Export[FileNameJoin@{outputDir,"MeanSystemTime.pdf"},%];
+
+
+(* ::Section:: *)
+(*Serverauslastung*)
+
+
+Show[ListPlot[ {Load@"mean-phone-size-all"},
+PlotRange->All], 
+Plot[Evaluate[y = 1], 
+{x, 0, durationSimulation},
+PlotStyle -> {Orange, Dashed, Thick}], 
+AxesLabel->{"t","mean phone workload"}]
+Export[FileNameJoin@{outputDir,"MeanPhoneWorkload.pdf"},%];
 
 
 (* ::Section::Closed:: *)
@@ -163,7 +176,7 @@ dataSet = Reverse[dataSet];
     Export[FileNameJoin@{outputDir,"QueueStepPlotLastFiltered.pdf"},%];
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*Theorem von Little : lambda * MeanSystemTime - MeanSystemSize = 0 f\[UDoubleDot]r t-> inf*)
 
 
@@ -175,7 +188,7 @@ ListPlot[Load@"little-system-normal", { AxesLabel->{"t","\!\(\*SubscriptBox[\(\[
 Export[FileNameJoin@{outputDir,"LittleSystem.pdf"},%];
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*Ausgabe der Ergebnisse in Tabelle*)
 
 

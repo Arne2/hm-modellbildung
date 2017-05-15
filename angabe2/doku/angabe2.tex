@@ -36,6 +36,60 @@ Quelle: http://www.mathepedia.de/Exponentialverteilung.aspx
 
 \section{Softwaredesign}
 
+Der Aufbau der Anwendung wurde im Team diskutiert und anschließend mittels UML spezifiziert.
+
+Grundsätzlich wurde eine Ereignisorientierte Simulation (Discrete Event Simulation) mit einer Eventliste gewählt. Ursprünglich war geplant die Berechnung mit Mathematica auszuführen. Dies stellte sich aber als nicht performant und komplizierter als notwendig heraus. Alle geforderten Berechnungen wurden dann ebenfalls in das Java Programm eingeplant.
+
+\subsection{Package time}
+
+\includegraphics[scale=0.3]{abbildungen/uml/time.pdf}
+
+
+In diesem Unterpaket finden sich alle notwendigen Klassen für die Ereignisorientierte Simulation. Die \texttt{Clock} hält die Simulationszeit und kann nur vorgestellt werden. 
+
+Das Interface \texttt{Event} definiert ein Ereignis in der Simulation. Jedes Ereignis hat einen Zeitpunkt an dem es auftritt, sowie Logik, die zu diesem Zeitpunkt ausgeführt werden soll und potentiell den ganzen Zustand der Simulation verändern kann. Die \texttt{EventList} kann Ereignisse aufnehmen und immer das nächste Event mit den frühesten Zeitpunkt liefern. 
+
+Die konkreten Events \texttt{Arrival, BeginServe, FinishServe} beschreiben die Ereignisse in der Callshop Problemstellung.
+
+\subsection{Package queue}
+
+\includegraphics[scale=0.3]{abbildungen/uml/queue.pdf}
+
+Die \texttt{Queue} ist eine FIFO-Warteschlange mit zugehörigen Operationen. Optional kann direkt auch der erste Resident (VIP) aus der Schlange entfernt werden. 
+
+\subsection{Package distribution}
+
+\includegraphics[scale=0.3]{abbildungen/uml/distribution.pdf}
+
+Die Verteilung ist grundsätzlich eine negative Exponentialverteilung. Die 
+Zufallszahlen können über einen Seed erstellt werden.
+
+\subsection{Package domain}
+
+\includegraphics[scale=0.3]{abbildungen/uml/domain.pdf}
+
+
+\texttt{domain} beschreibt alle notwendigen Datenstrukturen aus der Domäne des Callshops. Hier gibt es Personen und Telefone. Jede neue Person hat eine einzigartige ID und im Laufe der Simulation merkt sie sich ihre persönlichen Zeitpunkte.
+
+Eine Person kann optional ein Resident (Vip) sein. Eine Telefon kann optional nur Residents (VIPs) annehmen.
+
+\subsection{Package calculation, log}
+
+\includegraphics[scale=0.3]{abbildungen/uml/calculation.pdf}
+\includegraphics[scale=0.3]{abbildungen/uml/log.pdf}
+
+Die allgemeine Berechnung für Mittelwerte ist in \texttt{calculation} gelöst.
+Mit \texttt{log} können Ergebnisse in ein CSV Dokument gespeichert werden.
+
+\subsection{Package config, modellbildung}
+
+\includegraphics[scale=0.3]{abbildungen/uml/config.pdf}
+\includegraphics[scale=0.3]{abbildungen/uml/modellbildung.pdf}
+
+In \texttt{config} ist die Konfiguration der Simulation zu finden. Die Logs und Mittelwert-Rechner für die aktuelle konkrete Simulation sind ebenfalls hier definiert.
+
+Das Paket \texttt{modellbildung} beinhaltet alle zuvor beschriebenen Pakete und enthält die Simulationsklasse zum Starten sowie den groben Ablauf der Simulation. Der \texttt{SimulationState} hält den aktuellen Zustand der Simulation.
+
 \section{Implementierung}
 
 \section{Softwaretest}

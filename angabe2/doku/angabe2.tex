@@ -438,6 +438,18 @@ In Abbildung \ref{fig:LittleSystem100} ist der Verlauf der Gleichung \ref{eq:lit
 Alle vier ermittelten Durchschnittswerte schwanken bis zum Ende der Simulation deutlich. Das in Abbildung \ref{fig:LittleSystem100} ersichtliche Ergebnis der Differenz zeigt, dass das System während der gesamten Simulationsdauer den für ein eingeschwungenes System erforderlichen Wert von $0$ nicht erreicht. Aufgrund der großen Abweichung kann davon ausgegangen werden, dass der Steady State (eingeschwungene Zustand) in dieser Simulation nicht erreicht wurde. 
 
 Das beschriebene Verhalten des implementierten Modells stimmt somit mit der Theorie überein, welche besagt, dass wenn die durchschnittliche Zwischenankunftszeit gleich der durchschnittlichen Bediendauer ist, das System nie einschwingen kann. Ein Beweis, dass das System auch bei einer längeren Simulationsdauer nicht einschwingen würde, kann nicht erbracht werden.
+\subsection{Vergleich der Telefonauslastungen}
+Bisher wurden die durschnittlichen Verweildauern betrachtet. Die Auslastung des Telefons wurde dabei unberücksichtigt. Die durchschnittliche Auslastung des telefons berechnet sich mit der Formel:
+$$
+Auslastung(t) = \frac{\sum Telefonierdauer}{t}
+$$
+Eine Auslastung von 1 bedeutet, dass das Telefon zu 100 \% ausgelastet ist. In Abbildung \ref{fig:1_Phone_Workload_Vergleich} werden die Auslastungen über der Zeit für verschiedene Ankunftsraten dargestellt. Es fällt auf, dass bei Ankunftszeiten von 1500 s bis 800 s nur wenig Unterschied besteht. Das Telefon ist in allen drei Fällen ca. 15 \% ausgelastet. Bei einer Ankunftszeit von 400 s gibt es einen deutlichen Anstieg in der Auslastung auf über 20 \%. Das Telefon ist zu 100 \% ausgelastet bei einer durchschnittlichen Zwischenankunftszeit von 100 s. Da die durchschnittliche Telefonierzeit ebenfalls 100 s beträgt, ist dieses Ergebnis zu erwarten. Es ist zu bemerken, dass die durchschnittliche Telefonauslastung und die Zwischenankunftszeiten keinen linearen Zusammenhang haben. Ein exponentieller Zusammenhang kann aufgrund der fünf Simulationen vermutet, jedoch nicht eindeutig gezeigt werden.
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{abbildungen/1_Phone/Auslastung_Vegleich/MeanPhoneWorkload.pdf}
+	\caption{Darstellung der Telefonauslastung für verschiedene Ankunftszeiten}
+	\label{fig:1_Phone_Workload_Vergleich}
+\end{figure} 
 
 \subsection{Modell \glqq Bevorzugte VIP\grqq} 
 

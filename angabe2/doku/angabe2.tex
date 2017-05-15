@@ -427,13 +427,18 @@ Abschließend sind in den Abbildungen \ref{fig:QueueStepPlotAll100} und \ref{fig
 	\caption{Darstellung der Differenz: $\lambda * Ws - Ls$ über die Simulationszeit (Little Theorem)}
 	\label{fig:LittleSystem100}
 \end{figure} 
-In Abbildung \ref{fig:LittleSystem100} ist der Verlauf der Gleichung \ref{eq:little} über die Simulationszeit aufgeführt. Im Vergleich zu den beiden Auswertungen mit Zwischenankunftszeiten von $1000s$ bzw. $400s$ wird deutlich, dass die Abweichung vom den geforderten Wert $0$ in dieser Abbildung deutlich größer ist.  
+In Abbildung \ref{fig:LittleSystem100} ist der Verlauf der Gleichung \ref{eq:little} über die Simulationszeit aufgeführt. Im Vergleich zu den beiden Auswertungen mit Zwischenankunftszeiten von $1000s$ bzw. $400s$ wird deutlich, dass die Abweichung vom den geforderten Wert $0$ in dieser Abbildung erheblich größer ist.  
 
 Alle vier ermittelten Durchschnittswerte schwanken bis zum Ende der Simulation deutlich. Das in Abbildung \ref{fig:LittleSystem100} ersichtliche Ergebnis der Differenz zeigt, dass das System während der gesamten Simulationsdauer den für ein eingeschwungenes System erforderlichen Wert von $0$ nicht erreicht. Aufgrund der großen Abweichung kann davon ausgegangen werden, dass der Steady State (eingeschwungene Zustand) in dieser Simulation nicht erreicht wurde. 
 
-Das beschriebene Verhalten des implementierten Modells stimmt somit mit der Theorie überein, welche besagt, dass wenn die durchschnittliche Zwischenankunftszeit gleich der durchschnittlichen Bediendauer ist, das System nie einschwingen kann. Ein Beweis, dass das System auch bei einer längeren Simulationsdauer nicht einschwingen würde, kann nicht erbracht werden.
-\subsection{Erhögung der Simmulationsdauer}
-Die bisherigen Ergebnisse sind bei einer Simulationsdauer von $10^6 \ s$ entstanden. Bei einer Zwischenankunftszeit von 100 s zeigt sich eine Tendenz zu einer immer weiter ansteigenden Warteschlangenlänge. Um dies besser zu verdeutlichen wird die Simulationsdauer auf $10^7 s$ erhöht. Die Abbildung \ref{fig:QueueStepPlotAll100_duration_10000000} zeigt die Warteschlangenentwicklung über die gesamte Zeit. Es wird deutlich, dass die Warteschlangenlänge sehr schwankt. Aus den Abbildungen \ref{fig:meanQueueSize100_duration_10000000} und \ref{fig:meanSystemSize100_duration_10000000} ist für die durschnittliche Warteschlangenlänge ein klarer Trend nach oben zu erkennen. Auch bei der Betrachtung der Verweildauern im System und in der Warteschlange, wie in Abbildungen \ref{fig:meanQueueTime100_duration_10000000} und \ref{fig:meanSystemTime100_duration_10000000} zu sehen ist, zeigt sich eine Aufwärtsbewegung. Es ist deutlich zu erknennen, dass sich die Werte keiner Parallellen zur Zeitachse annähern. Das System erreich während der gesamten Simulationsdauer keinen stabilen zustand. Bei einer weiteren Erhöhung der Simulationsdauer ist davon auszugehen, dass sich Werte noch weiter ansteigen werden.
+Das beschriebene Verhalten des implementierten Modells stimmt somit mit der Theorie überein, welche besagt, dass wenn die durchschnittliche Zwischenankunftszeit gleich der durchschnittlichen Bediendauer ist, das System nie einschwingen kann. Ein Beweis, dass das System auch bei einer längeren Simulationsdauer nicht einschwingen würde, kann nicht erbracht werden. 
+
+Für ein aussagekräftigeres Ergebnis wurde die Siulation erneut mit einer längeren Simulationsdauer durchgeführt. Die Ergebnisse sind im folgenden Abschnitt beschrieben.
+
+\paragraph{Erhöhung der Simulationsdauer}
+
+Die bisherigen Ergebnisse sind bei einer Simulationsdauer von $10^6 \ s$ entstanden. Bei einer Zwischenankunftszeit von 100 s zeigt sich eine Tendenz zu einer immer weiter ansteigenden Warteschlangenlänge. Um dies besser zu verdeutlichen wird die Simulationsdauer auf $10^7 s$ erhöht. Die Abbildung \ref{fig:QueueStepPlotAll100_duration_10000000} zeigt die Warteschlangenentwicklung über die gesamte Zeit. Es wird deutlich, dass die Warteschlangenlänge sehr schwankt. Aus den Abbildungen \ref{fig:meanQueueSize100_duration_10000000} und \ref{fig:meanSystemSize100_duration_10000000} ist für die durchschnittliche Warteschlangenlänge ein klarer Trend nach oben zu erkennen. Auch bei der Betrachtung der Verweildauern im System und in der Warteschlange, wie in Abbildungen \ref{fig:meanQueueTime100_duration_10000000} und \ref{fig:meanSystemTime100_duration_10000000} zu sehen ist, zeigt sich eine Aufwärtsbewegung. \\
+Es ist deutlich zu erkennen, dass sich die Werte keiner Parallelen zur Zeitachse annähern. Das System erreicht während der gesamten Simulationsdauer keinen stabilen zustand. Bei einer weiteren Erhöhung der Simulationsdauer ist davon auszugehen, dass Werte noch weiter ansteigen werden.
 
 \begin{figure}[htpb]
 	\centering
@@ -441,10 +446,6 @@ Die bisherigen Ergebnisse sind bei einer Simulationsdauer von $10^6 \ s$ entstan
 	\caption{Warteschlangenlänge (gefiltert) , MeanAr = 100, Dauer = $10^7 \ s$}
 	\label{fig:QueueStepPlotAll100_duration_10000000}
 \end{figure}
-
-
-
-
 
 
 \begin{figure}[htpb]

@@ -76,8 +76,8 @@ arguments = StringJoin[
 If[startNewSimulation == true, Simulate[arguments], ]
 
 
-(* ::Section:: *)
-(*Plot Mean QueueSize*)
+(* ::Section::Closed:: *)
+(*Plot Mean QueueSize / SystemSize / QueueTime / SystemTime*)
 
 
 (* ::Subsubsection::Closed:: *)
@@ -170,6 +170,19 @@ Plot[Evaluate[y = MeanSystemTimeTheoretical],
 PlotStyle -> {Orange, Dashed, Thick}], 
 AxesLabel->{"t","mean system time all"}]
 Export[FileNameJoin@{outputDir,"MeanSystemTimeAll.pdf"},%];
+
+
+(* ::Section:: *)
+(*Serverauslastung*)
+
+
+Show[ListPlot[ {Load@"mean-phone-size-all"},
+PlotRange->All], 
+Plot[Evaluate[y = 1], 
+{x, 0, durationSimulation},
+PlotStyle -> {Orange, Dashed, Thick}], 
+AxesLabel->{"t","mean phone workload"}]
+Export[FileNameJoin@{outputDir,"MeanPhoneWorkload.pdf"},%];
 
 
 (* ::Section:: *)

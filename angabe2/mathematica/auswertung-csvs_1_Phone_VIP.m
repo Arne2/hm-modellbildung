@@ -16,7 +16,7 @@ Simulate[args_] := If[
 (*Falls neue Simulation ansteuern wert auf true setzen *)
 (*Falls wert auf false, dann wird keine neue Simulation durchgef\[UDoubleDot]hrt, sondern alte Daten herangezoogen *)
 startNewSimulation = false;
-meanArrivalTime = 400;
+meanArrivalTime = 100;
 meanServeTime = 100;
 durationSimulation = 1000000;
 vip = 10;
@@ -307,7 +307,7 @@ Export[FileNameJoin@{outputDir,"LittleSystem.pdf"},%];
 
 
 (* ::Text:: *)
-(*Achtung: hier wird ienfach der letzte Wert der Simulation verwendet*)
+(*Achtung: hier wird einfach der letzte Wert der Simulation verwendet*)
 
 
 TableOfResults = Grid[{

@@ -284,6 +284,7 @@ Alle vier ermittelten Durchschnittswerte liegen, ab einer Simulationsdauer von c
 
 \subsubsection{Durchschnittliche Zwischenankunftszeit der Clients: $400s$}
 \paragraph{Theoretische Erwartungswerte laut M/M/1 Warteschlangenmodell}
+\label{FormenlnMM1}
 \\
 Bei einer durchschnittlichen Zwischenankunftszeit von $400s$ ($\lambda=\frac{1}{400}$, $\mu=\frac{1}{100}$)ergeben sich, basierend auf den in Abschnitt \ref{Formeln} aufgeführten Formeln, folgende Erwartungswerte:
 \begin{equation}
@@ -441,7 +442,98 @@ Das beschriebene Verhalten des implementierten Modells stimmt somit mit der Theo
 
 \subsection{Modell \glqq Bevorzugte VIP\grqq} 
 Im zweiten Betriebsmodus werden die ankommenden Kunden unterschieden, ob es sich um Touristen, oder Einheimische (VIP) handelt. Befindet sich ein VIP in der Warteschlange, wird dieser bevorzugt. Wie im Betriebsmodus 1 werden auch hier drei verschiedene mittleren Zwischenankunftszeiten betrachtet.
+\subsubsection{Annahme}
+Es wird angenommen, dass die im Abschnitt \ref{FormenlnMM1} aufgeführten Formeln für den Betriebsmodus 1 auch für diesen Betriebsmodus gelten. Da sich im Shop weiterhin nur ein Telefon befindet, ist es für die Berechnung der Durchschnittswerte für das System (durchschnittliche Anzahl an Kunden im System, durchschnittliche Warteschlangenlänge, durchschnittliche Zeit im System, durchschnittliche Zeit in der Warteschlange) irrelevant, ob bestimmte Kunden bevorzugt werden. Beispielsweise die durchschnittliche Zeit in der Warteschlange, welche bei den VIP durch die Bevorzugung geringer ist, ist bei den Touristen dementsprechend höher, sodass sie insgesamt gleich der Zeit im Betriebsmodus 1 ist. 
 \subsubsection{Durchschnittliche Ankunftszeit der Clients: 1000}
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{abbildungen/1_Phone_VIP/Arrival_1000_Serve_100_dur_1000000_Skip_0/MeanQueueSizeAll.pdf}
+	\caption{Durchschnittliche Warteschlangenlänge, MeanAr = 1000}
+	\label{fig:MQSVIP1000ALL}
+\end{figure} 
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{abbildungen/1_Phone_VIP/Arrival_1000_Serve_100_dur_1000000_Skip_0/MeanQueueSizeTouristAndResident.pdf}
+	\caption{Durchschnittliche Warteschlangenlängen von Touristen und VIP, MeanAr = 1000}
+	\label{fig:MQSVIP1000VGL}
+\end{figure}
+
+Abbildung \ref{fig:MQSVIP1000ALL} zeigt die durchschnittliche Warteschlangenlänge. Im Vergleich dazu zeigt Abbildung \ref{fig:MQSVIP1000VGL} die Zusammensetzung der Warteschlangenlänge aus den zwei unterschiedenen Gruppen. Es wird deutlich, dass die Wartezeit der Touristen deutlich länger ist als die der VIP. 
+
+\begin{figure}[!htb]
+	\centering
+	\begin{minipage}{.5\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{abbildungen/1_Phone_VIP/Arrival_1000_Serve_100_dur_1000000_Skip_0/MeanQueueTimeResident.pdf}
+		\caption{Durchschnittliche Verweildauer der VIP in der Warteschlange , MeanAr = $1000s$}
+		\label{fig:MQTVIP1000}
+	\end{minipage}%
+	\begin{minipage}{0.5\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{abbildungen/1_Phone_VIP/Arrival_1000_Serve_100_dur_1000000_Skip_0/MeanQueueTimeTourist.pdf}
+		\caption{Durchschnittliche Verweildauer der Touristen in der Warteschlange , MeanAr = $1000s$}
+		\label{fig:MQTTOURI1000}
+	\end{minipage}
+\end{figure}
+
+Die Abbildungen \ref{fig:MQTVIP1000} und \ref{fig:MQTTOURI1000} zeigen die durchschnittliche Verweildauer in der Warteschlange der VIP und Touristen. Wiederum ist das erwartete Verhalten zu sehen, dass sich die VIP durchschnittlich deutlich kürzere Zeit in der Warteschlange befinden als die Touristen.
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{abbildungen/1_Phone_VIP/Arrival_1000_Serve_100_dur_1000000_Skip_0/MeanSystemSizeAll.pdf}
+	\caption{Durchschnittliche Anzahl an Kunden im System, MeanAr = $1000s$}
+	\label{fig:MSSVIP1000ALL}
+\end{figure} 
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{abbildungen/1_Phone_VIP/Arrival_1000_Serve_100_dur_1000000_Skip_0/MeanSystemSizeTouristAndResident.pdf}
+	\caption{Durchschnittliche Anzahl an Kunden im System, MeanAr = $100s$}
+	\label{fig:MSSVIP1000VGL}
+\end{figure}
+
+Abbildung \ref{fig:MSSVIP1000ALL} zeigt die durchschnittliche Anzahl an Kunden im System insgesamt. Im Vergleich dazu zeigt Abbildung \ref{fig:MSSVIP1000VGL} die Zusammensetzung aus den zwei unterschiedenen Gruppen. Es wird wiederum deutlich, dass sich durchschnittliche mehr Touristen im System befinden, als VIP. Eine Ursache hierfür ist die bereits erwähnte Bevorzugung der VIP. Doch auch der Anteil der VIP an der insgesamten Kundenanzahl (lediglich $0,1$) erklärt diese Abweichung. Es kommen somit deutlich mehr Touristen in den Telefonshop als VIP.
+F\\
+E\\
+H\\
+L\\
+T\\
+Mean System Time
+F
+E
+H
+L
+T
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{abbildungen/1_Phone_VIP/Arrival_1000_Serve_100_dur_1000000_Skip_0/QueueStepPlotAllFiltered.pdf}
+	\caption{Durchschnittliche Anzahl an Kunden im System, MeanAr = $1000s$}
+	\label{fig:QSPALL1000}
+\end{figure}
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{abbildungen/1_Phone_VIP/Arrival_1000_Serve_100_dur_1000000_Skip_0/QueueStepPlotTouristFiltered.pdf}
+	\caption{Durchschnittliche Anzahl an Kunden im System, MeanAr = $1000s$}
+	\label{fig:QSPTOURI1000}
+\end{figure}
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{abbildungen/1_Phone_VIP/Arrival_1000_Serve_100_dur_1000000_Skip_0/QueueStepPlotResidentFiltered.pdf}
+	\caption{Durchschnittliche Anzahl an Kunden im System, MeanAr = $1000s$}
+	\label{fig:QSPVIP1000}
+\end{figure}
+
+\paragraph{Validierung der Simulation}
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{abbildungen/1_Phone_VIP/Arrival_1000_Serve_100_dur_1000000_Skip_0/LittleSystem.pdf}
+	\caption{Durchschnittliche Anzahl an Kunden im System, MeanAr = $1000s$}
+	\label{fig:LittleVIP1000}
+\end{figure}
 \subsubsection{Durchschnittliche Ankunftszeit der Clients: 400}
 \subsubsection{Durchschnittliche Ankunftszeit der Clients: 100}
 

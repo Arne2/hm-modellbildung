@@ -16,7 +16,7 @@ Simulate[args_] := If[
 (*Falls neue Simulation ansteuern wert auf true setzen *)
 (*Falls wert auf false, dann wird keine neue Simulation durchgef\[UDoubleDot]hrt, sondern alte Daten herangezoogen *)
 startNewSimulation = false;
-meanArrivalTime = 100;
+meanArrivalTime = 1000;
 meanServeTime = 100;
 durationSimulation = 1000000;
 vip = 10;
@@ -76,7 +76,7 @@ arguments = StringJoin[
 If[startNewSimulation == true, Simulate[arguments], ]
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Plot Mean QueueSize / SystemSize / QueueTime / SystemTime*)
 
 
@@ -94,6 +94,19 @@ AxesLabel->{"t","mean queue size resident"}]
 Export[FileNameJoin@{outputDir,"MeanQueueSizeResident.pdf"},%];
 
 
+Show[ListPlot[ {Load@"mean-queue-size-resident"},
+{PlotRange->All, PlotStyle -> {Blue, Dashed, Thick}}], 
+ListPlot[ {Load@"mean-queue-size-normal"},
+{PlotRange->All, PlotStyle -> {Purple, Dashed, Thick}}],
+{AxesLabel->{"t","mean queue size"}, PlotRange->All},
+ Epilog -> Inset[Column[{ 
+      PointLegend[{Blue}, {" resident"}],
+      PointLegend[{Purple}, {" tourist"}]
+      }], Scaled[{0.8, 0.65}]]
+ (* End of the Legends *)]
+Export[FileNameJoin@{outputDir,"MeanQueueSizeTouristAndResident.pdf"},%];
+
+
 Show[ListPlot[ {Load@"mean-queue-size-all"},
 PlotRange->All], 
 Plot[Evaluate[y = MeanQueueSizeTheoretical], 
@@ -103,7 +116,7 @@ AxesLabel->{"t","mean queue size all"}]
 Export[FileNameJoin@{outputDir,"MeanQueueSizeAll.pdf"},%];
 
 
-(* ::Subsubsection::Closed:: *)
+(* ::Subsubsection:: *)
 (*Mean System Size*)
 
 
@@ -117,6 +130,19 @@ AxesLabel->{"t","mean system size resident"}]
 Export[FileNameJoin@{outputDir,"MeanSystemSizeResident.pdf"},%];
 
 
+Show[ListPlot[ {Load@"mean-system-size-resident"},
+{PlotRange->All, PlotStyle -> {Blue, Dashed, Thick}}], 
+ListPlot[ {Load@"mean-system-size-normal"},
+{PlotRange->All, PlotStyle -> {Purple, Dashed, Thick}}],
+{AxesLabel->{"t","mean system size"}, PlotRange->All},
+ Epilog -> Inset[Column[{ 
+      PointLegend[{Blue}, {" resident"}],
+      PointLegend[{Purple}, {" tourist"}]
+      }], Scaled[{0.8, 0.65}]]
+ (* End of the Legends *)]
+Export[FileNameJoin@{outputDir,"MeanSystemSizeTouristAndResident.pdf"},%];
+
+
 Show[ListPlot[ {Load@"mean-system-size-all"},
 PlotRange->All] , 
 Plot[Evaluate[y = MeanSystemSizeTheoretical], 
@@ -126,7 +152,7 @@ AxesLabel->{"t","mean system size"}]
 Export[FileNameJoin@{outputDir,"MeanSystemSizeAll.pdf"},%];
 
 
-(* ::Subsubsection::Closed:: *)
+(* ::Subsubsection:: *)
 (*Mean Queue Time*)
 
 
@@ -140,6 +166,19 @@ AxesLabel->{"t","mean queue time resident"}]
 Export[FileNameJoin@{outputDir,"MeanQueueTimeResident.pdf"},%];
 
 
+Show[ListPlot[ {Load@"mean-queue-size-resident"},
+{PlotRange->All, PlotStyle -> {Blue, Dashed, Thick}}], 
+ListPlot[ {Load@"mean-queue-size-normal"},
+{PlotRange->All, PlotStyle -> {Purple, Dashed, Thick}}],
+{AxesLabel->{"t","mean queue size"}, PlotRange->All},
+ Epilog -> Inset[Column[{ 
+      PointLegend[{Blue}, {" resident"}],
+      PointLegend[{Purple}, {" tourist"}]
+      }], Scaled[{0.8, 0.65}]]
+ (* End of the Legends *)]
+Export[FileNameJoin@{outputDir,"MeanQueueSizeTouristAndResident.pdf"},%];
+
+
 Show[ListPlot[ {Load@"mean-queue-time-all"},
 PlotRange->All] , 
 Plot[Evaluate[y = MeanQueueTimeTheoretical], 
@@ -149,7 +188,7 @@ AxesLabel->{"t","mean queue time all"}]
 Export[FileNameJoin@{outputDir,"MeanQueueTimeAll.pdf"},%];
 
 
-(* ::Subsubsection::Closed:: *)
+(* ::Subsubsection:: *)
 (*Mean System Time*)
 
 
@@ -161,6 +200,19 @@ Export[FileNameJoin@{outputDir,"MeanSystemTimeTourist.pdf"},%];
 Show[ListPlot[ {Load@"mean-system-time-resident"}],
 AxesLabel->{"t","mean system time resident"}]
 Export[FileNameJoin@{outputDir,"MeanSystemTimeResident.pdf"},%];
+
+
+Show[ListPlot[ {Load@"mean-system-time-resident"},
+{PlotRange->All, PlotStyle -> {Blue, Dashed, Thick}}], 
+ListPlot[ {Load@"mean-system-time-normal"},
+{PlotRange->All, PlotStyle -> {Purple, Dashed, Thick}}],
+{AxesLabel->{"t","mean system time"}, PlotRange->All},
+ Epilog -> Inset[Column[{ 
+      PointLegend[{Blue}, {" resident"}],
+      PointLegend[{Purple}, {" tourist"}]
+      }], Scaled[{0.8, 0.65}]]
+ (* End of the Legends *)]
+Export[FileNameJoin@{outputDir,"MeanSystemTimeTouristAndResident.pdf"},%];
 
 
 Show[ListPlot[ {Load@"mean-system-time-all"},
@@ -307,13 +359,13 @@ Export[FileNameJoin@{outputDir,"LittleSystem.pdf"},%];
 
 
 (* ::Text:: *)
-(*Achtung: hier wird einfach der letzte Wert der Simulation verwendet*)
+(*Achtung: hier wird einnfach der letzte Wert der Simulation verwendet*)
 
 
 TableOfResults = Grid[{
-{"value", "theoretical", "simulation", },
-{"mean queue size", N@MeanQueueSizeTheoretical, Last@Last[Load@"mean-queue-size-normal"]},
-{"mean queue time", N@MeanQueueTimeTheoretical, Last@Last[Load@"mean-queue-time-normal"]},
-{"mean system size", N@MeanSystemSizeTheoretical, Last@Last[Load@"mean-system-size-normal"]},
-{"mean system time", N@MeanSystemTimeTheoretical, Last@Last[Load@"mean-system-time-normal"] }}]
+{"value", "theoretical", "simulation tourist", "simulation resident" },
+{"mean queue size", N@MeanQueueSizeTheoretical, Last@Last[Load@"mean-queue-size-normal"], Last@Last[Load@"mean-queue-size-resident"]},
+{"mean queue time", N@MeanQueueTimeTheoretical, Last@Last[Load@"mean-queue-time-normal"], Last@Last[Load@"mean-queue-time-resident"]},
+{"mean system size", N@MeanSystemSizeTheoretical, Last@Last[Load@"mean-system-size-normal"], Last@Last[Load@"mean-system-size-resident"]},
+{"mean system time", N@MeanSystemTimeTheoretical, Last@Last[Load@"mean-system-time-normal"], Last@Last[Load@"mean-system-time-resident"] }}]
 Export[FileNameJoin@{outputDir,"ResultsTable.tex"},%, "TexFragment"];

@@ -42,8 +42,7 @@ Grundsätzlich wurde eine Ereignisorientierte Simulation (Discrete Event Simulat
 
 \subsection{Package time}
 
-\includegraphics[scale=0.3]{abbildungen/uml/time.pdf}
-
+\includegraphics[scale=0.5]{abbildungen/uml/time.pdf}
 
 In diesem Unterpaket finden sich alle notwendigen Klassen für die Ereignisorientierte Simulation. Die \texttt{Clock} hält die Simulationszeit und kann nur vorgestellt werden. 
 
@@ -51,22 +50,50 @@ Das Interface \texttt{Event} definiert ein Ereignis in der Simulation. Jedes Ere
 
 Die konkreten Events \texttt{Arrival, BeginServe, FinishServe} beschreiben die Ereignisse in der Callshop Problemstellung.
 
+Abbildung \ref{fig:arrival-event} zeigt den Verlauf des Ereignisses für Arrival. Zunächst werden freie Telefone gesucht. Wird ein freies Telefon gefunden wird ein BeginServeEvent mit aktueller Zeit erstellt. Eine neue Person wird erstellt, ihre Ankunftszeit gespeichert, und die Person wird in die Schlange eingefügt. Zum Schluss wird das nächste ArrivalEvent erstellt, um fortlaufend neue Ankünfte zu haben.
+
+Der Verlauf von BeginServe ist in Abbildung \ref{fig:beginserve-event} zu sehen. Die nächste (VIP oder normale) Person wird je nachdem, ob es sich um ein VIP Phone oder nicht handelt, aus der Liste geholt. Die Zeit vom Bearbeitungsbeginn wird für die Person gespeichert. Das FinishEvent wird direkt ermittelt und in die EventList eingetragen.
+
+Das Ereignis FinishServe ist in Abbildung \ref{fig:finishserve-event} dargestellt. Die Person wird aus dem Phone entfernt. Ihre Endzeit wird gespeichert. Ist die Warteschlange nicht leer, wird direkt ein neues BeginServeEvent erstellt. 
+
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[scale=0.5]{abbildungen/uml/Arrival.pdf}
+	\caption{Sequenzdiagramm für die Ausführung eines ArrivalEvent}
+	\label{fig:arrival-event}
+\end{figure}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[scale=0.5]{abbildungen/uml/BeginServe.pdf}
+	\caption{Sequenzdiagramm für die Ausführung eines BeginServeEvent}
+	\label{fig:beginserve-event}
+\end{figure}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[scale=0.5]{abbildungen/uml/FinishServe.pdf}
+	\caption{Sequenzdiagramm für die Ausführung eines FinishServeEvent}
+	\label{fig:finishserve-event}
+\end{figure}
+
 \subsection{Package queue}
 
-\includegraphics[scale=0.3]{abbildungen/uml/queue.pdf}
+\includegraphics[scale=0.5]{abbildungen/uml/queue.pdf}
 
 Die \texttt{Queue} ist eine FIFO-Warteschlange mit zugehörigen Operationen. Optional kann direkt auch der erste Resident (VIP) aus der Schlange entfernt werden. 
 
 \subsection{Package distribution}
 
-\includegraphics[scale=0.3]{abbildungen/uml/distribution.pdf}
+\includegraphics[scale=0.5]{abbildungen/uml/distribution.pdf}
 
 Die Verteilung ist grundsätzlich eine negative Exponentialverteilung. Die 
 Zufallszahlen können über einen Seed erstellt werden.
 
 \subsection{Package domain}
 
-\includegraphics[scale=0.3]{abbildungen/uml/domain.pdf}
+\includegraphics[scale=0.5]{abbildungen/uml/domain.pdf}
 
 
 \texttt{domain} beschreibt alle notwendigen Datenstrukturen aus der Domäne des Callshops. Hier gibt es Personen und Telefone. Jede neue Person hat eine einzigartige ID und im Laufe der Simulation merkt sie sich ihre persönlichen Zeitpunkte.
@@ -75,16 +102,16 @@ Eine Person kann optional ein Resident (Vip) sein. Eine Telefon kann optional nu
 
 \subsection{Package calculation, log}
 
-\includegraphics[scale=0.3]{abbildungen/uml/calculation.pdf}
-\includegraphics[scale=0.3]{abbildungen/uml/log.pdf}
+\includegraphics[scale=0.5]{abbildungen/uml/calculation.pdf}
+\includegraphics[scale=0.5]{abbildungen/uml/log.pdf}
 
 Die allgemeine Berechnung für Mittelwerte ist in \texttt{calculation} gelöst.
 Mit \texttt{log} können Ergebnisse in ein CSV Dokument gespeichert werden.
 
 \subsection{Package config, modellbildung}
 
-\includegraphics[scale=0.3]{abbildungen/uml/config.pdf}
-\includegraphics[scale=0.3]{abbildungen/uml/modellbildung.pdf}
+\includegraphics[scale=0.5]{abbildungen/uml/config.pdf}
+\includegraphics[scale=0.5]{abbildungen/uml/modellbildung.pdf}
 
 In \texttt{config} ist die Konfiguration der Simulation zu finden. Die Logs und Mittelwert-Rechner für die aktuelle konkrete Simulation sind ebenfalls hier definiert.
 

@@ -206,17 +206,6 @@ In \texttt{config} ist die Konfiguration der Simulation zu finden. Die Logs und 
 
 Das Paket \texttt{modellbildung} beinhaltet alle zuvor beschriebenen Pakete und enthält die Simulationsklasse zum Starten sowie den groben Ablauf der Simulation. Der \texttt{SimulationState} hält den aktuellen Zustand der Simulation.
 
-\section{Softwaretest}
-
-\subsection{Verifikation}
-
-Um unseren Code zu verifizieren wurden Unit-Tests erstellt. Die Zeit hat nicht ausgereicht eine vollständige Testabdeckung zu erreichen. Deshalb wurden für jede Änderung an der Code-Basis Reviews von in der Regel zwei bzw. mindestens einem anderen Teammitglied durchgeführt. Nach Ende der Implementierung wurde die Software nochmal komplett überprüft.
-
-\subsection{Validation}
-
-Tests wurden soweit möglich über das Theorem von Little und Vergleiche mit bewiesenen Formeln durchgeführt. Somit wurde gezeigt,
-dass die Software für eingeschwungene Systeme auch valide ist.
-
 \section{Überprüfung auf Exponentialverteilung}
 Im Zuge dieses Kapitels erfolgt die Überprüfung der, im Zuge der implementierten Simulation, generierten Zufallszahlen. Diese sollen, wie in den Anforderungen definiert, negativ exponentialverteilt sein. \\
 Die Überprüfung erfolgt zunächst graphisch mittels eines Histogramms und eines Qunatil-Quantil-Plots. Im Anschluss erfolgt die rechnerische Überprüfung mittels Shapiro-Wilk-, Cramér-von-Mises- und Anderson-Darling-Test.
@@ -1153,6 +1142,18 @@ Anders als in den vorherigen Ankunftszeiten des Betriebsmodus 3, wie in Abbildun
 Betrachtet man nun die Auslastung der beiden Telefone in Abbildung \ref{fig:2_Phone_Workload_Vergleich} fällt auf, dass die Last über die Simulationszeit niedrig ist. In diesem Graph ist die Linie bei $2$, da auch die Anzahl der Telefone verdoppelt hat. Nur bei einer Ankunftsrate von $100s$ übersteigt die Auslastung des Systems den Wert $1$. Daher lässt sich schließen, dass in den anderen Szenarien das zweite Telefon überflüssig erscheint.
 
 Wenn man jedoch Abbildung \ref{fig:1_Phone_Workload_Vergleich} betrachtet, dann ist das System bei einer Ankunftsrate von $100s$ komplett ausgelastet.
+
+\section{Softwaretest}
+
+\subsection{Verifikation}
+
+Um unseren Code zu verifizieren wurden Unit-Tests erstellt. Die Zeit hat nicht ausgereicht eine vollständige Testabdeckung zu erreichen. Deshalb wurden für jede Änderung an der Code-Basis Reviews von in der Regel zwei bzw. mindestens einem anderen Teammitglied durchgeführt. Nach Ende der Implementierung wurde die Software nochmal komplett überprüft.
+
+\subsection{Validation}
+
+Tests wurden soweit möglich über das Theorem von Little und Vergleiche mit bewiesenen Formeln durchgeführt. Somit wurde gezeigt,
+dass die Software für eingeschwungene Systeme auch valide ist.
+
 
 \section{Ausblick und Fazit}
 \subsection{Abweichung von theoretischen Werten}

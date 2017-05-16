@@ -449,7 +449,7 @@ Das beschriebene Verhalten des implementierten Modells stimmt somit mit der Theo
 Im dritten Betriebsmodus wird zu einem Telefon wie im Betriebsmodus 1 ein VIP Telefon hinzugefügt. Wie vorhin werden auch hier die drei verschiedenen mittleren Ankunftszeiten betrachtet. In diesem Szenario werden die Formeln für M/M/2 Warteschlangenmodelle verwendet. 
 \subsubsection{Formeln für M/M/2 Warteschlangenmodelle}
 \label{Formeln2}
-Für die theoretischen Größen und Zeiten des Systems bzw. der Warteschlange werden folgende Formeln genutzt.
+Für die theoretischen Größen und Zeiten des Systems bzw. der Warteschlange werden folgende Formeln genutzt [3]. Dabei steht P0 für die Wahrscheinlichkeit, dass sich keine Kunden im System befinden.
 \begin{equation}
 P0=(1+\rho+\rho^2/(2-\rho))^{-1}
 \end{equation}
@@ -631,7 +631,9 @@ Wq=33,3333
 	\label{fig:mean3SystemSize100}
 \end{figure}
 
-In Abbildung \ref{fig:mean3SystemSize100} kann man erkennen, dass bei zwei Telefonen die durchschnittliche Systemgröße sich sehr gut an den erwarteten Wert annähert. Hingegen der vorherigen Betriebsmodi lässt die Abbildung auf ein eingeschwungenes System schließen. Da durch zwei Telefone die Service Rate verdoppelt wird, ist in dieser Simulation \mu ungleich \lamda. Schließlich ist das erreichen eines Steady State nicht unplausibel.
+In Abbildung \ref{fig:mean3SystemSize100} kann man erkennen, dass bei zwei Telefonen die durchschnittliche Systemgröße sich sehr gut an den erwarteten Wert annähert. Hingegen der vorherigen Betriebsmodi lässt die Abbildung auf ein eingeschwungenes System schließen. 
+
+Da durch zwei Telefone die Service Rate verdoppelt wird, ist in dieser Simulation $\mu$ ungleich $\lambda$. Schließlich ist das erreichen eines Steady State nicht unplausibel.
 
 \begin{figure}[htpb]
 	\centering
@@ -676,4 +678,5 @@ Anders als in den vorherigen Ankunftszeiten des Betriebsmodus 3, wie in Abbildun
 %\input{References}
 \bibliography{Bibliographie} 
 \bibliographystyle{plain}
+[3] faculty.ksu.edu.sa/9766/OR372/Lec13\_MMs\_Queueing\%20System2.pdf
 \end{document}

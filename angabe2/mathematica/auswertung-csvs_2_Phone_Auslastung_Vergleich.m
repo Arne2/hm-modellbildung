@@ -9,9 +9,6 @@ Simulate[args_] := If[
 ]
 
 
-NormalizeData[data_] := 
-
-
 (* ::Section:: *)
 (*Parameter f\[UDoubleDot]r Simulation*)
 
@@ -46,13 +43,13 @@ Load100[name_]:= Import[FileNameJoin@{NotebookDirectory[],dataPath100, name <> "
 data1500 = Load1500@"mean-phone-size-all";
 data1500[[All,2]] = data1500[[All,2]]/2;
 data1000 = Load1000@"mean-phone-size-all";
-data1000[[All,2]] = data1500[[All,2]]/2;
+data1000[[All,2]] = data1000[[All,2]]/2;
 data800 = Load800@"mean-phone-size-all";
-data800[[All,2]] = data1500[[All,2]]/2;
+data800[[All,2]] = data800[[All,2]]/2;
 data400 = Load400@"mean-phone-size-all";
-data400[[All,2]] = data1500[[All,2]]/2;
+data400[[All,2]] = data400[[All,2]]/2;
 data100 = Load100@"mean-phone-size-all";
-data100[[All,2]] = data1500[[All,2]]/2;
+data100[[All,2]] = data100[[All,2]]/2;
 
 
 
@@ -71,7 +68,7 @@ ListPlot[data100,
 Plot[Evaluate[y = 1], 
 {x, 0, durationSimulation},
 PlotStyle -> {Orange, Dashed, Thick}], 
-PlotRange -> Automatic,
+PlotRange -> All,
 AxesLabel->{"t","mean phone workload"},
  (* The legends in the Epilog are starting here *)
  Epilog -> Inset[Column[{ 

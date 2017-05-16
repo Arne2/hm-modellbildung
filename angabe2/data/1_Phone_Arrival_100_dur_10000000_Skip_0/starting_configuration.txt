@@ -1,6 +1,0 @@
-Programmstart mit folgenden Parametern: 
- Mittlere Ankunftszeit: 100
- Mittlere Telefonierzeit: 100
- Gesamtdauer: 10000000
- Wahrscheinlichkeit auf Dorfbewohner: 0
- Konfiguration: 1

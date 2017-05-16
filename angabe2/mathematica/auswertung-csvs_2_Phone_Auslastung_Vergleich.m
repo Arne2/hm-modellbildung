@@ -9,6 +9,9 @@ Simulate[args_] := If[
 ]
 
 
+NormalizeData[data_] := 
+
+
 (* ::Section:: *)
 (*Parameter f\[UDoubleDot]r Simulation*)
 
@@ -21,6 +24,8 @@ NotebookDirectory[], StringJoin["../doku/abbildungen/2_Phone_VIP/Auslastung_Vegl
 (*Wirft ein Fehler falls directory bereits vorhanden... ist aber OK so *)
 CreateDirectory[outputDir, CreateIntermediateDirectories -> True]
 (*DatenPfad erzeugt sich automatisch aus den Paramtern*)
+skip = 0;
+durationSimulation = 1000000
 dataPath1500 = StringJoin["../data/2_Phone_VIP_10_Arrival_", ToString@1500, "_Skip_", ToString@skip];
 dataPath1000 = StringJoin["../data/2_Phone_VIP_10_Arrival_", ToString@1000, "_Skip_", ToString@skip];
 dataPath800 = StringJoin["../data/2_Phone_VIP_10_Arrival_", ToString@800, "_Skip_", ToString@skip];
@@ -38,17 +43,32 @@ Load100[name_]:= Import[FileNameJoin@{NotebookDirectory[],dataPath100, name <> "
 (*Serverauslastung*)
 
 
-Show[ListPlot[ {Load1500@"mean-phone-size-all"},
+data1500 = Load1500@"mean-phone-size-all";
+data1500[[All,2]] = data1500[[All,2]]/2;
+data1000 = Load1000@"mean-phone-size-all";
+data1000[[All,2]] = data1500[[All,2]]/2;
+data800 = Load800@"mean-phone-size-all";
+data800[[All,2]] = data1500[[All,2]]/2;
+data400 = Load400@"mean-phone-size-all";
+data400[[All,2]] = data1500[[All,2]]/2;
+data100 = Load100@"mean-phone-size-all";
+data100[[All,2]] = data1500[[All,2]]/2;
+
+
+
+
+
+Show[ListPlot[ data1500,
 {PlotRange->All, PlotStyle -> {Blue, Dashed, Thick}}], 
-ListPlot[ {Load1000@"mean-phone-size-all"},
+ListPlot[data1000,
 {PlotRange->All, PlotStyle -> {Purple, Dashed, Thick}}], 
-ListPlot[ {Load800@"mean-phone-size-all"},
+ListPlot[data800,
 {PlotRange->All, PlotStyle -> {Green, Dashed, Thick}}], 
-ListPlot[ {Load400@"mean-phone-size-all"},
+ListPlot[data400,
 {PlotRange->All, PlotStyle -> {Yellow, Dashed, Thick}}], 
-ListPlot[ {Load100@"mean-phone-size-all"},
+ListPlot[data100,
 {PlotRange->All, PlotStyle -> {Magenta, Dashed, Thick}}], 
-Plot[Evaluate[y = 2], 
+Plot[Evaluate[y = 1], 
 {x, 0, durationSimulation},
 PlotStyle -> {Orange, Dashed, Thick}], 
 PlotRange -> Automatic,

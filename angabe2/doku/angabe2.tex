@@ -650,6 +650,90 @@ Abbildung \ref{fig:MSTVIP1000ALL} zeigt die durchschnittliche Verweildauer aller
 In Abbildung \ref{fig:LittleSystemVIP400} ist der Verlauf der Gleichung \ref{eq:little} über die Simulationszeit aufgeführt. Ab einer Simulationsdauer von ca. $450000s$ schwankt der Wert nur noch um einen Wert von ca. $0,01$. Gegen Ende der Simulation schwankt der Wert um die Nulllinie und weicht am Ende nur noch um ca. $0,002$ ab. Diese sehr geringe Abweichung zeigt, dass das System mit großer Wahrscheinlichkeit eingeschwungen ist. Die Abweichung von $0,002$ ist sehr gering und auf kleinere Rundungsfehler bei der Berechnung zurückzuführen.
 
 \subsubsection{Durchschnittliche Ankunftszeit der Clients: 100}
+Es wird eine Simulation durchgeführt, mit einer durschnittlichen Zwischenankunftszeit von 100 s. Dabei wird zwischen den Einheimischen und den Touristen unterschieden. Die Einheimischen stellen 10 \% der Besucher dar. Da die Einheimischen bevorzugt behandelt werden, ist anzunehmen, dass die durchschnittlichen Verweildauern im System und in der Warteschlange niedriger sind. Wie bereits aus vorherigen Simulationen hervorgegangen ist, laufen die Verweildauern und die Warteschlangenlänge gegen Unendlich. Es ist zu untersuchen, wie sich die Verweildauern für Einheimische verhalten. Die Abbildungen \ref{fig:1_Phone_VIP_100_MeanQueueSize_Tourist} und \ref{fig:1_Phone_VIP_100_MeanQueueSize_Resident} zeigen, dass, sich die durchschnittliche Warteschlangenlänge von Touristen und Einheimischen deutlich unterscheiden. Die durschnittliche Warteschlangenlänge der Einheimischen geht ungefähr gegen 0.1, während die der Touristen gegen unendlich steigt. Die Abbildung \ref{fig:1_Phone_VIP_100_MeanQueueSize_All} verdeutlicht nochmals diesen Zusammenhang. \\
+Ähnlich sieht es auch bei den Verweildauern aus. Die durchschnittliche Wartezeit der Einheimischen beträgt ungefähr 110 s, während die Wartezeit der Touristen gegen unendlich läuft. Dieser Zusammenhang ist in den Abbildungen \ref{fig:1_Phone_VIP_100_MeanQueueTime_Tourist} und \ref{fig:1_Phone_VIP_100_MeanQueueTime_Resident}. Die Abbildung \ref{fig:1_Phone_VIP_100_MeanQueueTime_All} Vergleicht die Wartezeiten miteinander. Es ist logisch zu erklären, dass sich die Wartezeit der Einheimischen auf den wert nahe an 100 s einpendelt. Einheimische werden nur bevorzugt, wenn das Telefon frei ist. Ist das Telefon besetzt, müssen auch die Einheimischen warten. Da die durchschnittliche Telefonierdauer 100 s beträgt, müssen die Einheimischen mindestens diese Zeit abwarten. Der Wert ist etwas größer als 100, da die Einheimischen auch warten müssen, wenn sich weitere Einheimische in der Warteschlange befinden.\\
+Interessant ist die Tatsache, dass die Wartezeit der Einheimischen bis ca. 100.000 s Simulationsdauer nahezu 0 beträgt und danach Sprunghaft ansteigt. Die ist damit zu erklären, dass ab dieser Zeit die Warteschlange sprunghaft ansteigt wie in Abbildung \ref{fig:1_Phone_VIP_100_QueuePlot_All} zu sehen ist. Auch die Betrachtung der Telefonauslastung bestätigt diese Vermutung. Die Abbildung \ref{fig:1_Phone_VIP_100_WorkLoad} zeigt, wie sich die Auslastung zunächst verringert und nach 100.000 s Simulationsdauer ansteigt. \\
+Die Abbildung \ref{fig:1_Phone_VIP_100_MeanSystemTime_Resident} zeigt, dass sich die durchschnittliche Systemzeit der Einheimischen bei ungefähr 200 einpendelt. Das ist logisch, da sich die Systemzeit aus der Wartezeit und der Telefonierzeit zusammensetzt. Muss ein Einheimischer im Schnitt 100 s warten und 100 s telefonieren, dann verbleibt er im Schnitt 200 s im System.\\
+Da Einheimische bevorzugt behandelt werden und einen Anteil von 10 \% der Besucher ausmachen, kommen die Einheimischen durschnittlich alle 1000 s an. Dies könnte zum Irrtum führen, dass die Verweildauern der Einheimischen ähnlich zu betrachten sind, als würde man die eine Simulation ohne Bevorzugung für eine Ankunftszeit von 1000 s durchführen. Die ist jedoch nicht richtig. Obwohl die Einheimischen bevorzugt werden, ist ihre Wartezeit direkt von der Telefonauslastung abhängig. Ist das Telefon voll Ausgelastet, müssen die Einheimischen im Schnitt 100 s warten. Also rund das zehnfache, als die Werte in Abbildung \ref{fig:meanQueueTime1000}. Anders würde das Ergebnis aussehen, wenn Touristen ihr Telefonat unterbrechen müssten, sobald ein Einheimischer die Warteschlange betritt. 
+\subsubsection{Eingeschwungener Zustand \ Littles Gesetz}
+Die Abbildung \ref{fig:1_Phone_VIP_100_Little} zeigt den Verlauf der Gleichung \ref{eq:little}. Es ist deutlich zu erkennen, dass es noch große Schwankungen gibt und das System sich in einem nicht stabilen Zustand befindet. Es ist anzunehmen, dass bei einer durschnittlichen Zwischenankunftszeit die gleich der durchschnittlichen Telefonierdauer ist, sich das System nicht in einem stabilen Zustand befinden kann.
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{abbildungen/1_Phone_VIP/Arrival_100_Serve_100_dur_1000000_Skip_0/MeanQueueSizeTourist.pdf}
+	\caption{Durchschnittliche Warteschlangenlänge der Touristen bei einer Zwischenankunftszeit von 100 s}
+	\label{fig:1_Phone_VIP_100_MeanQueueSize_Tourist}
+\end{figure} 
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{abbildungen/1_Phone_VIP/Arrival_100_Serve_100_dur_1000000_Skip_0/MeanQueueSizeResident.pdf}
+	\caption{Durchschnittliche Warteschlangenlänge der Einheimischen bei einer Zwischenankunftszeit von 100 s}
+	\label{fig:1_Phone_VIP_100_MeanQueueSize_Resident}
+\end{figure} 
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{abbildungen/1_Phone_VIP/Arrival_100_Serve_100_dur_1000000_Skip_0/MeanQueueSizeTouristAndResident.pdf}
+	\caption{Durchschnittliche Warteschlangenlänge der Einheimischen und Touristen bei einer Zwischenankunftszeit von 100 s}
+	\label{fig:1_Phone_VIP_100_MeanQueueSize_All}
+\end{figure} 
+
+
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{abbildungen/1_Phone_VIP/Arrival_100_Serve_100_dur_1000000_Skip_0/MeanQueueTimeTourist.pdf}
+	\caption{Durchschnittliche Wartezeit der Touristen bei einer Zwischenankunftszeit von 100 s}
+	\label{fig:1_Phone_VIP_100_MeanQueueTime_Tourist}
+\end{figure} 
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{abbildungen/1_Phone_VIP/Arrival_100_Serve_100_dur_1000000_Skip_0/MeanQueueTimeResident.pdf}
+	\caption{Durchschnittliche Wartezeit der Einheimischen bei einer Zwischenankunftszeit von 100 s}
+	\label{fig:1_Phone_VIP_100_MeanQueueTime_Resident}
+\end{figure} 
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{abbildungen/1_Phone_VIP/Arrival_100_Serve_100_dur_1000000_Skip_0/MeanQueueTimeTouristAndResident.pdf}
+	\caption{Durchschnittliche Wartezeit der Einheimischen und Touristen bei einer Zwischenankunftszeit von 100 s}
+	\label{fig:1_Phone_VIP_100_MeanQueueTime_All}
+\end{figure} 
+
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{abbildungen/1_Phone_VIP/Arrival_100_Serve_100_dur_1000000_Skip_0/MeanSystemTimeResident.pdf}
+	\caption{Durchschnittliche Systemzeit der Einheimischen bei einer Zwischenankunftszeit von 100 s}
+	\label{fig:1_Phone_VIP_100_MeanSystemTime_Resident}
+\end{figure} 
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{abbildungen/1_Phone_VIP/Arrival_100_Serve_100_dur_1000000_Skip_0/QueueStepPlotAllFiltered.pdf}
+	\caption{Warteschlange über den gesamten Simulationsverlauf bei einer Zwischenankunftszeit von 100 s}
+	\label{fig:1_Phone_VIP_100_QueuePlot_All}
+\end{figure} 
+
+
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{abbildungen/1_Phone_VIP/Arrival_100_Serve_100_dur_1000000_Skip_0/MeanPhoneWorkload.pdf}
+	\caption{Durchschnittliche Auslastung des Telefons bei einer Zwischenankunftszeit von 100 s}
+	\label{fig:1_Phone_VIP_100_WorkLoad}
+\end{figure} 
+
+
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{abbildungen/1_Phone_VIP/Arrival_100_Serve_100_dur_1000000_Skip_0/LittleSystem.pdf}
+	\caption{Darstellung der Differenz: $\lambda * Ws - Ls$ über die Simulationszeit (Little Theorem) bei einer Zwischenankunftszeit von 100 s}
+	\label{fig:1_Phone_VIP_100_Little}
+\end{figure} 
 
 \subsection{Modell \glqq Zusätzliches VIP Telefon\grqq} 
 Im dritten Betriebsmodus wird zu einem Telefon wie im Betriebsmodus 1 ein VIP Telefon hinzugefügt. Wie vorhin werden auch hier die drei verschiedenen mittleren Ankunftszeiten betrachtet. In diesem Szenario werden die Formeln für M/M/2 Warteschlangenmodelle verwendet. 

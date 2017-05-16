@@ -822,7 +822,7 @@ Die Abbildung \ref{fig:1_Phone_VIP_100_Little} zeigt den Verlauf der Gleichung \
 Im dritten Betriebsmodus wird zu einem Telefon wie im Betriebsmodus 1 ein VIP Telefon hinzugefügt. Wie vorhin werden auch hier die drei verschiedenen mittleren Ankunftszeiten betrachtet. In diesem Szenario werden die Formeln für M/M/2 Warteschlangenmodelle verwendet. 
 \subsubsection{Formeln für M/M/2 Warteschlangenmodelle}
 \label{Formeln2}
-Für die theoretischen Größen und Zeiten des Systems bzw. der Warteschlange werden folgende Formeln genutzt.
+Für die theoretischen Größen und Zeiten des Systems bzw. der Warteschlange werden folgende Formeln genutzt [3]. Dabei steht P0 für die Wahrscheinlichkeit, dass sich keine Kunden im System befinden.
 \begin{equation}
 P0=(1+\rho+\rho^2/(2-\rho))^{-1}
 \end{equation}
@@ -909,7 +909,140 @@ Dieser Wert schwangt über die Simulationsdauer um bis zu $0,005$. Da die Differ
 Alle vier ermittelten Durchschnittswerte liegen, ab einer Simulationsdauer von ca. $400000s$ sehr nah an den Werten, welche für ein eingeschwungenes Warteschlangensystem errechnet wurden. Da auch das in Abbildung  \ref{fig:Little3System1000} ersichtliche Ergebnis der Differenz zeigt, dass das System, abgesehen vom erläuterten systematischen Fehler, ab einer Simulationszeit von ca. $400000s$ der für ein eingeschwungenes System erforderliche Wert von $0$ näherungsweise erreicht wird. Es kann somit davon ausgegangen werden, dass der Steady State (eingeschwungene Zustand) bei dieser Simulationsdauer erreicht wurde.
 
 \subsubsection{Durchschnittliche Ankunftszeit der Clients: 400}
+\paragraph{Theoretische Erwartungswerte laut M/M/1 Warteschlangenmodell}
+\\
+Bei einer durchschnittlichen Zwischenankunftszeit von $400$ ($\lambda=\frac{1}{400}$, $\mu=\frac{1}{100}$)ergeben sich, basierend auf den in Abschnitt \ref{Formeln2} aufgeführten Formeln, folgende Erwartungswerte:
+\begin{equation}
+Ls=0,252467
+\end{equation}
+\begin{equation}
+Lq=0,00396825
+\end{equation}
+\begin{equation}
+Ws=100,987
+\end{equation}
+\begin{equation}
+Wq=1,5873
+\end{equation}
+
+\paragraph{Verwendung der implementierten Java-Simulation, Berechnung in Java}
+\label{JavaTwoPhones400}
+\\
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{abbildungen/2_Phone_VIP/Arrival_400_Serve_100_dur_1000000_Skip_0/MeanSystemSizeAll.pdf}
+	\caption{Durchschnittliche Anzahl an Kunden im System, MeanAr = $400s$}
+	\label{fig:mean3SystemSize400}
+\end{figure}
+
+Abbildung \ref{fig:mean3SystemSize400} zeigt die durchschnittliche Anzahl an Kunden im System an. Bereits ab einer Simulationszeit von ca $100000s$ nähert diese immer näher an den erwarteten Wert an. Der Erwartungswert von $0,252467$ wird dieses mal sehr gut genähert. Die minimale Abweichung lässt anzunehmen, dass die Systemgröße für dieses Szenario plausibel ist.
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{abbildungen/2_Phone_VIP/Arrival_400_Serve_100_dur_1000000_Skip_0/MeanSystemTimeAll.pdf}
+	\caption{Durchschnittliche Verweildauer der Kunden im System, MeanAr = $400s$}
+	\label{fig:mean3SystemTime400}
+\end{figure}
+
+Die Abbildung \ref{fig:mean3SystemTime400} zeigt, dass die Verweildauer im System sehr nah an dem erwarteten Wert von $100,987$ liegt. In der Simulation wird dieser Wert mit einer fast unerkennbaren Abweichung erreicht.
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{abbildungen/2_Phone_VIP/Arrival_400_Serve_100_dur_1000000_Skip_0/MeanQueueSizeAll.pdf}
+	\caption{Durchschnittliche Warteschlangenlänge, MeanAr = $400s$}
+	\label{fig:mean3QueueSize400}
+\end{figure}
+
+Auch bei der Betrachtung der in Abbildung \ref{fig:mean3QueueSize400} nähert sich der Wert immer weiter der theoretischen Warteschlangenlänge von $0,00396825$. Jedoch lässt sich noch nicht erkennen, ob bei dieser Laufzeit der Wert noch weiter steigt oder nicht.
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{abbildungen/2_Phone_VIP/Arrival_400_Serve_100_dur_1000000_Skip_0/MeanQueueTimeAll.pdf}
+	\caption{Durchschnittliche Verweildauer in der Warteschlange , MeanAr = $400s$}
+	\label{fig:mean3QueueTime400}
+\end{figure} 
+
+Wie bereits bei der Untersuchung der mittleren Warteschlangenlänge ist die ermittelte durchschnittliche Verweildauer, wie in Abbildung \ref{fig:mean3QueueTime400} zu sehen ist in der Warteschlange sehr nah an dem erwarteten Wert von $1,5873$. Auch hier ist nicht bekannt ob sich der Wert über einen längeren Zeitraum genau so verhält.
+\paragraph{Validierung der Simulation}
+\\
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{abbildungen/2_Phone_VIP/Arrival_400_Serve_100_dur_1000000_Skip_0/LittleSystem.pdf}
+	\caption{Darstellung der Differenz: $\lambda * Ws - Ls$ über die Simulationszeit (Little Theorem)}
+	\label{fig:Little3System400}
+\end{figure} 
+
+In Abbildung \ref{fig:Little3System400} ist der Verlauf der Gleichung \ref{eq:little} über die Simulationszeit aufgeführt. 
+Dieser Wert schwangt über die Simulationsdauer um bis zu $0,005$. Da die Differenz zum Erwartungswert auch in diesem Betriebsmodus sehr gering ist, liegt die Ursache für diese Abweichung vermutlich in Ungenauigkeiten bei der Berechnung der Werte. Betrachtet man diese Abbildung mit den vorherigen, dann weichen diese Aussagen nicht voneinander ab.
+
+Alle vier ermittelten Durchschnittswerte liegen, ab einer Simulationsdauer von ca. $400000s$ sehr nah an den Werten, welche für ein eingeschwungenes Warteschlangensystem errechnet wurden. Da auch das in Abbildung  \ref{fig:Little3System400} ersichtliche Ergebnis der Differenz zeigt, dass das System, abgesehen vom erläuterten systematischen Fehler, ab einer Simulationszeit von ca. $400000s$ der für ein eingeschwungenes System erforderliche Wert von $0$ näherungsweise erreicht wird. Es kann somit davon ausgegangen werden, dass der Steady State (eingeschwungene Zustand) bei dieser Simulationsdauer erreicht wurde.
+
 \subsubsection{Durchschnittliche Ankunftszeit der Clients: 100}
+\paragraph{Theoretische Erwartungswerte laut M/M/1 Warteschlangenmodell}
+\\
+Bei einer durchschnittlichen Zwischenankunftszeit von $100$ ($\lambda=\frac{1}{100}$, $\mu=\frac{1}{100}$)ergeben sich, basierend auf den in Abschnitt \ref{Formeln2} aufgeführten Formeln, folgende Erwartungswerte:
+\begin{equation}
+Ls=1,33333
+\end{equation}
+\begin{equation}
+Lq=0,333333
+\end{equation}
+\begin{equation}
+Ws=133,333
+\end{equation}
+\begin{equation}
+Wq=33,3333
+\end{equation}
+
+\paragraph{Verwendung der implementierten Java-Simulation, Berechnung in Java}
+\label{JavaTwoPhones100}
+\\
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{abbildungen/2_Phone_VIP/Arrival_100_Serve_100_dur_1000000_Skip_0/MeanSystemSizeAll.pdf}
+	\caption{Durchschnittliche Anzahl an Kunden im System, MeanAr = $100s$}
+	\label{fig:mean3SystemSize100}
+\end{figure}
+
+In Abbildung \ref{fig:mean3SystemSize100} kann man erkennen, dass bei zwei Telefonen die durchschnittliche Systemgröße sich sehr gut an den erwarteten Wert annähert. Hingegen der vorherigen Betriebsmodi lässt die Abbildung auf ein eingeschwungenes System schließen. 
+
+Da durch zwei Telefone die Service Rate verdoppelt wird, ist in dieser Simulation $\mu$ ungleich $\lambda$. Schließlich ist das erreichen eines Steady State nicht unplausibel.
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{abbildungen/2_Phone_VIP/Arrival_100_Serve_100_dur_1000000_Skip_0/MeanSystemTimeAll.pdf}
+	\caption{Durchschnittliche Verweildauer der Kunden im System, MeanAr = $100s$}
+	\label{fig:mean3SystemTime100}
+\end{figure}
+
+Ein ähnlicher Schluss lässt sich ziehen bei Betrachtung der mittleren Systemzeit in Abbildung \ref{fig:mean3SystemTime100}. Auch hier wird der erwartete Wert von $133,333$ fast erreicht.
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{abbildungen/2_Phone_VIP/Arrival_100_Serve_100_dur_1000000_Skip_0/MeanQueueSizeAll.pdf}
+	\caption{Durchschnittliche Warteschlangenlänge, MeanAr = $100s$}
+	\label{fig:mean3QueueSize100}
+\end{figure}
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{abbildungen/2_Phone_VIP/Arrival_100_Serve_100_dur_1000000_Skip_0/MeanQueueTimeAll.pdf}
+	\caption{Durchschnittliche Verweildauer in der Warteschlange , MeanAr = $100s$}
+	\label{fig:mean3QueueTime100}
+\end{figure} 
+
+In den Abbildungen \ref{fig:mean3QueueSize100} und \ref{fig:mean3QueueTime100}, welche die Größe und Verweildauer der Warteschlangen zeigen, lässt sich ein Einschwingen des Systems ab ca. $200000s$ vermuten. Da diese Werte bis zum Ende der Simulation kaum schwanken, kann davon ausgegangen werden, dass sie es nicht bei einer längeren Simulationsdauer tun würden.
+
+\paragraph{Validierung der Simulation}
+\\
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{abbildungen/2_Phone_VIP/Arrival_100_Serve_100_dur_1000000_Skip_0/LittleSystem.pdf}
+	\caption{Darstellung der Differenz: $\lambda * Ws - Ls$ über die Simulationszeit (Little Theorem)}
+	\label{fig:Little3System100}
+\end{figure} 
+
+Anders als in den vorherigen Ankunftszeiten des Betriebsmodus 3, wie in Abbildung \ref{fig:Little3System100} zu sehen ist, liegt der Wert über die gesamte Simulationsdauer über $0$. Zusätzlich schwankt der Wert bis zu einer Simulationszeit von ca. $225000s$ um $0,05$ über dem Erhofften. Ab dem Zeitpunkt von $400000s$ geht dieses Abweichung auf $0,03$ herunter, ist aber im Vergleich zu den vorherigen Ankunftszeiten signifikant hoch. Folglich kann von nur einer sehr schwachen Aussagekraft der Messung und der Simulation ausgegangen werden. Ein Steady State kann nicht erwartet werden.
 
 \section{Ausblick und Fazit}
 \subsection{Abweichung von theoretischen Werten}
@@ -938,4 +1071,5 @@ Darüber hinaus wurde eine Simulation mit einer Simulationsdauer von $10^9s$, wa
 %\input{References}
 \bibliography{Bibliographie} 
 \bibliographystyle{plain}
+[3] faculty.ksu.edu.sa/9766/OR372/Lec13\_MMs\_Queueing\%20System2.pdf
 \end{document}

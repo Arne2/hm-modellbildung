@@ -1044,6 +1044,19 @@ In den Abbildungen \ref{fig:mean3QueueSize100} und \ref{fig:mean3QueueTime100}, 
 
 Anders als in den vorherigen Ankunftszeiten des Betriebsmodus 3, wie in Abbildung \ref{fig:Little3System100} zu sehen ist, liegt der Wert über die gesamte Simulationsdauer über $0$. Zusätzlich schwankt der Wert bis zu einer Simulationszeit von ca. $225000s$ um $0,05$ über dem Erhofften. Ab dem Zeitpunkt von $400000s$ geht dieses Abweichung auf $0,03$ herunter, ist aber im Vergleich zu den vorherigen Ankunftszeiten signifikant hoch. Folglich kann von nur einer sehr schwachen Aussagekraft der Messung und der Simulation ausgegangen werden. Ein Steady State kann nicht erwartet werden.
 
+\subsubsection{Vergleich zwei Telefone mit einem}
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{abbildungen/2_Phone_VIP/Auslastung_Vegleich/MeanPhoneWorkload.pdf}
+	\caption{Darstellung der Telefonauslastung für verschiedene Ankunftszeiten}
+	\label{fig:2_Phone_Workload_Vergleich}
+\end{figure}
+
+Betrachtet man nun die Auslastung der beiden Telefone in Abbildung \ref{fig:2_Phone_Workload_Vergleich} fällt auf, dass die über die Simulationszeit die Last nicht besonders hoch ist. In diesem Graph ist die Linie bei $2$, da auch die Anzahl der Telefone verdoppelt hat. Nur bei einer Ankunftsrate von $100s$ übersteigt die Auslastung des Systems den Wert $1$. Daher lässt sich schließen, dass in den anderen Szenarien das zweite Telefon überflüssig erscheint.
+
+Wenn man jedoch Abbildung \ref{fig:1_Phone_Workload_Vergleich} betrachtet, dann ist das System bei einer Ankunftsrate von $100s$ komplett ausgelastet.
+
 \section{Ausblick und Fazit}
 \subsection{Abweichung von theoretischen Werten}
 Im Zuge der Auswertung der durch die Simulation erzeugten Werte lässt sich beim Vergleich mit den theoretisch errechneten Werten feststellen, dass diese nie exakt erreicht wurden. Die Werte der Simulation nähern sich mit zunehmender Simulationsdauer stark an die theoretischen Werte an, doch es bleibt immer eine Abweichung bestehen. Diese Tatsache kann durch folgenden Gründe erklärt werden: \\

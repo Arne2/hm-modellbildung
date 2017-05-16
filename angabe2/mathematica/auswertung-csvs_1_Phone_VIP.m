@@ -16,7 +16,7 @@ Simulate[args_] := If[
 (*Falls neue Simulation ansteuern wert auf true setzen *)
 (*Falls wert auf false, dann wird keine neue Simulation durchgef\[UDoubleDot]hrt, sondern alte Daten herangezoogen *)
 startNewSimulation = false;
-meanArrivalTime = 1000;
+meanArrivalTime = 400;
 meanServeTime = 100;
 durationSimulation = 1000000;
 vip = 10;
@@ -116,7 +116,7 @@ AxesLabel->{"t","mean queue size all"}]
 Export[FileNameJoin@{outputDir,"MeanQueueSizeAll.pdf"},%];
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*Mean System Size*)
 
 
@@ -166,17 +166,17 @@ AxesLabel->{"t","mean queue time resident"}]
 Export[FileNameJoin@{outputDir,"MeanQueueTimeResident.pdf"},%];
 
 
-Show[ListPlot[ {Load@"mean-queue-size-resident"},
+Show[ListPlot[ {Load@"mean-queue-time-resident"},
 {PlotRange->All, PlotStyle -> {Blue, Dashed, Thick}}], 
-ListPlot[ {Load@"mean-queue-size-normal"},
+ListPlot[ {Load@"mean-queue-time-normal"},
 {PlotRange->All, PlotStyle -> {Purple, Dashed, Thick}}],
-{AxesLabel->{"t","mean queue size"}, PlotRange->All},
+{AxesLabel->{"t","mean queue time"}, PlotRange->All},
  Epilog -> Inset[Column[{ 
       PointLegend[{Blue}, {" resident"}],
       PointLegend[{Purple}, {" tourist"}]
       }], Scaled[{0.8, 0.65}]]
  (* End of the Legends *)]
-Export[FileNameJoin@{outputDir,"MeanQueueSizeTouristAndResident.pdf"},%];
+Export[FileNameJoin@{outputDir,"MeanQueueTimeTouristAndResident.pdf"},%];
 
 
 Show[ListPlot[ {Load@"mean-queue-time-all"},

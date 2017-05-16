@@ -445,6 +445,24 @@ Im zweiten Betriebsmodus werden die ankommenden Kunden unterschieden, ob es sich
 \subsubsection{Annahme}
 Es wird angenommen, dass die im Abschnitt \ref{FormenlnMM1} aufgeführten Formeln für den Betriebsmodus 1 auch für diesen Betriebsmodus gelten. Da sich im Shop weiterhin nur ein Telefon befindet, ist es für die Berechnung der Durchschnittswerte für das System (durchschnittliche Anzahl an Kunden im System, durchschnittliche Warteschlangenlänge, durchschnittliche Zeit im System, durchschnittliche Zeit in der Warteschlange) irrelevant, ob bestimmte Kunden bevorzugt werden. Beispielsweise die durchschnittliche Zeit in der Warteschlange, welche bei den VIP durch die Bevorzugung geringer ist, ist bei den Touristen dementsprechend höher, sodass sie insgesamt gleich der Zeit im Betriebsmodus 1 ist. 
 \subsubsection{Durchschnittliche Ankunftszeit der Clients: 1000}
+\paragraph{Theoretische Erwartungswerte laut M/M/1 Warteschlangenmodell}
+\\
+Bei einer durchschnittlichen Zwischenankunftszeit von $1000s$ ($\lambda=\frac{1}{1000}$, $\mu=\frac{1}{100}$)ergeben sich, basierend auf den in Abschnitt \ref{Formeln} aufgeführten Formeln, folgende Erwartungswerte:
+\begin{equation}
+Ls=0,111111
+\end{equation}
+\begin{equation}
+Lq=0,0111111
+\end{equation}
+\begin{equation}
+Ws=111,111
+\end{equation}
+\begin{equation}
+Wq=11,1111
+\end{equation}
+\paragraph{Verwendung der implementierten Java-Simulation, Berechnung in Java}
+\label{JavaVIPPhone1000}
+\\
 \begin{figure}[htpb]
 	\centering
 	\includegraphics[width=0.8\textwidth]{abbildungen/1_Phone_VIP/Arrival_1000_Serve_100_dur_1000000_Skip_0/MeanQueueSizeAll.pdf}
@@ -459,82 +477,178 @@ Es wird angenommen, dass die im Abschnitt \ref{FormenlnMM1} aufgeführten Formel
 	\label{fig:MQSVIP1000VGL}
 \end{figure}
 
-Abbildung \ref{fig:MQSVIP1000ALL} zeigt die durchschnittliche Warteschlangenlänge. Im Vergleich dazu zeigt Abbildung \ref{fig:MQSVIP1000VGL} die Zusammensetzung der Warteschlangenlänge aus den zwei unterschiedenen Gruppen. Es wird deutlich, dass die Wartezeit der Touristen deutlich länger ist als die der VIP. 
-
-\begin{figure}[!htb]
-	\centering
-	\begin{minipage}{.5\textwidth}
-		\centering
-		\includegraphics[width=\textwidth]{abbildungen/1_Phone_VIP/Arrival_1000_Serve_100_dur_1000000_Skip_0/MeanQueueTimeResident.pdf}
-		\caption{Durchschnittliche Verweildauer der VIP in der Warteschlange , MeanAr = $1000s$}
-		\label{fig:MQTVIP1000}
-	\end{minipage}%
-	\begin{minipage}{0.5\textwidth}
-		\centering
-		\includegraphics[width=\textwidth]{abbildungen/1_Phone_VIP/Arrival_1000_Serve_100_dur_1000000_Skip_0/MeanQueueTimeTourist.pdf}
-		\caption{Durchschnittliche Verweildauer der Touristen in der Warteschlange , MeanAr = $1000s$}
-		\label{fig:MQTTOURI1000}
-	\end{minipage}
-\end{figure}
-
-Die Abbildungen \ref{fig:MQTVIP1000} und \ref{fig:MQTTOURI1000} zeigen die durchschnittliche Verweildauer in der Warteschlange der VIP und Touristen. Wiederum ist das erwartete Verhalten zu sehen, dass sich die VIP durchschnittlich deutlich kürzere Zeit in der Warteschlange befinden als die Touristen.
+Abbildung \ref{fig:MQSVIP1000ALL} zeigt die durchschnittliche Warteschlangenlänge. Im Vergleich dazu zeigt Abbildung \ref{fig:MQSVIP1000VGL} die Zusammensetzung der Warteschlangenlänge aus den zwei unterschiedenen Gruppen. Es wird deutlich, dass die Wartezeit der Touristen deutlich länger ist als die der VIP, was aufgrund der Bevorzugung plausibel ist. Die durchschnittliche Warteschlangenlänge insgesamt liegt gegen Ende der Simulation um ca. $0,004$ über dem erwarteten Wert von $0.111111$ (gelbe Linie). Doch neben der Bevorzugung spielt auch der Anteil der Einwohner an der insgesamten Kundenanzahl (lediglich $0,1$) eine Rolle. Es kommen somit deutlich mehr Touristen in den Telefonshop als Einwohner.
 
 \begin{figure}[htpb]
 	\centering
-	\includegraphics[width=0.8\textwidth]{abbildungen/1_Phone_VIP/Arrival_1000_Serve_100_dur_1000000_Skip_0/MeanSystemSizeAll.pdf}
-	\caption{Durchschnittliche Anzahl an Kunden im System, MeanAr = $1000s$}
-	\label{fig:MSSVIP1000ALL}
+	\includegraphics[width=0.8\textwidth]{abbildungen/1_Phone_VIP/Arrival_1000_Serve_100_dur_1000000_Skip_0/MeanQueueTimeAll.pdf}
+	\caption{Durchschnittliche Verweildauer in der Warteschlange, MeanAr = 1000}
+	\label{fig:MQTVIP1000ALL}
 \end{figure} 
 
 \begin{figure}[htpb]
 	\centering
-	\includegraphics[width=0.8\textwidth]{abbildungen/1_Phone_VIP/Arrival_1000_Serve_100_dur_1000000_Skip_0/MeanSystemSizeTouristAndResident.pdf}
-	\caption{Durchschnittliche Anzahl an Kunden im System, MeanAr = $100s$}
-	\label{fig:MSSVIP1000VGL}
+	\includegraphics[width=0.8\textwidth]{abbildungen/1_Phone_VIP/Arrival_1000_Serve_100_dur_1000000_Skip_0/MeanQueueTimeTouristAndResident.pdf}
+	\caption{Durchschnittliche Verweildauer der Touristen und Einwohner in der Warteschlange , MeanAr = $1000s$}
+	\label{fig:MQTVIP1000VGL}
 \end{figure}
 
-Abbildung \ref{fig:MSSVIP1000ALL} zeigt die durchschnittliche Anzahl an Kunden im System insgesamt. Im Vergleich dazu zeigt Abbildung \ref{fig:MSSVIP1000VGL} die Zusammensetzung aus den zwei unterschiedenen Gruppen. Es wird wiederum deutlich, dass sich durchschnittliche mehr Touristen im System befinden, als VIP. Eine Ursache hierfür ist die bereits erwähnte Bevorzugung der VIP. Doch auch der Anteil der VIP an der insgesamten Kundenanzahl (lediglich $0,1$) erklärt diese Abweichung. Es kommen somit deutlich mehr Touristen in den Telefonshop als VIP.
-F\\
-E\\
-H\\
-L\\
-T\\
-Mean System Time
-F
-E
-H
-L
-T
+In der Abbildung \ref{fig:MQTVIP1000ALL} sieht man die durchschnittliche Wartezeit aller Kunden insgesamt. Im Vergleich dazu wird in der Abbildung \ref{fig:MQTVIP1000VGL} zwischen Touristen und Einwohnern unterschieden. Durch die Bevorzugung ist auch hier der Wert der Einwohner deutlich geringer als der der Touristen. Auffallend ist ebenfalls, dass bei Simulationsdauer von ca. $680000s$ die Anzahl der wartenden Einwohner leicht ansteigt. In etwa zur gleichen Zeit steigt die durchschnittliche Wartezeit der Einwohner ebenfalls an. Da jedoch durch die geringe Auslastung des Telefons die insgesamte Wartezeit beider Gruppen sehr gering ist, scheint die durchschnittliche Wartezeit der Einwohner zu diesem Zeitpunkt deutlich drastischer anzusteigen als die Anzahl. Dies liegt jedoch lediglich an der feineren Skalierung und wäre auch nicht plausibel. 
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{abbildungen/1_Phone_VIP/Arrival_1000_Serve_100_dur_1000000_Skip_0/MeanSystemTimeAll.pdf}
+	\caption{Durchschnittliche Verweildauer der Kunden im System, MeanAr = $1000s$}
+	\label{fig:MSTVIP1000ALL}
+\end{figure} 
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{abbildungen/1_Phone_VIP/Arrival_1000_Serve_100_dur_1000000_Skip_0/MeanSystemTimeTouristAndResident.pdf}
+	\caption{Durchschnittliche Verweildauer der Einwohner und Touristen im System, MeanAr = $1000s$}
+	\label{fig:MSTVIP1000VGL}
+\end{figure}
+
+Abbildung \ref{fig:MSTVIP1000ALL} zeigt die durchschnittliche Verweildauer aller Kunden im System insgesamt. Im Vergleich dazu zeigt Abbildung \ref{fig:MSTVIP1000VGL} die Zusammensetzung aus den zwei unterschiedenen Gruppen. Die durchschnittliche Verweildauer insgesamt liegt wiederum im Bereich des Erwartungswertes (Abweichung ca. $10s$). Interessant ist hingegen die Aufteilung zwischen den Touristen und Einwohnern. Obwohl die Werte für die Verweildauer in der Warteschlange und auch für die Warteschlangenlänge bei den Einwohnern deutlich niedriger waren, als bei den Touristen, liegen die Werte in diesem Fall, vor allem gegen Ende der Simulationszeit, sehr nah beieinander. Die Ursache hierfür liegt in der geringen Auslastung des Telefons. Durch die durchschnittliche Telefonierdauer von $100s$ liegt die durchschnittliche Verweildauer im System ohne Wartezeit ebenfalls bei $100s$. Da auch die bevorzugten Einwohner warten müssen, bis ein belegtes Telefon wieder frei ist, bevor sie telefonieren können, liegt der Wert hier entwas über $100s$. Da jedoch das Telefon nur gering ausgelastet ist, müssen auch die Touristen durchschnittlich nur eine sehr kurze Zeit warten und haben daher auch nur eine durchschnittliche Verweildauer im System von ca. $118s$. 
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{abbildungen/1_Phone_VIP/Arrival_400_Serve_100_dur_1000000_Skip_0/QueueStepPlotAllFiltered.pdf}
+	\caption{Warteschlangenlänge insgesamt (gefiltert), MeanAr = $400s$}
+	\label{fig:QSPALL400}
+\end{figure}
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{abbildungen/1_Phone_VIP/Arrival_400_Serve_100_dur_1000000_Skip_0/QueueStepPlotTouristFiltered.pdf}
+	\caption{Warteschlangenlänge der Touristen (gefiltert), MeanAr = $400s$}
+	\label{fig:QSPTOURI400}
+\end{figure}
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{abbildungen/1_Phone_VIP/Arrival_400_Serve_100_dur_1000000_Skip_0/QueueStepPlotResidentFiltered.pdf}
+	\caption{Warteschlangenlänge der Einwohner (gefiltert), MeanAr = $400s$}
+	\label{fig:QSPVIP400}
+\end{figure}
+
+Die Abbildungen \ref{fig:QSPALL1000}, \ref{fig:QSPTOURI1000} und \ref{fig:QSPVIP1000} zeigen die absoluten Warteschlangenlängen zu den unterschiedlichen Systemzeiten. Über die gesamte Simulationszeit ist die maximal auftretende Warteschlangenlänge lediglich $5$. Es warten jedoch, wie Abbildung \ref{fig:QSPVIP1000} zeigt zu keinem Zeitpunkt zwei Einwohner gleichzeitig. Dies belegt die geringe durchschnittliche Verweildauer der Einwohner im System und in der Warteschlange.
+
+\paragraph{Validierung der Simulation}
+\\
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{abbildungen/1_Phone_VIP/Arrival_1000_Serve_100_dur_1000000_Skip_0/LittleSystem.pdf}
+	\caption{Darstellung der Differenz: $\lambda * Ws - Ls$ über die Simulationszeit (Little Theorem)}
+	\label{fig:LittleSystemVIP1000}
+\end{figure}
+
+In Abbildung \ref{fig:LittleSystemVIP1000} ist der Verlauf der Gleichung \ref{eq:little} über die Simulationszeit aufgeführt. Ab einer Simulationsdauer von ca. $250000s$ schwankt der Wert nur noch um einen Wert von ca. $0,005$. Gegen Ende der Simulation steigt der Wert in Richtung Nulllinie an und liegt am Ende bei ca. $-0,001$. Diese sehr geringe Abweichung zeigt, dass das System mit großer Wahrscheinlichkeit eingeschwungen ist. Die Abweichung von $0,001$ ist sehr gering und auf kleinere Rundungsfehler bei der Berechnung zurückzuführen.
+
+
+
+
+\subsubsection{Durchschnittliche Ankunftszeit der Clients: 400}
+\paragraph{Theoretische Erwartungswerte laut M/M/1 Warteschlangenmodell}
+\\
+Bei einer durchschnittlichen Zwischenankunftszeit von $400s$ ($\lambda=\frac{1}{400}$, $\mu=\frac{1}{100}$)ergeben sich, basierend auf den in Abschnitt \ref{Formeln} aufgeführten Formeln, folgende Erwartungswerte:
+\begin{equation}
+Ls=0,333333
+\end{equation}
+\begin{equation}
+Lq=0,0833333
+\end{equation}
+\begin{equation}
+Ws=133,333
+\end{equation}
+\begin{equation}
+Wq=33,3333
+\end{equation}
+
+\paragraph{Verwendung der implementierten Java-Simulation, Berechnung in Java}
+\label{JavaVIPPhone400}
+\\
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{abbildungen/1_Phone_VIP/Arrival_400_Serve_100_dur_1000000_Skip_0/MeanQueueSizeAll.pdf}
+	\caption{Durchschnittliche Warteschlangenlänge, MeanAr = 400}
+	\label{fig:MQSVIP400ALL}
+\end{figure} 
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{abbildungen/1_Phone_VIP/Arrival_400_Serve_100_dur_1000000_Skip_0/MeanQueueSizeTouristAndResident.pdf}
+	\caption{Durchschnittliche Warteschlangenlängen von Touristen und VIP, MeanAr = $400s$}
+	\label{fig:MQSVIP400VGL}
+\end{figure}
+
+Abbildung \ref{fig:MQSVIP400ALL} zeigt die durchschnittliche Warteschlangenlänge. Im Vergleich dazu zeigt Abbildung \ref{fig:MQSVIP400VGL} die Zusammensetzung der Warteschlangenlänge aus den zwei unterschiedenen Gruppen. Wie bei einer durchschnittlichen Zwischenankunftszeit von $1000s$, fällt auch hier auf, dass sich deutlich weniger Einheimische in der Warteschlange befinden als Touristen. Beide Werte sind jedoch höher als bei einer durchschnittlichen Zwischenankunftszeit von $1000s$, was aufgrund der höheren Auslastung des Telefons plausibel ist. Der Wert von beiden Gruppen zusammengenommen schwankt um den erwarteten Wert von $0,0833333$ und nähert sich diesem gegen Ende der Simulation immer weiter an. Am Ende liegt eine Abweichung von ca. $0,007$ vor.
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{abbildungen/1_Phone_VIP/Arrival_400_Serve_100_dur_1000000_Skip_0/MeanQueueTimeAll.pdf}
+	\caption{Durchschnittliche Verweildauer in der Warteschlange, MeanAr = $400s$}
+	\label{fig:MQTVIP400ALL}
+\end{figure} 
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{abbildungen/1_Phone_VIP/Arrival_400_Serve_100_dur_1000000_Skip_0/MeanQueueTimeTouristAndResident.pdf}
+	\caption{Durchschnittliche Verweildauer der Touristen und Einwohner in der Warteschlange , MeanAr = $400s$}
+	\label{fig:MQTVIP400VGL}
+\end{figure}
+
+In der Abbildung \ref{fig:MQTVIP400ALL} sieht man die durchschnittliche Wartezeit aller Kunden insgesamt. Im Vergleich dazu wird in der Abbildung \ref{fig:MQTVIP400VGL} zwischen Touristen und Einwohnern unterschieden. Ab einer Simulationsdauer von ca. $300000s$ ist, aufgrund der Bevorzugung, auch hier der Wert der Einwohner deutlich geringer als der der Touristen. Auffallend ist, dass der Wert der Einwohner zu Beginn der Simulation kurzzeitig höher ist als der der Touristen. Hintergrund dürfte hierbei ein nicht eingeschwungenes System sein, infolge dessen einzelne Kunden noch eine große Veränderung des durschnittswertes bewirken. Gegen Ende der Simulation näher sich der errechnete Wert immer weiter dem Erwartungswert von $33,3333$ an. Am Ende der Simulation ist eine Abweichung von ca. $1,5$ anzumerken.
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{abbildungen/1_Phone_VIP/Arrival_400_Serve_100_dur_1000000_Skip_0/MeanSystemTimeAll.pdf}
+	\caption{Durchschnittliche Verweildauer der Kunden im System, MeanAr = $400s$}
+	\label{fig:MSTVIP400ALL}
+\end{figure} 
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{abbildungen/1_Phone_VIP/Arrival_400_Serve_100_dur_1000000_Skip_0/MeanSystemTimeTouristAndResident.pdf}
+	\caption{Durchschnittliche Verweildauer der Einwohner und Touristen im System, MeanAr = $400s$}
+	\label{fig:MSTVIP400VGL}
+\end{figure}
+
+Abbildung \ref{fig:MSTVIP1000ALL} zeigt die durchschnittliche Verweildauer aller Kunden im System insgesamt. Im Vergleich dazu zeigt Abbildung \ref{fig:MSTVIP1000VGL} die Zusammensetzung aus den zwei unterschiedenen Gruppen. Wiederum zeigt sich, dass der Wert der Einwohner zu Beginn der Simulation kurzzeitig höher ist als der der Touristen. Dies stimmt mit Abbildung \ref{fig:MQTVIP400VGL} überein, spricht jedoch für ein (bis zu diesem Zeitpunkt) nicht eingeschwungenes System. Der Wert der Einwohner liegt ab einer Simulationsdauer von $400000s$ bei ca. $125s$. Dies setzt sich aus einer durchschnittlichen Telefonierdauer von $100s$ und der durchschnittlichen Verweildauer ca. $25s$ zusammen (siehe Abbildung \ref{fig:MQTVIP400VGL})  und ist somit plausibel. Die durchschnittliche Verweildauer beider Gruppen zusammen nähert sich ab einer Simulationsdauer von ca. $400000s$ dem erwarteten Wert von $133,333$ immer weiter an. Gegen Ende der Simulation ist eine Abweichung von ca. $3s$ festzustellen.  
 
 \begin{figure}[htpb]
 	\centering
 	\includegraphics[width=0.8\textwidth]{abbildungen/1_Phone_VIP/Arrival_1000_Serve_100_dur_1000000_Skip_0/QueueStepPlotAllFiltered.pdf}
-	\caption{Durchschnittliche Anzahl an Kunden im System, MeanAr = $1000s$}
+	\caption{Warteschlangenlänge insgesamt (gefiltert), MeanAr = $1000s$}
 	\label{fig:QSPALL1000}
 \end{figure}
 
 \begin{figure}[htpb]
 	\centering
 	\includegraphics[width=0.8\textwidth]{abbildungen/1_Phone_VIP/Arrival_1000_Serve_100_dur_1000000_Skip_0/QueueStepPlotTouristFiltered.pdf}
-	\caption{Durchschnittliche Anzahl an Kunden im System, MeanAr = $1000s$}
+	\caption{Warteschlangenlänge der Touristen (gefiltert), MeanAr = $1000s$}
 	\label{fig:QSPTOURI1000}
 \end{figure}
 
 \begin{figure}[htpb]
 	\centering
 	\includegraphics[width=0.8\textwidth]{abbildungen/1_Phone_VIP/Arrival_1000_Serve_100_dur_1000000_Skip_0/QueueStepPlotResidentFiltered.pdf}
-	\caption{Durchschnittliche Anzahl an Kunden im System, MeanAr = $1000s$}
+	\caption{Warteschlangenlänge der Einwohner (gefiltert), MeanAr = $1000s$}
 	\label{fig:QSPVIP1000}
 \end{figure}
 
+
 \paragraph{Validierung der Simulation}
+\\
 \begin{figure}[htpb]
 	\centering
-	\includegraphics[width=0.8\textwidth]{abbildungen/1_Phone_VIP/Arrival_1000_Serve_100_dur_1000000_Skip_0/LittleSystem.pdf}
-	\caption{Durchschnittliche Anzahl an Kunden im System, MeanAr = $1000s$}
-	\label{fig:LittleVIP1000}
+	\includegraphics[width=0.8\textwidth]{abbildungen/1_Phone_VIP/Arrival_400_Serve_100_dur_1000000_Skip_0/LittleSystem.pdf}
+	\caption{Darstellung der Differenz: $\lambda * Ws - Ls$ über die Simulationszeit (Little Theorem)}
+	\label{fig:LittleSystemVIP400}
 \end{figure}
-\subsubsection{Durchschnittliche Ankunftszeit der Clients: 400}
+
+In Abbildung \ref{fig:LittleSystemVIP400} ist der Verlauf der Gleichung \ref{eq:little} über die Simulationszeit aufgeführt. Ab einer Simulationsdauer von ca. $450000s$ schwankt der Wert nur noch um einen Wert von ca. $0,01$. Gegen Ende der Simulation schwankt der Wert um die Nulllinie und weicht am Ende nur noch um ca. $0,002$ ab. Diese sehr geringe Abweichung zeigt, dass das System mit großer Wahrscheinlichkeit eingeschwungen ist. Die Abweichung von $0,002$ ist sehr gering und auf kleinere Rundungsfehler bei der Berechnung zurückzuführen.
+
 \subsubsection{Durchschnittliche Ankunftszeit der Clients: 100}
 
 \subsection{Modell \glqq Zusätzliches VIP Telefon\grqq} 

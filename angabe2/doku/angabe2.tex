@@ -48,17 +48,38 @@ Die Telefonierzeiten sollen zufällig generiert werden. Die Verteilung der Zufal
 Die Applikation unterliegt keinen harten Echtzeitanforderungen. Die Simulation soll für die gesamte Simmulationsdauer so schnell wie möglich durchgeführt werden. Es soll keine Globale Uhr modelliert werden.
 
 \subsection{Berechnungen}
-Die Grundfunktion der Applikation ist die Simulation eines Warteschlangenmodells und die Ausgabe relevanter Rohdaten für weitere Berechnungen. Die Berechnungen selbst werden von der Applikation und mit Hilfe von Mathematica durchgeführt.
+Die Funktion der Applikation ist die Simulation eines Warteschlangenmodells und die Berechnung relevanter Daten. Alle Werte werden mit Hilfe der Java Klasse BigDecimal berechnet. Für die Division werden 32 Nachkommastellen berücksichtigt und als Rundungsmodus wird Half\_Even verwendet, da dieser kumulative Fehler bei sich wiederholenden Berechnungen minimiert. 
+Die Auswertung und grafische Darstellung der Daten erfolgt mit Mathematica. 
 
 \subsection{Reports}
-Alle errechneten Ergebnisse sollen über Reports ausgeleitet werden. Die Reports sollen im .CSV format ausgeleitet werden um eine gute Weiterverarbeitung der Ergebnisse zu gewährleisten. Folgende Reports sollen ausgeleitet werden:
+Alle errechneten Ergebnisse sollen über Reports ausgeleitet werden. Die Reports sollen im .csv Format ausgeleitet werden um eine gute Weiterverarbeitung der Ergebnisse zu gewährleisten. Folgende Reports sollen ausgeleitet werden:
 \begin{list}{•}
-	\item arrival.csv enthält alle Arrival-Ereignisse mit Zeitstempel und Personen ID.
-	\item begin.csv  enthält alle Begin-Ereignisse mit Zeitstempel und Personen ID.
-	\item finish.csv  enthält alle Finish-Ereignisse mit Zeitstempel und Personen ID.
-	\item queue.csv enthält die Länder der Warteschlange und die Anzahl der Personen im System mit Zeitstempel.
-	\item arrival\_ distribution.csv enthält alle zufällig generierten Zahlen für die Zwischenankunfszeiten.
-	\item serve\_ distribution.csv enthält alle zufällig generierten Zahlen für die Dauer der Telefonnutzung.
+	\item arrival-delta.csv enthält alle Zwischenankunftszeiten einer Simulation
+	
+	\item serve-delta.csv enthält alle Telefonierzeiten
+	
+	\item little-system-all.csv enthält alle Werte für die Gleichung \ref{eq:little}
+    	
+    	\item little-system-normal.csv enthält die Werte der Touristen für die Gleichung \ref{eq:little}
+    	
+    	\item little-system-resident.csv enthält die Werte der Einwohner für die Gleichung \ref{eq:little}
+    	\item mean-phone-size-all.csv enthält die durchschnittliche Auslastung des Telefons
+    	\item mean-queue-size-all.csv enthält die durchschnittliche Warteschlangenlänge
+    	\item mean-queue-size-normal.csv enthält die durschnittliche Warteschlangenlänge der Touristen
+    	\item mean-queue-size-resident.csv enthält die durchschnittliche Warteschlangenlänge der Einwohner
+    	\item mean-system-size-all.csv enthält die durchschnittliche Anzahl an Kunden im System
+    	\item mean-system-size-normal.csv enthält die durschnittliche Anzahl an Touristen im System
+    	\item mean-system-size-resident.csv enthält die durchschnittliche Anzahl an Einwohnern im System
+    	\item mean-queue-time-all.csv enthält die durchschnittliche Wartezeit aller Kunden
+    	\item mean-queue-time-normal.csv enthält die durschnittliche Wartezeit der Touristen
+    	\item mean-queue-time-resident.csv enthält die durchschnittliche Wartezeit der Einwohner		
+    	\item mean-system-time-all.csv enthält die durchschnittliche Verweildauer der Kunden im System
+    	\item mean-system-time-normal.csv enthält die durschnittliche Verweildauer der Touristen im System
+    	\item mean-system-time-resident.csv enthält die durchschnittliche Verweildauer der Einwohner im System
+    	\item queue-size-all.csv enthält die Länge der gesamten Warteschlange zu den jeweiligen Zeitpunkten	
+    	\item queue-size-tourist.csv enthält die Länge der Touristen-Warteschlange zu den jeweiligen Zeitpunkten	
+    	\item queue-size-resident.csv enthält die Länge der Einwohner-Warteschlange zu den jeweiligen Zeitpunkten
+	
 \end{list}
 \subsection{Parameter}
 Die Tabelle \ref{tab:parameter} zeigt alle möglichen Parameter, welche die Software steuern. Alle Parameter sind optional. 
@@ -828,7 +849,27 @@ Alle vier ermittelten Durchschnittswerte liegen, ab einer Simulationsdauer von c
 \subsubsection{Durchschnittliche Ankunftszeit der Clients: 400}
 \subsubsection{Durchschnittliche Ankunftszeit der Clients: 100}
 
-\section{Fazit}
+\section{Ausblick und Fazit}
+\subsection{Abweichung von theoretischen Werten}
+Im Zuge der Auswertung der durch die Simulation erzeugten Werte lässt sich beim Vergleich mit den theoretisch errechneten Werten feststellen, dass diese nie exakt erreicht wurden. Die Werte der Simulation nähern sich mit zunehmender Simulationsdauer stark an die theoretischen Werte an, doch es bleibt immer eine Abweichung bestehen. Diese Tatsache kann durch folgenden Gründe erklärt werden: \\
+
+Sowohl die Zwischenankunftszeiten, als auch die Telefonierzeiten sind (auf Basis eines vorgegebenen Durchschnittswertes) einer Zufallsverteilung unterworfen. Diese erzielt immer eine gewissen Abweichung um den theoretischen Wert. \\
+
+Andererseits können auch Rundungsfehler zu diesen Abweichungen führen. Für die Berechnung der einzelnen Durchschnittswerte sind zahlreiche Berechnungen notwendig. Doch gerade bei Divisionen treten in der Regel Ungenauigkeiten in den Nachkommastellen auf, welche auf Rundungsfehler zurückzuführen sind. Es kann nicht ausgeschlossen werden, dass ein anderer Rundungsmodus oder eine Berücksichtigung von mehr als 32 Nachkommastellen das Ergebnis verändern würde.\\
+
+\subsection{Auswirkung der unterschiedlichen Betriebsmodi auf die Wartezeiten für die Kunden}
+Es wurden drei unterschiedliche Betriebsmodi simuliert. Im ersten Betriebsmodus werden alle Kunden gleich behandelt. Bis zu einer durchschnittlichen Zwischenankunftszeit von $400s$ (bei einer durchschnittlichen Telefonierzeit von $100s$) sind die Wartezeiten für die Kunden sehr gering. 
+
+Im Betriebsmodus 2 werden die Einwohner der Insel gegenüber den Touristen bevorzugt. Vermutlich würde dieser Betriebsmodus in der Realität zu Unzufriedenheit bei den Touristen führen. Die durchschnittlichen Wartezeiten der Einwohner werden bei diesem Betriebsmodus stark reduziert. Hingegen steigen die Wartezeiten der Touristen an, sodass sich die durchschnittliche Gesamtwartezeit aller Kunden gegenüber dem Betriebsmodus 1 nicht verändert. \\
+FAZIT HIERFÜR FEHLT !
+
+
+\subsection{Unberücksichtigte Simulationen}
+Die gewählte Implementierung der Simulation bietet zahlreiche Variationsmöglichkeiten der einzelnen Parameter. Je nach Wahl der Parameter kann das Ergebnis der Simulation deutlich anders verlaufen. Für die Auswertung im Zuge dieser Studienarbeit wurde vor allem der Parameter der durchschnittlichen Zwischenankunftszeit variiert. 
+
+Darüber hinaus wurde eine Simulation mit einer Simulationsdauer von $10^9s$, was in etwa $31,7$ Jahren entspricht, durchgeführt. Aufgrund der zu großen Datenmenge von ca. $50$ GB kann dieser Datenstand nicht ausgewertet werden. Vor allem bei der grafischen Darstellung reichte die Kapazität der verwendeten Rechner nicht aus. Der Datenstand kann auf Wunsch vorgezeigt werden.
+
+
 
 %	REFERENCE LIST
 %----------------------------------------------------------------------------------------

@@ -12,12 +12,12 @@
 
 \tableofcontents
 \section{Einführung}
-Simulationen haben in der moderne einen sehr hohen Stellenwert erlangt, da durch sie zahlreiche, oftmals sehr genaue, Zukunftsprognosen erstellt werden können. Als Grundlage für die Simulationen dienen in der Regel Modelle, welche einen Ausschnitt der Wirklichkeit abbilden. Das Thema dieser Studienarbeit ist die Simulation eines Callshops, bzw. des Telefons in einem Callshop, in einem Inseldorf. Dieser wird für günstige Telefonate ins Ausland verwendet. 
+Simulationen haben in der moderne einen sehr hohen Stellenwert erlangt, da durch sie zahlreiche, oftmals sehr genaue, Zukunftsprognosen erstellt werden können. Als Grundlage für die Simulationen dienen in der Regel Modelle, welche einen Ausschnitt der Wirklichkeit abbilden. Das Thema dieser Studienarbeit ist die Simulation eines Callshops, bzw. des Telefons in einem Callshop, in einem Inseldorf. Dieser wird für günstige Telefonate ins Ausland verwendet.
 
 \section{Beschreibung des Modells}
-Für die Simulation des Insel-Callshops wird ein Warteschlagenmodell mit Clients und zunächst nur einem Server verwendet. Jede Person die den CallShop betritt wird durch einen neuen Client repräsentiert. Das Telefon des Shops ist durch den Server dargestellt. Möchte eine Person das Telefon zu einem Zeitpunkt benützen, zu dem bereits eine andere Person telefoniert, muss sie sich hinten anstellen und warten, bis die Person ihr Telefonat beendet hat. Im Modell wird dieses durch eine Warteschlage (Queue) realisiert, in die sich ankommende Clients einordnen und sobald der Server nichtmehr belegt ist nach dem FIFO (first in first out) Prinzip bedient werden. 
+Für die Simulation des Insel-Callshops wird ein Warteschlagenmodell mit Clients und zunächst nur einem Server verwendet. Jede Person die den CallShop betritt wird durch einen neuen Client repräsentiert. Das Telefon des Shops ist durch den Server dargestellt. Möchte eine Person das Telefon zu einem Zeitpunkt benützen, zu dem bereits eine andere Person telefoniert, muss sie sich hinten anstellen und warten, bis die Person ihr Telefonat beendet hat. Im Modell wird dieses durch eine Warteschlage (Queue) realisiert, in die sich ankommende Clients einordnen und sobald der Server nichtmehr belegt ist nach dem FIFO (first in first out) Prinzip bedient werden.
 
-Im Modell werden sowohl die Ankunftszeiten der Clients, als auch die Dauer der Telefonate durch eine negative Exponentialverteilung beschrieben, da diese sehr nah an den real beoachteten Verhalten liegt. Der mathematische Hintergrund liegt in der Eigenschaft der Exponentialfunktion zugrunde. Die Exponentialverteilung ist die einzige kontinuierliche Verteilung, welche zugleich die Markoveigenschaft, die sogenannte Gedächtnislosigkeit, erfüllt. Diese besagt, dass die seit dem letzten Ereignis vergangene Zeit (in diesem Beispiel Anrufer) keinen Einfluss auf die Verteilung der Zeit bis zum nächsten Ereignis (bis zum nächsten Anruf) hat \cite{ExpoVert}. 
+Im Modell werden sowohl die Ankunftszeiten der Clients, als auch die Dauer der Telefonate durch eine negative Exponentialverteilung beschrieben, da diese sehr nah an den real beoachteten Verhalten liegt. Der mathematische Hintergrund liegt in der Eigenschaft der Exponentialfunktion zugrunde. Die Exponentialverteilung ist die einzige kontinuierliche Verteilung, welche zugleich die Markoveigenschaft, die sogenannte Gedächtnislosigkeit, erfüllt. Diese besagt, dass die seit dem letzten Ereignis vergangene Zeit (in diesem Beispiel Anrufer) keinen Einfluss auf die Verteilung der Zeit bis zum nächsten Ereignis (bis zum nächsten Anruf) hat \cite{ExpoVert}.
 
 Darüber hinaus wird ein zweites Modell betrachtet, in welchem die Bewohner des Inseldorfes (Einheimische) bevorzugt werden. Im weiteren Verlauf der Studienarbeit werden diese als VIP oder resident bezeichnet. Der grundlegende Ablauf verläuft wie beim ersten Modell. Allerdings wird, bevor der nächste Client (FIFO Prinzip) telefonieren darf, die Queue nach einem Einheimischen durchsucht. Befindet sich ein Einheimischer in der Queue, wird dieser bevorzugt und darf zuerst telfonieren. Alle restlichen Kunden in der Queue (im folgenden als Touristen bezeichnet) müssen warten bis sich kein Einheimischer mehr in der Warteschlange befindet.
 
@@ -32,15 +32,15 @@ Die Zwischenankunftszeiten sollen zufällig genieriert werden. Die Verteilung de
 $$
 f(x) = \left\{\begin{matrix}
 \lambda e^{-\lambda x}
-\\ 
-0  
+\\
+0
 \end{matrix}\right.für \begin{matrix}
 x \geqslant 0
-\\ 
+\\
 x < 0
 \end{matrix}
 $$
-Die mittlere Zwischenankunftszeit hat den Erwartungswert $\frac{1}{\lambda}$. Die mittlere Zwischenankunftszeit soll parametrisierbar sein. 
+Die mittlere Zwischenankunftszeit hat den Erwartungswert $\frac{1}{\lambda}$. Die mittlere Zwischenankunftszeit soll parametrisierbar sein.
 \subsection{Verteilung der Telefonierzeiten}
 Die Telefonierzeiten sollen zufällig generiert werden. Die Verteilung der Zufallszahlen soll analog zur Zwischenankunftszeiten eine Exponentialverteilung aufweisen. Die mittlere Telefonierzeit soll ebennfalls parametrisierbar sein.
 
@@ -82,7 +82,7 @@ Alle errechneten Ergebnisse sollen über Reports ausgeleitet werden. Die Reports
 
 \end{list}
 \subsection{Parameter}
-Die Tabelle \ref{tab:parameter} zeigt alle möglichen Parameter, welche die Software steuern. Alle Parameter sind optional. 
+Die Tabelle \ref{tab:parameter} zeigt alle möglichen Parameter, welche die Software steuern. Alle Parameter sind optional.
 \begin{table}[htpb]
 	\centering
 	\begin{tabular}{lll}
@@ -125,6 +125,87 @@ Alle in der Tabelle \ref{tab:WerteAuswertung} aufgeführten Werte sollen auf Bas
 
 \section{Softwaredesign}
 
+Der Aufbau der Anwendung wurde im Team diskutiert und anschließend mittels UML spezifiziert.
+
+Grundsätzlich wurde eine Ereignisorientierte Simulation (Discrete Event Simulation) mit einer Eventliste gewählt. Ursprünglich war geplant die Berechnung mit Mathematica auszuführen. Dies stellte sich aber als nicht performant und komplizierter als notwendig heraus. Alle geforderten Berechnungen wurden dann ebenfalls in das Java Programm eingeplant.
+
+\subsection{Package time}
+
+\includegraphics[scale=0.5]{abbildungen/uml/time.pdf}
+
+In diesem Unterpaket finden sich alle notwendigen Klassen für die Ereignisorientierte Simulation. Die \texttt{Clock} hält die Simulationszeit und kann nur vorgestellt werden.
+
+Das Interface \texttt{Event} definiert ein Ereignis in der Simulation. Jedes Ereignis hat einen Zeitpunkt, an dem es auftritt, sowie Logik, die zu diesem Zeitpunkt ausgeführt werden soll und potentiell den ganzen Zustand der Simulation verändern kann. Die \texttt{EventList} kann Ereignisse aufnehmen und immer das nächste Event mit den frühesten Zeitpunkt liefern.
+
+Die konkreten Events \texttt{Arrival, BeginServe, FinishServe} beschreiben die Ereignisse in der Callshop Problemstellung.
+
+Abbildung \ref{fig:arrival-event} zeigt den Verlauf des Ereignisses für Arrival. Zunächst werden freie Telefone gesucht. Wird ein freies Telefon gefunden, wird ein BeginServeEvent mit aktueller Zeit erstellt. Eine neue Person wird erstellt, ihre Ankunftszeit gespeichert, und die Person wird in die Schlange eingefügt. Zum Schluss wird das nächste ArrivalEvent erstellt, um fortlaufend neue Ankünfte zu haben.
+
+Der Verlauf von BeginServe ist in Abbildung \ref{fig:beginserve-event} zu sehen. Die nächste (VIP oder normale) Person wird je nachdem, ob es sich um ein VIP Phone oder nicht handelt, aus der Liste geholt. Die Zeit vom Bearbeitungsbeginn wird für die Person gespeichert. Das FinishEvent wird direkt ermittelt und in die EventList eingetragen.
+
+Das Ereignis FinishServe ist in Abbildung \ref{fig:finishserve-event} dargestellt. Die Person wird aus dem Phone entfernt. Ihre Endzeit wird gespeichert. Ist die Warteschlange nicht leer, wird direkt ein neues BeginServeEvent erstellt.
+
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[scale=0.5]{abbildungen/uml/Arrival.pdf}
+	\caption{Sequenzdiagramm für die Ausführung eines ArrivalEvent}
+	\label{fig:arrival-event}
+\end{figure}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[scale=0.5]{abbildungen/uml/BeginServe.pdf}
+	\caption{Sequenzdiagramm für die Ausführung eines BeginServeEvent}
+	\label{fig:beginserve-event}
+\end{figure}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[scale=0.5]{abbildungen/uml/FinishServe.pdf}
+	\caption{Sequenzdiagramm für die Ausführung eines FinishServeEvent}
+	\label{fig:finishserve-event}
+\end{figure}
+
+\subsection{Package queue}
+
+\includegraphics[scale=0.5]{abbildungen/uml/queue.pdf}
+
+Die \texttt{Queue} ist eine FIFO-Warteschlange mit zugehörigen Operationen. Optional kann direkt auch der erste Resident (VIP) aus der Schlange entfernt werden.
+
+\subsection{Package distribution}
+
+\includegraphics[scale=0.5]{abbildungen/uml/distribution.pdf}
+
+Die Verteilung ist grundsätzlich eine negative Exponentialverteilung. Die
+Zufallszahlen können über einen Seed erstellt werden.
+
+\subsection{Package domain}
+
+\includegraphics[scale=0.5]{abbildungen/uml/domain.pdf}
+
+
+\texttt{domain} beschreibt alle notwendigen Datenstrukturen aus der Domäne des Callshops. Hier gibt es Personen und Telefone. Jede neue Person hat eine einzigartige ID und im Laufe der Simulation merkt sie sich ihre persönlichen Zeitpunkte.
+
+Eine Person kann optional ein Resident (Vip) sein. Ein Telefon kann optional nur Residents (VIPs) annehmen.
+
+\subsection{Package calculation, log}
+
+\includegraphics[scale=0.5]{abbildungen/uml/calculation.pdf}
+\includegraphics[scale=0.5]{abbildungen/uml/log.pdf}
+
+Die allgemeine Berechnung für Mittelwerte ist in \texttt{calculation} gelöst.
+Mit \texttt{log} können Ergebnisse in ein CSV Dokument gespeichert werden.
+
+\subsection{Package config, modellbildung}
+
+\includegraphics[scale=0.5]{abbildungen/uml/config.pdf}
+\includegraphics[scale=0.5]{abbildungen/uml/modellbildung.pdf}
+
+In \texttt{config} ist die Konfiguration der Simulation zu finden. Die Logs und Mittelwert-Rechner für die aktuelle konkrete Simulation sind ebenfalls hier definiert.
+
+Das Paket \texttt{modellbildung} beinhaltet alle zuvor beschriebenen Pakete und enthält die Simulationsklasse zum Starten sowie den groben Ablauf der Simulation. Der \texttt{SimulationState} hält den aktuellen Zustand der Simulation.
+
 \section{Überprüfung auf Exponentialverteilung}
 Im Zuge dieses Kapitels erfolgt die Überprüfung der, im Zuge der implementierten Simulation, generierten Zufallszahlen. Diese sollen, wie in den Anforderungen definiert, negativ exponentialverteilt sein. \\
 Die Überprüfung erfolgt zunächst graphisch mittels eines Histogramms und eines Qunatil-Quantil-Plots. Im Anschluss erfolgt die rechnerische Überprüfung mittels Shapiro-Wilk-, Cramér-von-Mises- und Anderson-Darling-Test.
@@ -151,7 +232,7 @@ In Abbildung \ref{fig:QQPlot} werden die generierten Zufallszahlen in einem Quan
 
 \subsection{Rechnerische Überprüfung}
 Für eine weitere Überprüfung werden die generierten Daten mittels Shapiro-Wilk-, Cramér-von-Mises- und Anderson-Darling-Test auf eine Exponentialverteilung überprüft. Die Hypothese H0 lautet hierbei: \\
-$H_0:$ Die generierten Zufallszahlen sind exponentialverteilt, Signifikanzniveau $\alpha =0,05$ Die Ergebnisse der einzelnen Tests sind in der folgenden Tabelle aufgelistet: 
+$H_0:$ Die generierten Zufallszahlen sind exponentialverteilt, Signifikanzniveau $\alpha =0,05$ Die Ergebnisse der einzelnen Tests sind in der folgenden Tabelle aufgelistet:
 \input{abbildungen/distribution/dis_fit_test_table}
 
 Laut dem Shapiro-Wilk-Test kann die Nullhypothese nicht abgelehnt werden, da der p-Wert mit $0,80994$ deutlich über dem Signifikanzniveau von $0,05$ liegt. Ebenso kann die Nullhypothese bei den Cramér-von-Mises- und Anderson-Darling-Tests nicht abgelehnt werden, da der p-Wert hier ebenso mit $0,764349$ bzw. $0,0764349$ deutlich über dem Signifikanznievau liegt.\\
@@ -162,16 +243,16 @@ Im Zuge dieses Kapitels werden alle Ergebnisse der Simulation und die daraus err
 Die Anzahl und damit die Kombinationsmöglichkeiten der unterschiedlichen Parameter ist sehr groß. Im Verlauf dieser Studienarbeit werden ausschließlich die Auswirkungen verschiedene Werte für den Parameter durchschnittliche Zwischenankunftszeit auf den Verlauf der Simulation ausgewertet. Weitere Simulationen mit anderen Parameterwerten können durchgeführt werden. Die unterschiedlichen Parameter sind in der Tabelle \ref{tab:parameter} aufgelistet.
 
 
-\subsection{Modell \glqq Ein Telefon\grqq} 
+\subsection{Modell \glqq Ein Telefon\grqq}
 Für den in Kapitel \ref{requirements} aufgelisteten ersten Betriebsmodus (ein Server, welcher alle Clients bedient) werden im folgenden die Auswertungen aufgeführt. Exemplarisch werden vier verschiedene durchschnittliche Ankunftszeiten für die Clients verwendet. Zunächst wird eine durchschnittliche Ankunftszeit von $1000s$ angenommen, was bei einer durchschnittlichen Telefonierdauer von $100s$ (Dauer der Serverbelegung) einer sehr geringen Serverauslastung entspricht. Anschließend werden mit den durchschnittlichen Ankunftszeiten von $400s$ und $100s$ die Auswirkungen von höherer Serverauslastung auf das Ergebnis der Simulation erläutert. \\
 
-Für jede durchschnittliche Ankunftszeit werden zunächst die zu erwartenden Werte, basierend auf den Formeln für M/M/1 Warteschlangenmodelle ermittelt. Die einzelnen Formeln sind im folgenden Kapitel aufgeführt. Betrachtet werden hierbei, wie in den \ref{requirements} erläutert die durchschnittliche Anzahl von Kunden im System, durchschnittliche Warteschlangenlänge, durchschnittliche Verweildauer im System und die durchschnittliche Verweildauer in der Warteschlange. Die berechneten Größen werden als Erwartungswerte betrachtet gegen die die durch die Simulation ermittelten Werte geprüft werden. 
+Für jede durchschnittliche Ankunftszeit werden zunächst die zu erwartenden Werte, basierend auf den Formeln für M/M/1 Warteschlangenmodelle ermittelt. Die einzelnen Formeln sind im folgenden Kapitel aufgeführt. Betrachtet werden hierbei, wie in den \ref{requirements} erläutert die durchschnittliche Anzahl von Kunden im System, durchschnittliche Warteschlangenlänge, durchschnittliche Verweildauer im System und die durchschnittliche Verweildauer in der Warteschlange. Die berechneten Größen werden als Erwartungswerte betrachtet gegen die die durch die Simulation ermittelten Werte geprüft werden.
 
 Die Maßnahmen für die Verifikation der implementierten Simulation werden im Kapitel (REFERENZ AUF DIE UNITTEST KAPITEL) näher beschrieben. In den folgenden Abbildungen wird die durchschnittliche Zwischenankunftszeit mit \glqq MeanAr\grqq abgekürzt.
 
 \subsubsection{Formeln für M/M/1 Warteschlangenmodelle}
 \label{Formeln}
-Die im folgenden aufgeführten Formeln gelten für M/M/1 Warteschlangenmodelle im eingeschwungenen Zustand. Mit $Ls$ wird die durchschnittliche Anzahl von Kunden im System bezeichnet. $Lq$ gibt die durchschnittliche Länge der Warteschlange an. $Ws$ definiert die durchschnittliche Verweildauer der einzelnen Kunden im System und $Wq$ die durchschnittliche Verweildauer in der Warteschlange. 
+Die im folgenden aufgeführten Formeln gelten für M/M/1 Warteschlangenmodelle im eingeschwungenen Zustand. Mit $Ls$ wird die durchschnittliche Anzahl von Kunden im System bezeichnet. $Lq$ gibt die durchschnittliche Länge der Warteschlange an. $Ws$ definiert die durchschnittliche Verweildauer der einzelnen Kunden im System und $Wq$ die durchschnittliche Verweildauer in der Warteschlange.
 
 \begin{equation}
 Ls=\frac{\lambda}{\mu - \lambda}
@@ -186,7 +267,7 @@ Ws=\frac{1}{\mu - \lambda}
 Wq=\frac{\rho}{\mu - \lambda}
 \end{equation}
 
-In den einzelnen Gleichungen sind $\lambda$, $\mu$ und $\rho$ wie folgt definiert: $\lambda$ beschreibt die durchschnittliche Ankunftszeit der Kunden pro Sekunde. $\mu$ definiert die durchschnittliche Telefonierdauer der Kunden pro Sekunde. Und $\rho$ beschreibt die durchschnittliche Auslastung des Telefons \cite{MM1Formeln}. 
+In den einzelnen Gleichungen sind $\lambda$, $\mu$ und $\rho$ wie folgt definiert: $\lambda$ beschreibt die durchschnittliche Ankunftszeit der Kunden pro Sekunde. $\mu$ definiert die durchschnittliche Telefonierdauer der Kunden pro Sekunde. Und $\rho$ beschreibt die durchschnittliche Auslastung des Telefons \cite{MM1Formeln}.
 
 \begin{equation}
 \rho=\frac{\lambda}{\mu}
@@ -262,7 +343,7 @@ Bei der Betrachtung der in Abbildung \ref{fig:meanQueueSize1000} gezeigte durchs
 	\includegraphics[width=0.8\textwidth]{abbildungen/1_Phone/Arrival_1000_Serve_100_dur_1000000_Skip_0/MeanQueueTime.pdf}
 	\caption{Durchschnittliche Verweildauer in der Warteschlange , MeanAr = $1000s$}
 	\label{fig:meanQueueTime1000}
-\end{figure} 
+\end{figure}
 
 Die in Abbildung \ref{fig:meanQueueTime1000} aufgeführte durchschnittliche Verweildauer in der Warteschlange weißt einen ähnlichen Verlauf auf wie die in Abbildung \ref{fig:meanQueueSize1000} gezeigte durchschnittliche Warteschlangenlänge. Dieses Verhalten ist plausibel, da bei einer größeren Warteschlangenlänge auch die Wartezeit in der Warteschlange steigt. Gegen Ende der Simulation näher sich die durchschnittliche Verweildauer in der Warteschlange dem Erwartungswert von $11,1111$ an, bleibt jedoch mit einer Abweichung von ca. $1,51$ unterhalb.
 
@@ -271,13 +352,13 @@ Die in Abbildung \ref{fig:meanQueueTime1000} aufgeführte durchschnittliche Verw
 	\includegraphics[width=0.8\textwidth]{abbildungen/1_Phone/Arrival_1000_Serve_100_dur_1000000_Skip_0/QueueStepPlotAll.pdf}
 	\caption{Warteschlangenlänge (ungefiltert) , MeanAr = $1000s$}
 	\label{fig:QueueStepPlotAll1000}
-\end{figure} 
+\end{figure}
 \begin{figure}[htpb]
 	\centering
 	\includegraphics[width=0.8\textwidth]{abbildungen/1_Phone/Arrival_1000_Serve_100_dur_1000000_Skip_0/QueueStepPlotAllFiltered.pdf}
 	\caption{Warteschlangenlänge (gefiltert) , MeanAr = $1000s$}
 	\label{fig:QueueStepPlotAllFiltered1000}
-\end{figure} 
+\end{figure}
 
 Die Abbildung \ref{fig:QueueStepPlotAll1000} zeigt die einzelnen Werte für die Warteschlangenlänge über die Simulationszeit. Diese Abbildung ist nicht aussagekräftig. Hintergrund dafür ist die Implementierung der Simulation. Im Warteschlangenmodell wird zwischen drei verschiedenen Events unterschieden. Betritt ein neuer Kunde den Telefonshop, wird ein Arrival Event ausgelöst und die Warteschlangenlänge wird um 1 erhöht. Ist das Telefon frei, wird ein Begin Event ausgelöst und die Warteschlangenlänge wird um 1 reduziert. Hat ein Kunde sein Telefonat beendet, wird ein Finish Event ausgelöst, was wiederum ein Begin Event auslöst, da das Telefon frei ist. Ein Problem gibt es hierbei für den Fall, dass kein Kunde im Laden steht und somit auch die Warteschlange leer und das Telefon frei ist. Betritt nun ein neuer Kunde den Laden, wird ein Arrival Event ausgelöst und direkt anschließend ein Begin Event, da das Telefon frei ist und der Kunde sein Telefonat sofort beginnen kann. Er befindet sich somit für $0s$ in der Warteschlange. Aufgrund der Events wird die Warteschlangenlänge jedoch trotzdem erhöht und direkt wieder gesenkt. Es gibt somit für den gleichen Zeitstempel zwei unterschiedliche Warteschlangenlängen. Abbildung \ref{fig:QueueStepPlotAllFiltered1000} zeigt die gleiche Situation ohne die eben erläuterte Situation. Es wird hierbei nur eine Warteschlangenlänge angezeigt, wenn auch wirklich ein Kunde länger als $0s$ in der Warteschlange wartet. Da das System nur sehr gering ausgelastet ist, ist die geringe Warteschlangenlänge plausibel.\\
 
@@ -288,7 +369,7 @@ Die Abbildung \ref{fig:QueueStepPlotAll1000} zeigt die einzelnen Werte für die 
 	\includegraphics[width=0.8\textwidth]{abbildungen/1_Phone/Arrival_1000_Serve_100_dur_1000000_Skip_0/LittleSystem.pdf}
 	\caption{Darstellung der Differenz: $\lambda * Ws - Ls$ über die Simulationszeit (Little Theorem)}
 	\label{fig:LittleSystem1000}
-\end{figure} 
+\end{figure}
 
 In Abbildung \ref{fig:LittleSystem1000} ist der Verlauf der Gleichung \ref{eq:little} über die Simulationszeit aufgeführt. Ab einer Simulationsdauer von ca. $350000s$ liegt der Wert sehr nach an dem geforderten Erwartungswert von $0$, schwankt jedoch bis zum Ende der Simulation im Bereich von $0,004$. Da die Differenz zum Erwartungswert sehr gering ist, liegt die Ursache für diese Abweichung vermutlich in Ungenauigkeiten bei der Berechung der Werte. Die durchschnittliche Anzahl an Kunden im System wird entweder um $0,004$ zu gering angenommen, oder die Verweildauer der Kunden im System um $0,004$ zu lang. Ebenso ist eine Kombination der beiden Fehler möglich. Insgesamt deckt sich diese Aussage mit den Abweichungen in den einzelnen Abbildungen.
 
@@ -350,16 +431,16 @@ Die in Abbildung \ref{fig:meanQueueSize400} gezeigte durchschnittliche Warteschl
 	\includegraphics[width=0.8\textwidth]{abbildungen/1_Phone/Arrival_400_Serve_100_dur_1000000_Skip_0/MeanQueueTime.pdf}
 	\caption{Durchschnittliche Verweildauer in der Warteschlange , MeanAr = $400s$}
 	\label{fig:meanQueueTime400}
-\end{figure} 
+\end{figure}
 
-Die in Abbildung \ref{fig:meanQueueTime400} aufgeführte durchschnittliche Verweildauer in der Warteschlange weißt einen ähnlichen Verlauf auf wie die in Abbildung \ref{fig:meanQueueSize400} gezeigte durchschnittliche Warteschlangenlänge. Dieses Verhalten ist plausibel, da bei einer größeren Warteschlangenlänge auch die Wartezeit in der Warteschlange steigt. Beide Werte schwanken ab einer Simulationsdauer von ca. $400000s$ um den Erwartungswert. Die durchschnittliche Verweildauer in der Warteschlange schwankt um ca. $2$ um den Erwartungswert von $33,3333$. 
+Die in Abbildung \ref{fig:meanQueueTime400} aufgeführte durchschnittliche Verweildauer in der Warteschlange weißt einen ähnlichen Verlauf auf wie die in Abbildung \ref{fig:meanQueueSize400} gezeigte durchschnittliche Warteschlangenlänge. Dieses Verhalten ist plausibel, da bei einer größeren Warteschlangenlänge auch die Wartezeit in der Warteschlange steigt. Beide Werte schwanken ab einer Simulationsdauer von ca. $400000s$ um den Erwartungswert. Die durchschnittliche Verweildauer in der Warteschlange schwankt um ca. $2$ um den Erwartungswert von $33,3333$.
 
 \begin{figure}[htpb]
 	\centering
 	\includegraphics[width=0.8\textwidth]{abbildungen/1_Phone/Arrival_400_Serve_100_dur_1000000_Skip_0/QueueStepPlotAll.pdf}
 	\caption{Warteschlangenlänge (ungefiltert) , MeanAr = $400s$}
 	\label{fig:QueueStepPlotAll400}
-\end{figure} 
+\end{figure}
 \begin{figure}[htpb]
 	\centering
 	\includegraphics[width=0.8\textwidth]{abbildungen/1_Phone/Arrival_400_Serve_100_dur_1000000_Skip_0/QueueStepPlotAllFiltered.pdf}
@@ -409,7 +490,7 @@ Abbildung \ref{fig:meanSystemSize100} zeigt die durchschnittliche Anzahl an Kund
 	\label{fig:meanSystemTime100}
 \end{figure}
 
-Abbildung \ref{fig:meanSystemTime100} zeigt die durchschnittliche Verweildauer der Kunden im System. Wiederum kann davon ausgegangen werden, dass das System noch nicht eingeschwungen war, bzw. nicht einschwingen wird. 
+Abbildung \ref{fig:meanSystemTime100} zeigt die durchschnittliche Verweildauer der Kunden im System. Wiederum kann davon ausgegangen werden, dass das System noch nicht eingeschwungen war, bzw. nicht einschwingen wird.
 
 \begin{figure}[htpb]
 	\centering
@@ -425,7 +506,7 @@ Die Abbildungen \ref{fig:meanQueueSize100} und \ref{fig:meanQueueTime100} und au
 	\includegraphics[width=0.8\textwidth]{abbildungen/1_Phone/Arrival_100_Serve_100_dur_1000000_Skip_0/MeanQueueTime.pdf}
 	\caption{Durchschnittliche Verweildauer in der Warteschlange , MeanAr = 100}
 	\label{fig:meanQueueTime100}
-\end{figure} 
+\end{figure}
 
 Abschließend sind in den Abbildungen \ref{fig:QueueStepPlotAll100} und \ref{fig:QueueStepPlotAllFiltered100} jeweils die Länge der Warteschlange dargestellt. Aufgrund des in \ref{JavaOnePhone1000} erläuterten Problems mit der Inkrementierung bzw. Dekrementierung der Warteschlangenlänge bei den einzelnen Events, zeigt Abbildung \ref{fig:QueueStepPlotAllFiltered400} wiederum die gefilterten Werte. Die Werte in beiden Abbildungen schwanken jedoch so stark, dass kein Unterschied mehr ersichtlich ist. Gegen Ende der Simulation steigen die Werte deutlich an. Ob sie gegen den erwarteten Wert von unendlich ansteigen lässt sich nur im Zuge einer erneuten Simulation mit einer längeren Simulationsdauer ermitteln.
 
@@ -434,13 +515,13 @@ Abschließend sind in den Abbildungen \ref{fig:QueueStepPlotAll100} und \ref{fig
 	\includegraphics[width=0.8\textwidth]{abbildungen/1_Phone/Arrival_100_Serve_100_dur_1000000_Skip_0/QueueStepPlotAll.pdf}
 	\caption{Warteschlangenlänge (ungefiltert) , MeanAr = 100}
 	\label{fig:QueueStepPlotAll100}
-\end{figure} 
+\end{figure}
 \begin{figure}[htpb]
 	\centering
 	\includegraphics[width=0.8\textwidth]{abbildungen/1_Phone/Arrival_100_Serve_100_dur_1000000_Skip_0/QueueStepPlotAllFiltered.pdf}
 	\caption{Warteschlangenlänge (gefiltert) , MeanAr = 100}
 	\label{fig:QueueStepPlotAllFiltered100}
-\end{figure} 
+\end{figure}
 
 \paragraph{Validierung der Simulation}
 \begin{figure}[htpb]
@@ -448,10 +529,10 @@ Abschließend sind in den Abbildungen \ref{fig:QueueStepPlotAll100} und \ref{fig
 	\includegraphics[width=0.8\textwidth]{abbildungen/1_Phone/Arrival_100_Serve_100_dur_1000000_Skip_0/LittleSystem.pdf}
 	\caption{Darstellung der Differenz: $\lambda * Ws - Ls$ über die Simulationszeit (Little Theorem)}
 	\label{fig:LittleSystem100}
-\end{figure} 
+\end{figure}
 In Abbildung \ref{fig:LittleSystem100} ist der Verlauf der Gleichung \ref{eq:little} über die Simulationszeit aufgeführt. Im Vergleich zu den beiden Auswertungen mit Zwischenankunftszeiten von $1000s$ bzw. $400s$ wird deutlich, dass die Abweichung vom den geforderten Wert $0$ in dieser Abbildung erheblich größer ist.
 
-Alle vier ermittelten Durchschnittswerte schwanken bis zum Ende der Simulation deutlich. Das in Abbildung \ref{fig:LittleSystem100} ersichtliche Ergebnis der Differenz zeigt, dass das System während der gesamten Simulationsdauer den für ein eingeschwungenes System erforderlichen Wert von $0$ nicht erreicht. Aufgrund der großen Abweichung kann davon ausgegangen werden, dass der Steady State (eingeschwungene Zustand) in dieser Simulation nicht erreicht wurde. 
+Alle vier ermittelten Durchschnittswerte schwanken bis zum Ende der Simulation deutlich. Das in Abbildung \ref{fig:LittleSystem100} ersichtliche Ergebnis der Differenz zeigt, dass das System während der gesamten Simulationsdauer den für ein eingeschwungenes System erforderlichen Wert von $0$ nicht erreicht. Aufgrund der großen Abweichung kann davon ausgegangen werden, dass der Steady State (eingeschwungene Zustand) in dieser Simulation nicht erreicht wurde.
 
 Das beschriebene Verhalten des implementierten Modells stimmt somit mit der Theorie überein, welche besagt, dass wenn die durchschnittliche Zwischenankunftszeit gleich der durchschnittlichen Bediendauer ist, das System nie einschwingen kann. Ein Beweis, dass das System auch bei einer längeren Simulationsdauer nicht einschwingen würde, kann nicht erbracht werden.
 
@@ -823,8 +904,8 @@ Die Abbildung \ref{fig:1_Phone_VIP_100_Little} zeigt den Verlauf der Gleichung \
 
 
 
-\subsection{Modell \glqq Zusätzliches VIP Telefon\grqq} 
-Im dritten Betriebsmodus wird zu einem Telefon wie im Betriebsmodus 1 ein VIP Telefon (Telefon, welches Einheimische bevorzugt) hinzugefügt. Wie vorhin werden auch hier die drei verschiedenen mittleren Ankunftszeiten betrachtet. In diesem Szenario werden die Formeln für M/M/2 Warteschlangenmodelle verwendet. 
+\subsection{Modell \glqq Zusätzliches VIP Telefon\grqq}
+Im dritten Betriebsmodus wird zu einem Telefon wie im Betriebsmodus 1 ein VIP Telefon (Telefon, welches Einheimische bevorzugt) hinzugefügt. Wie vorhin werden auch hier die drei verschiedenen mittleren Ankunftszeiten betrachtet. In diesem Szenario werden die Formeln für M/M/2 Warteschlangenmodelle verwendet.
 \subsubsection{Formeln für M/M/2 Warteschlangenmodelle}
 \label{Formeln2}
 Für die theoretischen Größen und Zeiten des Systems bzw. der Warteschlange werden folgende Formeln genutzt [3]. Dabei steht P0 für die Wahrscheinlichkeit, dass sich keine Kunden im System befinden. Der Wert c steht für die Anzahl der Telefone. In diesem Betriebsmodus also c = $2$.
@@ -895,7 +976,7 @@ Bei der Betrachtung der in Abbildung \ref{fig:mean3QueueSize1000} gezeigte, durc
 	\includegraphics[width=0.8\textwidth]{abbildungen/2_Phone_VIP/Arrival_1000_Serve_100_dur_1000000_Skip_0/MeanQueueTimeAll.pdf}
 	\caption{Durchschnittliche Verweildauer in der Warteschlange , MeanAr = $1000s$}
 	\label{fig:mean3QueueTime1000}
-\end{figure} 
+\end{figure}
 
 Wie bereits bei der Untersuchung der mittleren Warteschlangenlänge ist die ermittelte durchschnittliche Verweildauer, wie in Abbildung \ref{fig:mean3QueueTime1000} zu sehen ist in der Warteschlange unterhalb des erwarteten Wertes von $0,25$. Dabei nähert sich jedoch der Wert immer weiter dem erwarteten Wert an. Eine Abweichung von $0,05$ lässt sich gegen Ende der Simulation aber nicht ausgleichen.
 
@@ -906,9 +987,9 @@ Wie bereits bei der Untersuchung der mittleren Warteschlangenlänge ist die ermi
 	\includegraphics[width=0.8\textwidth]{abbildungen/2_Phone_VIP/Arrival_1000_Serve_100_dur_1000000_Skip_0/LittleSystem.pdf}
 	\caption{Darstellung der Differenz: $\lambda * Ws - Ls$ über die Simulationszeit (Little Theorem)}
 	\label{fig:Little3System1000}
-\end{figure} 
+\end{figure}
 
-In Abbildung \ref{fig:Little3System1000} ist der Verlauf der Gleichung \ref{eq:little} über die Simulationszeit aufgeführt. 
+In Abbildung \ref{fig:Little3System1000} ist der Verlauf der Gleichung \ref{eq:little} über die Simulationszeit aufgeführt.
 Dieser Wert schwangt über die Simulationsdauer um bis zu $0,005$. Da die Differenz zum Erwartungswert auch in diesem Betriebsmodus sehr gering ist, liegt die Ursache für diese Abweichung vermutlich in Ungenauigkeiten bei der Berechnung der Werte. Betrachtet man diese Abbildung mit den vorherigen, dann weichen diese Aussagen nicht voneinander ab.
 
 Alle vier ermittelten Durchschnittswerte liegen, ab einer Simulationsdauer von ca. $400000s$ sehr nah an den Werten, welche für ein eingeschwungenes Warteschlangensystem errechnet wurden. Da auch das in Abbildung  \ref{fig:Little3System1000} ersichtliche Ergebnis der Differenz zeigt, dass das System, abgesehen vom erläuterten systematischen Fehler, ab einer Simulationszeit von ca. $400000s$ der für ein eingeschwungenes System erforderliche Wert von $0$ näherungsweise erreicht wird. Es kann somit davon ausgegangen werden, dass der Steady State (eingeschwungene Zustand) bei dieser Simulationsdauer erreicht wurde.
@@ -965,7 +1046,7 @@ Auch bei der Betrachtung der in Abbildung \ref{fig:mean3QueueSize400} nähert si
 	\includegraphics[width=0.8\textwidth]{abbildungen/2_Phone_VIP/Arrival_400_Serve_100_dur_1000000_Skip_0/MeanQueueTimeAll.pdf}
 	\caption{Durchschnittliche Verweildauer in der Warteschlange , MeanAr = $400s$}
 	\label{fig:mean3QueueTime400}
-\end{figure} 
+\end{figure}
 
 Wie bereits bei der Untersuchung der mittleren Warteschlangenlänge ist die ermittelte durchschnittliche Verweildauer, wie in Abbildung \ref{fig:mean3QueueTime400} zu sehen ist in der Warteschlange sehr nah an dem erwarteten Wert von $1,5873$. Auch hier ist nicht bekannt ob sich der Wert über einen längeren Zeitraum genau so verhält.
 \paragraph{Validierung der Simulation}
@@ -975,9 +1056,9 @@ Wie bereits bei der Untersuchung der mittleren Warteschlangenlänge ist die ermi
 	\includegraphics[width=0.8\textwidth]{abbildungen/2_Phone_VIP/Arrival_400_Serve_100_dur_1000000_Skip_0/LittleSystem.pdf}
 	\caption{Darstellung der Differenz: $\lambda * Ws - Ls$ über die Simulationszeit (Little Theorem)}
 	\label{fig:Little3System400}
-\end{figure} 
+\end{figure}
 
-In Abbildung \ref{fig:Little3System400} ist der Verlauf der Gleichung \ref{eq:little} über die Simulationszeit aufgeführt. 
+In Abbildung \ref{fig:Little3System400} ist der Verlauf der Gleichung \ref{eq:little} über die Simulationszeit aufgeführt.
 Dieser Wert schwangt über die Simulationsdauer um bis zu $0,005$. Da die Differenz zum Erwartungswert auch in diesem Betriebsmodus sehr gering ist, liegt die Ursache für diese Abweichung vermutlich in Ungenauigkeiten bei der Berechnung der Werte. Betrachtet man diese Abbildung mit den vorherigen, dann weichen diese Aussagen nicht voneinander ab.
 
 Alle vier ermittelten Durchschnittswerte liegen, ab einer Simulationsdauer von ca. $400000s$ sehr nah an den Werten, welche für ein eingeschwungenes Warteschlangensystem errechnet wurden. Da auch das in Abbildung  \ref{fig:Little3System400} ersichtliche Ergebnis der Differenz zeigt, dass das System, abgesehen vom erläuterten systematischen Fehler, ab einer Simulationszeit von ca. $400000s$ der für ein eingeschwungenes System erforderliche Wert von $0$ näherungsweise erreicht wird. Es kann somit davon ausgegangen werden, dass der Steady State (eingeschwungene Zustand) bei dieser Simulationsdauer erreicht wurde.
@@ -1009,7 +1090,7 @@ Wq=33,3333
 	\label{fig:mean3SystemSize100}
 \end{figure}
 
-In Abbildung \ref{fig:mean3SystemSize100} kann man erkennen, dass bei zwei Telefonen die durchschnittliche Systemgröße sich sehr gut an den erwarteten Wert annähert. Hingegen der vorherigen Betriebsmodi lässt die Abbildung auf ein eingeschwungenes System schließen. 
+In Abbildung \ref{fig:mean3SystemSize100} kann man erkennen, dass bei zwei Telefonen die durchschnittliche Systemgröße sich sehr gut an den erwarteten Wert annähert. Hingegen der vorherigen Betriebsmodi lässt die Abbildung auf ein eingeschwungenes System schließen.
 
 Da durch zwei Telefone die Service Rate verdoppelt wird, ist in dieser Simulation $\mu$ ungleich $\lambda$. Folglich ist das erreichen eines Steady State nicht unplausibel.
 
@@ -1034,7 +1115,7 @@ Ein ähnlicher Schluss lässt sich ziehen bei Betrachtung der mittleren Systemze
 	\includegraphics[width=0.8\textwidth]{abbildungen/2_Phone_VIP/Arrival_100_Serve_100_dur_1000000_Skip_0/MeanQueueTimeAll.pdf}
 	\caption{Durchschnittliche Verweildauer in der Warteschlange , MeanAr = $100s$}
 	\label{fig:mean3QueueTime100}
-\end{figure} 
+\end{figure}
 
 In den Abbildungen \ref{fig:mean3QueueSize100} und \ref{fig:mean3QueueTime100}, welche die Größe und Verweildauer der Warteschlangen zeigen, lässt sich ein Einschwingen des Systems ab ca. $200000s$ vermuten. Da diese Werte bis zum Ende der Simulation kaum schwanken, kann davon ausgegangen werden, dass sie es nicht bei einer längeren Simulationsdauer tun würden.
 
@@ -1045,7 +1126,7 @@ In den Abbildungen \ref{fig:mean3QueueSize100} und \ref{fig:mean3QueueTime100}, 
 	\includegraphics[width=0.8\textwidth]{abbildungen/2_Phone_VIP/Arrival_100_Serve_100_dur_1000000_Skip_0/LittleSystem.pdf}
 	\caption{Darstellung der Differenz: $\lambda * Ws - Ls$ über die Simulationszeit (Little Theorem)}
 	\label{fig:Little3System100}
-\end{figure} 
+\end{figure}
 
 Anders als in den vorherigen Ankunftszeiten des Betriebsmodus 3, wie in Abbildung \ref{fig:Little3System100} zu sehen ist, liegt der Wert über die gesamte Simulationsdauer über $0$. Zusätzlich schwankt der Wert bis zu einer Simulationszeit von ca. $225000s$ um $0,05$ über dem erwarteten Wert. Ab dem Zeitpunkt von $400000s$ geht dieses Abweichung auf $0,03$ herunter, ist aber im Vergleich zu den vorherigen Ankunftszeiten signifikant hoch. Folglich kann nur von einer sehr schwachen Aussagekraft der Messung und der Simulation ausgegangen werden. Ein Steady State kann nicht erwartet werden.
 
@@ -1073,9 +1154,9 @@ Andererseits können auch Rundungsfehler zu diesen Abweichungen führen. Für di
 \subsection{Auswirkung der unterschiedlichen Betriebsmodi auf die Wartezeiten für die Kunden}
 Es wurden drei unterschiedliche Betriebsmodi simuliert. Im ersten Betriebsmodus werden alle Kunden gleich behandelt. Bis zu einer durchschnittlichen Zwischenankunftszeit von $400s$ (bei einer durchschnittlichen Telefonierzeit von $100s$) sind die Wartezeiten für die Kunden sehr gering.
 
-Im Betriebsmodus 2 werden die Einheimische der Insel gegenüber den Touristen bevorzugt. Vermutlich würde dieser Betriebsmodus in der Realität zu Unzufriedenheit bei den Touristen führen. Die durchschnittlichen Wartezeiten der Einheimischen werden bei diesem Betriebsmodus stark reduziert. Hingegen steigen die Wartezeiten der Touristen an, sodass sich die durchschnittliche Gesamtwartezeit aller Kunden gegenüber dem Betriebsmodus 1 nicht verändert. 
+Im Betriebsmodus 2 werden die Einheimische der Insel gegenüber den Touristen bevorzugt. Vermutlich würde dieser Betriebsmodus in der Realität zu Unzufriedenheit bei den Touristen führen. Die durchschnittlichen Wartezeiten der Einheimischen werden bei diesem Betriebsmodus stark reduziert. Hingegen steigen die Wartezeiten der Touristen an, sodass sich die durchschnittliche Gesamtwartezeit aller Kunden gegenüber dem Betriebsmodus 1 nicht verändert.
 
-Zwei Telefone wie in Betriebsmodus 3 bewirken hingegen zu den vorherigen Modi eine signifikante Entlastung des Systems. 
+Zwei Telefone wie in Betriebsmodus 3 bewirken hingegen zu den vorherigen Modi eine signifikante Entlastung des Systems.
 
 
 \subsection{Unberücksichtigte Simulationen}
@@ -1090,7 +1171,7 @@ Die gewählte Implementierung der Simulation bietet zahlreiche Variationsmöglic
 %	REFERENCE LIST
 %----------------------------------------------------------------------------------------
 %\input{References}
-\bibliography{Bibliographie} 
+\bibliography{Bibliographie}
 \bibliographystyle{plain}
 [3] faculty.ksu.edu.sa/9766/OR372/Lec13\_MMs\_Queueing\%20System2.pdf
 \end{document}

@@ -839,7 +839,7 @@ Wq=\frac{Lq}{\lambda}
 Ws=\frac{Ls}{\lambda}
 \end{equation}
 \subsubsection{Durchschnittliche Ankunftszeit der Clients: 1000}
-\paragraph{Theoretische Erwartungswerte laut M/M/1 Warteschlangenmodell}
+\paragraph{Theoretische Erwartungswerte laut M/M/2 Warteschlangenmodell}
 \\
 Bei einer durchschnittlichen Zwischenankunftszeit von $1000s$ ($\lambda=\frac{1}{1000}$, $\mu=\frac{1}{100}$)ergeben sich, basierend auf den in Abschnitt \ref{Formeln2} aufgeführten Formeln, folgende Erwartungswerte:
 \begin{equation}
@@ -909,7 +909,7 @@ Dieser Wert schwangt über die Simulationsdauer um bis zu $0,005$. Da die Differ
 Alle vier ermittelten Durchschnittswerte liegen, ab einer Simulationsdauer von ca. $400000s$ sehr nah an den Werten, welche für ein eingeschwungenes Warteschlangensystem errechnet wurden. Da auch das in Abbildung  \ref{fig:Little3System1000} ersichtliche Ergebnis der Differenz zeigt, dass das System, abgesehen vom erläuterten systematischen Fehler, ab einer Simulationszeit von ca. $400000s$ der für ein eingeschwungenes System erforderliche Wert von $0$ näherungsweise erreicht wird. Es kann somit davon ausgegangen werden, dass der Steady State (eingeschwungene Zustand) bei dieser Simulationsdauer erreicht wurde.
 
 \subsubsection{Durchschnittliche Ankunftszeit der Clients: 400}
-\paragraph{Theoretische Erwartungswerte laut M/M/1 Warteschlangenmodell}
+\paragraph{Theoretische Erwartungswerte laut M/M/2 Warteschlangenmodell}
 \\
 Bei einer durchschnittlichen Zwischenankunftszeit von $400$ ($\lambda=\frac{1}{400}$, $\mu=\frac{1}{100}$)ergeben sich, basierend auf den in Abschnitt \ref{Formeln2} aufgeführten Formeln, folgende Erwartungswerte:
 \begin{equation}
@@ -978,7 +978,7 @@ Dieser Wert schwangt über die Simulationsdauer um bis zu $0,005$. Da die Differ
 Alle vier ermittelten Durchschnittswerte liegen, ab einer Simulationsdauer von ca. $400000s$ sehr nah an den Werten, welche für ein eingeschwungenes Warteschlangensystem errechnet wurden. Da auch das in Abbildung  \ref{fig:Little3System400} ersichtliche Ergebnis der Differenz zeigt, dass das System, abgesehen vom erläuterten systematischen Fehler, ab einer Simulationszeit von ca. $400000s$ der für ein eingeschwungenes System erforderliche Wert von $0$ näherungsweise erreicht wird. Es kann somit davon ausgegangen werden, dass der Steady State (eingeschwungene Zustand) bei dieser Simulationsdauer erreicht wurde.
 
 \subsubsection{Durchschnittliche Ankunftszeit der Clients: 100}
-\paragraph{Theoretische Erwartungswerte laut M/M/1 Warteschlangenmodell}
+\paragraph{Theoretische Erwartungswerte laut M/M/2 Warteschlangenmodell}
 \\
 Bei einer durchschnittlichen Zwischenankunftszeit von $100$ ($\lambda=\frac{1}{100}$, $\mu=\frac{1}{100}$)ergeben sich, basierend auf den in Abschnitt \ref{Formeln2} aufgeführten Formeln, folgende Erwartungswerte:
 \begin{equation}
@@ -1068,14 +1068,17 @@ Andererseits können auch Rundungsfehler zu diesen Abweichungen führen. Für di
 \subsection{Auswirkung der unterschiedlichen Betriebsmodi auf die Wartezeiten für die Kunden}
 Es wurden drei unterschiedliche Betriebsmodi simuliert. Im ersten Betriebsmodus werden alle Kunden gleich behandelt. Bis zu einer durchschnittlichen Zwischenankunftszeit von $400s$ (bei einer durchschnittlichen Telefonierzeit von $100s$) sind die Wartezeiten für die Kunden sehr gering.
 
-Im Betriebsmodus 2 werden die Einwohner der Insel gegenüber den Touristen bevorzugt. Vermutlich würde dieser Betriebsmodus in der Realität zu Unzufriedenheit bei den Touristen führen. Die durchschnittlichen Wartezeiten der Einwohner werden bei diesem Betriebsmodus stark reduziert. Hingegen steigen die Wartezeiten der Touristen an, sodass sich die durchschnittliche Gesamtwartezeit aller Kunden gegenüber dem Betriebsmodus 1 nicht verändert. \\
-FAZIT HIERFÜR FEHLT !
+Im Betriebsmodus 2 werden die Einwohner der Insel gegenüber den Touristen bevorzugt. Vermutlich würde dieser Betriebsmodus in der Realität zu Unzufriedenheit bei den Touristen führen. Die durchschnittlichen Wartezeiten der Einwohner werden bei diesem Betriebsmodus stark reduziert. Hingegen steigen die Wartezeiten der Touristen an, sodass sich die durchschnittliche Gesamtwartezeit aller Kunden gegenüber dem Betriebsmodus 1 nicht verändert. 
+
+Zwei Telefone wie in Betriebsmodus 3 bewirken hingegen zu den vorherigen Modi eine signifikante Entlastung des Systems. 
 
 
 \subsection{Unberücksichtigte Simulationen}
-Die gewählte Implementierung der Simulation bietet zahlreiche Variationsmöglichkeiten der einzelnen Parameter. Je nach Wahl der Parameter kann das Ergebnis der Simulation deutlich anders verlaufen. Für die Auswertung im Zuge dieser Studienarbeit wurde vor allem der Parameter der durchschnittlichen Zwischenankunftszeit variiert.
-
 Darüber hinaus wurde eine Simulation mit einer Simulationsdauer von $10^9s$, was in etwa $31,7$ Jahren entspricht, durchgeführt. Aufgrund der zu großen Datenmenge von ca. $50$ GB kann dieser Datenstand nicht ausgewertet werden. Vor allem bei der grafischen Darstellung reichte die Kapazität der verwendeten Rechner nicht aus. Der Datenstand kann auf Wunsch vorgezeigt werden.
+
+\subsection{Ausblick}
+
+Die gewählte Implementierung der Simulation bietet zahlreiche Variationsmöglichkeiten der einzelnen Parameter. Je nach Wahl der Parameter kann das Ergebnis der Simulation deutlich anders verlaufen. Für die Auswertung im Zuge dieser Studienarbeit wurde vor allem der Parameter der durchschnittlichen Zwischenankunftszeit variiert. Es besteht jedoch die Möglichkeit weitere Simulationen mit unterschiedlichen Zwischenankunftszeiten, Telefonierzeiten oder einem anderen Verhältnis zwischen Einwohner und Touristen ablaufen zu lassen.
 
 
 

@@ -101,10 +101,29 @@ Die Tabelle \ref{tab:parameter} zeigt alle möglichen Parameter, welche die Soft
 
 \subsection{Betriebsmodi}
 Die Software hat drei Betriebsmodi:
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{abbildungen/modell/Betriebsmodus_1.pdf}
+	\caption{Modell des Betriebsmodus 1}
+	\label{fig:Betriebsmodus1}
+\end{figure}
+
 \begin{list}{}
-	\item Betriebsmodus 1: In diesem Modus gibt es ein Telefon und eine Warteschlange. Alle Personen in der Warteschlange werden gleichberechtigt behandelt.
-	\item Betriebsmodus 2: In diesem Modus gibt es ein Telefon und eine Warteschlange. Die Personen werden jedoch unterschieden nach Einheimischen (VIP) und Touristen. Einheimische werden bevorzugt behandelt. Befindet sich ein Einheimischer in der Warteschlange, wird dieser zuerst telefonieren, sobald das Telefon frei ist. Befinden sich mehrere Einheimische in der Warteschlange, wird der erste zuerst abgearbeitet. Das Verhältnis von Einheimischen zu Touristen kann mittels des Parameters percVIP geregelt werden.
-	\item Betriebsmodus 3: In diesem Modus gibt es eine Warteschlange und zwei Telefone. Das erste Telefon behandelt die Warteschlange analog zu Betriebsmodus 2. Das zweite Telefon behandelt die Warteschlange der Reihe nach unabhängig davon, ob es sich um einen Touristen oder einen Einheimischen handelt.
+	\item Betriebsmodus 1: In diesem Modus gibt es ein Telefon und eine Warteschlange, wie in Abbildung \ref{fig:Betriebsmodus1} zu sehen ist. Alle Personen in der Warteschlange werden gleichberechtigt behandelt.
+	\begin{figure}[htpb]
+		\centering
+		\includegraphics[width=0.8\textwidth]{abbildungen/modell/Betriebsmodus_2.pdf}
+		\caption{Modell des Betriebsmodus 2}
+		\label{fig:Betriebsmodus2}
+	\end{figure}
+	\item Betriebsmodus 2: In dem Modus, der in Abbildung \ref{fig:Betriebsmodus2} dargestellt ist, gibt es ein Telefon und eine Warteschlange. Die Personen werden jedoch unterschieden nach Einheimischen (VIP) und Touristen. Einheimische werden bevorzugt behandelt. Befindet sich ein Einheimischer in der Warteschlange, wird dieser zuerst telefonieren, sobald das Telefon frei ist. Befinden sich mehrere Einheimische in der Warteschlange, wird der erste zuerst abgearbeitet. Das Verhältnis von Einheimischen zu Touristen kann mittels des Parameters percVIP geregelt werden.
+	\begin{figure}[htpb]
+		\centering
+		\includegraphics[width=0.8\textwidth]{abbildungen/modell/Betriebsmodus_3.pdf}
+		\caption{Modell des Betriebsmodus 3}
+		\label{fig:Betriebsmodus3}
+	\end{figure}
+	\item Betriebsmodus 3: In diesem Modus gibt es eine Warteschlange und zwei Telefone. Das erste Telefon behandelt die Warteschlange analog zu Betriebsmodus 2. Das zweite Telefon behandelt die Warteschlange der Reihe nach unabhängig davon, ob es sich um einen Touristen oder einen Einheimischen handelt. Siehe dazu Abbildung \ref{fig:Betriebsmodus3}.
 \end{list}
 
 \subsection{Werte für die Auswertung}

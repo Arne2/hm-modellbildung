@@ -135,11 +135,11 @@ Grundsätzlich wurde eine Ereignisorientierte Simulation (Discrete Event Simulat
 
 In diesem Unterpaket finden sich alle notwendigen Klassen für die Ereignisorientierte Simulation. Die \texttt{Clock} hält die Simulationszeit und kann nur vorgestellt werden.
 
-Das Interface \texttt{Event} definiert ein Ereignis in der Simulation. Jedes Ereignis hat einen Zeitpunkt an dem es auftritt, sowie Logik, die zu diesem Zeitpunkt ausgeführt werden soll und potentiell den ganzen Zustand der Simulation verändern kann. Die \texttt{EventList} kann Ereignisse aufnehmen und immer das nächste Event mit den frühesten Zeitpunkt liefern.
+Das Interface \texttt{Event} definiert ein Ereignis in der Simulation. Jedes Ereignis hat einen Zeitpunkt, an dem es auftritt, sowie Logik, die zu diesem Zeitpunkt ausgeführt werden soll und potentiell den ganzen Zustand der Simulation verändern kann. Die \texttt{EventList} kann Ereignisse aufnehmen und immer das nächste Event mit den frühesten Zeitpunkt liefern.
 
 Die konkreten Events \texttt{Arrival, BeginServe, FinishServe} beschreiben die Ereignisse in der Callshop Problemstellung.
 
-Abbildung \ref{fig:arrival-event} zeigt den Verlauf des Ereignisses für Arrival. Zunächst werden freie Telefone gesucht. Wird ein freies Telefon gefunden wird ein BeginServeEvent mit aktueller Zeit erstellt. Eine neue Person wird erstellt, ihre Ankunftszeit gespeichert, und die Person wird in die Schlange eingefügt. Zum Schluss wird das nächste ArrivalEvent erstellt, um fortlaufend neue Ankünfte zu haben.
+Abbildung \ref{fig:arrival-event} zeigt den Verlauf des Ereignisses für Arrival. Zunächst werden freie Telefone gesucht. Wird ein freies Telefon gefunden, wird ein BeginServeEvent mit aktueller Zeit erstellt. Eine neue Person wird erstellt, ihre Ankunftszeit gespeichert, und die Person wird in die Schlange eingefügt. Zum Schluss wird das nächste ArrivalEvent erstellt, um fortlaufend neue Ankünfte zu haben.
 
 Der Verlauf von BeginServe ist in Abbildung \ref{fig:beginserve-event} zu sehen. Die nächste (VIP oder normale) Person wird je nachdem, ob es sich um ein VIP Phone oder nicht handelt, aus der Liste geholt. Die Zeit vom Bearbeitungsbeginn wird für die Person gespeichert. Das FinishEvent wird direkt ermittelt und in die EventList eingetragen.
 
@@ -187,7 +187,7 @@ Zufallszahlen können über einen Seed erstellt werden.
 
 \texttt{domain} beschreibt alle notwendigen Datenstrukturen aus der Domäne des Callshops. Hier gibt es Personen und Telefone. Jede neue Person hat eine einzigartige ID und im Laufe der Simulation merkt sie sich ihre persönlichen Zeitpunkte.
 
-Eine Person kann optional ein Resident (Vip) sein. Eine Telefon kann optional nur Residents (VIPs) annehmen.
+Eine Person kann optional ein Resident (Vip) sein. Ein Telefon kann optional nur Residents (VIPs) annehmen.
 
 \subsection{Package calculation, log}
 

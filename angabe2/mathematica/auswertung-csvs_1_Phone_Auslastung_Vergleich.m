@@ -13,8 +13,8 @@ Simulate[args_] := If[
 (*Parameter f\[UDoubleDot]r Simulation*)
 
 
-(*Falls neue Simulation ansteuern wert auf true setzen *)
-(*Falls wert auf false, dann wird keine neue Simulation durchgef\[UDoubleDot]hrt, sondern alte Daten herangezoogen *)
+durationSimulation = 10000;
+skip = 0;
 outputDir =  FileNameJoin@{
 NotebookDirectory[], StringJoin["../doku/abbildungen/1_Phone/Auslastung_Vegleich", 
 "/"]};

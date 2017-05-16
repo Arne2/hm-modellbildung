@@ -62,23 +62,23 @@ Alle errechneten Ergebnisse sollen über Reports ausgeleitet werden. Die Reports
 
     	\item little-system-normal.csv enthält die Werte der Touristen für die Gleichung \ref{eq:little}
 
-    	\item little-system-resident.csv enthält die Werte der Einwohner für die Gleichung \ref{eq:little}
+    	\item little-system-resident.csv enthält die Werte der Einheimischen für die Gleichung \ref{eq:little}
     	\item mean-phone-size-all.csv enthält die durchschnittliche Auslastung des Telefons
     	\item mean-queue-size-all.csv enthält die durchschnittliche Warteschlangenlänge
     	\item mean-queue-size-normal.csv enthält die durschnittliche Warteschlangenlänge der Touristen
-    	\item mean-queue-size-resident.csv enthält die durchschnittliche Warteschlangenlänge der Einwohner
+    	\item mean-queue-size-resident.csv enthält die durchschnittliche Warteschlangenlänge der Einheimischen
     	\item mean-system-size-all.csv enthält die durchschnittliche Anzahl an Kunden im System
     	\item mean-system-size-normal.csv enthält die durschnittliche Anzahl an Touristen im System
-    	\item mean-system-size-resident.csv enthält die durchschnittliche Anzahl an Einwohnern im System
+    	\item mean-system-size-resident.csv enthält die durchschnittliche Anzahl an Einheimischen im System
     	\item mean-queue-time-all.csv enthält die durchschnittliche Wartezeit aller Kunden
     	\item mean-queue-time-normal.csv enthält die durschnittliche Wartezeit der Touristen
-    	\item mean-queue-time-resident.csv enthält die durchschnittliche Wartezeit der Einwohner
+    	\item mean-queue-time-resident.csv enthält die durchschnittliche Wartezeit der Einheimischen
     	\item mean-system-time-all.csv enthält die durchschnittliche Verweildauer der Kunden im System
     	\item mean-system-time-normal.csv enthält die durschnittliche Verweildauer der Touristen im System
-    	\item mean-system-time-resident.csv enthält die durchschnittliche Verweildauer der Einwohner im System
+    	\item mean-system-time-resident.csv enthält die durchschnittliche Verweildauer der Einheimischen im System
     	\item queue-size-all.csv enthält die Länge der gesamten Warteschlange zu den jeweiligen Zeitpunkten
     	\item queue-size-tourist.csv enthält die Länge der Touristen-Warteschlange zu den jeweiligen Zeitpunkten
-    	\item queue-size-resident.csv enthält die Länge der Einwohner-Warteschlange zu den jeweiligen Zeitpunkten
+    	\item queue-size-resident.csv enthält die Länge der Einheimischen-Warteschlange zu den jeweiligen Zeitpunkten
 
 \end{list}
 \subsection{Parameter}
@@ -562,7 +562,7 @@ Wq=11,1111
 	\label{fig:MQSVIP1000VGL}
 \end{figure}
 
-Abbildung \ref{fig:MQSVIP1000ALL} zeigt die durchschnittliche Warteschlangenlänge. Im Vergleich dazu zeigt Abbildung \ref{fig:MQSVIP1000VGL} die Zusammensetzung der Warteschlangenlänge aus den zwei unterschiedenen Gruppen. Es wird deutlich, dass die Wartezeit der Touristen deutlich länger ist als die der Einheimischen, was aufgrund der Bevorzugung plausibel ist. Die durchschnittliche Warteschlangenlänge insgesamt liegt gegen Ende der Simulation um ca. $0,004$ über dem erwarteten Wert von $0.111111$ (gelbe Linie). Doch neben der Bevorzugung spielt auch der Anteil der Einwohner an der insgesamten Kundenanzahl (lediglich $0,1$) eine Rolle. Es kommen somit deutlich mehr Touristen in den Telefonshop als Einwohner.
+Abbildung \ref{fig:MQSVIP1000ALL} zeigt die durchschnittliche Warteschlangenlänge. Im Vergleich dazu zeigt Abbildung \ref{fig:MQSVIP1000VGL} die Zusammensetzung der Warteschlangenlänge aus den zwei unterschiedenen Gruppen. Es wird deutlich, dass die Wartezeit der Touristen deutlich länger ist als die der Einheimischen, was aufgrund der Bevorzugung plausibel ist. Die durchschnittliche Warteschlangenlänge insgesamt liegt gegen Ende der Simulation um ca. $0,004$ über dem erwarteten Wert von $0.111111$ (gelbe Linie). Doch neben der Bevorzugung spielt auch der Anteil der Einheimischen an der insgesamten Kundenanzahl (lediglich $0,1$) eine Rolle. Es kommen somit deutlich mehr Touristen in den Telefonshop als Einheimische.
 
 \begin{figure}[htpb]
 	\centering
@@ -574,11 +574,11 @@ Abbildung \ref{fig:MQSVIP1000ALL} zeigt die durchschnittliche Warteschlangenlän
 \begin{figure}[htpb]
 	\centering
 	\includegraphics[width=0.8\textwidth]{abbildungen/1_Phone_VIP/Arrival_1000_Serve_100_dur_1000000_Skip_0/MeanQueueTimeTouristAndResident.pdf}
-	\caption{Durchschnittliche Verweildauer der Touristen und Einwohner in der Warteschlange , MeanAr = $1000s$}
+	\caption{Durchschnittliche Verweildauer der Touristen und Einheimische in der Warteschlange , MeanAr = $1000s$}
 	\label{fig:MQTVIP1000VGL}
 \end{figure}
 
-In der Abbildung \ref{fig:MQTVIP1000ALL} sieht man die durchschnittliche Wartezeit aller Kunden insgesamt. Im Vergleich dazu wird in der Abbildung \ref{fig:MQTVIP1000VGL} zwischen Touristen und Einwohnern unterschieden. Durch die Bevorzugung ist auch hier der Wert der Einwohner deutlich geringer als der der Touristen. Auffallend ist ebenfalls, dass bei Simulationsdauer von ca. $680000s$ die Anzahl der wartenden Einwohner leicht ansteigt. In etwa zur gleichen Zeit steigt die durchschnittliche Wartezeit der Einheimischen ebenfalls an. Da jedoch durch die geringe Auslastung des Telefons die insgesamte Wartezeit beider Gruppen sehr gering ist, scheint die durchschnittliche Wartezeit der Einwohner zu diesem Zeitpunkt deutlich drastischer anzusteigen als die Anzahl. Dies liegt jedoch lediglich an der feineren Skalierung und wäre auch nicht plausibel.
+In der Abbildung \ref{fig:MQTVIP1000ALL} sieht man die durchschnittliche Wartezeit aller Kunden insgesamt. Im Vergleich dazu wird in der Abbildung \ref{fig:MQTVIP1000VGL} zwischen Touristen und Einheimischen unterschieden. Durch die Bevorzugung ist auch hier der Wert der Einheimischen deutlich geringer als der der Touristen. Auffallend ist ebenfalls, dass bei Simulationsdauer von ca. $680000s$ die Anzahl der wartenden Einheimischen leicht ansteigt. In etwa zur gleichen Zeit steigt die durchschnittliche Wartezeit der Einheimischen ebenfalls an. Da jedoch durch die geringe Auslastung des Telefons die insgesamte Wartezeit beider Gruppen sehr gering ist, scheint die durchschnittliche Wartezeit der Einheimischen zu diesem Zeitpunkt deutlich drastischer anzusteigen als die Anzahl. Dies liegt jedoch lediglich an der feineren Skalierung und wäre auch nicht plausibel.
 
 \begin{figure}[htpb]
 	\centering
@@ -590,11 +590,11 @@ In der Abbildung \ref{fig:MQTVIP1000ALL} sieht man die durchschnittliche Warteze
 \begin{figure}[htpb]
 	\centering
 	\includegraphics[width=0.8\textwidth]{abbildungen/1_Phone_VIP/Arrival_1000_Serve_100_dur_1000000_Skip_0/MeanSystemTimeTouristAndResident.pdf}
-	\caption{Durchschnittliche Verweildauer der Einwohner und Touristen im System, MeanAr = $1000s$}
+	\caption{Durchschnittliche Verweildauer der Einheimischen und Touristen im System, MeanAr = $1000s$}
 	\label{fig:MSTVIP1000VGL}
 \end{figure}
 
-Abbildung \ref{fig:MSTVIP1000ALL} zeigt die durchschnittliche Verweildauer aller Kunden im System insgesamt. Im Vergleich dazu zeigt Abbildung \ref{fig:MSTVIP1000VGL} die Zusammensetzung aus den zwei unterschiedenen Gruppen. Die durchschnittliche Verweildauer insgesamt liegt wiederum im Bereich des Erwartungswertes (Abweichung ca. $10s$). Interessant ist hingegen die Aufteilung zwischen den Touristen und Einheimischen. Obwohl die Werte für die Verweildauer in der Warteschlange und auch für die Warteschlangenlänge bei den Einwohnern deutlich niedriger waren, als bei den Touristen, liegen die Werte in diesem Fall, vor allem gegen Ende der Simulationszeit, sehr nah beieinander. Die Ursache hierfür liegt in der geringen Auslastung des Telefons. Durch die durchschnittliche Telefonierdauer von $100s$ liegt die durchschnittliche Verweildauer im System ohne Wartezeit ebenfalls bei $100s$. Da auch die bevorzugten Einwohner warten müssen, bis ein belegtes Telefon wieder frei ist, bevor sie telefonieren können, liegt der Wert hier entwas über $100s$. Da jedoch das Telefon nur gering ausgelastet ist, müssen auch die Touristen durchschnittlich nur eine sehr kurze Zeit warten und haben daher auch nur eine durchschnittliche Verweildauer im System von ca. $118s$.
+Abbildung \ref{fig:MSTVIP1000ALL} zeigt die durchschnittliche Verweildauer aller Kunden im System insgesamt. Im Vergleich dazu zeigt Abbildung \ref{fig:MSTVIP1000VGL} die Zusammensetzung aus den zwei unterschiedenen Gruppen. Die durchschnittliche Verweildauer insgesamt liegt wiederum im Bereich des Erwartungswertes (Abweichung ca. $10s$). Interessant ist hingegen die Aufteilung zwischen den Touristen und Einheimischen. Obwohl die Werte für die Verweildauer in der Warteschlange und auch für die Warteschlangenlänge bei den Einheimischen deutlich niedriger waren, als bei den Touristen, liegen die Werte in diesem Fall, vor allem gegen Ende der Simulationszeit, sehr nah beieinander. Die Ursache hierfür liegt in der geringen Auslastung des Telefons. Durch die durchschnittliche Telefonierdauer von $100s$ liegt die durchschnittliche Verweildauer im System ohne Wartezeit ebenfalls bei $100s$. Da auch die bevorzugten Einheimischen warten müssen, bis ein belegtes Telefon wieder frei ist, bevor sie telefonieren können, liegt der Wert hier entwas über $100s$. Da jedoch das Telefon nur gering ausgelastet ist, müssen auch die Touristen durchschnittlich nur eine sehr kurze Zeit warten und haben daher auch nur eine durchschnittliche Verweildauer im System von ca. $118s$.
 
 \begin{figure}[htpb]
 	\centering
@@ -613,11 +613,11 @@ Abbildung \ref{fig:MSTVIP1000ALL} zeigt die durchschnittliche Verweildauer aller
 \begin{figure}[htpb]
 	\centering
 	\includegraphics[width=0.8\textwidth]{abbildungen/1_Phone_VIP/Arrival_400_Serve_100_dur_1000000_Skip_0/QueueStepPlotResidentFiltered.pdf}
-	\caption{Warteschlangenlänge der Einwohner (gefiltert), MeanAr = $400s$}
+	\caption{Warteschlangenlänge der Einheimischen (gefiltert), MeanAr = $400s$}
 	\label{fig:QSPVIP400}
 \end{figure}
 
-Die Abbildungen \ref{fig:QSPALL1000}, \ref{fig:QSPTOURI1000} und \ref{fig:QSPVIP1000} zeigen die absoluten Warteschlangenlängen zu den unterschiedlichen Systemzeiten. Über die gesamte Simulationszeit ist die maximal auftretende Warteschlangenlänge lediglich $5$. Es warten jedoch, wie Abbildung \ref{fig:QSPVIP1000} zeigt zu keinem Zeitpunkt zwei Einwohner gleichzeitig. Dies belegt die geringe durchschnittliche Verweildauer der Einwohner im System und in der Warteschlange.
+Die Abbildungen \ref{fig:QSPALL1000}, \ref{fig:QSPTOURI1000} und \ref{fig:QSPVIP1000} zeigen die absoluten Warteschlangenlängen zu den unterschiedlichen Systemzeiten. Über die gesamte Simulationszeit ist die maximal auftretende Warteschlangenlänge lediglich $5$. Es warten jedoch, wie Abbildung \ref{fig:QSPVIP1000} zeigt zu keinem Zeitpunkt zwei Einheimische gleichzeitig. Dies belegt die geringe durchschnittliche Verweildauer der Einheimischen im System und in der Warteschlange.
 
 \paragraph{Validierung der Simulation}
 \\
@@ -679,11 +679,11 @@ Abbildung \ref{fig:MQSVIP400ALL} zeigt die durchschnittliche Warteschlangenläng
 \begin{figure}[htpb]
 	\centering
 	\includegraphics[width=0.8\textwidth]{abbildungen/1_Phone_VIP/Arrival_400_Serve_100_dur_1000000_Skip_0/MeanQueueTimeTouristAndResident.pdf}
-	\caption{Durchschnittliche Verweildauer der Touristen und Einwohner in der Warteschlange , MeanAr = $400s$}
+	\caption{Durchschnittliche Verweildauer der Touristen und Einheimische in der Warteschlange , MeanAr = $400s$}
 	\label{fig:MQTVIP400VGL}
 \end{figure}
 
-In der Abbildung \ref{fig:MQTVIP400ALL} sieht man die durchschnittliche Wartezeit aller Kunden insgesamt. Im Vergleich dazu wird in der Abbildung \ref{fig:MQTVIP400VGL} zwischen Touristen und Einwohnern unterschieden. Ab einer Simulationsdauer von ca. $300000s$ ist, aufgrund der Bevorzugung, auch hier der Wert der Einwohner deutlich geringer als der der Touristen. Auffallend ist, dass der Wert der Einwohner zu Beginn der Simulation kurzzeitig höher ist als der der Touristen. Hintergrund dürfte hierbei ein nicht eingeschwungenes System sein, infolge dessen einzelne Kunden noch eine große Veränderung des durschnittswertes bewirken. Gegen Ende der Simulation näher sich der errechnete Wert immer weiter dem Erwartungswert von $33,3333$ an. Am Ende der Simulation ist eine Abweichung von ca. $1,5$ anzumerken.
+In der Abbildung \ref{fig:MQTVIP400ALL} sieht man die durchschnittliche Wartezeit aller Kunden insgesamt. Im Vergleich dazu wird in der Abbildung \ref{fig:MQTVIP400VGL} zwischen Touristen und Einheimischen unterschieden. Ab einer Simulationsdauer von ca. $300000s$ ist, aufgrund der Bevorzugung, auch hier der Wert der Einheimischen deutlich geringer als der der Touristen. Auffallend ist, dass der Wert der Einheimischen zu Beginn der Simulation kurzzeitig höher ist als der der Touristen. Hintergrund dürfte hierbei ein nicht eingeschwungenes System sein, infolge dessen einzelne Kunden noch eine große Veränderung des durschnittswertes bewirken. Gegen Ende der Simulation näher sich der errechnete Wert immer weiter dem Erwartungswert von $33,3333$ an. Am Ende der Simulation ist eine Abweichung von ca. $1,5$ anzumerken.
 
 \begin{figure}[htpb]
 	\centering
@@ -695,7 +695,7 @@ In der Abbildung \ref{fig:MQTVIP400ALL} sieht man die durchschnittliche Wartezei
 \begin{figure}[htpb]
 	\centering
 	\includegraphics[width=0.8\textwidth]{abbildungen/1_Phone_VIP/Arrival_400_Serve_100_dur_1000000_Skip_0/MeanSystemTimeTouristAndResident.pdf}
-	\caption{Durchschnittliche Verweildauer der Einwohner und Touristen im System, MeanAr = $400s$}
+	\caption{Durchschnittliche Verweildauer der Einheimischen und Touristen im System, MeanAr = $400s$}
 	\label{fig:MSTVIP400VGL}
 \end{figure}
 
@@ -718,7 +718,7 @@ Abbildung \ref{fig:MSTVIP1000ALL} zeigt die durchschnittliche Verweildauer aller
 \begin{figure}[htpb]
 	\centering
 	\includegraphics[width=0.8\textwidth]{abbildungen/1_Phone_VIP/Arrival_1000_Serve_100_dur_1000000_Skip_0/QueueStepPlotResidentFiltered.pdf}
-	\caption{Warteschlangenlänge der Einwohner (gefiltert), MeanAr = $1000s$}
+	\caption{Warteschlangenlänge der Einheimischen (gefiltert), MeanAr = $1000s$}
 	\label{fig:QSPVIP1000}
 \end{figure}
 
@@ -1073,7 +1073,7 @@ Andererseits können auch Rundungsfehler zu diesen Abweichungen führen. Für di
 \subsection{Auswirkung der unterschiedlichen Betriebsmodi auf die Wartezeiten für die Kunden}
 Es wurden drei unterschiedliche Betriebsmodi simuliert. Im ersten Betriebsmodus werden alle Kunden gleich behandelt. Bis zu einer durchschnittlichen Zwischenankunftszeit von $400s$ (bei einer durchschnittlichen Telefonierzeit von $100s$) sind die Wartezeiten für die Kunden sehr gering.
 
-Im Betriebsmodus 2 werden die Einwohner der Insel gegenüber den Touristen bevorzugt. Vermutlich würde dieser Betriebsmodus in der Realität zu Unzufriedenheit bei den Touristen führen. Die durchschnittlichen Wartezeiten der Einwohner werden bei diesem Betriebsmodus stark reduziert. Hingegen steigen die Wartezeiten der Touristen an, sodass sich die durchschnittliche Gesamtwartezeit aller Kunden gegenüber dem Betriebsmodus 1 nicht verändert. 
+Im Betriebsmodus 2 werden die Einheimische der Insel gegenüber den Touristen bevorzugt. Vermutlich würde dieser Betriebsmodus in der Realität zu Unzufriedenheit bei den Touristen führen. Die durchschnittlichen Wartezeiten der Einheimischen werden bei diesem Betriebsmodus stark reduziert. Hingegen steigen die Wartezeiten der Touristen an, sodass sich die durchschnittliche Gesamtwartezeit aller Kunden gegenüber dem Betriebsmodus 1 nicht verändert. 
 
 Zwei Telefone wie in Betriebsmodus 3 bewirken hingegen zu den vorherigen Modi eine signifikante Entlastung des Systems. 
 
@@ -1083,7 +1083,7 @@ Darüber hinaus wurde eine Simulation mit einer Simulationsdauer von $10^9s$, wa
 
 \subsection{Ausblick}
 
-Die gewählte Implementierung der Simulation bietet zahlreiche Variationsmöglichkeiten der einzelnen Parameter. Je nach Wahl der Parameter kann das Ergebnis der Simulation deutlich anders verlaufen. Für die Auswertung im Zuge dieser Studienarbeit wurde vor allem der Parameter der durchschnittlichen Zwischenankunftszeit variiert. Es besteht jedoch die Möglichkeit weitere Simulationen mit unterschiedlichen Zwischenankunftszeiten, Telefonierzeiten oder einem anderen Verhältnis zwischen Einwohner und Touristen ablaufen zu lassen.
+Die gewählte Implementierung der Simulation bietet zahlreiche Variationsmöglichkeiten der einzelnen Parameter. Je nach Wahl der Parameter kann das Ergebnis der Simulation deutlich anders verlaufen. Für die Auswertung im Zuge dieser Studienarbeit wurde vor allem der Parameter der durchschnittlichen Zwischenankunftszeit variiert. Es besteht jedoch die Möglichkeit weitere Simulationen mit unterschiedlichen Zwischenankunftszeiten, Telefonierzeiten oder einem anderen Verhältnis zwischen Einheimischen und Touristen ablaufen zu lassen.
 
 
 

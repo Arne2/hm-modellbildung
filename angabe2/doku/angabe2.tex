@@ -130,23 +130,15 @@ Im Zuge dieses Kapitels erfolgt die Überprüfung der, im Zuge der implementiert
 Die Überprüfung erfolgt zunächst graphisch mittels eines Histogramms und eines Qunatil-Quantil-Plots. Im Anschluss erfolgt die rechnerische Überprüfung mittels Shapiro-Wilk-, Cramér-von-Mises- und Anderson-Darling-Test.
 
 \subsection{Graphische Überprüfung}
-\begin{figure}[!htb]
+	
+\begin{figure}[htpb]
 	\centering
-	\begin{minipage}{.5\textwidth}
-		\centering
-		\includegraphics[width=0.8\textwidth]{abbildungen/distribution/histogramm.pdf}
-		\caption{Histogramm der generierten Zufallszahlen}
-		\label{fig:Histogramm}
-	\end{minipage}%
-	\begin{minipage}{0.5\textwidth}
-		\centering
-		\includegraphics[width=0.8\textwidth]{abbildungen/distribution/histogrammExpVerteilung.pdf}
-		\caption{Histogramm einer Exponentialverteilung}
-		\label{fig:HistogrammExp}
-	\end{minipage}
+	\includegraphics[width=0.8\textwidth]{abbildungen/distribution/histogrammExpVerteilung.pdf}
+	\caption{Histogramm der generierten Zufallszahlen}
+	\label{fig:HistogrammExp}
 \end{figure}
 
-Abbildung \ref{fig:Histogramm} zeigt die von der Simulation generierten Zufallszahlen in einem Histogramm. Zum besseren Vergleich zeigt Abbildung \ref{fig:HistogrammExp} das Histogramm einer Exponentialverteilung. Beide Abbildungen weisen einen nahezu identischen Verlauf auf, was ein Indiz für eine Exponentialverteilung der Daten darstellt.
+Abbildung \ref{fig:HistogrammExp} zeigt die von der Simulation generierten Zufallszahlen in einem Histogramm. Die blaue Linie stellt den Graph einer Exponentialverteilung dar. Der Verlauf des Histogramms ist nahezu identisch mit dem Verlauf der Exponentialverteilung, was ein Indiz für eine Exponentialverteilung der Daten darstellt.
 
 \begin{figure}[htpb]
 	\centering
@@ -166,10 +158,12 @@ Laut dem Shapiro-Wilk-Test kann die Nullhypothese nicht abgelehnt werden, da der
 Durch die Tests kann somit eine Exponentialverteilung der generierten Zufallszahlen nicht wiederlegt werden. In Kombination mit der graphischen Überprüfung ist es plausibel, wenn von exponentialverteilten Werten ausgegangen wird. Ein entgültiger Beweis kann nicht erbracht werden.
 
 \section{Auswertung der Ergebnisse}
-Im Zuge dieses Kapitels werden alle Ergebnisse der Simulation und die daraus errechneten Werte erläutert. Zusätzlich werden relevante Größen durch Plots veranschaulicht. Die einzelnen Auswertungen werden mit Hilfe des Theorems von Little validiert.
+Im Zuge dieses Kapitels werden alle Ergebnisse der Simulation und die daraus errechneten Werte erläutert. Zusätzlich werden relevante Größen durch Plots veranschaulicht. Die einzelnen Auswertungen werden mit Hilfe des Theorems von Little validiert.\\
+Die Anzahl und damit die Kombinationsmöglichkeiten der unterschiedlichen Parameter ist sehr groß. Im Verlauf dieser Studienarbeit werden ausschließlich die Auswirkungen verschiedene Werte für den Parameter durchschnittliche Zwischenankunftszeit auf den Verlauf der Simulation ausgewertet. Weitere Simulationen mit anderen Parameterwerten können durchgeführt werden. Die unterschiedlichen Parameter sind in der Tabelle \ref{tab:parameter} aufgelistet.
+
 
 \subsection{Modell \glqq Ein Telefon\grqq} 
-Für den in Kapitel \ref{requirements} aufgelisteten ersten Betriebsmodus (ein Server, welcher alle Clients bedient) werden im folgenden die Auswertungen aufgeführt. Exemplarisch werden vier verschiedene durchschnittliche Ankunftszeiten für die Clients verwendet. Zunächst wird eine durchschnittliche Ankunftszeit von $1000s$ angenommen, was bei einer durchschnittlichen Telefonierdauer von $100s$ (Dauer der Serverbelegung) einer sehr geringen Serverauslastung entspricht. Anschließend werden mit den durchschnittlichen Ankunftszeiten von $800s$, $400s$ und $100s$ die Auswirkungen von höherer Serverauslastung auf das Ergebnis der Simulation erläutert. \\
+Für den in Kapitel \ref{requirements} aufgelisteten ersten Betriebsmodus (ein Server, welcher alle Clients bedient) werden im folgenden die Auswertungen aufgeführt. Exemplarisch werden vier verschiedene durchschnittliche Ankunftszeiten für die Clients verwendet. Zunächst wird eine durchschnittliche Ankunftszeit von $1000s$ angenommen, was bei einer durchschnittlichen Telefonierdauer von $100s$ (Dauer der Serverbelegung) einer sehr geringen Serverauslastung entspricht. Anschließend werden mit den durchschnittlichen Ankunftszeiten von $400s$ und $100s$ die Auswirkungen von höherer Serverauslastung auf das Ergebnis der Simulation erläutert. \\
 
 Für jede durchschnittliche Ankunftszeit werden zunächst die zu erwartenden Werte, basierend auf den Formeln für M/M/1 Warteschlangenmodelle ermittelt. Die einzelnen Formeln sind im folgenden Kapitel aufgeführt. Betrachtet werden hierbei, wie in den \ref{requirements} erläutert die durchschnittliche Anzahl von Kunden im System, durchschnittliche Warteschlangenlänge, durchschnittliche Verweildauer im System und die durchschnittliche Verweildauer in der Warteschlange. Die berechneten Größen werden als Erwartungswerte betrachtet gegen die die durch die Simulation ermittelten Werte geprüft werden. 
 
@@ -243,7 +237,7 @@ Die einzelnen Erwartungswerte sind in den nachfolgenden Abbildungen durch eine g
 	\label{fig:meanSystemSize1000}
 \end{figure}
 
-Abbildung \ref{fig:meanSystemSize1000} zeigt die durchschnittliche Anzahl an Kunden im System an. Ab einer Simulationszeit von ca $200000s$ liegt diese durchschnittlich bei $0.11$, schwankt jedoch bis zum Ende der Simulation um ca. $0,01$. Der Erwartungswert von $0,111111$ wird durch die Simulation nicht exakt erreicht. Es muss von einem systematischen Fehler von ca. $0,01$ ausgegangen werden. Weitere Erkenntnisse liefert die Validierung mit Hilfe des Little Theorems. Allgemein zeigt dieser Plot, dass die durchschnittliche Anzahl an Kunden im System sehr gering ist. Durch die Vergleichsweise kurze Telefonierzeit in Kombination mit einer lange Zwischenankunftszeit ist dieser Wert plausibel.
+Abbildung \ref{fig:meanSystemSize1000} zeigt die durchschnittliche Anzahl an Kunden im System an. Ab einer Simulationszeit von ca $200000s$ liegt diese durchschnittlich bei $0.11$, schwankt jedoch bis zum Ende der Simulation um ca. $0,01$. Der Erwartungswert von $0,111111$ wird durch die Simulation nicht exakt erreicht. Ursache hierfür könnte ein systematischen Fehler von ca. $0,01$ bei der Berechnung sein. Alternativ würde ein noch nicht vollständig eingeschwungenes System das Verhalten ebenfalls erklären. Weitere Erkenntnisse liefert die Validierung mit Hilfe des Little Theorems. Allgemein zeigt dieser Plot, dass die durchschnittliche Anzahl an Kunden im System sehr gering ist. Durch die Vergleichsweise kurze Telefonierzeit in Kombination mit einer lange Zwischenankunftszeit ist dieser Wert plausibel.
 
 \begin{figure}[htpb]
 	\centering
@@ -252,7 +246,7 @@ Abbildung \ref{fig:meanSystemSize1000} zeigt die durchschnittliche Anzahl an Kun
 	\label{fig:meanSystemTime1000}
 \end{figure}
 
-Betrachtet man Abbildung \ref{fig:meanSystemTime1000}, wird deutlich, dass die durchschnittliche Verweilsdauer im System bis zu einer Simulationszeit von $200000s$ stark variiert. Doch auch mit steigender Simulationszeit bleibt sie unter dem erwarteten Wert von $111.111$ bei durchschnittlich. Der Grund hierfür könnte wiederum ein systematischer Fehler in der Berechnung, beispielsweise aufgrund von Ungenauigkeiten durch Runden sein.
+Betrachtet man Abbildung \ref{fig:meanSystemTime1000}, wird deutlich, dass die durchschnittliche Verweilsdauer im System bis zu einer Simulationszeit von $200000s$ stark variiert. Doch auch mit steigender Simulationszeit bleibt sie unter dem erwarteten Wert von $111.111$ bei durchschnittlich. Der Grund hierfür könnte wiederum ein systematischer Fehler in der Berechnung, beispielsweise aufgrund von Ungenauigkeiten durch Runden sein, oder ein noch nicht vollständig eingeschwungenes System.
 
 \begin{figure}[htpb]
 	\centering
@@ -261,7 +255,7 @@ Betrachtet man Abbildung \ref{fig:meanSystemTime1000}, wird deutlich, dass die d
 	\label{fig:meanQueueSize1000}
 \end{figure}
 
-Bei der Betrachtung der in Abbildung \ref{fig:meanQueueSize1000} gezeigte durchschnittliche Warteschlangenlänge fällt auf, dass die Werte wiederum bis zu einer Simulationsdauer von $200000s$ stark variieren schwanken. Anschließend nähern sich die Werte dem dem Erwartungswert von $0,0111111$ an, bleiben jedoch unterhalb. Es ist hierbei wiederum von einem systematischen Fehler von ca. $0,0015$ auszugehen.
+Bei der Betrachtung der in Abbildung \ref{fig:meanQueueSize1000} gezeigte durchschnittliche Warteschlangenlänge fällt auf, dass die Werte wiederum bis zu einer Simulationsdauer von $200000s$ stark variieren schwanken. Anschließend nähern sich die Werte dem dem Erwartungswert von $0,0111111$ an, bleiben jedoch unterhalb. Es handelt sich hierbei um eine Abweichung von ca. $0,0015$, was wiederum durch einen systematischen Fehler, oder ein nicht vollständig eingeschwungenes System erzeugt werden könnte.
 
 \begin{figure}[htpb]
 	\centering
@@ -301,7 +295,7 @@ In Abbildung \ref{fig:LittleSystem1000} ist der Verlauf der Gleichung \ref{eq:li
 Abschließend sind im folgenden die von der implementierten Simulation berechneten Werte für die durchschnittliche Warteschlangenlänge, Wartezeit in der Warteschlange, Anzahl an Clients im System und Zeit im System im Vergleich zu den entsprechenden theoretisch errechneten Werten (für ein eingeschwungenes System) aufgelistet:
 \input{abbildungen/1_Phone/Arrival_1000_Serve_100_dur_1000000_Skip_0/ResultsTable}
 
-Alle vier ermittelten Durchschnittswerte liegen, ab einer Simulationsdauer von ca. $400000s$ sehr nah an den Werten, welche für ein eingeschwungenes Warteschlangensystem errechnet wurden. Da auch das in Abbildung  \ref{fig:LittleSystem1000} ersichtliche Ergebnis der Differenz zeigt, dass das System, abgesehen vom erläuterten systematischen Fehler, ab einer Simulationszeit von ca. $400000s$ der für ein eingeschwungenes System erforderliche Wert von $0$ näherungsweise erreicht wird. Es kann somit davon ausgegangen werden, dass der Steady State (eingeschwungene Zustand) bei dieser Simulationsdauer erreicht wurde.
+Alle vier ermittelten Durchschnittswerte liegen, ab einer Simulationsdauer von ca. $400000s$ sehr nah an den Werten, welche für ein eingeschwungenes Warteschlangensystem errechnet wurden. Da auch das in Abbildung  \ref{fig:LittleSystem1000} ersichtliche Ergebnis der Differenz zeigt, dass das System ab einer Simulationszeit von ca. $400000s$ den für ein eingeschwungenes System erforderlichen Wert von $0$ näherungsweise erreicht, kann somit davon ausgegangen werden, dass der Steady State (eingeschwungene Zustand) bei dieser Simulationsdauer erreicht wurde.
 
 \subsubsection{Durchschnittliche Zwischenankunftszeit der Clients: $400s$}
 \paragraph{Theoretische Erwartungswerte laut M/M/1 Warteschlangenmodell}
@@ -331,7 +325,7 @@ Die einzelnen Erwartungswerte sind in den nachfolgenden Abbildungen durch eine g
 	\label{fig:meanSystemSize400}
 \end{figure}
 
-Abbildung \ref{fig:meanSystemSize400} zeigt die durchschnittliche Anzahl an Kunden im System an. Ab einer Simulationszeit von ca $400000s$ schwankt diese nur noch sehr gering, liegt jedoch über dem Erwartungswert von $0,333333$. Es ist von einem systematischen Fehler von $0,01$ auszugehen.
+Abbildung \ref{fig:meanSystemSize400} zeigt die durchschnittliche Anzahl an Kunden im System an. Ab einer Simulationszeit von ca $400000s$ schwankt diese nur noch sehr gering, liegt jedoch über dem Erwartungswert von $0,333333$. Es ist von einem systematischen Fehler von $0,01$, oder einem nicht vollständig eingeschwungenen System auszugehen.
 
 \begin{figure}[htpb]
 	\centering
@@ -455,11 +449,68 @@ Abschließend sind in den Abbildungen \ref{fig:QueueStepPlotAll100} und \ref{fig
 	\caption{Darstellung der Differenz: $\lambda * Ws - Ls$ über die Simulationszeit (Little Theorem)}
 	\label{fig:LittleSystem100}
 \end{figure} 
-In Abbildung \ref{fig:LittleSystem100} ist der Verlauf der Gleichung \ref{eq:little} über die Simulationszeit aufgeführt. Im Vergleich zu den beiden Auswertungen mit Zwischenankunftszeiten von $1000s$ bzw. $400s$ wird deutlich, dass die Abweichung vom den geforderten Wert $0$ in dieser Abbildung deutlich größer ist.  
+In Abbildung \ref{fig:LittleSystem100} ist der Verlauf der Gleichung \ref{eq:little} über die Simulationszeit aufgeführt. Im Vergleich zu den beiden Auswertungen mit Zwischenankunftszeiten von $1000s$ bzw. $400s$ wird deutlich, dass die Abweichung vom den geforderten Wert $0$ in dieser Abbildung erheblich größer ist.  
 
 Alle vier ermittelten Durchschnittswerte schwanken bis zum Ende der Simulation deutlich. Das in Abbildung \ref{fig:LittleSystem100} ersichtliche Ergebnis der Differenz zeigt, dass das System während der gesamten Simulationsdauer den für ein eingeschwungenes System erforderlichen Wert von $0$ nicht erreicht. Aufgrund der großen Abweichung kann davon ausgegangen werden, dass der Steady State (eingeschwungene Zustand) in dieser Simulation nicht erreicht wurde. 
 
-Das beschriebene Verhalten des implementierten Modells stimmt somit mit der Theorie überein, welche besagt, dass wenn die durchschnittliche Zwischenankunftszeit gleich der durchschnittlichen Bediendauer ist, das System nie einschwingen kann. Ein Beweis, dass das System auch bei einer längeren Simulationsdauer nicht einschwingen würde, kann nicht erbracht werden.
+Das beschriebene Verhalten des implementierten Modells stimmt somit mit der Theorie überein, welche besagt, dass wenn die durchschnittliche Zwischenankunftszeit gleich der durchschnittlichen Bediendauer ist, das System nie einschwingen kann. Ein Beweis, dass das System auch bei einer längeren Simulationsdauer nicht einschwingen würde, kann nicht erbracht werden. 
+
+Für ein aussagekräftigeres Ergebnis wurde die Siulation erneut mit einer längeren Simulationsdauer durchgeführt. Die Ergebnisse sind im folgenden Abschnitt beschrieben.
+
+\paragraph{Erhöhung der Simulationsdauer}
+
+Die bisherigen Ergebnisse sind bei einer Simulationsdauer von $10^6 \ s$ entstanden. Bei einer Zwischenankunftszeit von 100 s zeigt sich eine Tendenz zu einer immer weiter ansteigenden Warteschlangenlänge. Um dies besser zu verdeutlichen wird die Simulationsdauer auf $10^7 s$ erhöht. Die Abbildung \ref{fig:QueueStepPlotAll100_duration_10000000} zeigt die Warteschlangenentwicklung über die gesamte Zeit. Es wird deutlich, dass die Warteschlangenlänge sehr schwankt. Aus den Abbildungen \ref{fig:meanQueueSize100_duration_10000000} und \ref{fig:meanSystemSize100_duration_10000000} ist für die durchschnittliche Warteschlangenlänge ein klarer Trend nach oben zu erkennen. Auch bei der Betrachtung der Verweildauern im System und in der Warteschlange, wie in Abbildungen \ref{fig:meanQueueTime100_duration_10000000} und \ref{fig:meanSystemTime100_duration_10000000} zu sehen ist, zeigt sich eine Aufwärtsbewegung. \\
+Es ist deutlich zu erkennen, dass sich die Werte keiner Parallelen zur Zeitachse annähern. Das System erreicht während der gesamten Simulationsdauer keinen stabilen zustand. Bei einer weiteren Erhöhung der Simulationsdauer ist davon auszugehen, dass Werte noch weiter ansteigen werden.
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{abbildungen/1_Phone/Arrival_100_Serve_100_dur_10000000_Skip_0/QueueStepPlotAllFiltered.pdf}
+	\caption{Warteschlangenlänge (gefiltert) , MeanAr = 100, Dauer = $10^7 \ s$}
+	\label{fig:QueueStepPlotAll100_duration_10000000}
+\end{figure}
+
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{abbildungen/1_Phone/Arrival_100_Serve_100_dur_10000000_Skip_0/MeanSystemSize.pdf}
+	\caption{Durchschnittliche Anzahl an Kunden im System, MeanAr = $100s$, Dauer = $10^7 \ s$}
+	\label{fig:meanSystemSize100_duration_10000000}
+\end{figure}
+
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{abbildungen/1_Phone/Arrival_100_Serve_100_dur_10000000_Skip_0/MeanSystemTime.pdf}
+	\caption{Durchschnittliche Verweildauer der Kunden im System, MeanAr = 100, Dauer = $10^7 \ s$}
+	\label{fig:meanSystemTime100_duration_10000000}
+\end{figure}
+
+
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{abbildungen/1_Phone/Arrival_100_Serve_100_dur_10000000_Skip_0/MeanQueueSize.pdf}
+	\caption{Durchschnittliche Warteschlangenlänge, MeanAr = 100, Dauer = $10^7 \ s$}
+	\label{fig:meanQueueSize100_duration_10000000}
+\end{figure}
+
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{abbildungen/1_Phone/Arrival_100_Serve_100_dur_10000000_Skip_0/MeanQueueTime.pdf}
+	\caption{Durchschnittliche Verweildauer in der Warteschlange , MeanAr = 100, Dauer = $10^7 \ s$}
+	\label{fig:meanQueueTime100_duration_10000000}
+\end{figure} 
+
+
+
+\paragraph{Anwendung Gesetzes von Little}
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{abbildungen/1_Phone/Arrival_100_Serve_100_dur_10000000_Skip_0/LittleSystem.pdf}
+	\caption{Darstellung der Differenz: $\lambda * Ws - Ls$ über die Simulationszeit (Little Theorem)}
+	\label{fig:LittleSystem100_duration_10000000}
+\end{figure} 
 
 \subsection{Modell \glqq Bevorzugte VIP\grqq} 
 Im zweiten Betriebsmodus werden die ankommenden Kunden unterschieden, ob es sich um Touristen, oder Einheimische (VIP) handelt. Befindet sich ein VIP in der Warteschlange, wird dieser bevorzugt. Wie im Betriebsmodus 1 werden auch hier drei verschiedene mittleren Zwischenankunftszeiten betrachtet.

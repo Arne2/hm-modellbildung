@@ -19,9 +19,9 @@ Für die Simulation des Insel-Callshops wird ein Warteschlagenmodell mit Clients
 
 Im Modell werden sowohl die Ankunftszeiten der Clients, als auch die Dauer der Telefonate durch eine negative Exponentialverteilung beschrieben, da diese sehr nah an den real beoachteten Verhalten liegt. Der mathematische Hintergrund liegt in der Eigenschaft der Exponentialfunktion zugrunde. Die Exponentialverteilung ist die einzige kontinuierliche Verteilung, welche zugleich die Markoveigenschaft, die sogenannte Gedächtnislosigkeit, erfüllt. Diese besagt, dass die seit dem letzten Ereignis vergangene Zeit (in diesem Beispiel Anrufer) keinen Einfluss auf die Verteilung der Zeit bis zum nächsten Ereignis (bis zum nächsten Anruf) hat \cite{ExpoVert}. 
 
-Darüber hinaus wird ein zweites Modell betrachtet, in welchem die Bewohner des Inseldorfes (Einheimische) bevorzugt werden. Im weiteren Verlauf der Studienarbeit werden diese als VIP oder resident bezeichnet. Der grundlegende Ablauf verläuft wie beim ersten Modell. Allerdings wird, bevor der nächste Client (FIFO Prinzip) telefonieren darf, die Queue nach einem VIP durchsucht. Befindet sich ein VIP in der Queue, wird dieser bevorzugt und darf zuerst telfonieren. 
+Darüber hinaus wird ein zweites Modell betrachtet, in welchem die Bewohner des Inseldorfes (Einheimische) bevorzugt werden. Im weiteren Verlauf der Studienarbeit werden diese als VIP oder resident bezeichnet. Der grundlegende Ablauf verläuft wie beim ersten Modell. Allerdings wird, bevor der nächste Client (FIFO Prinzip) telefonieren darf, die Queue nach einem Einheimischen durchsucht. Befindet sich ein Einheimischer in der Queue, wird dieser bevorzugt und darf zuerst telfonieren. Alle restlichen Kunden in der Queue (im folgenden als Touristen bezeichnet) müssen warten bis sich kein Einheimischer mehr in der Warteschlange befindet.
 
-In einem dritten Modell befindet sich ein weiteres Telefon im Callshop. Von den nun zwei Telefonen (zwei Server), behandelt eines alle ankommenden Personen (Clients) gleichberechtigt (analog zum ersten Modell). Das zweite Telefon bevorzugt die VIPs und behandelt andere Personen nur, wenn kein VIP wartet (analog zum zweiten Modell).
+In einem dritten Modell befindet sich ein weiteres Telefon im Callshop. Von den nun zwei Telefonen (zwei Server), behandelt eines alle ankommenden Personen (Clients) gleichberechtigt (analog zum ersten Modell). Das zweite Telefon bevorzugt die Einheimischer und behandelt Touristen nur, wenn kein Einheimischer wartet (analog zum zweiten Modell).
 
 \section{Anforderungen/Requirements}
 \label{requirements}
@@ -237,7 +237,7 @@ Die einzelnen Erwartungswerte sind in den nachfolgenden Abbildungen durch eine g
 	\label{fig:meanSystemSize1000}
 \end{figure}
 
-Abbildung \ref{fig:meanSystemSize1000} zeigt die durchschnittliche Anzahl an Kunden im System an. Ab einer Simulationszeit von ca $200000s$ liegt diese durchschnittlich bei $0.11$, schwankt jedoch bis zum Ende der Simulation um ca. $0,01$. Der Erwartungswert von $0,111111$ wird durch die Simulation nicht exakt erreicht. Ursache hierfür könnte ein systematischen Fehler von ca. $0,01$ bei der Berechnung sein. Alternativ würde ein noch nicht vollständig eingeschwungenes System das Verhalten ebenfalls erklären. Weitere Erkenntnisse liefert die Validierung mit Hilfe des Little Theorems. Allgemein zeigt dieser Plot, dass die durchschnittliche Anzahl an Kunden im System sehr gering ist. Durch die Vergleichsweise kurze Telefonierzeit in Kombination mit einer lange Zwischenankunftszeit ist dieser Wert plausibel.
+Abbildung \ref{fig:meanSystemSize1000} zeigt die durchschnittliche Anzahl an Kunden im System an. Ab einer Simulationszeit von ca $200000s$ liegt diese durchschnittlich bei $0.11$, schwankt jedoch bis zum Ende der Simulation um ca. $0,01$. Der Erwartungswert von $0,111111$ wird durch die Simulation nicht exakt erreicht. Ursache hierfür könnte ein systematischen Fehler, beispielsweise aufgrund von Rundungsfehlern, von ca. $0,01$ bei der Berechnung sein. Alternativ würde ein noch nicht vollständig eingeschwungenes System das Verhalten ebenfalls erklären. Weitere Erkenntnisse liefert die Validierung mit Hilfe des Little Theorems. Allgemein zeigt dieser Plot, dass die durchschnittliche Anzahl an Kunden im System sehr gering ist. Durch die Vergleichsweise kurze Telefonierzeit in Kombination mit einer lange Zwischenankunftszeit ist dieser Wert plausibel.
 
 \begin{figure}[htpb]
 	\centering
@@ -255,7 +255,7 @@ Betrachtet man Abbildung \ref{fig:meanSystemTime1000}, wird deutlich, dass die d
 	\label{fig:meanQueueSize1000}
 \end{figure}
 
-Bei der Betrachtung der in Abbildung \ref{fig:meanQueueSize1000} gezeigte durchschnittliche Warteschlangenlänge fällt auf, dass die Werte wiederum bis zu einer Simulationsdauer von $200000s$ stark variieren schwanken. Anschließend nähern sich die Werte dem dem Erwartungswert von $0,0111111$ an, bleiben jedoch unterhalb. Es handelt sich hierbei um eine Abweichung von ca. $0,0015$, was wiederum durch einen systematischen Fehler, oder ein nicht vollständig eingeschwungenes System erzeugt werden könnte.
+Bei der Betrachtung der in Abbildung \ref{fig:meanQueueSize1000} gezeigte durchschnittliche Warteschlangenlänge fällt auf, dass die Werte wiederum bis zu einer Simulationsdauer von $200000s$ stark variieren schwanken. Anschließend nähern sich die Werte dem dem Erwartungswert von $0,0111111$ an, bleiben jedoch unterhalb. Es handelt sich hierbei um eine Abweichung von ca. $0,0015$. Ursache dafür könnte, wie bereits erwähnt ein systematischen Fehler, oder ein nicht vollständig eingeschwungenes System sein.
 
 \begin{figure}[htpb]
 	\centering
@@ -453,7 +453,9 @@ In Abbildung \ref{fig:LittleSystem100} ist der Verlauf der Gleichung \ref{eq:lit
 
 Alle vier ermittelten Durchschnittswerte schwanken bis zum Ende der Simulation deutlich. Das in Abbildung \ref{fig:LittleSystem100} ersichtliche Ergebnis der Differenz zeigt, dass das System während der gesamten Simulationsdauer den für ein eingeschwungenes System erforderlichen Wert von $0$ nicht erreicht. Aufgrund der großen Abweichung kann davon ausgegangen werden, dass der Steady State (eingeschwungene Zustand) in dieser Simulation nicht erreicht wurde. 
 
-Das beschriebene Verhalten des implementierten Modells stimmt somit mit der Theorie überein, welche besagt, dass wenn die durchschnittliche Zwischenankunftszeit gleich der durchschnittlichen Bediendauer ist, das System nie einschwingen kann. Ein Beweis, dass das System auch bei einer längeren Simulationsdauer nicht einschwingen würde, kann nicht erbracht werden.\subsection{Vergleich der Telefonauslastungen}
+Das beschriebene Verhalten des implementierten Modells stimmt somit mit der Theorie überein, welche besagt, dass wenn die durchschnittliche Zwischenankunftszeit gleich der durchschnittlichen Bediendauer ist, das System nie einschwingen kann. Ein Beweis, dass das System auch bei einer längeren Simulationsdauer nicht einschwingen würde, kann nicht erbracht werden.
+
+\subsubsection{Vergleich der Telefonauslastungen}
 Bisher wurden die durschnittlichen Verweildauern betrachtet. Die Auslastung des Telefons wurde dabei unberücksichtigt. Die durchschnittliche Auslastung des telefons berechnet sich mit der Formel:
 $$
 Auslastung(t) = \frac{\sum Telefonierdauer}{t}
@@ -468,7 +470,7 @@ Eine Auslastung von 1 bedeutet, dass das Telefon zu 100 \% ausgelastet ist. In A
 
 Für ein aussagekräftigeres Ergebnis wurde die Siulation erneut mit einer längeren Simulationsdauer durchgeführt. Die Ergebnisse sind im folgenden Abschnitt beschrieben.
 
-\paragraph{Erhöhung der Simulationsdauer}
+\subsubsection{Erhöhung der Simulationsdauer}
 
 Die bisherigen Ergebnisse sind bei einer Simulationsdauer von $10^6 \ s$ entstanden. Bei einer Zwischenankunftszeit von 100 s zeigt sich eine Tendenz zu einer immer weiter ansteigenden Warteschlangenlänge. Um dies besser zu verdeutlichen wird die Simulationsdauer auf $10^7 s$ erhöht. Die Abbildung \ref{fig:QueueStepPlotAll100_duration_10000000} zeigt die Warteschlangenentwicklung über die gesamte Zeit. Es wird deutlich, dass die Warteschlangenlänge sehr schwankt. Aus den Abbildungen \ref{fig:meanQueueSize100_duration_10000000} und \ref{fig:meanSystemSize100_duration_10000000} ist für die durchschnittliche Warteschlangenlänge ein klarer Trend nach oben zu erkennen. Auch bei der Betrachtung der Verweildauern im System und in der Warteschlange, wie in Abbildungen \ref{fig:meanQueueTime100_duration_10000000} und \ref{fig:meanSystemTime100_duration_10000000} zu sehen ist, zeigt sich eine Aufwärtsbewegung. \\
 Es ist deutlich zu erkennen, dass sich die Werte keiner Parallelen zur Zeitachse annähern. Das System erreicht während der gesamten Simulationsdauer keinen stabilen zustand. Bei einer weiteren Erhöhung der Simulationsdauer ist davon auszugehen, dass Werte noch weiter ansteigen werden.
@@ -513,18 +515,18 @@ Es ist deutlich zu erkennen, dass sich die Werte keiner Parallelen zur Zeitachse
 	\label{fig:meanQueueTime100_duration_10000000}
 \end{figure}
 
+Abbildung \ref{fig:LittleSystem100_duration_10000000} zeigt die Gleichung des Little Theorems für die Simulation mit erhöhter Simulationsdauer. Auch bei längerer Simulationsdauer wird der Wert von $0$ nicht erreicht. Die Abweichung wird mit steigender Simulationsdauer größer. Das System schwingt somit auch bei einer längeren Simulationsdauer nicht ein, was bei dieser Konstellation von durchschnittlicher Zwischwnankunftszeit und durchschnittlicher Telefonierdauer plausibel und gefordert ist.
 
-
-\paragraph{Anwendung Gesetzes von Little}
 \begin{figure}[htpb]
 	\centering
 	\includegraphics[width=0.8\textwidth]{abbildungen/1_Phone/Arrival_100_Serve_100_dur_10000000_Skip_0/LittleSystem.pdf}
-	\caption{Darstellung der Differenz: $\lambda * Ws - Ls$ über die Simulationszeit (Little Theorem)}
+	\caption{Darstellung der Differenz: $\lambda * Ws - Ls$ über die Simulationszeit (Little Theorem für die erhöhte Simulationsdauer)}
 	\label{fig:LittleSystem100_duration_10000000}
 \end{figure}
 
-\subsection{Modell \glqq Bevorzugte VIP\grqq}
-Im zweiten Betriebsmodus werden die ankommenden Kunden unterschieden, ob es sich um Touristen, oder Einheimische (VIP) handelt. Befindet sich ein VIP in der Warteschlange, wird dieser bevorzugt. Wie im Betriebsmodus 1 werden auch hier drei verschiedene mittleren Zwischenankunftszeiten betrachtet.
+\subsection{Modell \glqq Bevorzugung der Einheimischen (VIP)\grqq}
+Im zweiten Betriebsmodus werden die ankommenden Kunden unterschieden, ob es sich um Touristen, oder Einheimische (VIP) handelt. Befindet sich ein Einheimischer in der Warteschlange, wird dieser bevorzugt. Wie im Betriebsmodus 1 werden auch hier drei verschiedene mittleren Zwischenankunftszeiten betrachtet.
+
 \subsubsection{Annahme}
 Es wird angenommen, dass die im Abschnitt \ref{FormenlnMM1} aufgeführten Formeln für den Betriebsmodus 1 auch für diesen Betriebsmodus gelten. Da sich im Shop weiterhin nur ein Telefon befindet, ist es für die Berechnung der Durchschnittswerte für das System (durchschnittliche Anzahl an Kunden im System, durchschnittliche Warteschlangenlänge, durchschnittliche Zeit im System, durchschnittliche Zeit in der Warteschlange) irrelevant, ob bestimmte Kunden bevorzugt werden. Beispielsweise die durchschnittliche Zeit in der Warteschlange, welche bei den VIP durch die Bevorzugung geringer ist, ist bei den Touristen dementsprechend höher, sodass sie insgesamt gleich der Zeit im Betriebsmodus 1 ist.
 \subsubsection{Durchschnittliche Ankunftszeit der Clients: 1000}
@@ -560,7 +562,7 @@ Wq=11,1111
 	\label{fig:MQSVIP1000VGL}
 \end{figure}
 
-Abbildung \ref{fig:MQSVIP1000ALL} zeigt die durchschnittliche Warteschlangenlänge. Im Vergleich dazu zeigt Abbildung \ref{fig:MQSVIP1000VGL} die Zusammensetzung der Warteschlangenlänge aus den zwei unterschiedenen Gruppen. Es wird deutlich, dass die Wartezeit der Touristen deutlich länger ist als die der VIP, was aufgrund der Bevorzugung plausibel ist. Die durchschnittliche Warteschlangenlänge insgesamt liegt gegen Ende der Simulation um ca. $0,004$ über dem erwarteten Wert von $0.111111$ (gelbe Linie). Doch neben der Bevorzugung spielt auch der Anteil der Einwohner an der insgesamten Kundenanzahl (lediglich $0,1$) eine Rolle. Es kommen somit deutlich mehr Touristen in den Telefonshop als Einwohner.
+Abbildung \ref{fig:MQSVIP1000ALL} zeigt die durchschnittliche Warteschlangenlänge. Im Vergleich dazu zeigt Abbildung \ref{fig:MQSVIP1000VGL} die Zusammensetzung der Warteschlangenlänge aus den zwei unterschiedenen Gruppen. Es wird deutlich, dass die Wartezeit der Touristen deutlich länger ist als die der Einheimischen, was aufgrund der Bevorzugung plausibel ist. Die durchschnittliche Warteschlangenlänge insgesamt liegt gegen Ende der Simulation um ca. $0,004$ über dem erwarteten Wert von $0.111111$ (gelbe Linie). Doch neben der Bevorzugung spielt auch der Anteil der Einwohner an der insgesamten Kundenanzahl (lediglich $0,1$) eine Rolle. Es kommen somit deutlich mehr Touristen in den Telefonshop als Einwohner.
 
 \begin{figure}[htpb]
 	\centering
@@ -576,7 +578,7 @@ Abbildung \ref{fig:MQSVIP1000ALL} zeigt die durchschnittliche Warteschlangenlän
 	\label{fig:MQTVIP1000VGL}
 \end{figure}
 
-In der Abbildung \ref{fig:MQTVIP1000ALL} sieht man die durchschnittliche Wartezeit aller Kunden insgesamt. Im Vergleich dazu wird in der Abbildung \ref{fig:MQTVIP1000VGL} zwischen Touristen und Einwohnern unterschieden. Durch die Bevorzugung ist auch hier der Wert der Einwohner deutlich geringer als der der Touristen. Auffallend ist ebenfalls, dass bei Simulationsdauer von ca. $680000s$ die Anzahl der wartenden Einwohner leicht ansteigt. In etwa zur gleichen Zeit steigt die durchschnittliche Wartezeit der Einwohner ebenfalls an. Da jedoch durch die geringe Auslastung des Telefons die insgesamte Wartezeit beider Gruppen sehr gering ist, scheint die durchschnittliche Wartezeit der Einwohner zu diesem Zeitpunkt deutlich drastischer anzusteigen als die Anzahl. Dies liegt jedoch lediglich an der feineren Skalierung und wäre auch nicht plausibel.
+In der Abbildung \ref{fig:MQTVIP1000ALL} sieht man die durchschnittliche Wartezeit aller Kunden insgesamt. Im Vergleich dazu wird in der Abbildung \ref{fig:MQTVIP1000VGL} zwischen Touristen und Einwohnern unterschieden. Durch die Bevorzugung ist auch hier der Wert der Einwohner deutlich geringer als der der Touristen. Auffallend ist ebenfalls, dass bei Simulationsdauer von ca. $680000s$ die Anzahl der wartenden Einwohner leicht ansteigt. In etwa zur gleichen Zeit steigt die durchschnittliche Wartezeit der Einheimischen ebenfalls an. Da jedoch durch die geringe Auslastung des Telefons die insgesamte Wartezeit beider Gruppen sehr gering ist, scheint die durchschnittliche Wartezeit der Einwohner zu diesem Zeitpunkt deutlich drastischer anzusteigen als die Anzahl. Dies liegt jedoch lediglich an der feineren Skalierung und wäre auch nicht plausibel.
 
 \begin{figure}[htpb]
 	\centering
@@ -592,7 +594,7 @@ In der Abbildung \ref{fig:MQTVIP1000ALL} sieht man die durchschnittliche Warteze
 	\label{fig:MSTVIP1000VGL}
 \end{figure}
 
-Abbildung \ref{fig:MSTVIP1000ALL} zeigt die durchschnittliche Verweildauer aller Kunden im System insgesamt. Im Vergleich dazu zeigt Abbildung \ref{fig:MSTVIP1000VGL} die Zusammensetzung aus den zwei unterschiedenen Gruppen. Die durchschnittliche Verweildauer insgesamt liegt wiederum im Bereich des Erwartungswertes (Abweichung ca. $10s$). Interessant ist hingegen die Aufteilung zwischen den Touristen und Einwohnern. Obwohl die Werte für die Verweildauer in der Warteschlange und auch für die Warteschlangenlänge bei den Einwohnern deutlich niedriger waren, als bei den Touristen, liegen die Werte in diesem Fall, vor allem gegen Ende der Simulationszeit, sehr nah beieinander. Die Ursache hierfür liegt in der geringen Auslastung des Telefons. Durch die durchschnittliche Telefonierdauer von $100s$ liegt die durchschnittliche Verweildauer im System ohne Wartezeit ebenfalls bei $100s$. Da auch die bevorzugten Einwohner warten müssen, bis ein belegtes Telefon wieder frei ist, bevor sie telefonieren können, liegt der Wert hier entwas über $100s$. Da jedoch das Telefon nur gering ausgelastet ist, müssen auch die Touristen durchschnittlich nur eine sehr kurze Zeit warten und haben daher auch nur eine durchschnittliche Verweildauer im System von ca. $118s$.
+Abbildung \ref{fig:MSTVIP1000ALL} zeigt die durchschnittliche Verweildauer aller Kunden im System insgesamt. Im Vergleich dazu zeigt Abbildung \ref{fig:MSTVIP1000VGL} die Zusammensetzung aus den zwei unterschiedenen Gruppen. Die durchschnittliche Verweildauer insgesamt liegt wiederum im Bereich des Erwartungswertes (Abweichung ca. $10s$). Interessant ist hingegen die Aufteilung zwischen den Touristen und Einheimischen. Obwohl die Werte für die Verweildauer in der Warteschlange und auch für die Warteschlangenlänge bei den Einwohnern deutlich niedriger waren, als bei den Touristen, liegen die Werte in diesem Fall, vor allem gegen Ende der Simulationszeit, sehr nah beieinander. Die Ursache hierfür liegt in der geringen Auslastung des Telefons. Durch die durchschnittliche Telefonierdauer von $100s$ liegt die durchschnittliche Verweildauer im System ohne Wartezeit ebenfalls bei $100s$. Da auch die bevorzugten Einwohner warten müssen, bis ein belegtes Telefon wieder frei ist, bevor sie telefonieren können, liegt der Wert hier entwas über $100s$. Da jedoch das Telefon nur gering ausgelastet ist, müssen auch die Touristen durchschnittlich nur eine sehr kurze Zeit warten und haben daher auch nur eine durchschnittliche Verweildauer im System von ca. $118s$.
 
 \begin{figure}[htpb]
 	\centering
@@ -697,7 +699,7 @@ In der Abbildung \ref{fig:MQTVIP400ALL} sieht man die durchschnittliche Wartezei
 	\label{fig:MSTVIP400VGL}
 \end{figure}
 
-Abbildung \ref{fig:MSTVIP1000ALL} zeigt die durchschnittliche Verweildauer aller Kunden im System insgesamt. Im Vergleich dazu zeigt Abbildung \ref{fig:MSTVIP1000VGL} die Zusammensetzung aus den zwei unterschiedenen Gruppen. Wiederum zeigt sich, dass der Wert der Einwohner zu Beginn der Simulation kurzzeitig höher ist als der der Touristen. Dies stimmt mit Abbildung \ref{fig:MQTVIP400VGL} überein, spricht jedoch für ein (bis zu diesem Zeitpunkt) nicht eingeschwungenes System. Der Wert der Einwohner liegt ab einer Simulationsdauer von $400000s$ bei ca. $125s$. Dies setzt sich aus einer durchschnittlichen Telefonierdauer von $100s$ und der durchschnittlichen Verweildauer ca. $25s$ zusammen (siehe Abbildung \ref{fig:MQTVIP400VGL})  und ist somit plausibel. Die durchschnittliche Verweildauer beider Gruppen zusammen nähert sich ab einer Simulationsdauer von ca. $400000s$ dem erwarteten Wert von $133,333$ immer weiter an. Gegen Ende der Simulation ist eine Abweichung von ca. $3s$ festzustellen.
+Abbildung \ref{fig:MSTVIP1000ALL} zeigt die durchschnittliche Verweildauer aller Kunden im System insgesamt. Im Vergleich dazu zeigt Abbildung \ref{fig:MSTVIP1000VGL} die Zusammensetzung aus den zwei unterschiedenen Gruppen. Wiederum zeigt sich, dass der Wert der Einheimischen zu Beginn der Simulation kurzzeitig höher ist als der der Touristen. Dies stimmt mit Abbildung \ref{fig:MQTVIP400VGL} überein, spricht jedoch für ein (bis zu diesem Zeitpunkt) nicht eingeschwungenes System. Der Wert der Einheimischen liegt ab einer Simulationsdauer von $400000s$ bei ca. $125s$. Dies setzt sich aus einer durchschnittlichen Telefonierdauer von $100s$ und der durchschnittlichen Verweildauer ca. $25s$ zusammen (siehe Abbildung \ref{fig:MQTVIP400VGL})  und ist somit plausibel. Die durchschnittliche Verweildauer beider Gruppen zusammen nähert sich ab einer Simulationsdauer von ca. $400000s$ dem erwarteten Wert von $133,333$ immer weiter an. Gegen Ende der Simulation ist eine Abweichung von ca. $3s$ festzustellen.
 
 \begin{figure}[htpb]
 	\centering
@@ -818,8 +820,11 @@ Die Abbildung \ref{fig:1_Phone_VIP_100_Little} zeigt den Verlauf der Gleichung \
 	\label{fig:1_Phone_VIP_100_Little}
 \end{figure}
 
+
+
+
 \subsection{Modell \glqq Zusätzliches VIP Telefon\grqq} 
-Im dritten Betriebsmodus wird zu einem Telefon wie im Betriebsmodus 1 ein VIP Telefon hinzugefügt. Wie vorhin werden auch hier die drei verschiedenen mittleren Ankunftszeiten betrachtet. In diesem Szenario werden die Formeln für M/M/2 Warteschlangenmodelle verwendet. 
+Im dritten Betriebsmodus wird zu einem Telefon wie im Betriebsmodus 1 ein VIP Telefon (Telefon, welches Einheimische bevorzugt) hinzugefügt. Wie vorhin werden auch hier die drei verschiedenen mittleren Ankunftszeiten betrachtet. In diesem Szenario werden die Formeln für M/M/2 Warteschlangenmodelle verwendet. 
 \subsubsection{Formeln für M/M/2 Warteschlangenmodelle}
 \label{Formeln2}
 Für die theoretischen Größen und Zeiten des Systems bzw. der Warteschlange werden folgende Formeln genutzt [3]. Dabei steht P0 für die Wahrscheinlichkeit, dass sich keine Kunden im System befinden.
@@ -874,7 +879,7 @@ Abbildung \ref{fig:mean3SystemSize1000} zeigt die durchschnittliche Anzahl an Ku
 	\label{fig:mean3SystemTime1000}
 \end{figure}
 
-Durch Betrachtung von Abbildung \ref{fig:mean3SystemTime1000} lässt sich konstatieren, dass die Verweildauer im System sehr nah an dem erwarteten Wert von $100,137$ liegt. Jedoch steigt dieser über die Zeit minimal weiterhin an. Dies zeigt, dass es noch nicht ersichtlich ist, ob das eine längere Systemzeit von Nöten wäre oder ob es sich um einen Fehler in der Berechnung handelt.
+Durch Betrachtung von Abbildung \ref{fig:mean3SystemTime1000} lässt sich konstatieren, dass die Verweildauer im System sehr nah an dem erwarteten Wert von $100,137$ liegt. Jedoch steigt dieser über die Zeit minimal weiterhin an. Dies zeigt, dass es noch nicht ersichtlich ist, ob eine längere Systemzeit von Nöten wäre oder ob es sich um einen Fehler in der Berechnung handelt.
 
 \begin{figure}[htpb]
 	\centering
@@ -883,7 +888,7 @@ Durch Betrachtung von Abbildung \ref{fig:mean3SystemTime1000} lässt sich konsta
 	\label{fig:mean3QueueSize1000}
 \end{figure}
 
-Bei der Betrachtung der in Abbildung \ref{fig:mean3QueueSize1000} gezeigte durchschnittliche Warteschlangenlänge fällt auf, dass bei dieser Simulation die Werte durchgehend unter dem erwarteten Wert von $0,000250627$ liegen. Im Verlauf steigen die Werte bis zu $0,00020$ an, was darauf schließen lässt, dass das System einschwingt. Ein systematischer Fehler von $0,00005$ ist wahrscheinlich.
+Bei der Betrachtung der in Abbildung \ref{fig:mean3QueueSize1000} gezeigte, durchschnittliche Warteschlangenlänge fällt auf, dass bei dieser Simulation die Werte durchgehend unter dem erwarteten Wert von $0,000250627$ liegen. Im Verlauf steigen die Werte bis zu $0,00020$ an, was darauf schließen lässt, dass das System einschwingt. Ein systematischer Fehler von $0,00005$ ist wahrscheinlich.
 
 \begin{figure}[htpb]
 	\centering
@@ -1006,7 +1011,7 @@ Wq=33,3333
 
 In Abbildung \ref{fig:mean3SystemSize100} kann man erkennen, dass bei zwei Telefonen die durchschnittliche Systemgröße sich sehr gut an den erwarteten Wert annähert. Hingegen der vorherigen Betriebsmodi lässt die Abbildung auf ein eingeschwungenes System schließen. 
 
-Da durch zwei Telefone die Service Rate verdoppelt wird, ist in dieser Simulation $\mu$ ungleich $\lambda$. Schließlich ist das erreichen eines Steady State nicht unplausibel.
+Da durch zwei Telefone die Service Rate verdoppelt wird, ist in dieser Simulation $\mu$ ungleich $\lambda$. Folglich ist das erreichen eines Steady State nicht unplausibel.
 
 \begin{figure}[htpb]
 	\centering
@@ -1042,9 +1047,9 @@ In den Abbildungen \ref{fig:mean3QueueSize100} und \ref{fig:mean3QueueTime100}, 
 	\label{fig:Little3System100}
 \end{figure} 
 
-Anders als in den vorherigen Ankunftszeiten des Betriebsmodus 3, wie in Abbildung \ref{fig:Little3System100} zu sehen ist, liegt der Wert über die gesamte Simulationsdauer über $0$. Zusätzlich schwankt der Wert bis zu einer Simulationszeit von ca. $225000s$ um $0,05$ über dem Erhofften. Ab dem Zeitpunkt von $400000s$ geht dieses Abweichung auf $0,03$ herunter, ist aber im Vergleich zu den vorherigen Ankunftszeiten signifikant hoch. Folglich kann von nur einer sehr schwachen Aussagekraft der Messung und der Simulation ausgegangen werden. Ein Steady State kann nicht erwartet werden.
+Anders als in den vorherigen Ankunftszeiten des Betriebsmodus 3, wie in Abbildung \ref{fig:Little3System100} zu sehen ist, liegt der Wert über die gesamte Simulationsdauer über $0$. Zusätzlich schwankt der Wert bis zu einer Simulationszeit von ca. $225000s$ um $0,05$ über dem erwarteten Wert. Ab dem Zeitpunkt von $400000s$ geht dieses Abweichung auf $0,03$ herunter, ist aber im Vergleich zu den vorherigen Ankunftszeiten signifikant hoch. Folglich kann nur von einer sehr schwachen Aussagekraft der Messung und der Simulation ausgegangen werden. Ein Steady State kann nicht erwartet werden.
 
-\subsubsection{Vergleich zwei Telefone mit einem}
+\subsubsection{Vergleich von Betriebsmodus 3 (Zwei Telefone) und Betriebsmodus 1 (Ein Telefon)}
 
 \begin{figure}[htpb]
 	\centering
@@ -1053,7 +1058,7 @@ Anders als in den vorherigen Ankunftszeiten des Betriebsmodus 3, wie in Abbildun
 	\label{fig:2_Phone_Workload_Vergleich}
 \end{figure}
 
-Betrachtet man nun die Auslastung der beiden Telefone in Abbildung \ref{fig:2_Phone_Workload_Vergleich} fällt auf, dass die über die Simulationszeit die Last nicht besonders hoch ist. In diesem Graph ist die Linie bei $2$, da auch die Anzahl der Telefone verdoppelt hat. Nur bei einer Ankunftsrate von $100s$ übersteigt die Auslastung des Systems den Wert $1$. Daher lässt sich schließen, dass in den anderen Szenarien das zweite Telefon überflüssig erscheint.
+Betrachtet man nun die Auslastung der beiden Telefone in Abbildung \ref{fig:2_Phone_Workload_Vergleich} fällt auf, dass die Last über die Simulationszeit niedrig ist. In diesem Graph ist die Linie bei $2$, da auch die Anzahl der Telefone verdoppelt hat. Nur bei einer Ankunftsrate von $100s$ übersteigt die Auslastung des Systems den Wert $1$. Daher lässt sich schließen, dass in den anderen Szenarien das zweite Telefon überflüssig erscheint.
 
 Wenn man jedoch Abbildung \ref{fig:1_Phone_Workload_Vergleich} betrachtet, dann ist das System bei einer Ankunftsrate von $100s$ komplett ausgelastet.
 

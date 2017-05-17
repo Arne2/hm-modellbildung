@@ -1,10 +1,10 @@
 (* ::Package:: *)
 
 (* ::Input:: *)
-(*dataPath = FileNameJoin@{NotebookDirectory[],"../data/distribution/NormalRand.csv"};*)
+(*dataPath = FileNameJoin@{NotebookDirectory[],"../data/arrival-delta.csv"};*)
 (*outputDir =  FileNameJoin@{NotebookDirectory[], "../doku/abbildungen/distribution/"};*)
-(*dataRand=SemanticImport[dataPath];*)
-(*lambda = 0.001;*)
+(*dataRand=Transpose[Import[dataPath, HeaderLines->1]][[1]]*)
+(*lambda = 1/400;*)
 
 
 (* ::Input:: *)

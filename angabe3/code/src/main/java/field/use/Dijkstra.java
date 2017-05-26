@@ -20,7 +20,7 @@ public class Dijkstra {
     private Dijkstra(final Field field, Location start) {
         this.field = field;
 
-        unvisited = field.asList().parallelStream()
+        unvisited = field.cells().parallelStream()
                 .filter(c -> !c.isOccupied())
                 .map(Cell::location)
                 .collect(Collectors.toSet());

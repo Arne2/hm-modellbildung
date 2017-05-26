@@ -3,7 +3,7 @@ package field.location;
 /**
  * @author peter-mueller
  */
-public class Location {
+public class Location implements Comparable<Location>{
     public final int x;
     public final int y;
 
@@ -48,5 +48,14 @@ public class Location {
                 this.y + other.y
         );
         return location;
+    }
+
+    @Override
+    public int compareTo(Location o) {
+        final int result = Integer.compare(this.y, o.y);
+        if (result == 0) {
+            return Integer.compare(this.x, o.x);
+        }
+        return result;
     }
 }

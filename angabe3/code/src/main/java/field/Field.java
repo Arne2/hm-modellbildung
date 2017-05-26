@@ -3,45 +3,32 @@ package field;
 import field.cell.Cell;
 import field.location.Location;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class Field {
-    public final int sizeX;
-    public final int sizeY;
-    private final Cell[][] cells;
+    private final Map<Location, Cell> cells = new HashMap<>();
 
-    public Field(int sizeX, int sizeY) {
-        this.sizeX = sizeX;
-        this.sizeY = sizeY;
-        this.cells = new Cell[sizeX][sizeY];
-        this.init();
-    }
+    public Field() {this(0,0);}
 
-    private void init() {
-        for (int x = 0; x < sizeX; x++) {
-            for (int y = 0; y < sizeY; y++) {
-                cells[x][y] = new Cell(new Location(x, y));
+    public Field(int width, int height) {
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
+                put(new Cell(Location.of(x,y)));
             }
         }
     }
 
-    @Override
-    public String toString() {
-        return "Field{" +
-                "cells=" + Arrays.deepToString(cells) +
-                '}';
+    public void put(Cell cell) {
+        cells.put(cell.location(), cell);
     }
 
-    public List<Cell> asList() {
-        final List<Cell> list = new ArrayList<>();
-        for (Cell[] row : cells) {
-            list.addAll(Arrays.asList(row));
-        }
-        return list;
+    public Collection<Cell> cells() {
+        return cells.values();
     }
 
+    public Set<Location> locations() {
+        return cells.keySet();
+    }
     public Cell at(Location location) {
         if (!has(location)) {
             final String message = String.format(
@@ -49,12 +36,10 @@ public class Field {
                     location);
             throw new IllegalArgumentException(message);
         }
-        return cells[location.x][location.y];
+        return cells.get(location);
     }
 
     public boolean has(Location location) {
-        final int x = location.x;
-        final int y = location.y;
-        return x < sizeX && y < sizeY && x >= 0 && y >= 0;
+        return cells.containsKey(location);
     }
 }

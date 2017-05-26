@@ -2,10 +2,13 @@ package field;
 
 import field.cell.Cell;
 import field.location.Location;
+import sun.rmi.server.LoaderHandler;
 
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * @author peter-mueller
@@ -32,15 +35,19 @@ public class Fields {
 
     public static Field parseStringMap(final String map) {
         final String[] rows = map.split("\n");
-        final int sizeX = rows[0].length();
-        final int sizeY = rows.length;
-        final Field field = new Field(sizeX, sizeY);
+        final Field field = new Field();
 
-        for (int x = 0; x < sizeX; x++) {
-            for (int y = 0; y < sizeY; y++) {
-                final Cell cell = field.at(Location.of(x, y));
-                final char c = rows[y].charAt(x);
-                fitCell(cell, c);
+        for (int y = 0; y < rows.length; y++) {
+            final String row = rows[y];
+            for (int x = 0; x < row.length(); x++) {
+                final char c = row.charAt(x);
+                final Location point = Location.of(x, y);
+                if (c == '1') {
+                    field.put(new Cell(point, true));
+                }
+                if (c == '0') {
+                    field.put(new Cell(point));
+                }
             }
         }
 
@@ -48,27 +55,21 @@ public class Fields {
     }
 
     public static String toStringMap(Field field) {
-        final StringBuffer buffer = new StringBuffer();
-        for (int y = 0; y < field.sizeY; y++) {
-            for (int x = 0; x < field.sizeX; x++) {
-                final Cell cell = field.at(Location.of(x, y));
-                buffer.append(cell.isOccupied() ? '1' : '0');
+        final StringBuilder buffer = new StringBuilder();
+
+        final Location edge = field.locations().stream()
+                .max(Location::compareTo).orElse(Location.of(0, 0));
+
+        for (int y = 0; y <= edge.y; y++) {
+            for (int x = 0; x <= edge.x; x++) {
+                if (field.has(Location.of(x, y))) {
+                    buffer.append("0");
+                } else {
+                    buffer.append(" ");
+                }
             }
-            buffer.append('\n');
+            buffer.append("\n");
         }
         return buffer.toString();
-    }
-
-    private static void fitCell(Cell cell, char c) {
-        switch (c) {
-            case '0':
-                break;
-            case '1':
-                cell.occupy();
-                break;
-            default:
-                final String s = String.format("Could not parse map with char %s!", c);
-                throw new IllegalArgumentException(s);
-        }
     }
 }

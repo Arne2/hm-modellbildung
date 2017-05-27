@@ -5,24 +5,17 @@ import person.Person;
 
 import java.util.*;
 
+/**
+ * Provides a class that describes a area with a set of locations that describe
+ * the possible cells a person can walk on. Persons can move on these locations
+ * and the field has one single target location.
+ */
 public class Field {
+    /** Possible cells a person can walk to */
     private final Set<Location> locations = new HashSet<>();
-
-    public Map<Person, Location> getPersons() {
-        return Collections.unmodifiableMap(persons);
-    }
-
-    public Location getTarget() {
-        return target;
-    }
-
+    /** All persons with their locations. */
     private final Map<Person, Location> persons = new HashMap<>();
-
-    public void setTarget(Location target) {
-        addLocation(target);
-        this.target = target;
-    }
-
+    /** The single target in this field. */
     private Location target = Location.of(0, 0);
 
     public Field() {
@@ -35,6 +28,19 @@ public class Field {
                 locations.add(Location.of(x, y));
             }
         }
+    }
+
+    public Map<Person, Location> getPersons() {
+        return Collections.unmodifiableMap(persons);
+    }
+
+    public Location getTarget() {
+        return target;
+    }
+
+    public void setTarget(Location target) {
+        addLocation(target);
+        this.target = target;
     }
 
     public boolean addLocation(Location location) {

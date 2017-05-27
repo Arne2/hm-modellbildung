@@ -7,6 +7,8 @@ import field.location.Location;
 import java.util.*;
 
 /**
+ * Provides a simple implementation for the dijkstra algorithm to make use
+ * values for a field.
  * @author peter-mueller
  */
 public class Dijkstra {

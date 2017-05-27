@@ -1,19 +1,36 @@
 package field.location;
 
 /**
+ * Provides a simple value object for a location.
+ *
  * @author peter-mueller
  */
-public class Location implements Comparable<Location>{
+public class Location implements Comparable<Location> {
+    /** x offset from the top left corner to the right. */
     public final int x;
+    /** y offset from the top left corner to the bottom. */
     public final int y;
 
+    /**
+     * Create a new Location with the given offsets.
+     *
+     * @param x horizontal offset rightwards
+     * @param y vertical offset downwards
+     */
     public Location(int x, int y) {
         this.x = x;
         this.y = y;
     }
 
+    /**
+     * Create a new Location based on two integers as offset.
+     *
+     * @param x horizontal offset rightwards
+     * @param y vertical offset downwards
+     * @return a Location
+     */
     public static Location of(int x, int y) {
-        return new Location(x,y);
+        return new Location(x, y);
     }
 
     @Override
@@ -33,14 +50,12 @@ public class Location implements Comparable<Location>{
         return result;
     }
 
-    @Override
-    public String toString() {
-        return "Location{" +
-                "x=" + x +
-                ", y=" + y +
-                '}';
-    }
-
+    /**
+     * Combine two locations. They are added together.
+     *
+     * @param other the other location to add on this one.
+     * @return A new location that describes the sum.
+     */
     public Location relative(Location other) {
         return new Location(
                 this.x + other.x,

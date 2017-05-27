@@ -1,10 +1,10 @@
 package time.events;
 
-import field.Field;
+import config.Configuration;
 import field.Fields;
 import field.location.Location;
 import field.location.Locations;
-import main.State;
+import main.Simulation;
 import person.Person;
 
 import java.math.BigDecimal;
@@ -16,46 +16,47 @@ import java.util.*;
 public class PersonMoveEvent extends BaseEvent {
 
     private final Person person;
-    private final State state;
+    private final Simulation simulation;
 
-    public PersonMoveEvent(BigDecimal time, State state, Person person) {
+    public PersonMoveEvent(BigDecimal time, Simulation simulation, Person person) {
         super(time);
-        this.state = state;
+        this.simulation = simulation;
         this.person = person;
     }
 
     @Override
     public List<Event> execute() {
-        final Location center = state.field.locationOf(person);
-        final Set<Location> moore = Fields.moore(state.field, center);
+        final List<Event> newEvents = new ArrayList<>();
 
+        final Location center = simulation.field.locationOf(person);
+        if (simulation.field.isTarget(center)) {
+            simulation.field.removePerson(person);
+            return newEvents;
+        }
+
+        final Set<Location> moore = Fields.moore(simulation.field, center);
         final Location bestTarget = moore.stream()
-                .filter(state.field::isFree)
-                .max(Comparator.comparingDouble(state.use::get))
+                .filter(simulation.field::isFree)
+                .max(Comparator.comparingDouble(simulation.use::get))
                 .orElse(null);
 
 
-        final List<Event> newEvents = new ArrayList<>();
 
         if (bestTarget == null) {
             //TODO how long to wait if no move possible?
             final BigDecimal timeForMove = BigDecimal.valueOf(1 / person.getVelocity());
-            final BigDecimal nextMove = state.clock.systemTime().add(timeForMove);
-            final PersonMoveEvent event = new PersonMoveEvent(nextMove, state, person);
+            final BigDecimal nextMove = getTime().add(timeForMove);
+            final PersonMoveEvent event = new PersonMoveEvent(nextMove, simulation, person);
             newEvents.add(event);
             return newEvents;
         }
 
-        if (state.field.isTarget(bestTarget)) {
-            state.field.removePerson(person);
-            return newEvents;
-        }
 
-        state.field.putPerson(person, bestTarget);
-        final double distance = Locations.distance(center, bestTarget);
+        simulation.field.putPerson(person, bestTarget);
+        final double distance = Locations.distance(center, bestTarget) * simulation.configuration.getCellSize();
         final BigDecimal timeForMove = BigDecimal.valueOf(distance / person.getVelocity());
-        final BigDecimal nextMove = state.clock.systemTime().add(timeForMove);
-        final PersonMoveEvent event = new PersonMoveEvent(nextMove, state, person);
+        final BigDecimal nextMove = getTime().add(timeForMove);
+        final PersonMoveEvent event = new PersonMoveEvent(nextMove, simulation, person);
         newEvents.add(event);
 
 

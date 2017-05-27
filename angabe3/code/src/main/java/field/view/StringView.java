@@ -2,6 +2,7 @@ package field.view;
 
 import field.Field;
 import field.location.Location;
+import person.Person;
 
 import java.util.Map;
 

@@ -1,20 +1,16 @@
 package field;
 
-import field.cell.Cell;
 import field.location.Location;
-import sun.rmi.server.LoaderHandler;
 
 import java.util.Arrays;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * @author peter-mueller
  */
 public class Fields {
-    public static Set<Cell> moore(Field field, Location center) {
+    public static Set<Location> moore(Field field, Location center) {
         if (field == null) {
             throw new IllegalArgumentException("Field cannot be null!");
         }
@@ -29,7 +25,6 @@ public class Fields {
         return Arrays.stream(moore)
                 .map(center::relative)
                 .filter(field::has)
-                .map(field::at)
                 .collect(Collectors.toSet());
     }
 
@@ -41,12 +36,8 @@ public class Fields {
             final String row = rows[y];
             for (int x = 0; x < row.length(); x++) {
                 final char c = row.charAt(x);
-                final Location point = Location.of(x, y);
-                if (c == '1') {
-                    field.put(new Cell(point, true));
-                }
                 if (c == '0') {
-                    field.put(new Cell(point));
+                    field.add(Location.of(x, y));
                 }
             }
         }

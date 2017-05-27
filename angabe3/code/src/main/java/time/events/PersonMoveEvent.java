@@ -1,13 +1,11 @@
 package time.events;
 
 import field.Fields;
-import field.cell.Cell;
 import field.location.Location;
 import main.State;
 import person.Person;
 
 import java.math.BigDecimal;
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Set;
 
@@ -26,11 +24,10 @@ public class PersonMoveEvent extends BaseEvent {
     @Override
     public void execute() {
         final Location center = person.getLocation();
-        final Set<Cell> moore = Fields.moore(getState().field, center);
+        final Set<Location> moore = Fields.moore(getState().field, center);
 
         final Location bestTarget = moore.stream()
-                .filter(c -> !c.isOccupied())
-                .map(Cell::location)
+                .filter(getState().field::isFree)
                 .min(Comparator.comparingDouble(getState().use::get))
                 .orElse(null);
 

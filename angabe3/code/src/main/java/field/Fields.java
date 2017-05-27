@@ -28,39 +28,4 @@ public class Fields {
                 .collect(Collectors.toSet());
     }
 
-    public static Field parseStringMap(final String map) {
-        final String[] rows = map.split("\n");
-        final Field field = new Field();
-
-        for (int y = 0; y < rows.length; y++) {
-            final String row = rows[y];
-            for (int x = 0; x < row.length(); x++) {
-                final char c = row.charAt(x);
-                if (c == '0') {
-                    field.add(Location.of(x, y));
-                }
-            }
-        }
-
-        return field;
-    }
-
-    public static String toStringMap(Field field) {
-        final StringBuilder buffer = new StringBuilder();
-
-        final Location edge = field.locations().stream()
-                .max(Location::compareTo).orElse(Location.of(0, 0));
-
-        for (int y = 0; y <= edge.y; y++) {
-            for (int x = 0; x <= edge.x; x++) {
-                if (field.has(Location.of(x, y))) {
-                    buffer.append("0");
-                } else {
-                    buffer.append(" ");
-                }
-            }
-            buffer.append("\n");
-        }
-        return buffer.toString();
-    }
 }

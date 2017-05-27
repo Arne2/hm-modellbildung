@@ -123,7 +123,7 @@ public class FreeFlowTest {
     }
 
     private class Calculation {
-        private Field field;
+        private final Field field;
         private double actualVelocity;
         private double error;
 

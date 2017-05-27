@@ -1,7 +1,5 @@
 package person;
 
-import field.location.Location;
-
 /**
  * @author peter-mueller
  */

@@ -1,6 +1,5 @@
 package time.events;
 
-import config.Configuration;
 import field.Fields;
 import field.location.Location;
 import field.location.Locations;

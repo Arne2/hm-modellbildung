@@ -23,8 +23,7 @@ public class Location implements Comparable<Location>{
 
         Location location = (Location) o;
 
-        if (x != location.x) return false;
-        return y == location.y;
+        return x == location.x && y == location.y;
     }
 
     @Override
@@ -43,11 +42,10 @@ public class Location implements Comparable<Location>{
     }
 
     public Location relative(Location other) {
-        final Location location = new Location(
+        return new Location(
                 this.x + other.x,
                 this.y + other.y
         );
-        return location;
     }
 
     @Override

@@ -2,7 +2,6 @@ package field.view;
 
 import field.Field;
 import field.location.Location;
-import person.Person;
 
 import java.util.Map;
 
@@ -92,7 +91,7 @@ public class StringView {
                 } else if (field.isTarget(Location.of(x, y))) {
                     buffer.append("X");
                 } else {
-                    buffer.append("X");
+                    buffer.append(" ");
                 }
             }
             buffer.append("\n");

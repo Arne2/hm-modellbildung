@@ -43,10 +43,10 @@ public class Configuration {
 
         public Builder parseArgs(final String[] args) {
             for (int i = 0; i < args.length; i++) {
-                if (args[i] == "--cell-size") {
+                if (args[i].equals("--cell-size")) {
                     this.cellSize(Integer.parseInt(args[i + 1]));
                 }
-                if (args[i] == "--free-flow-velocity") {
+                if (args[i].equals("--free-flow-velocity")) {
                     this.velocity(Double.parseDouble(args[i + 1]));
                 }
             }

@@ -5,7 +5,6 @@ import field.Fields;
 import field.location.Location;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * @author peter-mueller
@@ -19,14 +18,14 @@ public class Dijkstra {
     private Dijkstra(final Field field, Location start) {
         this.field = field;
 
-        unvisited = field.locations();
+        unvisited = new HashSet<>(field.getLocations());
         distance.put(start, 0.0);
     }
 
     private void run() {
         while (!unvisited.isEmpty()) {
             final Location u = unvisited.parallelStream()
-                    .min(Comparator.comparingDouble(key -> distance.getOrDefault(key, Double.POSITIVE_INFINITY)))
+                    .max(Comparator.comparingDouble(key -> distance.getOrDefault(key, Double.NEGATIVE_INFINITY)))
                     .orElseThrow(() -> new AssertionError("unvisited must have not been empty!"));
             unvisited.remove(u);
 
@@ -34,8 +33,8 @@ public class Dijkstra {
             moore.stream()
                     .filter(unvisited::contains)
                     .forEach(v -> {
-                        final double alt = distance.get(u) + 1;
-                        if (distance.get(v) == null || alt < distance.get(v)) {
+                        final double alt = distance.get(u) - 1;
+                        if (distance.get(v) == null || alt > distance.get(v)) {
                             distance.put(v, alt);
                             prev.put(v, u);
                         }
@@ -43,8 +42,8 @@ public class Dijkstra {
         }
     }
 
-    public static Map<Location, Double> use(Field field, Location target) {
-        final Dijkstra dijkstra = new Dijkstra(field, target);
+    public static Map<Location, Double> use(Field field) {
+        final Dijkstra dijkstra = new Dijkstra(field, field.getTarget());
         dijkstra.run();
         return dijkstra.distance;
     }

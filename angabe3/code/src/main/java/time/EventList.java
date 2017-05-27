@@ -2,6 +2,7 @@ package time;
 
 import time.events.Event;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -23,6 +24,10 @@ public class EventList {
         return eventList.remove(0);
     }
 
+    public boolean hasNext() {
+        return !eventList.isEmpty();
+    }
+
     /**
      * Adds an Event to the list.
      *
@@ -33,5 +38,12 @@ public class EventList {
             throw new IllegalArgumentException("Event must not be null!");
         }
         eventList.add(event);
+    }
+
+    public void addAll(Collection<Event> events) {
+        if (events == null) {
+            throw new IllegalArgumentException("Events must not be null!");
+        }
+        eventList.addAll(events);
     }
 }

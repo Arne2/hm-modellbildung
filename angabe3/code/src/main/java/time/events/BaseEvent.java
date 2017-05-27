@@ -1,7 +1,5 @@
 package time.events;
 
-import main.State;
-
 import java.math.BigDecimal;
 
 /**
@@ -9,10 +7,9 @@ import java.math.BigDecimal;
  */
 public abstract class BaseEvent implements Event {
     private final BigDecimal time;
-    private final State state;
-    public BaseEvent(BigDecimal time, State state) {
+
+    public BaseEvent(BigDecimal time) {
         this.time = time;
-        this.state = state;
     }
 
     @Override
@@ -25,7 +22,4 @@ public abstract class BaseEvent implements Event {
         return getTime().compareTo(o.getTime());
     }
 
-    public State getState() {
-        return state;
-    }
 }

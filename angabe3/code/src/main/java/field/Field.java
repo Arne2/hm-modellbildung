@@ -7,7 +7,23 @@ import java.util.*;
 
 public class Field {
     private final Set<Location> locations = new HashSet<>();
+
+    public Map<Person, Location> getPersons() {
+        return Collections.unmodifiableMap(persons);
+    }
+
+    public Location getTarget() {
+        return target;
+    }
+
     private final Map<Person, Location> persons = new HashMap<>();
+
+    public void setTarget(Location target) {
+        addLocation(target);
+        this.target = target;
+    }
+
+    private Location target = Location.of(0, 0);
 
     public Field() {
         this(0, 0);
@@ -21,12 +37,24 @@ public class Field {
         }
     }
 
-    public boolean add(Location location) {
+    public boolean addLocation(Location location) {
         return locations.add(location);
     }
 
-    public Set<Location> locations() {
+    public boolean isTarget(Location target) {
+        return target.equals(this.target);
+    }
+
+    public void putPerson(Person person, Location location) {
+        persons.put(person, location);
+    }
+
+    public Set<Location> getLocations() {
         return Collections.unmodifiableSet(locations);
+    }
+
+    public Location locationOf(Person person) {
+        return persons.get(person);
     }
 
     public boolean isFree(Location location) {
@@ -35,5 +63,9 @@ public class Field {
 
     public boolean has(Location location) {
         return locations.contains(location);
+    }
+
+    public void removePerson(Person person) {
+        persons.remove(person);
     }
 }

@@ -17,6 +17,7 @@ public class PersonMoveEvent extends BaseEvent {
     private final Person person;
     private final Simulation simulation;
 
+
     public PersonMoveEvent(BigDecimal time, Simulation simulation, Person person) {
         super(time);
         this.simulation = simulation;
@@ -56,6 +57,7 @@ public class PersonMoveEvent extends BaseEvent {
         final BigDecimal timeForMove = BigDecimal.valueOf(distance / person.getVelocity());
         final BigDecimal nextMove = getTime().add(timeForMove);
         final PersonMoveEvent event = new PersonMoveEvent(nextMove, simulation, person);
+        person.step(new BigDecimal(distance), timeForMove);
         newEvents.add(event);
 
 

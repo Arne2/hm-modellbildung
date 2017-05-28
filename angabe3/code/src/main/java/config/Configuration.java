@@ -20,6 +20,7 @@ public class Configuration {
      */
     private final Supplier<Double> velocity;
 
+    private final double deviation;
     /**
      * The used algorithm to calculate cell distances
      */
@@ -34,6 +35,7 @@ public class Configuration {
         this.cellSize = builder.cellSize;
         this.velocity = builder.freeFlowVelocity;
         this.algorithm = builder.algorithm;
+        this.deviation = builder.deviation;
     }
 
     /**
@@ -45,6 +47,7 @@ public class Configuration {
         this.cellSize = builder.cellSize;
         this.velocity = builder.freeFlowVelocity;
         this.algorithm = builder.algorithm;
+        this.deviation = builder.deviation;
     }
 
     /**
@@ -67,6 +70,10 @@ public class Configuration {
         return velocity.get();
     }
 
+    public double getDeviation(){
+        return this.deviation;
+    }
+
     public AlgorithmType getAlgorithm(){
         return this.algorithm;
     }
@@ -79,7 +86,7 @@ public class Configuration {
         private int cellSize = 1;
         private AlgorithmType algorithm = AlgorithmType.eDijkstra;
         private Supplier<Double> freeFlowVelocity = () -> 1.0;
-
+        private double deviation = 1.44;
         public Builder cellSize(int cellSize) {
             this.cellSize = cellSize;
             return this;
@@ -112,6 +119,9 @@ public class Configuration {
                 }
                 if (args[i].equals("--free-flow-velocity")) {
                     this.velocity(Double.parseDouble(args[i + 1]));
+                }
+                if (args[i].equals("--free-flow-deviation")) {
+                    this.deviation = Double.parseDouble(args[i + 1]);
                 }
                 if (args[i].equals("--algorithm")) {
                     if(args[i + 1].equals("dijkstra")) {

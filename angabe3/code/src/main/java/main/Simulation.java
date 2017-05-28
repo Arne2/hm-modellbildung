@@ -6,6 +6,7 @@ import field.location.Location;
 import field.use.Dijkstra;
 import field.use.EuclidDistance;
 import field.view.StringView;
+import outputFile.OutputFile;
 import person.Person;
 import time.Clock;
 import time.EventList;
@@ -58,6 +59,7 @@ public class Simulation {
         final PersonMoveEvent event = new PersonMoveEvent(clock.systemTime(), this, person);
         this.events.add(event);
         persons.add(person);
+        OutputFile.addPawnEvent(clock.systemTime(), person.getId(), location.x, location.y);
         return person;
     }
     public void run(BigDecimal maxSimulationTime) {

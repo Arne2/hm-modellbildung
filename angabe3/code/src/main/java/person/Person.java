@@ -11,7 +11,9 @@ public class Person {
     private BigDecimal distanceWent;
     private BigDecimal timePassed;
     private BigDecimal meanVelocity;
+    private static int id;
     public Person(double velocity) {
+        id +=1;
         this.velocity = velocity;
         this.timeSinceLastMove = 0;
         this.distanceWent = new BigDecimal(0);
@@ -19,6 +21,9 @@ public class Person {
         this.meanVelocity = new BigDecimal(0);
     }
 
+    public int getId(){
+        return id;
+    }
     public double getVelocity() {
         return velocity;
     }

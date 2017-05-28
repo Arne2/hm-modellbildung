@@ -4,6 +4,7 @@ import field.Fields;
 import field.location.Location;
 import field.location.Locations;
 import main.Simulation;
+import outputFile.OutputFile;
 import person.Person;
 
 import java.math.BigDecimal;
@@ -58,6 +59,7 @@ public class PersonMoveEvent extends BaseEvent {
         final BigDecimal nextMove = getTime().add(timeForMove);
         final PersonMoveEvent event = new PersonMoveEvent(nextMove, simulation, person);
         person.step(new BigDecimal(distance), timeForMove);
+        OutputFile.addMoveEvent(simulation.clock.systemTime(), person.getId(), bestTarget.x, bestTarget.y);
         newEvents.add(event);
 
 

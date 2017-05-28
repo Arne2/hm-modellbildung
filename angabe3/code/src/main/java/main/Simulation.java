@@ -30,8 +30,18 @@ public class Simulation {
     public Simulation(Field field, Configuration configuration) {
         this.configuration = configuration;
         this.field = field;
-        //this.use = Dijkstra.use(field);
-        this.use = EuclidDistance.use(field);
+        if(configuration.getAlgorithm() == Configuration.AlgorithmType.eEuclid){
+            this.use = EuclidDistance.use(field);
+        }
+        else if(configuration.getAlgorithm() == Configuration.AlgorithmType.eFastMarching){
+            //TODO: fast marching Algorithm
+            //here: Euclid to be replaced by fast marching
+            this.use = EuclidDistance.use(field);
+        }
+        else{
+            this.use = Dijkstra.use(field);
+        }
+
     }
 
     public Person spawnPerson(Location location) {

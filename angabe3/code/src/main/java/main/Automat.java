@@ -23,7 +23,7 @@ public class Automat {
                 "000 0\n" +
                 "0 0 0\n");
 
-        final Configuration build = new Configuration.Builder()
+        final Configuration build = new Configuration.Builder(args)
                 .velocity(() -> new Random().nextDouble())
                 .build();
         final Simulation simulation = new Simulation(field, build);

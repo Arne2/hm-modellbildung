@@ -17,7 +17,7 @@ import java.math.BigDecimal;
 public class FreeFlowTest {
     private static final double VELOCITY = 1.0;
     public static final int CELL_SIZE = 1;
-    private final Configuration conf = new Configuration.Builder()
+    private final Configuration conf = new Configuration.Builder(new String [] {""})
             .cellSize(CELL_SIZE)
             .velocity(VELOCITY)
             .build();

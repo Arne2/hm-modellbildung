@@ -4,6 +4,7 @@ import config.Configuration;
 import field.Field;
 import field.location.Location;
 import field.use.Dijkstra;
+import field.use.EuclidDistance;
 import person.Person;
 import time.Clock;
 import time.EventList;
@@ -29,7 +30,8 @@ public class Simulation {
     public Simulation(Field field, Configuration configuration) {
         this.configuration = configuration;
         this.field = field;
-        this.use = Dijkstra.use(field);
+        //this.use = Dijkstra.use(field);
+        this.use = EuclidDistance.use(field);
     }
 
     public Person spawnPerson(Location location) {

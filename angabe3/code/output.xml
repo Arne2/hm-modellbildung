@@ -15,7 +15,7 @@
         <type>pawn</type>
     </events>
     <events>
-        <personID>2</personID>
+        <personID>1</personID>
         <positionX>12</positionX>
         <positionY>4</positionY>
         <time>0</time>
@@ -30,206 +30,222 @@
     </events>
     <events>
         <personID>2</personID>
-        <positionX>11</positionX>
-        <positionY>3</positionY>
-        <time>0.6645421142519538</time>
-        <type>move</type>
-    </events>
-    <events>
-        <personID>2</personID>
         <positionX>12</positionX>
         <positionY>1</positionY>
-        <time>0.8825823842597165</time>
+        <time>0.6208809402869946</time>
         <type>move</type>
     </events>
     <events>
-        <personID>2</personID>
-        <positionX>10</positionX>
+        <personID>1</personID>
+        <positionX>11</positionX>
         <positionY>3</positionY>
-        <time>1.6043465849951578</time>
+        <time>0.6634703107889762</time>
         <type>move</type>
     </events>
     <events>
         <personID>2</personID>
         <positionX>11</positionX>
         <positionY>2</positionY>
-        <time>2.1307423619913901</time>
+        <time>1.4989391866598223</time>
         <type>move</type>
     </events>
     <events>
-        <personID>2</personID>
+        <personID>1</personID>
+        <positionX>10</positionX>
+        <positionY>3</positionY>
+        <time>1.6017590225386389</time>
+        <type>move</type>
+    </events>
+    <events>
+        <personID>1</personID>
         <positionX>9</positionX>
         <positionY>4</positionY>
-        <time>2.2688886992471116</time>
-        <type>move</type>
-    </events>
-    <events>
-        <personID>2</personID>
-        <positionX>8</positionX>
-        <positionY>3</positionY>
-        <time>3.2086931699903156</time>
+        <time>2.2652293333276151</time>
         <type>move</type>
     </events>
     <events>
         <personID>2</personID>
         <positionX>10</positionX>
         <positionY>3</positionY>
-        <time>3.3789023397230637</time>
+        <time>2.3769974330326500</time>
         <type>move</type>
     </events>
     <events>
-        <personID>2</personID>
-        <positionX>7</positionX>
-        <positionY>2</positionY>
-        <time>4.1484976407335196</time>
+        <personID>1</personID>
+        <positionX>8</positionX>
+        <positionY>3</positionY>
+        <time>3.2035180450772778</time>
         <type>move</type>
     </events>
     <events>
         <personID>2</personID>
         <positionX>9</positionX>
         <positionY>4</positionY>
-        <time>4.6270623174547373</time>
+        <time>3.2550556794054777</time>
         <type>move</type>
     </events>
     <events>
         <personID>2</personID>
+        <positionX>10</positionX>
+        <positionY>3</positionY>
+        <time>4.1331139257783054</time>
+        <type>move</type>
+    </events>
+    <events>
+        <personID>1</personID>
+        <positionX>7</positionX>
+        <positionY>2</positionY>
+        <time>4.1418067568269405</time>
+        <type>move</type>
+    </events>
+    <events>
+        <personID>2</personID>
+        <positionX>9</positionX>
+        <positionY>4</positionY>
+        <time>5.0111721721511331</time>
+        <type>move</type>
+    </events>
+    <events>
+        <personID>1</personID>
         <positionX>6</positionX>
         <positionY>1</positionY>
-        <time>5.0883021114767236</time>
+        <time>5.0800954685766032</time>
         <type>move</type>
     </events>
     <events>
         <personID>2</personID>
         <positionX>8</positionX>
         <positionY>3</positionY>
-        <time>5.8752222951864109</time>
+        <time>5.8892304185239608</time>
         <type>move</type>
     </events>
     <events>
-        <personID>2</personID>
+        <personID>1</personID>
         <positionX>5</positionX>
         <positionY>1</positionY>
-        <time>6.0281065822199276</time>
+        <time>6.0183841803262659</time>
         <type>move</type>
     </events>
     <events>
-        <personID>2</personID>
+        <personID>1</personID>
         <positionX>4</positionX>
         <positionY>0</positionY>
-        <time>6.6926486964718814</time>
+        <time>6.6818544911152421</time>
         <type>move</type>
     </events>
     <events>
         <personID>2</personID>
         <positionX>7</positionX>
         <positionY>2</positionY>
-        <time>7.1233822729180845</time>
+        <time>6.7672886648967885</time>
         <type>move</type>
     </events>
     <events>
-        <personID>2</personID>
+        <personID>1</personID>
         <positionX>3</positionX>
         <positionY>1</positionY>
-        <time>7.6324531672150854</time>
+        <time>7.6201432028649048</time>
         <type>move</type>
     </events>
     <events>
         <personID>2</personID>
         <positionX>6</positionX>
         <positionY>1</positionY>
-        <time>8.3715422506497581</time>
-        <type>move</type>
-    </events>
-    <events>
-        <personID>2</personID>
-        <positionX>2</positionX>
-        <positionY>2</positionY>
-        <time>8.5722576379582894</time>
-        <type>move</type>
-    </events>
-    <events>
-        <personID>2</personID>
-        <positionX>1</positionX>
-        <positionY>3</positionY>
-        <time>9.5120621087014934</time>
+        <time>7.6453469112696162</time>
         <type>move</type>
     </events>
     <events>
         <personID>2</personID>
         <positionX>5</positionX>
         <positionY>1</positionY>
-        <time>9.6197022283814317</time>
+        <time>8.5234051576424439</time>
         <type>move</type>
     </events>
     <events>
-        <personID>2</personID>
-        <positionX>0</positionX>
+        <personID>1</personID>
+        <positionX>2</positionX>
         <positionY>2</positionY>
-        <time>10.4518665794446974</time>
+        <time>8.5584319146145675</time>
         <type>move</type>
     </events>
     <events>
         <personID>2</personID>
         <positionX>4</positionX>
         <positionY>0</positionY>
-        <time>10.5022846126411482</time>
+        <time>9.1442860979294385</time>
         <type>move</type>
     </events>
     <events>
-        <personID>2</personID>
-        <positionX>0</positionX>
-        <positionY>1</positionY>
-        <time>11.3916710501879014</time>
+        <personID>1</personID>
+        <positionX>1</positionX>
+        <positionY>3</positionY>
+        <time>9.4967206263642302</time>
         <type>move</type>
     </events>
     <events>
         <personID>2</personID>
         <positionX>3</positionX>
         <positionY>1</positionY>
-        <time>11.7504445903728218</time>
+        <time>10.0223443443022662</time>
         <type>move</type>
     </events>
     <events>
-        <personID>2</personID>
+        <personID>1</personID>
         <positionX>0</positionX>
-        <positionY>0</positionY>
-        <time>12.0562131644398552</time>
+        <positionY>2</positionY>
+        <time>10.4350093381138929</time>
         <type>move</type>
     </events>
     <events>
         <personID>2</personID>
         <positionX>2</positionX>
         <positionY>2</positionY>
-        <time>12.9986045681044954</time>
+        <time>10.9004025906750939</time>
+        <type>move</type>
+    </events>
+    <events>
+        <personID>1</personID>
+        <positionX>0</positionX>
+        <positionY>1</positionY>
+        <time>11.3732980498635556</time>
         <type>move</type>
     </events>
     <events>
         <personID>2</personID>
         <positionX>1</positionX>
         <positionY>3</positionY>
-        <time>14.2467645458361690</time>
+        <time>11.7784608370479216</time>
+        <type>move</type>
+    </events>
+    <events>
+        <personID>1</personID>
+        <positionX>0</positionX>
+        <positionY>0</positionY>
+        <time>12.0367683606525318</time>
         <type>move</type>
     </events>
     <events>
         <personID>2</personID>
         <positionX>0</positionX>
         <positionY>2</positionY>
-        <time>15.4949245235678426</time>
+        <time>12.6565190834207493</time>
         <type>move</type>
     </events>
     <events>
         <personID>2</personID>
         <positionX>0</positionX>
         <positionY>1</positionY>
-        <time>16.7430845012995162</time>
+        <time>13.5345773297935770</time>
         <type>move</type>
     </events>
     <events>
         <personID>2</personID>
         <positionX>0</positionX>
         <positionY>0</positionY>
-        <time>17.6256668855592327</time>
+        <time>14.1554582700805716</time>
         <type>move</type>
     </events>
+    <fieldHeight>5</fieldHeight>
+    <fieldWidth>14</fieldWidth>
     <name>output</name>
 </output>

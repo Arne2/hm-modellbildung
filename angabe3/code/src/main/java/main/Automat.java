@@ -20,11 +20,11 @@ public class Automat {
      */
     public static void main(String[] args) {
         final Field field = StringView.parseStringMap(
-                "X 000         \n" +
-                "0 00000  0  0 \n" +
-                "0 000 00  00 0\n" +
-                "000 0 0 0 00 0\n" +
-                "0 0 0 00 00 00\n");
+                "00000000000000\n" +
+                "000       0000\n" +
+                "000 00X00 0000\n" +
+                "000000000 0000\n" +
+                "000000000 0000\n");
 
         final Configuration build = new Configuration.Builder(args)
                 .build();
@@ -35,7 +35,7 @@ public class Automat {
 
         System.out.println(StringView.personMap(simulation.field));
         System.out.println(StringView.useMap(simulation.field, simulation.use));
-        simulation.run(BigDecimal.valueOf(200000));
+        //simulation.run(BigDecimal.valueOf(200000));
         try {
             output.save("output.xml");
         }catch (Exception e){

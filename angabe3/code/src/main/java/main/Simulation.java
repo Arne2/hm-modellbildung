@@ -61,7 +61,9 @@ public class Simulation {
         final PersonMoveEvent event = new PersonMoveEvent(clock.systemTime(), this, person);
         this.events.add(event);
         persons.add(person);
-        outputFile.addPawnEvent(clock.systemTime(), person.getId(), location.x, location.y);
+        if(outputFile != null) {
+            outputFile.addPawnEvent(clock.systemTime(), person.getId(), location.x, location.y);
+        }
         return person;
     }
     public void run(BigDecimal maxSimulationTime) {

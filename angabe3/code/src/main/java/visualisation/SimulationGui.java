@@ -8,12 +8,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import main.Simulation;
 import outputFile.Output;
 import outputFile.OutputEvent;
-import person.Person;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -33,7 +30,7 @@ public class SimulationGui extends Application {
     private int step = 0;
     private Label stepLabel;
     private Label timeLabel;
-    private GridPane gridPane;
+    private GridPane gridPane = new GridPane();
     public static Output input = null;
     public static void main(String[] args) {
         try {
@@ -52,13 +49,15 @@ public class SimulationGui extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("Visualisierung für: " + input.getName());
-        gridPane = createGridPane();
-        gridPane.setLayoutY(50);
-        stepLabel = new Label(step+"");
-        stepLabel.setLayoutX(50);
+        initGridPane();
+        gridPane.setLayoutY(75);
+        stepLabel = new Label("Current step: " + step);
+        stepLabel.setLayoutX(25);
         stepLabel.setLayoutY(14);
 
-        //TODO: timeLabel
+        timeLabel = new Label("Current Time: 0");
+        timeLabel.setLayoutX(250);
+        timeLabel.setLayoutY(14);
 
         Button proceed = new Button("Next Step");
         proceed.setLayoutX(150);
@@ -73,28 +72,45 @@ public class SimulationGui extends Application {
             }
         });
 
+        Button reset = new Button("Reset");
+        reset.setLayoutX(150);
+        reset.setLayoutY(42);
+
+        reset.setOnAction(event -> {
+            resetGrid();
+        });
+
         Pane root = new Pane();
         root.getChildren().add(stepLabel);
+        root.getChildren().add(timeLabel);
         root.getChildren().add(proceed);
+        root.getChildren().add(reset);
         root.getChildren().add(gridPane);
-        primaryStage.setScene(new Scene(root, 30*input.getFieldWidth(), 30*input.getFieldHeight() + 50));
+        primaryStage.setScene(new Scene(root, 30*input.getFieldWidth(), 30*input.getFieldHeight() + 75));
         primaryStage.show();
     }
 
-    public GridPane createGridPane(){
+    public void initGridPane(){
         //TODO import field
-        GridPane pane = new GridPane();
         for (int x = 0; x < input.getFieldWidth(); x++){
             for(int y = 0; y < input.getFieldHeight(); y++) {
                 if(x == 0 && y == 0) {
-                    pane.add(new ImageView(new Image("file:images/target.png")),x,y);
+                    gridPane.add(new ImageView(new Image("file:images/target.png")),x,y);
                 } else {
-                    pane.add(new ImageView(new Image("file:images/free.png")),x,y);
+                    gridPane.add(new ImageView(new Image("file:images/free.png")),x,y);
                 }
             }
         }
-        pane.setStyle("-fx-grid-lines-visible: true");
-        return pane;
+        gridPane.setStyle("-fx-grid-lines-visible: true");
+    }
+
+    public void resetGrid(){
+        gridPane.getChildren().clear();
+        personList.clear();
+        initGridPane();
+        step = 0;
+        stepLabel.setText("Current step: " + step);
+        timeLabel.setText("Current Time: 0");
     }
 
     public void handleNextEvent(){
@@ -136,8 +152,8 @@ public class SimulationGui extends Application {
         System.out.println(next);
         System.out.println(personList);
 
-        //TODO timeLabel
-        stepLabel.setText(++step + "");
+        timeLabel.setText("Current Time: " + next.getTime());
+        stepLabel.setText("Current step: " + ++step);
     }
 
     private void addPersonToGrid(SimulatedPerson person){

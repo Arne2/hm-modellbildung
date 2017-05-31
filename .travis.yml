@@ -1,0 +1,4 @@
+language: java
+script: 
+  - cd angabe3/code/
+  - mvn test -B

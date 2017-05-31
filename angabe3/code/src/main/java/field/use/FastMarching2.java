@@ -1,7 +1,7 @@
 package field.use;
 
-import com.sun.org.apache.bcel.internal.generic.BIPUSH;
 import field.Field;
+import field.Fields;
 import field.location.Location;
 
 import java.math.BigDecimal;
@@ -11,15 +11,16 @@ import static java.util.Comparator.comparingDouble;
 
 /**
  * Created by dima on 30.05.17.
+ * Fast Marching Dijkstra like
  */
-public class FastMarching {
+public class FastMarching2 {
     private final Field field;
     private final Location target;
     private final Map<Location, Double> distance = new HashMap<>();
     private final Set<Location> unvisited;
     private final Map<Location, Double> considered = new HashMap<>();
 
-    private FastMarching(final Field field_, Location target_) {
+    private FastMarching2(final Field field_, Location target_) {
         this.field = field_;
         this.target = target_;
         this.unvisited = new HashSet<>(field.getLocations());
@@ -148,7 +149,29 @@ public class FastMarching {
         return locations;
     }
 
-    private void run(){
+    private void run() {
+        while (!unvisited.isEmpty()) {
+            final Location u = unvisited.parallelStream()
+                    .min(Comparator.comparingDouble(key -> distance.getOrDefault(key, Double.MAX_VALUE)))
+                    .orElseThrow(() -> new AssertionError("unvisited must have not been empty!"));
+            unvisited.remove(u);
+
+            final Set<Location> neumann = Fields.neumann(field, u);
+            neumann.stream()
+                    .filter(unvisited::contains)
+                    .forEach(v -> {
+                        final double alt = calcUTilde(v);
+
+
+
+                        if (distance.get(v) == null || alt < distance.get(v)) {
+                            distance.put(v, alt);
+                        }
+                    });
+        }
+    }
+
+    private void run2(){
 
 
         //Assign every node Xi the value of Ui =  +INFINITY and label them as far;
@@ -203,14 +226,11 @@ public class FastMarching {
                 System.out.println(loc.toString());
             }
         }
-
-
-
     }
 
 
     public static Map<Location, Double> use(Field field) {
-        final FastMarching fastMarching = new FastMarching(field, field.getTarget());
+        final FastMarching2 fastMarching = new FastMarching2(field, field.getTarget());
         fastMarching.run();
         return fastMarching.distance;
     }

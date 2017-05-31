@@ -6,6 +6,7 @@ import field.location.Location;
 import field.use.Dijkstra;
 import field.use.EuclidDistance;
 import field.use.FastMarching;
+import field.use.FastMarching2;
 import field.view.StringView;
 import outputFile.OutputFile;
 import person.Person;

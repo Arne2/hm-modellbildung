@@ -35,7 +35,7 @@ public class Automat {
 
         System.out.println(StringView.personMap(simulation.field));
         System.out.println(StringView.useMap(simulation.field, simulation.use));
-        //simulation.run(BigDecimal.valueOf(200000));
+        simulation.run(BigDecimal.valueOf(200000));
         try {
             output.save("output.xml");
         }catch (Exception e){

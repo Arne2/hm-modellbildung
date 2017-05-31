@@ -45,7 +45,7 @@ public class PersonMoveEvent extends BaseEvent {
 
         if (bestTarget == null) {
             //TODO how long to wait if no move possible?
-            final BigDecimal timeForMove = BigDecimal.valueOf(1 / person.getVelocity());
+            final BigDecimal timeForMove = BigDecimal.valueOf(0.05);
             final BigDecimal nextMove = getTime().add(timeForMove);
             final PersonMoveEvent event = new PersonMoveEvent(nextMove, simulation, person);
             newEvents.add(event);

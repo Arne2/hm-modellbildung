@@ -96,7 +96,7 @@ public class FastMarching {
         Set<Location> locations = new HashSet<>();
         for(int i = -1; i<2; i++){
             for(int j = -1; j<2; j++){
-                if ((i != 0) && (j != 0)){
+                if (i != j){
                     Location loc = Location.of(location.x + i, location.y + j);
                     if(unvisited.contains(loc)) {
                         locations.add(loc);

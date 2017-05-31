@@ -2,6 +2,7 @@ package outputFile;
 
 import config.Configuration;
 import field.Field;
+import field.view.StringView;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import java.math.BigDecimal;
@@ -15,10 +16,13 @@ import java.util.List;
 public class Output{
     private final Configuration config;
     private Field field;
+    private String fieldmap;
     private String name = "output";
     private List<OutputEvent> events;
     private int fieldWidth;
     private int fieldHeight;
+    private int targetX;
+    private int targetY;
 
     // Default Constructor necessary for JAXB
     public Output(){
@@ -26,11 +30,14 @@ public class Output{
     }
 
     public Output(Configuration config_, Field field_){
+        events = new ArrayList<>();
         this.config = config_;
         this.field = field_;
-        events = new ArrayList<>();
+        this.fieldmap = StringView.toStringMap(field);
         fieldWidth = field.getWidth();
         fieldHeight = field.getHeight();
+        targetX = field_.getTarget().x;
+        targetY = field_.getTarget().y;
     }
 
     public String getName(){
@@ -47,6 +54,14 @@ public class Output{
 
     public void setFieldWidth(int fieldWidth) {
         this.fieldWidth = fieldWidth;
+    }
+
+    public String getFieldmap() {
+        return fieldmap;
+    }
+
+    public void setFieldmap(String fieldmap) {
+        this.fieldmap = fieldmap;
     }
 
     public int getFieldHeight() {
@@ -83,6 +98,22 @@ public class Output{
 
     public void addPawnEvent(BigDecimal time, int id, long x, long y){
         events.add(new OutputEvent("pawn", time, id, x, y));
+    }
+
+    public int getTargetX() {
+        return targetX;
+    }
+
+    public void setTargetX(int targetX) {
+        this.targetX = targetX;
+    }
+
+    public int getTargetY() {
+        return targetY;
+    }
+
+    public void setTargetY(int targetY) {
+        this.targetY = targetY;
     }
 
     @Override

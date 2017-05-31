@@ -90,14 +90,32 @@ public class SimulationGui extends Application {
         primaryStage.show();
     }
 
-    public void initGridPane(){
-        //TODO import field
-        for (int x = 0; x < input.getFieldWidth(); x++){
-            for(int y = 0; y < input.getFieldHeight(); y++) {
-                if(x == 0 && y == 0) {
-                    gridPane.add(new ImageView(new Image("file:images/target.png")),x,y);
+    public void initBasicGridPane(){
+        for(int y = 0; y < input.getFieldHeight(); y++) {
+            for (int x = 0; x < input.getFieldWidth(); x++) {
+                if (x == 0 && y == 0) {
+                    gridPane.add(new ImageView(new Image("file:images/target.png")), x, y);
                 } else {
-                    gridPane.add(new ImageView(new Image("file:images/free.png")),x,y);
+                    gridPane.add(new ImageView(new Image("file:images/free.png")), x, y);
+                }
+            }
+        }
+        gridPane.setStyle("-fx-grid-lines-visible: true");
+    }
+
+    public void initGridPane(){
+        String map = input.getFieldmap();
+        String[] rows = map.split("\n");
+        System.out.println(rows);
+        for (int y = 0; y < input.getFieldHeight(); y++) {
+            for (int x = 0; x < input.getFieldWidth(); x++) {
+                char c = rows[y].charAt(x);
+                if (x == input.getTargetX() && y == input.getTargetY()) {
+                    gridPane.add(new ImageView(new Image("file:images/target.png")), x, y);
+                } else if (c == '0'){
+                    gridPane.add(new ImageView(new Image("file:images/free.png")), x, y);
+                } else if (c == ' '){
+                    gridPane.add(new ImageView(new Image("file:images/wall.png")), x, y);
                 }
             }
         }

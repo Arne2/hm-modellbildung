@@ -97,6 +97,11 @@ public class Configuration {
             return this;
         }
 
+        public Builder deviation(double deviation){
+            this.deviation = deviation;
+            return this;
+        }
+
         public Builder velocity(Supplier<Double> supplier) {
             this.freeFlowVelocity = supplier;
             return this;

@@ -109,8 +109,8 @@ public class FastMarching {
             double secondSumUnderRoot = 2 * (UH*UH + UV*UV - 1);
             double root = Math.sqrt(firstSumUnderRoot - secondSumUnderRoot);
             double value = firstFraction + 0.5 * root;
-            return BD_value.doubleValue();
-            //return firstFraction + 0.5 * root;
+            //return BD_value.doubleValue();
+            return firstFraction + 0.5 * root;
         }
         else{
             return  Math.min(UH, UV) + 1;

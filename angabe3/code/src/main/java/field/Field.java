@@ -74,4 +74,8 @@ public class Field {
     public void removePerson(Person person) {
         persons.remove(person);
     }
+
+    public int numberOfPersons(){
+        return persons.size();
+    }
 }

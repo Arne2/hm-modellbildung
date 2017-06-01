@@ -42,8 +42,6 @@ public class Simulation {
             this.use = EuclidDistance.use(field);
         }
         else if(configuration.getAlgorithm() == Configuration.AlgorithmType.eFastMarching){
-            //TODO: fast marching Algorithm
-            //here: Euclid to be replaced by fast marching
             this.use = FastMarching.use(field);
         }
         else{
@@ -55,7 +53,7 @@ public class Simulation {
     public Person spawnPerson(Location location) {
 
         Random rand = new Random(System.nanoTime());
-        final double velocity = rand.nextGaussian() * configuration.getDeviation() + configuration.getVelocity();
+        final double velocity = this.configuration.getVelocity();//rand.nextGaussian() * configuration.getDeviation() + configuration.getVelocity();
         final Person person = new Person(velocity);
         field.putPerson(person, location);
         final PersonMoveEvent event = new PersonMoveEvent(clock.systemTime(), this, person);

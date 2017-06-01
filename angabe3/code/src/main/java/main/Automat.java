@@ -20,22 +20,29 @@ public class Automat {
      */
     public static void main(String[] args) {
         final Field field = StringView.parseStringMap(
-                "00000000000000\n" +
-                "000       0000\n" +
-                "000 00X00 0000\n" +
-                "000000000 0000\n" +
-                "000000000 0000\n");
+                        "000000X000000\n" +
+                        "0000000000000\n" +
+                        "000       000\n" +
+                        "000 00000 000\n" +
+                        "000 00000 000\n" +
+                        "000 00000 000\n" +
+                        "000  000  000\n" +
+                        "0000000000000\n" +
+                        "0000000000000");
 
         final Configuration build = new Configuration.Builder(args)
                 .build();
         final Simulation simulation = new Simulation(field, build);
         OutputFile output = new OutputFile(build, field);
-        simulation.spawnPerson(Location.of(13,4));
-        simulation.spawnPerson(Location.of(13,3));
+        simulation.spawnPerson(Location.of(4,3));
+        simulation.spawnPerson(Location.of(5,3));
+        simulation.spawnPerson(Location.of(6,3));
+        simulation.spawnPerson(Location.of(7,3));
+        simulation.spawnPerson(Location.of(8,3));
 
         System.out.println(StringView.personMap(simulation.field));
         System.out.println(StringView.useMap(simulation.field, simulation.use));
-        //simulation.run(BigDecimal.valueOf(200000));
+        simulation.run(BigDecimal.valueOf(200000));
         try {
             output.save("output.xml");
         }catch (Exception e){

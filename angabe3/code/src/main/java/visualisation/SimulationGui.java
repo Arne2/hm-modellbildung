@@ -1,6 +1,8 @@
 package visualisation;
 
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -25,9 +27,11 @@ import java.util.Optional;
  * Created by Arne on 30.05.2017.
  */
 public class SimulationGui extends Application {
+    public static final int MILLIS = 500;
     private String path = System.getProperty("user.dir");
     private List<SimulatedPerson> personList = new ArrayList<>();
     private int step = 0;
+    private boolean running = false;
     private Label stepLabel;
     private Label timeLabel;
     private GridPane gridPane = new GridPane();
@@ -63,6 +67,62 @@ public class SimulationGui extends Application {
         proceed.setLayoutX(150);
         proceed.setLayoutY(12);
 
+        Button reset = new Button("Reset");
+        reset.setLayoutX(150);
+        reset.setLayoutY(42);
+
+        reset.setOnAction(event -> {
+            resetGrid();
+        });
+
+        Button play = new Button("Play");
+        play.setLayoutX(25);
+        play.setLayoutY(42);
+
+        play.setOnAction(event -> {
+            if (running){
+                running = false;
+                play.setText("Play");
+            } else {
+                play.setText("Pause");
+                running = true;
+                proceed.setDisable(true);
+
+
+                Task task = new Task<Void>() {
+                    @Override
+                    public Void call() {
+                        while (running && step < input.getEvents().size()) {
+                            Platform.runLater(new Runnable() {
+                                @Override
+                                public void run() {
+                                    handleNextEvent();
+                                }
+                            });
+                            try {
+                                Thread.sleep(MILLIS);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        running = false;
+                        proceed.setDisable(false);
+                        if (step >= input.getEvents().size()) {
+                            Platform.runLater(new Runnable() {
+                                @Override
+                                public void run() {
+                                    stepLabel.setText("Finished");
+                                }
+                            });
+                        }
+                        return null;
+                    }
+                };
+                new Thread(task).start();
+            }
+
+        });
+
         proceed.setOnAction(event -> {
             if (step < input.getEvents().size()) {
                 handleNextEvent();
@@ -72,19 +132,12 @@ public class SimulationGui extends Application {
             }
         });
 
-        Button reset = new Button("Reset");
-        reset.setLayoutX(150);
-        reset.setLayoutY(42);
-
-        reset.setOnAction(event -> {
-            resetGrid();
-        });
-
         Pane root = new Pane();
         root.getChildren().add(stepLabel);
         root.getChildren().add(timeLabel);
         root.getChildren().add(proceed);
         root.getChildren().add(reset);
+        root.getChildren().add(play);
         root.getChildren().add(gridPane);
         primaryStage.setScene(new Scene(root, 30*input.getFieldWidth(), 30*input.getFieldHeight() + 75));
         primaryStage.show();

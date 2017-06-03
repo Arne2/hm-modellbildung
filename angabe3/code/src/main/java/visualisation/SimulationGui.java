@@ -4,12 +4,15 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.CycleMethod;
+import javafx.scene.paint.LinearGradient;
+import javafx.scene.paint.Stop;
 import javafx.stage.Stage;
 import outputFile.Output;
 import outputFile.OutputEvent;
@@ -28,13 +31,20 @@ import java.util.Optional;
  */
 public class SimulationGui extends Application {
     public static final int MILLIS = 500;
-    private String path = System.getProperty("user.dir");
+    public static final int CELLSIZE = 30;
     private List<SimulatedPerson> personList = new ArrayList<>();
     private int step = 0;
     private boolean running = false;
+    private boolean heatmap = false;
     private Label stepLabel;
     private Label timeLabel;
-    private GridPane gridPane = new GridPane();
+    private Canvas cellLayer;
+    private Canvas heatLayer;
+    private Canvas objectLayer;
+    private Button proceed;
+    private Button reset;
+    private Button play;
+    private Button changeLayer;
     public static Output input = null;
     public static void main(String[] args) {
         try {
@@ -53,8 +63,6 @@ public class SimulationGui extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("Visualisierung für: " + input.getName());
-        initGridPane();
-        gridPane.setLayoutY(75);
         stepLabel = new Label("Current step: " + step);
         stepLabel.setLayoutX(25);
         stepLabel.setLayoutY(14);
@@ -63,19 +71,125 @@ public class SimulationGui extends Application {
         timeLabel.setLayoutX(250);
         timeLabel.setLayoutY(14);
 
-        Button proceed = new Button("Next Step");
+        createButtons();
+
+        cellLayer = new Canvas(CELLSIZE*input.getFieldWidth(), CELLSIZE*input.getFieldHeight());
+        cellLayer.setLayoutY(75);
+
+        heatLayer = new Canvas(CELLSIZE*input.getFieldWidth(), CELLSIZE*input.getFieldHeight());
+        heatLayer.setLayoutY(75);
+
+        objectLayer = new Canvas(CELLSIZE*input.getFieldWidth(), CELLSIZE*input.getFieldHeight());
+        objectLayer.setLayoutY(75);
+
+        drawCells();
+        drawHeatMap();
+        drawObjects();
+
+        Pane root = new Pane();
+        root.getChildren().add(stepLabel);
+        root.getChildren().add(timeLabel);
+        root.getChildren().add(proceed);
+        root.getChildren().add(reset);
+        root.getChildren().add(play);
+        root.getChildren().add(changeLayer);
+        root.getChildren().add(cellLayer);
+        root.getChildren().add(heatLayer);
+        root.getChildren().add(objectLayer);
+
+        heatLayer.toBack();
+        objectLayer.toFront();
+        primaryStage.setScene(new Scene(root, CELLSIZE *input.getFieldWidth(), CELLSIZE*input.getFieldHeight() + 75));
+        primaryStage.show();
+    }
+
+    private void moveCanvas(Canvas canvas, int x, int y) {
+        canvas.setTranslateX(x);
+        canvas.setTranslateY(y);
+    }
+
+    public void drawCells(){
+        GraphicsContext gc = cellLayer.getGraphicsContext2D();
+        gc.setFill(Color.WHITE);
+        gc.setStroke(Color.BLACK);
+        gc.setLineWidth(1);
+        for(int y = 0; y < input.getFieldHeight(); y++) {
+            for (int x = 0; x < input.getFieldWidth(); x++) {
+                gc.fillRect(x*CELLSIZE, y*CELLSIZE, CELLSIZE, CELLSIZE);
+                gc.strokeRect(x*CELLSIZE, y*CELLSIZE, CELLSIZE, CELLSIZE);
+            }
+        }
+    }
+
+    public void drawHeatMap(){
+        //TODO heatmap
+        GraphicsContext gc = heatLayer.getGraphicsContext2D();
+        LinearGradient lg = new LinearGradient(0, 0, 1, 1, true,
+                CycleMethod.REFLECT,
+                new Stop(0.0, Color.YELLOW),
+                new Stop(1.0, Color.RED));
+        gc.setFill(lg);
+        gc.setLineWidth(1);
+        gc.stroke();
+        gc.fillRect(0,0, heatLayer.getWidth(), heatLayer.getHeight());
+    }
+
+    public void drawObjects(){
+        GraphicsContext gc = objectLayer.getGraphicsContext2D();
+        gc.setFill(Color.WHITE);
+        gc.setStroke(Color.BLACK);
+        gc.setLineWidth(1);
+        String map = input.getFieldmap();
+        String[] rows = map.split("\n");
+        for(int y = 0; y < input.getFieldHeight(); y++) {
+            for (int x = 0; x < input.getFieldWidth(); x++) {
+                char c = rows[y].charAt(x);
+                if (x == input.getTargetX() && y == input.getTargetY()) {
+                    gc.setFill(Color.GREEN);
+                    gc.fillRect(x*CELLSIZE, y*CELLSIZE, CELLSIZE, CELLSIZE);
+                    gc.strokeRect(x*CELLSIZE, y*CELLSIZE, CELLSIZE, CELLSIZE);
+                } else if (c == ' '){
+                    gc.setFill(Color.BLACK);
+                    gc.fillRect(x*CELLSIZE, y*CELLSIZE, CELLSIZE, CELLSIZE);
+                }
+            }
+        }
+    }
+    public void reset(){
+        personList.stream().forEach(simulatedPerson -> removePersonFromField(simulatedPerson));
+        personList.clear();
+        GraphicsContext gc = objectLayer.getGraphicsContext2D();
+        gc.setFill(Color.GREEN);
+        gc.fillRect(input.getTargetX()*CELLSIZE, input.getTargetY()*CELLSIZE, CELLSIZE, CELLSIZE);
+        gc.strokeRect(input.getTargetX()*CELLSIZE, input.getTargetY()*CELLSIZE, CELLSIZE, CELLSIZE);
+        step = 0;
+        stepLabel.setText("Current step: " + step);
+        timeLabel.setText("Current Time: 0");
+    }
+
+    public void createButtons(){
+        proceed = new Button("Next Step");
         proceed.setLayoutX(150);
         proceed.setLayoutY(12);
 
-        Button reset = new Button("Reset");
+        proceed.setOnAction(event -> {
+            if (step < input.getEvents().size()) {
+                handleNextEvent();
+            }
+            if (step >= input.getEvents().size()){
+                stepLabel.setText("Finished");
+            }
+        });
+
+        reset = new Button("Reset");
         reset.setLayoutX(150);
         reset.setLayoutY(42);
 
         reset.setOnAction(event -> {
-            resetGrid();
+            reset();
         });
 
-        Button play = new Button("Play");
+        play = new Button("Play");
         play.setLayoutX(25);
         play.setLayoutY(42);
 
@@ -112,6 +226,7 @@ public class SimulationGui extends Application {
                                 @Override
                                 public void run() {
                                     stepLabel.setText("Finished");
+                                    play.setText("Play");
                                 }
                             });
                         }
@@ -123,65 +238,21 @@ public class SimulationGui extends Application {
 
         });
 
-        proceed.setOnAction(event -> {
-            if (step < input.getEvents().size()) {
-                handleNextEvent();
-            }
-            if (step >= input.getEvents().size()){
-                stepLabel.setText("Finished");
+        changeLayer = new Button("Heatmap");
+        changeLayer.setLayoutX(250);
+        changeLayer.setLayoutY(42);
+
+        changeLayer.setOnAction(event -> {
+            if (heatmap){
+                heatmap = false;
+                changeLayer.setText("Heatmap");
+                heatLayer.toBack();
+            } else {
+                heatmap = true;
+                changeLayer.setText("Cellmap");
+                cellLayer.toBack();
             }
         });
-
-        Pane root = new Pane();
-        root.getChildren().add(stepLabel);
-        root.getChildren().add(timeLabel);
-        root.getChildren().add(proceed);
-        root.getChildren().add(reset);
-        root.getChildren().add(play);
-        root.getChildren().add(gridPane);
-        primaryStage.setScene(new Scene(root, 30*input.getFieldWidth(), 30*input.getFieldHeight() + 75));
-        primaryStage.show();
-    }
-
-    public void initBasicGridPane(){
-        for(int y = 0; y < input.getFieldHeight(); y++) {
-            for (int x = 0; x < input.getFieldWidth(); x++) {
-                if (x == 0 && y == 0) {
-                    gridPane.add(new ImageView(new Image("file:images/target.png")), x, y);
-                } else {
-                    gridPane.add(new ImageView(new Image("file:images/free.png")), x, y);
-                }
-            }
-        }
-        gridPane.setStyle("-fx-grid-lines-visible: true");
-    }
-
-    public void initGridPane(){
-        String map = input.getFieldmap();
-        String[] rows = map.split("\n");
-        System.out.println(rows);
-        for (int y = 0; y < input.getFieldHeight(); y++) {
-            for (int x = 0; x < input.getFieldWidth(); x++) {
-                char c = rows[y].charAt(x);
-                if (x == input.getTargetX() && y == input.getTargetY()) {
-                    gridPane.add(new ImageView(new Image("file:images/target.png")), x, y);
-                } else if (c == '0'){
-                    gridPane.add(new ImageView(new Image("file:images/free.png")), x, y);
-                } else if (c == ' '){
-                    gridPane.add(new ImageView(new Image("file:images/wall.png")), x, y);
-                }
-            }
-        }
-        gridPane.setStyle("-fx-grid-lines-visible: true");
-    }
-
-    public void resetGrid(){
-        gridPane.getChildren().clear();
-        personList.clear();
-        initGridPane();
-        step = 0;
-        stepLabel.setText("Current step: " + step);
-        timeLabel.setText("Current Time: 0");
     }
 
     public void handleNextEvent(){
@@ -195,7 +266,7 @@ public class SimulationGui extends Application {
                     throw new AssertionError("Pawn Event with an ID that's already taken!");
                 }
                 personList.add(person);
-                addPersonToGrid(person);
+                addPersonToField(person);
                 break;
             case "move" :
                  p = personList.stream().filter(simulatedPerson -> simulatedPerson.getId() == next.getPersonID()).findAny();
@@ -203,10 +274,10 @@ public class SimulationGui extends Application {
                     throw new AssertionError("Person not in personList");
                 }
                 person = p.get();
-                removePersonFromGrid(person);
+                removePersonFromField(person);
                 person.setX(next.getPositionX());
                 person.setY(next.getPositionY());
-                addPersonToGrid(person);
+                addPersonToField(person);
                 break;
             case "remove":
                 p = personList.stream().filter(simulatedPerson -> simulatedPerson.getId() == next.getPersonID()).findAny();
@@ -214,7 +285,7 @@ public class SimulationGui extends Application {
                     throw new AssertionError("Person not in personList");
                 }
                 person = p.get();
-                removePersonFromGrid(person);
+                removePersonFromField(person);
                 personList.remove(person);
                 break;
             default:
@@ -227,13 +298,15 @@ public class SimulationGui extends Application {
         stepLabel.setText("Current step: " + ++step);
     }
 
-    private void addPersonToGrid(SimulatedPerson person){
-        gridPane.getChildren().remove(person.getX()*input.getFieldHeight() + person.getY());
-        gridPane.add(new ImageView(new Image("file:images/person.png")),Math.toIntExact(person.getX()),Math.toIntExact(person.getY()));
+    private void addPersonToField(SimulatedPerson person){
+        GraphicsContext gc = objectLayer.getGraphicsContext2D();
+        gc.setFill(Color.ORANGE);
+        gc.setStroke(Color.BLACK);
+        gc.fillRect(person.getX()*CELLSIZE+1, person.getY()*CELLSIZE+1, CELLSIZE-2, CELLSIZE-2);
     }
 
-    private void removePersonFromGrid(SimulatedPerson person){
-        gridPane.getChildren().remove(person.getX()*input.getFieldHeight() + person.getY());
-        gridPane.add(new ImageView(new Image("file:images/free.png")),Math.toIntExact(person.getX()),Math.toIntExact(person.getY()));
+    private void removePersonFromField(SimulatedPerson person){
+        GraphicsContext gc = objectLayer.getGraphicsContext2D();
+        gc.clearRect(person.getX()*CELLSIZE+1,person.getY()*CELLSIZE+1, CELLSIZE-2, CELLSIZE-2);
     }
 }

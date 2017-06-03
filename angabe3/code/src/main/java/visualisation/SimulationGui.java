@@ -30,23 +30,46 @@ import java.util.Optional;
  * Created by Arne on 30.05.2017.
  */
 public class SimulationGui extends Application {
+    /**
+     * Waiting time for the running simulation.
+     */
     public static final int MILLIS = 500;
+    /**
+     * Size of one cell.
+     */
     public static final int CELLSIZE = 30;
+
+    /**
+     * List of all simulated persons.
+     */
     private List<SimulatedPerson> personList = new ArrayList<>();
+
+    // Helping variables
     private int step = 0;
     private boolean running = false;
     private boolean heatmap = false;
+
+    // Labels
     private Label stepLabel;
     private Label timeLabel;
+
+    // Layers of the visualisation
     private Canvas cellLayer;
     private Canvas heatLayer;
     private Canvas objectLayer;
+
+    // Buttons
     private Button proceed;
     private Button reset;
     private Button play;
     private Button changeLayer;
+
+    private static final boolean DEBUG = true;
+
     public static Output input = null;
+
     public static void main(String[] args) {
+        // Reading the xml file
         try {
             JAXBContext jaxbContext = JAXBContext.newInstance(Output.class);
             Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
@@ -63,29 +86,12 @@ public class SimulationGui extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("Visualisierung für: " + input.getName());
-        stepLabel = new Label("Current step: " + step);
-        stepLabel.setLayoutX(25);
-        stepLabel.setLayoutY(14);
 
-        timeLabel = new Label("Current Time: 0");
-        timeLabel.setLayoutX(250);
-        timeLabel.setLayoutY(14);
-
+        createLabels();
         createButtons();
+        createLayers();
 
-        cellLayer = new Canvas(CELLSIZE*input.getFieldWidth(), CELLSIZE*input.getFieldHeight());
-        cellLayer.setLayoutY(75);
-
-        heatLayer = new Canvas(CELLSIZE*input.getFieldWidth(), CELLSIZE*input.getFieldHeight());
-        heatLayer.setLayoutY(75);
-
-        objectLayer = new Canvas(CELLSIZE*input.getFieldWidth(), CELLSIZE*input.getFieldHeight());
-        objectLayer.setLayoutY(75);
-
-        drawCells();
-        drawHeatMap();
-        drawObjects();
-
+        // Add all elements to the pane
         Pane root = new Pane();
         root.getChildren().add(stepLabel);
         root.getChildren().add(timeLabel);
@@ -99,15 +105,25 @@ public class SimulationGui extends Application {
 
         heatLayer.toBack();
         objectLayer.toFront();
+
         primaryStage.setScene(new Scene(root, CELLSIZE *input.getFieldWidth(), CELLSIZE*input.getFieldHeight() + 75));
         primaryStage.show();
     }
 
+    /**
+     * Helping method for drawing Canvas -- currently not used.
+     * @param canvas
+     * @param x
+     * @param y
+     */
     private void moveCanvas(Canvas canvas, int x, int y) {
         canvas.setTranslateX(x);
         canvas.setTranslateY(y);
     }
 
+    /**
+     * Draws the cells of the cellLayer.
+     */
     public void drawCells(){
         GraphicsContext gc = cellLayer.getGraphicsContext2D();
         gc.setFill(Color.WHITE);
@@ -121,6 +137,9 @@ public class SimulationGui extends Application {
         }
     }
 
+    /**
+     * Draws the heatmap which visualizes the value of each location.
+     */
     public void drawHeatMap(){
         //TODO heatmap
         GraphicsContext gc = heatLayer.getGraphicsContext2D();
@@ -134,6 +153,10 @@ public class SimulationGui extends Application {
         gc.fillRect(0,0, heatLayer.getWidth(), heatLayer.getHeight());
     }
 
+    /**
+     * Draws objects of the objectLayer, which include target and walls.
+     * Persons will be added during the simulation.
+     */
     public void drawObjects(){
         GraphicsContext gc = objectLayer.getGraphicsContext2D();
         gc.setFill(Color.WHITE);
@@ -155,6 +178,10 @@ public class SimulationGui extends Application {
             }
         }
     }
+
+    /**
+     * Sets the simulation to the beginning.
+     */
     public void reset(){
         personList.stream().forEach(simulatedPerson -> removePersonFromField(simulatedPerson));
         personList.clear();
@@ -167,6 +194,22 @@ public class SimulationGui extends Application {
         timeLabel.setText("Current Time: 0");
     }
 
+    /**
+     * Helping method for creating the labels.
+     */
+    public void createLabels(){
+        stepLabel = new Label("Current step: " + step);
+        stepLabel.setLayoutX(25);
+        stepLabel.setLayoutY(14);
+
+        timeLabel = new Label("Current Time: 0");
+        timeLabel.setLayoutX(250);
+        timeLabel.setLayoutY(14);
+    }
+
+    /**
+     * Helping method for creating the buttons.
+     */
     public void createButtons(){
         proceed = new Button("Next Step");
         proceed.setLayoutX(150);
@@ -255,6 +298,27 @@ public class SimulationGui extends Application {
         });
     }
 
+    /**
+     * Helping method for creating the layers.
+     */
+    public void createLayers(){
+        cellLayer = new Canvas(CELLSIZE*input.getFieldWidth(), CELLSIZE*input.getFieldHeight());
+        cellLayer.setLayoutY(75);
+
+        heatLayer = new Canvas(CELLSIZE*input.getFieldWidth(), CELLSIZE*input.getFieldHeight());
+        heatLayer.setLayoutY(75);
+
+        objectLayer = new Canvas(CELLSIZE*input.getFieldWidth(), CELLSIZE*input.getFieldHeight());
+        objectLayer.setLayoutY(75);
+
+        drawCells();
+        drawHeatMap();
+        drawObjects();
+    }
+
+    /**
+     * This methods handles the next event in the eventlist of the input. Persons will be created, moved and removed here.
+     */
     public void handleNextEvent(){
         OutputEvent next = input.getEvents().get(step);
         SimulatedPerson person;
@@ -291,13 +355,20 @@ public class SimulationGui extends Application {
             default:
                 throw new AssertionError("Invalid Event Type: " + next.getType());
         }
-        System.out.println(next);
-        System.out.println(personList);
+
+        if (DEBUG) {
+            System.out.println(next);
+            System.out.println(personList);
+        }
 
         timeLabel.setText("Current Time: " + next.getTime());
         stepLabel.setText("Current step: " + ++step);
     }
 
+    /**
+     * Method that adds a person to the field.
+     * @param person
+     */
     private void addPersonToField(SimulatedPerson person){
         GraphicsContext gc = objectLayer.getGraphicsContext2D();
         gc.setFill(Color.ORANGE);
@@ -305,6 +376,10 @@ public class SimulationGui extends Application {
         gc.fillRect(person.getX()*CELLSIZE+1, person.getY()*CELLSIZE+1, CELLSIZE-2, CELLSIZE-2);
     }
 
+    /**
+     * Method that removes a person from the field.
+     * @param person
+     */
     private void removePersonFromField(SimulatedPerson person){
         GraphicsContext gc = objectLayer.getGraphicsContext2D();
         gc.clearRect(person.getX()*CELLSIZE+1,person.getY()*CELLSIZE+1, CELLSIZE-2, CELLSIZE-2);

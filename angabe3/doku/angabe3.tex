@@ -91,8 +91,17 @@ Die Aufgabe der Software ist die Simulation von Personenbewegungen. Für möglic
 
 \subsection{Reports}
 %TODO --> Ermitteln was alles ausgegeben wird
+
 \subsection{Betriebsmodi}
 \label{AnforderungenBetriebsmodi}
+
+Die Software hat 3 Betriebsmodi. Abhängig vom Betriebsmodus wird der Nutzen bzw. die Attraktivität der einzelnen Zellen, bezogen auf das/die Ziel(e) mit anderen Algorithmen berechnet. \\
+\\
+Betriebsmodus 1: Der Nutzen bzw. die Attraktivität jeder Zelle entspricht dem negativen euklidischen Abstand. In diesem Betriebsmodus können keine Hindernisse umgangen werden. Jede Person versucht den Nutzen zu maximieren und wählt jeweils die Zelle mit maximalen Wert aus den umliegenden aus.\\
+\\
+Betriebsmodus 2: Der Nutzen bzw. die Attraktivität jeder Zelle wird durch Floor-Flooding, basierend auf dem Dijkstra Algorithmus, berechnet. Für jede Zelle wird die geringste Anzahl an notwendigen Bewegungen bis zum Ziel ermittelt. \\
+\\
+Betriebsmodus 3: Analog zum Betriebsmodus 2 wird auch in diesem Betriebsmodus der Nutzen bzw. die Attraktivität jeder Zelle mittels Floor-Flooding berechnet. In diesem Betriebsmodus wird jedoch der Fast-Marching Alforithmus (Lösung der Eikonal-Gleichung) als Grundlage verwendet.
 
 \subsection{Werte für die Auswertung}
 Alle in der Tabelle \ref{tab:WerteAuswertung} aufgeführten Werte sollen auf Basis der Simulation ermittelt und ausgewertet werden. Einige Werte werden nur für bestimmte Tests benötigt.
@@ -114,14 +123,29 @@ Alle in der Tabelle \ref{tab:WerteAuswertung} aufgeführten Werte sollen auf Bas
 
 \subsection{Testszenarien für die Simulation}
 \label{AnforderungenTest}
+%TODO --> Bilder mit jeweiligen Testszenarien einfügen
+%TODO --> Definieren mit welcher Dichte, wie viele Personen etc der Test durchgeführt werden muss
 Die implementierten Algorithmen (vgl. Betriebsmodi im Unterkapitel \ref{AnforderungenBetriebsmodi} ) sollen anhand unterschiedlicher Testszenarien verglichen und verifiziert werden. 
  
 \subsubsection{Freier Fluss}
+Im Zuge dieses Tests soll überprüft werden, ob sich Personen bei freier Bahn (keine Hindernisse zwischen Start und Ziel) mit ihrer jeweiligen Wunschgeschwindigkeit auf das Ziel hin bewegen. Des weiteren soll überprüft werden, ob die Person den kürzesten Weg verwendet. Der Test soll mit allen 3 Betriebsmodi durchgeführt werden.
+
 \subsubsection{Hühnertest}
+Zwischen Start und Ziel soll ein U-förmiges Hindernis (Öffnung in Richtung des Startes) eingefügt werden. Abhängig vom Betriebsmodus wird ein unterschiedliches Ergebnis erwartet:\\
+Betriebsmodus 1: Die Personen sollen sich auf dem kürzesten Weg auf das Ziel zubewegen. Sobald sie das Hindernis erreicht haben, sollen sie stehen bleiben. Ein erfolgreiches absolvieren des Tests wird nicht erwartet. \\
+Betriebsmodi 2 und 3: Die Personen sollen das Hindernis umgehen und das Ziel erreichen. Bei einem \glqq Feststecken im Hindernis\grqq (wie im Betriebsmodus 1 gefordert) wird der Test als fehlgeschlagen gewertet.
+ 
 \subsubsection{Evakuierung eines Raumes mit 2 Türen}
+\label{Anforderungen:Evakuierung2}
+Die Personen befinden sich zu Beginn in einen von Hindernissen umgebenen, quadratischen Raum. An 2 Seiten sind Öffnungen platziert (freie Zellen). Hinter diesen Öffnungen befindet sich jeweils ein Ziel. Im Laufe des Tests sollen die Personen durch die beiden Engstellen zum Ziel gelangen. \\
+Dieser Test soll mit den Betriebsmodi 2 und 3 in unterschiedlichen Versionen durchgeführt werden. Zunächst sollen sich die Türen an benachbarten Seiten befinden. Hierbei sollen sie einmal mit minimalen und einmal mit maximalen Abstand zueinander plaziert werden. Anschließend sollen die Türen an gegenüberliegenden Seiten plaziert werden. Auch hierbei sollen sie einmal direkt gegenüber (mittig) und einmal mit maximalen Abstand zueinander (versetzt) angeordnet werden. Unterschiede hinsichtlich der Evakuierungsdauer sind festzuhalten.
+
 \subsubsection{Evakuierung eines Raumes mit 4 Türen}
+Dieser Testfall entsprich der in Kapitel \ref{Anforderungen:Evakuierung2} beschriebenen Evakuierung mit 2 Türen. In diesem Fall befindet sich jedoch an jeder Raumseite eine Tür. Die Türen sollen sich in einer ersten Version mittig bezogen auf die jeweilige Raumseite befinden. Darüber hinaus sollen in einer weiteren Version die Auswirkungen ermittelt werden, wenn jeweils die 2 Türen an benachbarten Seiten mit minimalen Abstand zueinander plaziert werden. Unterschiede hinsichtlich der Evakuierungsdauer sind festzuhalten.
+
 \subsubsection{Fundamentaldiagramm - Rimea-Test 4}
 \label{Anforderungen:RimeaTest}
+
 \section{Softwaredesign}
 
 Der Aufbau der Anwendung wurde im Team diskutiert und anschließend mittels UML spezifiziert.

@@ -21,11 +21,59 @@ Die Ziele werden als attraktiv für die Personen angesehen. Die Personen steiger
 Das erläuterte Modell gibt die einzelnen Personenbewegungen aus und visualisiert diese zusätzlich. Die Bewegung der Personen wird in drei getrennten Simulationen mit jeweils unterschiedlichen Algorithmen berechnet. Zunächst wird für jedes Feld der negative euklidische Abstand als Zielnutzen berechnet. Jede Person versucht durch die Wahl des umliegenden Feldes mit dem maximalen Wert seinen Nutzen zu steigern. \\
 In einem zweiten Modell erfolgt die Ermittlung der Personenbewegung mit Hilfe des Floor-Flooding, basierend auf dem Dijkstra Algorithmus. Jede Person wählt von den anliegenden Feldern das Feld, welches die geringste Anzahl an notwendigen Bewegungen bis zum Ziel hat. \\
 In einem dritten Modell erfolgt die Ermittlung der Personenbewegung ebenfalls mit Hilfe des Floor-Flooding. Als Grundlage dient hierbei jedoch die Lösung der Eikonal-Gleichung, welche die Ausbreitung einer Welle beschreibt. Hierfür wird der Fast-Marching Algorithmus verwendet.  \\
-Im Laufe der Studienarbeit werden die beschriebenen Modelle anhand unterschiedlicher Tests verglichen und ausgewertet. Eine detaillierte Erläuterung der Tests ist im folgenden Kapitel \ref{requirements} beschrieben.
+Im Laufe der Studienarbeit werden die beschriebenen Modelle anhand unterschiedlicher Tests verglichen und ausgewertet. Eine detaillierte Erläuterung der Tests ist im folgenden Kapitel \ref{AnforderungenTest} beschrieben.
 
 
 \section{Anforderungen/Requirements}
 \label{requirements}
+
+\subsection{Allgemeines}
+Es soll ein zellulärer Zustandsautomat implementiert werden. Die Software soll Personenbewegungen in der Ebene simulieren. Die unterschiedlichen Szenarien (Zustand der Zellen zu Beginn der Simulation), wie beispielsweise die Position der Hindernisse werden der Software übergeben. Diese sind im Unterkapitel \ref{AnforderungenTest} näher erläutert. Es wird davon ausgegangen, dass sich zu Beginn der Simulation alle Personen im Startbereich (es soll möglich sein mehrere Startbereiche anzulegen) befinden.
+
+\subsection{Zellen}
+Das gesamte Feld (zweidimensionaler Bereich indem sich die Personen bewegen können) soll in Zellen eingeteilt werden. Die Größe des Feldes und die Anzahl an Zellen sollen der Software als Parameter übergeben werden.\\
+Jede Zelle soll quadratisch sein. Jede Zelle kann verschiedene Zustände haben. Sie kann entweder leer oder besetzt sein. Ist eine Zelle besetzt, wird noch weiter unterschieden, ob sie durch ein Hindernis, das Ziel- (Personensenke) oder Startfeld (Personenquelle) oder durch eine Person besetzt ist.
+
+\subsection{Hindernisse}
+Es soll davon ausgegangen werden, dass jedes Hindernis eine oder mehrere Zellen ganz belegt. Hindernisse können von den Personen nicht betreten werden. Falls sich ein Hindernis zwischen einer Person und ihrem Ziel befindet, ist die Person gezwungen um das Hindernis herum zu gehen. \\
+In der Realität versucht eine Person einem Hindernis möglichst frühzeitig auszuweichen. Sie senkt somit ihren Nutzen, je näher sie einem Hindernis kommt. Dies wird im weiteren Verlauf dieser Studienarbeit nicht berücksichtigt.
+
+\subsection{Ziele}
+Durch das entsprechende Testszenario werden ein oder mehrere Ziele definiert. Ziele werden als attraktiv für die Personen angesehen. Jede Person erhöht ihren Nutzen, wenn sie sich dem Ziel nähert. Befinden sich mehrere Ziele im Feld, wird die Wahl des Ziels für jede Person abhängig vom Betriebsmodus bestimmt. 
+
+\subsection{Personen}
+Jede Person startet in ihrem Startfeld und bewegt sich im Laufe der Simulation von Zelle zu Zelle auf ihr Ziel hin. Jede Person kann sich in der Moore-Umgebung (8 mögliche Bewegungsrichtungen) bewegen. Die möglichen Bewegungsrichtungen sind in Abbildung \ref{fig:MooreUmgebung} rot markiert.
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.3\textwidth]{abbildungen/MooreUmgebung.pdf}
+	\caption{Moore-Umgebung}
+	\label{fig:MooreUmgebung}
+\end{figure}
+\\
+Die Personen können nur freie Zellen betreten. Jede Person wählt genau die Zelle als nächste Zelle, welche ihr den steilsten Nutzenanstieg ermöglicht. Der Nutzen wird der Zelle wird abhängig vom Betriebsmodus unterschiedlich berechnet. Darüber hinaus wird der Nutzen durch die Position der anderen Personen beeinflusst. 
+\\
+\\ %TODO --> Punkt 3 fehlt noch 	
+
+\subsection{Geschwindigkeit der Personen}
+Jede Person soll eine individuelle Wunschgeschwindigkeit besitzen. Sie bewegt sich bei freier Bahn mit dieser Geschwindigkeit fort. Die Wunschgeschwindigkeiten sollen als normalverteilt angesehen werden. Als Mittelwert und Varianz sollen die errechneten Werte aus der ersten Studienarbeit verwendet werden.
+\\%TODO --> Genaue Werte aus erster Studienarbeit einfügen
+\subsection{Zeitmanagement}
+\subsection{Parameter}
+\subsection{Berechnungen}
+\subsection{Reports}
+\subsection{Betriebsmodi}
+\label{AnforderungenBetriebsmodi}
+\subsection{Werte für die Auswertung}
+\subsection{Test der Implementierung}
+
+\subsection{Testszenarien für die Simulation}
+\label{AnforderungenTest}
+Die implementierten Algorithmen (vgl. Betriebsmodi im Unterkapitel \ref{AnforderungenBetriebsmodi} ) sollen anhand unterschiedlicher Testszenarien verglichen und verifiziert werden.  
+\subsubsection{Freier Fluss}
+\subsubsection{Hühnertest}
+\subsubsection{Evakuierung eines Raumes mit 2 Türen}
+\subsubsection{Evakuierung eines Raumes mit 4 Türen}
+\subsubsection{Fundamentaldiagramm - Rimea-Test 4}
 
 \section{Softwaredesign}
 

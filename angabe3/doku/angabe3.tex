@@ -42,7 +42,7 @@ In der Realität versucht eine Person einem Hindernis möglichst frühzeitig aus
 Durch das entsprechende Testszenario werden ein oder mehrere Ziele definiert. Ziele werden als attraktiv für die Personen angesehen. Jede Person erhöht ihren Nutzen, wenn sie sich dem Ziel nähert. Befinden sich mehrere Ziele im Feld, wird die Wahl des Ziels für jede Person abhängig vom Betriebsmodus bestimmt. 
 
 \subsection{Personen}
-Jede Person startet in ihrem Startfeld und bewegt sich im Laufe der Simulation von Zelle zu Zelle auf ihr Ziel hin. Jede Person kann sich in der Moore-Umgebung (8 mögliche Bewegungsrichtungen) bewegen. Die möglichen Bewegungsrichtungen sind in Abbildung \ref{fig:MooreUmgebung} rot markiert.
+Jede Person soll in ihrem Startfeld starten und sich im Laufe der Simulation von Zelle zu Zelle auf ihr Ziel hin bewegen und dadurch ihren persönlichen Nutzen, je näher sie dem Ziel kommt, steigern. Jede Person kann sich in der Moore-Umgebung (8 mögliche Bewegungsrichtungen) bewegen. Die möglichen Bewegungsrichtungen sind in Abbildung \ref{fig:MooreUmgebung} rot markiert.
 \begin{figure}[htpb]
 	\centering
 	\includegraphics[width=0.3\textwidth]{abbildungen/MooreUmgebung.pdf}
@@ -50,31 +50,78 @@ Jede Person startet in ihrem Startfeld und bewegt sich im Laufe der Simulation v
 	\label{fig:MooreUmgebung}
 \end{figure}
 \\
-Die Personen können nur freie Zellen betreten. Jede Person wählt genau die Zelle als nächste Zelle, welche ihr den steilsten Nutzenanstieg ermöglicht. Der Nutzen wird der Zelle wird abhängig vom Betriebsmodus unterschiedlich berechnet. Darüber hinaus wird der Nutzen durch die Position der anderen Personen beeinflusst. 
-\\
-\\ %TODO --> Punkt 3 fehlt noch 	
+Die Personen können nur freie Zellen betreten. Jede Person wählt genau die Zelle als nächste Zelle, welche ihr den steilsten Nutzenanstieg ermöglicht. Der Nutzen der verschiedenen Zellen wird abhängig vom Betriebsmodus unterschiedlich berechnet. Darüber hinaus soll der Nutzen durch die Position der anderen Personen beeinflusst werden. \\
 
+ %TODO --> Punkt 3 fehlt noch, Diskussion und genauere Beschreibung auch 	
+Der Nutzen einer Person wird verringern, wenn sie anderen Personen zu nahe kommt. In der Simulation soll folgende Funktion verwendet werden. 
+
+\begin{displaymath}
+u_{p}(d) = 
+\left\{ 
+\begin{array}{cc}
+-h \exp(\frac{1}{(\frac{d}{w})^2 -1}) & \;\;\;\;\;\;\;\;\;\;\; falls\, |d| < w  \\
+0 & sonst  
+\end{array} 
+\right.
+\end{displaymath}
+Hierbei wird mit $d$ der Abstand zur nächsten Person bezeichnet. $w$ und $h$ stehen für die Stärke und Reichweite der Funktion. 
+ 
 \subsection{Geschwindigkeit der Personen}
 Jede Person soll eine individuelle Wunschgeschwindigkeit besitzen. Sie bewegt sich bei freier Bahn mit dieser Geschwindigkeit fort. Die Wunschgeschwindigkeiten sollen als normalverteilt angesehen werden. Als Mittelwert und Varianz sollen die errechneten Werte aus der ersten Studienarbeit verwendet werden.
 \\%TODO --> Genaue Werte aus erster Studienarbeit einfügen
-\subsection{Zeitmanagement}
+
+\subsection{Zeitmodellierung}
+Die Applikation unterliegt keinen harten Echtzeitanforderungen. Die Simulation soll für die gesamte Simmulationsdauer so schnell wie möglich durchgeführt werden. Es soll keine Globale Uhr modelliert werden.
+
 \subsection{Parameter}
+Die Tabelle \ref{tab:parameter} zeigt alle möglichen Parameter, welche die Software steuern. Alle Parameter sind optional.
+\begin{table}[htpb]
+	\centering
+	\begin{tabular}{lll}
+		Parameter & Beschreibung  &  Default\\ \hline
+		- & - & - \\
+	\end{tabular}
+	\caption{Parameter und Defaultwerte}
+	\label{tab:parameter}
+\end{table}
+	%TODO --> Parameter der Software ermitteln und eintragen
+	
 \subsection{Berechnungen}
+Die Aufgabe der Software ist die Simulation von Personenbewegungen. Für möglichst genaue Zeitangaben wird die Java Klasse BigDecimal verwendet. Für die Division werden 32 Nachkommastellen berücksichtigt und als Rundungsmodus wird Half\_Even verwendet, da dieser kumulative Fehler bei sich wiederholenden Berechnungen minimiert. Die anschließende Berechnung und Aufbereitung der Daten (insebesondere für den Test \ref{Anforderungen:RimeaTest}) erfolgt mit Mathematica.
+
 \subsection{Reports}
+%TODO --> Ermitteln was alles ausgegeben wird
 \subsection{Betriebsmodi}
 \label{AnforderungenBetriebsmodi}
+
 \subsection{Werte für die Auswertung}
+Alle in der Tabelle \ref{tab:WerteAuswertung} aufgeführten Werte sollen auf Basis der Simulation ermittelt und ausgewertet werden. Einige Werte werden nur für bestimmte Tests benötigt.
+\begin{table}[htpb]
+	\centering
+	\begin{tabular}{lll}
+		Ermittelte Werte & Beschreibung & Wann benötigt\\ \hline
+		mittlere Geschwindigkeit & durchschnittliche Geschwindigkeit der Personen & Rimea-Test 4 \\
+		
+		Fluss (Personen/Meter/s) & Anzahl der Personen mit Geschwindigkeit > 1m/s & Rimea-Test 4\\
+		Simulationsdauer & Dauer bis der Test beendet ist & Hühner Test, \\&& Evakuierung (2 Türen), \\&& Evakuierung (4 Türen)\\
+	\end{tabular}
+	\caption{Werte für die Auswertung}
+	\label{tab:WerteAuswertung}
+\end{table}
+
 \subsection{Test der Implementierung}
+%TODO --> Beschreiben was alles getestet wurde
 
 \subsection{Testszenarien für die Simulation}
 \label{AnforderungenTest}
-Die implementierten Algorithmen (vgl. Betriebsmodi im Unterkapitel \ref{AnforderungenBetriebsmodi} ) sollen anhand unterschiedlicher Testszenarien verglichen und verifiziert werden.  
+Die implementierten Algorithmen (vgl. Betriebsmodi im Unterkapitel \ref{AnforderungenBetriebsmodi} ) sollen anhand unterschiedlicher Testszenarien verglichen und verifiziert werden. 
+ 
 \subsubsection{Freier Fluss}
 \subsubsection{Hühnertest}
 \subsubsection{Evakuierung eines Raumes mit 2 Türen}
 \subsubsection{Evakuierung eines Raumes mit 4 Türen}
 \subsubsection{Fundamentaldiagramm - Rimea-Test 4}
-
+\label{Anforderungen:RimeaTest}
 \section{Softwaredesign}
 
 Der Aufbau der Anwendung wurde im Team diskutiert und anschließend mittels UML spezifiziert.
@@ -88,8 +135,6 @@ Der Aufbau der Anwendung wurde im Team diskutiert und anschließend mittels UML 
 
 \section{Ausblick und Fazit}
 
-
-%	REFERENCE LIST
 %----------------------------------------------------------------------------------------
 %\input{References}
 \bibliography{Bibliographie}

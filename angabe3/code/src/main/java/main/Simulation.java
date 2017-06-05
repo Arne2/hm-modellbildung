@@ -50,6 +50,7 @@ public class Simulation {
             this.use = Dijkstra.use(field);
         }
 
+        outputFile.setDistances(this.use);
     }
 
     public Person spawnPerson(Location location) {

@@ -2,6 +2,7 @@ package outputFile;
 
 import config.Configuration;
 import field.Field;
+import field.location.Location;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -9,6 +10,7 @@ import javax.xml.bind.Marshaller;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.Map;
 
 /**
  * Created by dima on 28.05.17.
@@ -29,6 +31,10 @@ public class OutputFile {
 
         //m.marshal(output, System.out);
         m.marshal(this.output, new FileWriter(filename));
+    }
+
+    public void setDistances(Map<Location, Double> use){
+        output.setDistanceMap(use);
     }
 
     public void addMoveEvent(BigDecimal time, int id, long x, long y){

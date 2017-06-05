@@ -37,7 +37,7 @@ public class SimulationGui extends Application {
     /**
      * Size of one cell.
      */
-    public static final int CELLSIZE = 30;
+    public static final int CELLSIZE = 2;
 
     /**
      * List of all simulated persons.

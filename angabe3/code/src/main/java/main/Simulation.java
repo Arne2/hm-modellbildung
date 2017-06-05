@@ -49,8 +49,9 @@ public class Simulation {
         else{
             this.use = Dijkstra.use(field);
         }
-
-        outputFile.setDistances(this.use);
+        if (outputFile != null) {
+            outputFile.setDistances(this.use);
+        }
     }
 
     public Person spawnPerson(Location location) {

@@ -263,11 +263,10 @@ public class SimulationGui extends Application {
                     continue;
                 }
                 int val = (int)((1-d/min)*255);
-                gc.setFill(Color.rgb(val,val,val));
+                gc.setFill(Color.rgb(val,val,255-val));
                 gc.fillRect(x* cellsize, y* cellsize, cellsize, cellsize);
             }
         }
-        //TODO heatmap
         /*LinearGradient lg = new LinearGradient(0, 0, 1, 1, true,
                 CycleMethod.REFLECT,
                 new Stop(0.0, Color.YELLOW),
@@ -507,7 +506,7 @@ public class SimulationGui extends Application {
      */
     private void addPersonToField(SimulatedPerson person){
         GraphicsContext gc = objectLayer.getGraphicsContext2D();
-        gc.setFill(Color.ORANGE);
+        gc.setFill(Color.PINK);
         gc.setStroke(Color.BLACK);
         gc.fillRect(person.getX()* cellsize +1, person.getY()* cellsize +1, cellsize -2, cellsize -2);
     }

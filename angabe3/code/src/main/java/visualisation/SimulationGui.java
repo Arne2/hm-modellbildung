@@ -34,6 +34,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -131,7 +132,7 @@ public class SimulationGui extends Application {
         createButtons();
         createLayers();
 
-        int width = Math.max(cellsize * input.getFieldWidth(), 500)+(int)sc.getWidth();
+        int width = Math.max(cellsize * input.getFieldWidth(), 350)+(int)sc.getWidth();
         int height = Math.min(Math.max(cellsize * input.getFieldHeight() + MENUSIZE, 500),(int)screenBounds.getHeight()-50);
 
         // Add all elements to the pane
@@ -241,16 +242,43 @@ public class SimulationGui extends Application {
      */
     public void drawHeatMap(){
         String heatmap = input.getDistanceMap();
-        //TODO heatmap
+        String[] rows = heatmap.split("\n");
         GraphicsContext gc = heatLayer.getGraphicsContext2D();
-        LinearGradient lg = new LinearGradient(0, 0, 1, 1, true,
+
+        double min = Double.MIN_VALUE;
+        for(int i = 0; i < rows.length; i++) {
+            String[] row = rows[i].split(" ");
+            for (int j = 0; j < row.length; j++) {
+                double d = Double.parseDouble(row[j]);
+                if (d == -1.7976931348623157E308){
+                    continue;
+                }
+                min = Math.min(d, min);
+            }
+        }
+        for(int y = 0; y < input.getFieldHeight(); y++) {
+            String[] row = rows[y].split(" ");
+            for (int x = 0; x < input.getFieldWidth(); x++) {
+                double d = Double.parseDouble(row[x]);
+                if (d == -1.7976931348623157E308){
+                    continue;
+                }
+                int val = (int)((1-d/min)*255);
+                System.out.println(d + " + " + val);
+                gc.setFill(Color.rgb(val,val,val));
+                gc.fillRect(x* cellsize, y* cellsize, cellsize, cellsize);
+            }
+        }
+        //TODO heatmap
+        /*LinearGradient lg = new LinearGradient(0, 0, 1, 1, true,
                 CycleMethod.REFLECT,
                 new Stop(0.0, Color.YELLOW),
                 new Stop(1.0, Color.RED));
         gc.setFill(lg);
         gc.setLineWidth(1);
         gc.stroke();
-        gc.fillRect(0,0, heatLayer.getWidth(), heatLayer.getHeight());
+
+        gc.fillRect(0,0, heatLayer.getWidth(), heatLayer.getHeight());*/
     }
 
     /**

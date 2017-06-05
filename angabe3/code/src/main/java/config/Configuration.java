@@ -1,5 +1,6 @@
 package config;
 
+import field.use.Dijkstra;
 import sun.awt.image.BufferedImageDevice;
 
 import java.util.function.Supplier;
@@ -19,6 +20,11 @@ public class Configuration {
      */
     private final Supplier<Double> velocity;
 
+    private final double deviation;
+    /**
+     * The used algorithm to calculate cell distances
+     */
+    private final AlgorithmType algorithm;
     /**
      * Create a new Configuration from a builder.
      * The Configuration has final values and cannot be changed.
@@ -28,16 +34,20 @@ public class Configuration {
     public Configuration(Builder builder) {
         this.cellSize = builder.cellSize;
         this.velocity = builder.freeFlowVelocity;
+        this.algorithm = builder.algorithm;
+        this.deviation = builder.deviation;
     }
 
     /**
      * Create a new Configuration with default values. Use a Builder to use
      * custom values.
      */
-    public Configuration() {
-        final Builder builder = new Builder();
+    public Configuration(String [] args) {
+        final Builder builder = new Builder(args);
         this.cellSize = builder.cellSize;
         this.velocity = builder.freeFlowVelocity;
+        this.algorithm = builder.algorithm;
+        this.deviation = builder.deviation;
     }
 
     /**
@@ -60,13 +70,23 @@ public class Configuration {
         return velocity.get();
     }
 
+    public double getDeviation(){
+        return this.deviation;
+    }
+
+    public AlgorithmType getAlgorithm(){
+        return this.algorithm;
+    }
+
+    public enum AlgorithmType {eDijkstra, eEuclid, eFastMarching}
     /**
      * Provides a builder for a customized Configuration.
      */
     public static class Builder {
         private int cellSize = 1;
+        private AlgorithmType algorithm = AlgorithmType.eDijkstra;
         private Supplier<Double> freeFlowVelocity = () -> 1.0;
-
+        private double deviation = 1.44;
         public Builder cellSize(int cellSize) {
             this.cellSize = cellSize;
             return this;
@@ -82,13 +102,17 @@ public class Configuration {
             return this;
         }
 
+        public Builder(String[] args){
+            parseArgs(args);
+        }
+
         /**
          * Parse the configuration values from a command line input.
          *
          * @param args args from the command line.
          * @return this builder
          */
-        public Builder parseArgs(final String[] args) {
+        public void parseArgs(final String[] args) {
             for (int i = 0; i < args.length; i++) {
                 if (args[i].equals("--cell-size")) {
                     this.cellSize(Integer.parseInt(args[i + 1]));
@@ -96,8 +120,22 @@ public class Configuration {
                 if (args[i].equals("--free-flow-velocity")) {
                     this.velocity(Double.parseDouble(args[i + 1]));
                 }
+                if (args[i].equals("--free-flow-deviation")) {
+                    this.deviation = Double.parseDouble(args[i + 1]);
+                }
+                if (args[i].equals("--algorithm")) {
+                    if(args[i + 1].equals("dijkstra")) {
+                        this.algorithm = AlgorithmType.eDijkstra;
+                    }
+                    if(args[i + 1].equals("euclid")){
+                        this.algorithm = AlgorithmType.eEuclid;
+                    }
+                    if(args[i + 1].equals("fast-marching")){
+                        this.algorithm = AlgorithmType.eFastMarching;
+                    }
+                }
             }
-            return this;
+
         }
 
         /**

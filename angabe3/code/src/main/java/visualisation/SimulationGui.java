@@ -3,6 +3,7 @@ package visualisation;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
+import javafx.event.ActionEvent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -22,6 +23,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import java.io.FileReader;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -33,7 +35,7 @@ public class SimulationGui extends Application {
     /**
      * Waiting time for the running simulation.
      */
-    public static final int MILLIS = 500;
+    public static final int MILLIS = 5;
     /**
      * Size of one cell.
      */
@@ -48,6 +50,7 @@ public class SimulationGui extends Application {
     private int step = 0;
     private boolean running = false;
     private boolean heatmap = false;
+    private long waitingtime = 0;
 
     // Labels
     private Label stepLabel;
@@ -236,7 +239,7 @@ public class SimulationGui extends Application {
         play.setLayoutX(25);
         play.setLayoutY(42);
 
-        play.setOnAction(event -> {
+        play.setOnAction((ActionEvent event) -> {
             if (running){
                 running = false;
                 play.setText("Play");
@@ -254,14 +257,24 @@ public class SimulationGui extends Application {
                                 @Override
                                 public void run() {
                                     handleNextEvent();
+                                    if (step+1 < input.getEvents().size()) {
+                                        BigDecimal a = input.getEvents().get(step).getTime();
+                                        BigDecimal b = input.getEvents().get(step -1).getTime();
+                                        waitingtime = a.subtract(b).multiply(new BigDecimal(1000)).longValue();
+                                    } else {
+                                        waitingtime = 0;
+                                    }
                                 }
                             });
-                            try {
-                                Thread.sleep(MILLIS);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
+                                if (DEBUG) {
+                                    System.out.println(waitingtime);
+                                }
+                                try {
+                                    Thread.sleep(Math.max(MILLIS,waitingtime));
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
                             }
-                        }
                         running = false;
                         proceed.setDisable(false);
                         if (step >= input.getEvents().size()) {

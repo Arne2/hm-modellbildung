@@ -61,7 +61,7 @@ public class StringView {
 
     public static Field parseStringMap(final String map) {
         final String[] rows = map.split("\n");
-        final Field field = new Field();
+        final Field field = new Field(rows[0].length(), rows.length);
 
         for (int y = 0; y < rows.length; y++) {
             final String row = rows[y];

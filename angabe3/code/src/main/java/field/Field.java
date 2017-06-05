@@ -18,11 +18,20 @@ public class Field {
     /** The single target in this field. */
     private Location target = Location.of(0, 0);
 
+    private final int width;
+
+    private final int height;
+
     public Field() {
         this(0, 0);
     }
 
     public Field(int width, int height) {
+        this.width = width;
+        this.height = height;
+    }
+
+    public void fillField(){
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
                 locations.add(Location.of(x, y));
@@ -41,6 +50,14 @@ public class Field {
     public void setTarget(Location target) {
         addLocation(target);
         this.target = target;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
     }
 
     public boolean addLocation(Location location) {

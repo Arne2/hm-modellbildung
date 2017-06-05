@@ -12,6 +12,9 @@ public class OutputEvent{
     private long positionX;
     private long positionY;
 
+    public OutputEvent() {
+    }
+
     OutputEvent (String type_, BigDecimal time_, int personID_, long x_, long y_){
         setType(type_);
         setTime(time_);
@@ -19,7 +22,6 @@ public class OutputEvent{
         setPositionX(x_);
         setPositionY(y_);
     }
-
 
     public String getType() {
         return type;
@@ -59,5 +61,16 @@ public class OutputEvent{
 
     public void setPositionY(long positionY) {
         this.positionY = positionY;
+    }
+
+    @Override
+    public String toString() {
+        return "OutputEvent{" +
+                "type='" + type + '\'' +
+                ", time=" + time +
+                ", personID=" + personID +
+                ", positionX=" + positionX +
+                ", positionY=" + positionY +
+                '}';
     }
 }

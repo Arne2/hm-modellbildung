@@ -6,14 +6,16 @@ import java.math.BigDecimal;
  * @author peter-mueller
  */
 public class Person {
+    private static int UNIQUE_ID = 0;
+    private final int id = ++UNIQUE_ID;
+
     private final double velocity;
     private double timeSinceLastMove;
     private BigDecimal distanceWent;
     private BigDecimal timePassed;
     private BigDecimal meanVelocity;
-    private static int id;
+
     public Person(double velocity) {
-        id +=1;
         this.velocity = velocity;
         this.timeSinceLastMove = 0;
         this.distanceWent = new BigDecimal(0);

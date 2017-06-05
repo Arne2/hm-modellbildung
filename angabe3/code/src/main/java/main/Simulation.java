@@ -29,15 +29,17 @@ public class Simulation {
     public final Field field;
 
 
-    public final Map<Location, Double> use;
-    public final Clock clock = new Clock();
-    public final EventList events = new EventList();
-    public final List<Person> persons = new ArrayList<Person>();
-    public final Configuration configuration;
+    private final Map<Location, Double> use;
+    private final Clock clock = new Clock();
+    private final EventList events = new EventList();
+    private final List<Person> persons = new ArrayList<Person>();
+    private final Configuration configuration;
+    private final OutputFile outputFile;
 
-    public Simulation(Field field, Configuration configuration) {
+    public Simulation(Field field, Configuration configuration, OutputFile outputFile) {
         this.configuration = configuration;
         this.field = field;
+        this.outputFile = outputFile;
         if(configuration.getAlgorithm() == Configuration.AlgorithmType.eEuclid){
             this.use = EuclidDistance.use(field);
         }
@@ -59,7 +61,9 @@ public class Simulation {
         final PersonMoveEvent event = new PersonMoveEvent(clock.systemTime(), this, person);
         this.events.add(event);
         persons.add(person);
-        OutputFile.addPawnEvent(clock.systemTime(), person.getId(), location.x, location.y);
+        if(outputFile != null) {
+            outputFile.addPawnEvent(clock.systemTime(), person.getId(), location.x, location.y);
+        }
         return person;
     }
     public void run(BigDecimal maxSimulationTime) {
@@ -88,4 +92,31 @@ public class Simulation {
         }
     }
 
+    public Field getField() {
+        return field;
+    }
+
+    public Map<Location, Double> getUse() {
+        return use;
+    }
+
+    public Clock getClock() {
+        return clock;
+    }
+
+    public EventList getEvents() {
+        return events;
+    }
+
+    public List<Person> getPersons() {
+        return persons;
+    }
+
+    public Configuration getConfiguration() {
+        return configuration;
+    }
+
+    public OutputFile getOutputFile() {
+        return outputFile;
+    }
 }

@@ -26,7 +26,7 @@ public class Clock {
      */
     public void advanceTo(BigDecimal time) {
         if (this.time.compareTo(time) > 0) {
-            throw new IllegalArgumentException("Time must be greater than the current system time!");
+            throw new IllegalArgumentException("Time must be greater than the current system time! Current time: " + this.time + " while given time was: " + time);
         }
         this.time = time;
     }

@@ -148,15 +148,15 @@ public class FreeFlowTest {
         }
 
         public Calculation invoke() {
-            final Simulation simulation = new Simulation(field, conf);
+            final Simulation simulation = new Simulation(field, conf, null);
             final Location start = Location.of(0, 0);
             simulation.spawnPerson(start);
             simulation.run(BigDecimal.valueOf(1000));
 
-            //final BigDecimal duration = simulation.clock.systemTime();
+            //final BigDecimal duration = simulation.getClock().systemTime();
             //final double length = Locations.distance(start, simulation.field.getTarget());
             //actualVelocity = length / duration.doubleValue();
-            actualVelocity = simulation.persons.get(0).getMeanVelocity().doubleValue();
+            actualVelocity = simulation.getPersons().get(0).getMeanVelocity().doubleValue();
             error = Math.abs(actualVelocity - VELOCITY);
             return this;
         }

@@ -2,626 +2,244 @@
 <output>
     <events>
         <personID>1</personID>
-        <positionX>4</positionX>
-        <positionY>3</positionY>
+        <positionX>13</positionX>
+        <positionY>4</positionY>
         <time>0</time>
         <type>pawn</type>
     </events>
     <events>
         <personID>2</personID>
-        <positionX>5</positionX>
+        <positionX>13</positionX>
         <positionY>3</positionY>
         <time>0</time>
         <type>pawn</type>
     </events>
     <events>
-        <personID>3</personID>
-        <positionX>6</positionX>
-        <positionY>3</positionY>
-        <time>0</time>
-        <type>pawn</type>
-    </events>
-    <events>
-        <personID>4</personID>
-        <positionX>7</positionX>
-        <positionY>3</positionY>
-        <time>0</time>
-        <type>pawn</type>
-    </events>
-    <events>
-        <personID>5</personID>
-        <positionX>8</positionX>
-        <positionY>3</positionY>
-        <time>0</time>
-        <type>pawn</type>
-    </events>
-    <events>
-        <personID>5</personID>
-        <positionX>5</positionX>
+        <personID>1</personID>
+        <positionX>12</positionX>
         <positionY>4</positionY>
         <time>0</time>
         <type>move</type>
     </events>
     <events>
-        <personID>5</personID>
-        <positionX>6</positionX>
-        <positionY>4</positionY>
-        <time>0</time>
-        <type>move</type>
-    </events>
-    <events>
-        <personID>5</personID>
-        <positionX>7</positionX>
-        <positionY>4</positionY>
-        <time>0</time>
-        <type>move</type>
-    </events>
-    <events>
-        <personID>5</personID>
-        <positionX>8</positionX>
-        <positionY>4</positionY>
-        <time>0</time>
-        <type>move</type>
-    </events>
-    <events>
-        <personID>5</personID>
-        <positionX>7</positionX>
-        <positionY>3</positionY>
-        <time>0</time>
-        <type>move</type>
-    </events>
-    <events>
-        <personID>5</personID>
-        <positionX>6</positionX>
-        <positionY>3</positionY>
-        <time>0.6753288851670763</time>
-        <type>move</type>
-    </events>
-    <events>
-        <personID>5</personID>
-        <positionX>5</positionX>
-        <positionY>5</positionY>
-        <time>0.9550592684655819</time>
-        <type>move</type>
-    </events>
-    <events>
-        <personID>5</personID>
-        <positionX>7</positionX>
-        <positionY>5</positionY>
-        <time>0.9550592684655819</time>
-        <type>move</type>
-    </events>
-    <events>
-        <personID>5</personID>
-        <positionX>6</positionX>
-        <positionY>5</positionY>
-        <time>0.9550592684655819</time>
-        <type>move</type>
-    </events>
-    <events>
-        <personID>5</personID>
-        <positionX>7</positionX>
-        <positionY>4</positionY>
-        <time>0.9550592684655819</time>
-        <type>move</type>
-    </events>
-    <events>
-        <personID>5</personID>
-        <positionX>5</positionX>
-        <positionY>4</positionY>
-        <time>1.3506577703341526</time>
-        <type>move</type>
-    </events>
-    <events>
-        <personID>5</personID>
-        <positionX>5</positionX>
-        <positionY>6</positionY>
-        <time>1.6303881536326582</time>
-        <type>move</type>
-    </events>
-    <events>
-        <personID>5</personID>
-        <positionX>8</positionX>
-        <positionY>5</positionY>
-        <time>1.6303881536326582</time>
-        <type>move</type>
-    </events>
-    <events>
-        <personID>5</personID>
-        <positionX>7</positionX>
-        <positionY>6</positionY>
-        <time>1.9101185369311638</time>
-        <type>move</type>
-    </events>
-    <events>
-        <personID>5</personID>
-        <positionX>6</positionX>
-        <positionY>6</positionY>
-        <time>1.9101185369311638</time>
-        <type>move</type>
-    </events>
-    <events>
-        <personID>5</personID>
-        <positionX>5</positionX>
-        <positionY>5</positionY>
-        <time>2.3057170387997345</time>
-        <type>move</type>
-    </events>
-    <events>
-        <personID>5</personID>
-        <positionX>4</positionX>
-        <positionY>7</positionY>
-        <time>2.3057170387997345</time>
-        <type>move</type>
-    </events>
-    <events>
-        <personID>5</personID>
-        <positionX>7</positionX>
-        <positionY>5</positionY>
-        <time>2.5854474220982401</time>
-        <type>move</type>
-    </events>
-    <events>
-        <personID>5</personID>
-        <positionX>8</positionX>
-        <positionY>7</positionY>
-        <time>2.5854474220982401</time>
-        <type>move</type>
-    </events>
-    <events>
-        <personID>5</personID>
-        <positionX>7</positionX>
-        <positionY>7</positionY>
-        <time>2.5854474220982401</time>
-        <type>move</type>
-    </events>
-    <events>
-        <personID>5</personID>
-        <positionX>5</positionX>
-        <positionY>6</positionY>
-        <time>2.9810459239668108</time>
-        <type>move</type>
-    </events>
-    <events>
-        <personID>5</personID>
-        <positionX>3</positionX>
-        <positionY>7</positionY>
-        <time>3.2607763072653164</time>
-        <type>move</type>
-    </events>
-    <events>
-        <personID>5</personID>
-        <positionX>7</positionX>
-        <positionY>6</positionY>
-        <time>3.2607763072653164</time>
-        <type>move</type>
-    </events>
-    <events>
-        <personID>5</personID>
-        <positionX>9</positionX>
-        <positionY>7</positionY>
-        <time>3.5405066905638220</time>
-        <type>move</type>
-    </events>
-    <events>
-        <personID>5</personID>
-        <positionX>8</positionX>
-        <positionY>7</positionY>
-        <time>3.5405066905638220</time>
-        <type>move</type>
-    </events>
-    <events>
-        <personID>5</personID>
-        <positionX>4</positionX>
-        <positionY>7</positionY>
-        <time>3.6563748091338871</time>
-        <type>move</type>
-    </events>
-    <events>
-        <personID>5</personID>
-        <positionX>2</positionX>
-        <positionY>6</positionY>
-        <time>3.9361051924323927</time>
-        <type>move</type>
-    </events>
-    <events>
-        <personID>5</personID>
-        <positionX>7</positionX>
-        <positionY>7</positionY>
-        <time>3.9361051924323927</time>
-        <type>move</type>
-    </events>
-    <events>
-        <personID>5</personID>
-        <positionX>10</positionX>
-        <positionY>6</positionY>
-        <time>4.2158355757308983</time>
-        <type>move</type>
-    </events>
-    <events>
-        <personID>5</personID>
-        <positionX>9</positionX>
-        <positionY>7</positionY>
-        <time>4.2158355757308983</time>
-        <type>move</type>
-    </events>
-    <events>
-        <personID>5</personID>
-        <positionX>3</positionX>
-        <positionY>7</positionY>
-        <time>4.6114340775994690</time>
-        <type>move</type>
-    </events>
-    <events>
-        <personID>5</personID>
-        <positionX>8</positionX>
-        <positionY>7</positionY>
-        <time>4.6114340775994690</time>
-        <type>move</type>
-    </events>
-    <events>
-        <personID>5</personID>
-        <positionX>2</positionX>
-        <positionY>5</positionY>
-        <time>4.8911644608979746</time>
-        <type>move</type>
-    </events>
-    <events>
-        <personID>5</personID>
-        <positionX>10</positionX>
-        <positionY>7</positionY>
-        <time>4.8911644608979746</time>
-        <type>move</type>
-    </events>
-    <events>
-        <personID>5</personID>
-        <positionX>10</positionX>
-        <positionY>5</positionY>
-        <time>5.1708948441964802</time>
-        <type>move</type>
-    </events>
-    <events>
-        <personID>5</personID>
-        <positionX>2</positionX>
-        <positionY>6</positionY>
-        <time>5.2867629627665453</time>
-        <type>move</type>
-    </events>
-    <events>
-        <personID>5</personID>
-        <positionX>9</positionX>
-        <positionY>7</positionY>
-        <time>5.2867629627665453</time>
-        <type>move</type>
-    </events>
-    <events>
-        <personID>5</personID>
-        <positionX>2</positionX>
-        <positionY>4</positionY>
-        <time>5.5664933460650509</time>
-        <type>move</type>
-    </events>
-    <events>
-        <personID>5</personID>
-        <positionX>10</positionX>
-        <positionY>6</positionY>
-        <time>5.5664933460650509</time>
-        <type>move</type>
-    </events>
-    <events>
-        <personID>5</personID>
-        <positionX>10</positionX>
-        <positionY>4</positionY>
-        <time>5.8462237293635565</time>
-        <type>move</type>
-    </events>
-    <events>
-        <personID>5</personID>
-        <positionX>10</positionX>
-        <positionY>7</positionY>
-        <time>5.9620918479336216</time>
-        <type>move</type>
-    </events>
-    <events>
-        <personID>5</personID>
-        <positionX>2</positionX>
-        <positionY>5</positionY>
-        <time>6.2418222312321272</time>
-        <type>move</type>
-    </events>
-    <events>
-        <personID>5</personID>
-        <positionX>2</positionX>
-        <positionY>3</positionY>
-        <time>6.2418222312321272</time>
-        <type>move</type>
-    </events>
-    <events>
-        <personID>5</personID>
-        <positionX>10</positionX>
-        <positionY>5</positionY>
-        <time>6.2418222312321272</time>
-        <type>move</type>
-    </events>
-    <events>
-        <personID>5</personID>
-        <positionX>10</positionX>
-        <positionY>3</positionY>
-        <time>6.5215526145306328</time>
-        <type>move</type>
-    </events>
-    <events>
-        <personID>5</personID>
-        <positionX>10</positionX>
-        <positionY>6</positionY>
-        <time>6.6374207331006979</time>
-        <type>move</type>
-    </events>
-    <events>
-        <personID>5</personID>
-        <positionX>2</positionX>
-        <positionY>4</positionY>
-        <time>6.9171511163992035</time>
-        <type>move</type>
-    </events>
-    <events>
-        <personID>5</personID>
-        <positionX>2</positionX>
+        <personID>2</personID>
+        <positionX>13</positionX>
         <positionY>2</positionY>
-        <time>6.9171511163992035</time>
+        <time>0</time>
         <type>move</type>
     </events>
     <events>
-        <personID>5</personID>
-        <positionX>10</positionX>
-        <positionY>4</positionY>
-        <time>6.9171511163992035</time>
-        <type>move</type>
-    </events>
-    <events>
-        <personID>5</personID>
-        <positionX>10</positionX>
-        <positionY>2</positionY>
-        <time>7.1968814996977091</time>
-        <type>move</type>
-    </events>
-    <events>
-        <personID>5</personID>
-        <positionX>10</positionX>
-        <positionY>5</positionY>
-        <time>7.3127496182677742</time>
-        <type>move</type>
-    </events>
-    <events>
-        <personID>5</personID>
-        <positionX>2</positionX>
+        <personID>1</personID>
+        <positionX>11</positionX>
         <positionY>3</positionY>
-        <time>7.5924800015662798</time>
+        <time>0.6612692748943118</time>
         <type>move</type>
     </events>
     <events>
-        <personID>5</personID>
-        <positionX>3</positionX>
+        <personID>2</personID>
+        <positionX>12</positionX>
         <positionY>1</positionY>
-        <time>7.5924800015662798</time>
+        <time>0.7013233273224648</time>
         <type>move</type>
     </events>
     <events>
-        <personID>5</personID>
+        <personID>1</personID>
         <positionX>10</positionX>
         <positionY>3</positionY>
-        <time>7.5924800015662798</time>
+        <time>1.5964452518304700</time>
         <type>move</type>
     </events>
     <events>
-        <personID>5</personID>
+        <personID>2</personID>
+        <positionX>11</positionX>
+        <positionY>2</positionY>
+        <time>1.6931442884305200</time>
+        <type>move</type>
+    </events>
+    <events>
+        <personID>1</personID>
         <positionX>9</positionX>
-        <positionY>1</positionY>
-        <time>7.8722103848647854</time>
-        <type>move</type>
-    </events>
-    <events>
-        <personID>5</personID>
-        <positionX>10</positionX>
         <positionY>4</positionY>
-        <time>7.9880785034348505</time>
+        <time>2.2577145267247818</time>
         <type>move</type>
     </events>
     <events>
-        <personID>5</personID>
-        <positionX>2</positionX>
-        <positionY>2</positionY>
-        <time>8.2678088867333561</time>
-        <type>move</type>
-    </events>
-    <events>
-        <personID>5</personID>
+        <personID>2</personID>
         <positionX>10</positionX>
-        <positionY>2</positionY>
-        <time>8.2678088867333561</time>
+        <positionY>3</positionY>
+        <time>2.6849652495385752</time>
         <type>move</type>
     </events>
     <events>
-        <personID>5</personID>
+        <personID>1</personID>
+        <positionX>8</positionX>
+        <positionY>3</positionY>
+        <time>3.1928905036609400</time>
+        <type>move</type>
+    </events>
+    <events>
+        <personID>2</personID>
+        <positionX>9</positionX>
+        <positionY>4</positionY>
+        <time>3.6767862106466304</time>
+        <type>move</type>
+    </events>
+    <events>
+        <personID>1</personID>
+        <positionX>7</positionX>
+        <positionY>2</positionY>
+        <time>4.1280664805970982</time>
+        <type>move</type>
+    </events>
+    <events>
+        <personID>2</personID>
+        <positionX>8</positionX>
+        <positionY>3</positionY>
+        <time>4.6686071717546856</time>
+        <type>move</type>
+    </events>
+    <events>
+        <personID>1</personID>
+        <positionX>6</positionX>
+        <positionY>1</positionY>
+        <time>5.0632424575332564</time>
+        <type>move</type>
+    </events>
+    <events>
+        <personID>2</personID>
+        <positionX>7</positionX>
+        <positionY>2</positionY>
+        <time>5.6604281328627408</time>
+        <type>move</type>
+    </events>
+    <events>
+        <personID>1</personID>
+        <positionX>5</positionX>
+        <positionY>1</positionY>
+        <time>5.9984184344694146</time>
+        <type>move</type>
+    </events>
+    <events>
+        <personID>2</personID>
+        <positionX>6</positionX>
+        <positionY>1</positionY>
+        <time>6.6522490939707960</time>
+        <type>move</type>
+    </events>
+    <events>
+        <personID>1</personID>
         <positionX>4</positionX>
         <positionY>0</positionY>
-        <time>8.5475392700318617</time>
+        <time>6.6596877093637264</time>
         <type>move</type>
     </events>
     <events>
-        <personID>5</personID>
-        <positionX>10</positionX>
-        <positionY>3</positionY>
-        <time>8.6634073886019268</time>
-        <type>move</type>
-    </events>
-    <events>
-        <personID>5</personID>
-        <positionX>8</positionX>
-        <positionY>0</positionY>
-        <time>8.8272696533303673</time>
-        <type>move</type>
-    </events>
-    <events>
-        <personID>5</personID>
+        <personID>1</personID>
         <positionX>3</positionX>
         <positionY>1</positionY>
-        <time>8.9431377719004324</time>
+        <time>7.5948636862998846</time>
         <type>move</type>
     </events>
     <events>
-        <personID>5</personID>
-        <positionX>9</positionX>
-        <positionY>1</positionY>
-        <time>8.9431377719004324</time>
-        <type>move</type>
-    </events>
-    <events>
-        <personID>5</personID>
-        <positionX>10</positionX>
-        <positionY>2</positionY>
-        <time>9.3387362737690031</time>
-        <type>move</type>
-    </events>
-    <events>
-        <personID>5</personID>
+        <personID>2</personID>
         <positionX>5</positionX>
-        <positionY>0</positionY>
-        <time>9.5025985384974436</time>
+        <positionY>1</positionY>
+        <time>7.6440700550788512</time>
         <type>move</type>
     </events>
     <events>
-        <personID>5</personID>
-        <positionX>7</positionX>
-        <positionY>0</positionY>
-        <time>9.7823289217959492</time>
-        <type>move</type>
-    </events>
-    <events>
-        <personID>5</personID>
+        <personID>2</personID>
         <positionX>4</positionX>
         <positionY>0</positionY>
-        <time>9.8981970403660143</time>
+        <time>8.3453933824013160</time>
         <type>move</type>
     </events>
     <events>
-        <personID>5</personID>
-        <positionX>8</positionX>
-        <positionY>0</positionY>
-        <time>9.8981970403660143</time>
+        <personID>1</personID>
+        <positionX>2</positionX>
+        <positionY>2</positionY>
+        <time>8.5300396632360428</time>
         <type>move</type>
     </events>
     <events>
-        <personID>5</personID>
-        <positionX>9</positionX>
+        <personID>2</personID>
+        <positionX>3</positionX>
         <positionY>1</positionY>
-        <time>10.0140651589360794</time>
+        <time>9.3372143435093712</time>
         <type>move</type>
     </events>
     <events>
-        <personID>5</personID>
-        <positionX>6</positionX>
-        <positionY>0</positionY>
-        <time>10.1779274236645199</time>
+        <personID>1</personID>
+        <positionX>1</positionX>
+        <positionY>3</positionY>
+        <time>9.4652156401722010</time>
         <type>move</type>
     </events>
     <events>
-        <personID>5</personID>
-        <positionX>6</positionX>
+        <personID>2</personID>
+        <positionX>2</positionX>
+        <positionY>2</positionY>
+        <time>10.3290353046174264</time>
+        <type>move</type>
+    </events>
+    <events>
+        <personID>1</personID>
+        <positionX>0</positionX>
+        <positionY>2</positionY>
+        <time>10.4003916171083592</time>
+        <type>move</type>
+    </events>
+    <events>
+        <personID>2</personID>
+        <positionX>1</positionX>
+        <positionY>3</positionY>
+        <time>11.3208562657254816</time>
+        <type>move</type>
+    </events>
+    <events>
+        <personID>1</personID>
+        <positionX>0</positionX>
         <positionY>1</positionY>
-        <time>10.4576578069630255</time>
+        <time>11.3355675940445174</time>
         <type>move</type>
     </events>
     <events>
-        <personID>5</personID>
-        <positionX>5</positionX>
+        <personID>1</personID>
+        <positionX>0</positionX>
         <positionY>0</positionY>
-        <time>10.8532563088315962</time>
+        <time>11.9968368689388292</time>
         <type>move</type>
     </events>
     <events>
-        <personID>5</personID>
-        <positionX>7</positionX>
-        <positionY>0</positionY>
-        <time>10.8532563088315962</time>
+        <personID>2</personID>
+        <positionX>0</positionX>
+        <positionY>2</positionY>
+        <time>12.3126772268335368</time>
         <type>move</type>
     </events>
     <events>
-        <personID>5</personID>
-        <positionX>8</positionX>
-        <positionY>0</positionY>
-        <time>10.9691244274016613</time>
-        <type>move</type>
-    </events>
-    <events>
-        <personID>5</personID>
-        <positionX>6</positionX>
-        <positionY>0</positionY>
-        <time>11.4127170754286074</time>
-        <type>move</type>
-    </events>
-    <events>
-        <personID>5</personID>
-        <positionX>6</positionX>
+        <personID>2</personID>
+        <positionX>0</positionX>
         <positionY>1</positionY>
-        <time>11.5285851939986725</time>
+        <time>13.3044981879415920</time>
         <type>move</type>
     </events>
     <events>
-        <personID>5</personID>
-        <positionX>7</positionX>
-        <positionY>1</positionY>
-        <time>11.5285851939986725</time>
-        <type>move</type>
-    </events>
-    <events>
-        <personID>5</personID>
-        <positionX>7</positionX>
+        <personID>2</personID>
+        <positionX>0</positionX>
         <positionY>0</positionY>
-        <time>11.9241836958672432</time>
+        <time>14.0058215152640568</time>
         <type>move</type>
     </events>
-    <events>
-        <personID>5</personID>
-        <positionX>6</positionX>
-        <positionY>0</positionY>
-        <time>12.2039140791657488</time>
-        <type>move</type>
-    </events>
-    <events>
-        <personID>5</personID>
-        <positionX>5</positionX>
-        <positionY>0</positionY>
-        <time>12.4836444624642544</time>
-        <type>move</type>
-    </events>
-    <events>
-        <personID>5</personID>
-        <positionX>6</positionX>
-        <positionY>1</positionY>
-        <time>12.5995125810343195</time>
-        <type>move</type>
-    </events>
-    <events>
-        <personID>5</personID>
-        <positionX>6</positionX>
-        <positionY>0</positionY>
-        <time>13.4387037309298363</time>
-        <type>move</type>
-    </events>
-    <events>
-        <personID>5</personID>
-        <positionX>7</positionX>
-        <positionY>0</positionY>
-        <time>13.5545718494999014</time>
-        <type>move</type>
-    </events>
-    <events>
-        <personID>5</personID>
-        <positionX>6</positionX>
-        <positionY>0</positionY>
-        <time>14.5096311179654833</time>
-        <type>move</type>
-    </events>
+    <fieldHeight>5</fieldHeight>
+    <fieldWidth>14</fieldWidth>
+    <fieldmap>0 000         
+0 00000  0  0 
+0 000 00  00 0
+000 0 0 0 00 0
+0 0 0 00 00 00
+</fieldmap>
     <name>output</name>
+    <targetX>0</targetX>
+    <targetY>0</targetY>
 </output>

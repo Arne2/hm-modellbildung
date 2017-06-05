@@ -68,10 +68,10 @@ Hierbei wird mit $d$ der Abstand zur nächsten Person bezeichnet. $w$ und $h$ st
  
 \subsection{Geschwindigkeit der Personen}
 Jede Person soll eine individuelle Wunschgeschwindigkeit besitzen. Sie bewegt sich bei freier Bahn mit dieser Geschwindigkeit fort. Die Wunschgeschwindigkeiten sollen als normalverteilt angesehen werden. Als Mittelwert und Varianz sollen die errechneten Werte aus der ersten Studienarbeit verwendet werden.
-\\%TODO --> Genaue Werte aus erster Studienarbeit einfügen
 
 \subsection{Zeitmodellierung}
-Die Applikation unterliegt keinen harten Echtzeitanforderungen. Die Simulation soll für die gesamte Simmulationsdauer so schnell wie möglich durchgeführt werden. Es soll keine Globale Uhr modelliert werden.
+Die Simulation unterliegt keinen harten Echtzeitanforderungen. Sie soll für die gesamte Simmulationsdauer so schnell wie möglich durchgeführt werden. Es soll keine Globale Uhr modelliert werden. \\
+Die Visualisierung der Simulation soll hingegen die Bewegungen der Personen in Echtzeit darstellen. Sie unterliegt somit Echtzeitanforderungen.
 
 \subsection{Parameter}
 Die Tabelle \ref{tab:parameter} zeigt alle möglichen Parameter, welche die Software steuern. Alle Parameter sind optional.
@@ -79,19 +79,28 @@ Die Tabelle \ref{tab:parameter} zeigt alle möglichen Parameter, welche die Soft
 	\centering
 	\begin{tabular}{lll}
 		Parameter & Beschreibung  &  Default\\ \hline
-		- & - & - \\
+		--free-flow-velocity & Mittelwert der Wunschgeschwindigkeit [m/s] & 1,0 \\
+		--free-flow-deviation & Varianz der Wunschgeschwindigkeiten [m/s] & 0 \\
+		--algorithm & Betriebsmodus (1, 2 oder 3) & 2 \\
+		--output-folder & Ordner in den der Output gespeichert wird & ../data/ \\
+		--cellsize & Größe der einzelnen Zellen [m] & 1 \\
+		--input-map & Auswahl des Testfalls & - \\
+		
 	\end{tabular}
 	\caption{Parameter und Defaultwerte}
 	\label{tab:parameter}
 \end{table}
-	%TODO --> Parameter der Software ermitteln und eintragen
 	
 \subsection{Berechnungen}
 Die Aufgabe der Software ist die Simulation von Personenbewegungen. Für möglichst genaue Zeitangaben wird die Java Klasse BigDecimal verwendet. Für die Division werden 32 Nachkommastellen berücksichtigt und als Rundungsmodus wird Half\_Even verwendet, da dieser kumulative Fehler bei sich wiederholenden Berechnungen minimiert. Die anschließende Berechnung und Aufbereitung der Daten (insebesondere für den Test \ref{Anforderungen:RimeaTest}) erfolgt mit Mathematica.
 
 \subsection{Reports}
 %TODO --> Ermitteln was alles ausgegeben wird
-
+Alle errechneten Ergebnisse sollen über Reports ausgeleitet werden. Die Reports sollen im .csv Format ausgeleitet werden um eine gute Weiterverarbeitung der Ergebnisse zu gewährleisten. Folgende Reports sollen ausgeleitet werden:
+\begin{list}{•}
+	    	\item queue-size-resident.csv enthält die Länge der Einheimischen-Warteschlange zu den jeweiligen Zeitpunkten
+    	
+    \end{list}
 \subsection{Betriebsmodi}
 \label{AnforderungenBetriebsmodi}
 
@@ -109,8 +118,7 @@ Alle in der Tabelle \ref{tab:WerteAuswertung} aufgeführten Werte sollen auf Bas
 	\centering
 	\begin{tabular}{lll}
 		Ermittelte Werte & Beschreibung & Wann benötigt\\ \hline
-		mittlere Geschwindigkeit & durchschnittliche Geschwindigkeit der Personen & Rimea-Test 4 \\
-		
+		mittlere Geschwindigkeit & durchschnittliche Geschwindigkeit der Personen & Rimea-Test 4 \\	
 		Fluss (Personen/Meter/s) & Anzahl der Personen mit Geschwindigkeit > 1m/s & Rimea-Test 4\\
 		Simulationsdauer & Dauer bis der Test beendet ist & Hühner Test, \\&& Evakuierung (2 Türen), \\&& Evakuierung (4 Türen)\\
 	\end{tabular}
@@ -118,13 +126,10 @@ Alle in der Tabelle \ref{tab:WerteAuswertung} aufgeführten Werte sollen auf Bas
 	\label{tab:WerteAuswertung}
 \end{table}
 
-\subsection{Test der Implementierung}
-%TODO --> Beschreiben was alles getestet wurde
-
 \subsection{Testszenarien für die Simulation}
 \label{AnforderungenTest}
 %TODO --> Bilder mit jeweiligen Testszenarien einfügen
-%TODO --> Definieren mit welcher Dichte, wie viele Personen etc der Test durchgeführt werden muss
+
 Die implementierten Algorithmen (vgl. Betriebsmodi im Unterkapitel \ref{AnforderungenBetriebsmodi} ) sollen anhand unterschiedlicher Testszenarien verglichen und verifiziert werden. 
  
 \subsubsection{Freier Fluss}
@@ -145,6 +150,11 @@ Dieser Testfall entsprich der in Kapitel \ref{Anforderungen:Evakuierung2} beschr
 
 \subsubsection{Fundamentaldiagramm - Rimea-Test 4}
 \label{Anforderungen:RimeaTest}
+In diesem Testfall soll ein $65m$ langer und $12m$ breiter Gang angelegt werden. Auf der einen Seite des Ganges befindet sich die Personenquelle, auf der anderen Seite die Personensenke. Im Laufe des Testes sollen die Personen den Gang entlangschreiben. Die Anzahl der Personen ist zu variieren. In einer weiteren Version des Tests sollen Personen, welche die Personensenke erreicht haben, erneut bei der Personenquelle starten (Endlosschleife).
+
+\subsubsection{Engstelle (unidirektional)}
+In diesem Testfall soll, analog zum Rimea-Test 4, ein $65m$ langer und $12m$ breiter Gang angelegt werden. Am Ende des Ganges befindet sich eine Engstelle mit $6m$ Breite und dahinter die Personensenke. Es soll mit variierender Anzahl an Personen getestet werden, wie lange es dauert bis die Engstelle durchschritten wurde.
+%TODO: Eventuell auch Bidirektional?
 
 \section{Softwaredesign}
 

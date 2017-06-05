@@ -2,18 +2,22 @@ package outputFile;
 
 import config.Configuration;
 import field.Field;
+import field.location.Location;
 import field.view.StringView;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Arne on 30.05.2017.
  */
 @XmlRootElement
 public class Output{
+    private String distanceMap;
     private final Configuration config;
     private Field field;
     private String fieldmap;
@@ -38,6 +42,18 @@ public class Output{
         fieldHeight = field.getHeight();
         targetX = field_.getTarget().x;
         targetY = field_.getTarget().y;
+    }
+
+    public void setDistanceMap(Map<Location, Double> use_){
+        distanceMap = StringView.toStringDistanceMap(use_);
+    }
+
+    public void setDistanceMap(String distancemap){
+        distanceMap = distancemap;
+    }
+
+    public String getDistanceMap(){
+        return distanceMap;
     }
 
     public String getName(){

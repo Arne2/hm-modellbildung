@@ -11,15 +11,18 @@ import org.junit.Test;
 
 import java.math.BigDecimal;
 
-/**
- * @author peter-mueller
- */
+/*
+* @author peter-mueller
+*/
+
 public class FreeFlowTest {
-    private static final double VELOCITY = 1.0;
+    private static final double VELOCITY = 1.48;
+    private static final double DEVIATION = 0.144116;
     public static final int CELL_SIZE = 1;
     private final Configuration conf = new Configuration.Builder(new String [] {""})
             .cellSize(CELL_SIZE)
             .velocity(VELOCITY)
+            .deviation(DEVIATION)
             .build();
 
     @Test
@@ -41,7 +44,11 @@ public class FreeFlowTest {
         final Field field = StringView.parseStringMap("X\n");
         Calculation calculation = new Calculation(field).invoke();
 
-        if (calculation.getError() > 0.0) {
+        //If person on Target, then the velocity is 0
+        //Thus the difference between expected
+        //and actual velocity is VELOCITY
+
+        if (calculation.getError() > VELOCITY) {
             final String message = String.format(
                     "Expected velocity: %s, but got %s! (error of %s)",
                     VELOCITY, calculation.getActualVelocity(), calculation.getError()
@@ -108,7 +115,7 @@ public class FreeFlowTest {
     @Test
     public void testSlope2() {
         final Field field = StringView.parseStringMap(
-                "00000\n" +
+                        "00000\n" +
                         "00000\n" +
                         "0000X\n"
         );
@@ -146,9 +153,10 @@ public class FreeFlowTest {
             simulation.spawnPerson(start);
             simulation.run(BigDecimal.valueOf(1000));
 
-            final BigDecimal duration = simulation.getClock().systemTime();
-            final double length = Locations.distance(start, simulation.field.getTarget());
-            actualVelocity = length / duration.doubleValue();
+            //final BigDecimal duration = simulation.getClock().systemTime();
+            //final double length = Locations.distance(start, simulation.field.getTarget());
+            //actualVelocity = length / duration.doubleValue();
+            actualVelocity = simulation.getPersons().get(0).getMeanVelocity().doubleValue();
             error = Math.abs(actualVelocity - VELOCITY);
             return this;
         }

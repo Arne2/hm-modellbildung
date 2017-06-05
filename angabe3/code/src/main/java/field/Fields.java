@@ -28,4 +28,21 @@ public class Fields {
                 .collect(Collectors.toSet());
     }
 
+    public static Set<Location> neumann(Field field, Location center) {
+        if (field == null) {
+            throw new IllegalArgumentException("Field cannot be null!");
+        }
+        if (center == null) {
+            throw new IllegalArgumentException("Center location cannot be null!");
+        }
+        final Location[] neumann = new Location[]{
+                new Location(0, -1), new Location(-1, 0),
+                new Location(1, 0), new Location(0, 1),
+        };
+        return Arrays.stream(neumann)
+                .map(center::relative)
+                .filter(field::has)
+                .collect(Collectors.toSet());
+    }
+
 }

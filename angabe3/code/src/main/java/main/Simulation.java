@@ -5,6 +5,8 @@ import field.Field;
 import field.location.Location;
 import field.use.Dijkstra;
 import field.use.EuclidDistance;
+import field.use.FastMarching;
+import field.use.FastMarching2;
 import field.view.StringView;
 import outputFile.OutputFile;
 import person.Person;
@@ -42,9 +44,7 @@ public class Simulation {
             this.use = EuclidDistance.use(field);
         }
         else if(configuration.getAlgorithm() == Configuration.AlgorithmType.eFastMarching){
-            //TODO: fast marching Algorithm
-            //here: Euclid to be replaced by fast marching
-            this.use = EuclidDistance.use(field);
+            this.use = FastMarching.use(field);
         }
         else{
             this.use = Dijkstra.use(field);
@@ -55,7 +55,7 @@ public class Simulation {
     public Person spawnPerson(Location location) {
 
         Random rand = new Random(System.nanoTime());
-        final double velocity = rand.nextGaussian() * configuration.getDeviation() + configuration.getVelocity();
+        final double velocity = this.configuration.getVelocity();//rand.nextGaussian() * configuration.getDeviation() + configuration.getVelocity();
         final Person person = new Person(velocity);
         field.putPerson(person, location);
         final PersonMoveEvent event = new PersonMoveEvent(clock.systemTime(), this, person);

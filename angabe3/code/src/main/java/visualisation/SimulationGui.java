@@ -207,7 +207,6 @@ public class SimulationGui extends Application {
             enableScrollbar = true;
         }
         cellsize = Math.max(MINCELLSIZE, cellsize);
-        System.out.println(cellsize);
     }
 
     /**
@@ -264,7 +263,6 @@ public class SimulationGui extends Application {
                     continue;
                 }
                 int val = (int)((1-d/min)*255);
-                System.out.println(d + " + " + val);
                 gc.setFill(Color.rgb(val,val,val));
                 gc.fillRect(x* cellsize, y* cellsize, cellsize, cellsize);
             }

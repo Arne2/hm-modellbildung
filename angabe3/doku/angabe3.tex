@@ -19,8 +19,8 @@ Für die Simulation der Personenbewegungen wird ein zellulärer Zustandsautomat 
 Die Ziele werden als attraktiv für die Personen angesehen. Die Personen steigern ihren persönlichen Nutzen, je näher sie dem Ziel kommen. In der Realität fühlt sich eine Person jedoch unwohl, wenn ihr eine fremde Person zu nahe kommt. Im Modell wird dies dadurch berücksichtigt, dass sich der Nutzen einer Person verringert, wenn sie einer anderen zu nahe kommt. Um die Simulation möglichst realistisch zu gestalten, bewegen sich die Personen mit einer individuellen Wunschgeschwindigkeit. Diese wird aus den Ergebnissen der ersten Studienarbeit ermittelt. \\
 
 Das erläuterte Modell gibt die einzelnen Personenbewegungen aus und visualisiert diese zusätzlich. Die Bewegung der Personen wird in drei getrennten Simulationen mit jeweils unterschiedlichen Algorithmen berechnet. Zunächst wird für jedes Feld der negative euklidische Abstand als Zielnutzen berechnet. Jede Person versucht durch die Wahl des umliegenden Feldes mit dem maximalen Wert seinen Nutzen zu steigern. \\
-In einem zweiten Modell erfolgt die Ermittlung der Personenbewegung mit Hilfe des Floor-Flooding, basierend auf dem Dijkstra Algorithmus. Jede Person wählt von den anliegenden Feldern das Feld, welches die geringste Anzahl an notwendigen Bewegungen bis zum Ziel hat. \\
-In einem dritten Modell erfolgt die Ermittlung der Personenbewegung ebenfalls mit Hilfe des Floor-Flooding. Als Grundlage dient hierbei jedoch die Lösung der Eikonal-Gleichung, welche die Ausbreitung einer Welle beschreibt. Hierfür wird der Fast-Marching Algorithmus verwendet.  \\
+Darüber hinaus besteht die Möglichkeit die Personenbewegung mit Hilfe des Floor-Flooding, basierend auf dem Dijkstra Algorithmus zu ermitteln. Jede Person wählt von den anliegenden Feldern das Feld, welches die geringste Anzahl an notwendigen Bewegungen bis zum Ziel hat. \\
+Als dritte Variante erfolgt die Ermittlung der Personenbewegung ebenfalls mit Hilfe des Floor-Flooding. Als Grundlage dient hierbei jedoch die Lösung der Eikonal-Gleichung, welche die Ausbreitung einer Welle beschreibt. Hierfür wird der Fast-Marching Algorithmus verwendet.  \\
 Im Laufe der Studienarbeit werden die beschriebenen Modelle anhand unterschiedlicher Tests verglichen und ausgewertet. Eine detaillierte Erläuterung der Tests ist im folgenden Kapitel \ref{AnforderungenTest} beschrieben.
 
 
@@ -64,7 +64,8 @@ u_{p}(d) =
 \end{array} 
 \right.
 \end{displaymath}
-Hierbei wird mit $d$ der Abstand zur nächsten Person bezeichnet. $w$ und $h$ stehen für die Stärke und Reichweite der Funktion. 
+Hierbei wird mit $d$ der Abstand zur nächsten Person bezeichnet. $w$ und $h$ stehen für die Stärke und Reichweite der Funktion. \\
+Der Nutzen einer Nachbarzelle setzt sich somit insgesamt aus der Addition des Zielnutzens der Zelle (abhängig vom Algorithmus, vgl. Unterkapitel \ref{AnforderungenAlgorithmen}) mit dem Nutzeneinfluss aller Personen (in der Umgebung) auf die entsprechende Zelle zusammen. 
  
 \subsection{Geschwindigkeit der Personen}
 Jede Person soll eine individuelle Wunschgeschwindigkeit besitzen. Sie bewegt sich bei freier Bahn mit dieser Geschwindigkeit fort. Die Wunschgeschwindigkeiten sollen als normalverteilt angesehen werden. Als Mittelwert und Varianz sollen die errechneten Werte aus der ersten Studienarbeit verwendet werden.
@@ -81,7 +82,7 @@ Die Tabelle \ref{tab:parameter} zeigt alle möglichen Parameter, welche die Soft
 		Parameter & Beschreibung  &  Default\\ \hline
 		--free-flow-velocity & Mittelwert der Wunschgeschwindigkeit [m/s] & 1,0 \\
 		--free-flow-deviation & Varianz der Wunschgeschwindigkeiten [m/s] & 0 \\
-		--algorithm & Betriebsmodus (1, 2 oder 3) & 2 \\
+		--algorithm & Algorithmus (1, 2 oder 3) & 2 \\
 		--output-folder & Ordner in den der Output gespeichert wird & ../data/ \\
 		--cellsize & Größe der einzelnen Zellen [m] & 1 \\
 		--input-map & Auswahl des Testfalls & - \\
@@ -96,21 +97,21 @@ Die Aufgabe der Software ist die Simulation von Personenbewegungen. Für möglic
 
 \subsection{Reports}
 %TODO --> Ermitteln was alles ausgegeben wird
-Alle errechneten Ergebnisse sollen über Reports ausgeleitet werden. Die Reports sollen im .csv Format ausgeleitet werden um eine gute Weiterverarbeitung der Ergebnisse zu gewährleisten. Folgende Reports sollen ausgeleitet werden:
-\begin{list}{•}
-	    	\item queue-size-resident.csv enthält die Länge der Einheimischen-Warteschlange zu den jeweiligen Zeitpunkten
-    	
-    \end{list}
-\subsection{Betriebsmodi}
-\label{AnforderungenBetriebsmodi}
+Alle errechneten Ergebnisse sollen über Reports ausgeleitet werden.
+%Die Reports sollen im .csv Format ausgeleitet werden um eine gute Weiterverarbeitung der Ergebnisse zu gewährleisten. Folgende Reports sollen ausgeleitet werden:
+%\begin{list}{•}
+%	    	\item 	
+%    \end{list}
+\subsection{Berechung des Zielnutzens}
+\label{AnforderungenAlgorithmen}
 
-Die Software hat 3 Betriebsmodi. Abhängig vom Betriebsmodus wird der Nutzen bzw. die Attraktivität der einzelnen Zellen, bezogen auf das/die Ziel(e) mit anderen Algorithmen berechnet. \\
+Die Software hat beinhaltet 3 unterschiedliche Algorithmen für die Berechnung des Zielnutzens (Attraktivität) einer Zelle. \\
 \\
-Betriebsmodus 1: Der Nutzen bzw. die Attraktivität jeder Zelle entspricht dem negativen euklidischen Abstand. In diesem Betriebsmodus können keine Hindernisse umgangen werden. Jede Person versucht den Nutzen zu maximieren und wählt jeweils die Zelle mit maximalen Wert aus den umliegenden aus.\\
+Algorithmus 1: Der Nutzen bzw. die Attraktivität jeder Zelle entspricht dem negativen euklidischen Abstand. Hierbei können keine Hindernisse umgangen werden. Jede Person versucht den Nutzen zu maximieren und wählt jeweils die Zelle mit maximalen Wert aus den umliegenden aus.\\
 \\
-Betriebsmodus 2: Der Nutzen bzw. die Attraktivität jeder Zelle wird durch Floor-Flooding, basierend auf dem Dijkstra Algorithmus, berechnet. Für jede Zelle wird die geringste Anzahl an notwendigen Bewegungen bis zum Ziel ermittelt. \\
+Algorithmus 2: Der Nutzen bzw. die Attraktivität jeder Zelle wird durch Floor-Flooding, basierend auf dem Dijkstra Algorithmus, berechnet. Für jede Zelle wird die geringste Anzahl an notwendigen Bewegungen bis zum Ziel ermittelt. \\
 \\
-Betriebsmodus 3: Analog zum Betriebsmodus 2 wird auch in diesem Betriebsmodus der Nutzen bzw. die Attraktivität jeder Zelle mittels Floor-Flooding berechnet. In diesem Betriebsmodus wird jedoch der Fast-Marching Alforithmus (Lösung der Eikonal-Gleichung) als Grundlage verwendet.
+Algorithmus 3: Analog zum Algorithmus 2 wird auch in diesem hier der Nutzen bzw. die Attraktivität jeder Zelle mittels Floor-Flooding berechnet. Es wird jedoch der Fast-Marching Alforithmus (Lösung der Eikonal-Gleichung) als Grundlage verwendet.
 
 \subsection{Werte für die Auswertung}
 Alle in der Tabelle \ref{tab:WerteAuswertung} aufgeführten Werte sollen auf Basis der Simulation ermittelt und ausgewertet werden. Einige Werte werden nur für bestimmte Tests benötigt.
@@ -130,7 +131,7 @@ Alle in der Tabelle \ref{tab:WerteAuswertung} aufgeführten Werte sollen auf Bas
 \label{AnforderungenTest}
 %TODO --> Bilder mit jeweiligen Testszenarien einfügen
 
-Die implementierten Algorithmen (vgl. Betriebsmodi im Unterkapitel \ref{AnforderungenBetriebsmodi} ) sollen anhand unterschiedlicher Testszenarien verglichen und verifiziert werden. 
+Die implementierten Algorithmen (vgl. Unterkapitel \ref{AnforderungenAlgorithmen} ) sollen anhand unterschiedlicher Testszenarien verglichen und verifiziert werden. 
  
 \subsubsection{Freier Fluss}
 Im Zuge dieses Tests soll überprüft werden, ob sich Personen bei freier Bahn (keine Hindernisse zwischen Start und Ziel) mit ihrer jeweiligen Wunschgeschwindigkeit auf das Ziel hin bewegen. Des weiteren soll überprüft werden, ob die Person den kürzesten Weg verwendet. Der Test soll mit allen 3 Betriebsmodi durchgeführt werden.

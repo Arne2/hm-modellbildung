@@ -35,15 +35,15 @@ public class XChickenTest {
                         "000    0  000\n" +
                         "0000000000000\n" +
                         "0000000000000");
-        final Simulation simulation = new Simulation(field, conf);
+        final Simulation simulation = new Simulation(field, conf, null);
         simulation.spawnPerson(new Location(6,3));
         simulation.run(new BigDecimal(100000));
 
-        System.out.println(simulation.persons.toArray().length);
+        System.out.println(simulation.getPersons().toArray().length);
         if(simulation.field.numberOfPersons() != 0){
-            System.out.println(StringView.useMap(field, simulation.use));
+            System.out.println(StringView.useMap(field, simulation.getUse()));
             Assert.fail("chicken test failed: still " +
-                    simulation.persons.toArray().length + " persons in field");
+                    simulation.getPersons().toArray().length + " persons in field");
         }
     }
 }

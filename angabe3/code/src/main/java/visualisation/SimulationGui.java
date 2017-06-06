@@ -4,37 +4,36 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.geometry.Orientation;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollBar;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.CycleMethod;
-import javafx.scene.paint.LinearGradient;
-import javafx.scene.paint.Stop;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import outputFile.Output;
 import outputFile.OutputEvent;
 
+import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -51,6 +50,7 @@ public class SimulationGui extends Application {
      * Size of the menu.
      */
     public static final int MENUSIZE = 75;
+    public static final int STARTSIZE = 400;
 
     /**
      * Minimal size of a cell.
@@ -79,6 +79,9 @@ public class SimulationGui extends Application {
     private boolean enableScrollbar = false;
     private long waitingtime = 0;
 
+    // Stage
+    Stage primaryStage;
+
     // Panes
     private Pane root = new Pane();
     private Pane canvas = new Pane();
@@ -100,6 +103,7 @@ public class SimulationGui extends Application {
     private Button reset;
     private Button play;
     private Button changeLayer;
+    private Button loadXML;
 
     Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
 
@@ -108,68 +112,51 @@ public class SimulationGui extends Application {
     public static Output input = null;
 
     public static void main(String[] args) {
-        // Reading the xml file
-        try {
-            JAXBContext jaxbContext = JAXBContext.newInstance(Output.class);
-            Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-            FileReader reader = new FileReader("output.xml");
-            input = (Output) unmarshaller.unmarshal(reader);
-        } catch (JAXBException e) {
-            e.printStackTrace();
-        } catch (IOException e){
-            e.printStackTrace();
-        }
         launch(args);
+    }
+
+    /**
+     * Loads a simulation from a file.
+     * @param file
+     * @throws JAXBException
+     * @throws IOException
+     */
+    private void loadInput(File file) throws JAXBException, IOException{
+        JAXBContext jaxbContext = JAXBContext.newInstance(Output.class);
+        Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+        FileReader reader = new FileReader(file);
+        input = (Output) unmarshaller.unmarshal(reader);
     }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        primaryStage.setTitle("Visualisierung für: " + input.getName());
-
-        setCellSize();
+        this.primaryStage = primaryStage;
+        primaryStage.setTitle("Visualisierung");
 
         createLabels();
         createButtons();
+
+        primaryStage.setScene(new Scene(root, STARTSIZE, MENUSIZE));
+        primaryStage.show();
+    }
+
+    /**
+     * Creates the canvas for the simulation.
+     */
+    private void createGrid(){
         createLayers();
 
         int width = Math.max(cellsize * input.getFieldWidth(), 350)+(int)sc.getWidth();
         int height = Math.min(Math.max(cellsize * input.getFieldHeight() + MENUSIZE, 500),(int)screenBounds.getHeight()-50);
 
-        // Add all elements to the pane
-        addToRoot();
-
-        heatLayer.toBack();
-        objectLayer.toFront();
-
+        ObservableList<Node> rootChildren = root.getChildren();
+        root = new Pane();
+        root.getChildren().addAll(rootChildren);
         primaryStage.setScene(new Scene(root, width, height));
+        primaryStage.show();
 
         if (enableScrollbar) {
 //            configureScrollbar(primaryStage);
-        }
-
-        primaryStage.show();
-    }
-
-    /**
-     * Adds all components to the root pane.
-     */
-    public void addToRoot(){
-        root.getChildren().add(stepLabel);
-        root.getChildren().add(timeLabel);
-        root.getChildren().add(proceed);
-        root.getChildren().add(reset);
-        root.getChildren().add(play);
-        root.getChildren().add(changeLayer);
-        root.getChildren().add(cellLayer);
-        root.getChildren().add(heatLayer);
-        root.getChildren().add(objectLayer);
-
-//        canvas.getChildren().add(cellLayer);
-//        canvas.getChildren().add(heatLayer);
-//        canvas.getChildren().add(objectLayer);
-//        root.getChildren().add(canvas);
-        if (enableScrollbar) {
-//            root.getChildren().add(sc);
         }
     }
 
@@ -330,12 +317,16 @@ public class SimulationGui extends Application {
         timeLabel = new Label("Current Time: 0");
         timeLabel.setLayoutX(250);
         timeLabel.setLayoutY(14);
+
+        root.getChildren().add(stepLabel);
+        root.getChildren().add(timeLabel);
     }
 
     /**
      * Helping method for creating the buttons.
      */
     public void createButtons(){
+        // Proceed button
         proceed = new Button("Next Step");
         proceed.setLayoutX(150);
         proceed.setLayoutY(12);
@@ -349,75 +340,27 @@ public class SimulationGui extends Application {
             }
         });
 
+        // Reset button
         reset = new Button("Reset");
-        reset.setLayoutX(150);
+        reset.setLayoutX(75);
         reset.setLayoutY(42);
 
         reset.setOnAction(event -> {
             reset();
         });
 
+        // Play button
         play = new Button("Play");
         play.setLayoutX(25);
         play.setLayoutY(42);
 
         play.setOnAction((ActionEvent event) -> {
-            if (running){
-                running = false;
-                play.setText("Play");
-            } else {
-                play.setText("Pause");
-                running = true;
-                proceed.setDisable(true);
-
-
-                Task task = new Task<Void>() {
-                    @Override
-                    public Void call() {
-                        while (running && step < input.getEvents().size()) {
-                            Platform.runLater(new Runnable() {
-                                @Override
-                                public void run() {
-                                    handleNextEvent();
-                                    if (step+1 < input.getEvents().size()) {
-                                        BigDecimal a = input.getEvents().get(step).getTime();
-                                        BigDecimal b = input.getEvents().get(step -1).getTime();
-                                        waitingtime = a.subtract(b).multiply(new BigDecimal(1000)).longValue();
-                                    } else {
-                                        waitingtime = 0;
-                                    }
-                                }
-                            });
-                                if (DEBUG) {
-                                    System.out.println(waitingtime);
-                                }
-                                try {
-                                    Thread.sleep(Math.max(MILLIS,waitingtime));
-                                } catch (InterruptedException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        running = false;
-                        proceed.setDisable(false);
-                        if (step >= input.getEvents().size()) {
-                            Platform.runLater(new Runnable() {
-                                @Override
-                                public void run() {
-                                    stepLabel.setText("Finished");
-                                    play.setText("Play");
-                                }
-                            });
-                        }
-                        return null;
-                    }
-                };
-                new Thread(task).start();
-            }
-
+            play();
         });
 
+        // Change layer button
         changeLayer = new Button("Heatmap");
-        changeLayer.setLayoutX(250);
+        changeLayer.setLayoutX(150);
         changeLayer.setLayoutY(42);
 
         changeLayer.setOnAction(event -> {
@@ -431,6 +374,137 @@ public class SimulationGui extends Application {
                 cellLayer.toBack();
             }
         });
+
+        // Load simulation button
+        loadXML = new Button("Load Simulation");
+        loadXML.setLayoutX(250);
+        loadXML.setLayoutY(42);
+        loadXML.setOnAction(event -> {
+            loadXmlMethod();
+        });
+
+        // Add the buttons to the pane
+        root.getChildren().add(proceed);
+        root.getChildren().add(reset);
+        root.getChildren().add(play);
+        root.getChildren().add(changeLayer);
+        root.getChildren().add(loadXML);
+
+        // At the beginning there is no simulation selected. Therefore all buttons will be disabled.
+        play.setDisable(true);
+        proceed.setDisable(true);
+        reset.setDisable(true);
+        changeLayer.setDisable(true);
+    }
+
+    /**
+     * Method of the load xml button. Reads the simulation out of a xml file. Closes the opened simulation.
+     */
+    private void loadXmlMethod(){
+        // Stopps the running of a simulation.
+        running = false;
+        play.setText("Play");
+        proceed.setDisable(false);
+
+        // Chooser for the file to load
+        JFileChooser chooser = new JFileChooser();
+        chooser.setCurrentDirectory(new File("."));
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("XML Files", "xml");
+        chooser.setFileFilter(filter);
+
+        int result = chooser.showOpenDialog(null);
+        if (result != JFileChooser.APPROVE_OPTION){
+            return;
+        }
+        File file = chooser.getSelectedFile();
+        try {
+            loadInput(file);
+        } catch (JAXBException e){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Incompatible data format");
+            alert.setHeaderText(null);
+            alert.setContentText("The read xml does not contain the structure needed to be processed!");
+            alert.showAndWait();
+            return;
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+        // Resets and initializes the simulation
+        root.getChildren().remove(cellLayer);
+        root.getChildren().remove(heatLayer);
+        root.getChildren().remove(objectLayer);
+
+        play.setDisable(false);
+        proceed.setDisable(false);
+        reset.setDisable(false);
+        changeLayer.setDisable(false);
+
+        setCellSize();
+        createGrid();
+        reset();
+
+        if(heatmap){
+            cellLayer.toBack();
+        } else {
+            heatLayer.toBack();
+        }
+        primaryStage.setTitle("Visualisierung für: " + input.getName());
+    }
+
+    /**
+     * The method of the play button. Pressed again the running of the simulation will be stopped.
+     */
+    private void play(){
+        if (running){
+            running = false;
+            play.setText("Play");
+        } else {
+            play.setText("Pause");
+            running = true;
+            proceed.setDisable(true);
+
+            Task task = new Task<Void>() {
+                @Override
+                public Void call() {
+                    while (running && step < input.getEvents().size()) {
+                        Platform.runLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                handleNextEvent();
+                                if (step+1 < input.getEvents().size()) {
+                                    BigDecimal a = input.getEvents().get(step).getTime();
+                                    BigDecimal b = input.getEvents().get(step -1).getTime();
+                                    waitingtime = a.subtract(b).multiply(new BigDecimal(1000)).longValue();
+                                } else {
+                                    waitingtime = 0;
+                                }
+                            }
+                        });
+                        if (DEBUG) {
+                            System.out.println(waitingtime);
+                        }
+                        try {
+                            Thread.sleep(Math.max(MILLIS,waitingtime));
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    running = false;
+                    proceed.setDisable(false);
+                    if (step >= input.getEvents().size()) {
+                        Platform.runLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                stepLabel.setText("Finished");
+                                play.setText("Play");
+                            }
+                        });
+                    }
+                    return null;
+                }
+            };
+            new Thread(task).start();
+        }
     }
 
     /**
@@ -449,6 +523,21 @@ public class SimulationGui extends Application {
         drawCells();
         drawHeatMap();
         drawObjects();
+
+        root.getChildren().add(cellLayer);
+        root.getChildren().add(heatLayer);
+        root.getChildren().add(objectLayer);
+
+//        canvas.getChildren().add(cellLayer);
+//        canvas.getChildren().add(heatLayer);
+//        canvas.getChildren().add(objectLayer);
+//        root.getChildren().add(canvas);
+        if (enableScrollbar) {
+//            root.getChildren().add(sc);
+        }
+
+        heatLayer.toBack();
+        objectLayer.toFront();
     }
 
     /**

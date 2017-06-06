@@ -92,13 +92,13 @@ public class PersonalSpaceTest {
 
         field.putPerson(new Person(1.0), Location.of(0,1));
         final double use2 = personalSpace.use(field, Location.of(2, 2));
-        if (use2 <= use ) {
+        if (use2 > use ) {
             final String message = String.format("use should be influenced. was: %s", use2);
             Assert.fail(message);
         }
         field.putPerson(new Person(1.0), Location.of(0,2));
         final double use3 = personalSpace.use(field, Location.of(2, 2));
-        if (use3 <= use2 ) {
+        if (use3 > use2) {
             final String message = String.format("use should be influenced. was: %s", use3);
             Assert.fail(message);
         }

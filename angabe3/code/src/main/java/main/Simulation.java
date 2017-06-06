@@ -3,10 +3,7 @@ package main;
 import config.Configuration;
 import field.Field;
 import field.location.Location;
-import field.use.Dijkstra;
-import field.use.EuclidDistance;
-import field.use.FastMarching;
-import field.use.FastMarching2;
+import field.use.*;
 import field.view.StringView;
 import outputFile.OutputFile;
 import person.Person;
@@ -30,9 +27,11 @@ public class Simulation {
 
 
     private final Map<Location, Double> use;
+    private final PersonalSpace personalSpace = new PersonalSpace(new PersonalSpace.Settings());
     private final Clock clock = new Clock();
     private final EventList events = new EventList();
     private final List<Person> persons = new ArrayList<Person>();
+
     private final Configuration configuration;
     private final OutputFile outputFile;
 
@@ -40,13 +39,11 @@ public class Simulation {
         this.configuration = configuration;
         this.field = field;
         this.outputFile = outputFile;
-        if(configuration.getAlgorithm() == Configuration.AlgorithmType.eEuclid){
+        if (configuration.getAlgorithm() == Configuration.AlgorithmType.eEuclid) {
             this.use = EuclidDistance.use(field);
-        }
-        else if(configuration.getAlgorithm() == Configuration.AlgorithmType.eFastMarching){
+        } else if (configuration.getAlgorithm() == Configuration.AlgorithmType.eFastMarching) {
             this.use = FastMarching.use(field);
-        }
-        else{
+        } else {
             this.use = Dijkstra.use(field);
         }
 
@@ -61,16 +58,17 @@ public class Simulation {
         final PersonMoveEvent event = new PersonMoveEvent(clock.systemTime(), this, person);
         this.events.add(event);
         persons.add(person);
-        if(outputFile != null) {
+        if (outputFile != null) {
             outputFile.addPawnEvent(clock.systemTime(), person.getId(), location.x, location.y);
         }
         return person;
     }
+
     public void run(BigDecimal maxSimulationTime) {
         while (events.hasNext() & clock.systemTime().compareTo(maxSimulationTime) < 0) {
             System.out.println(clock.systemTime());
             System.out.println(StringView.personMap(this.field));
-            for (Person p: persons) {
+            for (Person p : persons) {
                 System.out.println("v given: " + p.getVelocity() + "  v: " + p.getMeanVelocity());
 
             }
@@ -118,5 +116,9 @@ public class Simulation {
 
     public OutputFile getOutputFile() {
         return outputFile;
+    }
+
+    public PersonalSpace getPersonalSpace() {
+        return personalSpace;
     }
 }

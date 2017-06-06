@@ -48,29 +48,29 @@ public class PersonalSpace {
         final Map<Person, Location> persons = field.getPersons();
         final Set<Location> locations = field.getLocations();
 
-        return locations.stream()
+        return  -1 * locations.stream()
                 .filter(l -> {
                     final double distance = Locations.distance(l, center) * field.getCellSize();
                     return isInRange(distance);
                 })
                 .filter(l -> !l.equals(center))
                 .filter(persons::containsValue)
-                .mapToDouble(l-> calculate(Locations.distance(l, center) * field.getCellSize()))
+                .mapToDouble(l -> calculate(Locations.distance(l, center) * field.getCellSize()))
                 .sum();
     }
 
-    static class Settings {
+    public static class Settings {
         private final double personalSpace;
         private final double intimateSpace;
         private final double pedestrianSize;
 
-        Settings(double personalSpace, double intimateSpace, double pedestrianSize, double cellWidth) {
+        public Settings(double personalSpace, double intimateSpace, double pedestrianSize, double cellWidth) {
             this.personalSpace = personalSpace;
             this.intimateSpace = intimateSpace;
             this.pedestrianSize = pedestrianSize;
         }
 
-        Settings() {
+        public Settings() {
             this.pedestrianSize = 20;
             this.intimateSpace = 45;
             this.personalSpace = 120;

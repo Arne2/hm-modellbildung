@@ -3,6 +3,7 @@ package field.use;
 import field.Field;
 import field.Fields;
 import field.location.Location;
+import field.location.Locations;
 
 import java.util.*;
 
@@ -35,7 +36,8 @@ public class Dijkstra {
             moore.stream()
                     .filter(unvisited::contains)
                     .forEach(v -> {
-                        final double alt = distance.get(u) - 1;
+                        final double d = Locations.distance(u, v) * field.getCellSize();
+                        final double alt = distance.get(u) - d;
                         if (distance.get(v) == null || alt > distance.get(v)) {
                             distance.put(v, alt);
                             prev.put(v, u);

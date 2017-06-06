@@ -30,7 +30,7 @@ public class Automat {
                         "000 00000 000\n" +
                         "000  000  000\n" +
                         "0000000000000\n" +
-                        "0000000000000");
+                        "0000000000000", 20);
 
         final Configuration build = new Configuration.Builder(args)
                 .build();

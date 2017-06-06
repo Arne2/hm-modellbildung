@@ -3,6 +3,7 @@ package time.events;
 import field.Fields;
 import field.location.Location;
 import field.location.Locations;
+import field.use.PersonalSpace;
 import main.Simulation;
 import outputFile.OutputFile;
 import person.Person;
@@ -38,7 +39,11 @@ public class PersonMoveEvent extends BaseEvent {
         final Set<Location> moore = Fields.moore(simulation.field, center);
         final Location bestTarget = moore.stream()
                 .filter(simulation.field::isFree)
-                .max(Comparator.comparingDouble(simulation.getUse()::get))
+                .max(Comparator.comparingDouble(l -> {
+                    final double use = simulation.getUse().get(l);
+                    final double personPotential = simulation.getPersonalSpace().use(simulation.field, l);
+                    return use + personPotential;
+                }))
                 .orElse(null);
 
 

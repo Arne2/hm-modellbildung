@@ -16,10 +16,7 @@ import time.events.Event;
 import time.events.PersonMoveEvent;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -40,6 +37,13 @@ public class Simulation {
         this.configuration = configuration;
         this.field = field;
         this.outputFile = outputFile;
+
+        Map<Person, Location> persLoc = field.getPersons();
+        for (Map.Entry<Person, Location> entry : persLoc.entrySet()) {
+                spawnPersonEvent(entry.getValue(), entry.getKey());
+        }
+
+
         if(configuration.getAlgorithm() == Configuration.AlgorithmType.eEuclid){
             this.use = EuclidDistance.use(field);
         }
@@ -52,6 +56,18 @@ public class Simulation {
 
         if(outputFile != null)outputFile.setDistances(this.use);
     }
+
+    private Person spawnPersonEvent(Location location, Person person){
+        final PersonMoveEvent event = new PersonMoveEvent(clock.systemTime(), this, person);
+        this.events.add(event);
+        persons.add(person);
+        if(outputFile != null) {
+            outputFile.addPawnEvent(clock.systemTime(), person.getId(), location.x, location.y);
+        }
+        return person;
+    }
+
+
 
     public Person spawnPerson(Location location) {
 
@@ -70,11 +86,11 @@ public class Simulation {
     public void run(BigDecimal maxSimulationTime) {
         while (events.hasNext() & clock.systemTime().compareTo(maxSimulationTime) < 0) {
             System.out.println(clock.systemTime());
-            System.out.println(StringView.personMap(this.field));
-            for (Person p: persons) {
+            //System.out.println(StringView.personMap(this.field));
+            /*for (Person p: persons) {
                 System.out.println("v given: " + p.getVelocity() + "  v: " + p.getMeanVelocity());
 
-            }
+            }*/
             final Event event = events.nextEvent();
             clock.advanceTo(event.getTime());
 

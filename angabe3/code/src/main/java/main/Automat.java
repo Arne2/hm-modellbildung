@@ -39,7 +39,9 @@ public class Automat {
                 .build();
 
         FieldImporter fi = new FieldImporter(
-                "D:\\Dokumente\\Studium\\Master_Informatik\\Semester1\\ModellbildungSimulation\\hm-modellbildung\\angabe3\\code\\testpictures\\testmap_001.png",
+                "D:\\Dokumente\\Studium\\Master_Informatik\\Semester1\\" +
+                        "ModellbildungSimulation\\hm-modellbildung\\angabe3\\code\\" +
+                        "testpictures\\testmap_005.png",
                 build);
         final Field field2 = fi.getField();
         OutputFile output = new OutputFile(build, field2);

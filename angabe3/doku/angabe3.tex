@@ -96,12 +96,9 @@ Die Tabelle \ref{tab:parameter} zeigt alle möglichen Parameter, welche die Soft
 Die Aufgabe der Software ist die Simulation von Personenbewegungen. Für möglichst genaue Zeitangaben wird die Java Klasse BigDecimal verwendet. Für die Division werden 32 Nachkommastellen berücksichtigt und als Rundungsmodus wird Half\_Even verwendet, da dieser kumulative Fehler bei sich wiederholenden Berechnungen minimiert. Die anschließende Berechnung und Aufbereitung der Daten (insebesondere für den Test \ref{Anforderungen:RimeaTest}) erfolgt mit Mathematica.
 
 \subsection{Reports}
-%TODO --> Ermitteln was alles ausgegeben wird
-Alle errechneten Ergebnisse sollen über Reports ausgeleitet werden.
-%Die Reports sollen im .csv Format ausgeleitet werden um eine gute Weiterverarbeitung der Ergebnisse zu gewährleisten. Folgende Reports sollen ausgeleitet werden:
-%\begin{list}{•}
-%	    	\item 	
-%    \end{list}
+Alle errechneten Ergebnisse sollen über einen Report ausgeleitet werden.
+Der Report soll im .xml Format ausgeleitet werden um eine gute Weiterverarbeitung der Ergebnisse (Visualisierung) zu gewährleisten. Die Datei $output.xml$ soll alle benötigten Informationen, wie beispielsweise die einzelnen Events der Personen, die durch den Algorithmus berechneten Entfernungen der einzelnen Zellen vom Ziel und eine Übersicht über den Zustand der einzelnen Zellen (Fieldmap), für Simulation beinhalten. 
+
 \subsection{Berechung des Zielnutzens}
 \label{AnforderungenAlgorithmen}
 
@@ -155,7 +152,6 @@ In diesem Testfall soll ein $65m$ langer und $12m$ breiter Gang angelegt werden.
 
 \subsubsection{Engstelle (unidirektional)}
 In diesem Testfall soll, analog zum Rimea-Test 4, ein $65m$ langer und $12m$ breiter Gang angelegt werden. Am Ende des Ganges befindet sich eine Engstelle mit $6m$ Breite und dahinter die Personensenke. Es soll mit variierender Anzahl an Personen getestet werden, wie lange es dauert bis die Engstelle durchschritten wurde.
-%TODO: Eventuell auch Bidirektional?
 
 \section{Softwaredesign}
 

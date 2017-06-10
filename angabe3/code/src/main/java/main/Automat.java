@@ -38,11 +38,7 @@ public class Automat {
         final Configuration build = new Configuration.Builder(args)
                 .build();
 
-        FieldImporter fi = new FieldImporter(
-                "D:\\Dokumente\\Studium\\Master_Informatik\\Semester1\\" +
-                        "ModellbildungSimulation\\hm-modellbildung\\angabe3\\code\\" +
-                        "testpictures\\testmap_005.png",
-                build);
+        FieldImporter fi = new FieldImporter(build);
         final Field field2 = fi.getField();
         OutputFile output = new OutputFile(build, field2);
         final Simulation simulation = new Simulation(field2, build, output);
@@ -54,7 +50,7 @@ public class Automat {
 
         //System.out.println(StringView.personMap(simulation.field));
         //System.out.println(StringView.useMap(simulation.field, simulation.getUse()));
-        simulation.run(BigDecimal.valueOf(200000));
+        simulation.run(BigDecimal.valueOf(50000));
         try {
             output.save("output.xml");
         }catch (JAXBException e){

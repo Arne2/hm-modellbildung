@@ -70,7 +70,7 @@ public class StringView {
                 if (c == '0') {
                     field.addLocation(Location.of(x, y));
                 } else if (c == 'X') {
-                    field.setTarget(Location.of(x, y));
+                    field.addTarget(Location.of(x, y));
                 }
             }
         }

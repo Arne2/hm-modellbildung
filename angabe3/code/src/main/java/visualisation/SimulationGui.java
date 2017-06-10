@@ -1,5 +1,6 @@
 package visualisation;
 
+import field.location.Location;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
@@ -279,7 +280,7 @@ public class SimulationGui extends Application {
         for(int y = 0; y < input.getFieldHeight(); y++) {
             for (int x = 0; x < input.getFieldWidth(); x++) {
                 char c = rows[y].charAt(x);
-                if (x == input.getTargetX() && y == input.getTargetY()) {
+                if ( input.getTargets().contains(Location.of(x, y))) {
                     gc.setFill(Color.GREEN);
                     gc.fillRect(x* cellsize, y* cellsize, cellsize, cellsize);
                     gc.strokeRect(x* cellsize, y* cellsize, cellsize, cellsize);
@@ -299,8 +300,12 @@ public class SimulationGui extends Application {
         personList.clear();
         GraphicsContext gc = objectLayer.getGraphicsContext2D();
         gc.setFill(Color.GREEN);
-        gc.fillRect(input.getTargetX()* cellsize, input.getTargetY()* cellsize, cellsize, cellsize);
-        gc.strokeRect(input.getTargetX()* cellsize, input.getTargetY()* cellsize, cellsize, cellsize);
+
+        for (Location target: input.getTargets()) {
+            gc.fillRect(target.x * cellsize, target.y * cellsize, cellsize, cellsize);
+            gc.strokeRect(target.x* cellsize, target.y* cellsize, cellsize, cellsize);
+        }
+
         step = 0;
         stepLabel.setText("Current step: " + step);
         timeLabel.setText("Current Time: 0");

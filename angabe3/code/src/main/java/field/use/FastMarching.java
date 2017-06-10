@@ -210,8 +210,31 @@ public class FastMarching {
 
 
     public static Map<Location, Double> use(Field field) {
-        final FastMarching fastMarching = new FastMarching(field, field.getTarget());
-        fastMarching.run();
-        return fastMarching.distance;
+        Set<Map<Location, Double>> distances = new HashSet<>();
+
+        for (Location target: field.getTargets()) {
+            final FastMarching fastMarching = new FastMarching(field, target);
+            fastMarching.run();
+            distances.add(fastMarching.distance);
+        }
+
+        Map<Location, Double> distance = new HashMap<>();
+        for (Location location:field.getLocations() ) {
+            Double maxValue = 0.;
+            Boolean filled= false;
+            for (Map<Location, Double> distmap:distances) {
+                if(!filled){
+                    filled = true;
+                    maxValue = distmap.get(location);
+                    continue;
+                }
+                else{
+                    maxValue = Math.max(maxValue, distmap.get(location));
+                }
+
+            }
+            distance.put(location, maxValue);
+        }
+        return distance;
     }
 }

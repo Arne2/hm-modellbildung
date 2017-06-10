@@ -6,8 +6,6 @@ import field.location.Location;
 import field.use.Dijkstra;
 import field.use.EuclidDistance;
 import field.use.FastMarching;
-import field.use.FastMarching2;
-import field.view.StringView;
 import outputFile.OutputFile;
 import person.Person;
 import time.Clock;
@@ -17,7 +15,6 @@ import time.events.PersonMoveEvent;
 
 import java.math.BigDecimal;
 import java.util.*;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @author peter-mueller

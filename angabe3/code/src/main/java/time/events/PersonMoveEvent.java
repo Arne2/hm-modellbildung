@@ -41,7 +41,7 @@ public class PersonMoveEvent extends BaseEvent {
                 .max(Comparator.comparingDouble(simulation.getUse()::get))
                 .orElse(null);
 
-
+        //TODO Compare best Target to Position of Person
 
         if (bestTarget == null) {
             //TODO how long to wait if no move possible?

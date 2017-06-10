@@ -18,7 +18,7 @@ import java.util.Map;
  */
 public class FieldImporter {
 
-    public enum ColorOfPixel{
+    private enum ColorOfPixel{
         colorBlack(-16777216),
         colorBlue(-12629812),
         colorGreen(-14503604),
@@ -50,9 +50,9 @@ public class FieldImporter {
     }
     private final String path;
     private final Configuration configuration;
-    public FieldImporter(String filepath, Configuration config){
+    public FieldImporter(Configuration config){
         this.configuration = config;
-        this.path = filepath;
+        this.path = config.getFieldImage();
     }
 
     public Field getField(){
@@ -74,7 +74,7 @@ public class FieldImporter {
                     case colorBlack:
                         break;
                     case colorBlue:
-                        returnField.setTarget(Location.of(x, y));
+                        returnField.addTarget(Location.of(x, y));
                         break;
                     case colorWhite:
                         returnField.addLocation(Location.of(x, y));

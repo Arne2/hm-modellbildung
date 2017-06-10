@@ -17,6 +17,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollBar;
+import javafx.scene.control.Slider;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Screen;
@@ -69,6 +70,10 @@ public class SimulationGui extends Application {
     private int cellsize = 4;
 
     /**
+     * Defines how fast the simulation will be run.
+     */
+    private int speed = 1;
+    /**
      * List of all simulated persons.
      */
     private List<SimulatedPerson> personList = new ArrayList<>();
@@ -95,6 +100,10 @@ public class SimulationGui extends Application {
     private ScrollBar scrollBarH = new ScrollBar();
     private double scrollBarSize = scrollBarV.getWidth();
 
+    // Silder
+    Slider slider = new Slider();
+    Label sliderLabel;
+
     // Labels
     private Label stepLabel;
     private Label timeLabel;
@@ -116,7 +125,7 @@ public class SimulationGui extends Application {
 
     Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
 
-    private static final boolean DEBUG = true;
+    private static final boolean DEBUG = false;
 
     public static Output input = null;
 
@@ -143,6 +152,7 @@ public class SimulationGui extends Application {
         primaryStage.setTitle("Visualisierung");
 
         createButtons();
+        createSlider();
 
         primaryStage.setScene(new Scene(menu, STARTSIZE, MENUSIZE));
 
@@ -190,6 +200,29 @@ public class SimulationGui extends Application {
     }
 
     /**
+     * Configures the slider.
+     */
+    private void createSlider(){
+        slider.setMin(1);
+        slider.setMax(10);
+        slider.setValue(1);
+        slider.setLayoutX(150);
+        slider.setLayoutY(14);
+        slider.setMaxWidth(100);
+        slider.valueProperty().addListener((observable, oldValue, newValue) ->{
+            speed = newValue.intValue();
+            sliderLabel.setText("Speed: " + speed + "x");
+        });
+
+        sliderLabel = new Label("Speed: 1x");
+        sliderLabel.setLayoutX(275);
+        sliderLabel.setLayoutY(14);
+
+        menu.getChildren().add(slider);
+        menu.getChildren().add(sliderLabel);
+    }
+
+    /**
      * Configures the scrollbar.
      */
     private void configureScrollbar(){
@@ -198,13 +231,10 @@ public class SimulationGui extends Application {
         scrollBarV.setMax(cellLayer.getHeight() - canvas.getHeight() + scrollBarSize);
         scrollBarV.setOrientation(Orientation.VERTICAL);
         scrollBarV.setPrefHeight(canvasStage.getScene().getHeight() - scrollBarSize + 6);
-        scrollBarV.valueProperty().addListener(new ChangeListener<Number>() {
-            public void changed(ObservableValue<? extends Number> ov,
-                                Number old_val, Number new_val) {
-                cellLayer.setLayoutY(-new_val.doubleValue());
-                heatLayer.setLayoutY(-new_val.doubleValue());
-                objectLayer.setLayoutY(-new_val.doubleValue());
-            }
+        scrollBarV.valueProperty().addListener((ov, old_val, new_val) -> {
+            cellLayer.setLayoutY(-new_val.doubleValue());
+            heatLayer.setLayoutY(-new_val.doubleValue());
+            objectLayer.setLayoutY(-new_val.doubleValue());
         });
 
         // Horizontal ScrollBar
@@ -213,13 +243,10 @@ public class SimulationGui extends Application {
         scrollBarH.setOrientation(Orientation.HORIZONTAL);
         scrollBarH.setPrefWidth(canvasStage.getScene().getWidth() - scrollBarSize);
         scrollBarH.toFront();
-        scrollBarH.valueProperty().addListener(new ChangeListener<Number>() {
-            public void changed(ObservableValue<? extends Number> ov,
-                                Number old_val, Number new_val) {
-                cellLayer.setLayoutX(-new_val.doubleValue());
-                heatLayer.setLayoutX(-new_val.doubleValue());
-                objectLayer.setLayoutX(-new_val.doubleValue());
-            }
+        scrollBarH.valueProperty().addListener((ov, old_val, new_val) -> {
+            cellLayer.setLayoutX(-new_val.doubleValue());
+            heatLayer.setLayoutX(-new_val.doubleValue());
+            objectLayer.setLayoutX(-new_val.doubleValue());
         });
     }
 
@@ -389,7 +416,7 @@ public class SimulationGui extends Application {
     public void createButtons(){
         // Proceed button
         proceed = new Button("Next Step");
-        proceed.setLayoutX(150);
+        proceed.setLayoutX(25);
         proceed.setLayoutY(12);
 
         proceed.setOnAction(event -> {
@@ -455,6 +482,7 @@ public class SimulationGui extends Application {
         play.setDisable(true);
         proceed.setDisable(true);
         reset.setDisable(true);
+        slider.setDisable(true);
         changeLayer.setDisable(true);
     }
 
@@ -498,6 +526,7 @@ public class SimulationGui extends Application {
         play.setDisable(false);
         proceed.setDisable(false);
         reset.setDisable(false);
+        slider.setDisable(false);
         changeLayer.setDisable(false);
 
         setCellSize();
@@ -546,7 +575,7 @@ public class SimulationGui extends Application {
                             System.out.println(waitingtime);
                         }
                         try {
-                            Thread.sleep(Math.max(MILLIS,waitingtime));
+                            Thread.sleep(Math.max(MILLIS,waitingtime/speed));
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }

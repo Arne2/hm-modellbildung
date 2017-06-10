@@ -21,6 +21,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import outputFile.Output;
 import outputFile.OutputEvent;
 
@@ -79,15 +80,20 @@ public class SimulationGui extends Application {
     private boolean enableScrollbar = false;
     private long waitingtime = 0;
 
-    // Stage
+    // Stages
     Stage primaryStage;
+    Stage canvasStage = new Stage();
+    Stage infoStage = new Stage();
 
     // Panes
-    private Pane root = new Pane();
+    private Pane menu = new Pane();
     private Pane canvas = new Pane();
+    private Pane info = new Pane();
 
     // Scrollbar
-    private ScrollBar sc = new ScrollBar();
+    private ScrollBar scrollBarV = new ScrollBar();
+    private ScrollBar scrollBarH = new ScrollBar();
+    private double scrollBarSize = scrollBarV.getWidth();
 
     // Labels
     private Label stepLabel;
@@ -136,8 +142,30 @@ public class SimulationGui extends Application {
         createLabels();
         createButtons();
 
-        primaryStage.setScene(new Scene(root, STARTSIZE, MENUSIZE));
+        primaryStage.setScene(new Scene(menu, STARTSIZE, MENUSIZE));
+
+        primaryStage.setOnCloseRequest(event -> {
+            running = false;
+            canvasStage.close();
+            infoStage.close();
+        });
+
+        primaryStage.setY(screenBounds.getHeight()*0.2);
+        primaryStage.setX((screenBounds.getWidth()-STARTSIZE)/2);
         primaryStage.show();
+
+        canvasStage.setScene(new Scene(canvas, STARTSIZE,5));
+        canvasStage.setX(primaryStage.getX());
+        canvasStage.setY(primaryStage.getY() + primaryStage.getHeight());
+//        canvasStage.initStyle(StageStyle.UNDECORATED);
+        canvasStage.show();
+
+        infoStage.setScene(new Scene(info, 250, canvasStage.getScene().getHeight()));
+        infoStage.setX(canvasStage.getX()+canvasStage.getWidth());
+        infoStage.setY(canvasStage.getY());
+
+
+        infoStage.show();
     }
 
     /**
@@ -146,35 +174,51 @@ public class SimulationGui extends Application {
     private void createGrid(){
         createLayers();
 
-        int width = Math.max(cellsize * input.getFieldWidth(), 350)+(int)sc.getWidth();
-        int height = Math.min(Math.max(cellsize * input.getFieldHeight() + MENUSIZE, 500),(int)screenBounds.getHeight()-50);
+        int width = cellsize * input.getFieldWidth()+(enableScrollbar?(int) scrollBarSize :0);
+        int height = Math.min(cellsize * input.getFieldHeight(),(int)(screenBounds.getHeight()*0.7-primaryStage.getHeight()))+(enableScrollbar?(int) scrollBarSize :0);
 
-        ObservableList<Node> rootChildren = root.getChildren();
-        root = new Pane();
-        root.getChildren().addAll(rootChildren);
-        primaryStage.setScene(new Scene(root, width, height));
-        primaryStage.show();
+        ObservableList<Node> canvasChildren = canvas.getChildren();
+        canvas = new Pane();
+        canvas.getChildren().addAll(canvasChildren);
+        canvasStage.setScene(new Scene(canvas, width, height));
+        canvasStage.setX((screenBounds.getWidth()-canvasStage.getWidth())/2);
+        canvasStage.show();
 
         if (enableScrollbar) {
-//            configureScrollbar(primaryStage);
+            configureScrollbar();
         }
     }
 
     /**
      * Configures the scrollbar.
-     * @param primaryStage
      */
-    private void configureScrollbar(Stage primaryStage){
-        sc.setLayoutX(primaryStage.getScene().getWidth()-sc.getWidth());
-        sc.setLayoutY(MENUSIZE);
-        sc.setMin(0);
-        sc.setOrientation(Orientation.VERTICAL);
-        sc.setPrefHeight(180);
-        sc.setMax(360);
-        sc.valueProperty().addListener(new ChangeListener<Number>() {
+    private void configureScrollbar(){
+        // Vertical ScrollBar
+        scrollBarV.setLayoutX(canvasStage.getScene().getWidth() - scrollBarSize);
+        scrollBarV.setMax(cellLayer.getHeight() - canvas.getHeight() + scrollBarSize);
+        scrollBarV.setOrientation(Orientation.VERTICAL);
+        scrollBarV.setPrefHeight(canvasStage.getScene().getHeight() - scrollBarSize + 6);
+        scrollBarV.valueProperty().addListener(new ChangeListener<Number>() {
             public void changed(ObservableValue<? extends Number> ov,
                                 Number old_val, Number new_val) {
-                canvas.setLayoutY(-new_val.doubleValue());
+                cellLayer.setLayoutY(-new_val.doubleValue());
+                heatLayer.setLayoutY(-new_val.doubleValue());
+                objectLayer.setLayoutY(-new_val.doubleValue());
+            }
+        });
+
+        // Horizontal ScrollBar
+        scrollBarH.setLayoutY(canvasStage.getScene().getHeight()- scrollBarSize + 6);
+        scrollBarH.setMax(cellLayer.getWidth() - canvas.getWidth());
+        scrollBarH.setOrientation(Orientation.HORIZONTAL);
+        scrollBarH.setPrefWidth(canvasStage.getScene().getWidth() - scrollBarSize);
+        scrollBarH.toFront();
+        scrollBarH.valueProperty().addListener(new ChangeListener<Number>() {
+            public void changed(ObservableValue<? extends Number> ov,
+                                Number old_val, Number new_val) {
+                cellLayer.setLayoutX(-new_val.doubleValue());
+                heatLayer.setLayoutX(-new_val.doubleValue());
+                objectLayer.setLayoutX(-new_val.doubleValue());
             }
         });
     }
@@ -254,15 +298,6 @@ public class SimulationGui extends Application {
                 gc.fillRect(x* cellsize, y* cellsize, cellsize, cellsize);
             }
         }
-        /*LinearGradient lg = new LinearGradient(0, 0, 1, 1, true,
-                CycleMethod.REFLECT,
-                new Stop(0.0, Color.YELLOW),
-                new Stop(1.0, Color.RED));
-        gc.setFill(lg);
-        gc.setLineWidth(1);
-        gc.stroke();
-
-        gc.fillRect(0,0, heatLayer.getWidth(), heatLayer.getHeight());*/
     }
 
     /**
@@ -318,8 +353,8 @@ public class SimulationGui extends Application {
         timeLabel.setLayoutX(250);
         timeLabel.setLayoutY(14);
 
-        root.getChildren().add(stepLabel);
-        root.getChildren().add(timeLabel);
+        menu.getChildren().add(stepLabel);
+        menu.getChildren().add(timeLabel);
     }
 
     /**
@@ -384,11 +419,11 @@ public class SimulationGui extends Application {
         });
 
         // Add the buttons to the pane
-        root.getChildren().add(proceed);
-        root.getChildren().add(reset);
-        root.getChildren().add(play);
-        root.getChildren().add(changeLayer);
-        root.getChildren().add(loadXML);
+        menu.getChildren().add(proceed);
+        menu.getChildren().add(reset);
+        menu.getChildren().add(play);
+        menu.getChildren().add(changeLayer);
+        menu.getChildren().add(loadXML);
 
         // At the beginning there is no simulation selected. Therefore all buttons will be disabled.
         play.setDisable(true);
@@ -430,9 +465,9 @@ public class SimulationGui extends Application {
             e.printStackTrace();
         }
         // Resets and initializes the simulation
-        root.getChildren().remove(cellLayer);
-        root.getChildren().remove(heatLayer);
-        root.getChildren().remove(objectLayer);
+        canvas.getChildren().remove(cellLayer);
+        canvas.getChildren().remove(heatLayer);
+        canvas.getChildren().remove(objectLayer);
 
         play.setDisable(false);
         proceed.setDisable(false);
@@ -512,28 +547,26 @@ public class SimulationGui extends Application {
      */
     public void createLayers(){
         cellLayer = new Canvas(cellsize *input.getFieldWidth(), cellsize *input.getFieldHeight());
-        cellLayer.setLayoutY(MENUSIZE);
 
         heatLayer = new Canvas(cellsize *input.getFieldWidth(), cellsize *input.getFieldHeight());
-        heatLayer.setLayoutY(MENUSIZE);
 
         objectLayer = new Canvas(cellsize *input.getFieldWidth(), cellsize *input.getFieldHeight());
-        objectLayer.setLayoutY(MENUSIZE);
 
         drawCells();
         drawHeatMap();
         drawObjects();
 
-        root.getChildren().add(cellLayer);
-        root.getChildren().add(heatLayer);
-        root.getChildren().add(objectLayer);
+//        menu.getChildren().add(cellLayer);
+//        menu.getChildren().add(heatLayer);
+//        menu.getChildren().add(objectLayer);
 
-//        canvas.getChildren().add(cellLayer);
-//        canvas.getChildren().add(heatLayer);
-//        canvas.getChildren().add(objectLayer);
-//        root.getChildren().add(canvas);
+        canvas.getChildren().add(cellLayer);
+        canvas.getChildren().add(heatLayer);
+        canvas.getChildren().add(objectLayer);
+//        menu.getChildren().add(canvas);
         if (enableScrollbar) {
-//            root.getChildren().add(sc);
+            canvas.getChildren().add(scrollBarV);
+            canvas.getChildren().add(scrollBarH);
         }
 
         heatLayer.toBack();

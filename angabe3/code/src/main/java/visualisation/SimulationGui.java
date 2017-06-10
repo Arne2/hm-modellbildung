@@ -21,7 +21,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import outputFile.Output;
 import outputFile.OutputEvent;
 
@@ -52,6 +51,7 @@ public class SimulationGui extends Application {
      */
     public static final int MENUSIZE = 75;
     public static final int STARTSIZE = 400;
+    public static final int INFOSIZE = 250;
 
     /**
      * Minimal size of a cell.
@@ -98,6 +98,9 @@ public class SimulationGui extends Application {
     // Labels
     private Label stepLabel;
     private Label timeLabel;
+    private Label algorithmLabel;
+    private Label personLabel;
+    private Label simulationTimeLabel;
 
     // Layers of the visualisation
     private Canvas cellLayer;
@@ -139,7 +142,6 @@ public class SimulationGui extends Application {
         this.primaryStage = primaryStage;
         primaryStage.setTitle("Visualisierung");
 
-        createLabels();
         createButtons();
 
         primaryStage.setScene(new Scene(menu, STARTSIZE, MENUSIZE));
@@ -160,11 +162,9 @@ public class SimulationGui extends Application {
 //        canvasStage.initStyle(StageStyle.UNDECORATED);
         canvasStage.show();
 
-        infoStage.setScene(new Scene(info, 250, canvasStage.getScene().getHeight()));
+        infoStage.setScene(new Scene(info, INFOSIZE, canvasStage.getScene().getHeight()));
         infoStage.setX(canvasStage.getX()+canvasStage.getWidth());
         infoStage.setY(canvasStage.getY());
-
-
         infoStage.show();
     }
 
@@ -174,14 +174,14 @@ public class SimulationGui extends Application {
     private void createGrid(){
         createLayers();
 
-        int width = cellsize * input.getFieldWidth()+(enableScrollbar?(int) scrollBarSize :0);
-        int height = Math.min(cellsize * input.getFieldHeight(),(int)(screenBounds.getHeight()*0.7-primaryStage.getHeight()))+(enableScrollbar?(int) scrollBarSize :0);
+        int width = Math.min(cellsize * input.getFieldWidth(), (int)(screenBounds.getWidth()*0.9 - infoStage.getWidth())) + (enableScrollbar?(int) scrollBarSize :0);
+        int height = Math.min(cellsize * input.getFieldHeight(),(int)(screenBounds.getHeight()*0.7 - primaryStage.getHeight()))+(enableScrollbar?(int) scrollBarSize :0);
 
         ObservableList<Node> canvasChildren = canvas.getChildren();
         canvas = new Pane();
         canvas.getChildren().addAll(canvasChildren);
         canvasStage.setScene(new Scene(canvas, width, height));
-        canvasStage.setX((screenBounds.getWidth()-canvasStage.getWidth())/2);
+        canvasStage.setX((screenBounds.getWidth() - infoStage.getWidth() - canvasStage.getWidth())/2);
         canvasStage.show();
 
         if (enableScrollbar) {
@@ -227,8 +227,8 @@ public class SimulationGui extends Application {
      * Sets the size of a cell depending on the screen size and the field bounds.
      */
     private void setCellSize(){
-        double x = screenBounds.getWidth();
-        double y = screenBounds.getHeight()-50;
+        double x = screenBounds.getWidth() - info.getWidth();
+        double y = screenBounds.getHeight() - 50;
         int width = input.getFieldWidth();
         int height = input.getFieldHeight();
 
@@ -342,19 +342,45 @@ public class SimulationGui extends Application {
     }
 
     /**
+     * Helping method for creating the info panel.
+     */
+    private void createInfo(){
+        info = new Pane();
+        createLabels();
+        infoStage.setScene(new Scene(info, INFOSIZE, canvas.getHeight()));
+        infoStage.setX(canvasStage.getX() + canvasStage.getWidth());
+        infoStage.show();
+    }
+
+    /**
      * Helping method for creating the labels.
      */
     public void createLabels(){
+        algorithmLabel = new Label("Algorithm type: " + input.getAlgorithm());
+        algorithmLabel.setLayoutX(10);
+        algorithmLabel.setLayoutY(14);
+
         stepLabel = new Label("Current step: " + step);
-        stepLabel.setLayoutX(25);
-        stepLabel.setLayoutY(14);
+        stepLabel.setLayoutX(10);
+        stepLabel.setLayoutY(32);
 
         timeLabel = new Label("Current Time: 0");
-        timeLabel.setLayoutX(250);
-        timeLabel.setLayoutY(14);
+        timeLabel.setLayoutX(10);
+        timeLabel.setLayoutY(50);
 
-        menu.getChildren().add(stepLabel);
-        menu.getChildren().add(timeLabel);
+        simulationTimeLabel = new Label("Simulationtime: " + input.getEvents().stream().map(outputEvent -> outputEvent.getTime()).max(BigDecimal::compareTo).get());
+        simulationTimeLabel.setLayoutX(10);
+        simulationTimeLabel.setLayoutY(68);
+
+        personLabel = new Label("People in the Simulation: 0");
+        personLabel.setLayoutX(10);
+        personLabel.setLayoutY(86);
+
+        info.getChildren().add(algorithmLabel);
+        info.getChildren().add(stepLabel);
+        info.getChildren().add(timeLabel);
+        info.getChildren().add(simulationTimeLabel);
+        info.getChildren().add(personLabel);
     }
 
     /**
@@ -476,6 +502,7 @@ public class SimulationGui extends Application {
 
         setCellSize();
         createGrid();
+        createInfo();
         reset();
 
         if(heatmap){
@@ -588,6 +615,7 @@ public class SimulationGui extends Application {
                 }
                 personList.add(person);
                 addPersonToField(person);
+                personLabel.setText("People in the Simulation: " + personList.size());
                 break;
             case "move" :
                  p = personList.stream().filter(simulatedPerson -> simulatedPerson.getId() == next.getPersonID()).findAny();
@@ -608,6 +636,7 @@ public class SimulationGui extends Application {
                 person = p.get();
                 removePersonFromField(person);
                 personList.remove(person);
+                personLabel.setText("People in the Simulation: " + personList.size());
                 break;
             default:
                 throw new AssertionError("Invalid Event Type: " + next.getType());

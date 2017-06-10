@@ -72,7 +72,7 @@ public class SimulationGui extends Application {
     /**
      * Defines how fast the simulation will be run.
      */
-    private int speed = 1;
+    private double speed = 1.0;
     /**
      * List of all simulated persons.
      */
@@ -204,13 +204,17 @@ public class SimulationGui extends Application {
      */
     private void createSlider(){
         slider.setMin(1);
-        slider.setMax(10);
-        slider.setValue(1);
+        slider.setMax(19);
+        slider.setValue(10);
         slider.setLayoutX(150);
         slider.setLayoutY(14);
         slider.setMaxWidth(100);
         slider.valueProperty().addListener((observable, oldValue, newValue) ->{
-            speed = newValue.intValue();
+            if (newValue.intValue() < 10){
+                speed = newValue.intValue()/10.0;
+            } else {
+                speed = newValue.intValue() - 9;
+            }
             sliderLabel.setText("Speed: " + speed + "x");
         });
 
@@ -575,7 +579,7 @@ public class SimulationGui extends Application {
                             System.out.println(waitingtime);
                         }
                         try {
-                            Thread.sleep(Math.max(MILLIS,waitingtime/speed));
+                            Thread.sleep(Math.max(MILLIS,(long)(waitingtime/speed)));
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }

@@ -50,9 +50,9 @@ public class Automat {
 
         //System.out.println(StringView.personMap(simulation.field));
         //System.out.println(StringView.useMap(simulation.field, simulation.getUse()));
-        simulation.run(BigDecimal.valueOf(50000));
+        simulation.run(BigDecimal.valueOf(build.getMaxDuration()));
         try {
-            output.save("output.xml");
+            output.save(build.getOutput());
         }catch (JAXBException e){
             e.printStackTrace();
         } catch (IOException e){

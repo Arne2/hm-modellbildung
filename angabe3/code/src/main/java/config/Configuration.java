@@ -33,6 +33,16 @@ public class Configuration {
     private final String fieldImage;
 
     /**
+     * used to save output XML file
+     */
+    private final String output;
+
+    /**
+     * used to define the maximum duration of simulation in seconds
+     */
+    private final int maxDuration;
+
+    /**
      * Create a new Configuration from a builder.
      * The Configuration has final values and cannot be changed.
      *
@@ -44,6 +54,8 @@ public class Configuration {
         this.algorithm = builder.algorithm;
         this.deviation = builder.deviation;
         this.fieldImage = builder.fieldImage;
+        this.output = builder.output;
+        this.maxDuration = builder.maxDuration;
     }
 
     /**
@@ -57,6 +69,8 @@ public class Configuration {
         this.algorithm = builder.algorithm;
         this.deviation = builder.deviation;
         this.fieldImage = builder.fieldImage;
+        this.output = builder.output;
+        this.maxDuration = builder.maxDuration;
     }
 
     /**
@@ -79,12 +93,21 @@ public class Configuration {
         return velocity.get();
     }
 
+
+    public int getMaxDuration(){
+        return maxDuration;
+    }
+
     public String getFieldImage(){
         return this.fieldImage;
     }
 
     public double getDeviation(){
         return this.deviation;
+    }
+
+    public String getOutput(){
+        return output;
     }
 
     public AlgorithmType getAlgorithm(){
@@ -101,6 +124,8 @@ public class Configuration {
         private Supplier<Double> freeFlowVelocity = () -> 1.48;
         private double deviation = 1.44;
         private String fieldImage;
+        private String output = "output.xml";
+        private int maxDuration = 20000;
 
         public Builder cellSize(int cellSize) {
             this.cellSize = cellSize;
@@ -109,6 +134,11 @@ public class Configuration {
 
         public Builder velocity(double fixedValue) {
             this.freeFlowVelocity = () -> fixedValue;
+            return this;
+        }
+
+        public Builder maxDuration(int maxDuration_){
+            this.maxDuration = maxDuration_;
             return this;
         }
 
@@ -124,6 +154,11 @@ public class Configuration {
 
         public Builder fieldImage(String fieldImage_){
             fieldImage = fieldImage_;
+            return this;
+        }
+
+        public Builder output(String output_){
+            this.output = output_;
             return this;
         }
 
@@ -150,6 +185,12 @@ public class Configuration {
                 }
                 if(args[i].equals("--field-image")){
                     this.fieldImage = args[i + 1];
+                }
+                if(args[i].equals("--output")){
+                    this.output = args[i + 1];
+                }
+                if(args[i].equals("--max-duration")){
+                    this.maxDuration = Integer.parseInt(args[i + 1]);
                 }
                 if (args[i].equals("--algorithm")) {
                     if(args[i + 1].equals("dijkstra")) {

@@ -28,6 +28,7 @@ public class Output{
     private int targetX;
     private int targetY;
     private String algorithm;
+    private String cellsize = "40cm";
 
     // Default Constructor necessary for JAXB
     public Output(){
@@ -140,6 +141,14 @@ public class Output{
 
     public void setAlgorithm(String algorithm) {
         this.algorithm = algorithm;
+    }
+
+    public String getCellsize() {
+        return cellsize;
+    }
+
+    public void setCellsize(String cellsize) {
+        this.cellsize = cellsize;
     }
 
     @Override

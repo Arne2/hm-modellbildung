@@ -54,6 +54,11 @@ public class SimulationGui extends Application {
     public static final int STARTSIZE = 400;
     public static final int INFOSIZE = 250;
 
+    // Colors
+    public static final Color GOALCOLOR = Color.GREEN;
+    public static final Color WALLCOLOR = Color.BLACK;
+    public static final Color PERSONCOLOR = Color.PINK;
+
     /**
      * Minimal size of a cell.
      */
@@ -110,6 +115,13 @@ public class SimulationGui extends Application {
     private Label algorithmLabel;
     private Label personLabel;
     private Label simulationTimeLabel;
+
+    // Caption
+    private Label cellSizeInfo;
+    private Label infoPerson;
+    private Label infoDestination;
+    private Label infoWall;
+    private Canvas captionColors;
 
     // Layers of the visualisation
     private Canvas cellLayer;
@@ -346,11 +358,11 @@ public class SimulationGui extends Application {
             for (int x = 0; x < input.getFieldWidth(); x++) {
                 char c = rows[y].charAt(x);
                 if (x == input.getTargetX() && y == input.getTargetY()) {
-                    gc.setFill(Color.GREEN);
+                    gc.setFill(GOALCOLOR);
                     gc.fillRect(x* cellsize, y* cellsize, cellsize, cellsize);
                     gc.strokeRect(x* cellsize, y* cellsize, cellsize, cellsize);
                 } else if (c == ' '){
-                    gc.setFill(Color.BLACK);
+                    gc.setFill(WALLCOLOR);
                     gc.fillRect(x* cellsize, y* cellsize, cellsize, cellsize);
                 }
             }
@@ -370,6 +382,7 @@ public class SimulationGui extends Application {
         step = 0;
         stepLabel.setText("Current step: " + step);
         timeLabel.setText("Current Time: 0");
+        personLabel.setText("People in the Simulation: 0");
     }
 
     /**
@@ -377,10 +390,50 @@ public class SimulationGui extends Application {
      */
     private void createInfo(){
         info = new Pane();
+        double height = Math.max(canvas.getHeight(), INFOSIZE);
         createLabels();
-        infoStage.setScene(new Scene(info, INFOSIZE, canvas.getHeight()));
+        createCaption(height);
+        infoStage.setScene(new Scene(info, INFOSIZE, height));
         infoStage.setX(canvasStage.getX() + canvasStage.getWidth());
         infoStage.show();
+    }
+
+    private void createCaption(double height){
+        cellSizeInfo = new Label("Cellsize: " + input.getCellsize());
+        cellSizeInfo.setLayoutX(10);
+        cellSizeInfo.setLayoutY(height - 76);
+
+        infoPerson = new Label("Person");
+        infoPerson.setLayoutX(25);
+        infoPerson.setLayoutY(height - 58);
+
+        infoDestination = new Label("Destination");
+        infoDestination.setLayoutX(25);
+        infoDestination.setLayoutY(height - 40);
+
+        infoWall = new Label("Wall/Obstacle");
+        infoWall.setLayoutX(25);
+        infoWall.setLayoutY(height - 22);
+
+        captionColors = new Canvas(10,46);
+        captionColors.setLayoutX(10);
+        captionColors.setLayoutY(height - 55);
+        GraphicsContext gc = captionColors.getGraphicsContext2D();
+
+        gc.setFill(PERSONCOLOR);
+        gc.fillRect(0, 0, 10, 10);
+
+        gc.setFill(GOALCOLOR);
+        gc.fillRect(0, 18, 10, 10);
+
+        gc.setFill(WALLCOLOR);
+        gc.fillRect(0, 36, 10, 10);
+
+        info.getChildren().add(cellSizeInfo);
+        info.getChildren().add(infoPerson);
+        info.getChildren().add(infoDestination);
+        info.getChildren().add(infoWall);
+        info.getChildren().add(captionColors);
     }
 
     /**
@@ -690,7 +743,7 @@ public class SimulationGui extends Application {
      */
     private void addPersonToField(SimulatedPerson person){
         GraphicsContext gc = objectLayer.getGraphicsContext2D();
-        gc.setFill(Color.PINK);
+        gc.setFill(PERSONCOLOR);
         gc.setStroke(Color.BLACK);
         gc.fillRect(person.getX()* cellsize +1, person.getY()* cellsize +1, cellsize -2, cellsize -2);
     }

@@ -47,9 +47,7 @@ public class SimulationGui extends Application {
      */
     public static final int MILLIS = 5;
 
-    /**
-     * Size of the menu.
-     */
+    // Default Sizes of Panels
     public static final int MENUSIZE = 75;
     public static final int STARTSIZE = 400;
     public static final int INFOSIZE = 250;
@@ -58,6 +56,11 @@ public class SimulationGui extends Application {
     public static final Color GOALCOLOR = Color.GREEN;
     public static final Color WALLCOLOR = Color.BLACK;
     public static final Color PERSONCOLOR = Color.PINK;
+
+    /**
+     * Value of a wall in the distance map.
+     */
+    public static final double WALLVALUE = -1.7976931348623157E308;
 
     /**
      * Minimal size of a cell.
@@ -135,6 +138,9 @@ public class SimulationGui extends Application {
     private Button changeLayer;
     private Button loadXML;
 
+    /**
+     * For accessing the screen info.
+     */
     Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
 
     private static final boolean DEBUG = false;
@@ -181,7 +187,6 @@ public class SimulationGui extends Application {
         canvasStage.setScene(new Scene(canvas, STARTSIZE,5));
         canvasStage.setX(primaryStage.getX());
         canvasStage.setY(primaryStage.getY() + primaryStage.getHeight());
-//        canvasStage.initStyle(StageStyle.UNDECORATED);
         canvasStage.show();
 
         infoStage.setScene(new Scene(info, INFOSIZE, canvasStage.getScene().getHeight()));
@@ -323,7 +328,7 @@ public class SimulationGui extends Application {
             String[] row = rows[i].split(" ");
             for (int j = 0; j < row.length; j++) {
                 double d = Double.parseDouble(row[j]);
-                if (d == -1.7976931348623157E308){
+                if (d == WALLVALUE){
                     continue;
                 }
                 min = Math.min(d, min);
@@ -333,7 +338,7 @@ public class SimulationGui extends Application {
             String[] row = rows[y].split(" ");
             for (int x = 0; x < input.getFieldWidth(); x++) {
                 double d = Double.parseDouble(row[x]);
-                if (d == -1.7976931348623157E308){
+                if (d == WALLVALUE){
                     continue;
                 }
                 int val = (int)((1-d/min)*255);
@@ -398,6 +403,10 @@ public class SimulationGui extends Application {
         infoStage.show();
     }
 
+    /**
+     * Helping method for creating the caption for the info panel.
+     * @param height of the infoStage
+     */
     private void createCaption(double height){
         cellSizeInfo = new Label("Cellsize: " + input.getCellsize());
         cellSizeInfo.setLayoutX(10);
@@ -660,28 +669,25 @@ public class SimulationGui extends Application {
      */
     public void createLayers(){
         cellLayer = new Canvas(cellsize *input.getFieldWidth(), cellsize *input.getFieldHeight());
-
         heatLayer = new Canvas(cellsize *input.getFieldWidth(), cellsize *input.getFieldHeight());
-
         objectLayer = new Canvas(cellsize *input.getFieldWidth(), cellsize *input.getFieldHeight());
 
+        // Drawing the layers
         drawCells();
         drawHeatMap();
         drawObjects();
 
-//        menu.getChildren().add(cellLayer);
-//        menu.getChildren().add(heatLayer);
-//        menu.getChildren().add(objectLayer);
-
         canvas.getChildren().add(cellLayer);
         canvas.getChildren().add(heatLayer);
         canvas.getChildren().add(objectLayer);
-//        menu.getChildren().add(canvas);
+
+        // Add Scrollbars if necessary
         if (enableScrollbar) {
             canvas.getChildren().add(scrollBarV);
             canvas.getChildren().add(scrollBarH);
         }
 
+        // Setting display order
         heatLayer.toBack();
         objectLayer.toFront();
     }

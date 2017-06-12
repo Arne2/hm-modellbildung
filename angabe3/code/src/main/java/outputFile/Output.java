@@ -7,10 +7,7 @@ import field.view.StringView;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by Arne on 30.05.2017.
@@ -23,12 +20,11 @@ public class Output{
     private String fieldmap;
     private String name = "output";
     private List<OutputEvent> events;
+    private Set<Location> targets;
     private int fieldWidth;
     private int fieldHeight;
-    private int targetX;
-    private int targetY;
-    private String algorithm;
     private String cellsize = "40cm";
+    private String algorithm;
 
     // Default Constructor necessary for JAXB
     public Output(){
@@ -42,10 +38,10 @@ public class Output{
         this.fieldmap = StringView.toStringMap(field);
         fieldWidth = field.getWidth();
         fieldHeight = field.getHeight();
-        targetX = field_.getTarget().x;
-        targetY = field_.getTarget().y;
+        targets = field_.getTargets();
         algorithm = config_.getAlgorithm().toString();
     }
+
 
     public void setDistanceMap(Map<Location, Double> use_){
         distanceMap = StringView.toStringDistanceMap(use_);
@@ -119,21 +115,15 @@ public class Output{
         events.add(new OutputEvent("pawn", time, id, x, y));
     }
 
-    public int getTargetX() {
-        return targetX;
+
+    public Set<Location> getTargets(){
+        return targets;
     }
 
-    public void setTargetX(int targetX) {
-        this.targetX = targetX;
+    public void setTargets(Set<Location> targets_){
+        targets = targets_;
     }
 
-    public int getTargetY() {
-        return targetY;
-    }
-
-    public void setTargetY(int targetY) {
-        this.targetY = targetY;
-    }
 
     public String getAlgorithm() {
         return algorithm;

@@ -5,6 +5,7 @@ import field.Fields;
 import field.location.Location;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Provides a simple implementation for the dijkstra algorithm to make use
@@ -45,8 +46,31 @@ public class Dijkstra {
     }
 
     public static Map<Location, Double> use(Field field) {
-        final Dijkstra dijkstra = new Dijkstra(field, field.getTarget());
-        dijkstra.run();
-        return dijkstra.distance;
+        Set<Map<Location, Double>> distances = new HashSet<>();
+
+        for (Location target: field.getTargets()) {
+            final Dijkstra dijkstra = new Dijkstra(field, target);
+            dijkstra.run();
+            distances.add(dijkstra.distance);
+        }
+
+        Map<Location, Double> distance = new HashMap<>();
+        for (Location location:field.getLocations() ) {
+            Double maxValue = 0.;
+            Boolean filled= false;
+            for (Map<Location, Double> distmap:distances) {
+                if(!filled){
+                    filled = true;
+                    maxValue = distmap.get(location);
+                    continue;
+                }
+                else{
+                    maxValue = Math.max(maxValue, distmap.get(location));
+                }
+
+            }
+            distance.put(location, maxValue);
+        }
+        return distance;
     }
 }

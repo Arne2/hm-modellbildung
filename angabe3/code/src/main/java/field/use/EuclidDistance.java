@@ -12,20 +12,29 @@ public class EuclidDistance {
     private final Field field;
     private final Map<Location, Double> distance = new HashMap<>();
     private final Set<Location> unvisited;
-    private final Location target;
+    private final Set<Location> targets;
 
-    private EuclidDistance(final Field field_, Location target_) {
+    private EuclidDistance(final Field field_, Set<Location> targets_) {
         this.field = field_;
-        this.target = target_;
+        this.targets = targets_;
         unvisited = new HashSet<>(field.getLocations());
-        distance.put(target,0.0);
+
+        for (Location target: targets ) {
+            distance.put(target,0.0);
+        }
+
         this.run();
     }
 
     private void run(){
         while (!unvisited.isEmpty()){
             final Location u =  unvisited.parallelStream().findAny().get();
-            distance.put(u, getEuclidDistance(target, u));
+            Set<Double> distances = new HashSet<>();
+            for (Location target: targets) {
+                distances.add(getEuclidDistance(target, u));
+            }
+            Double minDistance = distances.stream().max(Double::compareTo).get();
+            distance.put(u, minDistance);
             unvisited.remove(u);
         }
     }
@@ -36,7 +45,7 @@ public class EuclidDistance {
     }
 
     public static Map<Location, Double> use(Field field){
-        final EuclidDistance eudistance = new EuclidDistance(field, field.getTarget());
+        final EuclidDistance eudistance = new EuclidDistance(field, field.getTargets());
         return eudistance.distance;
     }
 

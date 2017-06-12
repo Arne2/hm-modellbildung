@@ -35,7 +35,7 @@ public class PersonalSpace {
         final double p2 = p1 + uP / aP * Math.exp(4 / Math.pow(v2, 2 * bP) - 1);
 
         if (distance < settings.pedestrianSize) {
-            throw new AssertionError("Not yet implemented! Is overlapping space");
+            return Double.POSITIVE_INFINITY;
         } else if (distance < settings.pedestrianSize + settings.intimateSpace) {
             return p2;
         } else if (distance < settings.pedestrianSize + settings.personalSpace) {

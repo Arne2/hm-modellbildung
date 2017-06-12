@@ -10,6 +10,7 @@ import person.Person;
 
 import java.math.BigDecimal;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author peter-mueller
@@ -36,27 +37,26 @@ public class PersonMoveEvent extends BaseEvent {
             return newEvents;
         }
 
-        final Set<Location> moore = Fields.moore(simulation.field, center);
-        final Location bestTarget = moore.stream()
+        final Set<Location> range = Fields.moore(simulation.field, center).stream()
                 .filter(simulation.field::isFree)
+                .collect(Collectors.toSet());
+        range.add(center);
+
+        final Location bestTarget = range.stream()
                 .max(Comparator.comparingDouble(l -> {
                     final double use = simulation.getUse().get(l);
                     final double personPotential = simulation.getPersonalSpace().use(simulation.field, l);
                     return use + personPotential;
                 }))
-                .orElse(null);
+                .orElseThrow(() -> new AssertionError("cannot happen!"));
 
-
-
-        if (bestTarget == null) {
-            //TODO how long to wait if no move possible?
-            final BigDecimal timeForMove = BigDecimal.valueOf(0.05);
-            final BigDecimal nextMove = getTime().add(timeForMove);
+        if (bestTarget.equals(center)) {
+            final BigDecimal timeForWait = BigDecimal.valueOf(simulation.field.getCellSize() / person.getVelocity());
+            final BigDecimal nextMove = getTime().add(timeForWait);
             final PersonMoveEvent event = new PersonMoveEvent(nextMove, simulation, person);
             newEvents.add(event);
             return newEvents;
         }
-
 
         simulation.field.putPerson(person, bestTarget);
         final double distance = Locations.distance(center, bestTarget) * simulation.getConfiguration().getCellSize();

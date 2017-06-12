@@ -17,7 +17,6 @@ Im Zuge der ersten Studienarbeit wurde das Laufverhalten von Probanden in der Eb
 \section{Beschreibung des Modells}
 Für die Simulation der Personenbewegungen wird ein zellulärer Zustandsautomat implementiert. Jede Zelle kann entweder leer oder durch eine Person oder ein Hindernis besetzt sein. Sie kann außerdem ein Ziel oder eine Quelle enthalten. Ein Hindernis kann von keiner Person betreten werden. Die Personen versuchen im Laufe der Simulation von der Quelle (Startposition) zum Ziel zu gelangen. Hierbei können sie sich in der sog. Moore-Umgebung bewegen. Es kann jede Zelle betreten werden, die frei ist und eine Nachbarzelle der aktuellen Zelle ist. Als Nachbarzelle wird jede Zelle bezeichnet, welche mit der aktuellen Zelle eine Kante oder Ecke teilt. \\
 Die Ziele werden als attraktiv für die Personen angesehen. Die Personen steigern ihren persönlichen Nutzen, je näher sie dem Ziel kommen. In der Realität fühlt sich eine Person jedoch unwohl, wenn ihr eine fremde Person zu nahe kommt. Im Modell wird dies dadurch berücksichtigt, dass sich der Nutzen einer Person verringert, wenn sie einer anderen zu nahe kommt. Um die Simulation möglichst realistisch zu gestalten, bewegen sich die Personen mit einer individuellen Wunschgeschwindigkeit. Diese wird aus den Ergebnissen der ersten Studienarbeit ermittelt. \\
-
 Das erläuterte Modell gibt die einzelnen Personenbewegungen aus und visualisiert diese zusätzlich. Die Bewegung der Personen wird in drei getrennten Simulationen mit jeweils unterschiedlichen Algorithmen berechnet. Zunächst wird für jedes Feld der negative euklidische Abstand als Zielnutzen berechnet. Jede Person versucht durch die Wahl des umliegenden Feldes mit dem maximalen Wert seinen Nutzen zu steigern. \\
 Darüber hinaus besteht die Möglichkeit die Personenbewegung mit Hilfe des Floor-Flooding, basierend auf dem Dijkstra Algorithmus zu ermitteln. Jede Person wählt von den anliegenden Feldern das Feld, welches die geringste Anzahl an notwendigen Bewegungen bis zum Ziel hat. \\
 Als dritte Variante erfolgt die Ermittlung der Personenbewegung ebenfalls mit Hilfe des Floor-Flooding. Als Grundlage dient hierbei jedoch die Lösung der Eikonal-Gleichung, welche die Ausbreitung einer Welle beschreibt. Hierfür wird der Fast-Marching Algorithmus verwendet.  \\
@@ -45,27 +44,43 @@ Durch das entsprechende Testszenario werden ein oder mehrere Ziele definiert. Zi
 Jede Person soll in ihrem Startfeld starten und sich im Laufe der Simulation von Zelle zu Zelle auf ihr Ziel hin bewegen und dadurch ihren persönlichen Nutzen, je näher sie dem Ziel kommt, steigern. Jede Person kann sich in der Moore-Umgebung (8 mögliche Bewegungsrichtungen) bewegen. Die möglichen Bewegungsrichtungen sind in Abbildung \ref{fig:MooreUmgebung} rot markiert.
 \begin{figure}[htpb]
 	\centering
-	\includegraphics[width=0.3\textwidth]{abbildungen/MooreUmgebung.pdf}
+	\includegraphics[width=0.5\textwidth]{abbildungen/MooreUmgebung.pdf}
 	\caption{Moore-Umgebung}
 	\label{fig:MooreUmgebung}
 \end{figure}
 \\
 Die Personen können nur freie Zellen betreten. Jede Person wählt genau die Zelle als nächste Zelle, welche ihr den steilsten Nutzenanstieg ermöglicht. Der Nutzen der verschiedenen Zellen wird abhängig vom Betriebsmodus unterschiedlich berechnet. Darüber hinaus soll der Nutzen durch die Position der anderen Personen beeinflusst werden. \\
 
- %TODO --> Punkt 3 fehlt noch, Diskussion und genauere Beschreibung auch 	
-Der Nutzen einer Person wird verringern, wenn sie anderen Personen zu nahe kommt. In der Simulation soll folgende Funktion verwendet werden. 
+Hierfür wird zwischen zwei Bereichen, abhängig vom Abstand zur nächsten Person unterschieden. Beträgt der Abstand zu einer fremden Person weniger als $45cm$, wird der vertraute Bereich (intimate space) der Personen betreten. Beträgt der Abstand zwischen $45cm$ und $120cm$, wird der persönliche Bereich (personal space) der Personen betreten. Für den vertrauten Bereich ist der Nutzenverlust (Nv(x)), abhängig vom Abstand $x$, nach Funktion \ref{Equ:NutzenverlustV} definiert. Für den persönlichen Bereich wird der Nutzenverlust (Np(x)), wiederum abhängig vom Abstand $x$ zur anderen Person, durch die Funktion \ref{Equ:NutzenverlustP} definiert. 
 
-\begin{displaymath}
-u_{p}(d) = 
-\left\{ 
-\begin{array}{cc}
--h \exp(\frac{1}{(\frac{d}{w})^2 -1}) & \;\;\;\;\;\;\;\;\;\;\; falls\, |d| < w  \\
-0 & sonst  
-\end{array} 
-\right.
-\end{displaymath}
-Hierbei wird mit $d$ der Abstand zur nächsten Person bezeichnet. $w$ und $h$ stehen für die Stärke und Reichweite der Funktion. \\
-Der Nutzen einer Nachbarzelle setzt sich somit insgesamt aus der Addition des Zielnutzens der Zelle (abhängig vom Algorithmus, vgl. Unterkapitel \ref{AnforderungenAlgorithmen}) mit dem Nutzeneinfluss aller Personen (in der Umgebung) auf die entsprechende Zelle zusammen. 
+\begin{equation}
+\label{Equ:NutzenverlustP}
+Np(x)= \mu * \exp(\frac{4}{(\frac{d(x)}{\delta_p * r})^{2} -1}) 
+\end{equation}
+
+\begin{equation}
+\label{Equ:NutzenverlustV}
+Nv(x)= Np + \frac{\mu}{a_p} * \exp(\frac{4}{(\frac{d(x)}{\delta_v * r})^{2*b_p} -1}) 
+\end{equation}
+
+$d(x)$ beschreibt den aktueller Abstand zur nächsten Person. Die folgende Tabelle enthält die Bedeutung der einzelnen Parameter und die entsprechenden Werte: 
+
+\begin{table}[htpb]
+	\centering
+	\begin{tabular}{lll}
+		Parameter & Beschreibung  &  Wert\\ \hline
+		$\mu$ & Stärke des Nutzenverlustes & 5.0 \\
+		$a_p$ & Dämpfung zwischen vertrautem und persönlichem Bereich & 1.0 \\
+		$b_p$ & Stärke des Übergangs zwischen vertrautem und persönlichen Bereich &1 \\
+		$\delta_p$ & persönlicher Bereich [m]& 1.20 \\
+		$\delta_v$ & vertrauter Bereich [m]& 0.45 \\
+		$r$ & Radius einer Person [m] & 0.2  
+	\end{tabular}
+	\caption{Parameter und Werte für die Berechnung des Nutzenverlustes}
+	\label{tab:parameterNutzenverlust}
+\end{table}
+
+Weitere Erläuterungen zu den Parametern, den Werten und den verwendeten Funktionen sind im Kapitel \ref{Personenpotenzial} beschrieben.
  
 \subsection{Geschwindigkeit der Personen}
 Jede Person soll eine individuelle Wunschgeschwindigkeit besitzen. Sie bewegt sich bei freier Bahn mit dieser Geschwindigkeit fort. Die Wunschgeschwindigkeiten sollen als normalverteilt angesehen werden. Als Mittelwert und Varianz sollen die errechneten Werte aus der ersten Studienarbeit verwendet werden.
@@ -99,7 +114,6 @@ Die Aufgabe der Software ist die Simulation von Personenbewegungen. Für möglic
 \label{Anforderungen:Report}
 Alle errechneten Ergebnisse sollen über einen Report ausgeleitet werden.
 Der Report soll im .xml Format ausgeleitet werden um eine gute Weiterverarbeitung der Ergebnisse (Visualisierung) zu gewährleisten. Die Datei $output.xml$ soll alle benötigten Informationen, wie beispielsweise die einzelnen Events der Personen, die durch den Algorithmus berechneten Entfernungen der einzelnen Zellen vom Ziel und eine Übersicht über den Zustand der einzelnen Zellen (Fieldmap), für Simulation beinhalten. \\
-Darüber hinaus soll während der Visualisierung der Simulation die Möglichkeit bestehen interessante Aspekte mit Hilfe von Screenshots festzuhalten. Diese sollen im .png Format gespeichert werden.
 
 \subsection{Berechung des Zielnutzens}
 \label{AnforderungenAlgorithmen}
@@ -128,7 +142,6 @@ Alle in der Tabelle \ref{tab:WerteAuswertung} aufgeführten Werte sollen auf Bas
 
 \subsection{Testszenarien für die Simulation}
 \label{AnforderungenTest}
-%TODO --> Bilder mit jeweiligen Testszenarien einfügen
 
 Die implementierten Algorithmen (vgl. Unterkapitel \ref{AnforderungenAlgorithmen} ) sollen anhand unterschiedlicher Testszenarien verglichen und verifiziert werden. 
  
@@ -216,7 +229,7 @@ Die Visualisierung soll die errechneten Personenbewegungen graphisch darstellen.
 	\label{fig:AnforderungenVisualisierung}
 \end{figure}
 
-Die Oberfläche der Visualisierung soll aus 4 verschiedenen Teilen bestehen, welche in der Abbildung durch die blauen Kästen A-D hervorgehoben wurden. Im Teil A sollen Konfigurationsmöglichkeiten für die Visualisierung aufgeführt sein. Beispielsweise soll zwischen einer normalen Darstellung der Simulation und einer Heatmap gewechselt werden können. Darüber hinaus soll die Möglichkeit bestehen, die Visualisierung zu stoppen und interessante Aspekte mit Hilfe von Screenshots festzuhalten. \\
+Die Oberfläche der Visualisierung soll aus 4 verschiedenen Teilen bestehen, welche in der Abbildung durch die blauen Kästen A-D hervorgehoben wurden. Im Teil A sollen Konfigurationsmöglichkeiten für die Visualisierung aufgeführt sein. Beispielsweise soll zwischen einer normalen Darstellung der Simulation und einer Heatmap gewechselt werden können. Darüber hinaus soll die Möglichkeit bestehen, die Visualisierung zu stoppen und schrittweise fortzusetzen. \\
 Teil B enthält die eigentliche Visualisierung der Personen, Hindernisse und Ziele. In Teil C sind alle Informationen bezüglich der Visualisierung aufgeführt und Teil D enthält eine Legende der verwendeten Symbole und Farben.
 
 \section{Softwaredesign}

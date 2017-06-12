@@ -23,6 +23,8 @@ public class Output{
     private Set<Location> targets;
     private int fieldWidth;
     private int fieldHeight;
+    private String cellsize = "40cm";
+    private String algorithm;
 
     // Default Constructor necessary for JAXB
     public Output(){
@@ -37,6 +39,7 @@ public class Output{
         fieldWidth = field.getWidth();
         fieldHeight = field.getHeight();
         targets = field_.getTargets();
+        algorithm = config_.getAlgorithm().toString();
     }
 
 
@@ -121,6 +124,22 @@ public class Output{
         targets = targets_;
     }
 
+
+    public String getAlgorithm() {
+        return algorithm;
+    }
+
+    public void setAlgorithm(String algorithm) {
+        this.algorithm = algorithm;
+    }
+
+    public String getCellsize() {
+        return cellsize;
+    }
+
+    public void setCellsize(String cellsize) {
+        this.cellsize = cellsize;
+    }
 
     @Override
     public String toString() {

@@ -36,6 +36,7 @@ public class Automat {
 
 
         final Configuration build = new Configuration.Builder(args)
+                .maxDuration(4)
                 .build();
 
         FieldImporter fi = new FieldImporter(build);

@@ -64,7 +64,7 @@ public class FieldImporter {
         }
         int width = img.getWidth();
         int height = img.getHeight();
-        Field returnField = new Field(width, height);
+        Field returnField = new Field(configuration.getCellSize());
 
         for(int x = 0; x < width; x++){
 

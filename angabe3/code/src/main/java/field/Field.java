@@ -22,10 +22,6 @@ public class Field {
     /** The size of a quadratic cell. Size equals the with and the height. */
     private final double cellSize;
 
-    public Field() {
-        this(1);
-    }
-
     public Field(double cellSize) {
         this.cellSize = cellSize;
     }

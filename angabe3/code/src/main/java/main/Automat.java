@@ -42,14 +42,6 @@ public class Automat {
         final Field field2 = fi.getField();
         OutputFile output = new OutputFile(build, field2);
         final Simulation simulation = new Simulation(field2, build, output);
-/*        simulation.spawnPerson(Location.of(4,3));
-        simulation.spawnPerson(Location.of(5,3));
-        simulation.spawnPerson(Location.of(6,3));
-        simulation.spawnPerson(Location.of(7,3));
-        simulation.spawnPerson(Location.of(8,3));*/
-
-        //System.out.println(StringView.personMap(simulation.field));
-        //System.out.println(StringView.useMap(simulation.field, simulation.getUse()));
         simulation.run(BigDecimal.valueOf(build.getMaxDuration()));
         try {
             output.save(build.getOutput());

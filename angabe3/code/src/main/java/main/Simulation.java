@@ -83,24 +83,9 @@ public class Simulation {
     public void run(BigDecimal maxSimulationTime) {
         while (events.hasNext() & clock.systemTime().compareTo(maxSimulationTime) < 0) {
             System.out.println(clock.systemTime());
-            //System.out.println(StringView.personMap(this.field));
-            /*for (Person p: persons) {
-                System.out.println("v given: " + p.getVelocity() + "  v: " + p.getMeanVelocity());
-
-            }*/
             final Event event = events.nextEvent();
             clock.advanceTo(event.getTime());
 
-            /* JUST TO VISUALIZE CHANGES
-            long timeToWait = (event.getTime().subtract(clock.systemTime())
-                    .multiply(new BigDecimal(1000)).longValue());
-
-            System.out.println(timeToWait);
-            try {
-                TimeUnit.MILLISECONDS.sleep(timeToWait);
-            }catch (Exception e){
-                System.out.println(e.getMessage());
-            }*/
             final List<Event> newEvents = event.execute();
             events.addAll(newEvents);
         }

@@ -88,10 +88,10 @@ public class StringView {
         for (int y = 0; y <= edge.y; y++) {
             for (int x = 0; x <= edge.x; x++) {
                 if (use.keySet().contains(Location.of(x, y))) {
-                    buffer.append(String.valueOf(use.get(Location.of(x, y))));
+                    buffer.append(String.valueOf(use.get(Location.of(x, y))) + " ");
 
                 } else {
-                    buffer.append(Double.MAX_VALUE + " ");
+                    buffer.append(-Double.MAX_VALUE + " ");
                 }
             }
             buffer.append("\n");

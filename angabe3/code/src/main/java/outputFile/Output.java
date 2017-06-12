@@ -27,6 +27,8 @@ public class Output{
     private int fieldHeight;
     private int targetX;
     private int targetY;
+    private String algorithm;
+    private String cellsize = "40cm";
 
     // Default Constructor necessary for JAXB
     public Output(){
@@ -42,6 +44,7 @@ public class Output{
         fieldHeight = field.getHeight();
         targetX = field_.getTarget().x;
         targetY = field_.getTarget().y;
+        algorithm = config_.getAlgorithm().toString();
     }
 
     public void setDistanceMap(Map<Location, Double> use_){
@@ -130,6 +133,22 @@ public class Output{
 
     public void setTargetY(int targetY) {
         this.targetY = targetY;
+    }
+
+    public String getAlgorithm() {
+        return algorithm;
+    }
+
+    public void setAlgorithm(String algorithm) {
+        this.algorithm = algorithm;
+    }
+
+    public String getCellsize() {
+        return cellsize;
+    }
+
+    public void setCellsize(String cellsize) {
+        this.cellsize = cellsize;
     }
 
     @Override

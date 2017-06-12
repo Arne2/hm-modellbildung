@@ -15,7 +15,7 @@ import java.util.Map;
  */
 public class FastMarchingTest {
 
-    public static final int CELL_SIZE = 20;
+    public static final double CELL_SIZE = 0.40;
 
     @Test
     public void testFastMarching(){

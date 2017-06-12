@@ -7,15 +7,15 @@ import org.junit.Assert;
 import org.junit.Test;
 import person.Person;
 
-import java.util.Map;
-
-import static org.junit.Assert.*;
-
 /**
  * @author peter-mueller
  */
 public class PersonalSpaceTest {
-    private final PersonalSpace personalSpace = new PersonalSpace(new PersonalSpace.Settings());
+    public static final int LARGE_CELL_SIZE = 1;
+    public static final double CELL_SIZE = 0.40;
+
+    private final PersonalSpace personalSpace = new PersonalSpace();
+
     @Test
     public void useNoOtherPersons() throws Exception {
         final Field field = StringView.parseStringMap(
@@ -23,7 +23,7 @@ public class PersonalSpaceTest {
                         "00000\n" +
                         "00000\n" +
                         "00000\n" +
-                        "00000\n", 20
+                        "00000\n", CELL_SIZE
         );
 
         field.putPerson(new Person(1.0), Location.of(2,2));
@@ -41,7 +41,7 @@ public class PersonalSpaceTest {
                         "00000\n" +
                         "00000\n" +
                         "00000\n" +
-                        "00000\n", 20
+                        "00000\n", CELL_SIZE
         );
 
         field.putPerson(new Person(1.0), Location.of(2,2));
@@ -60,7 +60,7 @@ public class PersonalSpaceTest {
                         "00000\n" +
                         "00000\n" +
                         "00000\n" +
-                        "00000\n", 50
+                        "00000\n", LARGE_CELL_SIZE
         );
 
         field.putPerson(new Person(1.0), Location.of(2,2));
@@ -79,11 +79,11 @@ public class PersonalSpaceTest {
                         "00000\n" +
                         "00000\n" +
                         "00000\n" +
-                        "00000\n", 20
+                        "00000\n", CELL_SIZE
         );
 
         field.putPerson(new Person(1.0), Location.of(2,2));
-        field.putPerson(new Person(1.0), Location.of(0,0));
+        field.putPerson(new Person(1.0), Location.of(2,1));
         final double use = personalSpace.use(field, Location.of(2, 2));
         if (use == 0) {
             final String message = String.format("use should be influenced. was: %s", use);

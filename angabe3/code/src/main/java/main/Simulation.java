@@ -26,10 +26,10 @@ public class Simulation {
 
 
     private final Map<Location, Double> use;
-    private final PersonalSpace personalSpace = new PersonalSpace(new PersonalSpace.Settings());
+    private final PersonalSpace personalSpace = new PersonalSpace();
     private final Clock clock = new Clock();
     private final EventList events = new EventList();
-    private final List<Person> persons = new ArrayList<Person>();
+    private final List<Person> persons = new ArrayList<>();
 
     private final Configuration configuration;
     private final OutputFile outputFile;

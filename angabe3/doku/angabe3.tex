@@ -12,8 +12,244 @@
 
 \tableofcontents
 \section{Einführung}
+Im Zuge der ersten Studienarbeit wurde das Laufverhalten von Probanden in der Ebene und auf der Treppe untersucht. Basierend auf den Erkenntnissen bezüglich der individuellen Wunschgeschwindigkeiten werden in dieser Studienarbeit Personenbewegungen in der Ebene simuliert. Mit Hilfe solcher Simulationen können, beispielsweise im Zuge von Gebäudeplanungen unterschiedliche Gebäude- und Raumgestaltungen simuliert und hinsichtlich schnellster Räumungen im Krisenfall optimiert werden. 
+
+\section{Beschreibung des Modells}
+Für die Simulation der Personenbewegungen wird ein zellulärer Zustandsautomat implementiert. Jede Zelle kann entweder leer oder durch eine Person oder ein Hindernis besetzt sein. Sie kann außerdem ein Ziel oder eine Quelle enthalten. Ein Hindernis kann von keiner Person betreten werden. Die Personen versuchen im Laufe der Simulation von der Quelle (Startposition) zum Ziel zu gelangen. Hierbei können sie sich in der sog. Moore-Umgebung bewegen. Es kann jede Zelle betreten werden, die frei ist und eine Nachbarzelle der aktuellen Zelle ist. Als Nachbarzelle wird jede Zelle bezeichnet, welche mit der aktuellen Zelle eine Kante oder Ecke teilt. \\
+Die Ziele werden als attraktiv für die Personen angesehen. Die Personen steigern ihren persönlichen Nutzen, je näher sie dem Ziel kommen. In der Realität fühlt sich eine Person jedoch unwohl, wenn ihr eine fremde Person zu nahe kommt. Im Modell wird dies dadurch berücksichtigt, dass sich der Nutzen einer Person verringert, wenn sie einer anderen zu nahe kommt. Um die Simulation möglichst realistisch zu gestalten, bewegen sich die Personen mit einer individuellen Wunschgeschwindigkeit. Diese wird aus den Ergebnissen der ersten Studienarbeit ermittelt. \\
+Das erläuterte Modell gibt die einzelnen Personenbewegungen aus und visualisiert diese zusätzlich. Die Bewegung der Personen wird in drei getrennten Simulationen mit jeweils unterschiedlichen Algorithmen berechnet. Zunächst wird für jedes Feld der negative euklidische Abstand als Zielnutzen berechnet. Jede Person versucht durch die Wahl des umliegenden Feldes mit dem maximalen Wert seinen Nutzen zu steigern. \\
+Darüber hinaus besteht die Möglichkeit die Personenbewegung mit Hilfe des Floor-Flooding, basierend auf dem Dijkstra Algorithmus zu ermitteln. Jede Person wählt von den anliegenden Feldern das Feld, welches die geringste Anzahl an notwendigen Bewegungen bis zum Ziel hat. \\
+Als dritte Variante erfolgt die Ermittlung der Personenbewegung ebenfalls mit Hilfe des Floor-Flooding. Als Grundlage dient hierbei jedoch die Lösung der Eikonal-Gleichung, welche die Ausbreitung einer Welle beschreibt. Hierfür wird der Fast-Marching Algorithmus verwendet.  \\
+Im Laufe der Studienarbeit werden die beschriebenen Modelle anhand unterschiedlicher Tests verglichen und ausgewertet. Eine detaillierte Erläuterung der Tests ist im folgenden Kapitel \ref{AnforderungenTest} beschrieben.
+
+
 \section{Anforderungen/Requirements}
 \label{requirements}
+
+\subsection{Allgemeines}
+Es soll ein zellulärer Zustandsautomat implementiert werden. Die Software soll Personenbewegungen in der Ebene simulieren. Die unterschiedlichen Szenarien (Zustand der Zellen zu Beginn der Simulation), wie beispielsweise die Position der Hindernisse werden der Software als .png Bilddatei übergeben. Diese sind im Unterkapitel \ref{AnforderungenTest} näher erläutert. Es wird davon ausgegangen, dass sich zu Beginn der Simulation alle Personen im Startbereich (es soll möglich sein mehrere Startbereiche anzulegen) befinden.
+
+
+
+\subsection{Zellen}
+Das gesamte Feld (zweidimensionaler Bereich indem sich die Personen bewegen können) soll in Zellen eingeteilt werden. Die Größe des Feldes und die Anzahl an Zellen sollen der Software als Parameter übergeben werden.\\
+Jede Zelle soll quadratisch sein. Jede Zelle kann verschiedene Zustände haben. Sie kann entweder leer oder besetzt sein. Ist eine Zelle besetzt, wird noch weiter unterschieden, ob sie durch ein Hindernis, das Ziel- (Personensenke) oder Startfeld (Personenquelle) oder durch eine Person besetzt ist.
+
+\subsection{Hindernisse}
+Es soll davon ausgegangen werden, dass jedes Hindernis eine oder mehrere Zellen ganz belegt. Hindernisse können von den Personen nicht betreten werden. Falls sich ein Hindernis zwischen einer Person und ihrem Ziel befindet, ist die Person gezwungen um das Hindernis herum zu gehen. \\
+In der Realität versucht eine Person einem Hindernis möglichst frühzeitig auszuweichen. Sie senkt somit ihren Nutzen, je näher sie einem Hindernis kommt. Dies wird im weiteren Verlauf dieser Studienarbeit nicht berücksichtigt.
+
+\subsection{Ziele}
+Durch das entsprechende Testszenario werden ein oder mehrere Ziele definiert. Ziele werden als attraktiv für die Personen angesehen. Jede Person erhöht ihren Nutzen, wenn sie sich dem Ziel nähert. Befinden sich mehrere Ziele im Feld, wird die Wahl des Ziels für jede Person abhängig vom Betriebsmodus bestimmt. 
+
+\subsection{Personen}
+Jede Person soll in ihrem Startfeld starten und sich im Laufe der Simulation von Zelle zu Zelle auf ihr Ziel hin bewegen und dadurch ihren persönlichen Nutzen, je näher sie dem Ziel kommt, steigern. Jede Person kann sich in der Moore-Umgebung (8 mögliche Bewegungsrichtungen) bewegen. Die möglichen Bewegungsrichtungen sind in Abbildung \ref{fig:MooreUmgebung} rot markiert.
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.5\textwidth]{abbildungen/MooreUmgebung.png}
+	\caption{Moore-Umgebung}
+	\label{fig:MooreUmgebung}
+\end{figure}
+\\
+Die Personen können nur freie Zellen betreten. Jede Person wählt genau die Zelle als nächste Zelle, welche ihr den steilsten Nutzenanstieg ermöglicht. Der Nutzen der verschiedenen Zellen wird abhängig vom Betriebsmodus unterschiedlich berechnet. Darüber hinaus soll der Nutzen durch die Position der anderen Personen beeinflusst werden. \\
+
+Hierfür wird zwischen zwei Bereichen, abhängig vom Abstand zur nächsten Person unterschieden. Beträgt der Abstand zu einer fremden Person weniger als $45cm$, wird der vertraute Bereich (intimate space) der Personen betreten. Beträgt der Abstand zwischen $45cm$ und $120cm$, wird der persönliche Bereich (personal space) der Personen betreten. Für den vertrauten Bereich ist der Nutzenverlust (Nv(x)), abhängig vom Abstand $x$, nach Funktion \ref{Equ:NutzenverlustV} definiert. Für den persönlichen Bereich wird der Nutzenverlust (Np(x)), wiederum abhängig vom Abstand $x$ zur anderen Person, durch die Funktion \ref{Equ:NutzenverlustP} definiert. 
+
+\begin{equation}
+\label{Equ:NutzenverlustP}
+Np(x)= \mu * \exp(\frac{4}{(\frac{d(x)}{\delta_p * r})^{2} -1}) 
+\end{equation}
+
+\begin{equation}
+\label{Equ:NutzenverlustV}
+Nv(x)= Np + \frac{\mu}{a_p} * \exp(\frac{4}{(\frac{d(x)}{\delta_v * r})^{2*b_p} -1}) 
+\end{equation}
+
+$d(x)$ beschreibt den aktueller Abstand zur nächsten Person. Die folgende Tabelle enthält die Bedeutung der einzelnen Parameter und die entsprechenden Werte: 
+
+\begin{table}[htpb]
+	\centering
+	\begin{tabular}{lll}
+		Parameter & Beschreibung  &  Wert\\ \hline
+		$\mu$ & Stärke des Nutzenverlustes & 5.0 \\
+		$a_p$ & Dämpfung zwischen vertrautem und persönlichem Bereich & 1.0 \\
+		$b_p$ & Stärke des Übergangs zwischen vertrautem und persönlichen Bereich &1 \\
+		$\delta_p$ & persönlicher Bereich [m]& 1.20 \\
+		$\delta_v$ & vertrauter Bereich [m]& 0.45 \\
+		$r$ & Radius einer Person [m] & 0.2  
+	\end{tabular}
+	\caption{Parameter und Werte für die Berechnung des Nutzenverlustes}
+	\label{tab:parameterNutzenverlust}
+\end{table}
+
+Weitere Erläuterungen zu den Parametern, den Werten und den verwendeten Funktionen sind im Kapitel \ref{Personenpotenzial} beschrieben.
+ 
+\subsection{Geschwindigkeit der Personen}
+Jede Person soll eine individuelle Wunschgeschwindigkeit besitzen. Sie bewegt sich bei freier Bahn mit dieser Geschwindigkeit fort. Die Wunschgeschwindigkeiten sollen als normalverteilt angesehen werden. Als Mittelwert und Standardabweichung sollen die errechneten Werte aus der ersten Studienarbeit verwendet werden.
+
+\subsection{Zeitmodellierung}
+Die Simulation unterliegt keinen harten Echtzeitanforderungen. Sie soll für die gesamte Simmulationsdauer so schnell wie möglich durchgeführt werden. Es soll keine globale Uhr modelliert werden. \\
+Die Visualisierung der Simulation soll hingegen die Bewegungen der Personen möglichst in Echtzeit darstellen. Sie unterliegt weichen Echtzeitanforderungen. Abweichungen aufgrund mangelnder Rechner-Ressourcen sind tolerierbar. 
+
+\subsection{Parameter}
+Die Tabelle \ref{tab:parameter} zeigt alle möglichen Parameter, welche die Software steuern. Alle Parameter sind optional.
+\begin{table}[htpb]
+	\centering
+	\begin{tabular}{lll}
+		Parameter & Beschreibung  &  Default\\ \hline
+		--free-flow-velocity & Mittelwert der Wunschgeschwindigkeit [m/s] & 1,0 \\
+		--free-flow-deviation & Standardabweichung der Wunschgeschwindigkeiten [m/s] & 0 \\
+		--algorithm & Algorithmus (euclid, dijkstra, fast-marching) & dijkstra \\
+		--output-folder & Ordner in den der Output gespeichert wird & ../data/ \\
+		--cellsize & Größe der einzelnen Zellen [m] & 1 \\
+		--input-map & Pfad zum Bild der map (Auswahl des Testfalls) & default.png \\
+		
+	\end{tabular}
+	\caption{Parameter und Defaultwerte}
+	\label{tab:parameter}
+\end{table}
+	
+\subsection{Berechnungen}
+Die Aufgabe der Software ist die Simulation von Personenbewegungen. Für möglichst genaue Zeitangaben wird die Java Klasse BigDecimal verwendet. Für die Division werden 32 Nachkommastellen berücksichtigt und als Rundungsmodus wird Half\_Even verwendet, da dieser kumulative Fehler bei sich wiederholenden Berechnungen minimiert. Die anschließende Berechnung und Aufbereitung der Daten (insebesondere für den Test \ref{Anforderungen:RimeaTest}) erfolgt mit Mathematica.
+
+\subsection{Report}
+\label{Anforderungen:Report}
+Alle errechneten Ergebnisse sollen über einen Report ausgeleitet werden.
+Der Report soll im .xml Format ausgeleitet werden um eine gute Weiterverarbeitung der Ergebnisse (Visualisierung) zu gewährleisten. Die Datei $output.xml$ soll alle benötigten Informationen, wie beispielsweise die einzelnen Events der Personen, die durch den Algorithmus berechneten Entfernungen der einzelnen Zellen vom Ziel und eine Übersicht über den Zustand der einzelnen Zellen (Fieldmap), für Simulation beinhalten. \\
+Die Wunschgeschwindigkeiten werden zufällig generiert. Diese sollen normalverteilt sein. Für eine Überprüfung der Zufallszahlgenerierung sollen die Wnschgeschwindigkeiten und die ID der entsprechenden Person im .csv Format in der Datei velocity.csv ausgegeben werden.
+
+\subsection{Berechung des Zielnutzens}
+\label{AnforderungenAlgorithmen}
+
+Es sollen drei unterschiedliche Algorithmen für die Berechnung des Zielnutzens (Attraktivität) einer Zelle implementiert werden. \\
+\\
+Algorithmus 1: Der Nutzen bzw. die Attraktivität jeder Zelle entspricht dem negativen euklidischen Abstand. Hierbei können keine Hindernisse umgangen werden. Jede Person versucht den Nutzen zu maximieren und wählt jeweils die Zelle mit maximalen Wert aus den umliegenden aus.\\
+\\
+Algorithmus 2: Der Nutzen bzw. die Attraktivität jeder Zelle wird durch Floor-Flooding, basierend auf dem Dijkstra Algorithmus, berechnet. Für jede Zelle wird die geringste Anzahl an notwendigen Bewegungen bis zum Ziel ermittelt. \\
+\\
+Algorithmus 3: Analog zum Algorithmus 2 wird auch in diesem hier der Nutzen bzw. die Attraktivität jeder Zelle mittels Floor-Flooding berechnet. Es wird jedoch der Fast-Marching Alforithmus (Lösung der Eikonal-Gleichung) als Grundlage verwendet.
+
+\subsection{Werte für die Auswertung}
+Alle in der Tabelle \ref{tab:WerteAuswertung} aufgeführten Werte sollen auf Basis der Simulation ermittelt und ausgewertet werden. Einige Werte werden nur für bestimmte Tests benötigt.
+\begin{table}[htpb]
+	\centering
+	\begin{tabular}{lll}
+		Ermittelte Werte & Beschreibung & Wann benötigt\\ \hline
+		mittlere Geschwindigkeit & durchschnittliche Geschwindigkeit der Personen im Feld & Rimea-Test 4 \\	
+		Fluss (Personen/Meter/s) & Anzahl der Personen mit Geschwindigkeit > 1m/s im Feld & Rimea-Test 4\\
+		Simulationsdauer & Dauer bis der Test beendet ist & Hühner Test, \\&& Evakuierung (2 Türen), \\&& Evakuierung (4 Türen)\\
+	\end{tabular}
+	\caption{Werte für die Auswertung}
+	\label{tab:WerteAuswertung}
+\end{table}
+
+\subsection{Testszenarien für die Simulation}
+\label{AnforderungenTest}
+
+Die implementierten Algorithmen (vgl. Unterkapitel \ref{AnforderungenAlgorithmen} ) sollen anhand unterschiedlicher Testszenarien verglichen und verifiziert werden. Die verschiedenen Szenarien sollen der Simulation als .png Datei übergeben werden. 
+
+\subsubsection{Erstellung der Testszenarien}
+Es soll die Möglichkeit bestehen, unterschiedliche Testszenarien mittels eines Bildbearbeitungsprogrammes zu erstellen und an die Simulation (als .png Datei) zu übergeben. Bei der Erstellung ist sowohl die Anzahl der Personen, als auch die Anzahl der Hindernisse und Ziele (Personensenken) beliebig. Hinsichtlich der Farben der Objekte müssen jedoch die in der folgenden Tabelle \ref{tab:Farbcodes} beschriebenen Farbcodes verwendet werden. Jedes Pixel wird durch eine Zelle des Automaten repräsentiert.
+ 
+\begin{table}[htpb]
+	\centering
+	\begin{tabular}{lll}
+		Farbcode & Farbe & Bedeutung\\ \hline
+		\#3F48CC & Blau & Ziel/ Personensenke \\	
+		\#000000 & Schwarz & Ziel/ Personensenke \\
+		\#FFFFFF & Weiß & Leere Zelle \\
+		\#22B14C & Grün & Person 
+	\end{tabular}
+	\caption{Werte für die Auswertung}
+	\label{tab:Farbcodes}
+\end{table}
+ 
+\subsubsection{Testszenario: Freier Fluss}
+Im Zuge dieses Tests soll überprüft werden, ob sich Personen bei freier Bahn (keine Hindernisse zwischen Start und Ziel) mit ihrer jeweiligen Wunschgeschwindigkeit auf das Ziel hin bewegen. Des weiteren soll überprüft werden, ob die Person den kürzesten Weg verwendet. Der Test soll mit allen 3 Betriebsmodi durchgeführt werden. Abbildung \ref{fig:AnforderungenTest_FreierFluss} stellt den Testaufbau schematisch dar.
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{abbildungen/Test_FreierFluss.png}
+	\caption{Testfall Freier Fluss (schematisch)}
+	\label{fig:AnforderungenTest_FreierFluss}
+\end{figure}
+
+\subsubsection{Testszenario: Hühnertest}
+Zwischen Start und Ziel soll ein U-förmiges Hindernis (Öffnung in Richtung des Startes) eingefügt werden. Abhängig vom Betriebsmodus wird ein unterschiedliches Ergebnis erwartet:\\
+Betriebsmodus 1: Die Personen sollen sich auf dem kürzesten Weg auf das Ziel zubewegen. Sobald sie das Hindernis erreicht haben, sollen sie stehen bleiben. Erwartungsgemäß wird der Test nicht erfolgreich verlaufen. \\
+Betriebsmodi 2 und 3: Die Personen sollen das Hindernis umgehen und das Ziel erreichen. Bei einem \glqq Feststecken im Hindernis\grqq (wie im Betriebsmodus 1 gefordert) wird der Test als fehlgeschlagen gewertet. Abbildung \ref{fig:AnforderungenTest_Hühner} stellt den Testaufbau schematisch dar.
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{abbildungen/Test_Huehner.png}
+	\caption{Testfall Hühnertest (schematisch)}
+	\label{fig:AnforderungenTest_Hühner}
+\end{figure}
+ 
+\subsubsection{Testszenario: Evakuierung eines Raumes mit 2 Türen}
+\label{Anforderungen:Evakuierung2}
+Die Personen befinden sich zu Beginn in einen von Hindernissen umgebenen, quadratischen Raum. An 2 Seiten sind Öffnungen platziert (freie Zellen). Hinter diesen Öffnungen befindet sich jeweils ein Ziel. Im Laufe des Tests sollen die Personen durch die beiden Engstellen zum Ziel gelangen. \\
+Dieser Test soll mit den Betriebsmodi 2 und 3 in unterschiedlichen Versionen durchgeführt werden. Zunächst sollen sich die Türen an benachbarten Seiten befinden. Hierbei sollen sie einmal mit geringem und einmal mit sehr großem Abstand zueinander plaziert werden. Anschließend sollen die Türen an gegenüberliegenden Seiten plaziert mittig werden. Unterschiede hinsichtlich der Evakuierungsdauer sind festzuhalten. Die Abbildungen \ref{fig:AnforderungenTestEvak2TürNebeneinanderMin},  \ref{fig:AnforderungenTestEvak2TürNebeneinanderMax} und  \ref{fig:Test_Evakuierung2_Gegueb} zeigen die unterschiedlichen Testversionen schematisch.
+
+\begin{figure}[!htb]
+	\centering
+	\begin{minipage}{.5\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{abbildungen/Test_Evakuierung2_Nebeneinander.png}
+		\caption{Testfall Evakuierung eines Raumes mit 2 Türen (Nebeneinander, geringer Abstand)}
+		\label{fig:AnforderungenTestEvak2TürNebeneinanderMin}
+	\end{minipage}%
+	\begin{minipage}{0.5\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{abbildungen/Test_Evakuierung2_NebeneinanderMax.png}
+		\caption{Testfall Evakuierung eines Raumes mit 2 Türen (Nebeneinander, großer Abstand)}
+		\label{fig:AnforderungenTestEvak2TürNebeneinanderMax}
+	\end{minipage}
+\end{figure}
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{abbildungen/Test_Evakuierung2_Gegueb.png}
+	\caption{Testfall Evakuierung eines Raumes mit 2 Türen (Gegenüber)}
+	\label{fig:Test_Evakuierung2_Gegueb}
+\end{figure}
+
+\subsubsection{Testszenario: Evakuierung eines Raumes mit 4 Türen}
+Dieser Testfall entspricht der in Kapitel \ref{Anforderungen:Evakuierung2} beschriebenen Evakuierung mit 2 Türen. In diesem Fall befindet sich jedoch an jeder Raumseite eine Tür. Die Türen sollen sich in einer ersten Version mittig bezogen auf die jeweilige Raumseite befinden. Darüber hinaus sollen in einer weiteren Version die Auswirkungen ermittelt werden, wenn jeweils die 2 Türen an benachbarten Seiten mit minimalen Abstand zueinander plaziert werden. Unterschiede hinsichtlich der Evakuierungsdauer sind festzuhalten. Aufgrund der Analogie zur Evakuierung mit 2 Türen wird auf eine graphische Veranschaulichung des Testaufbaus verzichtet.
+
+\subsubsection{Testszenario: Fundamentaldiagramm - Rimea-Test 4}
+\label{Anforderungen:RimeaTest}
+In diesem Testfall soll ein $65m$ langer und $12m$ breiter Gang angelegt werden. Auf der einen Seite des Ganges befindet sich die Personenquelle, auf der anderen Seite die Personensenke. Im Laufe des Testes sollen die Personen den Gang entlangschreiben. Die Anzahl der Personen ist zu variieren. In einer weiteren Version des Tests sollen Personen, welche die Personensenke erreicht haben, erneut bei der Personenquelle starten (Endlosschleife). Abbildung \ref{fig:Test_Rimea4} zeigt den Testaufbau schematisch.
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{abbildungen/Test_Rimea4-2.png}
+	\caption{Testfall Rimea 4 (schematisch)}
+	\label{fig:Test_Rimea4}
+\end{figure}
+
+\subsubsection{Testszenario: Engstelle (unidirektional)}
+In diesem Testfall soll, analog zum Rimea-Test 4, ein $65m$ langer und $12m$ breiter Gang angelegt werden. Am Ende des Ganges befindet sich eine Engstelle mit $6m$ Breite und dahinter die Personensenke. Es soll mit variierender Anzahl an Personen getestet werden, wie lange es dauert bis die Engstelle durchschritten wurde. Der schematische Testaufbau ist in Abbildung \ref{fig:Engstelle} aufgeführt.
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{abbildungen/Test_Engstelle.png}
+	\caption{Testfall Engstelle (schematisch)}
+	\label{fig:Engstelle}
+\end{figure}
+
+\subsection{Visualisierung}
+Die Visualisierung soll die errechneten Personenbewegungen graphisch darstellen. Als Grundlage soll der ausgegebene Report (vgl. Abschnitt \ref{Anforderungen:Report}) dienen. Konkrete Anforderungen bezüglich der Visualisierung sind in Abbildung \ref{fig:AnforderungenVisualisierung} abgebildet.
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{abbildungen/AnforderungenVisualisierung.pdf}
+	\caption{Visualisierung (schematisch)}
+	\label{fig:AnforderungenVisualisierung}
+\end{figure}
+
+Die Oberfläche der Visualisierung soll aus 4 verschiedenen Teilen bestehen, welche in der Abbildung durch die blauen Kästen A-D hervorgehoben wurden. Im Teil A sollen Konfigurationsmöglichkeiten für die Visualisierung aufgeführt sein. Beispielsweise soll zwischen einer normalen Darstellung der Simulation und einer Heatmap gewechselt werden können. Darüber hinaus soll die Möglichkeit bestehen, die Visualisierung zu stoppen und schrittweise fortzusetzen. \\
+Teil B enthält die eigentliche Visualisierung der Personen, Hindernisse und Ziele. In Teil C sind alle Informationen bezüglich der Visualisierung aufgeführt und Teil D enthält eine Legende der verwendeten Symbole und Farben.
 
 \section{Softwaredesign}
 
@@ -28,8 +264,6 @@ Der Aufbau der Anwendung wurde im Team diskutiert und anschließend mittels UML 
 
 \section{Ausblick und Fazit}
 
-
-%	REFERENCE LIST
 %----------------------------------------------------------------------------------------
 %\input{References}
 \bibliography{Bibliographie}

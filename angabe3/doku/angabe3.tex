@@ -44,7 +44,7 @@ Durch das entsprechende Testszenario werden ein oder mehrere Ziele definiert. Zi
 Jede Person soll in ihrem Startfeld starten und sich im Laufe der Simulation von Zelle zu Zelle auf ihr Ziel hin bewegen und dadurch ihren persönlichen Nutzen, je näher sie dem Ziel kommt, steigern. Jede Person kann sich in der Moore-Umgebung (8 mögliche Bewegungsrichtungen) bewegen. Die möglichen Bewegungsrichtungen sind in Abbildung \ref{fig:MooreUmgebung} rot markiert.
 \begin{figure}[htpb]
 	\centering
-	\includegraphics[width=0.5\textwidth]{abbildungen/MooreUmgebung.pdf}
+	\includegraphics[width=0.5\textwidth]{abbildungen/MooreUmgebung.png}
 	\caption{Moore-Umgebung}
 	\label{fig:MooreUmgebung}
 \end{figure}
@@ -83,11 +83,11 @@ $d(x)$ beschreibt den aktueller Abstand zur nächsten Person. Die folgende Tabel
 Weitere Erläuterungen zu den Parametern, den Werten und den verwendeten Funktionen sind im Kapitel \ref{Personenpotenzial} beschrieben.
  
 \subsection{Geschwindigkeit der Personen}
-Jede Person soll eine individuelle Wunschgeschwindigkeit besitzen. Sie bewegt sich bei freier Bahn mit dieser Geschwindigkeit fort. Die Wunschgeschwindigkeiten sollen als normalverteilt angesehen werden. Als Mittelwert und Varianz sollen die errechneten Werte aus der ersten Studienarbeit verwendet werden.
+Jede Person soll eine individuelle Wunschgeschwindigkeit besitzen. Sie bewegt sich bei freier Bahn mit dieser Geschwindigkeit fort. Die Wunschgeschwindigkeiten sollen als normalverteilt angesehen werden. Als Mittelwert und Standardabweichung sollen die errechneten Werte aus der ersten Studienarbeit verwendet werden.
 
 \subsection{Zeitmodellierung}
 Die Simulation unterliegt keinen harten Echtzeitanforderungen. Sie soll für die gesamte Simmulationsdauer so schnell wie möglich durchgeführt werden. Es soll keine Globale Uhr modelliert werden. \\
-Die Visualisierung der Simulation soll hingegen die Bewegungen der Personen in Echtzeit darstellen. Sie unterliegt somit Echtzeitanforderungen.
+Die Visualisierung der Simulation soll hingegen die Bewegungen der Personen möglichst in Echtzeit darstellen. Sie unterliegt weichen Echtzeitanforderungen. Abweichungen aufgrund mangelnder Rechner-Ressourcen sind tolerierbar. 
 
 \subsection{Parameter}
 Die Tabelle \ref{tab:parameter} zeigt alle möglichen Parameter, welche die Software steuern. Alle Parameter sind optional.
@@ -96,11 +96,11 @@ Die Tabelle \ref{tab:parameter} zeigt alle möglichen Parameter, welche die Soft
 	\begin{tabular}{lll}
 		Parameter & Beschreibung  &  Default\\ \hline
 		--free-flow-velocity & Mittelwert der Wunschgeschwindigkeit [m/s] & 1,0 \\
-		--free-flow-deviation & Varianz der Wunschgeschwindigkeiten [m/s] & 0 \\
-		--algorithm & Algorithmus (1, 2 oder 3) & 2 \\
+		--free-flow-deviation & Standardabweichung der Wunschgeschwindigkeiten [m/s] & 0 \\
+		--algorithm & Algorithmus (euclid, dijkstra, fast-marching) & dijkstra \\
 		--output-folder & Ordner in den der Output gespeichert wird & ../data/ \\
 		--cellsize & Größe der einzelnen Zellen [m] & 1 \\
-		--input-map & Auswahl des Testfalls & - \\
+		--input-map & Pfad zum Bild der map (Auswahl des Testfalls) & default.png \\
 		
 	\end{tabular}
 	\caption{Parameter und Defaultwerte}
@@ -150,7 +150,7 @@ Im Zuge dieses Tests soll überprüft werden, ob sich Personen bei freier Bahn (
 
 \begin{figure}[htpb]
 	\centering
-	\includegraphics[width=0.8\textwidth]{abbildungen/Test_FreierFluss.pdf}
+	\includegraphics[width=0.8\textwidth]{abbildungen/Test_FreierFluss.png}
 	\caption{Testfall Freier Fluss (schematisch)}
 	\label{fig:AnforderungenTest_FreierFluss}
 \end{figure}
@@ -162,7 +162,7 @@ Betriebsmodi 2 und 3: Die Personen sollen das Hindernis umgehen und das Ziel err
 
 \begin{figure}[htpb]
 	\centering
-	\includegraphics[width=0.8\textwidth]{abbildungen/Test_Huehner.pdf}
+	\includegraphics[width=0.8\textwidth]{abbildungen/Test_Huehner.png}
 	\caption{Testfall Hühnertest (schematisch)}
 	\label{fig:AnforderungenTest_Hühner}
 \end{figure}
@@ -176,13 +176,13 @@ Dieser Test soll mit den Betriebsmodi 2 und 3 in unterschiedlichen Versionen dur
 	\centering
 	\begin{minipage}{.5\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{abbildungen/Test_Evakuierung2_Nebeneinander.pdf}
+		\includegraphics[width=\textwidth]{abbildungen/Test_Evakuierung2_Nebeneinander.png}
 		\caption{Testfall Evakuierung eines Raumes mit 2 Türen (Nebeneinander, geringer Abstand)}
 		\label{fig:AnforderungenTestEvak2TürNebeneinanderMin}
 	\end{minipage}%
 	\begin{minipage}{0.5\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{abbildungen/Test_Evakuierung2_NebeneinanderMax.pdf}
+		\includegraphics[width=\textwidth]{abbildungen/Test_Evakuierung2_NebeneinanderMax.png}
 		\caption{Testfall Evakuierung eines Raumes mit 2 Türen (Nebeneinander, großer Abstand)}
 		\label{fig:AnforderungenTestEvak2TürNebeneinanderMax}
 	\end{minipage}
@@ -190,7 +190,7 @@ Dieser Test soll mit den Betriebsmodi 2 und 3 in unterschiedlichen Versionen dur
 
 \begin{figure}[htpb]
 	\centering
-	\includegraphics[width=0.8\textwidth]{abbildungen/Test_Evakuierung2_Gegueb.pdf}
+	\includegraphics[width=0.8\textwidth]{abbildungen/Test_Evakuierung2_Gegueb.png}
 	\caption{Testfall Evakuierung eines Raumes mit 2 Türen (Gegenüber)}
 	\label{fig:Test_Evakuierung2_Gegueb}
 \end{figure}
@@ -204,7 +204,7 @@ In diesem Testfall soll ein $65m$ langer und $12m$ breiter Gang angelegt werden.
 
 \begin{figure}[htpb]
 	\centering
-	\includegraphics[width=0.8\textwidth]{abbildungen/Test_Rimea4.pdf}
+	\includegraphics[width=0.8\textwidth]{abbildungen/Test_Rimea4-2.png}
 	\caption{Testfall Rimea 4 (schematisch)}
 	\label{fig:Test_Rimea4}
 \end{figure}
@@ -214,7 +214,7 @@ In diesem Testfall soll, analog zum Rimea-Test 4, ein $65m$ langer und $12m$ bre
 
 \begin{figure}[htpb]
 	\centering
-	\includegraphics[width=0.8\textwidth]{abbildungen/Test_Engstelle.pdf}
+	\includegraphics[width=0.8\textwidth]{abbildungen/Test_Engstelle.png}
 	\caption{Testfall Engstelle (schematisch)}
 	\label{fig:Engstelle}
 \end{figure}

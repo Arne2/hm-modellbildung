@@ -70,7 +70,7 @@ public class StringView {
                 if (c == '0') {
                     field.addLocation(Location.of(x, y));
                 } else if (c == 'X') {
-                    field.setTarget(Location.of(x, y));
+                    field.addTarget(Location.of(x, y));
                 }
             }
         }
@@ -78,8 +78,25 @@ public class StringView {
         return field;
     }
 
-    public static Field parseStringMap(final String map) {
-        return parseStringMap(map,1);
+    public static String toStringDistanceMap(Map<Location, Double> use){
+        final StringBuilder buffer = new StringBuilder();
+
+
+        final Location edge = use.keySet().stream()
+                .max(Location::compareTo).orElse(Location.of(0, 0));
+
+        for (int y = 0; y <= edge.y; y++) {
+            for (int x = 0; x <= edge.x; x++) {
+                if (use.keySet().contains(Location.of(x, y))) {
+                    buffer.append(String.valueOf(use.get(Location.of(x, y))) + " ");
+
+                } else {
+                    buffer.append(-Double.MAX_VALUE + " ");
+                }
+            }
+            buffer.append("\n");
+        }
+        return buffer.toString();
     }
 
     public static String toStringMap(Field field) {

@@ -22,6 +22,11 @@ public class Location implements Comparable<Location> {
         this.y = y;
     }
 
+
+    public Location(){
+        x = y = 0;
+    }
+
     /**
      * Create a new Location based on two integers as offset.
      *
@@ -70,5 +75,14 @@ public class Location implements Comparable<Location> {
             return Integer.compare(this.x, o.x);
         }
         return result;
+    }
+
+
+    public int getX(){
+        return x;
+    }
+
+    public int getY(){
+        return y;
     }
 }

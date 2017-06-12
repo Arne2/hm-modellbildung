@@ -2,6 +2,7 @@ package main;
 
 import config.Configuration;
 import field.Field;
+import field.FieldImporter;
 import field.location.Location;
 import field.view.StringView;
 import jdk.nashorn.internal.runtime.ECMAException;
@@ -21,7 +22,7 @@ public class Automat {
      * @param args
      */
     public static void main(String[] args) {
-        final Field field = StringView.parseStringMap(
+/*        final Field field = StringView.parseStringMap(
                         "000000X000000\n" +
                         "0000000000000\n" +
                         "000       000\n" +
@@ -30,23 +31,20 @@ public class Automat {
                         "000 00000 000\n" +
                         "000  000  000\n" +
                         "0000000000000\n" +
-                        "0000000000000", 20);
+                        "0000000000000");*/
+
+
 
         final Configuration build = new Configuration.Builder(args)
                 .build();
-        OutputFile output = new OutputFile(build, field);
-        final Simulation simulation = new Simulation(field, build, output);
-        simulation.spawnPerson(Location.of(4,3));
-        simulation.spawnPerson(Location.of(5,3));
-        simulation.spawnPerson(Location.of(6,3));
-        simulation.spawnPerson(Location.of(7,3));
-        simulation.spawnPerson(Location.of(8,3));
 
-        System.out.println(StringView.personMap(simulation.field));
-        System.out.println(StringView.useMap(simulation.field, simulation.getUse()));
-        simulation.run(BigDecimal.valueOf(200000));
+        FieldImporter fi = new FieldImporter(build);
+        final Field field2 = fi.getField();
+        OutputFile output = new OutputFile(build, field2);
+        final Simulation simulation = new Simulation(field2, build, output);
+        simulation.run(BigDecimal.valueOf(build.getMaxDuration()));
         try {
-            output.save("output.xml");
+            output.save(build.getOutput());
         }catch (JAXBException e){
             e.printStackTrace();
         } catch (IOException e){

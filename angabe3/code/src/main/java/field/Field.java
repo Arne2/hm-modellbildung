@@ -16,7 +16,8 @@ public class Field {
     /** All persons with their locations. */
     private final Map<Person, Location> persons = new HashMap<>();
     /** The single target in this field. */
-    private Location target = Location.of(0, 0);
+
+    private Set<Location> targets = new HashSet<>();
 
     /** The size of a quadratic cell. Size equals the with and the height. */
     private final double cellSize;
@@ -33,13 +34,15 @@ public class Field {
         return Collections.unmodifiableMap(persons);
     }
 
-    public Location getTarget() {
-        return target;
+
+    public Set<Location> getTargets(){
+        return this.targets;
     }
 
-    public void setTarget(Location target) {
-        addLocation(target);
-        this.target = target;
+    public void addTarget(Location target){
+        locations.add(target);
+        targets.add(target);
+
     }
 
     public int getWidth() {
@@ -61,7 +64,7 @@ public class Field {
     }
 
     public boolean isTarget(Location target) {
-        return target.equals(this.target);
+        return targets.contains(target);
     }
 
     public void putPerson(Person person, Location location) {

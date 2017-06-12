@@ -340,8 +340,7 @@ public class SimulationGui extends Application {
                 if (d == WALLVALUE){
                     continue;
                 }
-                int val = (int)((1-d/min)*255);
-                gc.setFill(Color.rgb(val,val,255-val));
+                gc.setFill(Color.hsb(((1+d/min) * 360), 1, 1, 1));
                 gc.fillRect(x* cellsize, y* cellsize, cellsize, cellsize);
             }
         }

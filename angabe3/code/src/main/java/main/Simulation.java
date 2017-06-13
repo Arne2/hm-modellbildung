@@ -3,6 +3,8 @@ package main;
 import config.Configuration;
 import field.Field;
 import field.location.Location;
+import field.use.*;
+import field.view.StringView;
 import field.use.Dijkstra;
 import field.use.EuclidDistance;
 import field.use.FastMarching;
@@ -24,9 +26,11 @@ public class Simulation {
 
 
     private final Map<Location, Double> use;
+    private final PersonalSpace personalSpace = new PersonalSpace();
     private final Clock clock = new Clock();
     private final EventList events = new EventList();
-    private final List<Person> persons = new ArrayList<Person>();
+    private final List<Person> persons = new ArrayList<>();
+
     private final Configuration configuration;
     private final OutputFile outputFile;
 
@@ -41,13 +45,11 @@ public class Simulation {
         }
 
 
-        if(configuration.getAlgorithm() == Configuration.AlgorithmType.eEuclid){
+        if (configuration.getAlgorithm() == Configuration.AlgorithmType.eEuclid) {
             this.use = EuclidDistance.use(field);
-        }
-        else if(configuration.getAlgorithm() == Configuration.AlgorithmType.eFastMarching){
+        } else if (configuration.getAlgorithm() == Configuration.AlgorithmType.eFastMarching) {
             this.use = FastMarching.use(field);
-        }
-        else{
+        } else {
             this.use = Dijkstra.use(field);
         }
         if (outputFile != null) {
@@ -76,11 +78,12 @@ public class Simulation {
         final PersonMoveEvent event = new PersonMoveEvent(clock.systemTime(), this, person);
         this.events.add(event);
         persons.add(person);
-        if(outputFile != null) {
+        if (outputFile != null) {
             outputFile.addPawnEvent(clock.systemTime(), person.getId(), location.x, location.y);
         }
         return person;
     }
+
     public void run(BigDecimal maxSimulationTime) {
         while (events.hasNext() & clock.systemTime().compareTo(maxSimulationTime) < 0) {
             System.out.println(clock.systemTime());
@@ -118,5 +121,9 @@ public class Simulation {
 
     public OutputFile getOutputFile() {
         return outputFile;
+    }
+
+    public PersonalSpace getPersonalSpace() {
+        return personalSpace;
     }
 }

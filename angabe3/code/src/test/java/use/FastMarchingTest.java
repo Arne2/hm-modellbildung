@@ -15,12 +15,14 @@ import java.util.Map;
  */
 public class FastMarchingTest {
 
+    public static final double CELL_SIZE = 0.40;
+
     @Test
     public void testFastMarching(){
         Field field = StringView.parseStringMap("" +
                 "000\n" +
                 "0X0\n" +
-                "000\n" );
+                "000\n", CELL_SIZE);
         Map<Location, Double> result = new HashMap<>();
         result.put(new Location(0,0), -1.71);
         result.put(new Location(0,1), -1.0);

@@ -1,6 +1,7 @@
 package field;
 
 import field.location.Location;
+import field.location.Locations;
 
 import java.util.Arrays;
 import java.util.Set;
@@ -44,5 +45,4 @@ public class Fields {
                 .filter(field::has)
                 .collect(Collectors.toSet());
     }
-
 }

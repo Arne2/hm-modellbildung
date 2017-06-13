@@ -34,7 +34,7 @@ public class XChickenTest {
                         "000 00000 000\n" +
                         "000    0  000\n" +
                         "0000000000000\n" +
-                        "0000000000000");
+                        "0000000000000",CELL_SIZE);
         final Simulation simulation = new Simulation(field, conf, null);
         simulation.spawnPerson(new Location(6,3));
         simulation.run(new BigDecimal(100000));

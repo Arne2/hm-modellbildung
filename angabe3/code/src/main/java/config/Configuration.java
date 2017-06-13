@@ -13,7 +13,7 @@ import java.util.function.Supplier;
 public class Configuration {
 
     /** Size of a cell. Indicates the width (and also the height) of it. */
-    private final int cellSize;
+    private final double cellSize;
     /**
      * Provides a value to use for a free flow velocity. It can be static or
      * be a new one each time it is called, based on a function.
@@ -79,7 +79,7 @@ public class Configuration {
      *
      * @return the length of the edge of a cell in cm.
      */
-    public int getCellSize() {
+    public double getCellSize() {
         return cellSize;
     }
 
@@ -119,7 +119,7 @@ public class Configuration {
      * Provides a builder for a customized Configuration.
      */
     public static class Builder {
-        private int cellSize = 1;
+        private double cellSize = 0.40;
         private AlgorithmType algorithm = AlgorithmType.eDijkstra;
         private Supplier<Double> freeFlowVelocity = () -> 1.48;
         private double deviation = 1.44;

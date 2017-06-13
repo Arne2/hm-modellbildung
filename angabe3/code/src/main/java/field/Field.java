@@ -19,25 +19,11 @@ public class Field {
 
     private Set<Location> targets = new HashSet<>();
 
-    private int width;
+    /** The size of a quadratic cell. Size equals the with and the height. */
+    private final double cellSize;
 
-    private int height;
-
-    public Field() {
-        this(0, 0);
-    }
-
-    public Field(int width, int height) {
-        this.width = width;
-        this.height = height;
-    }
-
-    public void fillField(){
-        for (int x = 0; x < width; x++) {
-            for (int y = 0; y < height; y++) {
-                locations.add(Location.of(x, y));
-            }
-        }
+    public Field(double cellSize) {
+        this.cellSize = cellSize;
     }
 
     public Map<Person, Location> getPersons() {
@@ -56,19 +42,17 @@ public class Field {
     }
 
     public int getWidth() {
-        return width;
-    }
-
-    public void setWidth(int width) {
-        this.width = width;
+        return locations.stream()
+                .map(location -> location.x)
+                .max(Integer::compareTo)
+                .orElse(-1) + 1;
     }
 
     public int getHeight() {
-        return height;
-    }
-
-    public void setHeight(int height) {
-        this.height = height;
+        return locations.stream()
+                .map(location -> location.y)
+                .max(Integer::compareTo)
+                .orElse(-1) + 1;
     }
 
     public boolean addLocation(Location location) {
@@ -103,7 +87,11 @@ public class Field {
         persons.remove(person);
     }
 
-    public int numberOfPersons(){
+    public int numberOfPersons() {
         return persons.size();
+    }
+
+    public double getCellSize() {
+        return cellSize;
     }
 }

@@ -5,6 +5,7 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.geometry.Orientation;
 import javafx.geometry.Rectangle2D;
@@ -17,6 +18,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollBar;
 import javafx.scene.control.Slider;
+import javafx.scene.image.WritableImage;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Screen;
@@ -24,18 +26,24 @@ import javafx.stage.Stage;
 import outputFile.Output;
 import outputFile.OutputEvent;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
+import java.awt.image.RenderedImage;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.sql.Time;
+import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.DoubleToIntFunction;
 
 /**
  * Created by Arne on 30.05.2017.
@@ -91,6 +99,7 @@ public class SimulationGui extends Application {
     private boolean heatmap = false;
     private boolean enableScrollbar = false;
     private long waitingtime = 0;
+    private File inputFile ;
 
     // Stages
     Stage primaryStage;
@@ -136,6 +145,8 @@ public class SimulationGui extends Application {
     private Button play;
     private Button changeLayer;
     private Button loadXML;
+    private Button snapshot;
+
 
     /**
      * For accessing the screen info.
@@ -157,6 +168,7 @@ public class SimulationGui extends Application {
      * @throws IOException
      */
     private void loadInput(File file) throws JAXBException, IOException{
+        inputFile = file;
         JAXBContext jaxbContext = JAXBContext.newInstance(Output.class);
         Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
         FileReader reader = new FileReader(file);
@@ -311,6 +323,18 @@ public class SimulationGui extends Application {
                 gc.fillRect(x* cellsize, y* cellsize, cellsize, cellsize);
                 gc.strokeRect(x* cellsize, y* cellsize, cellsize, cellsize);
             }
+        }
+    }
+
+    public void saveSnapshot(){
+        File snapshot = new File (inputFile.getParent() + "/snapshot_" + LocalTime.now().toString() + ".png");
+        WritableImage writableImage = new WritableImage(((int) canvas.getWidth()), ((int) canvas.getHeight()));
+        canvas.snapshot(null, writableImage);
+        RenderedImage renderedImage = SwingFXUtils.fromFXImage(writableImage, null);
+        try {
+            ImageIO.write(renderedImage, "png", snapshot);
+        }catch (Exception e){
+            e.getMessage(); //unhandled
         }
     }
 
@@ -533,10 +557,19 @@ public class SimulationGui extends Application {
 
         // Load simulation button
         loadXML = new Button("Load Simulation");
-        loadXML.setLayoutX(250);
+        loadXML.setLayoutX(350);
         loadXML.setLayoutY(42);
         loadXML.setOnAction(event -> {
             loadXmlMethod();
+        });
+
+
+        // Load snapshot button
+        snapshot = new Button("snapshot");
+        snapshot.setLayoutX(250);
+        snapshot.setLayoutY(42);
+        snapshot.setOnAction(event -> {
+            saveSnapshot();
         });
 
         // Add the buttons to the pane
@@ -545,6 +578,7 @@ public class SimulationGui extends Application {
         menu.getChildren().add(play);
         menu.getChildren().add(changeLayer);
         menu.getChildren().add(loadXML);
+        menu.getChildren().add(snapshot);
 
         // At the beginning there is no simulation selected. Therefore all buttons will be disabled.
         play.setDisable(true);
@@ -552,6 +586,7 @@ public class SimulationGui extends Application {
         reset.setDisable(true);
         slider.setDisable(true);
         changeLayer.setDisable(true);
+        snapshot.setDisable(true);
     }
 
     /**
@@ -596,7 +631,7 @@ public class SimulationGui extends Application {
         reset.setDisable(false);
         slider.setDisable(false);
         changeLayer.setDisable(false);
-
+        snapshot.setDisable(false);
         setCellSize();
         createGrid();
         createInfo();

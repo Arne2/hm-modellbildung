@@ -31,26 +31,26 @@ public class PersonMoveEvent extends BaseEvent {
     public List<Event> execute() {
         final List<Event> newEvents = new ArrayList<>();
 
-        final Location center = simulation.field.locationOf(person);
-        if (simulation.field.isTarget(center)) {
+        final Location locationOfPerson = simulation.field.locationOf(person);
+        if (simulation.field.isTarget(locationOfPerson)) {
             simulation.field.removePerson(person);
             return newEvents;
         }
 
-        final Set<Location> range = Fields.moore(simulation.field, center).stream()
+        final Set<Location> range = Fields.moore(simulation.field, locationOfPerson).stream()
                 .filter(simulation.field::isFree)
                 .collect(Collectors.toSet());
-        range.add(center);
+        range.add(locationOfPerson);
 
         final Location bestTarget = range.stream()
-                .max(Comparator.comparingDouble(l -> {
-                    final double use = simulation.getUse().get(l);
-                    final double personPotential = simulation.getPersonalSpace().use(simulation.field, center);
+                .max(Comparator.comparingDouble((Location target) -> {
+                    final double use = simulation.getUse().get(target);
+                    final double personPotential = simulation.getPersonalSpace().use(simulation.field, target, locationOfPerson);
                     return use + personPotential;
-                }).thenComparingDouble( a ->  -Locations.distance((Location)a, center)))
+                }).thenComparingDouble( target ->  -Locations.distance(target, locationOfPerson)))
                 .orElseThrow(() -> new AssertionError("cannot happen!"));
 
-        if (bestTarget.equals(center)) {
+        if (bestTarget.equals(locationOfPerson)) {
             final BigDecimal timeForWait = BigDecimal.valueOf(simulation.field.getCellSize() / person.getVelocity());
             final BigDecimal nextMove = getTime().add(timeForWait);
             final PersonMoveEvent event = new PersonMoveEvent(nextMove, simulation, person);
@@ -59,7 +59,7 @@ public class PersonMoveEvent extends BaseEvent {
         }
 
         simulation.field.putPerson(person, bestTarget);
-        final double distance = Locations.distance(center, bestTarget) * simulation.getConfiguration().getCellSize();
+        final double distance = Locations.distance(locationOfPerson, bestTarget) * simulation.getConfiguration().getCellSize();
         final BigDecimal timeForMove = BigDecimal.valueOf(distance / person.getVelocity());
         final BigDecimal nextMove = getTime().add(timeForMove);
         final PersonMoveEvent event = new PersonMoveEvent(nextMove, simulation, person);

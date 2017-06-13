@@ -40,16 +40,16 @@ public class PersonalSpace {
         throw new AssertionError("Should have been filtered out!");
     }
 
-    public double use(Field field, Location center) {
+    public double use(Field field, Location target, Location self) {
         final Map<Person, Location> persons = field.getPersons();
 
         return -1 * persons.values().stream()
+                .filter(l -> !l.equals(self))
                 .filter(l -> {
-                    final double distance = Locations.distance(l, center) * field.getCellSize();
+                    final double distance = Locations.distance(l, target) * field.getCellSize();
                     return isInRange(distance);
                 })
-                .filter(l -> !l.equals(center))
-                .mapToDouble(l -> calculate(Locations.distance(l, center) * field.getCellSize()))
+                .mapToDouble(l -> calculate(Locations.distance(l, target) * field.getCellSize()))
                 .sum();
     }
 

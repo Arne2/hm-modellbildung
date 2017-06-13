@@ -43,6 +43,7 @@ In der Realität versucht eine Person einem Hindernis möglichst frühzeitig aus
 Durch das entsprechende Testszenario werden ein oder mehrere Ziele definiert. Ziele werden als attraktiv für die Personen angesehen. Jede Person erhöht ihren Nutzen, wenn sie sich dem Ziel nähert. Befinden sich mehrere Ziele im Feld, wird die Wahl des Ziels für jede Person abhängig vom Betriebsmodus bestimmt. 
 
 \subsection{Personen}
+\label{Anf:Personen}
 Jede Person soll in ihrem Startfeld starten und sich im Laufe der Simulation von Zelle zu Zelle auf ihr Ziel hin bewegen und dadurch ihren persönlichen Nutzen, je näher sie dem Ziel kommt, steigern. Jede Person kann sich in der Moore-Umgebung (8 mögliche Bewegungsrichtungen) bewegen. Die möglichen Bewegungsrichtungen sind in Abbildung \ref{fig:MooreUmgebung} rot markiert.
 \begin{figure}[htpb]
 	\centering
@@ -51,7 +52,7 @@ Jede Person soll in ihrem Startfeld starten und sich im Laufe der Simulation von
 	\label{fig:MooreUmgebung}
 \end{figure}
 \\
-Die Personen können nur freie Zellen betreten. Jede Person wählt genau die Zelle als nächste Zelle, welche ihr den steilsten Nutzenanstieg ermöglicht. Der Nutzen der verschiedenen Zellen wird abhängig vom Betriebsmodus unterschiedlich berechnet. Darüber hinaus soll der Nutzen durch die Position der anderen Personen beeinflusst werden. \\
+Die Personen können nur freie Zellen betreten. Jede Person wählt genau die Zelle als nächste Zelle, welche ihr den steilsten Nutzenanstieg ermöglicht. Der Nutzen der verschiedenen Zellen wird abhängig vom verwendeten Algorithmus unterschiedlich berechnet. Darüber hinaus soll der Nutzen durch die Position der anderen Personen beeinflusst werden. \\
 
 Hierfür wird zwischen zwei Bereichen, abhängig vom Abstand zur nächsten Person unterschieden. Beträgt der Abstand zu einer fremden Person weniger als $45cm$, wird der vertraute Bereich (intimate space) der Personen betreten. Beträgt der Abstand zwischen $45cm$ und $120cm$, wird der persönliche Bereich (personal space) der Personen betreten. Für den vertrauten Bereich ist der Nutzenverlust (Nv(x)), abhängig vom Abstand $x$, nach Funktion \ref{Equ:NutzenverlustV} definiert. Für den persönlichen Bereich wird der Nutzenverlust (Np(x)), wiederum abhängig vom Abstand $x$ zur anderen Person, durch die Funktion \ref{Equ:NutzenverlustP} definiert. 
 
@@ -82,7 +83,7 @@ $d(x)$ beschreibt den aktueller Abstand zur nächsten Person. Die folgende Tabel
 	\label{tab:parameterNutzenverlust}
 \end{table}
 
-Weitere Erläuterungen zu den Parametern, den Werten und den verwendeten Funktionen sind im Kapitel \ref{Personenpotenzial} beschrieben.
+Der Radius einer Person sowie die Abstände für den vertrauten und persönlichen Bereich wurden auf Basis des Modells von Hall aus \cite{VONSIVERS2015104} übernommen. Weitere Erläuterungen zu den Parametern, den Werten und den verwendeten Funktionen sind im Kapitel \ref{Personenpotenzial} beschrieben.
  
 \subsection{Geschwindigkeit der Personen}
 Jede Person soll eine individuelle Wunschgeschwindigkeit besitzen. Sie bewegt sich bei freier Bahn mit dieser Geschwindigkeit fort. Die Wunschgeschwindigkeiten sollen als normalverteilt angesehen werden. Als Mittelwert und Standardabweichung sollen die errechneten Werte aus der ersten Studienarbeit verwendet werden.
@@ -137,7 +138,7 @@ Alle in der Tabelle \ref{tab:WerteAuswertung} aufgeführten Werte sollen auf Bas
 		Ermittelte Werte & Beschreibung & Wann benötigt\\ \hline
 		mittlere Geschwindigkeit & durchschnittliche Geschwindigkeit der Personen im Feld & Rimea-Test 4 \\	
 		Fluss (Personen/Meter/s) & Anzahl der Personen mit Geschwindigkeit > 1m/s im Feld & Rimea-Test 4\\
-		Simulationsdauer & Dauer bis der Test beendet ist & Hühner Test, \\&& Evakuierung (2 Türen), \\&& Evakuierung (4 Türen)\\
+		Simulationsdauer & Dauer bis der Test beendet ist & bei allen Tests
 	\end{tabular}
 	\caption{Werte für die Auswertung}
 	\label{tab:WerteAuswertung}
@@ -239,6 +240,7 @@ In diesem Testfall soll, analog zum Rimea-Test 4, ein $65m$ langer und $12m$ bre
 \end{figure}
 
 \subsection{Visualisierung}
+
 Die Visualisierung soll die errechneten Personenbewegungen graphisch darstellen. Als Grundlage soll der ausgegebene Report (vgl. Abschnitt \ref{Anforderungen:Report}) dienen. Konkrete Anforderungen bezüglich der Visualisierung sind in Abbildung \ref{fig:AnforderungenVisualisierung} abgebildet.
 
 \begin{figure}[htpb]
@@ -251,6 +253,31 @@ Die Visualisierung soll die errechneten Personenbewegungen graphisch darstellen.
 Die Oberfläche der Visualisierung soll aus 4 verschiedenen Teilen bestehen, welche in der Abbildung durch die blauen Kästen A-D hervorgehoben wurden. Im Teil A sollen Konfigurationsmöglichkeiten für die Visualisierung aufgeführt sein. Beispielsweise soll zwischen einer normalen Darstellung der Simulation und einer Heatmap gewechselt werden können. Darüber hinaus soll die Möglichkeit bestehen, die Visualisierung zu stoppen und schrittweise fortzusetzen. \\
 Teil B enthält die eigentliche Visualisierung der Personen, Hindernisse und Ziele. In Teil C sind alle Informationen bezüglich der Visualisierung aufgeführt und Teil D enthält eine Legende der verwendeten Symbole und Farben.
 
+
+\section{Beeinflussung durch andere Personen} 
+\label{Personenpotenzial}
+
+Wie bereits im Abschnitt \ref{Anf:Personen} kurz erläutert, wird die Entscheidung, welche Zelle eine Person als nächstes betritt abhängig vom verwendeten Algorithmus und von den Positionen der anderen Personen getroffen. In der Realität fühlen sich Personen unwohl, wenn sie anderen, insbesondere fremden Personen zu nahe kommen. Personen versuchen somit eine solche Situation wenn möglich zu vermeiden. Beispielsweise bei der Fahrt in einem überfüllten Aufzug lässt sich diese Situation nicht vermeiden, doch jede Person ist froh wenn sie ihr Stockwerk erreicht und die Situation vorbei ist. In der Ebene sind solche Situationen jedoch häufig vermeidbar. Personen neigen in der Realität dazu einen Umweg in kauf zu nehmen, um einem Gedränge zu entkommen. Um dieses Verhalten in der Simulation zu berücksichtigen existieren verschiedene mathematische Funktionen. Mit Hilfe der Funktionen wird das Abstoßungspotenzial ermittelt. Während auf der einen Seite der Nutzen einer Person steigt, je näher sie dem Ziel kommt, verringert sich dieser Nutzen auf der anderen Seite wieder, wenn sie anderen Personen zu nahe kommen. Mit Hilfe von Funktionen kann somit der Nutzenverlust einer Person bestimmt werden. \\
+%TODO: Warum glatte Fkt auf kompakten Trägern verwenden?
+Insbesondere glatte Funktionen auf kompakten Trägern eignen sich hierfür gut. Hintergrund hierfür ist die Eigenschaft solcher Funktionen, außerhalb eines begrenzten Gebietes komplett zu verschwinden. Wäre dies nicht der Fall, würde eine sehr weit entfernte Person die Entscheidung einer anderen Person beeinflussen. Dies entspricht nicht der Realität. Das Abstoßungspotenzial von Personen ist auf einen Bereich beschränkt. \\
+In der Fachliteratur wird beispielsweise folgende Funktion vorgeschlagen:
+\begin{displaymath}
+\label{equ:NutzenverlustSCHLECHT}
+N(d) = 
+\left\{ 
+\begin{array}{cc}
+-h \exp(\frac{1}{(\frac{d}{w})^2 -1}) & \;\;\;\;\;\;\;\;\;\;\; falls\, |d| < w  \\
+0 & sonst  
+\end{array} 
+\right.
+\end{displaymath}
+Hierbei wird der Nutzenverlust ($N(d)$), abhängig vom Abstand $d$ zur nächsten Person definiert. $w$ beschreibt die Reichweite der Funktion und $h$ die Stärke der Beeinflussung bzw. des Nutzenverlustes \cite{DIETRICH2014841}. \\ 
+Nach Diskussion in der Gruppe haben wir uns jedoch gegen die Verwendung dieser Funktion entschieden. \\
+%TODO: Begründung warum nicht gewählt!
+Für die Ermittlung des Abstoßungspotenzials bzw. des Nutzenverlustes aufgrund anderer Personen wurden stattdessen die in Abschnitt \ref{Anf:Personen} aufgeführten Funktionen \ref{Equ:NutzenverlustP} und \ref{Equ:NutzenverlustV} verwendet. Diese basieren auf dem Modell von Hall, welches den Bereich um eine Person in mehrere Bereiche einteilt. In einem Umkreis von bis zu $45cm$ wird der vertraute Bereich einer Person betreten. Befinden sich zwei Personen so nah beieinander, können Berührungen nicht vermieden werden. Zwischen $45cm$ und $120cm$ um eine Person befindet sich der persönliche Bereich, welcher beispielsweise von Freunden oder Familienmitgliedern, jedoch nicht von fremden betreten werden darf. Darüber hinaus definiert Hall noch zwei weitere Bereiche. Zwischen $120cm$ und $360cm$ um die Person befindet sich der soziale oder gesellschaftliche Bereich der Person und ab $360cm$ der öffentliche Bereich. Für die Simulation in dieser Studienarbeit sind die beiden letzten Bereiche jedoch nicht relevant, da der Einfluss auf den Nutzen der Person zu gering ist, um die Entscheidung, wohin die Person als nächstes geht zu beeinflussen. Darüber hinaus lässt sich das betreten dieser beiden Bereiche durch andere Personen bei einer höheren Personendichte generell nicht vermeiden.\\
+Nach unserer Einschätzung und nach \cite{VONSIVERS2015104} führt die Berücksichtigung des Modells von Hall durch die Verwendung unterschiedlicher Funktionen für den vertrauten und persönlichen Bereich zu einem Verhalten, welches der Realität näher kommt. Berührt eine Person eine fremde Person, fühlt sie sich deutlich unwohler, als wenn sie dieser lediglich nahe kommt mit einem Abstand von beispielsweise $50cm$. Diese Eigenschaft wird durch die Funktion \ref{equ:NutzenverlustSCHLECHT} kaum berücksichtigt.\\
+Darüber hinaus beinhalten die Funktionen \ref{Equ:NutzenverlustP} und \ref{Equ:NutzenverlustV} deutlich mehr Parameter anhand derer sie an die Realität bzw. an potenzielle gesellschaftliche oder länderspezifische Unterschiede angepasst werden können. Für diese Studienarbeit wurden die Parameter wie in der Tabelle \ref{tab:parameterNutzenverlust} aufgeführt gewählt. Grundlage hierfür sind die in \cite{VONSIVERS2015104} erläuterten Erkenntnisse aus unterschiedlichen Versuchen.  
+%TODO: Tests und Parameter genauer beschreiben
 \section{Softwaredesign}
 
 Der Aufbau der Anwendung wurde im Team diskutiert und anschließend mittels UML spezifiziert.

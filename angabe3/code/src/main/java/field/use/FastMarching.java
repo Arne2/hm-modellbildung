@@ -192,7 +192,7 @@ public class FastMarching {
         }
 
         for (Map.Entry<Location, Double> dist: distance.entrySet() ) {
-            dist.setValue( - dist.getValue());
+            dist.setValue( - dist.getValue()*field.getCellSize());
             distance.put(dist.getKey(), dist.getValue());
         }
 

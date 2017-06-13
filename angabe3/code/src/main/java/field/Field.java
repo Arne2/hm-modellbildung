@@ -19,9 +19,9 @@ public class Field {
 
     private Set<Location> targets = new HashSet<>();
 
-    private final int width;
+    private int width;
 
-    private final int height;
+    private int height;
 
     public Field() {
         this(0, 0);
@@ -59,8 +59,16 @@ public class Field {
         return width;
     }
 
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
     public int getHeight() {
         return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
     }
 
     public boolean addLocation(Location location) {

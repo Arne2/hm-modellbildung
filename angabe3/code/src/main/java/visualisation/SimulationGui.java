@@ -115,6 +115,8 @@ public class SimulationGui extends Application {
     private Label stepLabel;
     private Label timeLabel;
     private Label algorithmLabel;
+    private Label velocityLabel;
+    private Label deviationLabel;
     private Label personLabel;
     private Label simulationTimeLabel;
 
@@ -274,10 +276,14 @@ public class SimulationGui extends Application {
      * Sets the size of a cell depending on the screen size and the field bounds.
      */
     private void setCellSize(){
-        double x = screenBounds.getWidth() - info.getWidth();
-        double y = screenBounds.getHeight() - 50;
+        double x = screenBounds.getWidth()*0.9 - infoStage.getWidth();
+                //screenBounds.getWidth() - info.getWidth();
+        double y = screenBounds.getHeight()*0.7 - primaryStage.getHeight();
+                //screenBounds.getHeight() - 50;
         int width = input.getFieldWidth();
         int height = input.getFieldHeight();
+        System.out.println("Width: " + width);
+        System.out.println("Height: " + height);
 
         cellsize = (int)Math.min(x/width,(y-MENUSIZE)/height);
         cellsize = Math.min(MAXCELLSIZE, cellsize);
@@ -285,6 +291,7 @@ public class SimulationGui extends Application {
             enableScrollbar = true;
         }
         cellsize = Math.max(MINCELLSIZE, cellsize);
+        System.out.println(cellsize);
     }
 
     /**
@@ -455,23 +462,33 @@ public class SimulationGui extends Application {
         algorithmLabel.setLayoutX(10);
         algorithmLabel.setLayoutY(14);
 
+        velocityLabel = new Label("Free Flow Velocity: " + input.getFreeFlowVelocity());
+        velocityLabel.setLayoutX(10);
+        velocityLabel.setLayoutY(32);
+
+        deviationLabel = new Label("Deviation: " + input.getDeviation());
+        deviationLabel.setLayoutX(10);
+        deviationLabel.setLayoutY(50);
+
         stepLabel = new Label("Current step: " + step);
         stepLabel.setLayoutX(10);
-        stepLabel.setLayoutY(32);
+        stepLabel.setLayoutY(68);
 
         timeLabel = new Label("Current Time: 0");
         timeLabel.setLayoutX(10);
-        timeLabel.setLayoutY(50);
+        timeLabel.setLayoutY(86);
 
         simulationTimeLabel = new Label("Simulationtime: " + input.getEvents().stream().map(outputEvent -> outputEvent.getTime()).max(BigDecimal::compareTo).get());
         simulationTimeLabel.setLayoutX(10);
-        simulationTimeLabel.setLayoutY(68);
+        simulationTimeLabel.setLayoutY(104);
 
         personLabel = new Label("People in the Simulation: 0");
         personLabel.setLayoutX(10);
-        personLabel.setLayoutY(86);
+        personLabel.setLayoutY(122);
 
         info.getChildren().add(algorithmLabel);
+        info.getChildren().add(velocityLabel);
+        info.getChildren().add(deviationLabel);
         info.getChildren().add(stepLabel);
         info.getChildren().add(timeLabel);
         info.getChildren().add(simulationTimeLabel);

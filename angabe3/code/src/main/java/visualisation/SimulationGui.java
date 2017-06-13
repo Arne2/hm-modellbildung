@@ -56,7 +56,7 @@ public class SimulationGui extends Application {
 
     // Default Sizes of Panels
     public static final int MENUSIZE = 75;
-    public static final int STARTSIZE = 400;
+    public static final int STARTSIZE = 475;
     public static final int INFOSIZE = 250;
 
     // Colors

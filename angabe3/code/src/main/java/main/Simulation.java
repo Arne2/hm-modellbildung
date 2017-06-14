@@ -8,6 +8,7 @@ import field.view.StringView;
 import field.use.Dijkstra;
 import field.use.EuclidDistance;
 import field.use.FastMarching;
+import measurement.Measurement;
 import outputFile.OutputFile;
 import person.Person;
 import time.Clock;
@@ -30,7 +31,7 @@ public class Simulation {
     private final Clock clock = new Clock();
     private final EventList events = new EventList();
     private final List<Person> persons = new ArrayList<>();
-
+    private final Measurement measurement;
     private final Configuration configuration;
     private final OutputFile outputFile;
 
@@ -38,6 +39,7 @@ public class Simulation {
         this.configuration = configuration;
         this.field = field;
         this.outputFile = outputFile;
+        measurement = new Measurement(field.getMeasurementPoints(), configuration);
 
         Map<Person, Location> persLoc = field.getPersons();
         for (Map.Entry<Person, Location> entry : persLoc.entrySet()) {
@@ -67,7 +69,9 @@ public class Simulation {
         return person;
     }
 
+    private void addMeasurementEvent(){
 
+    }
 
     public Person spawnPerson(Location location) {
 
@@ -93,6 +97,10 @@ public class Simulation {
             final List<Event> newEvents = event.execute();
             events.addAll(newEvents);
         }
+    }
+
+    public Measurement getMeasurement(){
+        return measurement;
     }
 
     public Field getField() {

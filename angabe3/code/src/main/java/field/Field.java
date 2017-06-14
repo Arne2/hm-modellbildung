@@ -1,6 +1,7 @@
 package field;
 
 import field.location.Location;
+import measurement.Measurement;
 import person.Person;
 
 import java.util.*;
@@ -16,6 +17,8 @@ public class Field {
     /** All persons with their locations. */
     private final Map<Person, Location> persons = new HashMap<>();
     /** The single target in this field. */
+
+    private final Set<Location> measurePoints = new HashSet<>();
 
     private Set<Location> targets = new HashSet<>();
 
@@ -33,6 +36,14 @@ public class Field {
 
     public Set<Location> getTargets(){
         return this.targets;
+    }
+
+    public void addMeasurePoint(Location point){
+        measurePoints.add(point);
+    }
+
+    public Set<Location> getMeasurementPoints(){
+        return measurePoints;
     }
 
     public void addTarget(Location target){

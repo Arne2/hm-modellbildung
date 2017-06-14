@@ -150,7 +150,7 @@ Alle in der Tabelle \ref{tab:WerteAuswertung} aufgeführten Werte sollen auf Bas
 Die implementierten Algorithmen (vgl. Unterkapitel \ref{AnforderungenAlgorithmen} ) sollen anhand unterschiedlicher Testszenarien verglichen und verifiziert werden. Die verschiedenen Szenarien sollen der Simulation als .png Datei übergeben werden. 
 
 \subsubsection{Erstellung der Testszenarien}
-Es soll die Möglichkeit bestehen, unterschiedliche Testszenarien mittels eines Bildbearbeitungsprogrammes zu erstellen und an die Simulation (als .png Datei) zu übergeben. Bei der Erstellung ist sowohl die Anzahl der Personen, als auch die Anzahl der Hindernisse und Ziele (Personensenken) beliebig. Hinsichtlich der Farben der Objekte müssen jedoch die in der folgenden Tabelle \ref{tab:Farbcodes} beschriebenen Farbcodes verwendet werden. Jedes Pixel wird durch eine Zelle des Automaten repräsentiert.
+Es soll die Möglichkeit bestehen, unterschiedliche Testszenarien mittels eines Bildbearbeitungsprogrammes zu erstellen und an die Simulation (als .png Datei) zu übergeben. Bei der Erstellung ist sowohl die Anzahl der Personen, als auch die Anzahl der Hindernisse und Ziele (Personensenken) beliebig. Hinsichtlich der Farben der Objekte müssen jedoch die in der folgenden Tabelle \ref{tab:Farbcodes} beschriebenen Farbcodes verwendet werden. Jedes Pixel wird durch eine Zelle des Automaten repräsentiert. Darüber hinaus soll die Möglichkeit bestehen ein Messfeld zu definieren. In diesem Feld wird die durchschnittliche Geschwindigkeit der Personen ermittelt in einer .csv Datei ausgegeben. Für das Messfeld müssen in der .png Datei lediglich die beiden diagonalen Eckpunkte angegeben werden. Die Implementierung ermittelt die Koordinaten und erstellt daraus ein rechteckiges Feld. 
  
 \begin{table}[htpb]
 	\centering
@@ -159,7 +159,8 @@ Es soll die Möglichkeit bestehen, unterschiedliche Testszenarien mittels eines 
 		\#3F48CC & Blau & Ziel/ Personensenke \\	
 		\#000000 & Schwarz & Ziel/ Personensenke \\
 		\#FFFFFF & Weiß & Leere Zelle \\
-		\#22B14C & Grün & Person 
+		\#22B14C & Grün & Person \\
+		\#FF0000 & Rot  & Messfeld
 	\end{tabular}
 	\caption{Werte für die Auswertung}
 	\label{tab:Farbcodes}
@@ -251,7 +252,7 @@ Die Visualisierung soll die errechneten Personenbewegungen graphisch darstellen.
 \end{figure}
 
 Die Oberfläche der Visualisierung soll aus 4 verschiedenen Teilen bestehen, welche in der Abbildung durch die blauen Kästen A-D hervorgehoben wurden. Im Teil A sollen Konfigurationsmöglichkeiten für die Visualisierung aufgeführt sein. Beispielsweise soll zwischen einer normalen Darstellung der Simulation und einer Heatmap gewechselt werden können. Darüber hinaus soll die Möglichkeit bestehen, die Visualisierung zu stoppen und schrittweise fortzusetzen. \\
-Teil B enthält die eigentliche Visualisierung der Personen, Hindernisse und Ziele. In Teil C sind alle Informationen bezüglich der Visualisierung aufgeführt und Teil D enthält eine Legende der verwendeten Symbole und Farben.
+Teil B enthält die eigentliche Visualisierung der Personen, Hindernisse und Ziele. In Teil C sind alle Informationen bezüglich der Visualisierung aufgeführt und Teil D enthält eine Legende der verwendeten Symbole und Farben. Wird ein Messfeld definiert, soll dieses in der Visualisierung hervorgehoben werden.
 
 
 \section{Beeinflussung durch andere Personen} 

@@ -37,6 +37,11 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -334,16 +339,22 @@ public class SimulationGui extends Application {
         }
     }
 
-    public void saveSnapshot(){
-        File snapshot = new File (inputFile.getParent() + "/snapshot_" + LocalTime.now().toString() + ".png");
+    /**
+     * Creates a png file of the current canvas.
+     * @throws IOException
+     * @throws URISyntaxException
+     */
+    public void saveSnapshot() throws IOException, URISyntaxException {
+        String path = inputFile.getParent() + "\\snapshot_" + LocalTime.now().toString().replace(":","_") + ".png";
+        File snapshot = new File (path);
+        if (!snapshot.exists()){
+            Files.createDirectories(Paths.get(inputFile.getParent()));
+            Files.createFile(Paths.get(path));
+        }
         WritableImage writableImage = new WritableImage(((int) canvas.getWidth()), ((int) canvas.getHeight()));
         canvas.snapshot(null, writableImage);
         RenderedImage renderedImage = SwingFXUtils.fromFXImage(writableImage, null);
-        try {
-            ImageIO.write(renderedImage, "png", snapshot);
-        }catch (Exception e){
-            e.getMessage(); //unhandled
-        }
+        ImageIO.write(renderedImage, "png", snapshot);
     }
 
     /**
@@ -589,7 +600,11 @@ public class SimulationGui extends Application {
         snapshot.setLayoutX(250);
         snapshot.setLayoutY(42);
         snapshot.setOnAction(event -> {
-            saveSnapshot();
+            try {
+                saveSnapshot();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
 
         // Add the buttons to the pane

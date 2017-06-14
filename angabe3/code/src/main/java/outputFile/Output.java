@@ -44,6 +44,7 @@ public class Output{
         algorithm = config_.getAlgorithm().toString();
         freeFlowVelocity = config_.getVelocity();
         deviation = config_.getDeviation();
+        cellsize = config_.getCellSize()*100 + "cm";
     }
 
 

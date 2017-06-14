@@ -41,7 +41,7 @@ public class EuclidDistance {
 
     private double getEuclidDistance(Location target, Location source){
 
-        return -Math.sqrt(Math.pow(target.x - source.x, 2) + Math.pow(target.y - source.y, 2));
+        return -Math.sqrt(Math.pow(target.x - source.x, 2) + Math.pow(target.y - source.y, 2))*field.getCellSize();
     }
 
     public static Map<Location, Double> use(Field field){

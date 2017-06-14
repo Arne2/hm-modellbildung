@@ -1,5 +1,6 @@
 package main;
 
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import config.Configuration;
 import field.Field;
 import field.location.Location;
@@ -10,13 +11,17 @@ import field.use.EuclidDistance;
 import field.use.FastMarching;
 import measurement.Measurement;
 import outputFile.OutputFile;
+import outputFile.XYLog;
 import person.Person;
 import time.Clock;
 import time.EventList;
 import time.events.Event;
 import time.events.PersonMoveEvent;
 
+import java.io.Console;
+import java.io.File;
 import java.math.BigDecimal;
+import java.nio.file.Path;
 import java.util.*;
 
 /**
@@ -34,12 +39,21 @@ public class Simulation {
     private final Measurement measurement;
     private final Configuration configuration;
     private final OutputFile outputFile;
+    private  XYLog CSVLogfile;
 
     public Simulation(Field field, Configuration configuration, OutputFile outputFile) {
         this.configuration = configuration;
         this.field = field;
         this.outputFile = outputFile;
         measurement = new Measurement(field.getMeasurementPoints(), configuration);
+        File folder = new File (configuration.getOutput());
+        Path LogFile = new File(folder.getParent() + "/free_flow_velocity.csv").toPath();
+        try {
+            CSVLogfile = new XYLog(LogFile);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+
 
         Map<Person, Location> persLoc = field.getPersons();
         for (Map.Entry<Person, Location> entry : persLoc.entrySet()) {
@@ -60,6 +74,7 @@ public class Simulation {
     }
 
     private Person spawnPersonEvent(Location location, Person person){
+        CSVLogfile.log(new BigDecimal(person.getId()) , new BigDecimal(person.getVelocity()));
         final PersonMoveEvent event = new PersonMoveEvent(clock.systemTime(), this, person);
         this.events.add(event);
         persons.add(person);
@@ -77,6 +92,7 @@ public class Simulation {
 
         Random rand = new Random(System.nanoTime());
         final double velocity = this.configuration.getVelocity();//rand.nextGaussian() * configuration.getDeviation() + configuration.getVelocity();
+
         final Person person = new Person(velocity);
         field.putPerson(person, location);
         final PersonMoveEvent event = new PersonMoveEvent(clock.systemTime(), this, person);
@@ -97,6 +113,12 @@ public class Simulation {
             final List<Event> newEvents = event.execute();
             events.addAll(newEvents);
         }
+
+       try {
+            CSVLogfile.close();
+       }catch (Exception e){
+           System.out.println(e.getMessage());
+       }
     }
 
     public Measurement getMeasurement(){

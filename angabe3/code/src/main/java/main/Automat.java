@@ -45,7 +45,7 @@ public class Automat {
         final Simulation simulation = new Simulation(field2, build, output);
         simulation.run(BigDecimal.valueOf(build.getMaxDuration()));
         try {
-            output.save(build.getOutput());
+            output.save(build.getOutput() + build.getAlgorithm().toString() + ".xml");
         }catch (JAXBException e){
             e.printStackTrace();
         } catch (IOException e){

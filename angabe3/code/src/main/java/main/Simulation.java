@@ -9,6 +9,7 @@ import field.view.StringView;
 import field.use.Dijkstra;
 import field.use.EuclidDistance;
 import field.use.FastMarching;
+import measurement.Measurement;
 import outputFile.OutputFile;
 import outputFile.XYLog;
 import person.Person;
@@ -35,7 +36,7 @@ public class Simulation {
     private final Clock clock = new Clock();
     private final EventList events = new EventList();
     private final List<Person> persons = new ArrayList<>();
-
+    private final Measurement measurement;
     private final Configuration configuration;
     private final OutputFile outputFile;
     private  XYLog CSVLogfile;
@@ -44,13 +45,7 @@ public class Simulation {
         this.configuration = configuration;
         this.field = field;
         this.outputFile = outputFile;
-        File folder = new File (configuration.getOutput());
-        Path LogFile = new File(folder.getParent() + "/free_flow_velocity.csv").toPath();
-        try {
-            CSVLogfile = new XYLog(LogFile);
-        }catch (Exception e){
-            System.out.println(e.getMessage());
-        }
+        measurement = new Measurement(field.getMeasurementPoints(), configuration);
 
 
         Map<Person, Location> persLoc = field.getPersons();
@@ -82,7 +77,9 @@ public class Simulation {
         return person;
     }
 
+    private void addMeasurementEvent(){
 
+    }
 
     public Person spawnPerson(Location location) {
 
@@ -115,6 +112,10 @@ public class Simulation {
        }catch (Exception e){
            System.out.println(e.getMessage());
        }
+    }
+
+    public Measurement getMeasurement(){
+        return measurement;
     }
 
     public Field getField() {

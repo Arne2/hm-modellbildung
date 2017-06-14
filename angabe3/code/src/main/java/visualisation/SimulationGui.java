@@ -37,13 +37,10 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.sql.Time;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.DoubleToIntFunction;
 
 /**
  * Created by Arne on 30.05.2017.
@@ -230,6 +227,15 @@ public class SimulationGui extends Application {
     }
 
     /**
+     * Handles all Events that occur at the time zero.
+     */
+    private void proceedToStart(){
+        while (input.getEvents().size() > step && input.getEvents().get(step+1).getTime().equals(BigDecimal.ZERO)){
+            handleNextEvent();
+        }
+    }
+
+    /**
      * Configures the slider.
      */
     private void createSlider(){
@@ -289,13 +295,9 @@ public class SimulationGui extends Application {
      */
     private void setCellSize(){
         double x = screenBounds.getWidth()*0.9 - infoStage.getWidth();
-                //screenBounds.getWidth() - info.getWidth();
         double y = screenBounds.getHeight()*0.7 - primaryStage.getHeight();
-                //screenBounds.getHeight() - 50;
         int width = input.getFieldWidth();
         int height = input.getFieldHeight();
-        System.out.println("Width: " + width);
-        System.out.println("Height: " + height);
 
         cellsize = (int)Math.min(x/width,(y-MENUSIZE)/height);
         cellsize = Math.min(MAXCELLSIZE, cellsize);
@@ -303,7 +305,6 @@ public class SimulationGui extends Application {
             enableScrollbar = true;
         }
         cellsize = Math.max(MINCELLSIZE, cellsize);
-        System.out.println(cellsize);
     }
 
     /**
@@ -421,6 +422,8 @@ public class SimulationGui extends Application {
         stepLabel.setText("Current step: " + step);
         timeLabel.setText("Current Time: 0");
         personLabel.setText("People in the Simulation: 0");
+
+        proceedToStart();
     }
 
     /**

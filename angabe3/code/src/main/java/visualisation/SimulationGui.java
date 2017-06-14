@@ -335,7 +335,7 @@ public class SimulationGui extends Application {
     public void drawCells(){
         GraphicsContext gc = cellLayer.getGraphicsContext2D();
         gc.setFill(Color.WHITE);
-        gc.setStroke(Color.BLACK);
+        gc.setStroke(Color.GRAY);
         gc.setLineWidth(1);
         for(int y = 0; y < input.getFieldHeight(); y++) {
             for (int x = 0; x < input.getFieldWidth(); x++) {

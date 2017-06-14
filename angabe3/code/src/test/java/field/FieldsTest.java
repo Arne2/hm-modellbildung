@@ -14,7 +14,7 @@ import java.util.Set;
 public class FieldsTest {
     @Test
     public void toStringMap() throws Exception {
-        final Field field = new Field();
+        final Field field = new Field(1);
         field.addLocation(Location.of(0, 0));
         field.addLocation(Location.of(1, 0));
         field.addLocation(Location.of(0, 1));
@@ -24,7 +24,7 @@ public class FieldsTest {
             Assert.fail("Failed to make string map representation!");
         }
 
-        final Field field2 = new Field();
+        final Field field2 = new Field(1);
         field2.addLocation(Location.of(0, 0));
         field2.addLocation(Location.of(0, 1));
         field2.addLocation(Location.of(1, 1));
@@ -40,7 +40,7 @@ public class FieldsTest {
         final String map = "0 00\n" +
                 "0 00\n" +
                 " 000\n";
-        final Field field = StringView.parseStringMap(map);
+        final Field field = StringView.parseStringMap(map, 1);
         final Set<Location> moore = Fields.moore(field, Location.of(0, 0));
         final Set<Location> expected = new HashSet<>();
         expected.add(Location.of(0, 1));
@@ -52,7 +52,7 @@ public class FieldsTest {
     @Test
     public void parseStringMap() throws Exception {
         final String map = "0 00\n0 00\n 000\n";
-        final Field field = StringView.parseStringMap(map);
+        final Field field = StringView.parseStringMap(map,1);
 
         if (field.has(Location.of(1, 1))) {
             Assert.fail("Map should not have 1,1!");

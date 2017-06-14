@@ -25,6 +25,8 @@ public class Output{
     private int fieldHeight;
     private String cellsize = "40cm";
     private String algorithm;
+    private double freeFlowVelocity;
+    private double deviation;
 
     // Default Constructor necessary for JAXB
     public Output(){
@@ -40,6 +42,8 @@ public class Output{
         fieldHeight = field.getHeight();
         targets = field_.getTargets();
         algorithm = config_.getAlgorithm().toString();
+        freeFlowVelocity = config_.getVelocity();
+        deviation = config_.getDeviation();
     }
 
 
@@ -139,6 +143,22 @@ public class Output{
 
     public void setCellsize(String cellsize) {
         this.cellsize = cellsize;
+    }
+
+    public double getFreeFlowVelocity() {
+        return freeFlowVelocity;
+    }
+
+    public void setFreeFlowVelocity(double freeFlowVelocity) {
+        this.freeFlowVelocity = freeFlowVelocity;
+    }
+
+    public double getDeviation() {
+        return deviation;
+    }
+
+    public void setDeviation(double deviation) {
+        this.deviation = deviation;
     }
 
     @Override

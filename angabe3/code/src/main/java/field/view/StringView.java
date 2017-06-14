@@ -59,9 +59,9 @@ public class StringView {
         return buffer.toString();
     }
 
-    public static Field parseStringMap(final String map) {
+    public static Field parseStringMap(final String map, double cellSize) {
         final String[] rows = map.split("\n");
-        final Field field = new Field(rows[0].length(), rows.length);
+        final Field field = new Field(cellSize);
 
         for (int y = 0; y < rows.length; y++) {
             final String row = rows[y];

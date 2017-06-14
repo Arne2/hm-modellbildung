@@ -17,17 +17,15 @@ import java.math.BigDecimal;
 
 public class FreeFlowTest {
     private static final double VELOCITY = 1.48;
-    private static final double DEVIATION = 0.144116;
-    public static final int CELL_SIZE = 1;
+    private static final int CELL_SIZE = 20;
     private final Configuration conf = new Configuration.Builder(new String [] {""})
             .cellSize(CELL_SIZE)
-            .velocity(VELOCITY)
-            .deviation(DEVIATION)
+            .velocity(() -> VELOCITY)
             .build();
 
     @Test
     public void testHorizontal() {
-        final Field field = StringView.parseStringMap("0000000000X\n");
+        final Field field = StringView.parseStringMap("0000000000X\n",CELL_SIZE);
         Calculation calculation = new Calculation(field).invoke();
 
         if (calculation.getError() > 0.0) {
@@ -41,7 +39,7 @@ public class FreeFlowTest {
 
     @Test
     public void testOnTarget() {
-        final Field field = StringView.parseStringMap("X\n");
+        final Field field = StringView.parseStringMap("X\n",CELL_SIZE);
         Calculation calculation = new Calculation(field).invoke();
 
         //If person on Target, then the velocity is 0
@@ -64,7 +62,7 @@ public class FreeFlowTest {
                         "0\n" +
                         "0\n" +
                         "0\n" +
-                        "X\n"
+                        "X\n", CELL_SIZE
         );
         Calculation calculation = new Calculation(field).invoke();
 
@@ -82,7 +80,7 @@ public class FreeFlowTest {
         final Field field = StringView.parseStringMap(
                 "000\n" +
                         "000\n" +
-                        "00X\n"
+                        "00X\n", CELL_SIZE
         );
         Calculation calculation = new Calculation(field).invoke();
 
@@ -100,7 +98,7 @@ public class FreeFlowTest {
         final Field field = StringView.parseStringMap(
                 "0000\n" +
                         "0000\n" +
-                        "000X\n"
+                        "000X\n", CELL_SIZE
         );
         Calculation calculation = new Calculation(field).invoke();
 
@@ -117,7 +115,7 @@ public class FreeFlowTest {
         final Field field = StringView.parseStringMap(
                         "00000\n" +
                         "00000\n" +
-                        "0000X\n"
+                        "0000X\n", CELL_SIZE
         );
         Calculation calculation = new Calculation(field).invoke();
 

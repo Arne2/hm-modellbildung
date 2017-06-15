@@ -1,6 +1,7 @@
 package config;
 
 import field.use.Dijkstra;
+import person.VelocityDistribution;
 import sun.awt.image.BufferedImageDevice;
 
 import java.util.function.Supplier;
@@ -121,13 +122,13 @@ public class Configuration {
     public static class Builder {
         private double cellSize = 0.40;
         private AlgorithmType algorithm = AlgorithmType.eDijkstra;
-        private Supplier<Double> freeFlowVelocity = () -> 1.48;
-        private double deviation = 1.44;
+        private Supplier<Double> freeFlowVelocity = () -> 1.48; //TODO find right value
+        private double deviation = 0.1; //TODO find right value
         private String fieldImage;
-        private String output = "output.xml";
+        private String output = "";
         private int maxDuration = 20;
 
-        public Builder cellSize(int cellSize) {
+        public Builder cellSize(double cellSize) {
             this.cellSize = cellSize;
             return this;
         }
@@ -149,6 +150,12 @@ public class Configuration {
 
         public Builder velocity(Supplier<Double> supplier) {
             this.freeFlowVelocity = supplier;
+            return this;
+        }
+
+        public Builder withVelocityDistribution(final long seed) {
+            final VelocityDistribution velocityDistribution = new VelocityDistribution(deviation, freeFlowVelocity.get(), seed);
+            velocity(velocityDistribution::nextVelocity);
             return this;
         }
 

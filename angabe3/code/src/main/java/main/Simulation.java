@@ -85,15 +85,9 @@ public class Simulation implements AutoCloseable {
         return person;
     }
 
-    private void addMeasurementEvent() {
-
-    }
-
     public Person spawnPerson(Location location) {
 
-        Random rand = new Random(System.nanoTime());
-        final double velocity = this.configuration.getVelocity();//rand.nextGaussian() * configuration.getDeviation() + configuration.getVelocity();
-
+        final double velocity = this.configuration.getVelocity();
         final Person person = new Person(velocity);
         field.putPerson(person, location);
         final PersonMoveEvent event = new PersonMoveEvent(clock.systemTime(), this, person);

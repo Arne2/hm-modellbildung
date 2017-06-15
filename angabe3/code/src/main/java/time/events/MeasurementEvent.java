@@ -21,6 +21,7 @@ public class MeasurementEvent extends BaseEvent{
     public List<Event> execute() {
         final List<Event> newEvents = new ArrayList<>();
 
+        System.out.printf("measure at %s\n", simulation.getClock().systemTime());
         simulation.getMeasurement().measure(simulation.field, getTime());
         final BigDecimal nextMove = getTime().add(new BigDecimal(0.5));
         final MeasurementEvent event = new MeasurementEvent(nextMove, simulation);

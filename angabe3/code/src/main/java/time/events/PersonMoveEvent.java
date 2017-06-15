@@ -42,7 +42,7 @@ public class PersonMoveEvent extends BaseEvent {
                 .collect(Collectors.toSet());
         range.add(locationOfPerson);
 
-        final Location bestTarget = range.stream()
+        final Location bestTarget = range.parallelStream()
                 .max(Comparator.comparingDouble((Location target) -> {
                     final double use = simulation.getUse().get(target);
                     final double personPotential = simulation.getPersonalSpace().use(simulation.field, target, locationOfPerson);

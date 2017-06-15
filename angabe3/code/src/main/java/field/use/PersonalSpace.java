@@ -5,8 +5,10 @@ import field.location.Location;
 import field.location.Locations;
 import person.Person;
 
+import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
+import java.util.SortedSet;
 import java.util.stream.Collectors;
 
 /**
@@ -14,7 +16,14 @@ import java.util.stream.Collectors;
  */
 public class PersonalSpace {
 
-    private boolean isInRange(double distance) {
+    private boolean isInRange(Location l1, Location l2, double cellSize) {
+        final double deltaX = (l1.x - l2.x) * cellSize;
+        final double deltaY = (l1.y - l2.y) * cellSize;
+        if (deltaX > cellSize || deltaY > cellSize) {
+            return true;
+        }
+        final double distance = Locations.distance(l1, l2) * cellSize;
+
         return distance < PERSONAL_SPACE;
     }
 
@@ -41,13 +50,13 @@ public class PersonalSpace {
     }
 
     public double use(Field field, Location target, Location self) {
-        final Map<Person, Location> persons = field.getPersons();
 
-        return -1 * persons.values().stream()
-                .filter(l -> !l.equals(self))
+        return -1 * field.getPersons().values().stream()
                 .filter(l -> {
-                    final double distance = Locations.distance(l, target) * field.getCellSize();
-                    return isInRange(distance);
+                    if (l.hashCode() != self.hashCode() || !l.equals(self)) {
+                        return false;
+                    }
+                    return isInRange(l, self, field.getCellSize());
                 })
                 .mapToDouble(l -> calculate(Locations.distance(l, target) * field.getCellSize()))
                 .sum();

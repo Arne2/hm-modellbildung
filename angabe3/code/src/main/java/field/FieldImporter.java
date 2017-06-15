@@ -88,7 +88,8 @@ public class FieldImporter {
                     case colorGreen:
                         Location loc = Location.of(x, y);
                         returnField.addLocation(loc);
-                        returnField.putPerson(new Person(configuration.getVelocity()), loc);
+                        final double velocity = configuration.getVelocity();
+                        returnField.putPerson(new Person(velocity), loc);
                         break;
                     default:
                         break;

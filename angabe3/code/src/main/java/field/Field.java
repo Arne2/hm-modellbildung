@@ -1,7 +1,6 @@
 package field;
 
 import field.location.Location;
-import measurement.Measurement;
 import person.Person;
 
 import java.util.*;
@@ -16,6 +15,7 @@ public class Field {
     private final Set<Location> locations = new HashSet<>();
     /** All persons with their locations. */
     private final Map<Person, Location> persons = new HashMap<>();
+    private final TreeSet<Location> personLocations = new TreeSet<>();
     /** The single target in this field. */
 
     private final Set<Location> measurePoints = new HashSet<>();
@@ -75,7 +75,11 @@ public class Field {
     }
 
     public void putPerson(Person person, Location location) {
-        persons.put(person, location);
+        final Location old = persons.put(person, location);
+        if (old != null) {
+            personLocations.remove(old);
+        }
+        personLocations.add(location);
     }
 
     public Set<Location> getLocations() {
@@ -87,7 +91,7 @@ public class Field {
     }
 
     public boolean isFree(Location location) {
-        return !persons.containsValue(location);
+        return !personLocations.contains(location);
     }
 
     public boolean has(Location location) {

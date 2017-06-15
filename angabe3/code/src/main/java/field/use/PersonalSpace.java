@@ -16,7 +16,14 @@ import java.util.stream.Collectors;
  */
 public class PersonalSpace {
 
-    private boolean isInRange(double distance) {
+    private boolean isInRange(Location l1, Location l2, double cellSize) {
+        final double deltaX = (l1.x - l2.x) * cellSize;
+        final double deltaY = (l1.y - l2.y) * cellSize;
+        if (deltaX > cellSize || deltaY > cellSize) {
+            return true;
+        }
+        final double distance = Locations.distance(l1, l2) * cellSize;
+
         return distance < PERSONAL_SPACE;
     }
 
@@ -46,12 +53,10 @@ public class PersonalSpace {
 
         return -1 * field.getPersons().values().parallelStream()
                 .filter(l -> {
-                    if (!l.equals(self)) {
+                    if (l.hashCode() != self.hashCode() || !l.equals(self)) {
                         return false;
                     }
-
-                    final double distance = Locations.distance(l, target) * field.getCellSize();
-                    return isInRange(distance);
+                    return isInRange(l, self, field.getCellSize());
                 })
                 .mapToDouble(l -> calculate(Locations.distance(l, target) * field.getCellSize()))
                 .sum();

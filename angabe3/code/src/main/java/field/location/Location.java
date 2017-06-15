@@ -10,6 +10,7 @@ public class Location implements Comparable<Location> {
     public final int x;
     /** y offset from the top left corner to the bottom. */
     public final int y;
+    private final int hash;
 
     /**
      * Create a new Location with the given offsets.
@@ -20,11 +21,12 @@ public class Location implements Comparable<Location> {
     public Location(int x, int y) {
         this.x = x;
         this.y = y;
+        this.hash = x | (y << 15);
     }
 
 
     public Location(){
-        x = y = 0;
+        this(0,0);
     }
 
     /**
@@ -41,22 +43,17 @@ public class Location implements Comparable<Location> {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null) return false;
 
         Location location = (Location) o;
 
-        return x == location.x && y == location.y;
-    }
-    public boolean equals(Location location) {
-        if (this == location) return true;
-        return x == location.x && y == location.y;
+
+        return hash == location.hash && x == location.x && y == location.y;
     }
 
     @Override
     public int hashCode() {
-        int result = x;
-        result = 31 * result + y;
-        return result;
+        return hash;
     }
 
     /**

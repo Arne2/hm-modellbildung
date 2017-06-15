@@ -51,7 +51,7 @@ public class PersonalSpace {
 
     public double use(Field field, Location target, Location self) {
 
-        return -1 * field.getPersons().values().parallelStream()
+        return -1 * field.getPersons().values().stream()
                 .filter(l -> {
                     if (l.hashCode() != self.hashCode() || !l.equals(self)) {
                         return false;

@@ -37,7 +37,7 @@ public class PersonMoveEvent extends BaseEvent {
             return newEvents;
         }
 
-        final Set<Location> range = Fields.moore(simulation.field, locationOfPerson).parallelStream()
+        final Set<Location> range = Fields.moore(simulation.field, locationOfPerson).stream()
                 .filter(simulation.field::isFree)
                 .collect(Collectors.toSet());
         range.add(locationOfPerson);

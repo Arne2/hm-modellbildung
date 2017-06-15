@@ -53,6 +53,7 @@ public class PersonMoveEvent extends BaseEvent {
         if (bestTarget.equals(locationOfPerson)) {
             final BigDecimal timeForWait = BigDecimal.valueOf(simulation.field.getCellSize() / person.getVelocity());
             final BigDecimal nextMove = getTime().add(timeForWait);
+            person.step(new BigDecimal(0), timeForWait);
             final PersonMoveEvent event = new PersonMoveEvent(nextMove, simulation, person);
             newEvents.add(event);
             return newEvents;

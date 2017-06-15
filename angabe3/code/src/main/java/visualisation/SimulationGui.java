@@ -420,6 +420,7 @@ public class SimulationGui extends Application {
         for(int y = 0; y < input.getFieldHeight(); y++) {
             for (int x = 0; x < input.getFieldWidth(); x++) {
                 char c = rows[y].charAt(x);
+                if(input.getTargets() == null) continue;
                 if ( input.getTargets().contains(Location.of(x, y))) {
                     gc.setFill(GOALCOLOR);
                     gc.fillRect(x* cellsize, y* cellsize, cellsize, cellsize);

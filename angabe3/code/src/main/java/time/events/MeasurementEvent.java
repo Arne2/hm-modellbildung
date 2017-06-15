@@ -22,7 +22,7 @@ public class MeasurementEvent extends BaseEvent{
         final List<Event> newEvents = new ArrayList<>();
 
         simulation.getMeasurement().measure(simulation.field, getTime());
-        final BigDecimal nextMove = getTime().add(new BigDecimal(1));
+        final BigDecimal nextMove = getTime().add(new BigDecimal(0.5));
         final MeasurementEvent event = new MeasurementEvent(nextMove, simulation);
         newEvents.add(event);
         return newEvents;

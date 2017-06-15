@@ -9,6 +9,7 @@ import main.Simulation;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 
 /*
@@ -24,7 +25,7 @@ public class FreeFlowTest {
             .build();
 
     @Test
-    public void testHorizontal() {
+    public void testHorizontal() throws Exception {
         final Field field = StringView.parseStringMap("0000000000X\n",CELL_SIZE);
         Calculation calculation = new Calculation(field).invoke();
 
@@ -38,7 +39,7 @@ public class FreeFlowTest {
     }
 
     @Test
-    public void testOnTarget() {
+    public void testOnTarget() throws Exception {
         final Field field = StringView.parseStringMap("X\n",CELL_SIZE);
         Calculation calculation = new Calculation(field).invoke();
 
@@ -56,7 +57,7 @@ public class FreeFlowTest {
     }
 
     @Test
-    public void testVertical() {
+    public void testVertical() throws Exception {
         final Field field = StringView.parseStringMap(
                 "0\n" +
                         "0\n" +
@@ -76,7 +77,7 @@ public class FreeFlowTest {
     }
 
     @Test
-    public void testDiagonal() {
+    public void testDiagonal() throws Exception {
         final Field field = StringView.parseStringMap(
                 "000\n" +
                         "000\n" +
@@ -94,7 +95,7 @@ public class FreeFlowTest {
     }
 
     @Test
-    public void testSlope() {
+    public void testSlope() throws Exception {
         final Field field = StringView.parseStringMap(
                 "0000\n" +
                         "0000\n" +
@@ -111,7 +112,7 @@ public class FreeFlowTest {
         }
     }
     @Test
-    public void testSlope2() {
+    public void testSlope2() throws Exception {
         final Field field = StringView.parseStringMap(
                         "00000\n" +
                         "00000\n" +
@@ -145,7 +146,7 @@ public class FreeFlowTest {
             return error;
         }
 
-        public Calculation invoke() {
+        public Calculation invoke() throws Exception {
             final Simulation simulation = new Simulation(field, conf, null);
             final Location start = Location.of(0, 0);
             simulation.spawnPerson(start);

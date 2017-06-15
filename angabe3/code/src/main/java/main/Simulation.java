@@ -16,10 +16,12 @@ import person.Person;
 import time.Clock;
 import time.EventList;
 import time.events.Event;
+import time.events.MeasurementEvent;
 import time.events.PersonMoveEvent;
 
 import java.io.Console;
 import java.io.File;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.nio.file.Path;
 import java.util.*;
@@ -27,7 +29,7 @@ import java.util.*;
 /**
  * @author peter-mueller
  */
-public class Simulation {
+public class Simulation implements AutoCloseable {
     public final Field field;
 
 
@@ -39,25 +41,17 @@ public class Simulation {
     private final Measurement measurement;
     private final Configuration configuration;
     private final OutputFile outputFile;
-    private  XYLog CSVLogfile;
 
-    public Simulation(Field field, Configuration configuration, OutputFile outputFile) {
+    public Simulation(Field field, Configuration configuration, OutputFile outputFile) throws IOException {
         this.configuration = configuration;
         this.field = field;
         this.outputFile = outputFile;
-        measurement = new Measurement(field.getMeasurementPoints(), configuration);
-        File folder = new File (configuration.getOutput());
-        Path LogFile = new File(folder.getParent() + "/free_flow_velocity.csv").toPath();
-        try {
-            CSVLogfile = new XYLog(LogFile);
-        }catch (Exception e){
-            System.out.println(e.getMessage());
-        }
 
+        measurement = new Measurement(field.getMeasurementPoints(), configuration);
 
         Map<Person, Location> persLoc = field.getPersons();
         for (Map.Entry<Person, Location> entry : persLoc.entrySet()) {
-                spawnPersonEvent(entry.getValue(), entry.getKey());
+            spawnPersonEvent(entry.getValue(), entry.getKey());
         }
 
 
@@ -71,20 +65,28 @@ public class Simulation {
         if (outputFile != null) {
             outputFile.setDistances(this.use);
         }
+
+        final MeasurementEvent event = new MeasurementEvent(new BigDecimal(0), this);
+        this.events.add(event);
     }
 
-    private Person spawnPersonEvent(Location location, Person person){
-        CSVLogfile.log(new BigDecimal(person.getId()) , new BigDecimal(person.getVelocity()));
+    private Person spawnPersonEvent(Location location, Person person) {
+        if (person == null) {
+            throw new IllegalArgumentException("Person must not be null");
+        }
+        if (location == null) {
+            throw new IllegalArgumentException("Location must not be null");
+        }
         final PersonMoveEvent event = new PersonMoveEvent(clock.systemTime(), this, person);
         this.events.add(event);
         persons.add(person);
-        if(outputFile != null) {
+        if (outputFile != null) {
             outputFile.addPawnEvent(clock.systemTime(), person.getId(), location.x, location.y);
         }
         return person;
     }
 
-    private void addMeasurementEvent(){
+    private void addMeasurementEvent() {
 
     }
 
@@ -104,24 +106,20 @@ public class Simulation {
         return person;
     }
 
-    public void run(BigDecimal maxSimulationTime) {
+    public void run(BigDecimal maxSimulationTime) throws Exception {
         while (events.hasNext() & clock.systemTime().compareTo(maxSimulationTime) < 0) {
-            System.out.println(clock.systemTime());
+            //System.out.println(clock.systemTime());
             final Event event = events.nextEvent();
             clock.advanceTo(event.getTime());
 
             final List<Event> newEvents = event.execute();
             events.addAll(newEvents);
         }
+        close();
 
-       try {
-            CSVLogfile.close();
-       }catch (Exception e){
-           System.out.println(e.getMessage());
-       }
     }
 
-    public Measurement getMeasurement(){
+    public Measurement getMeasurement() {
         return measurement;
     }
 
@@ -155,5 +153,10 @@ public class Simulation {
 
     public PersonalSpace getPersonalSpace() {
         return personalSpace;
+    }
+
+    @Override
+    public void close() throws Exception {
+        measurement.close();
     }
 }

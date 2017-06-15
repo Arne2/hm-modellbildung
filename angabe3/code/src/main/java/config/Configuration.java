@@ -125,7 +125,7 @@ public class Configuration {
         private double deviation = 1.44;
         private String fieldImage;
         private String output = "output.xml";
-        private int maxDuration = 20000;
+        private int maxDuration = 20;
 
         public Builder cellSize(int cellSize) {
             this.cellSize = cellSize;

@@ -20,7 +20,7 @@ public class PersonalSpace {
 
     private double calculate(double distance) {
         // TODO ???
-        final double uP = 5;
+        final double uP = 50;
         final double aP = 1;
         final double bP = 1;
 

@@ -1,5 +1,6 @@
 package person;
 
+import javax.management.OperationsException;
 import java.math.BigDecimal;
 
 /**
@@ -15,12 +16,23 @@ public class Person {
     private BigDecimal timePassed;
     private BigDecimal meanVelocity;
 
+    //calculate the sliding mean velocity of 1 Values
+    private BigDecimal slidingVelocity[] = new BigDecimal[1];
+    private int slidingCounter = 0;
+
     public Person(double velocity) {
         this.velocity = velocity;
         this.timeSinceLastMove = 0;
         this.distanceWent = new BigDecimal(0);
         this.timePassed = new BigDecimal(0);
         this.meanVelocity = new BigDecimal(0);
+
+        //initialize sliding Velocity to zero
+        //At Begin of Simulation persons do not move
+        for(int i = 0; i < slidingVelocity.length ; i++)
+        {
+            slidingVelocity[i] = new BigDecimal(0);
+        }
     }
 
     public int getId(){
@@ -46,10 +58,22 @@ public class Person {
         return this.timePassed;
     }
 
+    public BigDecimal getSlidingAverageVelocity(){
+        BigDecimal slidingAverage = new BigDecimal(0);
+        for (BigDecimal velocity: slidingVelocity ) {
+            slidingAverage = slidingAverage.add(velocity);
+        }
+        return slidingAverage.divide(new BigDecimal(slidingVelocity.length), 32, BigDecimal.ROUND_HALF_EVEN);
+    }
 
-    public void step(BigDecimal distance, BigDecimal time){
+    public void step(BigDecimal distance, BigDecimal timeForMove){
+        if(timeForMove.doubleValue() != 0) {
+            //add new Velocity to Array
+            slidingVelocity[(slidingCounter++)&0b0] = distance.divide(timeForMove, 32, BigDecimal.ROUND_HALF_EVEN);
+        }
+
         this.distanceWent = this.distanceWent.add(distance);
-        this.timePassed = timePassed.add(time);
+        this.timePassed = timePassed.add(timeForMove);
         if(timePassed.equals(new BigDecimal(0)) == false){
             meanVelocity = distanceWent.divide(timePassed, 32, BigDecimal.ROUND_HALF_EVEN);
         }

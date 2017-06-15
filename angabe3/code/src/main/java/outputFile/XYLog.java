@@ -17,6 +17,12 @@ public class XYLog implements AutoCloseable {
                 "y");
     }
 
+    public XYLog(final Path file, String xName, String yName) throws IOException {
+        this.log = new Log(file);
+        log.log(xName,
+                yName);
+    }
+
     public void log(BigDecimal x, BigDecimal y) {
         final String[] strings = {
                 x.toString(),

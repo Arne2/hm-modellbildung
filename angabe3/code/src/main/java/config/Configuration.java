@@ -122,8 +122,14 @@ public class Configuration {
     public static class Builder {
         private double cellSize = 0.40;
         private AlgorithmType algorithm = AlgorithmType.eDijkstra;
-        private Supplier<Double> freeFlowVelocity = () -> 1.48; //TODO find right value
-        private double deviation = 0.1; //TODO find right value
+
+        /**
+         * velocity and deviation from Experiment 2017
+         */
+        private Supplier<Double> freeFlowVelocity = () -> 1.48076;
+        private double deviation = 0.11686;
+
+
         private String fieldImage;
         private String output = "";
         private int maxDuration = 20;

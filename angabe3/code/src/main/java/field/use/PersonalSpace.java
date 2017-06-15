@@ -5,8 +5,10 @@ import field.location.Location;
 import field.location.Locations;
 import person.Person;
 
+import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
+import java.util.SortedSet;
 import java.util.stream.Collectors;
 
 /**
@@ -41,11 +43,13 @@ public class PersonalSpace {
     }
 
     public double use(Field field, Location target, Location self) {
-        final Map<Person, Location> persons = field.getPersons();
 
-        return -1 * persons.values().stream()
-                .filter(l -> !l.equals(self))
+        return -1 * field.getPersons().values().parallelStream()
                 .filter(l -> {
+                    if (!l.equals(self)) {
+                        return false;
+                    }
+
                     final double distance = Locations.distance(l, target) * field.getCellSize();
                     return isInRange(distance);
                 })

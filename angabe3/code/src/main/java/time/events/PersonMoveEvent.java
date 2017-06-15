@@ -37,12 +37,12 @@ public class PersonMoveEvent extends BaseEvent {
             return newEvents;
         }
 
-        final Set<Location> range = Fields.moore(simulation.field, locationOfPerson).stream()
+        final Set<Location> range = Fields.moore(simulation.field, locationOfPerson).parallelStream()
                 .filter(simulation.field::isFree)
                 .collect(Collectors.toSet());
         range.add(locationOfPerson);
 
-        final Location bestTarget = range.stream()
+        final Location bestTarget = range.parallelStream()
                 .max(Comparator.comparingDouble((Location target) -> {
                     final double use = simulation.getUse().get(target);
                     final double personPotential = simulation.getPersonalSpace().use(simulation.field, target, locationOfPerson);

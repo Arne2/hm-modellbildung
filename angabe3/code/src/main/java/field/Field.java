@@ -1,7 +1,6 @@
 package field;
 
 import field.location.Location;
-import measurement.Measurement;
 import person.Person;
 
 import java.util.*;
@@ -75,7 +74,7 @@ public class Field {
     }
 
     public void putPerson(Person person, Location location) {
-        persons.put(person, location);
+        final Location old = persons.put(person, location);
     }
 
     public Set<Location> getLocations() {

@@ -47,6 +47,10 @@ public class Location implements Comparable<Location> {
 
         return x == location.x && y == location.y;
     }
+    public boolean equals(Location location) {
+        if (this == location) return true;
+        return x == location.x && y == location.y;
+    }
 
     @Override
     public int hashCode() {

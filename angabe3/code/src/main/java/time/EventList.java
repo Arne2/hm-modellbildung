@@ -44,6 +44,9 @@ public class EventList {
         if (events == null) {
             throw new IllegalArgumentException("Events must not be null!");
         }
+        if (events.isEmpty()) {
+            return;
+        }
         if (!eventList.addAll(events)) {
             throw new AssertionError("");
         }

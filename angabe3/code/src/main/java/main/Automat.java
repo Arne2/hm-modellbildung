@@ -23,9 +23,7 @@ public class Automat {
      */
     public static void main(String[] args) throws Exception {
 
-        final Configuration build = new Configuration.Builder(args)
-                .maxDuration(100)
-                .build();
+        final Configuration build = new Configuration.Builder(args).build();
 
         FieldImporter fi = new FieldImporter(build);
         final Field field2 = fi.getField();

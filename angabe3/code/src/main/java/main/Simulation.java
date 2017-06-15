@@ -1,6 +1,5 @@
 package main;
 
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import config.Configuration;
 import field.Field;
 import field.location.Location;

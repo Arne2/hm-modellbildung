@@ -5,6 +5,7 @@ import field.location.Location;
 import field.use.FastMarching;
 import field.view.StringView;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.HashMap;
@@ -13,6 +14,7 @@ import java.util.Map;
 /**
  * Created by dima on 01.06.17.
  */
+@Ignore
 public class FastMarchingTest {
 
     public static final double CELL_SIZE = 0.40;

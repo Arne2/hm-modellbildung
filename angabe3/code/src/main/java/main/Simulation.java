@@ -4,13 +4,11 @@ import config.Configuration;
 import field.Field;
 import field.location.Location;
 import field.use.*;
-import field.view.StringView;
 import field.use.Dijkstra;
 import field.use.EuclidDistance;
 import field.use.FastMarching;
 import measurement.Measurement;
 import outputFile.OutputFile;
-import outputFile.XYLog;
 import person.Person;
 import time.Clock;
 import time.EventList;
@@ -18,11 +16,8 @@ import time.events.Event;
 import time.events.MeasurementEvent;
 import time.events.PersonMoveEvent;
 
-import java.io.Console;
-import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.nio.file.Path;
 import java.util.*;
 
 /**
@@ -33,7 +28,7 @@ public class Simulation implements AutoCloseable {
 
 
     private final Map<Location, Double> use;
-    private final PersonalSpace personalSpace = new PersonalSpace();
+    private final PersonalSpace personalSpace;
     private final Clock clock = new Clock();
     private final EventList events = new EventList();
     private final List<Person> persons = new ArrayList<>();
@@ -45,6 +40,7 @@ public class Simulation implements AutoCloseable {
         this.configuration = configuration;
         this.field = field;
         this.outputFile = outputFile;
+        personalSpace = new PersonalSpace(field.getCellSize());
 
         measurement = new Measurement(field.getMeasurementPoints(), configuration);
 

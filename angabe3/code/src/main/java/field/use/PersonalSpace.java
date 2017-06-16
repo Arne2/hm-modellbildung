@@ -7,6 +7,7 @@ import field.location.Locations;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * @author peter-mueller
@@ -15,6 +16,15 @@ public class PersonalSpace {
 
     private final Map<Double, Double> cacheP1 = new HashMap<>();
     private final Map<Double, Double> cacheP2 = new HashMap<>();
+    private final double cellSize;
+    private final Location[] selector;
+
+    public PersonalSpace(double cellSize) {
+        this.cellSize = cellSize;
+        final int cells = (int)Math.ceil(PERSONAL_SPACE/cellSize);
+        selector = Fields.circleSelector(cells);
+    }
+
 
     private double calculate(double distance) {
         final double uP = 5;
@@ -52,12 +62,12 @@ public class PersonalSpace {
 
     public double use(Field field, Location target, Location self) {
         double use = 0;
-        final int cells = (int)Math.ceil(field.getCellSize() * PERSONAL_SPACE);
-        for (Location location : Fields.square(field,target, cells)) {
+        final Set<Location> circle = Fields.of(field, target, selector);
+        for (Location location : circle) {
             if (location.equals(self)) {continue;}
             if (!field.getPersonLocations().contains(location)) {continue;}
 
-            final double distance = Locations.distance(location, target) * field.getCellSize();
+            final double distance = Locations.distance(location, target) * cellSize;
             if (distance >= PERSONAL_SPACE) {continue;}
             use += calculate(distance);
         }

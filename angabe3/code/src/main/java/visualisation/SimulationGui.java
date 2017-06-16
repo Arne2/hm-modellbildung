@@ -65,6 +65,7 @@ public class SimulationGui extends Application {
     public static final Color GOALCOLOR = Color.GREEN;
     public static final Color WALLCOLOR = Color.BLACK;
     public static final Color PERSONCOLOR = Color.PINK;
+    public static final Color MEASUREMENTCOLOR = Color.DARKGREEN;
 
     /**
      * Value of a wall in the distance map.
@@ -148,6 +149,7 @@ public class SimulationGui extends Application {
     private Canvas cellLayer;
     private Canvas heatLayer;
     private Canvas objectLayer;
+    private Canvas measurementLayer;
 
     // Buttons
     private Button proceed;
@@ -426,11 +428,30 @@ public class SimulationGui extends Application {
                     gc.fillRect(x* cellsize, y* cellsize, cellsize, cellsize);
                     gc.strokeRect(x* cellsize, y* cellsize, cellsize, cellsize);
                 } else if (c == ' '){
-                    gc.setFill(WALLCOLOR);
-                    gc.fillRect(x* cellsize, y* cellsize, cellsize, cellsize);
+                    // The reason why the walls are drawn in a runLater block is to prevent a bug,
+                    // in which some walls are not drawn when a second input is loaded.
+                    final int x2 = x;
+                    final int y2 = y;
+                    Platform.runLater(() -> {
+                        gc.setFill(WALLCOLOR);
+                        gc.fillRect(x2* cellsize, y2* cellsize, cellsize, cellsize);
+                    });
                 }
             }
         }
+    }
+
+    /**
+     * Draws the measurement box in the canvas.
+     */
+    public void drawMeasurement(){
+        GraphicsContext gc = measurementLayer.getGraphicsContext2D();
+        gc.setStroke(MEASUREMENTCOLOR);
+        gc.setLineWidth(3);
+        if (DEBUG) {
+            System.out.println("Measurement from: " + input.getFromX() + ", " + input.getFromY() + " to: " + input.getToX() + ", " + input.getToY());
+        }
+        gc.strokeRect(input.getFromX(), input.getFromY(), (input.getToX() - input.getFromX()) * cellsize, (input.getToY() - input.getFromY()) * cellsize);
     }
 
     /**
@@ -441,6 +462,7 @@ public class SimulationGui extends Application {
         personList.clear();
         GraphicsContext gc = objectLayer.getGraphicsContext2D();
         gc.setFill(Color.GREEN);
+        gc.setStroke(Color.BLACK);
 
         for (Location target: input.getTargets()) {
             gc.fillRect(target.x * cellsize, target.y * cellsize, cellsize, cellsize);
@@ -727,6 +749,7 @@ public class SimulationGui extends Application {
         canvas.getChildren().remove(cellLayer);
         canvas.getChildren().remove(heatLayer);
         canvas.getChildren().remove(objectLayer);
+        canvas.getChildren().remove(measurementLayer);
 
         play.setDisable(false);
         proceed.setDisable(false);
@@ -810,15 +833,18 @@ public class SimulationGui extends Application {
         cellLayer = new Canvas(cellsize *input.getFieldWidth(), cellsize *input.getFieldHeight());
         heatLayer = new Canvas(cellsize *input.getFieldWidth(), cellsize *input.getFieldHeight());
         objectLayer = new Canvas(cellsize *input.getFieldWidth(), cellsize *input.getFieldHeight());
+        measurementLayer = new Canvas(cellsize *input.getFieldWidth(), cellsize *input.getFieldHeight());
 
         // Drawing the layers
         drawCells();
         drawHeatMap();
         drawObjects();
+        drawMeasurement();
 
         canvas.getChildren().add(cellLayer);
         canvas.getChildren().add(heatLayer);
         canvas.getChildren().add(objectLayer);
+        canvas.getChildren().add(measurementLayer);
 
         // Add Scrollbars if necessary
         if (enableScrollbar) {
@@ -828,6 +854,7 @@ public class SimulationGui extends Application {
 
         // Setting display order
         heatLayer.toBack();
+        measurementLayer.toFront();
         objectLayer.toFront();
     }
 

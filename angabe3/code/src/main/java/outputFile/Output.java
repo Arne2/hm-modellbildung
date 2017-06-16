@@ -27,6 +27,10 @@ public class Output{
     private String algorithm;
     private double freeFlowVelocity;
     private double deviation;
+    private int fromX;
+    private int fromY;
+    private int toX;
+    private int toY;
 
     // Default Constructor necessary for JAXB
     public Output(){
@@ -46,7 +50,6 @@ public class Output{
         deviation = config_.getDeviation();
         cellsize = config_.getCellSize()*100 + "cm";
     }
-
 
     public void setDistanceMap(Map<Location, Double> use_){
         distanceMap = StringView.toStringDistanceMap(use_);
@@ -160,6 +163,38 @@ public class Output{
 
     public void setDeviation(double deviation) {
         this.deviation = deviation;
+    }
+
+    public int getFromX() {
+        return fromX;
+    }
+
+    public void setFromX(int fromX) {
+        this.fromX = fromX;
+    }
+
+    public int getFromY() {
+        return fromY;
+    }
+
+    public void setFromY(int fromY) {
+        this.fromY = fromY;
+    }
+
+    public int getToX() {
+        return toX;
+    }
+
+    public void setToX(int toX) {
+        this.toX = toX;
+    }
+
+    public int getToY() {
+        return toY;
+    }
+
+    public void setToY(int toY) {
+        this.toY = toY;
     }
 
     @Override

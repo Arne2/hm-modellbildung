@@ -29,6 +29,20 @@ public class Fields {
                 .collect(Collectors.toSet());
     }
 
+    public static Set<Location> square(Field field, Location center, int distance) {
+        final int width = distance * 2;
+        final Location[] square = new Location[width * width];
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < width; y++) {
+                square[x * width + y] = Location.of(x - distance, y - distance);
+            }
+        }
+        return Arrays.stream(square)
+                .map(center::relative)
+                .filter(field::has)
+                .collect(Collectors.toSet());
+    }
+
     public static Set<Location> neumann(Field field, Location center) {
         if (field == null) {
             throw new IllegalArgumentException("Field cannot be null!");

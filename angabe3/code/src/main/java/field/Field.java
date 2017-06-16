@@ -15,6 +15,11 @@ public class Field {
     private final Set<Location> locations = new HashSet<>();
     /** All persons with their locations. */
     private final Map<Person, Location> persons = new HashMap<>();
+
+    public TreeSet<Location> getPersonLocations() {
+        return personLocations;
+    }
+
     private final TreeSet<Location> personLocations = new TreeSet<>();
     /** The single target in this field. */
 
@@ -34,19 +39,19 @@ public class Field {
     }
 
 
-    public Set<Location> getTargets(){
+    public Set<Location> getTargets() {
         return this.targets;
     }
 
-    public void addMeasurePoint(Location point){
+    public void addMeasurePoint(Location point) {
         measurePoints.add(point);
     }
 
-    public Set<Location> getMeasurementPoints(){
+    public Set<Location> getMeasurementPoints() {
         return measurePoints;
     }
 
-    public void addTarget(Location target){
+    public void addTarget(Location target) {
         locations.add(target);
         targets.add(target);
 

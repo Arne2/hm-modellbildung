@@ -1,6 +1,7 @@
 package field.use;
 
 import field.Field;
+import field.Fields;
 import field.location.Location;
 import field.location.Locations;
 
@@ -14,7 +15,6 @@ public class PersonalSpace {
 
     private final Map<Double, Double> cacheP1 = new HashMap<>();
     private final Map<Double, Double> cacheP2 = new HashMap<>();
-
 
     private double calculate(double distance) {
         final double uP = 5;
@@ -51,13 +51,17 @@ public class PersonalSpace {
     }
 
     public double use(Field field, Location target, Location self) {
+        double use = 0;
+        final int cells = (int)Math.ceil(field.getCellSize() * PERSONAL_SPACE);
+        for (Location location : Fields.square(field,target, cells)) {
+            if (location.equals(self)) {continue;}
+            if (!field.getPersonLocations().contains(location)) {continue;}
 
-        return -1 * field.getPersons().values().stream()
-                .filter(l -> !l.equals(self))
-                .mapToDouble(l -> Locations.distance(l, target) * field.getCellSize())
-                .filter(distance -> distance < PERSONAL_SPACE)
-                .map(this::calculate)
-                .sum();
+            final double distance = Locations.distance(location, target) * field.getCellSize();
+            if (distance >= PERSONAL_SPACE) {continue;}
+            use += calculate(distance);
+        }
+        return -1 * use;
     }
 
     private static final double PEDESTRIAN_SIZE = 0.20;

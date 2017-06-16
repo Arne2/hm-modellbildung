@@ -3,13 +3,14 @@ package time.events;
 import field.Fields;
 import field.location.Location;
 import field.location.Locations;
-import field.use.PersonalSpace;
 import main.Simulation;
-import outputFile.OutputFile;
 import person.Person;
 
 import java.math.BigDecimal;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -42,7 +43,7 @@ public class PersonMoveEvent extends BaseEvent {
                 .collect(Collectors.toSet());
         range.add(locationOfPerson);
 
-        final Location bestTarget = range.parallelStream()
+        final Location bestTarget = range.stream()
                 .max(Comparator.comparingDouble((Location target) -> {
                     final double use = simulation.getUse().get(target);
                     if (simulation.field.isTarget(target)) {

@@ -34,10 +34,12 @@ public class EventList {
         if (event == null) {
             throw new IllegalArgumentException("Event must not be null!");
         }
-        if (!eventList.add(event)) {
-            throw new AssertionError("");
+        final int i = Collections.binarySearch(eventList, event);
+        if (i < 0) {
+            eventList.add(-i - 1, event);
+        } else {
+            eventList.add(i, event);
         }
-        Collections.sort(eventList);
     }
 
     public void addAll(Collection<Event> events) {
@@ -47,9 +49,6 @@ public class EventList {
         if (events.isEmpty()) {
             return;
         }
-        if (!eventList.addAll(events)) {
-            throw new AssertionError("");
-        }
-        Collections.sort(eventList);
+        events.forEach(this::add);
     }
 }

@@ -3,41 +3,41 @@ package field.use;
 import field.Field;
 import field.location.Location;
 import field.location.Locations;
-import person.Person;
 
-import java.util.Collections;
-import java.util.Map;
-import java.util.Set;
-import java.util.SortedSet;
-import java.util.stream.Collectors;
+import java.util.*;
 
 /**
  * @author peter-mueller
  */
 public class PersonalSpace {
 
-    private boolean isInRange(Location l1, Location l2, double cellSize) {
-        final double deltaX = (l1.x - l2.x) * cellSize;
-        final double deltaY = (l1.y - l2.y) * cellSize;
-        if (deltaX > cellSize || deltaY > cellSize) {
-            return true;
-        }
-        final double distance = Locations.distance(l1, l2) * cellSize;
+    private final Map<Double, Double> cacheP1 = new HashMap<>();
+    private final Map<Double, Double> cacheP2 = new HashMap<>();
 
-        return distance < PERSONAL_SPACE;
-    }
 
     private double calculate(double distance) {
-        // TODO ???
-        final double uP = 60;
+        final double uP = 5;
         final double aP = 1;
         final double bP = 1;
 
-        final double v1 = distance / (PERSONAL_SPACE);
-        final double p1 = uP * Math.exp(4 / (Math.pow(v1, 2) - 1));
+        final double p1;
+        if (!cacheP1.containsKey(distance)) {
+                final double v1 = distance / (PERSONAL_SPACE);
+                p1 = uP * Math.exp(4 / (Math.pow(v1, 2) - 1));
+                cacheP1.put(distance,p1);
+        } else {
+            p1 = cacheP1.get(distance);
+        }
 
-        final double v2 = distance / (INTIMATE_SPACE);
-        final double p2 = p1 + ((uP / aP) * Math.exp(4 / (Math.pow(v2, 2 * bP) - 1)));
+        final double p2;
+        if (!cacheP2.containsKey(distance)) {
+            final double v2 = distance / (INTIMATE_SPACE);
+            p2 = p1 + ((uP / aP) * Math.exp(4 / (Math.pow(v2, 2 * bP) - 1)));
+            cacheP2.put(distance,p2);
+        } else {
+            p2 = cacheP2.get(distance);
+        }
+
 
         if (distance < PEDESTRIAN_SIZE) {
             return Double.POSITIVE_INFINITY;
@@ -52,19 +52,21 @@ public class PersonalSpace {
     public double use(Field field, Location target, Location self) {
 
         return -1 * field.getPersons().values().stream()
-                .filter(l -> {
-                    if (l.hashCode() != self.hashCode() || !l.equals(self)) {
-                        return false;
+                .map(location -> {
+                    if (location.x >= 20) {
+                        return Location.of(0, location.y);
                     }
-                    return isInRange(l, self, field.getCellSize());
+                    return location;
                 })
-                .mapToDouble(l -> calculate(Locations.distance(l, target) * field.getCellSize()))
+                .filter(l -> !l.equals(self))
+                .mapToDouble(l -> Locations.distance(l, target) * field.getCellSize())
+                .filter(distance -> distance < PERSONAL_SPACE)
+                .map(this::calculate)
                 .sum();
     }
 
     private static final double PEDESTRIAN_SIZE = 0.20;
     private static final double INTIMATE_SPACE = 0.45 + PEDESTRIAN_SIZE;
     private static final double PERSONAL_SPACE = 1.20 + PEDESTRIAN_SIZE;
-
 }
 

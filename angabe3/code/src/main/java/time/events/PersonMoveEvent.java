@@ -45,6 +45,9 @@ public class PersonMoveEvent extends BaseEvent {
         final Location bestTarget = range.parallelStream()
                 .max(Comparator.comparingDouble((Location target) -> {
                     final double use = simulation.getUse().get(target);
+                    if (simulation.field.isTarget(target)) {
+                        return use;
+                    }
                     final double personPotential = simulation.getPersonalSpace().use(simulation.field, target, locationOfPerson);
                     return use + personPotential;
                 }).thenComparingDouble( target ->  -Locations.distance(target, locationOfPerson)))

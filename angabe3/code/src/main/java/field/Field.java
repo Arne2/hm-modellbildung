@@ -99,7 +99,8 @@ public class Field {
     }
 
     public void removePerson(Person person) {
-        persons.remove(person);
+        final Location remove = persons.remove(person);
+        personLocations.remove(remove);
     }
 
     public int numberOfPersons() {

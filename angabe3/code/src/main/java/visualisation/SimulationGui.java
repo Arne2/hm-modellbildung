@@ -451,7 +451,7 @@ public class SimulationGui extends Application {
         if (DEBUG) {
             System.out.println("Measurement from: " + input.getFromX() + ", " + input.getFromY() + " to: " + input.getToX() + ", " + input.getToY());
         }
-        gc.strokeRect(input.getFromX(), input.getFromY(), (input.getToX() - input.getFromX()) * cellsize, (input.getToY() - input.getFromY()) * cellsize);
+        gc.strokeRect(input.getFromX() * cellsize, input.getFromY() * cellsize, (input.getToX() - input.getFromX()) * cellsize, (input.getToY() - input.getFromY()) * cellsize);
     }
 
     /**
@@ -789,24 +789,34 @@ public class SimulationGui extends Application {
                         Platform.runLater(new Runnable() {
                             @Override
                             public void run() {
-                                handleNextEvent();
-                                if (step+1 < input.getEvents().size()) {
-                                    BigDecimal a = input.getEvents().get(step).getTime();
-                                    BigDecimal b = input.getEvents().get(step -1).getTime();
-                                    waitingtime = a.subtract(b).multiply(new BigDecimal(1000)).longValue();
-                                } else {
-                                    waitingtime = 0;
+                                while (true){
+                                    handleNextEvent();
+                                    if (step + 1 < input.getEvents().size()) {
+                                        BigDecimal a = input.getEvents().get(step).getTime();
+                                        BigDecimal b = input.getEvents().get(step - 1).getTime();
+                                        waitingtime = a.subtract(b).multiply(new BigDecimal(1000)).longValue();
+                                        if (waitingtime > 0){
+                                            break;
+                                        }
+                                        if (DEBUG){
+                                            System.out.println("Next Event at the same time!");
+                                        }
+                                    } else {
+                                        waitingtime = 0;
+                                        break;
+                                    }
                                 }
                             }
                         });
                         if (DEBUG) {
-                            System.out.println(waitingtime);
+                            System.out.println("Waiting Time for the next Event: " + waitingtime);
                         }
                         try {
-                            Thread.sleep(Math.max(MILLIS,(long)(waitingtime/speed)));
+                            Thread.sleep(Math.max(MILLIS, (long) (waitingtime / speed)));
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
+
                     }
                     running = false;
                     proceed.setDisable(false);
@@ -876,7 +886,7 @@ public class SimulationGui extends Application {
                 personLabel.setText("People in the Simulation: " + personList.size());
                 break;
             case "move" :
-                 p = personList.stream().filter(simulatedPerson -> simulatedPerson.getId() == next.getPersonID()).findAny();
+                p = personList.stream().filter(simulatedPerson -> simulatedPerson.getId() == next.getPersonID()).findAny();
                 if (!p.isPresent()){
                     throw new AssertionError("Person not in personList");
                 }

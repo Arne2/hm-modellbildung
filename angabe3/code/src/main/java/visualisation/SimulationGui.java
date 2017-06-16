@@ -241,6 +241,7 @@ public class SimulationGui extends Application {
      * Handles all Events that occur at the time zero.
      */
     private void proceedToStart(){
+        if(input.getEvents() == null) return;
         while (input.getEvents().size() > step && input.getEvents().get(step+1).getTime().equals(BigDecimal.ZERO)){
             handleNextEvent();
         }
@@ -351,7 +352,7 @@ public class SimulationGui extends Application {
      * @throws URISyntaxException
      */
     public void saveSnapshot() throws IOException, URISyntaxException {
-        String path = inputFile.getParent() + "/snapshot_" + LocalTime.now().toString().replace(":","_") + ".png";
+        String path = inputFile.getParent() + "/snapshot_"+ input.getAlgorithm() + "_" + LocalTime.now().toString().replace(":","_") + ".png";
         File snapshot = new File (path);
         if (!snapshot.exists()){
             Files.createDirectories(Paths.get(inputFile.getParent()));
@@ -583,8 +584,14 @@ public class SimulationGui extends Application {
         timeLabel.setLayoutX(10);
         timeLabel.setLayoutY(86);
 
-        simulationTimeLabel = new Label("Simulationtime: " + input.getEvents().stream().map(outputEvent -> outputEvent.getTime()).max(BigDecimal::compareTo).get());
-        simulationTimeLabel.setLayoutX(10);
+        if(input.getEvents() != null) {
+            simulationTimeLabel = new Label("Simulationtime: " + input.getEvents().stream().map(outputEvent -> outputEvent.getTime()).max(BigDecimal::compareTo).get());
+        }
+        else{
+            simulationTimeLabel = new Label("Simulationtime: 0");
+
+        }
+                simulationTimeLabel.setLayoutX(10);
         simulationTimeLabel.setLayoutY(104);
 
         personLabel = new Label("People in the Simulation: 0");

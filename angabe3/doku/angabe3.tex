@@ -259,6 +259,62 @@ Der Aufbau der Anwendung wurde im Team diskutiert und anschließend mittels UML 
 \section{Softwaretest}
 
 \subsection{Verifikation}
+\subsubsection{Hühnertest}
+Der Hühnertest wurde auf Basis des in Abbildung \ref{fig:HühnertestMap} aufgeführten Feldes durchgeführt. Die einzelnen Farben der einzelnen Elemente sind wiederum analog zur Tabelle \ref{tab:Farbcodes}. Personen werden grün, Hindernisse schwarz und das Ziel blau dargestellt. Da mit Hilfe dieses Testes lediglich überprüft werden soll, ob die Personen den Weg aus dem Hindernis finden, ist die Anzahl von $39$ simulierten Personen ausreichend.  
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.5\textwidth]{abbildungen/HuehnertestMap.png}
+	\caption{Ausgangsfeld des Hühnertests}
+	\label{fig:HühnertestMap}
+\end{figure}
+
+Die Abbildungen \ref{fig:HühnerTestEuklidAnfang} und \ref{fig:HühnertestEuklidEnde} zeigen die Heatmap des Testes zu Beginn und am Ende des Testes. Wie zu erwarten war, laufen alle Personen im Verlauf des Tests auf dem kürzesten Weg in Richtung des Ziels. Sie sind nicht in der Lage das Hindernis zu Umlaufen und sammeln sich vor dem Hindernis, an der Stelle mit der geringsten Distanz zum Ziel. Dies wird durch die Heatmap verdeutlicht. Abhängig von der Farbe der Heatmap werden die unterschiedlichen Entfernungen der einzelnen Felder zum Ziel, und damit die Attraktivität der Felder dargestellt. Wie die Abbildungen zeigen, werden Hindernisse bei der Ermittlung der Entfernungen nicht berücksichtigt.
+ 
+\begin{figure}[!htb]
+	\centering
+	\begin{minipage}{.5\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{abbildungen/ChickenTest1BeginEuclid.png}
+		\caption{Heatmap des Hühnertests mit dem Euklid Algorithmus (zu Beginn)}
+		\label{fig:HühnerTestEuklidAnfang}
+	\end{minipage}%
+	\begin{minipage}{0.5\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{abbildungen/ChickenTest1EndEuclid.png}
+		\caption{Heatmap des Hühnertests mit dem Euklid Algorithmus (Ende des Tests)}
+		\label{fig:HühnertestEuklidEnde}
+	\end{minipage}
+\end{figure}
+
+Im Vergleich dazu zeigen die Abbildungen \ref{fig:HühnerTestDijkstraAnfang} und \ref{fig:HühnertestDijkstraMitte} jeweils die Heatmap des Floor-Flooding mit dem Dijkstra Algorithmus zu Beginn der Simulation und nach einer SImulationsdauer von ca. $8s$. Es fällt auf, dass diese Heatmap deutlich anders aussieht, als die des Euklid Algorithmus. Die Hindernisse werden bei der Ermittlung der Entfernung der Zellen vom Ziel berücksichtigt und folglich farblich anders dargestellt. Abbildung \ref{fig:HühnertestDijkstraMitte} zeigt außerdem, dass sich die Personen in 2 Gruppen aufteilen und das Hindernis an beiden Seiten umlaufen. Nach einer Simulationsdauer von ca. $34,32s$ sind alle Personen im Ziel angekommen.
+
+\begin{figure}[!htb]
+	\centering
+	\begin{minipage}{.5\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{abbildungen/ChickenTestBeginDijkstra.png}
+		\caption{Heatmap des Hühnertests mit dem Dijkstra Algorithmus (zu Beginn)}
+		\label{fig:HühnerTestDijkstraAnfang}
+	\end{minipage}%
+	\begin{minipage}{0.5\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{abbildungen/ChickenTestMitteDijkstra.png}
+		\caption{Heatmap des Hühnertests mit dem Dijkstra Algorithmus (während der Simulation)}
+		\label{fig:HühnertestDijkstraMitte}
+	\end{minipage}
+\end{figure}
+
+Abschließend zeigt Abbildung \ref{fig:HühnertestFMAnfang} die Heatmap des Fast-Marching Algorithmus. 
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.5\textwidth]{abbildungen/ChickenTestBeginFM.png}
+	\caption{Heatmap des Hühnertests mit dem Fast-Marching Algorithmus (zu Beginn)}
+	\label{fig:HühnertestFMAnfang}
+\end{figure}
+
+Zusammenfassend ist festzustellen, dass die Personen in der Simulation mit dem Euklid Algorithmus im Hindernis hängen blieben. Bei den beiden anderen Algorithmen fanden sie den Weg ins Ziel. Beide Male teilten sie sich in 2 Gruppen auf. Für eine bessere Übersichtlichkeit wurde auf Abbildungen, welche das Ende des Tests mit dem Dijkstra bzw. Fast-Marching Algorithmus zeigen, verzichtet. Außerdem konnte festgestellt werden, dass die Simulationsdauer durch die Verwendung des Fast-Marching Algorithmus mit ca. $34,33s$ minimal kürzer als bei der Verwendung des Dijkstra Alogirithmus mit ca. $34,47s$ war.
 
 \subsection{Validation}
 

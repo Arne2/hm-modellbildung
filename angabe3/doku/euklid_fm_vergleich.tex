@@ -1,0 +1,45 @@
+\section{Vergleich der Algorithmen}
+\subsection{Euklid}
+\subsection{Dijkstra}
+\subsection{Fast Marching}
+
+
+\section{Einfluss der Zellgröße auf die Abstandsberechnung}
+Bei der Berechnung der Abstände hat die Wahl der Zellgröße je nach Algorithmus einen entscheidenden Einfluss auf die Ergebnisse der Simulation. Die Zellgröße gibt nicht nur die minimale Schrittweite vor, sondern hat auch Einfluss auf die Genauigkeit der Nutzenberechnungen. Um einen Vergleich darzustellen wurde ein Quadratisches Feld angelegt. Die Zellgröße des Feldes sowie die Anzahl der Felder wurden so variiert, dass die Entfernung von der rechten unteren Ecke zur linken oberen Ecke (am weitesten entfernter Punkt) immer den gleichen Abstand hat. Die Tabelle \ref{tab_euklid_fm_vergleich} zeigt die Ergebnisse dieses Experiments. Die Cellsize gibt dabei die Kantenlänge einer quadratischen Zelle an. Wichtig ist der Wert „Distance in X and Y“, welcher besagt, dass das Ziel in X und in Y Richtung immer jeweils 14 Zellen entfernt ist.
+Nach der Formel wurde der Abstand von Ziel zum am weitesten entfernten Punkt berechnet:
+
+$$a = \sqrt[]{x^2 +y^2} = \sqrt[]{(14\ m) ^2 +(14\ m) ^2} = 19,799\ m$$ 
+
+Wie in der Tabelle zu sehen ist, berechnet der Euklid Algorithmus den Abstand sehr präzise. Da der Euklid Algorithmus kein „Gedächtnis“ hat und ohne Einfluss vorheriger Zellen berechnet. Interessant ist vor allem die Abweichung von 1,45 m die beim Fast Marching Algorithmus entsteht. Die entspricht einem Fehler von von 7,3 \% entspricht. Verringert man die Zellgröße, so konvergiert der Fast Marching Algorithmus gegen den euklidischen Abstand. Die prozentualen Fehler in Abhängigkeit der Zellgröße sind in Abbildung \ref{fig_fast_marching_error_cellsize} dargestellt. 
+
+
+\section{Einfluss der Zellgröße auf die maximale Dichte}
+Darüber hinaus hat die Zellgröße direkten Einfluss auf die Dichte [$\frac{Personen}{m^2}$] in einem Feld. Würde man die Zellgröße von $2\ m^2$ wählen, erhielte man eine maximale Dichte von 0,5 $\frac{1}{m^2}$. Es ist darauf zu achten, dass die Zellgröße angemessen gewählt wird. Bei weiteren Versuchen wurde stets eine Zellbreite von 0,4 bis 0,5 m verwendet, sofern nichts anderes angegeben.
+
+
+\begin{table}[htbp]
+\begin{tabular}{|l|r|r|r|r|r|r|r|}
+\hline
+Cellsize [m] & 2 & 1 & 0,5 & 0,25 & 0,125 & 0,0625 & 0,03125 \\ \hline
+Cells in X and Y & 7 & 14 & 28 & 56 & 112 & 224 & 448 \\ \hline
+Distance in  & & &  & &  & &\\ X and Y [m] & \textbf{14} & \textbf{14} & \textbf{14} & \textbf{14} & \textbf{14} & \textbf{14} & \textbf{14} \\ \hline
+Tatsächliche & & &  & &  & &\\Entfernung [m] & 19,799 & 19,799 & 19,799 & 19,799 & 19,799 & 19,799 & 19,799 \\ \hline
+Euklid [m] & 19,799 & 19,799 & 19,799 & 19,799 & 19,799 & 19,799 & 19,799 \\ \hline
+Fast  & & &  & &  & &\\ Marching [m] & \textbf{21,245} & \textbf{20,717} & \textbf{20,363} & \textbf{20,137} & \textbf{19,997} & \textbf{19,913} & \textbf{19,863} \\ \hline
+Diff [m] & 1,45 & 0,92 & 0,5645 & 0,3380 & 0,1979 & 0,1138 & 0,0644 \\ \hline
+ & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} \\ \hline
+Error [\%]  & & &  & &  & &\\ diff/distance & \textbf{7,30} & \textbf{4,64} & \textbf{2,85} & \textbf{1,71} & \textbf{1,00} & \textbf{0,57} & \textbf{0,33} \\ \hline
+\end{tabular}
+\caption{Vergleich der Algorithmen Fast Marching und Euklid. Cellsize ist die Kantenlänge einer quadratischen Zelle in m (Zellbreite)}
+\label{tab_euklid_fm_vergleich}
+\end{table}
+
+
+\begin{figure}[ht]
+	\centering
+  \includegraphics[width=\textwidth]{abbildungen/vergleich_euklid_fast_marching/fehler_zellgroesse.png}
+	\caption{Prozentualer Fehler des Fast Marching Algorithmus in Abhängigkeit der Zellbreite}
+	\label{fig_fast_marching_error_cellsize}
+\end{figure}
+
+

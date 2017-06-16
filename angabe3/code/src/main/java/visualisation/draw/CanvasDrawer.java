@@ -1,4 +1,4 @@
-package visualisation;
+package visualisation.draw;
 
 import field.location.Location;
 import javafx.application.Platform;
@@ -14,6 +14,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import outputFile.Output;
 import outputFile.OutputEvent;
+import visualisation.SimulatedPerson;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

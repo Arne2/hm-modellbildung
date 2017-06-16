@@ -189,7 +189,7 @@ public class Configuration {
         public void parseArgs(final String[] args) {
             for (int i = 0; i < args.length; i++) {
                 if (args[i].equals("--cell-size")) {
-                    this.cellSize(Integer.parseInt(args[i + 1]));
+                    this.cellSize(Double.parseDouble(args[i + 1]));
                 }
                 if (args[i].equals("--free-flow-velocity")) {
                     this.velocity(Double.parseDouble(args[i + 1]));

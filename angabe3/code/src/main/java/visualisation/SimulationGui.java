@@ -174,7 +174,7 @@ public class SimulationGui extends Application {
      * @throws URISyntaxException
      */
     public void saveSnapshot() throws IOException, URISyntaxException {
-        String path = inputFile.getParent() + "/snapshot_" + LocalTime.now().toString().replace(":","_") + ".png";
+        String path = inputFile.getParent() + "/snapshot_"+ input.getAlgorithm() + "_" + LocalTime.now().toString().replace(":","_") + ".png";
         File snapshot = new File (path);
         if (!snapshot.exists()){
             Files.createDirectories(Paths.get(inputFile.getParent()));

@@ -4,7 +4,8 @@ import field.Field;
 import field.location.Location;
 import field.location.Locations;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author peter-mueller
@@ -22,9 +23,9 @@ public class PersonalSpace {
 
         final double p1;
         if (!cacheP1.containsKey(distance)) {
-                final double v1 = distance / (PERSONAL_SPACE);
-                p1 = uP * Math.exp(4 / (Math.pow(v1, 2) - 1));
-                cacheP1.put(distance,p1);
+            final double v1 = distance / (PERSONAL_SPACE);
+            p1 = uP * Math.exp(4 / (Math.pow(v1, 2) - 1));
+            cacheP1.put(distance, p1);
         } else {
             p1 = cacheP1.get(distance);
         }
@@ -33,7 +34,7 @@ public class PersonalSpace {
         if (!cacheP2.containsKey(distance)) {
             final double v2 = distance / (INTIMATE_SPACE);
             p2 = p1 + ((uP / aP) * Math.exp(4 / (Math.pow(v2, 2 * bP) - 1)));
-            cacheP2.put(distance,p2);
+            cacheP2.put(distance, p2);
         } else {
             p2 = cacheP2.get(distance);
         }
@@ -52,12 +53,6 @@ public class PersonalSpace {
     public double use(Field field, Location target, Location self) {
 
         return -1 * field.getPersons().values().stream()
-                .map(location -> {
-                    if (location.x >= 20) {
-                        return Location.of(0, location.y);
-                    }
-                    return location;
-                })
                 .filter(l -> !l.equals(self))
                 .mapToDouble(l -> Locations.distance(l, target) * field.getCellSize())
                 .filter(distance -> distance < PERSONAL_SPACE)

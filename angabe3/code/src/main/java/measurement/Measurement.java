@@ -94,6 +94,21 @@ public class Measurement implements AutoCloseable{
 
     }
 
+    public int getFromX() {
+        return fromX;
+    }
+
+    public int getFromY() {
+        return fromY;
+    }
+
+    public int getToX() {
+        return toX;
+    }
+
+    public int getToY() {
+        return toY;
+    }
 
     @Override
     public void close() throws Exception {

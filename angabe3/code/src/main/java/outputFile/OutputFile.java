@@ -3,6 +3,7 @@ package outputFile;
 import config.Configuration;
 import field.Field;
 import field.location.Location;
+import measurement.Measurement;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -31,6 +32,13 @@ public class OutputFile {
 
         //m.marshal(output, System.out);
         m.marshal(this.output, new FileWriter(filename));
+    }
+
+    public void setMeasurement(Measurement measurement){
+        output.setFromX(measurement.getFromX());
+        output.setFromY(measurement.getFromY());
+        output.setToX(measurement.getToX());
+        output.setToY(measurement.getToY());
     }
 
     public void setDistances(Map<Location, Double> use){

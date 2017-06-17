@@ -59,6 +59,7 @@ public class Simulation implements AutoCloseable {
         }
         if (outputFile != null) {
             outputFile.setDistances(this.use);
+            outputFile.setMeasurement(measurement);
         }
 
         final MeasurementEvent event = new MeasurementEvent(new BigDecimal(0), this);

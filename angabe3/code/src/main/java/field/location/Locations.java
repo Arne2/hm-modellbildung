@@ -15,6 +15,10 @@ public class Locations {
         if (a.equals(b)) {
             return 0;
         }
-       return Math.hypot(a.x - b.x, a.y-b.y);
+       return hypot(a.x - b.x, a.y-b.y);
+    }
+
+    private static double hypot(int x, int y) {
+        return Math.sqrt(x*x + y*y);
     }
 }

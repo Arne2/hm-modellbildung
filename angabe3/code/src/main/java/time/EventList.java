@@ -1,11 +1,9 @@
 package time;
 
+import javafx.collections.transformation.SortedList;
 import time.events.Event;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author peter-mueller
@@ -20,7 +18,6 @@ public class EventList {
         if (eventList.isEmpty()) {
             return null;
         }
-        Collections.sort(eventList);
         return eventList.remove(0);
     }
 
@@ -37,13 +34,21 @@ public class EventList {
         if (event == null) {
             throw new IllegalArgumentException("Event must not be null!");
         }
-        eventList.add(event);
+        final int i = Collections.binarySearch(eventList, event);
+        if (i < 0) {
+            eventList.add(-i - 1, event);
+        } else {
+            eventList.add(i, event);
+        }
     }
 
     public void addAll(Collection<Event> events) {
         if (events == null) {
             throw new IllegalArgumentException("Events must not be null!");
         }
-        eventList.addAll(events);
+        if (events.isEmpty()) {
+            return;
+        }
+        events.forEach(this::add);
     }
 }

@@ -22,6 +22,7 @@ public class FieldImporter {
         colorBlack(-16777216),
         colorBlue(-12629812),
         colorGreen(-14503604),
+        colorRed(-65536),
         colorWhite(-1);
 
         private int value;
@@ -79,10 +80,16 @@ public class FieldImporter {
                     case colorWhite:
                         returnField.addLocation(Location.of(x, y));
                         break;
+                    case colorRed:
+                        returnField.addLocation(Location.of(x, y));
+                        returnField.addMeasurePoint(Location.of(x, y));
+
+                        break;
                     case colorGreen:
                         Location loc = Location.of(x, y);
                         returnField.addLocation(loc);
-                        returnField.putPerson(new Person(configuration.getVelocity()), loc);
+                        final double velocity = configuration.getVelocity();
+                        returnField.putPerson(new Person(velocity), loc);
                         break;
                     default:
                         break;

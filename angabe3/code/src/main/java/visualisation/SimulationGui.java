@@ -37,13 +37,15 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.sql.Time;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.DoubleToIntFunction;
 
 /**
  * Created by Arne on 30.05.2017.
@@ -57,7 +59,7 @@ public class SimulationGui extends Application {
     // Default Sizes of Panels
     public static final int MENUSIZE = 75;
     public static final int STARTSIZE = 475;
-    public static final int INFOSIZE = 250;
+    public static final int INFOSIZE = 275;
 
     // Colors
     public static final Color GOALCOLOR = Color.GREEN;
@@ -100,6 +102,7 @@ public class SimulationGui extends Application {
     private boolean enableScrollbar = false;
     private long waitingtime = 0;
     private File inputFile ;
+    private double distancemin = 0.0;
 
     // Stages
     Stage primaryStage;
@@ -134,7 +137,12 @@ public class SimulationGui extends Application {
     private Label infoPerson;
     private Label infoDestination;
     private Label infoWall;
+    private Label heatmapLabel;
+    private Label heatmapLabel1;
+    private Label heatmapLabel2;
+    private Label heatmapLabel3;
     private Canvas captionColors;
+    private Canvas captionHeatMap;
 
     // Layers of the visualisation
     private Canvas cellLayer;
@@ -230,6 +238,15 @@ public class SimulationGui extends Application {
     }
 
     /**
+     * Handles all Events that occur at the time zero.
+     */
+    private void proceedToStart(){
+        while (input.getEvents().size() > step && input.getEvents().get(step+1).getTime().equals(BigDecimal.ZERO)){
+            handleNextEvent();
+        }
+    }
+
+    /**
      * Configures the slider.
      */
     private void createSlider(){
@@ -289,13 +306,9 @@ public class SimulationGui extends Application {
      */
     private void setCellSize(){
         double x = screenBounds.getWidth()*0.9 - infoStage.getWidth();
-                //screenBounds.getWidth() - info.getWidth();
         double y = screenBounds.getHeight()*0.7 - primaryStage.getHeight();
-                //screenBounds.getHeight() - 50;
         int width = input.getFieldWidth();
         int height = input.getFieldHeight();
-        System.out.println("Width: " + width);
-        System.out.println("Height: " + height);
 
         cellsize = (int)Math.min(x/width,(y-MENUSIZE)/height);
         cellsize = Math.min(MAXCELLSIZE, cellsize);
@@ -303,7 +316,6 @@ public class SimulationGui extends Application {
             enableScrollbar = true;
         }
         cellsize = Math.max(MINCELLSIZE, cellsize);
-        System.out.println(cellsize);
     }
 
     /**
@@ -323,7 +335,7 @@ public class SimulationGui extends Application {
     public void drawCells(){
         GraphicsContext gc = cellLayer.getGraphicsContext2D();
         gc.setFill(Color.WHITE);
-        gc.setStroke(Color.BLACK);
+        gc.setStroke(Color.GRAY);
         gc.setLineWidth(1);
         for(int y = 0; y < input.getFieldHeight(); y++) {
             for (int x = 0; x < input.getFieldWidth(); x++) {
@@ -333,16 +345,22 @@ public class SimulationGui extends Application {
         }
     }
 
-    public void saveSnapshot(){
-        File snapshot = new File (inputFile.getParent() + "/snapshot_" + LocalTime.now().toString() + ".png");
+    /**
+     * Creates a png file of the current canvas.
+     * @throws IOException
+     * @throws URISyntaxException
+     */
+    public void saveSnapshot() throws IOException, URISyntaxException {
+        String path = inputFile.getParent() + "/snapshot_" + LocalTime.now().toString().replace(":","_") + ".png";
+        File snapshot = new File (path);
+        if (!snapshot.exists()){
+            Files.createDirectories(Paths.get(inputFile.getParent()));
+            Files.createFile(Paths.get(path));
+        }
         WritableImage writableImage = new WritableImage(((int) canvas.getWidth()), ((int) canvas.getHeight()));
         canvas.snapshot(null, writableImage);
         RenderedImage renderedImage = SwingFXUtils.fromFXImage(writableImage, null);
-        try {
-            ImageIO.write(renderedImage, "png", snapshot);
-        }catch (Exception e){
-            e.getMessage(); //unhandled
-        }
+        ImageIO.write(renderedImage, "png", snapshot);
     }
 
     /**
@@ -364,6 +382,7 @@ public class SimulationGui extends Application {
                 min = Math.min(d, min);
             }
         }
+        distancemin = min;
         for(int y = 0; y < input.getFieldHeight(); y++) {
             String[] row = rows[y].split(" ");
             for (int x = 0; x < input.getFieldWidth(); x++) {
@@ -371,10 +390,20 @@ public class SimulationGui extends Application {
                 if (d == WALLVALUE){
                     continue;
                 }
-                gc.setFill(Color.hsb(((1+d/min) * 360), 1, 1, 1));
+                gc.setFill(getHeatColor(d,distancemin));
                 gc.fillRect(x* cellsize, y* cellsize, cellsize, cellsize);
             }
         }
+    }
+
+    /**
+     * Helping method for creating the heatmap.
+     * @param d
+     * @param min
+     * @return the color of the a cell.
+     */
+    private Color getHeatColor(double d, double min){
+        return Color.hsb(((1+d/min) * 360), 1, 1, 1);
     }
 
     /**
@@ -391,6 +420,7 @@ public class SimulationGui extends Application {
         for(int y = 0; y < input.getFieldHeight(); y++) {
             for (int x = 0; x < input.getFieldWidth(); x++) {
                 char c = rows[y].charAt(x);
+                if(input.getTargets() == null) continue;
                 if ( input.getTargets().contains(Location.of(x, y))) {
                     gc.setFill(GOALCOLOR);
                     gc.fillRect(x* cellsize, y* cellsize, cellsize, cellsize);
@@ -421,6 +451,8 @@ public class SimulationGui extends Application {
         stepLabel.setText("Current step: " + step);
         timeLabel.setText("Current Time: 0");
         personLabel.setText("People in the Simulation: 0");
+
+        proceedToStart();
     }
 
     /**
@@ -441,24 +473,55 @@ public class SimulationGui extends Application {
      * @param height of the infoStage
      */
     private void createCaption(double height){
+        // Caption Heatmap
+        heatmapLabel = new Label("Heatmap Colors:");
+        heatmapLabel.setLayoutX(10);
+        heatmapLabel.setLayoutY(height - 135);
+
+        heatmapLabel1 = new Label("0.0m");
+        heatmapLabel1.setLayoutX(28);
+        heatmapLabel1.setLayoutY(height - 117);
+
+        heatmapLabel2 = new Label(getDistanceString(-distancemin/2));
+        heatmapLabel2.setLayoutX(28);
+        heatmapLabel2.setLayoutY(height - 68);
+
+        heatmapLabel3 = new Label(getDistanceString(-distancemin));
+        heatmapLabel3.setLayoutX(28);
+        heatmapLabel3.setLayoutY(height - 19);
+
+        captionHeatMap = new Canvas(10, 100);
+        captionHeatMap.setLayoutX(10);
+        captionHeatMap.setLayoutY(height - 109);
+        GraphicsContext gc2 = captionHeatMap.getGraphicsContext2D();
+
+        for (int i = 0 ; i < 100; i++){
+            gc2.setFill(getHeatColor(i,100));
+            gc2.fillRect(0, i, 10, 1);
+        }
+
+        // Caption Cellmap
+        // Offset depending on the Heatmap caption width
+        double offset = heatmapLabel3.getLayoutX() + heatmapLabel3.getText().length()*5;
+
         cellSizeInfo = new Label("Cellsize: " + input.getCellsize());
-        cellSizeInfo.setLayoutX(10);
+        cellSizeInfo.setLayoutX(offset + 25);
         cellSizeInfo.setLayoutY(height - 76);
 
         infoPerson = new Label("Person");
-        infoPerson.setLayoutX(25);
+        infoPerson.setLayoutX(offset + 40);
         infoPerson.setLayoutY(height - 58);
 
         infoDestination = new Label("Destination");
-        infoDestination.setLayoutX(25);
+        infoDestination.setLayoutX(offset + 40);
         infoDestination.setLayoutY(height - 40);
 
         infoWall = new Label("Wall/Obstacle");
-        infoWall.setLayoutX(25);
+        infoWall.setLayoutX(offset + 40);
         infoWall.setLayoutY(height - 22);
 
         captionColors = new Canvas(10,46);
-        captionColors.setLayoutX(10);
+        captionColors.setLayoutX(offset + 25);
         captionColors.setLayoutY(height - 55);
         GraphicsContext gc = captionColors.getGraphicsContext2D();
 
@@ -471,11 +534,29 @@ public class SimulationGui extends Application {
         gc.setFill(WALLCOLOR);
         gc.fillRect(0, 36, 10, 10);
 
+        // Add Nodes to info panel.
         info.getChildren().add(cellSizeInfo);
         info.getChildren().add(infoPerson);
         info.getChildren().add(infoDestination);
         info.getChildren().add(infoWall);
         info.getChildren().add(captionColors);
+        info.getChildren().add(heatmapLabel);
+        info.getChildren().add(heatmapLabel1);
+        info.getChildren().add(heatmapLabel2);
+        info.getChildren().add(heatmapLabel3);
+        info.getChildren().add(captionHeatMap);
+    }
+
+    /**
+     * Helping method for creating the content of the heatmap labels.
+     * @param distance
+     * @return
+     */
+    private String getDistanceString(double distance){
+        String result = (distance+"");
+        result = result.substring(0,result.indexOf(".")+3);
+        result += "m";
+        return result;
     }
 
     /**
@@ -586,7 +667,11 @@ public class SimulationGui extends Application {
         snapshot.setLayoutX(250);
         snapshot.setLayoutY(42);
         snapshot.setOnAction(event -> {
-            saveSnapshot();
+            try {
+                saveSnapshot();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
 
         // Add the buttons to the pane

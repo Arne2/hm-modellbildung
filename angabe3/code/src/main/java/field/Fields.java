@@ -3,7 +3,9 @@ package field;
 import field.location.Location;
 import field.location.Locations;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -24,6 +26,26 @@ public class Fields {
                 new Location(-1, 1), new Location(0, 1), new Location(1, 1),
         };
         return Arrays.stream(moore)
+                .map(center::relative)
+                .filter(field::has)
+                .collect(Collectors.toSet());
+    }
+
+    public static Location[] circleSelector(int distance) {
+        final int width = distance * 2 + 1;
+        final List<Location> circle = new ArrayList<>();
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < width; y++) {
+                if (Math.hypot(x-distance,y-distance) < distance) {
+                    circle.add(Location.of(x-distance, y-distance));
+                }
+            }
+        }
+        return circle.toArray(new Location[0]);
+    }
+
+    public static Set<Location> of(Field field, Location center, Location[] selector) {
+        return Arrays.stream(selector)
                 .map(center::relative)
                 .filter(field::has)
                 .collect(Collectors.toSet());

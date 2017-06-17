@@ -11,10 +11,11 @@ import person.Person;
  * @author peter-mueller
  */
 public class PersonalSpaceTest {
-    public static final int LARGE_CELL_SIZE = 1;
+    public static final int LARGE_CELL_SIZE = 10;
     public static final double CELL_SIZE = 0.40;
 
-    private final PersonalSpace personalSpace = new PersonalSpace();
+    private final PersonalSpace personalSpace = new PersonalSpace(CELL_SIZE);
+    private final PersonalSpace personalSpaceLarge = new PersonalSpace(LARGE_CELL_SIZE);
 
     @Test
     public void useNoOtherPersons() throws Exception {
@@ -65,7 +66,7 @@ public class PersonalSpaceTest {
 
         field.putPerson(new Person(1.0), Location.of(2,2));
         field.putPerson(new Person(1.0), Location.of(0,0));
-        final double use = personalSpace.use(field, Location.of(2, 2), Location.of(2,2));
+        final double use = personalSpaceLarge.use(field, Location.of(2, 2), Location.of(2,2));
         if (use != 0.0) {
             final String message = String.format("use should not be influenced, because the person is to far away. was: %s", use);
             Assert.fail(message);

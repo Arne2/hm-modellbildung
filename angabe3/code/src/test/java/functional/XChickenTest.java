@@ -8,6 +8,7 @@ import main.Simulation;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 
 /**
@@ -24,7 +25,7 @@ public class XChickenTest {
             .build();
 
     @Test
-    public void testChickenTest(){
+    public void testChickenTest() throws Exception {
         Field field = StringView.parseStringMap(
                         "000000X000000\n" +
                         "0000000000000\n" +

@@ -3,13 +3,14 @@ package time.events;
 import field.Fields;
 import field.location.Location;
 import field.location.Locations;
-import field.use.PersonalSpace;
 import main.Simulation;
-import outputFile.OutputFile;
 import person.Person;
 
 import java.math.BigDecimal;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -45,6 +46,9 @@ public class PersonMoveEvent extends BaseEvent {
         final Location bestTarget = range.stream()
                 .max(Comparator.comparingDouble((Location target) -> {
                     final double use = simulation.getUse().get(target);
+                    if (simulation.field.isTarget(target)) {
+                        return use;
+                    }
                     final double personPotential = simulation.getPersonalSpace().use(simulation.field, target, locationOfPerson);
                     return use + personPotential;
                 }).thenComparingDouble( target ->  -Locations.distance(target, locationOfPerson)))
@@ -53,6 +57,7 @@ public class PersonMoveEvent extends BaseEvent {
         if (bestTarget.equals(locationOfPerson)) {
             final BigDecimal timeForWait = BigDecimal.valueOf(simulation.field.getCellSize() / person.getVelocity());
             final BigDecimal nextMove = getTime().add(timeForWait);
+            person.step(new BigDecimal(0), timeForWait);
             final PersonMoveEvent event = new PersonMoveEvent(nextMove, simulation, person);
             newEvents.add(event);
             return newEvents;

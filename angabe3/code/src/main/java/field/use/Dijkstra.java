@@ -26,6 +26,9 @@ public class Dijkstra {
         distance.put(start, 0.0);
     }
 
+    /**
+     * Calculates the value for the locations of a field for a target.
+     */
     private void run() {
         while (!unvisited.isEmpty()) {
             final Location u = unvisited.parallelStream()
@@ -47,6 +50,11 @@ public class Dijkstra {
         }
     }
 
+    /**
+     * Returns a map of locations with their resulting values for the Dijkstra algorithm.
+     * @param field
+     * @return resulting map
+     */
     public static Map<Location, Double> use(Field field) {
         Set<Map<Location, Double>> distances = new HashSet<>();
 

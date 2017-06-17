@@ -35,6 +35,12 @@ public class StringView {
         return buffer.toString();
     }
 
+    /**
+     *
+     * @param field
+     * @param use
+     * @return
+     */
     public static String useMap(final Field field, final Map<Location, Double> use) {
         final StringBuilder buffer = new StringBuilder();
 
@@ -59,6 +65,12 @@ public class StringView {
         return buffer.toString();
     }
 
+    /**
+     * Reads an input String and generates a Field out of it.
+     * @param map
+     * @param cellSize
+     * @return generated Field
+     */
     public static Field parseStringMap(final String map, double cellSize) {
         final String[] rows = map.split("\n");
         final Field field = new Field(cellSize);
@@ -78,9 +90,13 @@ public class StringView {
         return field;
     }
 
+    /**
+     * Returns a String which contains distance map of a given Map.
+     * @param use
+     * @return String distance map.
+     */
     public static String toStringDistanceMap(Map<Location, Double> use){
         final StringBuilder buffer = new StringBuilder();
-
 
         final Location edge = use.keySet().stream()
                 .max(Location::compareTo).orElse(Location.of(0, 0));
@@ -99,6 +115,11 @@ public class StringView {
         return buffer.toString();
     }
 
+    /**
+     * Generates a String View out of a given Field.
+     * @param field
+     * @return String View of the Field.
+     */
     public static String toStringMap(Field field) {
         final StringBuilder buffer = new StringBuilder();
 

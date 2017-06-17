@@ -116,6 +116,7 @@ public class Configuration {
     }
 
     public enum AlgorithmType {eDijkstra, eEuclid, eFastMarching}
+
     /**
      * Provides a builder for a customized Configuration.
      */

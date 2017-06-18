@@ -1,0 +1,11 @@
+### ARGUMENTS ###
+use default values for free-flow-velocity and free-flow-deviation
+
+### FOR EUCLID ###
+--algorithm euclid --field-image "../test_scenarios/evacuation_2_doors_test_1/map.png" --output "../test_scenarios/evacuation_2_doors_test_2/euclid.xml" --max-duration 5000
+
+### FOR DIJKSTRA ###
+--algorithm dijkstra --field-image "../test_scenarios/evacuation_2_doors_test_1/map.png" --output "../test_scenarios/evacuation_2_doors_test_2/dijkstra.xml"
+
+### FOR FAST MARCHING ###
+--algorithm fast-marching --field-image "../test_scenarios/evacuation_2_doors_test_1/map.png" --output "../test_scenarios/evacuation_2_doors_test_2/fast-marching.xml"

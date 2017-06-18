@@ -265,16 +265,60 @@ Der Aufbau der Anwendung wurde im Team diskutiert und anschließend mittels UML 
 \subsection{Verifikation}
 
 \subsubsection{Evakuierung}
-Mit Hilfe der verschiedenen Evakuierungstests sollen die Auswirkungen unterschiedlicher Positionen und Anzahl von Türen auf die Dauer der Evakuierung eines Raumes ermittelt werden. Die Berechnung des Zielnutzens auf Basis des Euklid Algorithmus wird hierbei nicht berücksichtigt.  
-%TODO Begründung
+Mit Hilfe der verschiedenen Evakuierungstests sollen die Auswirkungen unterschiedlicher Positionen und Anzahl von Türen auf die Dauer der Evakuierung eines Raumes ermittelt werden. Die Berechnung des Zielnutzens auf Basis des Euklid Algorithmus wird hierbei nicht berücksichtigt. Dieser Algorithmus ist zwar gut geeignet um den kürzesten Weg zu einem Ziel zu finden, Hindernisse können jedoch nicht umgangen werden. Somit kann nicht ausgeschlossen werden, dass eine Person, beispielsweise in einer Ecke, \glqq hängen bleibt\grqq. Dieses Verhalten würde nicht der Realität entsprechen.
 
 \paragraph{Evakuierung eines Raumes (Personen befinden sich in der Mitte)}
 \label{EvaVerifikation}
 Für die Verifikation der Simulation sollen sich die Personen zunächst alle dicht gedrängt in der Mitte des Raumes befinden. An 2 gegenüberliegenden Seiten des Raumes soll sich jeweils eine Tür befinden (Evakuierung eines Raumes mit 2 Türen). In einer weiteren Simulation sollen sich an den anderen beiden Seiten jeweils eine weitere Tür befinden (Evakuierung eines Raumes mit 4 Türen). Die Evakuierungsdauer des Raumes mit 4 Türen müsste nun exakt halb so lange sein, wie die des Raumes mit 2 Türen. \\ 
 
 \paragraph{Evakuierung eines Raumes (Personen zufällig verteilt)}
-Da das in Abschnitt \ref{EvaVerifikation} beschriebene Szenario zwar für die Verifikation relevant ist, doch in der Realität äußerst unwahrscheinlich ist, werden in diesem Abschnitt weitere Evakuierungstests gegenübergestellt. \\
+Das in Abschnitt \ref{EvaVerifikation} beschriebene Szenario ist zwar für die Verifikation der Simulation relevant, in der Realität jedoch äußerst unwahrscheinlich. Die Personen in einem Raum werden sich nie dicht gedrängt, exakt symmetrisch in der Mitte befinden. Aus diesem Grund werden in diesem Abschnitt weitere Evakuierungstests gegenübergestellt, bei denen die Personen zufällig im Raum verteilt wurden. Anhand dieser Tests sollen die Auswirkungen unterschiedlicher Positionen und Anzahl der Türen auf die Evakuierungsdauer simuliert werden.\\
 
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{abbildungen/Evak1DBegin.png}
+	\caption{Verteilung der Personen (Heatmap Dijkstra Algorithmus)}
+	\label{fig:EvakuierungMap}
+\end{figure}
+
+Abbildung \ref{fig:EvakuierungMap} zeigt die Verteilung der Personen, die für alle weiteren Evakuierungstests in diesem Kapitel verwendet werden. Somit wird eine bessere Vergleichbarkeit der Ergebnisse erzielt. In der Abbildung ist außerdem die Heatmap des Dijkstra Algorithmus für dieses Szenario zu sehen. 
+
+\begin{figure}[!htb]
+	\centering
+	\begin{minipage}{.5\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{abbildungen/Evak1DMitte.png}
+		\caption{Evakuierung eines Raumes mit 2 Türen (geringer Abstand, Dijkstra Algorithmus)}
+		\label{fig:Evak2TürNebeneinanderMinDijkstra}
+	\end{minipage}%
+	\begin{minipage}{0.5\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{abbildungen/Evak1FMMitte.png}
+		\caption{Evakuierung eines Raumes mit 2 Türen (geringer Abstand, Fast Marching Algorithmus)}
+		\label{fig:Evak2TürNebeneinanderMinFM}
+	\end{minipage}
+\end{figure}
+
+Die Abbildungen \ref{fig:Evak2TürNebeneinanderMinDijkstra} und \ref{fig:Evak2TürNebeneinanderMinFM} zeigen einen Ausschnitt der Simulation nach einer Simulationszeit von ca. $13s$. Wie zu erwarten ist, drängen alle Personen in die Ecke links unten. Dort bilden sich vor den Engstellen (Ausgängen) kleinere Staus. Die Evakuierungsdauer beträgt für die Simulation mit dem Dijkstra Algorithmus ca. $20s$. Da sich die Personen bei Verwendung des Fast Marching Algorithmus effizienter auf die Ziele zu bewegen, bilden sich etwas kleinere Staus an den Engstellen und die Evakuierungsdauer ist mit ca. $18,7s$ etwas kürzer.
+
+\begin{figure}[!htb]
+	\centering
+	\begin{minipage}{.5\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{abbildungen/Evak2DMitte.png}
+		\caption{Evakuierung eines Raumes mit 2 Türen (großer Abstand, Dijkstra Algorithmus)}
+		\label{fig:Evak2TürNebeneinanderMaxDijkstra}
+	\end{minipage}%
+	\begin{minipage}{0.5\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{abbildungen/Evak2FMMitte.png}
+		\caption{Evakuierung eines Raumes mit 2 Türen (großer Abstand, Fast Marching Algorithmus)}
+		\label{fig:Evak2TürNebeneinanderMaxFM}
+	\end{minipage}
+\end{figure}
+
+Im Vergleich dazu zeigen die Abbildungen \ref{fig:Evak2TürNebeneinanderMaxDijkstra} und \ref{fig:Evak2TürNebeneinanderMaxFM} jeweils einen Ausschnitt einer Simulation, in der die Ausgänge bzw. Ziele sehr weit voneinander entfernt gewählt wurden. In beiden Abbildungen ist sofort zu sehen, dass sich in etwa die Hälfte der Personen (Personen deren Startposition in der entsprechenden Hälfte lag) auf die Ziele unten links und die andere Hälfte auf die Ziele oben rechts zubewegen. Die Heatmaps zeigen die entsprechende Entfernung an. Die maximale Entfernung vom Ziel ist mit ca. $16m$ deutlich geringer als in der eben beschriebenen Simulation ($21m$). Die bessere Verteilung der Personen auf die Ziele und die geringere Entfernung zum Ziel erklären die geringer Evakuierungsdauer von ca. $19,5s$ (Dijkstra) bzw. $18,5s$ (Fast-Marching).
+%TODO: Noch ne SImulation mit mehr Personen um Unterschied zu verdeutlichen
 \paragraph{Fazit und Vergleich}
 
 \subsection{Validation}

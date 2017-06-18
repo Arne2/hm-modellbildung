@@ -23,6 +23,8 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
 import java.io.File;
 import java.io.FileReader;
@@ -180,12 +182,41 @@ public class SimulationGui extends Application {
             Files.createDirectories(Paths.get(inputFile.getParent()));
             Files.createFile(Paths.get(path));
         }
-        WritableImage writableImage = new WritableImage(((int) canvasDrawer.getCanvas().getWidth()), ((int) canvasDrawer.getCanvas().getHeight()));
-        canvasDrawer.getCanvas().snapshot(null, writableImage);
-        RenderedImage renderedImage = SwingFXUtils.fromFXImage(writableImage, null);
+        WritableImage writableImageCanvas = new WritableImage(((int) canvasDrawer.getCanvas().getWidth()), ((int) canvasDrawer.getCanvas().getHeight()));
+        canvasDrawer.getCanvas().snapshot(null, writableImageCanvas);
+
+        WritableImage writableImageInfo = new WritableImage(((int) infoDrawer.getCanvas().getWidth()), ((int) infoDrawer.getCanvas().getHeight()));
+        infoDrawer.getCanvas().snapshot(null, writableImageInfo);
+
+        RenderedImage renderedImage = joinImages(writableImageCanvas, writableImageInfo);
         ImageIO.write(renderedImage, "png", snapshot);
     }
 
+    /**
+     * Helping method for join Info Pane and Map Pane in one Image
+     * Joins two Images side by side
+     */
+    public static BufferedImage joinImages(WritableImage img1_temp,WritableImage img2_temp) {
+        BufferedImage img1 = SwingFXUtils.fromFXImage(img1_temp, null);
+        BufferedImage img2 = SwingFXUtils.fromFXImage(img2_temp, null);
+        //do some calculate first
+        int offset  = 5;
+        int wid = img1.getWidth()+img2.getWidth()+offset;
+        int height = Math.max(img1.getHeight(),img2.getHeight())+offset;
+        //create a new buffer and draw two image into the new image
+        BufferedImage newImage = new BufferedImage(wid,height, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2 = newImage.createGraphics();
+        Color oldColor = g2.getColor();
+        //fill background
+        g2.setPaint(Color.WHITE);
+        g2.fillRect(0, 0, wid, height);
+        //draw image
+        g2.setColor(oldColor);
+        g2.drawImage(img1, null, 0, 0);
+        g2.drawImage(img2, null, img1.getWidth()+offset, 0);
+        g2.dispose();
+        return newImage;
+    }
     /**
      * Helping method for creating the buttons.
      */

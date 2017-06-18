@@ -1,3 +1,9 @@
-\begin{thebibliography}{}
+\begin{thebibliography}{1}
+
+\bibitem{JavaParallelism}
+Oracle Documentation.
+\newblock Java parallelism,
+  https://docs.oracle.com/javase/tutorial/collections/streams/parallelism.html,
+  2017.
 
 \end{thebibliography}

@@ -154,7 +154,7 @@ public class CanvasDrawer {
                 min = Math.min(d, min);
             }
         }
-        distancemin = min;
+        distancemin = -30;
         for(int y = 0; y < input.getFieldHeight(); y++) {
             String[] row = rows[y].split(" ");
             for (int x = 0; x < input.getFieldWidth(); x++) {

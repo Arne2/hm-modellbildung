@@ -30,7 +30,14 @@ public class EuclidDistance {
      * Calculates the euclid distances for the locations of a field for all targets.
      */
     private void run(){
-        while (!unvisited.isEmpty()){
+        int maxCounter = 100; //1, 20, 100, 1000, 3000
+        int counter = 0;
+
+        for (Location un: unvisited) {
+            distance.put(un, -Double.MAX_VALUE);
+        }
+        while (!unvisited.isEmpty() && counter < maxCounter){
+            counter++;
             final Location u =  unvisited.parallelStream().findAny().get();
             Set<Double> distances = new HashSet<>();
             for (Location target: targets) {

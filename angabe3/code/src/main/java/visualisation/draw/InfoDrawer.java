@@ -202,7 +202,7 @@ public class InfoDrawer {
      */
     private String getDistanceString(double distance){
         String result = (distance+"");
-        result = result.substring(0,result.indexOf(".")+3);
+        result = result.substring(0,result.indexOf(".")+1);
         result += "m";
         return result;
     }

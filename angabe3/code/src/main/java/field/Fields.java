@@ -11,8 +11,15 @@ import java.util.stream.Collectors;
 
 /**
  * @author peter-mueller
+ * Collection of static helping methods for using the Field class.
  */
 public class Fields {
+    /**
+     * Returns a Set of the Moore-Neighbour Fields.
+     * @param field
+     * @param center
+     * @return Moore-Neighbours.
+     */
     public static Set<Location> moore(Field field, Location center) {
         if (field == null) {
             throw new IllegalArgumentException("Field cannot be null!");
@@ -31,6 +38,11 @@ public class Fields {
                 .collect(Collectors.toSet());
     }
 
+    /**
+     * Returns an array of all Location up to a certain distance.
+     * @param distance
+     * @return area of Locations.
+     */
     public static Location[] circleSelector(int distance) {
         final int width = distance * 2 + 1;
         final List<Location> circle = new ArrayList<>();
@@ -44,6 +56,13 @@ public class Fields {
         return circle.toArray(new Location[0]);
     }
 
+    /**
+     *
+     * @param field
+     * @param center
+     * @param selector
+     * @return
+     */
     public static Set<Location> of(Field field, Location center, Location[] selector) {
         return Arrays.stream(selector)
                 .map(center::relative)

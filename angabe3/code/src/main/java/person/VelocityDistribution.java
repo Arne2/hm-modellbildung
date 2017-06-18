@@ -4,6 +4,7 @@ import java.util.Random;
 
 /**
  * @author peter-mueller
+ * Class for distrubuting the velocity to Persons.
  */
 public class VelocityDistribution {
 
@@ -20,5 +21,4 @@ public class VelocityDistribution {
     public double nextVelocity() {
         return random.nextGaussian() * deviation + velocity;
     }
-
 }

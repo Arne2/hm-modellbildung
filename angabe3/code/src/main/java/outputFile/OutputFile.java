@@ -15,8 +15,8 @@ import java.util.Map;
 
 /**
  * Created by dima on 28.05.17.
+ * The file in which the simulation will be saved.
  */
-
 public class OutputFile {
 
     private Output output;
@@ -24,6 +24,12 @@ public class OutputFile {
         output = new Output(config_, field_);
     }
 
+    /**
+     * Completes the writing of the output file.
+     * @param filename
+     * @throws JAXBException
+     * @throws IOException
+     */
     public void save(String filename) throws JAXBException, IOException {
         JAXBContext context = JAXBContext.newInstance(Output.class);
 

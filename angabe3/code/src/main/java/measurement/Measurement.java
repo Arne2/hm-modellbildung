@@ -6,13 +6,14 @@ import field.location.Location;
 import outputFile.XYLog;
 import person.Person;
 
-import java.io.Console;
 import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.nio.file.Path;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 
 /**
@@ -20,6 +21,7 @@ import java.util.stream.Collectors;
  */
 public class Measurement implements AutoCloseable{
 
+    // Parameters of the Measurement field.
     private final int fromX;
     private final int fromY;
     private final int toX;
@@ -28,8 +30,7 @@ public class Measurement implements AutoCloseable{
 
     private final Configuration config;
 
-    /** Log files
-     */
+    // Log files
     private final XYLog fundamental;
     private final XYLog timeVeloctiy;
     private final XYLog timeDensity;
@@ -61,7 +62,11 @@ public class Measurement implements AutoCloseable{
         measureFieldSize = ((toX - fromX - 1) * config.getCellSize()) * ((toY - fromY - 1) * config.getCellSize());
     }
 
-
+    /**
+     * Calculates and logs the information for later purposes.
+     * @param field
+     * @param time
+     */
     public void measure(Field field, BigDecimal time) {
         BigDecimal sum_v = new BigDecimal(0);
 
@@ -83,15 +88,11 @@ public class Measurement implements AutoCloseable{
         }
         BigDecimal meanv = sum_v.divide(new BigDecimal(personsToMeasure.size()), 32, BigDecimal.ROUND_HALF_EVEN);
 
-
-
         BigDecimal density = new BigDecimal( personsToMeasure.size() / measureFieldSize);
 
         fundamental.log(density, meanv);
         timeVeloctiy.log(time, meanv);
         timeDensity.log(time,density);
-
-
     }
 
     public int getFromX() {

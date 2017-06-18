@@ -3,10 +3,10 @@ package main;
 import config.Configuration;
 import field.Field;
 import field.location.Location;
-import field.use.*;
 import field.use.Dijkstra;
 import field.use.EuclidDistance;
 import field.use.FastMarching;
+import field.use.PersonalSpace;
 import measurement.Measurement;
 import outputFile.OutputFile;
 import person.Person;
@@ -18,22 +18,39 @@ import time.events.PersonMoveEvent;
 
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author peter-mueller
  */
 public class Simulation implements AutoCloseable {
+    /** Field of the Simulation. */
     public final Field field;
 
-
+    /** Distance map */
     private final Map<Location, Double> use;
+
+    /** The calculator for the personal space. */
     private final PersonalSpace personalSpace;
+
+    /** The clock to measure the current time of the simulation. */
     private final Clock clock = new Clock();
+
+    /** This List holds all the events to come. */
     private final EventList events = new EventList();
+
+    /** A List of all Persons in the simulation. */
     private final List<Person> persons = new ArrayList<>();
+
+    /** The class to manage the measurement area. */
     private final Measurement measurement;
+
+    /** The Configuration of the simulation. */
     private final Configuration configuration;
+
+    /** The OutputFile for the post visualization. */
     private final OutputFile outputFile;
 
     public Simulation(Field field, Configuration configuration, OutputFile outputFile) throws IOException {
@@ -48,7 +65,6 @@ public class Simulation implements AutoCloseable {
         for (Map.Entry<Person, Location> entry : persLoc.entrySet()) {
             spawnPersonEvent(entry.getValue(), entry.getKey());
         }
-
 
         if (configuration.getAlgorithm() == Configuration.AlgorithmType.eEuclid) {
             this.use = EuclidDistance.use(field);
@@ -66,6 +82,12 @@ public class Simulation implements AutoCloseable {
         this.events.add(event);
     }
 
+    /**
+     * Adds a spawn event of a person to the EventList.
+     * @param location
+     * @param person
+     * @return the added Person.
+     */
     private Person spawnPersonEvent(Location location, Person person) {
         if (person == null) {
             throw new IllegalArgumentException("Person must not be null");
@@ -82,6 +104,11 @@ public class Simulation implements AutoCloseable {
         return person;
     }
 
+    /**
+     * Sets a new Person on a given Location.
+     * @param location
+     * @return the Person.
+     */
     public Person spawnPerson(Location location) {
 
         final double velocity = this.configuration.getVelocity();
@@ -96,6 +123,11 @@ public class Simulation implements AutoCloseable {
         return person;
     }
 
+    /**
+     * Runs the entire Simulation.
+     * @param maxSimulationTime
+     * @throws Exception
+     */
     public void run(BigDecimal maxSimulationTime) throws Exception {
         while (events.hasNext() & clock.systemTime().compareTo(maxSimulationTime) < 0) {
             //System.out.println(clock.systemTime());
@@ -106,7 +138,6 @@ public class Simulation implements AutoCloseable {
             events.addAll(newEvents);
         }
         close();
-
     }
 
     public Measurement getMeasurement() {

@@ -3,16 +3,9 @@ package main;
 import config.Configuration;
 import field.Field;
 import field.FieldImporter;
-import field.location.Location;
-import field.view.StringView;
-import jdk.nashorn.internal.runtime.ECMAException;
 import outputFile.OutputFile;
-import person.VelocityDistribution;
 
-import javax.xml.bind.JAXBException;
-import java.io.IOException;
 import java.math.BigDecimal;
-import java.util.Random;
 
 /**
  * @author DD00033863

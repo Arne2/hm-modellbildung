@@ -258,10 +258,24 @@ Der Aufbau der Anwendung wurde im Team diskutiert und anschließend mittels UML 
 
 \section{Softwaretest}
 
+
 \input{euklid_fm_vergleich}
 
 
 \subsection{Verifikation}
+
+\subsubsection{Evakuierung}
+Mit Hilfe der verschiedenen Evakuierungstests sollen die Auswirkungen unterschiedlicher Positionen und Anzahl von Türen auf die Dauer der Evakuierung eines Raumes ermittelt werden. Die Berechnung des Zielnutzens auf Basis des Euklid Algorithmus wird hierbei nicht berücksichtigt.  
+%TODO Begründung
+
+\paragraph{Evakuierung eines Raumes (Personen befinden sich in der Mitte)}
+\label{EvaVerifikation}
+Für die Verifikation der Simulation sollen sich die Personen zunächst alle dicht gedrängt in der Mitte des Raumes befinden. An 2 gegenüberliegenden Seiten des Raumes soll sich jeweils eine Tür befinden (Evakuierung eines Raumes mit 2 Türen). In einer weiteren Simulation sollen sich an den anderen beiden Seiten jeweils eine weitere Tür befinden (Evakuierung eines Raumes mit 4 Türen). Die Evakuierungsdauer des Raumes mit 4 Türen müsste nun exakt halb so lange sein, wie die des Raumes mit 2 Türen. \\ 
+
+\paragraph{Evakuierung eines Raumes (Personen zufällig verteilt)}
+Da das in Abschnitt \ref{EvaVerifikation} beschriebene Szenario zwar für die Verifikation relevant ist, doch in der Realität äußerst unwahrscheinlich ist, werden in diesem Abschnitt weitere Evakuierungstests gegenübergestellt. \\
+
+\paragraph{Fazit und Vergleich}
 
 \subsection{Validation}
 

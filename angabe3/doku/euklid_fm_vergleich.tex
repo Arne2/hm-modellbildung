@@ -1,16 +1,20 @@
 \section{Vergleich der Algorithmen}
-Die Algorithmen werden in Abbildung \ref{fig_euklid_dijkstra_fast_marching_vergleich} in Vergleich gesetzt.
+Die Algorithmen werden in Abbildung \ref{fig_euklid_dijkstra_fast_marching_vergleich} in Vergleich gesetzt. Dafür wird eine Karte erstellt mit einem Raum, einer Tür und einem Hindernis vor der Tür. Die Karten werden jeweils nach 1, 20, 100, 1000 Schritten geplottet. Als letztes wird noch das Gesamtergebis dargestellt.
+
 \subsection{Euklid}
-Um den Euklidischen Abstand zu berechnen, benötigt man lediglich die Position des Ziels, die Position der aktuellen Zelle und die Zellbreite. Man geht alle Zellen der Reihe nach durch und berechnet den Abstand der aktuellen Zelle zum Ziel. Diesen Vorgang kann man auch gut parallelisieren, wie in Abbildung \ref{fig_euklid_dijkstra_fast_marching_vergleich} zu sehen ist. Darunter versteht man das Aufteilen eines Problems in Unterprobleme. Die Berechnung dieser Probleme läuft parallel, wobei jedes Teilproblem in einem separaten Thread läuft. Zum Schluss werden die Ergebnisse der Lösungen mit den Teilproblemen kombiniert. \cite{JavaParallelism}
+Um den Euklidischen Abstand zu berechnen, benötigt man lediglich die Position des Ziels, die Position der aktuellen Zelle und die Zellbreite. Man geht alle Zellen der Reihe nach durch und berechnet den Abstand der aktuellen Zelle zum Ziel. Die Suche nach noch nicht berechneten Zellen läuft nicht von oben nach unten sondern mit der Funktion \glqq parallelStream()\grqq . Diese teilt das Feld in Teilfelder auf und sucht parallel nach freien (noch nicht berechneten) Feldern. Dadurh entstehen die in Abbildung \ref{fig_euklid_dijkstra_fast_marching_vergleich} sichtbaren Stufen. \cite{JavaParallelism} Darüber hinaus ist zu erkennen, dass das Hindernis vor der Tür für den Euklidalgorithmus keinen Einfluss hat. Dieses Hindernis wird bei der Berechnung ignoriert.
 
 \subsection{Dijkstra}
+Beim Dijkstra Algorithmus geht man ausgehend vom Ziel immer ein Feld weiter und berechnet den abstand des aktuellen Feldes anhand des Abstand des Nachbarfeldes. Dadurch wird die Karte ausgehend vom Ziel aufgebaut wie in abbildung \ref{fig_euklid_dijkstra_fast_marching_vergleich} zu sehen ist. Es ist auch zu erkennen, dass der Dijkstra Algorithmus die Abstände um das Hindenris berechnet. Das Hindernis wird also in die Berechnung einbezogen.
+
 \subsection{Fast Marching}
+Ähnlich wie beim Dijkstra arbeitet der Fastmarching Algorithmus vom Ziel aus. Das Zielfeld wird als Basis angenommen und die Nachbarfelder um das Ziel werden als \glqq considered\grqq also als \glqq in Betracht kommend\grqq markiert. Das in Betracht kommende Nachbarfeld mit dem besten Wert wird als \glqq accepted\grqq also als \glqq akzeptiert\grqq markiert. Danach wird für alle Nachbarn dieses akzeptieren Feldes die Entfernung mittels der Eikonalgleichung berechnet. Auch hier ist also die Berechnung abhängig von den vorher berechneten Feldern. Es ist deutlich zu erkennen, dass der Fast Marching Algorithmus eine deutlich rundere Karte erzeugt, als der Dijkstra.
 
 \begin{figure}
 \centering
 \begin{minipage}{0.32\textwidth}
 \centering
-  \includegraphics[width=1\linewidth]{abbildungen/vergleich_euklid_fast_marching/snapshot_eEuclid_zusammen_cutted.png}
+  \includegraphics[width=\linewidth]{abbildungen/vergleich_euklid_fast_marching/snapshot_eEuclid_zusammen_cutted.png}
 \end{minipage}%
 \begin{minipage}{0.32\textwidth}
 \centering
@@ -27,14 +31,19 @@ Um den Euklidischen Abstand zu berechnen, benötigt man lediglich die Position d
 
 
 \subsection{Einfluss der Zellgröße auf die Abstandsberechnung}
-Bei der Berechnung der Abstände hat die Wahl der Zellgröße je nach Algorithmus einen entscheidenden Einfluss auf die Ergebnisse der Simulation. Die Zellgröße gibt nicht nur die minimale Schrittweite vor, sondern hat auch Einfluss auf die Genauigkeit der Nutzenberechnungen. An dieser Stelle wird der Euklid Algorithmus dem Fast Marching Algorithmus gegenübergestellt. Um einen Vergleich darzustellen wurde ein Quadratisches Feld angelegt. Die Zellgröße des Feldes sowie die Anzahl der Felder wurden so variiert, dass die Entfernung von der rechten unteren Ecke zur linken oberen Ecke (am weitesten entfernter Punkt) immer den gleichen Abstand hat. Es wird also die Diagonale des Rechtecks berechnet. Die Abbildung \ref{fig_euklid_fast_marching_2m_cellsize} Zeigt den Vergleich beider Algorithmen bei der der Abstandsberechnung. Üblicherweise wird die Rabskala so gewählt um alle Werte vom kleinsten Abstand zum weitesten Punkt abzubilden. Um den Vergleich an dieser Stelle deutlich zu machen, wurde für beide Bilder die selbe Farbskala verwendet. Mit Bloßem Auge ist die Differenz nur schwer zu erkennen. Es ist jedoch sichtbar, dass das Feld, welches mit dem Euklid algorithmus berechnet wurde, einen deutlicheren Bogen aufweist. 
+Bei der Berechnung der Abstände hat die Wahl der Zellgröße je nach Algorithmus einen entscheidenden Einfluss auf die Ergebnisse der Simulation. Die Zellgröße gibt nicht nur die minimale Schrittweite vor, sondern hat auch Einfluss auf die Genauigkeit der Nutzenberechnungen. An dieser Stelle wird der Euklid Algorithmus dem Fast Marching Algorithmus gegenübergestellt. Um einen Vergleich darzustellen wurde ein Quadratisches Feld angelegt. Die Zellgröße des Feldes sowie die Anzahl der Felder wurden so variiert, dass die Entfernung von der rechten unteren Ecke zur linken oberen Ecke (am weitesten entfernter Punkt) immer den gleichen Abstand hat. Es wird also die Diagonale des Rechtecks berechnet. 
+
+\subsubsection{Grafische Überprüfung}
+Die Abbildung \ref{fig_euklid_fast_marching_2m_cellsize} Zeigt den Vergleich beider Algorithmen bei der der Abstandsberechnung. Üblicherweise wird die Farbskala so gewählt um alle Werte vom kleinsten Abstand zum weitesten Punkt abzubilden. Um den Vergleich an dieser Stelle deutlich zu machen, wurde für beide Bilder die selbe Farbskala verwendet. Mit Bloßem Auge ist die Differenz nur schwer zu erkennen. Es ist jedoch sichtbar, dass das Feld, welches mit dem Euklid algorithmus berechnet wurde, einen deutlicheren Bogen aufweist. 
 
 Eine Möglichkeit die Unterschiede zu visualisieren ist es, die Bilder mittels einer Differenzbildung der Beiden Bilder. Dafür wird ein Bild als Basis hergenommen und das zweite Bild als eine Ebene darber eingefügt. Die Farben der zweiten Ebene werden von der ersten Ebene Subtrahiert. Gleichen sich die Farben beider Ebenen, so ist das Ergebnis schwarz. Dieser Vergleich macht nur Sinn, wenn für beide Darstellungen die selbe Farbskala verwendet wurde, also die Entfernungen mit dem gleichen Farbcode codiert wurden. Die Abbildung \ref{fig_fast_marching_euclid_difference} zeigt die Differenzmenge der in Abildung \ref{fig_euklid_fast_marching_2m_cellsize} dargestellten Karten.
-An diesem Bild ist deutlich zu erkennen, dass die Zellen, welche sich nur in X und nur in Y Richtung vom Ziel entfernen schwarz sind.  Es gibt also keinen Unterschied zwischen dem Euklidischen Abstand und dem Abstand welcher mittels Fast Marching berechnet wurde, bei einer Betrachtung der Zellen nur in X oder nur in Y Richtung. Entfernt man sich schräg vom Ziel (Also X und Y Anteil gleichzeitig), sieht man deutlich Differenzen der beiden Algorithmen. Um dies nochmals zu verdeutlichen werden die Algorithmen in Abbildung XXX mit einer kleineren Zellgröße verglichen. Auch hier wurde auf eine einheitliche Farbskala geachtet. Die Differenzbildung ist in Abbildung YYY zu sehen. 
+An diesem Bild ist deutlich zu erkennen, dass die Zellen, welche sich nur in X und nur in Y Richtung vom Ziel entfernen schwarz sind.  Es gibt also keinen Unterschied zwischen dem Euklidischen Abstand und dem Abstand welcher mittels Fast Marching berechnet wurde, bei einer Betrachtung der Zellen nur in X oder nur in Y Richtung. Entfernt man sich schräg vom Ziel (Also X und Y Anteil gleichzeitig), sieht man deutlich Differenzen der beiden Algorithmen. 
 
+Um dies nochmals zu verdeutlichen werden die Algorithmen in Abbildung \ref{fig_euklid_fast_marching_0_05m_cellsize} mit einer kleineren Zellgröße verglichen. Auch hier wurde auf eine einheitliche Farbskala geachtet. Die Differenzbildung ist in Abbildung \ref{fig_fast_marching_euclid_difference_0_05m} zu sehen. Es ist eine Art Kegel zu erkennen. Die Kanten unten und rechts sind Schwarz, da sich die Abstände beim Euklid und Fast Marching gleichen. Näher zur Diagonalen wird das Bild heller, da es einen größeren Unterschied gibt.
 
-Die Tabelle \ref{tab_euklid_fm_vergleich} zeigt die Ergebnisse dieses Experiments. Die Cellsize gibt dabei die Kantenlänge einer quadratischen Zelle an. Wichtig ist der Wert „Distance in X and Y“, welcher besagt, dass das Ziel in X und in Y Richtung immer jeweils 14 Zellen entfernt ist.
-Nach der Formel wurde der Abstand von Ziel zum am weitesten entfernten Punkt berechnet:
+\subsubsection{Rechnerische Überprüfung}
+Eine rechnerische Überprüfung wird auf den diagonalen Abstand durchgeführt. Die Tabelle \ref{tab_euklid_fm_vergleich} zeigt die Ergebnisse dieses Experiments. Die Cellsize gibt dabei die Kantenlänge einer quadratischen Zelle an. Wichtig ist der Wert „Distance in X and Y“, welcher besagt, dass das Ziel in X und in Y Richtung immer jeweils 14 Zellen entfernt ist.
+Nach der Formel wurde der Abstand von Ziel zum am weitesten entfernten Punkt (also diagonal) berechnet:
 
 $$a = \sqrt[]{x^2 +y^2} = \sqrt[]{(14\ m) ^2 +(14\ m) ^2} = 19,799\ m$$ 
 
@@ -86,14 +95,14 @@ Darüber hinaus hat die Zellgröße direkten Einfluss auf die Dichte [$\frac{Per
 \centering
   \includegraphics[width=\linewidth]{abbildungen/vergleich_euklid_fast_marching/eFastMarching_0_05m.png}
 \end{minipage}
-\caption{Berechnung der Abstände mittels Euklid und Fast Marching (rechts) an einem Feld mit einer Zellbreite von 0,5\ m}
+\caption{Berechnung der Abstände mittels Euklid (oben) und Fast Marching (unten) an einem Feld mit einer Zellbreite von 0,5\ m}
 \label{fig_euklid_fast_marching_0_05m_cellsize}
 \end{figure}
 
-\begin{figure}[ht]
+\begin{figure}[htpb]
 	\centering
   \includegraphics[width=0.6\textwidth]{abbildungen/vergleich_euklid_fast_marching/differenz_euklid_fm_0_05m.png}
-	\caption{Differenzbildung der beiden Karten Euklid und Fast Marching bei einer Zellgbreite von 0.5 m}
+	\caption{Differenzbildung der beiden Karten Euklid und Fast Marching bei einer Zellbreite von 0.5 m}
 	\label{fig_fast_marching_euclid_difference_0_05m}
 \end{figure}
 
@@ -120,7 +129,7 @@ Error [\%]  & & &  & &  & &\\ diff/distance & \textbf{7,30} & \textbf{4,64} & \t
 \begin{figure}[ht]
 	\centering
   \includegraphics[width=\textwidth]{abbildungen/vergleich_euklid_fast_marching/EuklidFastMarchingError.pdf}
-	\caption{Prozentualer Fehler des Fast Marching Algorithmus in Abhängigkeit der Zellbreite}
+	\caption{Prozentualer Fehler des Fast Marching Algorithmus in Abhängigkeit der Zellbreite für die diagonale Entfernung.}
 	\label{fig_fast_marching_error_cellsize}
 \end{figure}
 

@@ -30,7 +30,7 @@ public class EuclidDistance {
      * Calculates the euclid distances for the locations of a field for all targets.
      */
     private void run(){
-        int maxCounter = 100; //1, 20, 100, 1000, 3000
+        int maxCounter = 1000; //1, 20, 100, 1000, 3000
         int counter = 0;
 
         for (Location un: unvisited) {

@@ -14,6 +14,10 @@ import java.util.Set;
  */
 public class PersonalSpace {
 
+    private static final double PEDESTRIAN_SIZE = 0.20;
+    private static final double INTIMATE_SPACE = 0.45 + PEDESTRIAN_SIZE;
+    private static final double PERSONAL_SPACE = 1.20 + PEDESTRIAN_SIZE;
+
     private final Map<Double, Double> cacheP1 = new HashMap<>();
     private final Map<Double, Double> cacheP2 = new HashMap<>();
     private final double cellSize;
@@ -25,7 +29,11 @@ public class PersonalSpace {
         selector = Fields.circleSelector(cells);
     }
 
-
+    /**
+     * Calculates the negative value of a field due to nearby Persons.
+     * @param distance
+     * @return personal space value
+     */
     private double calculate(double distance) {
         final double uP = 100;
         final double aP = 1;
@@ -50,7 +58,6 @@ public class PersonalSpace {
             p2 = cacheP2.get(distance);
         }
 
-
         if (distance < PEDESTRIAN_SIZE) {
             return Double.POSITIVE_INFINITY;
         } else if (distance < INTIMATE_SPACE) {
@@ -61,6 +68,13 @@ public class PersonalSpace {
         throw new AssertionError("Should have been filtered out!");
     }
 
+    /**
+     * Returns the value of an area around the Location a Person is standing on depending on how many other Persons are in this area and how close they are.
+     * @param field
+     * @param target
+     * @param self
+     * @return value with personal space
+     */
     public double use(Field field, Location target, Location self) {
         double use = 0;
         final Set<Location> circle = Fields.of(field, target, selector);
@@ -74,9 +88,5 @@ public class PersonalSpace {
         }
         return -1 * use;
     }
-
-    private static final double PEDESTRIAN_SIZE = 0.20;
-    private static final double INTIMATE_SPACE = 0.45 + PEDESTRIAN_SIZE;
-    private static final double PERSONAL_SPACE = 1.20 + PEDESTRIAN_SIZE;
 }
 

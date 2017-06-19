@@ -7,13 +7,18 @@ import field.view.StringView;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import java.math.BigDecimal;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by Arne on 30.05.2017.
+ * Represents the simulation in the xml format for post visualization.
  */
 @XmlRootElement
 public class Output{
+    // Information of the Simulation
     private String distanceMap;
     private final Configuration config;
     private Field field;

@@ -26,7 +26,6 @@ public class FastMarching {
 
     }
 
-
     /**
      * Returns Distance of field above location
      * If above location does not exist, return MAX_VALUE
@@ -148,9 +147,10 @@ public class FastMarching {
         return locations;
     }
 
+    /**
+     * Calculates the value for the locations of a field for a target.
+     */
     private void run(){
-
-
         //Assign every node Xi the value of Ui =  +INFINITY and label them as far;
         for (Location loc: field.getLocations()) {
             distance.put(loc, Double.MAX_VALUE);
@@ -203,12 +203,13 @@ public class FastMarching {
                 System.out.println(loc.toString());
             }
         }
-
-
-
     }
 
-
+    /**
+     * Returns a map of locations with their resulting values for the Fast Marching algorithm.
+     * @param field
+     * @return resulting map
+     */
     public static Map<Location, Double> use(Field field) {
         Set<Map<Location, Double>> distances = new HashSet<>();
 

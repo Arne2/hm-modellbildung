@@ -1,12 +1,13 @@
 package outputFile;
 
-/**
- * Created by dima on 12.06.17.
- */
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.nio.file.Path;
 
+/**
+ * Created by dima on 12.06.17.
+ * This is the logging class for the measurement.
+ */
 public class XYLog implements AutoCloseable {
 
     private final Log log;

@@ -1,10 +1,10 @@
 package person;
 
-import javax.management.OperationsException;
 import java.math.BigDecimal;
 
 /**
  * @author peter-mueller
+ * Represents a Person in the simulation.
  */
 public class Person {
     private static int UNIQUE_ID = 0;
@@ -16,7 +16,7 @@ public class Person {
     private BigDecimal timePassed;
     private BigDecimal meanVelocity;
 
-    //calculate the sliding mean velocity of 1 Values
+    /** Calculate the sliding mean velocity of 1 Values. */
     private BigDecimal slidingVelocity[] = new BigDecimal[1];
     private int slidingCounter = 0;
 
@@ -35,9 +35,29 @@ public class Person {
         }
     }
 
+    /**
+     * Moves the Person a certain distance.
+     * @param distance
+     * @param timeForMove
+     */
+    public void step(BigDecimal distance, BigDecimal timeForMove){
+        if(timeForMove.doubleValue() != 0) {
+            //add new Velocity to Array
+            slidingVelocity[(slidingCounter++)&0b0] = distance.divide(timeForMove, 32, BigDecimal.ROUND_HALF_EVEN);
+        }
+
+        this.distanceWent = this.distanceWent.add(distance);
+        this.timePassed = timePassed.add(timeForMove);
+        if(timePassed.equals(new BigDecimal(0)) == false){
+            meanVelocity = distanceWent.divide(timePassed, 32, BigDecimal.ROUND_HALF_EVEN);
+        }
+
+    }
+
     public int getId(){
         return id;
     }
+
     public double getVelocity() {
         return velocity;
     }
@@ -65,20 +85,4 @@ public class Person {
         }
         return slidingAverage.divide(new BigDecimal(slidingVelocity.length), 32, BigDecimal.ROUND_HALF_EVEN);
     }
-
-    public void step(BigDecimal distance, BigDecimal timeForMove){
-        if(timeForMove.doubleValue() != 0) {
-            //add new Velocity to Array
-            slidingVelocity[(slidingCounter++)&0b0] = distance.divide(timeForMove, 32, BigDecimal.ROUND_HALF_EVEN);
-        }
-
-        this.distanceWent = this.distanceWent.add(distance);
-        this.timePassed = timePassed.add(timeForMove);
-        if(timePassed.equals(new BigDecimal(0)) == false){
-            meanVelocity = distanceWent.divide(timePassed, 32, BigDecimal.ROUND_HALF_EVEN);
-        }
-
-    }
-
-
 }

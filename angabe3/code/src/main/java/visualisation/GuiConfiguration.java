@@ -22,8 +22,8 @@ public class GuiConfiguration {
     // Colors
     public static final Color GOALCOLOR = Color.GREEN;
     public static final Color WALLCOLOR = Color.BLACK;
-    public static final Color PERSONCOLOR = Color.PINK;
-    public static final Color MEASUREMENTCOLOR = Color.DARKGREEN;
+    public static final Color PERSONCOLOR = Color.HOTPINK;
+    public static final Color MEASUREMENTCOLOR = Color.RED;
 
     /**
      * Value of a wall in the distance map.

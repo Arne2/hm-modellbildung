@@ -15,9 +15,13 @@ import java.util.Map;
 
 /**
  * Created by Dani on 07.06.2017.
+ * This class provides the logic to import a Field from a png File.
  */
 public class FieldImporter {
 
+    /**
+     * Portraits a Color in the png File.
+     */
     private enum ColorOfPixel{
         colorBlack(-16777216),
         colorBlue(-12629812),
@@ -49,26 +53,34 @@ public class FieldImporter {
             return value;
         }
     }
+
+    /** The path of the png Image. */
     private final String path;
+
+    /** The given Configuration */
     private final Configuration configuration;
+
     public FieldImporter(Configuration config){
         this.configuration = config;
         this.path = config.getFieldImage();
     }
 
+    /**
+     * Reads the png Image and generates the Field out of it.
+     * @return
+     */
     public Field getField(){
-
         BufferedImage img = null;
         try {
             img = ImageIO.read(new File(this.path));
         } catch (IOException e) {
+            e.printStackTrace();
         }
         int width = img.getWidth();
         int height = img.getHeight();
         Field returnField = new Field(configuration.getCellSize());
 
         for(int x = 0; x < width; x++){
-
             for(int y  = 0; y < height; y++){
                 int pixelColor = img.getRGB(x, y);
                 switch (ColorOfPixel.fromInt(pixelColor)){
@@ -83,7 +95,6 @@ public class FieldImporter {
                     case colorRed:
                         returnField.addLocation(Location.of(x, y));
                         returnField.addMeasurePoint(Location.of(x, y));
-
                         break;
                     case colorGreen:
                         Location loc = Location.of(x, y);
@@ -96,10 +107,6 @@ public class FieldImporter {
                 }
             }
         }
-
-
-
         return returnField;
     }
-
 }

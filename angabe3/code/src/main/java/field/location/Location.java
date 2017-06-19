@@ -6,10 +6,13 @@ package field.location;
  * @author peter-mueller
  */
 public class Location implements Comparable<Location> {
+
     /** x offset from the top left corner to the right. */
     public final int x;
+
     /** y offset from the top left corner to the bottom. */
     public final int y;
+
     private final int hash;
 
     /**
@@ -23,7 +26,6 @@ public class Location implements Comparable<Location> {
         this.y = y;
         this.hash = x | (y << 15);
     }
-
 
     public Location(){
         this(0,0);

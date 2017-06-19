@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 /**
  * Created by dima on 28.05.17.
+ * Represents one event or step of the simulation for the visualization.
  */
 public class OutputEvent{
     private String type;
@@ -12,8 +13,7 @@ public class OutputEvent{
     private long positionX;
     private long positionY;
 
-    public OutputEvent() {
-    }
+    public OutputEvent() {}
 
     OutputEvent (String type_, BigDecimal time_, int personID_, long x_, long y_){
         setType(type_);

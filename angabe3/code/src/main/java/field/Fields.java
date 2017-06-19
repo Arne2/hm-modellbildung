@@ -32,10 +32,7 @@ public class Fields {
                 new Location(-1, 0), new Location(1, 0),
                 new Location(-1, 1), new Location(0, 1), new Location(1, 1),
         };
-        return Arrays.stream(moore)
-                .map(center::relative)
-                .filter(field::has)
-                .collect(Collectors.toSet());
+        return of(field, center, moore);
     }
 
     /**
@@ -57,11 +54,12 @@ public class Fields {
     }
 
     /**
+     * Use the selector mask repositioned on the center location to receive the neighbourhood around it.
      *
-     * @param field
-     * @param center
-     * @param selector
-     * @return
+     * @param field field to find the location in
+     * @param center center to put the selector on
+     * @param selector selector (relative) locations to be used aound the center
+     * @return the existing locations in the field defined by selector and center
      */
     public static Set<Location> of(Field field, Location center, Location[] selector) {
         return Arrays.stream(selector)
@@ -81,9 +79,6 @@ public class Fields {
                 new Location(0, -1), new Location(-1, 0),
                 new Location(1, 0), new Location(0, 1),
         };
-        return Arrays.stream(neumann)
-                .map(center::relative)
-                .filter(field::has)
-                .collect(Collectors.toSet());
+        return of(field, center, neumann);
     }
 }

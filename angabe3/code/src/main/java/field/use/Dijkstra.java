@@ -30,7 +30,11 @@ public class Dijkstra {
      * Calculates the value for the locations of a field for a target.
      */
     private void run() {
-        while (!unvisited.isEmpty()) {
+        int maxCounter = 3000; //1, 20, 100, 1000, 3000
+        int counter = 0;
+
+        while (!unvisited.isEmpty() && counter < maxCounter) {
+            counter++;
             final Location u = unvisited.parallelStream()
                     .max(Comparator.comparingDouble(key -> distance.getOrDefault(key, Double.NEGATIVE_INFINITY)))
                     .orElseThrow(() -> new AssertionError("unvisited must have not been empty!"));
@@ -47,6 +51,10 @@ public class Dijkstra {
                             prev.put(v, u);
                         }
                     });
+        }
+
+        for (Location un: unvisited) {
+            distance.put(un, -Double.MAX_VALUE);
         }
     }
 

@@ -2,6 +2,8 @@ package visualisation.draw;
 
 import field.location.Location;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.geometry.Orientation;
 import javafx.scene.Node;
@@ -117,6 +119,21 @@ public class CanvasDrawer {
         if (enableScrollbar) {
             configureScrollbar();
         }
+
+        canvasStage.widthProperty().addListener(new ChangeListener<Number>() {
+            @Override public void changed(ObservableValue<? extends Number> observableValue, Number oldSceneHeight, Number newSceneHeight) {
+                configureScrollbar();
+            }
+        });
+
+
+        canvasStage.heightProperty().addListener(new ChangeListener<Number>() {
+            @Override public void changed(ObservableValue<? extends Number> observableValue, Number oldSceneHeight, Number newSceneHeight) {
+                configureScrollbar();
+            }
+        });
+
+
     }
 
     /**
@@ -126,7 +143,6 @@ public class CanvasDrawer {
         String heatmap = input.getDistanceMap();
         String[] rows = heatmap.split("\n");
         GraphicsContext gc = heatLayer.getGraphicsContext2D();
-
         double min = Double.MIN_VALUE;
         for(int i = 0; i < rows.length; i++) {
             String[] row = rows[i].split(" ");
@@ -138,7 +154,7 @@ public class CanvasDrawer {
                 min = Math.min(d, min);
             }
         }
-        distancemin = min;
+        distancemin = -30;
         for(int y = 0; y < input.getFieldHeight(); y++) {
             String[] row = rows[y].split(" ");
             for (int x = 0; x < input.getFieldWidth(); x++) {
@@ -208,6 +224,8 @@ public class CanvasDrawer {
      * Handles all Events that occur at the time zero.
      */
     private void proceedToStart(){
+        if(input.getEvents() == null)
+            return;
         while (input.getEvents().size() > step && input.getEvents().get(step+1).getTime().equals(BigDecimal.ZERO)){
             handleNextEvent();
         }
@@ -299,6 +317,10 @@ public class CanvasDrawer {
     public void createLayers(){
         cellLayer = new Canvas(cellsize *input.getFieldWidth(), cellsize *input.getFieldHeight());
         heatLayer = new Canvas(cellsize *input.getFieldWidth(), cellsize *input.getFieldHeight());
+
+
+
+
         objectLayer = new Canvas(cellsize *input.getFieldWidth(), cellsize *input.getFieldHeight());
         measurementLayer = new Canvas(cellsize *input.getFieldWidth(), cellsize *input.getFieldHeight());
 

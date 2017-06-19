@@ -172,7 +172,13 @@ public class InfoDrawer {
         timeLabel.setLayoutX(10);
         timeLabel.setLayoutY(86);
 
-        simulationTimeLabel = new Label("Simulationtime: " + input.getEvents().stream().map(outputEvent -> outputEvent.getTime()).max(BigDecimal::compareTo).get());
+        if(input.getEvents() != null){
+            simulationTimeLabel = new Label("Simulationtime: " + input.getEvents().stream().map(outputEvent -> outputEvent.getTime()).max(BigDecimal::compareTo).get());
+        }
+        else {
+            simulationTimeLabel = new Label("Simulationtime: " + 0);
+
+        }
         simulationTimeLabel.setLayoutX(10);
         simulationTimeLabel.setLayoutY(104);
 
@@ -196,7 +202,7 @@ public class InfoDrawer {
      */
     private String getDistanceString(double distance){
         String result = (distance+"");
-        result = result.substring(0,result.indexOf(".")+3);
+        result = result.substring(0,result.indexOf(".")+1);
         result += "m";
         return result;
     }
@@ -224,5 +230,9 @@ public class InfoDrawer {
 
     public Label getPersonLabel() {
         return personLabel;
+    }
+
+    public Pane getCanvas(){
+        return info;
     }
 }

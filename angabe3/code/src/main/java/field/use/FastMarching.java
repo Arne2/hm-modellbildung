@@ -151,9 +151,6 @@ public class FastMarching {
      * Calculates the value for the locations of a field for a target.
      */
     private void run(){
-        int maxCounter = 3000; //1, 20, 100, 1000, 3000
-        int counter = 0;
-
         //Assign every node Xi the value of Ui =  +INFINITY and label them as far;
         for (Location loc: field.getLocations()) {
             distance.put(loc, Double.MAX_VALUE);
@@ -173,8 +170,7 @@ public class FastMarching {
 
         //Let x be the considered node with the smallest value U.
         // Label x as accepted.
-        while (!considered.isEmpty() && counter < maxCounter){
-            counter++;
+        while (!considered.isEmpty()){
             Location consideredLocation = Collections
                     .min(considered.entrySet(), comparingDouble(Map.Entry::getValue)).getKey();
             unvisited.remove(consideredLocation);
@@ -205,7 +201,6 @@ public class FastMarching {
             System.out.println("unvisited nodes detected");
             for (Location loc:unvisited) {
                 System.out.println(loc.toString());
-                distance.put(loc, -Double.MAX_VALUE);
             }
         }
     }

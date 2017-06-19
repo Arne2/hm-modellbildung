@@ -75,7 +75,8 @@ public class Measurement implements AutoCloseable{
                 continue;
             }
             personsToMeasure.put(person.getValue(), person.getKey());
-            sum_v = sum_v.add(person.getKey().getSlidingAverageVelocity());
+            final BigDecimal slidingAverageVelocity = person.getKey().getSlidingAverageVelocity();
+            sum_v = sum_v.add(slidingAverageVelocity);
         }
         if (personsToMeasure.size() == 0) {
             fundamental.log(new BigDecimal(0), new BigDecimal(0));

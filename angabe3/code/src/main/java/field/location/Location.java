@@ -86,4 +86,11 @@ public class Location implements Comparable<Location> {
     public int getY(){
         return y;
     }
+
+    public Location withX(int x) {
+        return Location.of(x, getY());
+    }
+    public Location withY(int y) {
+        return Location.of(getX(), y);
+    }
 }

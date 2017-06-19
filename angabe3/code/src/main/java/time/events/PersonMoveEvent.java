@@ -7,10 +7,7 @@ import main.Simulation;
 import person.Person;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -28,15 +25,25 @@ public class PersonMoveEvent extends BaseEvent {
         this.person = person;
     }
 
+    private final Random r = new Random();
+
     @Override
     public List<Event> execute() {
         final List<Event> newEvents = new ArrayList<>();
 
-        final Location locationOfPerson = simulation.field.locationOf(person);
-        if (simulation.field.isTarget(locationOfPerson)) {
-            simulation.field.removePerson(person);
+        Location tempLocation = simulation.field.locationOf(person);
+        if (tempLocation == null) {
             return newEvents;
         }
+        if (simulation.field.isTarget(tempLocation)) {
+            if (true) {
+                tempLocation = tempLocation.withX(0);
+            } else {
+                return newEvents;
+            }
+        }
+        final Location locationOfPerson = tempLocation;
+
 
         final Set<Location> range = Fields.moore(simulation.field, locationOfPerson).stream()
                 .filter(simulation.field::isFree)
@@ -51,10 +58,12 @@ public class PersonMoveEvent extends BaseEvent {
                     }
                     final double personPotential = simulation.getPersonalSpace().use(simulation.field, target, locationOfPerson);
                     return use + personPotential;
-                }).thenComparingDouble( target ->  -Locations.distance(target, locationOfPerson)))
+                }).thenComparingDouble(target -> -Locations.distance(target, locationOfPerson)))
                 .orElseThrow(() -> new AssertionError("cannot happen!"));
 
-        if (bestTarget.equals(locationOfPerson)) {
+        if (bestTarget.equals(locationOfPerson))
+
+        {
             final BigDecimal timeForWait = BigDecimal.valueOf(simulation.field.getCellSize() / person.getVelocity());
             final BigDecimal nextMove = getTime().add(timeForWait);
             person.step(new BigDecimal(0), timeForWait);
@@ -68,8 +77,12 @@ public class PersonMoveEvent extends BaseEvent {
         final BigDecimal timeForMove = BigDecimal.valueOf(distance / person.getVelocity());
         final BigDecimal nextMove = getTime().add(timeForMove);
         final PersonMoveEvent event = new PersonMoveEvent(nextMove, simulation, person);
-        person.step(new BigDecimal(distance), timeForMove);
-        if (simulation.getOutputFile() != null) {
+        person.step(new
+
+                BigDecimal(distance), timeForMove);
+        if (simulation.getOutputFile() != null)
+
+        {
             simulation.getOutputFile().addMoveEvent(simulation.getClock().systemTime(), person.getId(), bestTarget.x, bestTarget.y);
         }
         newEvents.add(event);

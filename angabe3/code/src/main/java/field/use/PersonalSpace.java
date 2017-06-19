@@ -27,9 +27,9 @@ public class PersonalSpace {
 
 
     private double calculate(double distance) {
-        final double uP = 5;
+        final double uP = 100;
         final double aP = 1;
-        final double bP = 1;
+        final double bP = 2;
 
         final double p1;
         if (!cacheP1.containsKey(distance)) {
@@ -43,7 +43,8 @@ public class PersonalSpace {
         final double p2;
         if (!cacheP2.containsKey(distance)) {
             final double v2 = distance / (INTIMATE_SPACE);
-            p2 = p1 + ((uP / aP) * Math.exp(4 / (Math.pow(v2, 2 * bP) - 1)));
+            final double pow = Math.pow(v2, 2 * bP);
+            p2 = p1 + ((uP / aP) * Math.exp(4 / (pow - 1)));
             cacheP2.put(distance, p2);
         } else {
             p2 = cacheP2.get(distance);

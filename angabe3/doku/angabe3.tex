@@ -269,7 +269,79 @@ Mit Hilfe der verschiedenen Evakuierungstests sollen die Auswirkungen unterschie
 
 \paragraph{Evakuierung eines Raumes (Personen befinden sich in der Mitte)}
 \label{EvaVerifikation}
-Für die Verifikation der Simulation sollen sich die Personen zunächst alle dicht gedrängt in der Mitte des Raumes befinden. An 2 gegenüberliegenden Seiten des Raumes soll sich jeweils eine Tür befinden (Evakuierung eines Raumes mit 2 Türen). In einer weiteren Simulation sollen sich an den anderen beiden Seiten jeweils eine weitere Tür befinden (Evakuierung eines Raumes mit 4 Türen). Die Evakuierungsdauer des Raumes mit 4 Türen müsste nun exakt halb so lange sein, wie die des Raumes mit 2 Türen. \\ 
+Für die Verifikation der Simulation sollen sich die Personen zunächst alle dicht gedrängt,symmetrisch in der Mitte des Raumes befinden. An 2 gegenüberliegenden Seiten des Raumes soll sich jeweils eine Tür befinden (Evakuierung eines Raumes mit 2 Türen). In einer weiteren Simulation sollen sich an den anderen beiden Seiten jeweils eine weitere Tür befinden (Evakuierung eines Raumes mit 4 Türen). Die Evakuierungsdauer des Raumes mit 4 Türen müsste nun exakt halb so lange sein, wie die des Raumes mit 2 Türen. \\ 
+
+Um eine möglichst symmetrische Anordnung der Personen sicher zu stellen, wurden alle Zellen des Raumes mit Personen belegt. Es wurden Evakuierungen mit $676$ Personen simuliert. Die beiden Räume, für die im weiteren Kapitel die Evakuierungszeiten verglichen werden, sind in den Abbildungen \ref{fig:Eva2TMap} und \ref{fig:Eva4TMap} dargestellt. Für die Evakuierungsdauer ist nicht die gesamte Simulationsdauer (Zeit bis die letzte Person das Ziel erreicht), sondern die Zeit, bis die letzte Person den Raum verlässt relevant. Dieser Bereich wurde in den Abbildungen mit einem roten Rahmen hervorgehoben. Alle Szenarien wurden zunächst auf Basis des Dijkstra Algortihmus simuliert. Die Abbildungen \ref{fig:Eva2THeatMap} und \ref{fig:Eva4THeatMap} zeigen die Heatmap der Szenarien. Der symmetrische Nutzenanstieg in zwei bzw. vier Richtungen ist durch den Farbverlauf dargestellt. 
+
+\begin{figure}[!htb]
+	\centering
+	\begin{minipage}{.5\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{abbildungen/Evak2TuerenAnfang.png}
+		\caption{Evakuierung eines Raumes mit 2 Türen}
+		\label{fig:Eva2TMap}
+	\end{minipage}%
+	\begin{minipage}{0.5\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{abbildungen/Evak4TuerenAnfang.png}
+		\caption{Evakuierung eines Raumes mit 4 Türen}
+		\label{fig:Eva4TMap}
+	\end{minipage}
+\end{figure}
+
+\begin{figure}[!htb]
+	\centering
+	\begin{minipage}{.5\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{abbildungen/Evak2TuerenAnfangHeat.png}
+		\caption{Evakuierung eines Raumes mit 2 Türen (Heatmap)}
+		\label{fig:Eva2THeatMap}
+	\end{minipage}%
+	\begin{minipage}{0.5\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{abbildungen/Evak4TuerenAnfangHeat.png}
+		\caption{Evakuierung eines Raumes mit 4 Türen (Heatmap)}
+		\label{fig:Eva4THeatMap}
+	\end{minipage}
+\end{figure}
+
+Die Abbildungen \ref{fig:Eva2TMitte} und \ref{fig:Eva4TMitte} zeigen einen Ausschnitt der Simulation nach einer Simulationszeit von ca. $24,1s$ bzw. $15,5s$. Es ist deutlich zu erkennen, dass sich jeweils ca. die Hälfte (2 Türen) bzw. ein Viertel der Personen (4 Türen) auf jede Tür zubewegen. 
+
+\begin{figure}[!htb]
+	\centering
+	\begin{minipage}{.5\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{abbildungen/Evak2TuerenMitte.png}
+		\caption{Evakuierung eines Raumes mit 2 Türen (Ausschnitt)}
+		\label{fig:Eva2TMitte}
+	\end{minipage}%
+	\begin{minipage}{0.5\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{abbildungen/Evak4TuerenMitte.png}
+		\caption{Evakuierung eines Raumes mit 4 Türen (Ausschnitt)}
+		\label{fig:Eva4TMitte}
+	\end{minipage}
+\end{figure}
+
+Abschließend zeigen die Abbildungen \ref{fig:Eva2TEnde} und \ref{fig:Eva4TEnde} die jeweilige Evakuierungsdauer an. Die entsprechenden Ausschnitte zeigen den Moment, in dem die letzte Person den rot markierten Bereich verlassen hat. Bei der Simulation mit 2 Türen ist das nach ca. $71,88s$, bei der Simulation mit 4 Türen nach ca. $36,98s$. Durch die beiden zusätzlichen Türen verläuft die Evakuierung somit um das $1,94$ fache, also fast das $2$fache schneller. Dies ist ein Indiz für die Richtigkeit der Simulation. Die Abweichung vor allem auf Ungenauigkeiten durch die festen Zellgrößen des Automaten zurückzuführen. Darüber hinaus ist die Implementierung so gestaltet, dass eine Person, welche aktuell nicht ziehen kann, so lange warten muss, bis alle anderen Personen gezogen sind, bis sie wieder ziehen kann. Unabhängig davon, ob die Zelle vor ihr frei ist oder nicht. Durch die beiden zusätzlichen Türen in der Simulation mit 4 Türen tritt dieser Fall viel häufiger auf. Somit warten Personen, obwohl sie theoretisch schon gehen könnten. 
+
+\begin{figure}[!htb]
+	\centering
+	\begin{minipage}{.5\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{abbildungen/Evak2TuerenEnde.png}
+		\caption{Evakuierung eines Raumes mit 2 Türen (Ende der Evakuierung)}
+		\label{fig:Eva2TEnde}
+	\end{minipage}%
+	\begin{minipage}{0.5\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{abbildungen/Evak4TuerenEnde.png}
+		\caption{Evakuierung eines Raumes mit 4 Türen (Ende der Evakuierung)}
+		\label{fig:Eva4TEnde}
+	\end{minipage}
+\end{figure}
+
+Stellt man die erläuterten Evakuierungsszenarien in Bezug zur Realität müssen einige Punkte beachtet werden. Wie bereits erläutert, befinden sich zum einen in der Realität niemals so viele Personen symmetrisch in einem Raum. Zum anderen ist es aufgrund von Brandschutz und anderen Sicherheitsvorgaben nicht zulässig $676$ Personen in einen ca. $108qm$ großen Raum zu lassen. Des weiteren wurden menschliche Faktoren wie Orientierungslosigkeit oder Panik in der Simulation nicht berücksichtigt. Die geringen Evakuierungszeiten sind überwiegend darauf zurückzuführen, dass jede Person zu jedem Zeitpunkt die perfekte Orientierung hat und genau die Zellen betritt, die auf dem für sie effizientesten Weg zum Ziel liegen. Diese Simulationen sind somit zusammenfassend als theoretisches Konstrukt zu sehen. Anhand dessen kann die Simulation gegen die Anforderung, dass sich die Evakuierungszeit bei Verdopplung der Türen Halbieren muss, verifiziert werden.
 
 \paragraph{Evakuierung eines Raumes (Personen zufällig verteilt)}
 Das in Abschnitt \ref{EvaVerifikation} beschriebene Szenario ist zwar für die Verifikation der Simulation relevant, in der Realität jedoch äußerst unwahrscheinlich. Die Personen in einem Raum werden sich nie dicht gedrängt, exakt symmetrisch in der Mitte befinden. Aus diesem Grund werden in diesem Abschnitt weitere Evakuierungstests gegenübergestellt, bei denen die Personen zufällig im Raum verteilt wurden. Anhand dieser Tests sollen die Auswirkungen unterschiedlicher Positionen und Anzahl der Türen auf die Evakuierungsdauer simuliert werden.\\

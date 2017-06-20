@@ -59,10 +59,10 @@ public class Measurement implements AutoCloseable {
             toY = 0;
             toX = 0;
         } else {
-            toX = measurementPoints.stream().max(Comparator.comparingInt((Location loc) -> loc.getX())).get().getX();
-            toY = measurementPoints.stream().max(Comparator.comparingInt((Location loc) -> loc.getY())).get().getY();
-            fromX = measurementPoints.stream().min(Comparator.comparingInt((Location loc) -> loc.getX())).get().getX();
-            fromY = measurementPoints.stream().min(Comparator.comparingInt((Location loc) -> loc.getY())).get().getY();
+            toX = measurementPoints.stream().max(Comparator.comparingInt(Location::getX)).get().getX() - 1;
+            toY = measurementPoints.stream().max(Comparator.comparingInt(Location::getY)).get().getY() - 1;
+            fromX = measurementPoints.stream().min(Comparator.comparingInt(Location::getX)).get().getX() + 1;
+            fromY = measurementPoints.stream().min(Comparator.comparingInt(Location::getY)).get().getY() + 1;
         }
         measureFieldSize = ((toX - fromX - 1) * config.getCellSize()) * ((toY - fromY - 1) * config.getCellSize());
     }
@@ -101,7 +101,7 @@ public class Measurement implements AutoCloseable {
         timeVeloctiy.log(time, meanv);
         timeDensity.log(time, density);
         if (field instanceof RotatingField) {
-            final long l = ((RotatingField) field).clearSteppedOverLine();
+            final double l = ((RotatingField) field).clearSteppedOverLine();
             timeFlow.log(time, BigDecimal.valueOf(l));
         }
     }

@@ -12,12 +12,12 @@ public class RotatingField extends Field {
     }
 
 
-    public long clearSteppedOverLine() {
-        final long steppedOver = this.steppedOver;
+    public double clearSteppedOverLine() {
+        final double steppedOver = this.steppedOver;
         this.steppedOver = 0;
         return steppedOver;
     }
-    private long steppedOver = 0;
+    private double steppedOver = 0;
 
     @Override
     public void putPerson(Person person, Location location)

@@ -32,15 +32,8 @@ public class PersonMoveEvent extends BaseEvent {
         final List<Event> newEvents = new ArrayList<>();
 
         Location tempLocation = simulation.field.locationOf(person);
-        if (tempLocation == null) {
+        if (simulation.field.isTarget(tempLocation) || tempLocation == null) {
             return newEvents;
-        }
-        if (simulation.field.isTarget(tempLocation)) {
-            if (true) {
-                tempLocation = tempLocation.withX(0);
-            } else {
-                return newEvents;
-            }
         }
         final Location locationOfPerson = tempLocation;
 
@@ -90,4 +83,5 @@ public class PersonMoveEvent extends BaseEvent {
 
         return newEvents;
     }
+
 }

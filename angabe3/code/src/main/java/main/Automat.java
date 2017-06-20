@@ -1,16 +1,11 @@
 package main;
 
 import config.Configuration;
-import field.Field;
+import field.RotatingField;
 import field.FieldImporter;
 import outputFile.OutputFile;
-import person.Person;
-import person.VelocityDistribution;
 
 import java.math.BigDecimal;
-import java.util.Random;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * @author DD00033863
@@ -28,10 +23,11 @@ public class Automat {
                 .build();
 
         FieldImporter fi = new FieldImporter(build);
-        final Field field2 = fi.getField();
+        final RotatingField field2 = fi.getField();
         OutputFile output = new OutputFile(build, field2);
         final Simulation simulation = new Simulation(field2, build, output);
 
+        field2.enableMod();
         simulation.run(BigDecimal.valueOf(build.getMaxDuration()));
 
         output.save(build.getOutput() + build.getAlgorithm().toString() + ".xml");

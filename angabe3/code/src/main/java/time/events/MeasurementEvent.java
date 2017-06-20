@@ -4,9 +4,7 @@ import main.Simulation;
 import person.Person;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -25,9 +23,9 @@ public class MeasurementEvent extends BaseEvent{
         final List<Event> newEvents = new ArrayList<>();
         System.out.printf("measure at %s\n", simulation.getClock().systemTime());
         simulation.getMeasurement().measure(simulation.field, getTime());
-        removeNPersons(5);
+        removeNPersons(50);
 
-        final BigDecimal nextMove = getTime().add(new BigDecimal(0.5));
+        final BigDecimal nextMove = getTime().add(new BigDecimal(1));
         final MeasurementEvent event = new MeasurementEvent(nextMove, simulation);
         newEvents.add(event);
         return newEvents;

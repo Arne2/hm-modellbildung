@@ -2,6 +2,7 @@ package measurement;
 
 import config.Configuration;
 import field.Field;
+import field.RotatingField;
 import field.location.Location;
 import outputFile.XYLog;
 import person.Person;
@@ -19,7 +20,7 @@ import java.util.Set;
 /**
  * Created by user on 14.06.17.
  */
-public class Measurement implements AutoCloseable{
+public class Measurement implements AutoCloseable {
 
     // Parameters of the Measurement field.
     private final int fromX;
@@ -34,18 +35,23 @@ public class Measurement implements AutoCloseable{
     private final XYLog fundamental;
     private final XYLog timeVeloctiy;
     private final XYLog timeDensity;
+    private final XYLog timeFlow;
 
     public Measurement(Set<Location> measurementPoints, Configuration config) throws IOException {
         this.config = config;
 
-        Path fundamentalLogFile = new File(config.getOutput() + "fundamental.csv").toPath();
+        Path fundamentalLogFile = new File(config.getOutput() + "./fundamental.csv").toPath();
         fundamental = new XYLog(fundamentalLogFile, "density", "velocity");
 
-        Path timeVelocityLogFile = new File(config.getOutput() + "timeVelocity.csv").toPath();
+        Path timeVelocityLogFile = new File(config.getOutput() + "./timeVelocity.csv").toPath();
         timeVeloctiy = new XYLog(timeVelocityLogFile, "time", "velocity");
 
-        Path timeDensityLogFile = new File(config.getOutput() + "timeDensity.csv").toPath();
+        Path timeDensityLogFile = new File(config.getOutput() + "./timeDensity.csv").toPath();
         timeDensity = new XYLog(timeDensityLogFile, "time", "density");
+
+
+        Path timeFlowFile = new File(config.getOutput() + "./timeFlow.csv").toPath();
+        timeFlow = new XYLog(timeFlowFile, "time", "density");
 
         if (measurementPoints.size() == 0) {
             fromX = 0;
@@ -53,17 +59,17 @@ public class Measurement implements AutoCloseable{
             toY = 0;
             toX = 0;
         } else {
-            toX = measurementPoints.stream().max(Comparator.comparingInt((Location loc) -> loc.getX())).get().getX() -1;
-            toY = measurementPoints.stream().max(Comparator.comparingInt((Location loc) -> loc.getY())).get().getY() -1;
-            fromX = measurementPoints.stream().min(Comparator.comparingInt((Location loc) -> loc.getX())).get().getX() +1;
-            fromY = measurementPoints.stream().min(Comparator.comparingInt((Location loc) -> loc.getY())).get().getY() + 1;
-
+            toX = measurementPoints.stream().max(Comparator.comparingInt((Location loc) -> loc.getX())).get().getX();
+            toY = measurementPoints.stream().max(Comparator.comparingInt((Location loc) -> loc.getY())).get().getY();
+            fromX = measurementPoints.stream().min(Comparator.comparingInt((Location loc) -> loc.getX())).get().getX();
+            fromY = measurementPoints.stream().min(Comparator.comparingInt((Location loc) -> loc.getY())).get().getY();
         }
         measureFieldSize = ((toX - fromX - 1) * config.getCellSize()) * ((toY - fromY - 1) * config.getCellSize());
     }
 
     /**
      * Calculates and logs the information for later purposes.
+     *
      * @param field
      * @param time
      */
@@ -73,10 +79,10 @@ public class Measurement implements AutoCloseable{
         Map<Location, Person> personsToMeasure = new HashMap<>();
         for (Map.Entry<Person, Location> person : field.getPersons().entrySet()) {
 
-            if (    person.getValue().getX() >= toX     ||
-                    person.getValue().getX() <= fromX   ||
-                    person.getValue().getY() >= toY     ||
-                    person.getValue().getY() <= fromY) {
+            if (person.getValue().getX() > toX ||
+                    person.getValue().getX() < fromX ||
+                    person.getValue().getY() > toY ||
+                    person.getValue().getY() < fromY) {
                 continue;
             }
             personsToMeasure.put(person.getValue(), person.getKey());
@@ -89,12 +95,17 @@ public class Measurement implements AutoCloseable{
         }
         BigDecimal meanv = sum_v.divide(new BigDecimal(personsToMeasure.size()), 32, BigDecimal.ROUND_HALF_EVEN);
 
-        BigDecimal density = new BigDecimal( personsToMeasure.size() / measureFieldSize);
+        BigDecimal density = new BigDecimal(personsToMeasure.size() / measureFieldSize);
 
         fundamental.log(density, meanv);
         timeVeloctiy.log(time, meanv);
-        timeDensity.log(time,density);
+        timeDensity.log(time, density);
+        if (field instanceof RotatingField) {
+            final long l = ((RotatingField) field).clearSteppedOverLine();
+            timeFlow.log(time, BigDecimal.valueOf(l));
+        }
     }
+
 
     public int getFromX() {
         return fromX;
@@ -117,5 +128,6 @@ public class Measurement implements AutoCloseable{
         fundamental.close();
         timeDensity.close();
         timeVeloctiy.close();
+        timeFlow.close();
     }
 }

@@ -83,8 +83,8 @@ public class Field {
 
     public int getWidth() {
         return locations.stream()
-                .map(location -> location.x)
-                .max(Integer::compareTo)
+                .mapToInt(location -> location.x)
+                .max()
                 .orElse(-1) + 1;
     }
 

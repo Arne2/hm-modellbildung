@@ -1,9 +1,7 @@
 package field;
 
-import com.sun.org.apache.xalan.internal.xsltc.compiler.util.IntType;
 import config.Configuration;
 import field.location.Location;
-import org.w3c.dom.css.RGBColor;
 import person.Person;
 
 import javax.imageio.ImageIO;
@@ -69,7 +67,7 @@ public class FieldImporter {
      * Reads the png Image and generates the Field out of it.
      * @return
      */
-    public Field getField(){
+    public RotatingField getField(){
         BufferedImage img = null;
         try {
             img = ImageIO.read(new File(this.path));
@@ -78,7 +76,7 @@ public class FieldImporter {
         }
         int width = img.getWidth();
         int height = img.getHeight();
-        Field returnField = new Field(configuration.getCellSize());
+        RotatingField returnField = new RotatingField(configuration.getCellSize());
 
         for(int x = 0; x < width; x++){
             for(int y  = 0; y < height; y++){

@@ -54,6 +54,11 @@ public class Location implements Comparable<Location> {
     }
 
     @Override
+    public String toString() {
+        return "(" + x + "," + y + ")";
+    }
+
+    @Override
     public int hashCode() {
         return hash;
     }

@@ -5,6 +5,8 @@ import field.Fields;
 import field.location.Location;
 import field.location.Locations;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -35,7 +37,7 @@ public class PersonalSpace {
      * @return personal space value
      */
     private double calculate(double distance) {
-        final double uP = 100;
+        final double uP = 50;
         final double aP = 1;
         final double bP = 2;
 
@@ -80,13 +82,13 @@ public class PersonalSpace {
         final Set<Location> circle = Fields.of(field, target, selector);
         for (Location location : circle) {
             if (location.equals(self)) {continue;}
-            if (!field.getPersonLocations().contains(location)) {continue;}
+            if (field.isFree(location)) {continue;}
 
             final double distance = Locations.distance(location, target) * cellSize;
             if (distance >= PERSONAL_SPACE) {continue;}
             use += calculate(distance);
         }
-        return -1 * use;
+        return (double)Math.round(use * 100000d) / -100000d;
     }
 }
 

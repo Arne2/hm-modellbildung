@@ -15,11 +15,11 @@
 Im Zuge der ersten Studienarbeit wurde das Laufverhalten von Probanden in der Ebene und auf der Treppe untersucht. Basierend auf den Erkenntnissen bezüglich der individuellen Wunschgeschwindigkeiten werden in dieser Studienarbeit Personenbewegungen in der Ebene simuliert. Mit Hilfe solcher Simulationen können, beispielsweise im Zuge von Gebäudeplanungen unterschiedliche Gebäude- und Raumgestaltungen simuliert und hinsichtlich schnellster Räumungen im Krisenfall optimiert werden. 
 
 \section{Beschreibung des Modells}
-Für die Simulation der Personenbewegungen wird ein zellulärer Zustandsautomat implementiert. Jede Zelle kann entweder leer oder durch eine Person oder ein Hindernis besetzt sein. Sie kann außerdem ein Ziel oder eine Quelle enthalten. Ein Hindernis kann von keiner Person betreten werden. Die Personen versuchen im Laufe der Simulation von der Quelle (Startposition) zum Ziel zu gelangen. Hierbei können sie sich in der sog. Moore-Umgebung bewegen. Es kann jede Zelle betreten werden, die frei ist und eine Nachbarzelle der aktuellen Zelle ist. Als Nachbarzelle wird jede Zelle bezeichnet, welche mit der aktuellen Zelle eine Kante oder Ecke teilt. \\
+Für die Simulation der Personenbewegungen wird ein zellulärer Zustandsautomat implementiert. Jede Zelle kann entweder leer oder durch eine Person oder ein Hindernis besetzt sein. Sie kann außerdem ein Ziel oder eine Quelle enthalten. Ein Hindernis kann von keiner Person betreten werden. Die Personen versuchen im Laufe der Simulation von der Quelle (Startposition) zum Ziel zu gelangen. Hierbei können sie sich in der sog. Moore-Umgebung bewegen. Es kann jede Zelle betreten werden, die frei ist und eine Nachbarzelle der aktuellen Zelle ist. Als Nachbarzelle wird jede Zelle bezeichnet, die mit der aktuellen Zelle eine Kante oder Ecke teilt. \\
 Die Ziele werden als attraktiv für die Personen angesehen. Die Personen steigern ihren persönlichen Nutzen, je näher sie dem Ziel kommen. In der Realität fühlt sich eine Person jedoch unwohl, wenn ihr eine fremde Person zu nahe kommt. Im Modell wird dies dadurch berücksichtigt, dass sich der Nutzen einer Person verringert, wenn sie einer anderen zu nahe kommt. Um die Simulation möglichst realistisch zu gestalten, bewegen sich die Personen mit einer individuellen Wunschgeschwindigkeit. Diese wird aus den Ergebnissen der ersten Studienarbeit ermittelt. \\
 Das erläuterte Modell gibt die einzelnen Personenbewegungen aus und visualisiert diese zusätzlich. Die Bewegung der Personen wird in drei getrennten Simulationen mit jeweils unterschiedlichen Algorithmen berechnet. Zunächst wird für jedes Feld der negative euklidische Abstand als Zielnutzen berechnet. Jede Person versucht durch die Wahl des umliegenden Feldes mit dem maximalen Wert seinen Nutzen zu steigern. \\
 Darüber hinaus besteht die Möglichkeit die Personenbewegung mit Hilfe des Floor-Flooding, basierend auf dem Dijkstra Algorithmus zu ermitteln. Jede Person wählt von den anliegenden Feldern das Feld, welches die geringste Anzahl an notwendigen Bewegungen bis zum Ziel hat. \\
-Als dritte Variante erfolgt die Ermittlung der Personenbewegung ebenfalls mit Hilfe des Floor-Flooding. Als Grundlage dient hierbei jedoch die Lösung der Eikonal-Gleichung, welche die Ausbreitung einer Welle beschreibt. Hierfür wird der Fast-Marching Algorithmus verwendet.  \\
+Als dritte Variante erfolgt die Ermittlung der Personenbewegung ebenfalls mit Hilfe des Floor-Flooding. Als Grundlage dient hierbei jedoch die Lösung der Eikonal-Gleichung, die die Ausbreitung einer Welle beschreibt. Hierfür wird der Fast-Marching Algorithmus verwendet.  \\
 Im Laufe der Studienarbeit werden die beschriebenen Modelle anhand unterschiedlicher Tests verglichen und ausgewertet. Eine detaillierte Erläuterung der Tests ist im folgenden Kapitel \ref{AnforderungenTest} beschrieben.
 
 
@@ -43,6 +43,7 @@ In der Realität versucht eine Person einem Hindernis möglichst frühzeitig aus
 Durch das entsprechende Testszenario werden ein oder mehrere Ziele definiert. Ziele werden als attraktiv für die Personen angesehen. Jede Person erhöht ihren Nutzen, wenn sie sich dem Ziel nähert. Befinden sich mehrere Ziele im Feld, wird die Wahl des Ziels für jede Person abhängig vom Betriebsmodus bestimmt. 
 
 \subsection{Personen}
+\label{Anf:Personen}
 Jede Person soll in ihrem Startfeld starten und sich im Laufe der Simulation von Zelle zu Zelle auf ihr Ziel hin bewegen und dadurch ihren persönlichen Nutzen, je näher sie dem Ziel kommt, steigern. Jede Person kann sich in der Moore-Umgebung (8 mögliche Bewegungsrichtungen) bewegen. Die möglichen Bewegungsrichtungen sind in Abbildung \ref{fig:MooreUmgebung} rot markiert.
 \begin{figure}[htpb]
 	\centering
@@ -51,7 +52,7 @@ Jede Person soll in ihrem Startfeld starten und sich im Laufe der Simulation von
 	\label{fig:MooreUmgebung}
 \end{figure}
 \\
-Die Personen können nur freie Zellen betreten. Jede Person wählt genau die Zelle als nächste Zelle, welche ihr den steilsten Nutzenanstieg ermöglicht. Der Nutzen der verschiedenen Zellen wird abhängig vom Betriebsmodus unterschiedlich berechnet. Darüber hinaus soll der Nutzen durch die Position der anderen Personen beeinflusst werden. \\
+Die Personen können nur freie Zellen betreten. Jede Person wählt genau die Zelle als nächste Zelle, welche ihr den steilsten Nutzenanstieg ermöglicht. Der Nutzen der verschiedenen Zellen wird abhängig vom verwendeten Algorithmus unterschiedlich berechnet. Darüber hinaus soll der Nutzen durch die Position der anderen Personen beeinflusst werden. \\
 
 Hierfür wird zwischen zwei Bereichen, abhängig vom Abstand zur nächsten Person unterschieden. Beträgt der Abstand zu einer fremden Person weniger als $45cm$, wird der vertraute Bereich (intimate space) der Personen betreten. Beträgt der Abstand zwischen $45cm$ und $120cm$, wird der persönliche Bereich (personal space) der Personen betreten. Für den vertrauten Bereich ist der Nutzenverlust (Nv(x)), abhängig vom Abstand $x$, nach Funktion \ref{Equ:NutzenverlustV} definiert. Für den persönlichen Bereich wird der Nutzenverlust (Np(x)), wiederum abhängig vom Abstand $x$ zur anderen Person, durch die Funktion \ref{Equ:NutzenverlustP} definiert. 
 
@@ -82,7 +83,7 @@ $d(x)$ beschreibt den aktueller Abstand zur nächsten Person. Die folgende Tabel
 	\label{tab:parameterNutzenverlust}
 \end{table}
 
-Weitere Erläuterungen zu den Parametern, den Werten und den verwendeten Funktionen sind im Kapitel \ref{Personenpotenzial} beschrieben.
+Der Radius einer Person sowie die Abstände für den vertrauten und persönlichen Bereich wurden auf Basis des Modells von Hall aus \cite{VONSIVERS2015104} übernommen. Weitere Erläuterungen zu den Parametern, den Werten und den verwendeten Funktionen sind im Kapitel \ref{Personenpotenzial} beschrieben.
  
 \subsection{Geschwindigkeit der Personen}
 Jede Person soll eine individuelle Wunschgeschwindigkeit besitzen. Sie bewegt sich bei freier Bahn mit dieser Geschwindigkeit fort. Die Wunschgeschwindigkeiten sollen als normalverteilt angesehen werden. Als Mittelwert und Standardabweichung sollen die errechneten Werte aus der ersten Studienarbeit verwendet werden.
@@ -137,7 +138,7 @@ Alle in der Tabelle \ref{tab:WerteAuswertung} aufgeführten Werte sollen auf Bas
 		Ermittelte Werte & Beschreibung & Wann benötigt\\ \hline
 		mittlere Geschwindigkeit & durchschnittliche Geschwindigkeit der Personen im Feld & Rimea-Test 4 \\	
 		Fluss (Personen/Meter/s) & Anzahl der Personen mit Geschwindigkeit > 1m/s im Feld & Rimea-Test 4\\
-		Simulationsdauer & Dauer bis der Test beendet ist & Hühner Test, \\&& Evakuierung (2 Türen), \\&& Evakuierung (4 Türen)\\
+		Simulationsdauer & Dauer bis der Test beendet ist & bei allen Tests
 	\end{tabular}
 	\caption{Werte für die Auswertung}
 	\label{tab:WerteAuswertung}
@@ -149,7 +150,7 @@ Alle in der Tabelle \ref{tab:WerteAuswertung} aufgeführten Werte sollen auf Bas
 Die implementierten Algorithmen (vgl. Unterkapitel \ref{AnforderungenAlgorithmen} ) sollen anhand unterschiedlicher Testszenarien verglichen und verifiziert werden. Die verschiedenen Szenarien sollen der Simulation als .png Datei übergeben werden. 
 
 \subsubsection{Erstellung der Testszenarien}
-Es soll die Möglichkeit bestehen, unterschiedliche Testszenarien mittels eines Bildbearbeitungsprogrammes zu erstellen und an die Simulation (als .png Datei) zu übergeben. Bei der Erstellung ist sowohl die Anzahl der Personen, als auch die Anzahl der Hindernisse und Ziele (Personensenken) beliebig. Hinsichtlich der Farben der Objekte müssen jedoch die in der folgenden Tabelle \ref{tab:Farbcodes} beschriebenen Farbcodes verwendet werden. Jedes Pixel wird durch eine Zelle des Automaten repräsentiert.
+Es soll die Möglichkeit bestehen, unterschiedliche Testszenarien mittels eines Bildbearbeitungsprogrammes zu erstellen und an die Simulation (als .png Datei) zu übergeben. Bei der Erstellung ist sowohl die Anzahl der Personen, als auch die Anzahl der Hindernisse und Ziele (Personensenken) beliebig. Hinsichtlich der Farben der Objekte müssen jedoch die in der folgenden Tabelle \ref{tab:Farbcodes} beschriebenen Farbcodes verwendet werden. Jedes Pixel wird durch eine Zelle des Automaten repräsentiert. Darüber hinaus soll die Möglichkeit bestehen ein Messfeld zu definieren. In diesem Feld wird die durchschnittliche Geschwindigkeit der Personen ermittelt in einer .csv Datei ausgegeben. Für das Messfeld müssen in der .png Datei lediglich die beiden diagonalen Eckpunkte angegeben werden. Die Implementierung ermittelt die Koordinaten und erstellt daraus ein rechteckiges Feld. 
  
 \begin{table}[htpb]
 	\centering
@@ -158,7 +159,8 @@ Es soll die Möglichkeit bestehen, unterschiedliche Testszenarien mittels eines 
 		\#3F48CC & Blau & Ziel/ Personensenke \\	
 		\#000000 & Schwarz & Ziel/ Personensenke \\
 		\#FFFFFF & Weiß & Leere Zelle \\
-		\#22B14C & Grün & Person 
+		\#22B14C & Grün & Person \\
+		\#FF0000 & Rot  & Messfeld
 	\end{tabular}
 	\caption{Werte für die Auswertung}
 	\label{tab:Farbcodes}
@@ -239,6 +241,7 @@ In diesem Testfall soll, analog zum Rimea-Test 4, ein $65m$ langer und $12m$ bre
 \end{figure}
 
 \subsection{Visualisierung}
+
 Die Visualisierung soll die errechneten Personenbewegungen graphisch darstellen. Als Grundlage soll der ausgegebene Report (vgl. Abschnitt \ref{Anforderungen:Report}) dienen. Konkrete Anforderungen bezüglich der Visualisierung sind in Abbildung \ref{fig:AnforderungenVisualisierung} abgebildet.
 
 \begin{figure}[htpb]
@@ -249,7 +252,32 @@ Die Visualisierung soll die errechneten Personenbewegungen graphisch darstellen.
 \end{figure}
 
 Die Oberfläche der Visualisierung soll aus 4 verschiedenen Teilen bestehen, welche in der Abbildung durch die blauen Kästen A-D hervorgehoben wurden. Im Teil A sollen Konfigurationsmöglichkeiten für die Visualisierung aufgeführt sein. Beispielsweise soll zwischen einer normalen Darstellung der Simulation und einer Heatmap gewechselt werden können. Darüber hinaus soll die Möglichkeit bestehen, die Visualisierung zu stoppen und schrittweise fortzusetzen. \\
-Teil B enthält die eigentliche Visualisierung der Personen, Hindernisse und Ziele. In Teil C sind alle Informationen bezüglich der Visualisierung aufgeführt und Teil D enthält eine Legende der verwendeten Symbole und Farben.
+Teil B enthält die eigentliche Visualisierung der Personen, Hindernisse und Ziele. In Teil C sind alle Informationen bezüglich der Visualisierung aufgeführt und Teil D enthält eine Legende der verwendeten Symbole und Farben. Wird ein Messfeld definiert, soll dieses in der Visualisierung hervorgehoben werden.
+
+
+\section{Beeinflussung durch andere Personen} 
+\label{Personenpotenzial}
+
+Wie bereits im Abschnitt \ref{Anf:Personen} kurz erläutert, wird die Entscheidung, welche Zelle eine Person als nächstes betritt abhängig vom verwendeten Algorithmus und von den Positionen der anderen Personen getroffen. In der Realität fühlen sich Personen unwohl, wenn sie anderen, insbesondere fremden Personen zu nahe kommen. Sie versuchen folglich eine solche Situation wenn möglich zu vermeiden. Beispielsweise bei der Fahrt in einem überfüllten Aufzug lässt sich diese Situation unter Umständen nicht vermeiden. Bei der Fortbewegung in der Ebene jedoch häufig schon. Personen neigen in der Realität dazu einen Umweg in kauf zu nehmen, um einem Gedränge zu entkommen. Um dieses Verhalten in der Simulation zu berücksichtigen existieren verschiedene mathematische Funktionen, mithilfe derer ein Abstoßungspotenzial berechnet wird. Während auf der einen Seite der Nutzen einer Person steigt, je näher sie dem Ziel kommt, verringert sich dieser Nutzen auf der anderen Seite wieder, wenn sie anderen Personen zu nahe kommen. Mit Hilfe von Funktionen kann somit der Nutzenverlust einer Person bestimmt werden. \\
+Insbesondere glatte Funktionen auf kompakten Trägern, die außerhalb eines begrenzten Gebietes komplett zu verschwinden (f(x) = $0$) eignen sich hierfür gut. Würde man eine Funktion verwenden, deren Funktionswert auch außerhalb des begrenzten Gebietes größer als $0$ ist, führe dies zu einer Abweichung von der Realität und damit zu einem Fehler. In diesem Fall, wird eine Person im Modell auch durch eine sehr weit entfernte Person, wenn auch nur leicht, beeinflusst. Dies widerspricht der Realität, da das Abstoßungspotenzial von Personen auf einen Bereich um die entsprechende Person beschränkt ist. \\
+In der Fachliteratur wird beispielsweise folgende Funktion vorgeschlagen:
+\begin{displaymath}
+\label{equ:NutzenverlustSCHLECHT}
+N(d) = 
+\left\{ 
+\begin{array}{cc}
+-h \exp(\frac{1}{(\frac{d}{w})^2 -1}) & \;\;\;\;\;\;\;\;\;\;\; falls\, |d| < w  \\
+0 & sonst  
+\end{array} 
+\right.
+\end{displaymath}
+Hierbei wird der Nutzenverlust ($N(d)$), abhängig vom Abstand $d$ zur nächsten Person definiert. $w$ beschreibt die Reichweite der Funktion und $h$ die Stärke der Beeinflussung bzw. des Nutzenverlustes \cite{DIETRICH2014841}. \\ 
+Für die Ermittlung des Abstoßungspotenzials bzw. des Nutzenverlustes aufgrund anderer Personen wurden jedoch anstelle dieser Funktion, die in Abschnitt \ref{Anf:Personen} aufgeführten Funktionen \ref{Equ:NutzenverlustP} und \ref{Equ:NutzenverlustV} verwendet. Diese basieren auf dem Modell von Hall, das den Bereich um eine Person in mehrere Teilbereiche einteilt. In einem Umkreis von bis zu $45cm$ wird der vertraute Bereich einer Person betreten. Befinden sich zwei Personen so nah beieinander, können Berührungen nicht vermieden werden. Zwischen $45cm$ und $120cm$ um eine Person befindet sich der persönliche Bereich, welcher beispielsweise von Freunden oder Familienmitgliedern betreten werden darf. Ein Betreten dieses Bereichs durch fremde Personen wird als unangenehm und aufdringlich empfunden und Personen versuchen es folglich zu vermeiden. Darüber hinaus definiert Hall noch zwei weitere Bereiche. Zwischen $120cm$ und $360cm$ um die Person befindet sich der soziale oder gesellschaftliche Bereich der Person und ab $360cm$ der öffentliche Bereich. Für die Simulation in dieser Studienarbeit sind die beiden letzten Bereiche jedoch nicht relevant, da der Einfluss auf den Nutzen der Person zu gering ist, um die Entscheidung, wohin die Person als nächstes geht zu beeinflussen. Außerdem lässt sich das Betreten dieser beiden Bereiche durch andere Personen bei einer höheren Personendichte generell nicht vermeiden.\\
+Hintergrund dieser Entscheidung ist, dass nach unserer Einschätzung und nach \cite{VONSIVERS2015104} die Berücksichtigung des Modells von Hall durch die Verwendung unterschiedlicher Funktionen für den vertrauten und persönlichen Bereich zu einem Verhalten, das der Realität näher kommt, führt. Berührt eine Person eine fremde Person, fühlt sie sich deutlich unwohler, als wenn sie dieser lediglich nahe kommt mit einem Abstand von beispielsweise $50cm$. Diese Eigenschaft wird durch die Funktion \ref{equ:NutzenverlustSCHLECHT} kaum berücksichtigt.\\
+Außerdem lassen sich in dieser Simulation, durch die Wahl einer geringen Zellgröße des zellulären Automatens von $40 cm$, die Auswirkungen der unterschiedlichen Bereiche auf den Nutzenverlust bzw. das Abstoßungspotenzial der Personen feststellen. \\
+Darüber hinaus beinhalten die Funktionen \ref{Equ:NutzenverlustP} und \ref{Equ:NutzenverlustV} deutlich mehr Parameter. Diese Parameter können an mögliche gesellschaftliche oder länderspezifische Unterschiede angepasst werden und so die Realität besser widerspiegeln. Für diese Studienarbeit wurden die Parameter wie in der Tabelle \ref{tab:parameterNutzenverlust} aufgeführt gewählt. Grundlage hierfür sind die in \cite{VONSIVERS2015104} erläuterten Erkenntnisse aus unterschiedlichen Versuchen. Außerdem zeigten mehrere, in der Gruppe durchgeführten Simulationen mit unterschiedlichen Parameterkombinationen, dass sich das Abstoßungspotenzial durch die Verwendung dieser Parameter so auswirkte, wie man es in der Realität erwarten würde. \\ 
+  
+%TODO: VERSUCH DER DAS BEWEIST EINFÜGEN
 
 \section{Softwaredesign}
 

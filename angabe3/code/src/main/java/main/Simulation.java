@@ -9,6 +9,8 @@ import field.use.FastMarching;
 import field.use.PersonalSpace;
 import measurement.Measurement;
 import outputFile.OutputFile;
+import outputFile.XYLog;
+import outputFile.XYZLog;
 import person.Person;
 import time.Clock;
 import time.EventList;
@@ -16,9 +18,12 @@ import time.events.Event;
 import time.events.MeasurementEvent;
 import time.events.PersonMoveEvent;
 
+import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -53,7 +58,7 @@ public class Simulation implements AutoCloseable {
     /** The OutputFile for the post visualization. */
     private final OutputFile outputFile;
 
-    public Simulation(Field field, Configuration configuration, OutputFile outputFile) throws IOException {
+    public Simulation(Field field, Configuration configuration, OutputFile outputFile) throws Exception {
         this.configuration = configuration;
         this.field = field;
         this.outputFile = outputFile;
@@ -78,8 +83,59 @@ public class Simulation implements AutoCloseable {
             outputFile.setMeasurement(measurement);
         }
 
+        Map<Location, Double> euclid = EuclidDistance.use(field);
+        Map<Location, Double> fastmarching =  FastMarching.use(field);
+        Map<Location, Double> error = new HashMap<>();
+
+
+        Path errorLogPath = new File(configuration.getOutput() + "error.csv").toPath();
+        Path euclidLogPath = new File(configuration.getOutput() + "euclid.csv").toPath();
+        Path fastmarchingLogPath = new File(configuration.getOutput() + "fastmarching.csv").toPath();
+
+        XYZLog euclidLog = new XYZLog(euclidLogPath, "x", "y", "euclid");
+        XYZLog fastmarchingLog = new XYZLog(fastmarchingLogPath, "x", "y", "fastmarching");
+
+        XYZLog errorLog = new XYZLog(errorLogPath, "x", "y", "error");
+        for (Map.Entry<Location, Double> eucl:euclid.entrySet()) {
+            double errorentry;
+            if(eucl.getValue() != 0){
+                errorentry = ( -fastmarching.get(eucl.getKey()) + eucl.getValue());//-eucl.getValue();
+            }
+            else {
+                errorentry = 0.;
+            }
+
+
+            error.put(eucl.getKey(), errorentry);
+
+
+            euclidLog.log(new BigDecimal(eucl.getKey().getX()),
+                    new BigDecimal(eucl.getKey().getY()),
+                    new BigDecimal(eucl.getValue()) );
+
+            fastmarchingLog.log(new BigDecimal(eucl.getKey().getX()),
+                    new BigDecimal(eucl.getKey().getY()),
+                    new BigDecimal(fastmarching.get(eucl.getKey())) );
+
+
+            errorLog.log(new BigDecimal(eucl.getKey().getX()),
+                    new BigDecimal(eucl.getKey().getY()),
+                    new BigDecimal(errorentry) );
+        }
+
+        errorLog.close();
+        euclidLog.close();
+        fastmarchingLog.close();
+
+
+
+
+
         final MeasurementEvent event = new MeasurementEvent(new BigDecimal(0), this);
         this.events.add(event);
+
+
+
     }
 
     /**

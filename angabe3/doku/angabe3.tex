@@ -359,6 +359,7 @@ Zum Vergleich zeigen die Abbildungen \ref{fig:Eva2TEndeFM} und \ref{fig:Eva4TEnd
 Stellt man die erläuterten Evakuierungsszenarien in Bezug zur Realität müssen einige Punkte beachtet werden. Zum einen befinden sich in der Realität niemals so viele Personen symmetrisch in einem Raum. Zum anderen ist es aufgrund von Brandschutz und anderen Sicherheitsvorgaben nicht zulässig $676$ Personen in einen ca. $108qm$ großen Raum zu lassen. Des weiteren wurden menschliche Faktoren wie Orientierungslosigkeit oder Panik in der Simulation nicht berücksichtigt. Die geringen Evakuierungszeiten sind überwiegend darauf zurückzuführen, dass jede Person zu jedem Zeitpunkt die perfekte Orientierung hat und genau die Zellen betritt, die auf dem für sie effizientesten Weg zum Ziel liegen. Diese Simulationen sind somit zusammenfassend als theoretisches Konstrukt zu sehen. Anhand dessen kann die Simulation gegen die Anforderung, dass sich die Evakuierungszeit bei Verdopplung der Türen Halbieren muss, verifiziert werden.
 
 \paragraph{Evakuierung eines Raumes (Personen zufällig verteilt)}
+%TODO: Tests erneut mit Messfeld durchführen --> wirkliche evakuierungsdauer messen!!!
 In diesem Abschnitt werden weitere Evakuierungstests gegenübergestellt, bei denen die Personen zufällig im Raum verteilt wurden. Anhand dieser Tests sollen die Auswirkungen unterschiedlicher Positionen der Türen auf die Evakuierungsdauer simuliert werden.\\
 
 \begin{figure}[htpb]
@@ -368,7 +369,7 @@ In diesem Abschnitt werden weitere Evakuierungstests gegenübergestellt, bei den
 	\label{fig:EvakuierungMap}
 \end{figure}
 
-Abbildung \ref{fig:EvakuierungMap} zeigt die Verteilung der Personen, die für alle weiteren Evakuierungstests in diesem Kapitel verwendet werden. Somit wird eine bessere Vergleichbarkeit der Ergebnisse erzielt. In der Abbildung ist außerdem die Heatmap des Dijkstra Algorithmus für dieses Szenario zu sehen. 
+Abbildung \ref{fig:EvakuierungMap} zeigt die Verteilung der Personen, die für unterschiedliche Evakuierungstests verwendet wird. Somit wird eine bessere Vergleichbarkeit der Ergebnisse erzielt. In der Abbildung ist außerdem die Heatmap des Dijkstra Algorithmus für dieses Szenario zu sehen. 
 
 \begin{figure}[!htb]
 	\centering
@@ -402,8 +403,60 @@ Die Abbildungen \ref{fig:Evak2TürNebeneinanderMinDijkstra} und \ref{fig:Evak2T�
 	\caption{Evakuierung eines Raumes mit 2 Türen (großer Abstand), Dijkstra Algorithmus (links), Fast-Marching Algorithmus (rechts)}
 \end{figure}
 
-Im Vergleich dazu zeigen die Abbildungen \ref{fig:Evak2TürNebeneinanderMaxDijkstra} und \ref{fig:Evak2TürNebeneinanderMaxFM} jeweils einen Ausschnitt einer Simulation, in der die Ausgänge bzw. Ziele sehr weit voneinander entfernt gewählt wurden. In beiden Abbildungen ist sofort zu sehen, dass sich in etwa die Hälfte der Personen (Personen deren Startposition in der entsprechenden Hälfte lag) auf die Ziele unten links und die andere Hälfte auf die Ziele oben rechts zubewegen. Die Heatmaps zeigen die entsprechende Entfernung an. Die maximale Entfernung vom Ziel ist mit ca. $16m$ deutlich geringer als in der eben beschriebenen Simulation ($21m$). Die bessere Verteilung der Personen auf die Ziele und die geringere Entfernung zum Ziel erklären die geringer Evakuierungsdauer von ca. $19,5s$ (Dijkstra) bzw. $18,5s$ (Fast-Marching).
-%TODO: Noch ne SImulation mit mehr Personen um Unterschied zu verdeutlichen
+Im Vergleich dazu zeigen die Abbildungen \ref{fig:Evak2TürNebeneinanderMaxDijkstra} und \ref{fig:Evak2TürNebeneinanderMaxFM} jeweils einen Ausschnitt einer Simulation, in der die Ausgänge bzw. Ziele sehr weit voneinander entfernt gewählt wurden. In beiden Abbildungen ist sofort zu sehen, dass sich in etwa die Hälfte der Personen (Personen deren Startposition in der entsprechenden Hälfte lag) auf die Ziele unten links und die andere Hälfte auf die Ziele oben rechts zubewegen. Die Heatmaps zeigen die entsprechende Entfernung an. Die maximale Entfernung vom Ziel ist mit ca. $16m$ deutlich geringer als in der eben beschriebenen Simulation ($21m$). \\
+Trotz dessen ist die Evakuierungsdauer wider Erwarten mit ca. $19,5s$ (Dijkstra) bzw. $18,5s$ (Fast-Marching) nur minimal kürzer als im zuvor beschrieben Szenario (vgl. Abbildung \ref{Evak2TürNebeneinanderMinDijkstra}). Um dieses Besonderheit weiter zu überprüfen, wurde eine zusätzliche Map mit deutlich mehr Personen im Raum angelegt. Die Positionen der Türen wurde nicht verändert. Da hierbei vor allem die Auswirkung der Position der Türen auf die Evakuierungsdauer ermittelt werden soll, wurde dieser zusätzliche Test nur auf Basis des Dijkstra Algorithmus durchgeführt. Die Implementierung der Simulation ermöglicht jedoch, diesen bei Bedarf auf Basis des Fast-Marching Algorithmus zu wiederholen.\\
+
+\begin{figure}[!htb]
+	\centering
+	\begin{minipage}{.5\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{abbildungen/Evak2TMinDis2.PNG}
+		\label{fig:Evak2TminDis2}
+	\end{minipage}%
+	\begin{minipage}{0.5\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{abbildungen/Evak2TMaxDis2.PNG}
+		\label{fig:Evak2TmaxDis2}
+	\end{minipage}
+	\caption{Evakuierung eines Raumes mit 2 Türen, links: geringer Abstand zwischen den Türen, rechts: großer Abstand zwischen den Türen}
+\end{figure}
+
+Die Abbildungen \ref{fig:Evak2TminDis2} und \ref{fig:Evak2TmaxDis2} zeigen die Aufteilung der $547$ Personen und die Positionen der Türen. 
+
+\begin{figure}[!htb]
+	\centering
+	\begin{minipage}{.5\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{abbildungen/Evak2TMinDis2MITTE.PNG}
+		\label{fig:Evak2TminDis2MITE}
+	\end{minipage}%
+	\begin{minipage}{0.5\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{abbildungen/Evak2TMaxDis2MITTE.PNG}
+		\label{fig:Evak2TmaxDis2MITTE}
+	\end{minipage}
+	\caption{Evakuierung eines Raumes mit 2 Türen (Ausschnitt der Simulation), links: geringer Abstand zwischen den Türen, rechts: großer Abstand zwischen den Türen}
+\end{figure}
+
+Die Abbildungen \ref{fig:Evak2TminDis2MITE} und \ref{fig:Evak2TmaxDis2MITTE} zeigen einen Ausschnitt der Simulation bei $15,97s$ bzw. $1,55s$. In beiden Abbildungen ist deutlich zu sehen, dass sich die Personen, aufgrund der hohen Personenanzahl, vor allen Türen stauen.
+
+\begin{figure}[!htb]
+	\centering
+	\begin{minipage}{.5\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{abbildungen/Evak2TMinDis2ENDE.PNG}
+		\label{fig:Evak2TminDis2ENDE}
+	\end{minipage}%
+	\begin{minipage}{0.5\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{abbildungen/Evak2TMaxDis2ENDE.PNG}
+		\label{fig:Evak2TmaxDis2ENDE}
+	\end{minipage}
+	\caption{Evakuierung eines Raumes mit 2 Türen (Ausschnitt: Ende der Evakuierung), links: geringer Abstand zwischen den Türen, rechts: großer Abstand zwischen den Türen}
+\end{figure}
+
+Abschließend zeigen die Abbildungen \ref{fig:Evak2TminDis2ENDE} und \ref{fig:Evak2TmaxDis2ENDE} das Ende der Evakuierung. Wiederum verläuft die Evakuierung eines Raumes, bei dem die Türen weit voneinander entfernt sind, mit ca. $60,28s$ um ca. $2,3s$ schneller als die eines Raumes, bei dem die Türen nah beieinander liegen ($62,53s$). Auch durch eine höhere Anzahl an Personen, wirklich sich die Position der Türen nur sehr gering auf Die Evakuierungsdauer aus. Hintergrund hierfür könnte die lange Wartezeit bzw. der große Stau vor den jeweiligen Türen sein. Da die Wartezeit der einzelnen Personen teilweise sehr hoch ist, wirkt sich der längere Weg bis zur Tür kaum auf die Evakuierungsdauer aus.
+ 
 \paragraph{Fazit und Vergleich}
 
 \subsection{Validation}

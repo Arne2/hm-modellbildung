@@ -290,6 +290,19 @@ Der Aufbau der Anwendung wurde im Team diskutiert und anschließend mittels UML 
 
 
 \subsection{Verifikation}
+
+\subsubsection{Verteilung Wunschgeschwindigkeit in der Ebene}
+Um die korrekte Funktion der Simulation gewährleisten zu können, muss die Geschwindigkeit der Personen normal verteilt sein. Für die Überprüfung wurden die erzeugten Geschwindigkeiten von Fußgängern mitgeloggt und in einem Histogramm, das in Abbildung \ref{fig:Verteilung_Geschwindigkeit} zu sehen ist, dargestellt. Da die Werte sehr nah an der erwarteten Linie (in der Abbildung blau) liegen kann von einer Normalverteilung ausgegangen werden.
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.5\textwidth]{abbildungen/histogramm.pdf}
+	\caption{Verteilung der Geschwindigkeiten von Personen}
+	\label{fig:Verteilung_Geschwindigkeit}
+\end{figure}  
+
+Dadurch, dass die Normalverteilung nicht das Thema dieser Arbeit ist, wurde von weiteren Tests auf Normalverteilung abgesehen.
+
 \subsubsection{Hühnertest}
 Der Hühnertest wurde auf Basis des in Abbildung \ref{fig:HühnertestMap} aufgeführten Feldes durchgeführt. Die einzelnen Farben der einzelnen Elemente sind analog zu den in Tabelle \ref{tab:Farbcodes} beschriebenen gewählt. Personen werden grün, Hindernisse schwarz und das Ziel blau dargestellt. Da mit Hilfe dieses Testes lediglich überprüft werden soll, ob die Personen den Weg aus dem Hindernis finden, ist die Anzahl von $39$ simulierten Personen ausreichend. Der Test wurde dreimal durchgeführt. Zunächst wurde der Euklid Algorithmus, anschließend Dijkstra und zuletzt der Fast-Marching Algorithmus für die Berechnung des Zielnutzens verwendet.
 

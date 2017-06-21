@@ -79,10 +79,10 @@ public class Measurement implements AutoCloseable {
         Map<Location, Person> personsToMeasure = new HashMap<>();
         for (Map.Entry<Person, Location> person : field.getPersons().entrySet()) {
 
-            if (person.getValue().getX() > toX ||
-                    person.getValue().getX() < fromX ||
-                    person.getValue().getY() > toY ||
-                    person.getValue().getY() < fromY) {
+            if (person.getValue().getX() >= toX ||
+                    person.getValue().getX() <= fromX ||
+                    person.getValue().getY() >= toY ||
+                    person.getValue().getY() <= fromY) {
                 continue;
             }
             personsToMeasure.put(person.getValue(), person.getKey());

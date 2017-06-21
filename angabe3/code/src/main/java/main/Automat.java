@@ -19,7 +19,8 @@ public class Automat {
 
         final Configuration build = new Configuration.Builder(args)
                 .withVelocityDistribution(Long.valueOf("seed", 36))
-                .maxDuration(1000)
+                .maxDuration(20)
+                .cellSize(0.2)
                 .build();
 
         FieldImporter fi = new FieldImporter(build);

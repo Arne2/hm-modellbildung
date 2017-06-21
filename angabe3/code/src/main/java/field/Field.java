@@ -60,7 +60,10 @@ public class Field {
         if (old != null) {
             personLocations.remove(old);
         }
-        personLocations.add(location);
+        boolean add = personLocations.add(location);
+        if (!add){
+            throw new AssertionError("can not put person on already occupied location");
+        }
     }
 
     /**

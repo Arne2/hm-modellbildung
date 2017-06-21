@@ -318,9 +318,6 @@ public class CanvasDrawer {
         cellLayer = new Canvas(cellsize *input.getFieldWidth(), cellsize *input.getFieldHeight());
         heatLayer = new Canvas(cellsize *input.getFieldWidth(), cellsize *input.getFieldHeight());
 
-
-
-
         objectLayer = new Canvas(cellsize *input.getFieldWidth(), cellsize *input.getFieldHeight());
         measurementLayer = new Canvas(cellsize *input.getFieldWidth(), cellsize *input.getFieldHeight());
 
@@ -396,8 +393,15 @@ public class CanvasDrawer {
      * @param person
      */
     public void removePersonFromField(SimulatedPerson person){
+        long x = person.getX();
+        long y = person.getY();
         GraphicsContext gc = objectLayer.getGraphicsContext2D();
-        gc.clearRect(person.getX()* cellsize +1,person.getY()* cellsize +1, cellsize -2, cellsize -2);
+        gc.clearRect(x* cellsize +1,y* cellsize +1, cellsize -2, cellsize -2);
+        if(input.getTargets().contains(Location.of((int)x, (int)y))){
+            gc.setFill(GOALCOLOR);
+            gc.fillRect(x* cellsize, y* cellsize, cellsize, cellsize);
+            gc.strokeRect(x* cellsize, y* cellsize, cellsize, cellsize);
+        }
     }
 
     public Canvas getCellLayer() {

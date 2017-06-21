@@ -31,6 +31,7 @@ public class Dijkstra {
      */
     private void run() {
         while (!unvisited.isEmpty()) {
+
             final Location u = unvisited.parallelStream()
                     .max(Comparator.comparingDouble(key -> distance.getOrDefault(key, Double.NEGATIVE_INFINITY)))
                     .orElseThrow(() -> new AssertionError("unvisited must have not been empty!"));

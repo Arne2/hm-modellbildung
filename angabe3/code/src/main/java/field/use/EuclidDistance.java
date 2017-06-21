@@ -31,6 +31,7 @@ public class EuclidDistance {
      */
     private void run(){
         while (!unvisited.isEmpty()){
+
             final Location u =  unvisited.parallelStream().findAny().get();
             Set<Double> distances = new HashSet<>();
             for (Location target: targets) {

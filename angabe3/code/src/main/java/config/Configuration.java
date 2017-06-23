@@ -131,7 +131,7 @@ public class Configuration {
         private double deviation = 0.11686;
 
 
-        private String fieldImage;
+        private String fieldImage = "../defaultmap/default.png";
         private String output = "";
         private int maxDuration = 20;
 

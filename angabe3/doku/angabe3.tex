@@ -553,6 +553,25 @@ Das Thema der Arbeit war die Bewegung von Personen in der Ebene zu simulieren. Z
 Die Personenbewegung wurde mit den Algorithmen Euklid, Dijkstra und Fast Marching berechnet und deren Resultate miteinander verglichen. Zudem wurde eine Personenabstoßung implementiert um  Ergebnisse zu erhalten, die näher an der Realität liegen. Zusätzlich wurde beschrieben wie die Zellgröße Einfluss auf die Ergebnisse nimmt. Zur Verifikation wurden mehrere Tests durchgeführt und dokumentiert. Anschließend ist eine Diskussion erfolgt, ob die implementierte Simulation relevant genug ist um die Realität zu einem gewissen Maße abbilden zu können.
 
 Die Simulation bietet die Möglichkeit die Startvariablen und den Simulationsbereich frei zu definieren und dadurch verschiedenste Szenarien betrachten zu können. Eine Option ist es, die durchschnittliche individuelle Wunschgeschwindigkeit der Personen anzupassen, wenn beispielsweise die Passanten in der Situation einer gewissen Gruppe (z.B. Rentner) angehören. Um realistische Ergebnisse zu erhalten müssten hierfür nur die entsprechenden Werte vorher ermittelt werden. Eine eigene Auswertung der Daten wie in dem Messexperiment der ersten Studienarbeit bietet die Simulation nicht an. Dies könnte für eine Weiterführung des Projektes eine mögliche Erweiterung sein. Hinzukommt, dass keine Personen generiert werden, die sich absonderlich oder anders als die anderen Verhalten. Ein Beispiel wären Drängler sein. Diese könnten in Zukunft noch hinzugefügt werden.
+
+\section{Aufgabenverteilung}
+Im folgenden wird die grobe Aufgabenverteilung aufgeführt. Ein strikte Aufgabentrennung gab es nicht. Viele Aufgaben wurden von mehreren Personen zusammen erledigt. Insbesondere wurden Code- und Textreviews durchgeführt. Die folgende Auflistung stellt nur die groben Schwerpunkte dar.
+ 
+\subsection{Peter Müller}
+\subsection{Arne Schöntag}
+\subsection{Dimitrie Diez}
+Implementierung:\\
+Implementierung Euklid, Implementierung Fast-Marching, Implementierung Field-Import, Implementierung Measurement-Berechnungen, Implementierung .csv Export (vom letzten Projekt übernommen), Teilimplementierung Visualisierung (Heatmap und Snapshot Funktion), Unit Tests, Code Reviews\\
+Seminararbeit:\\
+Kapitel Vergleich Euklid-Fast-Marching, Testfall Engstelle, Textreviews
+
+\subsection{Daniel Graf}
+Anforderungsmanagement: Definition der Requirements \\ 
+Implementierung:\\
+Implementierung Euklid, Implementierung Field-Import, Evaluierung Visualisierungstools (Vadere), Code Reviews 
+Seminararbeit:\\
+Kapitel Einleitung, Kapitel Modellbeschreibung, Kapitel Anforderung, Kapitel Engstelle, Kapitel Hühnertest, Kapitel Evakuierungsszenarien, Kapitel FreeFlow Test, Textreviews
+
 %----------------------------------------------------------------------------------------
 %\input{References}
 \bibliography{Bibliographie}

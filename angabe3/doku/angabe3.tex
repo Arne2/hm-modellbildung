@@ -168,7 +168,7 @@ Es soll die Möglichkeit bestehen, unterschiedliche Testszenarien mittels eines 
 \end{table}
  
 \subsubsection{Testszenario: Freier Fluss}
-Im Zuge dieses Tests soll überprüft werden, ob sich Personen bei freier Bahn (keine Hindernisse zwischen Start und Ziel) mit ihrer jeweiligen Wunschgeschwindigkeit auf das Ziel hin bewegen. Des weiteren soll überprüft werden, ob die Person den kürzesten Weg verwendet. Der Test soll mit allen 3 Betriebsmodi durchgeführt werden. Abbildung \ref{fig:AnforderungenTest_FreierFluss} stellt den Testaufbau schematisch dar.
+Im Zuge dieses Tests soll überprüft werden, ob sich Personen bei freier Bahn (keine Hindernisse zwischen Start und Ziel) mit ihrer jeweiligen Wunschgeschwindigkeit auf das Ziel hin bewegen. Des weiteren soll überprüft werden, ob die Person den kürzesten Weg verwendet. Abbildung \ref{fig:AnforderungenTest_FreierFluss} stellt den Testaufbau schematisch dar.
 
 \begin{figure}[htpb]
 	\centering
@@ -297,6 +297,8 @@ Um die korrekte Funktion der Simulation gewährleisten zu können, muss die Gesc
 Dadurch, dass die Normalverteilung nicht das Thema dieser Arbeit ist, wurde von weiteren Tests auf Normalverteilung abgesehen.
 
 In der Simulation ist es möglich einen Seed für die Geschwindigkeiten einzustellen um sicherzugehen, dass bei verschiedenen Durchläufen, die gleichen Verteilung von Personengeschwindigkeiten erfolgt.
+
+\input{freeflow_test}
 
 \subsubsection{Hühnertest}
 Der Hühnertest wurde auf Basis des in Abbildung \ref{fig:HühnertestMap} aufgeführten Feldes durchgeführt. Die einzelnen Farben der einzelnen Elemente sind analog zu den in Tabelle \ref{tab:Farbcodes} beschriebenen gewählt. Personen werden grün, Hindernisse schwarz und das Ziel blau dargestellt. Da mit Hilfe dieses Testes lediglich überprüft werden soll, ob die Personen den Weg aus dem Hindernis finden, ist die Anzahl von $39$ simulierten Personen ausreichend. Der Test wurde dreimal durchgeführt. Zunächst wurde der Euklid Algorithmus, anschließend Dijkstra und zuletzt der Fast-Marching Algorithmus für die Berechnung des Zielnutzens verwendet.
@@ -539,7 +541,6 @@ Die Abbildung \ref{fig:Evak2TminmaxDis2MITE} zeigt einen Ausschnitt der Simulati
 
 Abschließend zeigt die Abbildung \ref{fig:Evak2TminmaxDis2ENDE} das Ende der Evakuierung der beiden Räume. Die Evakuierung eines Raumes, bei dem die Türen weit voneinander entfernt sind, verläuft mit einer Dauer von ca. $60,28s$ um ca. $2,3s$ schneller als die eines Raumes, bei dem die Türen nah beieinander liegen ($62,53s$). Durch eine höhere Anzahl an Personen, wirkt sich die Position der Türen somit nur noch sehr gering auf die Evakuierungsdauer aus. Hintergrund hierfür könnte die lange Wartezeit bzw. der große Stau vor den jeweiligen Türen sein. Da die Wartezeit der einzelnen Personen teilweise sehr hoch ist, wirkt sich der längere Weg bis zur Tür kaum auf die Evakuierungsdauer aus.
  
-\paragraph{Fazit und Vergleich}
 
 
 \input{engstelle_test}

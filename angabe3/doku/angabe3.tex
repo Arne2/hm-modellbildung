@@ -253,10 +253,78 @@ Teil B enthält die eigentliche Visualisierung der Personen, Hindernisse und Zie
 
 \section{Softwaredesign}
 
-Der Aufbau der Anwendung wurde im Team diskutiert und anschließend mittels UML spezifiziert.
+Die Aufgaben der Anwendungen wurden in Bereiche (fachlich notwendige Ziele) aufgeteilt und mit UML unterstützt beschrieben. Im Folgenden sind diese Bereiche als Unterkapitel aufgeführt. Die passenden Diagramme sind jeweils im Kapitel eingefügt.
+
+\subsection{Konfiguration}
+
+\includegraphics[width=\textwidth]{abbildungen/uml/config}
+
+Um die Konfiguration dieses Mal besser als in der Vorherigen Abgabe zu gestalten, wird sie als zur Laufzeit nicht mehr veränderbare Klasse angelegt. Um dennoch einfaches Erstellen der Konfiguration zu ermöglichen wurde das Builder Pattern angewandt. Alle Konfigurationsfelder können über die Kommandozeile gesetzt  werden, haben aber auch Standardwerte. Die Zellgröße kann beispielsweise beliebig angepasst werden.
+
+\subsection{Feld}
+
+\includegraphics[width=\textwidth]{abbildungen/uml/field}
+
+Das Field ist eine Datenstruktur für die Simulationsfläche. Es enthält mögliche Locations (Punkte).
+
+Eine Map enthält alle Personen und für jede Person nur genau eine Location. So ist sichergestellt, das es die Person nur einmal auf dem Field gibt. Targets (Ziele) sind eine Menge aus Locations des Fields. 
+
+Dieses Speichern in mehreren Listen (denormalisiert) wird absichtlich so gewählt, um das Programm anpassbar und schnell zu halten. Alternative wäre es, jeder Location über Klassenfelder ihre Person und weitere Eigenschaften wie Nutzen zuzuweisen. Das führt zwar zu einer strikten OO Modellierung, fordert aber auch mehr Logik und Rechenzeit zum Lesen der Daten.
+
+\subsection{Nutzenberechnung}
+
+\includegraphics[width=\textwidth]{abbildungen/uml/field-use}
+
+Die verschiedenen Arten zur Nutzenberechnung werden jeweils getrennt implementiert. Sie liefern aber alle eine Map aus Locations mit entsprechenden Nutzenwert nach erfolgreicher Berechnung zurück. 
+
+Die Berechnungen benötigen natürlich immer das Field. Zusätzlich benötigt die Berechnung für das Personenpotential (PersonalSpace) die Location der zu betreffenden Person.
+
+\subsection{Zeit}
+
+Es wird analog zur vorherigen Studienarbeit eine Event-Driven Simulation umgesetzt. Es gibt wieder Clock und EventList. Als Events gibt es nur das 
+PersonMoveEvent für einen Zug einer Person sowie das MeasureEvent zum Messen und Speichern aller notwendigen Daten.
+
+\includegraphics[width=\textwidth]{abbildungen/uml/time}
+
+Das PersonMoveEvent findet die beste mögliche nächste Position anhand des Nutzens (Schritt 1.1 und 1.2 im nachfolgenden Sequenzdiagramm). Ist der Nutzen für mehrere Positionen gleich, wird die Zelle mit kleinstem euklidischen Abstand gewählt. 
+
+Bleibt als bestes Ziel nur die aktuelle Position der Person übrig, muss sie sich eigentlich nicht bewegen. Dennoch wartet sie solang, wie eine Bewegung zu einer benachbarten Zelle benötigt hätte. (Schritt 2)
+
+Ansonsten wird die Person zur gewünschten Position bewegt. Die Wartezeit wird anhand der eigenen Personengeschwindigkeit und der Zelldistanz berechnet. Das nächste PersonMoveEvent wird mit entsprechendem Zeitpunkt nach der Bewegung erstellt. (Schritt 3 und 4)
+
+\includegraphics[width=\textwidth]{abbildungen/uml/moveevent-execute}
+
+
+\subsection{Personen}
+
+\includegraphics[width=\textwidth]{abbildungen/uml/person}
+
+Eine Person hat eine ID und eine zu Beginn gesetzte feste Free Flow Velocity.
+Über die step() Methode wird jede Bewegung registriert. Die Klasse für eine Person speichert keinen Ort. Die Lokalisierung von Personen wird vom Field übernommen.
+
+Mit jeder registrierten Bewegung werden die Messwerte berechnet.
+
+
+\subsection{Oberfläche zur grafischen Darstellung der Simulation}
+
+Die Oberfläche kann eine gespeicherte Simulation laden und sie grafisch abspielen. Sie enthält einen Bereich mit Information über die  Simulationskonfiguration (InfoDrawer) sowie das aktuelle Feld (CanvasDrawer) mit Personen. Die Simulation kann mit einstellbarer Geschwindigkeit  abgespielt werden. 
+
+Optional können auch die konstanten Nutzenwerte im Feld durch einen Farbverlauf dargestellt werden.
+
+Die groben Einstellungen für die Darstellungsfarben sowie die Größe der Zellen können über Konstanten in der GuiConfiguration angepasst werden.
+ 
+\includegraphics[width=\textwidth]{abbildungen/uml/visualisation}
+
+
+
+
+
+
+
 
 
 \section{Softwaretest}
+
 
 \input{euklid_fm_vergleich}
 

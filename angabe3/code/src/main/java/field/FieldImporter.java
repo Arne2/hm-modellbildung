@@ -92,7 +92,6 @@ public class FieldImporter {
                         break;
                     case colorRed:
                         returnField.addLocation(Location.of(x, y));
-                        returnField.addMeasurePoint(Location.of(x, y));
                         break;
                     case colorGreen:
                         Location loc = Location.of(x, y);

@@ -3,6 +3,7 @@ package main;
 import config.Configuration;
 import field.RotatingField;
 import field.FieldImporter;
+import field.location.Location;
 import outputFile.OutputFile;
 
 import java.math.BigDecimal;
@@ -24,6 +25,8 @@ public class Automat {
 
         FieldImporter fi = new FieldImporter(build);
         final RotatingField field2 = fi.getField();
+        field2.addMeasurePoint(Location.of(0,-1));
+        field2.addMeasurePoint(Location.of(field2.getWidth(),field2.getHeight()+1));
         OutputFile output = new OutputFile(build, field2);
         final Simulation simulation = new Simulation(field2, build, output);
 

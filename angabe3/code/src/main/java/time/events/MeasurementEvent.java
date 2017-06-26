@@ -23,7 +23,7 @@ public class MeasurementEvent extends BaseEvent{
         final List<Event> newEvents = new ArrayList<>();
         System.out.printf("measure at %s\n", simulation.getClock().systemTime());
         simulation.getMeasurement().measure(simulation.field, getTime());
-        removeNPersons(50);
+        removeNPersons(30);
 
         final BigDecimal nextMove = getTime().add(new BigDecimal(1));
         final MeasurementEvent event = new MeasurementEvent(nextMove, simulation);

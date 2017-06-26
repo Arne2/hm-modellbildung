@@ -15,11 +15,11 @@
 Im Zuge der ersten Studienarbeit wurde das Laufverhalten von Probanden in der Ebene und auf der Treppe untersucht. Basierend auf den Erkenntnissen bezüglich der individuellen Wunschgeschwindigkeiten werden in dieser Studienarbeit Personenbewegungen in der Ebene simuliert. Mit Hilfe solcher Simulationen können, beispielsweise im Zuge von Gebäudeplanungen unterschiedliche Gebäude- und Raumgestaltungen simuliert und hinsichtlich schnellster Räumungen im Krisenfall optimiert werden. 
 
 \section{Beschreibung des Modells}
-Für die Simulation der Personenbewegungen wird ein zellulärer Zustandsautomat implementiert. Jede Zelle kann entweder leer oder durch eine Person oder ein Hindernis besetzt sein. Sie kann außerdem ein Ziel oder eine Quelle enthalten. Ein Hindernis kann von keiner Person betreten werden. Die Personen versuchen im Laufe der Simulation von der Quelle (Startposition) zum Ziel zu gelangen. Hierbei können sie sich in der sog. Moore-Umgebung bewegen. Es kann jede Zelle betreten werden, die frei ist und eine Nachbarzelle der aktuellen Zelle ist. Als Nachbarzelle wird jede Zelle bezeichnet, welche mit der aktuellen Zelle eine Kante oder Ecke teilt. \\
+Für die Simulation der Personenbewegungen wird ein zellulärer Zustandsautomat implementiert. Jede Zelle kann entweder leer oder durch eine Person oder ein Hindernis besetzt sein. Sie kann außerdem ein Ziel oder eine Quelle enthalten. Ein Hindernis kann von keiner Person betreten werden. Die Personen versuchen im Laufe der Simulation von der Quelle (Startposition) zum Ziel zu gelangen. Hierbei können sie sich in der sog. Moore-Umgebung bewegen. Es kann jede Zelle betreten werden, die frei ist und eine Nachbarzelle der aktuellen Zelle ist. Als Nachbarzelle wird jede Zelle bezeichnet, die mit der aktuellen Zelle eine Kante oder Ecke teilt. \\
 Die Ziele werden als attraktiv für die Personen angesehen. Die Personen steigern ihren persönlichen Nutzen, je näher sie dem Ziel kommen. In der Realität fühlt sich eine Person jedoch unwohl, wenn ihr eine fremde Person zu nahe kommt. Im Modell wird dies dadurch berücksichtigt, dass sich der Nutzen einer Person verringert, wenn sie einer anderen zu nahe kommt. Um die Simulation möglichst realistisch zu gestalten, bewegen sich die Personen mit einer individuellen Wunschgeschwindigkeit. Diese wird aus den Ergebnissen der ersten Studienarbeit ermittelt. \\
 Das erläuterte Modell gibt die einzelnen Personenbewegungen aus und visualisiert diese zusätzlich. Die Bewegung der Personen wird in drei getrennten Simulationen mit jeweils unterschiedlichen Algorithmen berechnet. Zunächst wird für jedes Feld der negative euklidische Abstand als Zielnutzen berechnet. Jede Person versucht durch die Wahl des umliegenden Feldes mit dem maximalen Wert seinen Nutzen zu steigern. \\
 Darüber hinaus besteht die Möglichkeit die Personenbewegung mit Hilfe des Floor-Flooding, basierend auf dem Dijkstra Algorithmus zu ermitteln. Jede Person wählt von den anliegenden Feldern das Feld, welches die geringste Anzahl an notwendigen Bewegungen bis zum Ziel hat. \\
-Als dritte Variante erfolgt die Ermittlung der Personenbewegung ebenfalls mit Hilfe des Floor-Flooding. Als Grundlage dient hierbei jedoch die Lösung der Eikonal-Gleichung, welche die Ausbreitung einer Welle beschreibt. Hierfür wird der Fast-Marching Algorithmus verwendet.  \\
+Als dritte Variante erfolgt die Ermittlung der Personenbewegung ebenfalls mit Hilfe des Floor-Flooding. Als Grundlage dient hierbei jedoch die Lösung der Eikonal-Gleichung, die die Ausbreitung einer Welle beschreibt. Hierfür wird der Fast-Marching Algorithmus verwendet.  \\
 Im Laufe der Studienarbeit werden die beschriebenen Modelle anhand unterschiedlicher Tests verglichen und ausgewertet. Eine detaillierte Erläuterung der Tests ist im folgenden Kapitel \ref{AnforderungenTest} beschrieben.
 
 
@@ -27,23 +27,24 @@ Im Laufe der Studienarbeit werden die beschriebenen Modelle anhand unterschiedli
 \label{requirements}
 
 \subsection{Allgemeines}
-Es soll ein zellulärer Zustandsautomat implementiert werden. Die Software soll Personenbewegungen in der Ebene simulieren. Die unterschiedlichen Szenarien (Zustand der Zellen zu Beginn der Simulation), wie beispielsweise die Position der Hindernisse werden der Software als .png Bilddatei übergeben. Diese sind im Unterkapitel \ref{AnforderungenTest} näher erläutert. Es wird davon ausgegangen, dass sich zu Beginn der Simulation alle Personen im Startbereich (es soll möglich sein mehrere Startbereiche anzulegen) befinden.
+Es soll ein zellulärer Zustandsautomat implementiert werden. Die Software soll Personenbewegungen in der Ebene simulieren. Die unterschiedlichen Szenarien (Zustand der Zellen zu Beginn der Simulation), wie beispielsweise die Position der Hindernisse oder die Startposition jeder Person werden der Software als .png Bilddatei übergeben. Diese sind im Unterkapitel \ref{AnforderungenTest} näher erläutert. 
 
 
 
 \subsection{Zellen}
 Das gesamte Feld (zweidimensionaler Bereich indem sich die Personen bewegen können) soll in Zellen eingeteilt werden. Die Größe des Feldes und die Anzahl an Zellen sollen der Software als Parameter übergeben werden.\\
-Jede Zelle soll quadratisch sein. Jede Zelle kann verschiedene Zustände haben. Sie kann entweder leer oder besetzt sein. Ist eine Zelle besetzt, wird noch weiter unterschieden, ob sie durch ein Hindernis, das Ziel- (Personensenke) oder Startfeld (Personenquelle) oder durch eine Person besetzt ist.
+Jede Zelle soll quadratisch sein und kann verschiedene Zustände haben. Sie kann entweder leer oder besetzt sein. Ist eine Zelle besetzt, wird noch weiter unterschieden, ob sie durch ein Hindernis, das Ziel- (Personensenke) oder Startfeld (Personenquelle) oder durch eine Person besetzt ist.
 
 \subsection{Hindernisse}
 Es soll davon ausgegangen werden, dass jedes Hindernis eine oder mehrere Zellen ganz belegt. Hindernisse können von den Personen nicht betreten werden. Falls sich ein Hindernis zwischen einer Person und ihrem Ziel befindet, ist die Person gezwungen um das Hindernis herum zu gehen. \\
 In der Realität versucht eine Person einem Hindernis möglichst frühzeitig auszuweichen. Sie senkt somit ihren Nutzen, je näher sie einem Hindernis kommt. Dies wird im weiteren Verlauf dieser Studienarbeit nicht berücksichtigt.
 
 \subsection{Ziele}
-Durch das entsprechende Testszenario werden ein oder mehrere Ziele definiert. Ziele werden als attraktiv für die Personen angesehen. Jede Person erhöht ihren Nutzen, wenn sie sich dem Ziel nähert. Befinden sich mehrere Ziele im Feld, wird die Wahl des Ziels für jede Person abhängig vom Betriebsmodus bestimmt. 
+Abhängig vom entsprechenden Testszenario werden ein oder mehrere Ziele definiert. Ziele werden als attraktiv für die Personen angesehen. Jede Person erhöht ihren Nutzen, wenn sie sich dem Ziel nähert. Befinden sich mehrere Ziele im Feld, wird die Wahl des Ziels für jede Person abhängig vom verwendeten Algorithmus bestimmt. 
 
 \subsection{Personen}
-Jede Person soll in ihrem Startfeld starten und sich im Laufe der Simulation von Zelle zu Zelle auf ihr Ziel hin bewegen und dadurch ihren persönlichen Nutzen, je näher sie dem Ziel kommt, steigern. Jede Person kann sich in der Moore-Umgebung (8 mögliche Bewegungsrichtungen) bewegen. Die möglichen Bewegungsrichtungen sind in Abbildung \ref{fig:MooreUmgebung} rot markiert.
+\label{Anf:Personen}
+Jede Person soll in ihrem Startfeld starten und sich im Laufe der Simulation von Zelle zu Zelle auf ihr Ziel hin bewegen und dadurch ihren persönlichen Nutzen, je näher sie dem Ziel kommt, steigern. Jede Person kann sich in der Moore-Umgebung (8 mögliche Bewegungsrichtungen) bewegen. Die möglichen Bewegungsrichtungen sind in Abbildung \ref{fig:MooreUmgebung} blau markiert.
 \begin{figure}[htpb]
 	\centering
 	\includegraphics[width=0.5\textwidth]{abbildungen/MooreUmgebung.png}
@@ -51,7 +52,7 @@ Jede Person soll in ihrem Startfeld starten und sich im Laufe der Simulation von
 	\label{fig:MooreUmgebung}
 \end{figure}
 \\
-Die Personen können nur freie Zellen betreten. Jede Person wählt genau die Zelle als nächste Zelle, welche ihr den steilsten Nutzenanstieg ermöglicht. Der Nutzen der verschiedenen Zellen wird abhängig vom Betriebsmodus unterschiedlich berechnet. Darüber hinaus soll der Nutzen durch die Position der anderen Personen beeinflusst werden. \\
+Die Personen können nur freie Zellen betreten. Jede Person wählt genau die Zelle als nächste Zelle, welche ihr den steilsten Nutzenanstieg ermöglicht. Der Nutzen der verschiedenen Zellen wird abhängig vom verwendeten Algorithmus unterschiedlich berechnet. Darüber hinaus soll der Nutzen durch die Position der anderen Personen beeinflusst werden. \\
 
 Hierfür wird zwischen zwei Bereichen, abhängig vom Abstand zur nächsten Person unterschieden. Beträgt der Abstand zu einer fremden Person weniger als $45cm$, wird der vertraute Bereich (intimate space) der Personen betreten. Beträgt der Abstand zwischen $45cm$ und $120cm$, wird der persönliche Bereich (personal space) der Personen betreten. Für den vertrauten Bereich ist der Nutzenverlust (Nv(x)), abhängig vom Abstand $x$, nach Funktion \ref{Equ:NutzenverlustV} definiert. Für den persönlichen Bereich wird der Nutzenverlust (Np(x)), wiederum abhängig vom Abstand $x$ zur anderen Person, durch die Funktion \ref{Equ:NutzenverlustP} definiert. 
 
@@ -82,7 +83,7 @@ $d(x)$ beschreibt den aktueller Abstand zur nächsten Person. Die folgende Tabel
 	\label{tab:parameterNutzenverlust}
 \end{table}
 
-Weitere Erläuterungen zu den Parametern, den Werten und den verwendeten Funktionen sind im Kapitel \ref{Personenpotenzial} beschrieben.
+Der Radius einer Person sowie die Abstände für den vertrauten und persönlichen Bereich wurden auf Basis des Modells von Hall aus \cite{VONSIVERS2015104} übernommen. Weitere Erläuterungen zu den Parametern, den Werten und den verwendeten Funktionen sind im Kapitel \ref{Personenpotenzial} beschrieben.
  
 \subsection{Geschwindigkeit der Personen}
 Jede Person soll eine individuelle Wunschgeschwindigkeit besitzen. Sie bewegt sich bei freier Bahn mit dieser Geschwindigkeit fort. Die Wunschgeschwindigkeiten sollen als normalverteilt angesehen werden. Als Mittelwert und Standardabweichung sollen die errechneten Werte aus der ersten Studienarbeit verwendet werden.
@@ -102,7 +103,7 @@ Die Tabelle \ref{tab:parameter} zeigt alle möglichen Parameter, welche die Soft
 		--algorithm & Algorithmus (euclid, dijkstra, fast-marching) & dijkstra \\
 		--output-folder & Ordner in den der Output gespeichert wird & ../data/ \\
 		--cellsize & Größe der einzelnen Zellen [m] & 1 \\
-		--input-map & Pfad zum Bild der map (Auswahl des Testfalls) & default.png \\
+		--input-map & Pfad zum Bild der map (Auswahl des Testfalls) & ../defaultmap/default.png \\
 		
 	\end{tabular}
 	\caption{Parameter und Defaultwerte}
@@ -114,9 +115,8 @@ Die Aufgabe der Software ist die Simulation von Personenbewegungen. Für möglic
 
 \subsection{Report}
 \label{Anforderungen:Report}
-Alle errechneten Ergebnisse sollen über einen Report ausgeleitet werden.
-Der Report soll im .xml Format ausgeleitet werden um eine gute Weiterverarbeitung der Ergebnisse (Visualisierung) zu gewährleisten. Die Datei $output.xml$ soll alle benötigten Informationen, wie beispielsweise die einzelnen Events der Personen, die durch den Algorithmus berechneten Entfernungen der einzelnen Zellen vom Ziel und eine Übersicht über den Zustand der einzelnen Zellen (Fieldmap), für Simulation beinhalten. \\
-Die Wunschgeschwindigkeiten werden zufällig generiert. Diese sollen normalverteilt sein. Für eine Überprüfung der Zufallszahlgenerierung sollen die Wnschgeschwindigkeiten und die ID der entsprechenden Person im .csv Format in der Datei velocity.csv ausgegeben werden.
+Alle errechneten Ergebnisse sollen über einen Report ausgeleitet werden. Für jedes Testszenario soll ein eigenes Verzeichnis angelegt werden, in dem der Report und die verwendete Map (vgl. Abschnitt \ref{AnforderungenTest}) gespeichert werden sollen. Der Report soll im .xml Format ausgeleitet werden um eine gute Weiterverarbeitung der Ergebnisse (Visualisierung) zu gewährleisten. Er soll alle benötigten Informationen, wie beispielsweise die einzelnen Events der Personen, die durch den Algorithmus berechneten Entfernungen der einzelnen Zellen vom Ziel und eine Übersicht über den Zustand der einzelnen Zellen (Fieldmap), für Simulation beinhalten. \\
+Darüber hinaus sollen im Verzeichnis 3 .csv Dateien angelegt werden. Wird kein Messfeld (vgl. Abschnitt \ref{AnforderungenTest}) definiert, sollen diese nicht befüllt werden. Falls ein Messfeld in der Map definiert wurde, soll in der Datei $timeDensity.csv$ die Personendichte im Messbereich zu verschiedenen Messzeitpunkten gespeichert werden. In der Datei $timeVelocity.csv$ sollen die durchschnittliche Geschwindigkeit der Personen im Messbereich zu verschiedenen Messzeitpunkten gespeichert werden. Die Datei $fundamental.csv$ soll die ermittelten Personendichten und Geschwindigkeiten enthalten, sodass daraus bei Bedarf ein Fundamentaldiagramm erstellt werden kann. Messzeitpunkte sollen in einem Intervall von $0,5s$ definiert werden.\\
 
 \subsection{Berechung des Zielnutzens}
 \label{AnforderungenAlgorithmen}
@@ -135,9 +135,11 @@ Alle in der Tabelle \ref{tab:WerteAuswertung} aufgeführten Werte sollen auf Bas
 	\centering
 	\begin{tabular}{lll}
 		Ermittelte Werte & Beschreibung & Wann benötigt\\ \hline
-		mittlere Geschwindigkeit & durchschnittliche Geschwindigkeit der Personen im Feld & Rimea-Test 4 \\	
-		Fluss (Personen/Meter/s) & Anzahl der Personen mit Geschwindigkeit > 1m/s im Feld & Rimea-Test 4\\
-		Simulationsdauer & Dauer bis der Test beendet ist & Hühner Test, \\&& Evakuierung (2 Türen), \\&& Evakuierung (4 Türen)\\
+		mittlere Geschwindigkeit & durchschnittliche Geschwindigkeit & Rimea-Test 4\\
+								 & der Personen im Feld &  \\	
+		Fluss (Personen/Meter/s) & Anzahl der Personen mit Geschwindigkeit & Rimea-Test 4\\
+								 & > 1m/s im Feld & \\
+		Simulationsdauer & Dauer bis der Test beendet ist & bei allen Tests
 	\end{tabular}
 	\caption{Werte für die Auswertung}
 	\label{tab:WerteAuswertung}
@@ -149,7 +151,7 @@ Alle in der Tabelle \ref{tab:WerteAuswertung} aufgeführten Werte sollen auf Bas
 Die implementierten Algorithmen (vgl. Unterkapitel \ref{AnforderungenAlgorithmen} ) sollen anhand unterschiedlicher Testszenarien verglichen und verifiziert werden. Die verschiedenen Szenarien sollen der Simulation als .png Datei übergeben werden. 
 
 \subsubsection{Erstellung der Testszenarien}
-Es soll die Möglichkeit bestehen, unterschiedliche Testszenarien mittels eines Bildbearbeitungsprogrammes zu erstellen und an die Simulation (als .png Datei) zu übergeben. Bei der Erstellung ist sowohl die Anzahl der Personen, als auch die Anzahl der Hindernisse und Ziele (Personensenken) beliebig. Hinsichtlich der Farben der Objekte müssen jedoch die in der folgenden Tabelle \ref{tab:Farbcodes} beschriebenen Farbcodes verwendet werden. Jedes Pixel wird durch eine Zelle des Automaten repräsentiert.
+Es soll die Möglichkeit bestehen, unterschiedliche Testszenarien mittels eines Bildbearbeitungsprogrammes zu erstellen und an die Simulation (als .png Datei) zu übergeben. Bei der Erstellung ist sowohl die Anzahl der Personen, als auch die Anzahl der Hindernisse und Ziele (Personensenken) beliebig. Hinsichtlich der Farben der Objekte müssen jedoch die in der folgenden Tabelle \ref{tab:Farbcodes} beschriebenen Farbcodes verwendet werden. Jedes Pixel wird durch eine Zelle des Automaten repräsentiert. Darüber hinaus soll die Möglichkeit bestehen ein Messfeld zu definieren. In diesem Feld wird die durchschnittliche Geschwindigkeit der Personen ermittelt in einer .csv Datei ausgegeben. Für das Messfeld müssen in der .png Datei lediglich die beiden diagonalen Eckpunkte angegeben werden. Die Implementierung ermittelt die Koordinaten und erstellt daraus ein rechteckiges Feld. 
  
 \begin{table}[htpb]
 	\centering
@@ -158,7 +160,8 @@ Es soll die Möglichkeit bestehen, unterschiedliche Testszenarien mittels eines 
 		\#3F48CC & Blau & Ziel/ Personensenke \\	
 		\#000000 & Schwarz & Ziel/ Personensenke \\
 		\#FFFFFF & Weiß & Leere Zelle \\
-		\#22B14C & Grün & Person 
+		\#22B14C & Grün & Person \\
+		\#FF0000 & Rot  & Messfeld
 	\end{tabular}
 	\caption{Werte für die Auswertung}
 	\label{tab:Farbcodes}
@@ -175,9 +178,9 @@ Im Zuge dieses Tests soll überprüft werden, ob sich Personen bei freier Bahn (
 \end{figure}
 
 \subsubsection{Testszenario: Hühnertest}
-Zwischen Start und Ziel soll ein U-förmiges Hindernis (Öffnung in Richtung des Startes) eingefügt werden. Abhängig vom Betriebsmodus wird ein unterschiedliches Ergebnis erwartet:\\
-Betriebsmodus 1: Die Personen sollen sich auf dem kürzesten Weg auf das Ziel zubewegen. Sobald sie das Hindernis erreicht haben, sollen sie stehen bleiben. Erwartungsgemäß wird der Test nicht erfolgreich verlaufen. \\
-Betriebsmodi 2 und 3: Die Personen sollen das Hindernis umgehen und das Ziel erreichen. Bei einem \glqq Feststecken im Hindernis\grqq (wie im Betriebsmodus 1 gefordert) wird der Test als fehlgeschlagen gewertet. Abbildung \ref{fig:AnforderungenTest_Hühner} stellt den Testaufbau schematisch dar.
+Zwischen Start und Ziel soll ein U-förmiges Hindernis (Öffnung in Richtung des Startes) eingefügt werden. Abhängig vom verwendeten Algorithmus wird ein unterschiedliches Ergebnis erwartet:\\
+Euklid: Die Personen sollen sich auf dem kürzesten Weg auf das Ziel zubewegen. Sobald sie das Hindernis erreicht haben, sollen sie stehen bleiben. Erwartungsgemäß wird der Test nicht erfolgreich verlaufen. \\
+Dijkstra und Fast-Marching Algorithmus: Die Personen sollen das Hindernis umgehen und das Ziel erreichen. Bei einem \glqq Feststecken im Hindernis\grqq (wie bei Verwendung des Euklid Algorithmus erwartet) wird der Test als fehlgeschlagen gewertet. Abbildung \ref{fig:AnforderungenTest_Hühner} stellt den Testaufbau schematisch dar.
 
 \begin{figure}[htpb]
 	\centering
@@ -188,34 +191,25 @@ Betriebsmodi 2 und 3: Die Personen sollen das Hindernis umgehen und das Ziel err
  
 \subsubsection{Testszenario: Evakuierung eines Raumes mit 2 Türen}
 \label{Anforderungen:Evakuierung2}
-Die Personen befinden sich zu Beginn in einen von Hindernissen umgebenen, quadratischen Raum. An 2 Seiten sind Öffnungen platziert (freie Zellen). Hinter diesen Öffnungen befindet sich jeweils ein Ziel. Im Laufe des Tests sollen die Personen durch die beiden Engstellen zum Ziel gelangen. \\
-Dieser Test soll mit den Betriebsmodi 2 und 3 in unterschiedlichen Versionen durchgeführt werden. Zunächst sollen sich die Türen an benachbarten Seiten befinden. Hierbei sollen sie einmal mit geringem und einmal mit sehr großem Abstand zueinander plaziert werden. Anschließend sollen die Türen an gegenüberliegenden Seiten plaziert mittig werden. Unterschiede hinsichtlich der Evakuierungsdauer sind festzuhalten. Die Abbildungen \ref{fig:AnforderungenTestEvak2TürNebeneinanderMin},  \ref{fig:AnforderungenTestEvak2TürNebeneinanderMax} und  \ref{fig:Test_Evakuierung2_Gegueb} zeigen die unterschiedlichen Testversionen schematisch.
+Die Personen befinden sich zu Beginn in einen von Hindernissen umgebenen, quadratischen Raum. An 2 Seiten sind Öffnungen platziert (freie Zellen). Hinter diesen Öffnungen befinden sich jeweils Ziele. Im Laufe des Tests sollen die Personen durch die beiden Engstellen zum Ziel gelangen. \\
+Dieser Test soll auf Basis des Dijkstra und Fast-Marching Algorithmus in unterschiedlichen Versionen durchgeführt werden. Zunächst sollen die Türen an benachbarten Seiten mit sehr geringem Abstand zueinander platziert werden. Anschließend sollen die Türen an gegenüberliegenden Seiten mit sehr großem Abstand zueinander platziert werden. Unterschiede hinsichtlich der Evakuierungsdauer, aufgrund der Algorithmen oder Positionen der Türen sind festzuhalten. Die Abbildung \ref{fig:AnforderungenTestEvak2TürNebeneinander} zeigt die unterschiedlichen Testversionen schematisch.
 
 \begin{figure}[!htb]
 	\centering
 	\begin{minipage}{.5\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{abbildungen/Test_Evakuierung2_Nebeneinander.png}
-		\caption{Testfall Evakuierung eines Raumes mit 2 Türen (Nebeneinander, geringer Abstand)}
-		\label{fig:AnforderungenTestEvak2TürNebeneinanderMin}
 	\end{minipage}%
 	\begin{minipage}{0.5\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{abbildungen/Test_Evakuierung2_NebeneinanderMax.png}
-		\caption{Testfall Evakuierung eines Raumes mit 2 Türen (Nebeneinander, großer Abstand)}
-		\label{fig:AnforderungenTestEvak2TürNebeneinanderMax}
 	\end{minipage}
-\end{figure}
-
-\begin{figure}[htpb]
-	\centering
-	\includegraphics[width=0.8\textwidth]{abbildungen/Test_Evakuierung2_Gegueb.png}
-	\caption{Testfall Evakuierung eines Raumes mit 2 Türen (Gegenüber)}
-	\label{fig:Test_Evakuierung2_Gegueb}
+	\label{fig:AnforderungenTestEvak2TürNebeneinander}
+	\caption{Testfall Evakuierung eines Raumes mit 2 Türen, links: geringer Abstand zwischen den Türen, rechts: großer Abstand zwischen den Türen}
 \end{figure}
 
 \subsubsection{Testszenario: Evakuierung eines Raumes mit 4 Türen}
-Dieser Testfall entspricht der in Kapitel \ref{Anforderungen:Evakuierung2} beschriebenen Evakuierung mit 2 Türen. In diesem Fall befindet sich jedoch an jeder Raumseite eine Tür. Die Türen sollen sich in einer ersten Version mittig bezogen auf die jeweilige Raumseite befinden. Darüber hinaus sollen in einer weiteren Version die Auswirkungen ermittelt werden, wenn jeweils die 2 Türen an benachbarten Seiten mit minimalen Abstand zueinander plaziert werden. Unterschiede hinsichtlich der Evakuierungsdauer sind festzuhalten. Aufgrund der Analogie zur Evakuierung mit 2 Türen wird auf eine graphische Veranschaulichung des Testaufbaus verzichtet.
+Für diesem Testfall soll sich an jeder Raumseite eine Tür befinden. Der Raum soll absolut symmetrisch aufgebaut sein und die Türen sollen sich jeweils in der Mitte jeder Raumseite befinden. In einem weiteren Szenario sollen zwei Türen an gegenüber liegenden Seiten entfernt werden. Ziel dieser beiden Testszenarien soll es sein, die Unterschiede hinsichtlich der Evakuierungsdauer eines identischen Raumes zu ermitteln, wenn sich in diesem zwei oder vier Türen befinden. Die Simulation soll anhand dieses Aspekts verifiziert werden. Es wird erwartet, dass sich die Evakuierungszeit durch die doppelte Anzahl an Türen nahezu halbiert.
 
 \subsubsection{Testszenario: Fundamentaldiagramm - Rimea-Test 4}
 \label{Anforderungen:RimeaTest}
@@ -229,7 +223,7 @@ In diesem Testfall soll ein $65m$ langer und $12m$ breiter Gang angelegt werden.
 \end{figure}
 
 \subsubsection{Testszenario: Engstelle (unidirektional)}
-In diesem Testfall soll, analog zum Rimea-Test 4, ein $65m$ langer und $12m$ breiter Gang angelegt werden. Am Ende des Ganges befindet sich eine Engstelle mit $6m$ Breite und dahinter die Personensenke. Es soll mit variierender Anzahl an Personen getestet werden, wie lange es dauert bis die Engstelle durchschritten wurde. Der schematische Testaufbau ist in Abbildung \ref{fig:Engstelle} aufgeführt.
+In diesem Testfall soll ein $72\ m$ langer und $11,6\ m$ breiter Gang angelegt werden. Am Ende des Ganges befindet sich eine Engstelle mit $1,2\ m$ Breite und dahinter die Personensenke. Es soll mit variierender Anzahl an Personen getestet werden, wie lange es dauert bis die Personen im Ziel (bzw. in der Personensenke) angekommen sind. Der schematische Testaufbau ist in Abbildung \ref{fig:Engstelle} aufgeführt.
 
 \begin{figure}[htpb]
 	\centering
@@ -239,6 +233,7 @@ In diesem Testfall soll, analog zum Rimea-Test 4, ein $65m$ langer und $12m$ bre
 \end{figure}
 
 \subsection{Visualisierung}
+
 Die Visualisierung soll die errechneten Personenbewegungen graphisch darstellen. Als Grundlage soll der ausgegebene Report (vgl. Abschnitt \ref{Anforderungen:Report}) dienen. Konkrete Anforderungen bezüglich der Visualisierung sind in Abbildung \ref{fig:AnforderungenVisualisierung} abgebildet.
 
 \begin{figure}[htpb]
@@ -249,7 +244,32 @@ Die Visualisierung soll die errechneten Personenbewegungen graphisch darstellen.
 \end{figure}
 
 Die Oberfläche der Visualisierung soll aus 4 verschiedenen Teilen bestehen, welche in der Abbildung durch die blauen Kästen A-D hervorgehoben wurden. Im Teil A sollen Konfigurationsmöglichkeiten für die Visualisierung aufgeführt sein. Beispielsweise soll zwischen einer normalen Darstellung der Simulation und einer Heatmap gewechselt werden können. Darüber hinaus soll die Möglichkeit bestehen, die Visualisierung zu stoppen und schrittweise fortzusetzen. \\
-Teil B enthält die eigentliche Visualisierung der Personen, Hindernisse und Ziele. In Teil C sind alle Informationen bezüglich der Visualisierung aufgeführt und Teil D enthält eine Legende der verwendeten Symbole und Farben.
+Teil B enthält die eigentliche Visualisierung der Personen, Hindernisse und Ziele. In Teil C sind alle Informationen bezüglich der Visualisierung aufgeführt und Teil D enthält eine Legende der verwendeten Symbole und Farben. Wird ein Messfeld definiert, soll dieses in der Visualisierung hervorgehoben werden.
+
+
+\section{Beeinflussung durch andere Personen} 
+\label{Personenpotenzial}
+
+Wie bereits im Abschnitt \ref{Anf:Personen} kurz erläutert, wird die Entscheidung, welche Zelle eine Person als nächstes betritt abhängig vom verwendeten Algorithmus und von den Positionen der anderen Personen getroffen. In der Realität fühlen sich Personen unwohl, wenn sie anderen, insbesondere fremden Personen zu nahe kommen. Sie versuchen folglich eine solche Situation wenn möglich zu vermeiden. Beispielsweise bei der Fahrt in einem überfüllten Aufzug lässt sich diese Situation unter Umständen nicht vermeiden. Bei der Fortbewegung in der Ebene jedoch häufig schon. Personen neigen in der Realität dazu einen Umweg in kauf zu nehmen, um einem Gedränge zu entkommen. Um dieses Verhalten in der Simulation zu berücksichtigen existieren verschiedene mathematische Funktionen, mithilfe derer ein Abstoßungspotenzial berechnet wird. Während auf der einen Seite der Nutzen einer Person steigt, je näher sie dem Ziel kommt, verringert sich dieser Nutzen auf der anderen Seite wieder, wenn sie anderen Personen zu nahe kommen. Mit Hilfe von Funktionen kann somit der Nutzenverlust einer Person bestimmt werden. \\
+Insbesondere glatte Funktionen auf kompakten Trägern, die außerhalb eines begrenzten Gebietes komplett zu verschwinden (f(x) = $0$) eignen sich hierfür gut. Würde man eine Funktion verwenden, deren Funktionswert auch außerhalb des begrenzten Gebietes größer als $0$ ist, führe dies zu einer Abweichung von der Realität und damit zu einem Fehler. In diesem Fall, wird eine Person im Modell auch durch eine sehr weit entfernte Person, wenn auch nur leicht, beeinflusst. Dies widerspricht der Realität, da das Abstoßungspotenzial von Personen auf einen Bereich um die entsprechende Person beschränkt ist. \\
+In der Fachliteratur wird beispielsweise folgende Funktion vorgeschlagen:
+\begin{displaymath}
+\label{equ:NutzenverlustSCHLECHT}
+N(d) = 
+\left\{ 
+\begin{array}{cc}
+-h \exp(\frac{1}{(\frac{d}{w})^2 -1}) & \;\;\;\;\;\;\;\;\;\;\; falls\, |d| < w  \\
+0 & sonst  
+\end{array} 
+\right.
+\end{displaymath}
+Hierbei wird der Nutzenverlust ($N(d)$), abhängig vom Abstand $d$ zur nächsten Person definiert. $w$ beschreibt die Reichweite der Funktion und $h$ die Stärke der Beeinflussung bzw. des Nutzenverlustes \cite{DIETRICH2014841}. \\ 
+Für die Ermittlung des Abstoßungspotenzials bzw. des Nutzenverlustes aufgrund anderer Personen wurden jedoch anstelle dieser Funktion, die in Abschnitt \ref{Anf:Personen} aufgeführten Funktionen \ref{Equ:NutzenverlustP} und \ref{Equ:NutzenverlustV} verwendet. Diese basieren auf dem Modell von Hall, das den Bereich um eine Person in mehrere Teilbereiche einteilt. In einem Umkreis von bis zu $45cm$ wird der vertraute Bereich einer Person betreten. Befinden sich zwei Personen so nah beieinander, können Berührungen nicht vermieden werden. Zwischen $45cm$ und $120cm$ um eine Person befindet sich der persönliche Bereich, welcher beispielsweise von Freunden oder Familienmitgliedern betreten werden darf. Ein Betreten dieses Bereichs durch fremde Personen wird als unangenehm und aufdringlich empfunden und Personen versuchen es folglich zu vermeiden. Darüber hinaus definiert Hall noch zwei weitere Bereiche. Zwischen $120cm$ und $360cm$ um die Person befindet sich der soziale oder gesellschaftliche Bereich der Person und ab $360cm$ der öffentliche Bereich. Für die Simulation in dieser Studienarbeit sind die beiden letzten Bereiche jedoch nicht relevant, da der Einfluss auf den Nutzen der Person zu gering ist, um die Entscheidung, wohin die Person als nächstes geht zu beeinflussen. Außerdem lässt sich das Betreten dieser beiden Bereiche durch andere Personen bei einer höheren Personendichte generell nicht vermeiden.\\
+Hintergrund dieser Entscheidung ist, dass nach unserer Einschätzung und nach \cite{VONSIVERS2015104} die Berücksichtigung des Modells von Hall durch die Verwendung unterschiedlicher Funktionen für den vertrauten und persönlichen Bereich zu einem Verhalten, das der Realität näher kommt, führt. Berührt eine Person eine fremde Person, fühlt sie sich deutlich unwohler, als wenn sie dieser lediglich nahe kommt mit einem Abstand von beispielsweise $50cm$. Diese Eigenschaft wird durch die Funktion \ref{equ:NutzenverlustSCHLECHT} kaum berücksichtigt.\\
+Außerdem lassen sich in dieser Simulation, durch die Wahl einer geringen Zellgröße des zellulären Automatens von $40 cm$, die Auswirkungen der unterschiedlichen Bereiche auf den Nutzenverlust bzw. das Abstoßungspotenzial der Personen feststellen. \\
+Darüber hinaus beinhalten die Funktionen \ref{Equ:NutzenverlustP} und \ref{Equ:NutzenverlustV} deutlich mehr Parameter. Diese Parameter können an mögliche gesellschaftliche oder länderspezifische Unterschiede angepasst werden und so die Realität besser widerspiegeln. Für diese Studienarbeit wurden die Parameter wie in der Tabelle \ref{tab:parameterNutzenverlust} aufgeführt gewählt. Grundlage hierfür sind die in \cite{VONSIVERS2015104} erläuterten Erkenntnisse aus unterschiedlichen Versuchen. Außerdem zeigten mehrere, in der Gruppe durchgeführten Simulationen mit unterschiedlichen Parameterkombinationen, dass sich das Abstoßungspotenzial durch die Verwendung dieser Parameter so auswirkte, wie man es in der Realität erwarten würde. \\ 
+  
+%TODO: VERSUCH DER DAS BEWEIST EINFÜGEN
 
 \section{Softwaredesign}
 
@@ -258,15 +278,281 @@ Der Aufbau der Anwendung wurde im Team diskutiert und anschließend mittels UML 
 
 \section{Softwaretest}
 
+
 \input{euklid_fm_vergleich}
 
 
 \subsection{Verifikation}
 
+\subsubsection{Verteilung Wunschgeschwindigkeit in der Ebene}
+Um die korrekte Funktion der Simulation gewährleisten zu können, muss die Geschwindigkeit der Personen normal verteilt sein. Für die Überprüfung wurden die erzeugten Geschwindigkeiten von Fußgängern mitgeloggt und in einem Histogramm, das in Abbildung \ref{fig:Verteilung_Geschwindigkeit} zu sehen ist, dargestellt. Da die Werte sehr nah an der erwarteten Linie (in der Abbildung blau) liegen kann von einer Normalverteilung ausgegangen werden.
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.5\textwidth]{abbildungen/histogramm.pdf}
+	\caption{Verteilung der Geschwindigkeiten von Personen}
+	\label{fig:Verteilung_Geschwindigkeit}
+\end{figure}  
+
+Dadurch, dass die Normalverteilung nicht das Thema dieser Arbeit ist, wurde von weiteren Tests auf Normalverteilung abgesehen.
+
+In der Simulation ist es möglich einen Seed für die Geschwindigkeiten einzustellen um sicherzugehen, dass bei verschiedenen Durchläufen, die gleichen Verteilung von Personengeschwindigkeiten erfolgt.
+
+\subsubsection{Hühnertest}
+Der Hühnertest wurde auf Basis des in Abbildung \ref{fig:HühnertestMap} aufgeführten Feldes durchgeführt. Die einzelnen Farben der einzelnen Elemente sind analog zu den in Tabelle \ref{tab:Farbcodes} beschriebenen gewählt. Personen werden grün, Hindernisse schwarz und das Ziel blau dargestellt. Da mit Hilfe dieses Testes lediglich überprüft werden soll, ob die Personen den Weg aus dem Hindernis finden, ist die Anzahl von $39$ simulierten Personen ausreichend. Der Test wurde dreimal durchgeführt. Zunächst wurde der Euklid Algorithmus, anschließend Dijkstra und zuletzt der Fast-Marching Algorithmus für die Berechnung des Zielnutzens verwendet.
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.5\textwidth]{abbildungen/HuehnertestMap.png}
+	\caption{Ausgangsfeld des Hühnertests}
+	\label{fig:HühnertestMap}
+\end{figure}
+
+Die Abbildungen \ref{fig:HühnerTestEuklidAnfang} und \ref{fig:HühnertestEuklidEnde} zeigen die Heatmap des Testes zu Beginn und am Ende des Testes auf Basis des Euklid Algorithmus. Wie zu erwarten war, laufen alle Personen im Verlauf des Tests auf dem kürzesten Weg in Richtung des Ziels. Sie sind nicht in der Lage das Hindernis zu Umlaufen und sammeln sich vor dem Hindernis, an der Stelle mit der geringsten Distanz zum Ziel. Dies wird durch die Heatmap verdeutlicht. Abhängig von der Farbe der Heatmap werden die unterschiedlichen Entfernungen der einzelnen Felder zum Ziel, und damit die Attraktivität der Felder dargestellt. Wie die Abbildungen zeigen, werden Hindernisse bei der Ermittlung der Entfernungen nicht berücksichtigt.
+ 
+\begin{figure}[!htb]
+	\centering
+	\begin{minipage}{.5\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{abbildungen/ChickenTest1BeginEuclid.PNG}
+		\caption{Heatmap des Hühnertests mit dem Euklid Algorithmus (zu Beginn)}
+		\label{fig:HühnerTestEuklidAnfang}
+	\end{minipage}%
+	\begin{minipage}{0.5\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{abbildungen/ChickenTest1EndEuclid.PNG}
+		\caption{Heatmap des Hühnertests mit dem Euklid Algorithmus (Ende des Tests)}
+		\label{fig:HühnertestEuklidEnde}
+	\end{minipage}
+\end{figure}
+
+Im Vergleich dazu zeigen die Abbildungen \ref{fig:HühnerTestDijkstraAnfang} und \ref{fig:HühnertestDijkstraMitte} jeweils die Heatmap des Floor-Flooding mit dem Dijkstra Algorithmus zu Beginn der Simulation und nach einer SImulationsdauer von ca. $8s$. Es fällt auf, dass diese Heatmap deutlich anders aussieht, als die des Euklid Algorithmus. Die Hindernisse werden bei der Ermittlung der Entfernung der Zellen vom Ziel berücksichtigt und folglich farblich anders dargestellt. Abbildung \ref{fig:HühnertestDijkstraMitte} zeigt außerdem, dass sich die Personen in 2 Gruppen aufteilen und das Hindernis an beiden Seiten umlaufen. Nach einer Simulationsdauer von ca. $34,32s$ sind alle Personen im Ziel angekommen.
+
+\begin{figure}[!htb]
+	\centering
+	\begin{minipage}{.5\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{abbildungen/ChickenTestBeginDijkstra.PNG}
+		\caption{Heatmap des Hühnertests mit dem Dijkstra Algorithmus (zu Beginn)}
+		\label{fig:HühnerTestDijkstraAnfang}
+	\end{minipage}%
+	\begin{minipage}{0.5\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{abbildungen/ChickenTestMitteDijkstra.PNG}
+		\caption{Heatmap des Hühnertests mit dem Dijkstra Algorithmus (während der Simulation)}
+		\label{fig:HühnertestDijkstraMitte}
+	\end{minipage}
+\end{figure}
+
+Abschließend zeigt Abbildung \ref{fig:HühnertestFMAnfang} die Heatmap des Fast-Marching Algorithmus. 
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.5\textwidth]{abbildungen/ChickenTestBeginFM.PNG}
+	\caption{Heatmap des Hühnertests mit dem Fast-Marching Algorithmus (zu Beginn)}
+	\label{fig:HühnertestFMAnfang}
+\end{figure}
+
+Zusammenfassend ist festzustellen, dass die Personen in der Simulation mit dem Euklid Algorithmus im Hindernis hängen blieben. Bei den beiden anderen Algorithmen fanden sie den Weg ins Ziel. Beide Male teilten sie sich in 2 Gruppen auf. Für eine bessere Übersichtlichkeit wurde auf Abbildungen, welche das Ende des Tests mit dem Dijkstra bzw. Fast-Marching Algorithmus zeigen, verzichtet. Außerdem konnte festgestellt werden, dass die Simulationsdauer durch die Verwendung des Fast-Marching Algorithmus mit ca. $34,33s$ minimal kürzer als bei der Verwendung des Dijkstra Alogirithmus mit ca. $34,47s$ war.
+
+\subsubsection{Evakuierung}
+Mit Hilfe der verschiedenen Evakuierungstests sollen die Auswirkungen unterschiedlicher Positionen und Anzahl von Türen auf die Dauer der Evakuierung eines Raumes ermittelt werden. Die Berechnung des Zielnutzens auf Basis des Euklid Algorithmus wird hierbei nicht berücksichtigt. Dieser Algorithmus ist zwar gut geeignet um den kürzesten Weg zu einem Ziel zu finden, Hindernisse können jedoch nicht umgangen werden. Somit kann nicht ausgeschlossen werden, dass eine Person, beispielsweise in einer Ecke, \glqq hängen bleibt\grqq. Dieses Verhalten würde nicht der Realität entsprechen.
+
+\paragraph{Evakuierung eines Raumes (Personen befinden sich in der Mitte)}
+\label{EvaVerifikation}
+Für die Verifikation der Simulation sollen sich die Personen zunächst alle dicht gedrängt, symmetrisch in der Mitte des Raumes befinden. An 2 gegenüberliegenden Seiten des Raumes soll sich jeweils eine Tür befinden (Evakuierung eines Raumes mit 2 Türen). In einer weiteren Simulation sollen sich an den anderen beiden Seiten jeweils eine weitere Tür befinden (Evakuierung eines Raumes mit 4 Türen). Die Evakuierungsdauer des Raumes mit 4 Türen müsste nun exakt halb so lange sein, wie die des Raumes mit 2 Türen. \\ 
+
+Um eine möglichst symmetrische Anordnung der Personen sicher zu stellen, wurden alle Zellen des Raumes mit Personen belegt. Es wurden Evakuierungen mit $676$ Personen simuliert. Die beiden Räume, für die im weiteren Kapitel die Evakuierungszeiten verglichen werden, sind in Abbildung \ref{fig:Eva2T4TMap} dargestellt. Für die Evakuierungsdauer ist nicht die gesamte Simulationsdauer (Zeit bis die letzte Person das Ziel erreicht), sondern die Zeit, bis die letzte Person den Raum verlässt relevant. Dieser Bereich wurde in den Abbildungen mit einem roten Rahmen hervorgehoben. Alle Szenarien wurden zunächst auf Basis des Dijkstra Algortihmus simuliert. Die Abbildung \ref{fig:Eva2T4THeatMap} zeigt die Heatmap der Szenarien. Der symmetrische Nutzenanstieg in zwei bzw. vier Richtungen ist durch den Farbverlauf dargestellt. 
+
+\begin{figure}[!htb]
+	\centering
+	\begin{minipage}{.5\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{abbildungen/Evak2TuerenAnfang.png}
+		
+	\end{minipage}%
+	\begin{minipage}{0.5\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{abbildungen/Evak4TuerenAnfang.png}
+	\end{minipage}
+	\caption{Evakuierung eines Raumes mit 2 Türen (links) und mit 4 Türen (rechts)}
+	\label{fig:Eva2T4TMap}
+\end{figure}
+
+\begin{figure}[!htb]
+	\centering
+	\begin{minipage}{.5\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{abbildungen/Evak2TuerenAnfangHeat.png}
+	\end{minipage}%
+	\begin{minipage}{0.5\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{abbildungen/Evak4TuerenAnfangHeat.png}
+	\end{minipage}
+		\caption{Evakuierung eines Raumes mit 2 Türen (links) und mit 4 Türen (rechts), Heatmap}
+		\label{fig:Eva2T4THeatMap}
+\end{figure}
+
+In Abbildung \ref{fig:Eva2T4TMitte} ist ein Ausschnitt der Simulationen nach einer Simulationszeit von ca. $24,1s$ (links) bzw. $15,5s$ (rechts) dargestellt. Es ist deutlich zu erkennen, dass sich jeweils ca. die Hälfte (2 Türen) bzw. ein Viertel der Personen (4 Türen) auf jede Tür zubewegen. 
+
+\begin{figure}[!htb]
+	\centering
+	\begin{minipage}{.5\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{abbildungen/Evak2TuerenMitte.png}
+	\end{minipage}%
+	\begin{minipage}{0.5\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{abbildungen/Evak4TuerenMitte.png}
+	\end{minipage}
+	\caption{Evakuierung eines Raumes mit 2 Türen (links) und mit 4 Türen (rechts), Ausschnitt}
+	\label{fig:Eva2T4TMitte}
+\end{figure}
+
+Abschließend zeigt Abbildung \ref{fig:Eva2T4TEnde} die Evakuierungsdauer der beiden Räume. Die entsprechenden Ausschnitte zeigen den Moment, in dem die letzte Person den rot markierten Bereich verlassen hat. Bei der Simulation mit 2 Türen ist das nach ca. $73,07s$, bei der Simulation mit 4 Türen nach ca. $36,98s$. Durch die beiden zusätzlichen Türen verläuft die Evakuierung somit um das $1,98$ fache, also fast das $2$ fache schneller. Diese Übereinstimmung mit der Theorie kann als Indiz für die Richtigkeit der Simulation angesehen werden. \\
+
+Die Abweichung ist zum einen dadurch zu erklären, dass die Geschwindigkeiten der Personen zufällig verteilt sind. Es kann also vorkommen, dass sich viele, etwas schneller gehende Personen im linken Teil des Feldes befinden und langsamer gehende rechts. Folglich würde die Evakuierung des linken Teils nicht so lange dauern, wie die des rechten und die anfängliche Symmetrie wäre nicht mehr vorhanden. Eine weitere Ursache könnte die Gestaltung der Implementierung sein. Eine Person, welche aktuell nicht ziehen kann (Felder mit größerem Nutzen als aktuell besetztes Feld sind belegt) wartet so lange, wie sie bräuchte um zum gewünschten Feld zu gehen, bis sie erneut versucht zu gehen. Das Verhalten ist unabhängig davon, ob das gewünschte Feld früher schon frei wird oder nicht. Somit warten Personen, obwohl sie theoretisch schon gehen könnten. 
+
+\begin{figure}[!htb]
+	\centering
+	\begin{minipage}{.5\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{abbildungen/Evak2TuerenEnde.png}
+	\end{minipage}%
+	\begin{minipage}{0.5\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{abbildungen/Evak4TuerenEnde.png}
+	\end{minipage}
+			\caption{Evakuierung eines Raumes mit 2 Türen (links) und mit 4 Türen (rechts), Ende der Evakuierung}
+			\label{fig:Eva2T4TEnde}
+\end{figure}
+
+\begin{figure}[!htb]
+	\centering
+	\begin{minipage}{.5\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{abbildungen/Evak2TuerenEndeFM.png}
+
+	\end{minipage}%
+	\begin{minipage}{0.5\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{abbildungen/Evak4TuerenEndeFM.png}
+	\end{minipage}
+	\caption{Evakuierung eines Raumes mit 2 Türen (links) und mit 4 Türen (rechts), Fast-Marching Algorithmus (Ende der Evakuierung)}
+	\label{fig:Eva2T4TEndeFM}
+	\end{figure}
+
+Zum Vergleich zeigt Abbildung \ref{fig:Eva2T4TEndeFM} die Evakuierungszeiten des identischen Raumes auf Basis des Fast-Marching Algorithmus. Auch hier ist die Dauer der Evakuierung bei zwei zusätzlichen Türen um den Faktor $1,97$ kürzer.\\
+
+Stellt man die erläuterten Evakuierungsszenarien in Bezug zur Realität müssen einige Punkte beachtet werden. Zum einen befinden sich in der Realität niemals so viele Personen symmetrisch in einem Raum. Zum anderen ist es aufgrund von Brandschutz und anderen Sicherheitsvorgaben nicht zulässig $676$ Personen in einen ca. $108qm$ großen Raum zu lassen. Des weiteren wurden menschliche Faktoren wie Orientierungslosigkeit oder Panik in der Simulation nicht berücksichtigt. Die geringen Evakuierungszeiten sind überwiegend darauf zurückzuführen, dass jede Person zu jedem Zeitpunkt die perfekte Orientierung hat und genau die Zellen betritt, die auf dem für sie effizientesten Weg zum Ziel liegen. Diese Simulationen sind somit zusammenfassend als theoretisches Konstrukt zu sehen. Anhand dessen kann die Simulation gegen die Anforderung, dass sich die Evakuierungszeit bei Verdopplung der Türen Halbieren muss, verifiziert werden.
+
+\paragraph{Evakuierung eines Raumes (Personen zufällig verteilt)}
+In diesem Abschnitt werden weitere Evakuierungstests gegenübergestellt, bei denen die Personen zufällig im Raum verteilt wurden. Anhand dieser Tests sollen die Auswirkungen unterschiedlicher Positionen der Türen auf die Evakuierungsdauer simuliert werden.\\
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{abbildungen/Evak1DBegin.PNG}
+	\caption{Verteilung der Personen (Heatmap Dijkstra Algorithmus)}
+	\label{fig:EvakuierungMap}
+\end{figure}
+
+Abbildung \ref{fig:EvakuierungMap} zeigt die Verteilung der Personen, die für unterschiedliche Evakuierungstests verwendet wird. Somit wird eine bessere Vergleichbarkeit der Ergebnisse erzielt. In der Abbildung ist außerdem die Heatmap des Dijkstra Algorithmus für dieses Szenario zu sehen. 
+
+\begin{figure}[!htb]
+	\centering
+	\begin{minipage}{.5\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{abbildungen/Evak1DMitte.PNG}
+	\end{minipage}%
+	\begin{minipage}{0.5\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{abbildungen/Evak1FMMitte.PNG}
+	\end{minipage}
+	\caption{Evakuierung eines Raumes mit 2 Türen (geringer Abstand), Dijkstra Algorithmus (links), Fast-Marching Algorithmus (rechts)}
+	\label{fig:Evak2TNebeneinanderMinDijkstraFM}
+\end{figure}
+
+Die Abbildung \ref{fig:Evak2TNebeneinanderMinDijkstraFM} zeigt einen Ausschnitt der Simulation nach einer Simulationszeit von ca. $6s$. Wie zu erwarten ist, drängen alle Personen in die Ecke links unten. Dort bilden sich vor den Engstellen (Ausgängen) kleinere Staus. Die Evakuierungsdauer beträgt für die Simulation mit dem Dijkstra Algorithmus ca. $16,8s$. Da sich die Personen bei Verwendung des Fast Marching Algorithmus effizienter auf die Ziele zu bewegen, bilden sich etwas kleinere Staus an den Engstellen und die Evakuierungsdauer ist mit ca. $16,5s$ etwas kürzer.
+
+\begin{figure}[!htb]
+	\centering
+	\begin{minipage}{.5\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{abbildungen/Evak2DMitte.PNG}
+	\end{minipage}%
+	\begin{minipage}{0.5\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{abbildungen/Evak2FMMitte.PNG}
+	\end{minipage}
+	\caption{Evakuierung eines Raumes mit 2 Türen (großer Abstand), Dijkstra Algorithmus (links), Fast-Marching Algorithmus (rechts)}
+	\label{fig:Evak2TNebeneinanderMaxDijkstraFM}
+	\end{figure}
+
+Im Vergleich dazu zeigt die Abbildung \ref{fig:Evak2TNebeneinanderMaxDijkstraFM}   einen Ausschnitt der Simulation, in der die Ausgänge bzw. Ziele sehr weit voneinander entfernt gewählt wurden. Beide Algorithmen werden gegenübergestellt. In der Abbildung ist sofort zu sehen, dass sich in etwa die Hälfte der Personen (Personen deren Startposition in der entsprechenden Hälfte lag) auf die Ziele unten links und die andere Hälfte auf die Ziele oben rechts zubewegen. Die Heatmaps zeigen die entsprechende Entfernung an. Die maximale Entfernung, die eine Person von einer Tür haben kann, ist in der Simulation mit den nahe beieinander liegenden Türen fast doppelt so groß (ca. $28m$), wie in der Simulation in der die Türen weit voneinander entfernt sind (ca. $15m$).  \\
+Die Evakuierungsdauer ist mit ca. $12,53s$ (Dijkstra) bzw. $12,6s$ (Fast-Marching) deutlich kürzer als im zuvor beschrieben Szenario (vgl. Abbildung \ref{fig:Evak2TNebeneinanderMinDijkstraFM}). Um diesen Zusammenhang weiter zu überprüfen, wurde eine zusätzliche Map mit deutlich mehr Personen im Raum angelegt. Die Positionen der Türen wurde nicht verändert. Da hierbei vor allem die Auswirkung der Position der Türen auf die Evakuierungsdauer ermittelt werden soll, wurde dieser zusätzliche Test nur auf Basis des Dijkstra Algorithmus durchgeführt. Die Implementierung der Simulation ermöglicht jedoch, diesen bei Bedarf auf Basis des Fast-Marching Algorithmus zu wiederholen.\\
+
+\begin{figure}[!htb]
+	\centering
+	\begin{minipage}{.5\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{abbildungen/Evak2TMinDis2.png}
+	\end{minipage}%
+	\begin{minipage}{0.5\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{abbildungen/Evak2TMaxDis2.png}
+	\end{minipage}
+	\caption{Evakuierung eines Raumes mit 2 Türen, links: geringer Abstand zwischen den Türen, rechts: großer Abstand zwischen den Türen}
+	\label{fig:Evak2TminmaxDis2}
+\end{figure}
+
+Abbildung \ref{fig:Evak2TminmaxDis2} zeigt die Aufteilung der $547$ Personen und die Positionen der Türen in den beiden Szenarien. 
+
+\begin{figure}[!htb]
+	\centering
+	\begin{minipage}{.5\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{abbildungen/Evak2TMinDis2MITTE.png}
+	\end{minipage}%
+	\begin{minipage}{0.5\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{abbildungen/Evak2TMaxDis2MITTE.png}
+	\end{minipage}
+	\caption{Evakuierung eines Raumes mit 2 Türen (Ausschnitt der Simulation), links: geringer Abstand zwischen den Türen, rechts: großer Abstand zwischen den Türen}
+	\label{fig:Evak2TminmaxDis2MITE}
+\end{figure}
+
+Die Abbildung \ref{fig:Evak2TminmaxDis2MITE} zeigt einen Ausschnitt der Simulation bei $15,97s$ (links) bzw. $1,55s$ (rechts). In beiden Abbildungen ist deutlich zu sehen, dass sich die Personen, aufgrund der hohen Personenanzahl, vor allen Türen stauen.
+
+\begin{figure}[!htb]
+	\centering
+	\begin{minipage}{.5\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{abbildungen/Evak2TMinDis2ENDE.png}
+	\end{minipage}%
+	\begin{minipage}{0.5\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{abbildungen/Evak2TMaxDis2ENDE.png}
+	\end{minipage}
+	\caption{Evakuierung eines Raumes mit 2 Türen (Ausschnitt: Ende der Evakuierung), links: geringer Abstand zwischen den Türen, rechts: großer Abstand zwischen den Türen}
+	\label{fig:Evak2TminmaxDis2ENDE}
+\end{figure}
+
+Abschließend zeigt die Abbildung \ref{fig:Evak2TminmaxDis2ENDE} das Ende der Evakuierung der beiden Räume. Die Evakuierung eines Raumes, bei dem die Türen weit voneinander entfernt sind, verläuft mit einer Dauer von ca. $60,28s$ um ca. $2,3s$ schneller als die eines Raumes, bei dem die Türen nah beieinander liegen ($62,53s$). Durch eine höhere Anzahl an Personen, wirkt sich die Position der Türen somit nur noch sehr gering auf die Evakuierungsdauer aus. Hintergrund hierfür könnte die lange Wartezeit bzw. der große Stau vor den jeweiligen Türen sein. Da die Wartezeit der einzelnen Personen teilweise sehr hoch ist, wirkt sich der längere Weg bis zur Tür kaum auf die Evakuierungsdauer aus.
+ 
+\paragraph{Fazit und Vergleich}
+
+
+\input{engstelle_test}
+
+
 \subsection{Validation}
 
 \section{Ausblick und Fazit}
+Das Thema der Arbeit war die Bewegung von Personen in der Ebene zu simulieren. Zu Beginn wurde ein Java Programm implementiert, dass abhängig von Übergabeparameter und einer Karte, die das Feld mit Hindernissen beschreibt durchrechnet. Die Resultate wurden in eine Ausgabe Datei geschrieben. Diese konnte anschließend in einer Visualisierung dargestellt werden.
 
+Die Personenbewegung wurde mit den Algorithmen Euklid, Dijkstra und Fast Marching berechnet und deren Resultate miteinander verglichen. Zudem wurde eine Personenabstoßung implementiert um  Ergebnisse zu erhalten, die näher an der Realität liegen. Zusätzlich wurde beschrieben wie die Zellgröße Einfluss auf die Ergebnisse nimmt. Zur Verifikation wurden mehrere Tests durchgeführt und dokumentiert. Anschließend ist eine Diskussion erfolgt, ob die implementierte Simulation relevant genug ist um die Realität zu einem gewissen Maße abbilden zu können.
+
+Die Simulation bietet die Möglichkeit die Startvariablen und den Simulationsbereich frei zu definieren und dadurch verschiedenste Szenarien betrachten zu können. Eine Option ist es, die durchschnittliche individuelle Wunschgeschwindigkeit der Personen anzupassen, wenn beispielsweise die Passanten in der Situation einer gewissen Gruppe (z.B. Rentner) angehören. Um realistische Ergebnisse zu erhalten müssten hierfür nur die entsprechenden Werte vorher ermittelt werden. Eine eigene Auswertung der Daten wie in dem Messexperiment der ersten Studienarbeit bietet die Simulation nicht an. Dies könnte für eine Weiterführung des Projektes eine mögliche Erweiterung sein. Hinzukommt, dass keine Personen generiert werden, die sich absonderlich oder anders als die anderen Verhalten. Ein Beispiel wären Drängler sein. Diese könnten in Zukunft noch hinzugefügt werden.
 %----------------------------------------------------------------------------------------
 %\input{References}
 \bibliography{Bibliographie}

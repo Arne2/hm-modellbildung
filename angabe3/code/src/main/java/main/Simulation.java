@@ -9,6 +9,8 @@ import field.use.FastMarching;
 import field.use.PersonalSpace;
 import measurement.Measurement;
 import outputFile.OutputFile;
+import outputFile.XYLog;
+import outputFile.XYZLog;
 import person.Person;
 import time.Clock;
 import time.EventList;
@@ -16,9 +18,12 @@ import time.events.Event;
 import time.events.MeasurementEvent;
 import time.events.PersonMoveEvent;
 
+import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -53,7 +58,7 @@ public class Simulation implements AutoCloseable {
     /** The OutputFile for the post visualization. */
     private final OutputFile outputFile;
 
-    public Simulation(Field field, Configuration configuration, OutputFile outputFile) throws IOException {
+    public Simulation(Field field, Configuration configuration, OutputFile outputFile) throws Exception {
         this.configuration = configuration;
         this.field = field;
         this.outputFile = outputFile;
@@ -80,6 +85,9 @@ public class Simulation implements AutoCloseable {
 
         final MeasurementEvent event = new MeasurementEvent(new BigDecimal(0), this);
         this.events.add(event);
+
+
+
     }
 
     /**

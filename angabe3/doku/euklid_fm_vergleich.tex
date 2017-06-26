@@ -8,7 +8,7 @@ Um den Euklidischen Abstand zu berechnen, benötigt man lediglich die Position d
 Beim Dijkstra Algorithmus geht man ausgehend vom Ziel immer ein Feld weiter und berechnet den Abstand des aktuellen Feldes anhand des Abstand des Nachbarfeldes. Dadurch wird die Karte ausgehend vom Ziel aufgebaut wie in Abbildung \ref{fig_euklid_dijkstra_fast_marching_vergleich} zu sehen ist. Es ist auch zu erkennen, dass der Dijkstra Algorithmus die Abstände um das Hindernis berechnet. Das Hindernis wird also in die Berechnung einbezogen.
 
 \subsection{Fast Marching}
-Ähnlich wie beim Dijkstra arbeitet der Fast Marching Algorithmus vom Ziel aus. Das Zielfeld wird als Basis angenommen und die Nachbarfelder um das Ziel werden als \glqq considered\grqq also als \glqq in Betracht kommend\grqq markiert. Das in Betracht kommende Nachbarfeld mit dem besten Wert wird als \glqq accepted\grqq also als \glqq akzeptiert\grqq markiert. Danach wird für alle Nachbarn dieses akzeptieren Feldes die Entfernung mittels der Eikonalgleichung berechnet. Auch hier ist also die Berechnung abhängig von den vorher berechneten Feldern. Es ist deutlich zu erkennen, dass der Fast Marching Algorithmus eine deutlich rundere Karte erzeugt, als der Dijkstra.
+Ähnlich wie beim Dijkstra arbeitet der Fast Marching Algorithmus vom Ziel aus. Das Zielfeld wird als Basis angenommen und die Nachbarfelder um das Ziel werden als \glqq considered\grqq  also als \glqq in Betracht kommend\grqq  markiert. Das in Betracht kommende Nachbarfeld mit dem besten Wert wird als \glqq accepted\grqq  also als \glqq akzeptiert\grqq  markiert. Danach wird für alle Nachbarn dieses akzeptieren Feldes die Entfernung mittels der Eikonalgleichung berechnet. Auch hier ist also die Berechnung abhängig von den vorher berechneten Feldern. Es ist deutlich zu erkennen, dass der Fast Marching Algorithmus eine deutlich rundere Karte erzeugt, als der Dijkstra.
 
 \begin{figure}
 \centering
@@ -43,14 +43,40 @@ Um dies nochmals zu verdeutlichen werden die Algorithmen in Abbildung \ref{fig_e
 
 \subsubsection{Rechnerische Überprüfung}
 Eine rechnerische Überprüfung wird auf den diagonalen Abstand durchgeführt. Die Tabelle \ref{tab_euklid_fm_vergleich} zeigt die Ergebnisse dieses Experiments. Die Cellsize gibt dabei die Kantenlänge einer quadratischen Zelle an. Wichtig ist der Wert „Distance in X and Y“, welcher besagt, dass das Ziel in X und in Y Richtung immer jeweils 14 Zellen entfernt ist.
-Nach der Formel wurde der Abstand von Ziel zum am weitesten entfernten Punkt (also diagonal) berechnet:
+Nach folgender Formel wurde der Abstand vom Ziel zum am weitesten entfernten Punkt (also diagonal) berechnet:
 
 $$a = \sqrt[]{x^2 +y^2} = \sqrt[]{(14\ m) ^2 +(14\ m) ^2} = 19,799\ m$$ 
 
-Wie in der Tabelle zu sehen ist, berechnet der Euklid Algorithmus den Abstand sehr präzise. Da der Euklid Algorithmus kein „Gedächtnis“ hat also ohne Einfluss vorheriger Zellen berechnet und die oben genannte Formel anwendet ist der Algorithmus gut geeignet um die exakte Entfernung zu berechnen. Interessant in der Tabelle ist vor allem die Abweichung von 1,45 m, welche beim Fast Marching Algorithmus entsteht. Diese Abweichung entspricht einem Fehler von von 7,3 \% bezogen auf die tatsächliche Entfernung. Verringert man die Zellgröße, so konvergiert der Fast Marching Algorithmus gegen den euklidischen Abstand und der Fehler gegen 0. Die prozentualen Fehler in Abhängigkeit der Zellgröße sind in Abbildung \ref{fig_fast_marching_error_cellsize} dargestellt. 
+Wie in der Tabelle zu sehen ist, berechnet der Euklid Algorithmus den Abstand sehr präzise. Da der Euklid Algorithmus kein \glqq Gedächtnis\grqq  hat, also ohne Einfluss vorheriger Zellen berechnet und die oben genannte Formel anwendet, ist der Algorithmus gut geeignet um die exakte Entfernung zu berechnen. Interessant in der Tabelle ist vor allem die Abweichung von 1,45 m, welche beim Fast Marching Algorithmus entsteht. Diese Abweichung entspricht einem Fehler von von 7,3 \% bezogen auf die tatsächliche Entfernung. Verringert man die Zellgröße, so konvergiert der Fast Marching Algorithmus gegen den euklidischen Abstand und der Fehler gegen 0. Die prozentualen Fehler in Abhängigkeit der Zellgröße sind in Abbildung \ref{fig_fast_marching_error_cellsize} dargestellt. Dies ist die Darstellung des Fehlers in Abhängigkeit von der Zellgröße in dem Punkt, von dem angenommen wird, dass dieser den größten Fehler hat. Eine grafische Darstellung des Fehlers über alle Punkte ist in der Abbildung \ref{fig_error_3d_aufstellung} zu sehen. In dieser Abbildung entspricht die Position (0|0) der linken, oberen Bildecke. Das Ziel ist diagonal gegenüber festgelegt (rechte untere Bildecke). Auf der Z Achse ist der Absolute Fehler aufgetragen. Diese Abbildung zeigt deutlich, dass der Fehler an den Achsen 0 beträgt und in der Diagonalen am höchsten ist. Der Fehler wird kleiner, wenn man die Zellgröße verringert.
+
+
 
 \section{Einfluss der Zellgröße auf die maximale Dichte}
 Darüber hinaus hat die Zellgröße direkten Einfluss auf die Dichte [$\frac{Personen}{m^2}$] in einem Feld. Würde man die Zellgröße von $2\ m^2$ wählen, erhielte man eine maximale Dichte von 0,5 $\frac{1}{m^2}$. Es ist darauf zu achten, dass die Zellgröße angemessen gewählt wird. Bei weiteren Versuchen wurde stets eine Zellbreite von 0,4 bis 0,5 m verwendet, sofern nichts anderes angegeben.
+
+
+
+\begin{figure}
+\centering
+\begin{minipage}{.8\textwidth}
+\centering
+  \includegraphics[width=1\linewidth]{abbildungen/vergleich_euklid_fast_marching/3DVergleich/cellsize2/Error.pdf}
+\end{minipage}%
+\\
+\begin{minipage}{.8\textwidth}
+\centering
+  \includegraphics[width=1\linewidth]{abbildungen/vergleich_euklid_fast_marching/3DVergleich/cellsize0_5/Error.pdf}
+\end{minipage}
+\\
+\begin{minipage}{.8\textwidth}
+\centering
+  \includegraphics[width=1\linewidth]{abbildungen/vergleich_euklid_fast_marching/3DVergleich/cellsize0_03125/Error.pdf}
+\end{minipage}
+\caption{Darstellung des Absoluten Fehlers in allen Punkten der Karte. X und Y stellen die Zellkoordinaten dar (Ohne Einheit)}
+\label{fig_error_3d_aufstellung}
+\end{figure}
+
+
 
 
 

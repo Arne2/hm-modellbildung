@@ -607,6 +607,80 @@ Abschließend zeigt die Abbildung \ref{fig:Evak2TminmaxDis2ENDE} das Ende der Ev
 \newpage
 \subsection{Validation}
 
+Zur Validation wurde der Rimea Test 4 mit unserer Software nachgebaut. Es wurde eine Karte mit $40cm$ großen Zellen erstellt, die $65$x$12m$ aufspannt.
+Die Karte ist in Abbildung \ref{fig:rimea4:map} dargestellt. Der Nutzen wurde mit euklidischem Abstand berechnet, um Fehler zu vermeiden.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\linewidth]{abbildungen/fundamentaldiagramm/map}
+	\caption{Karte für die Simulation des Rimea Test 4. Alle Zellen bis auf die Ziele der rechten Seite sind initial mit Personen befüllt.}
+	\label{fig:rimea4:map}
+\end{figure}
+
+Damit sich die Personen gleichmäßig verteilen und sich wie in einem endlosen Rundgang bewegen, wurde die Implementierung des Feldes angepasst. Von Personen auf der rechten Seite vor dem Ziel werden wieder die Zellen der linken Seite betrachtet. Da es zunächst einige Artefakte bei diesem Sprung gab, wurde sichergestellt, dass freie Zellen so wie das Personenpotential der jeweils anderen Seite berücksichtigt werden. Das heißt, das Personenpotenzial am Rand (also am Ziel) wurde auf die andere Seite (also Quelle) mitübertragen und umgekehrt.
+
+Um eine Änderung der Dichte zu erreichen, werden nach jeder Messung 30 zufällig verteilte Personen aus der Simulation entfernt. Das Messen wird jede Sekunde über das gesamte Feld durchgeführt.
+
+Für das Ermitteln des Flusses wurde eine vertikale Linie über die ganze Höhe gewählt. Die Werte werden aber auf $1m$ normiert.
+
+Die Simulation wurde durchgeführt und es wurde optisch kontrolliert, ob die Personen gleichmäßig verteilt sind. Die vier Ausschnitte aus der Simulation in Abbildung \ref{fig:rimea4:verlauf} zeigen den Verlauf.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\linewidth]{abbildungen/fundamentaldiagramm/verlauf}
+	\caption{Verlauf der Simulation mit dem Entfernen von Personen. Die Information zur Personenanzahl stimmt in diesem Fall nicht.}
+	\label{fig:rimea4:verlauf}
+\end{figure}
+
+Das Fundamentaldiagramm der Simulation ist in Abbildung \ref{fig:rimea4:diagramm} zu sehen. Die Werte für die Personenabstoßung wurden kalibriert ($\mu$ 50.0 $a_p$ 1.0 $b_p$ 2). Vergleicht man es mit dem Fundamentaldiagramm von Weidmann (Abbildung \ref{fig:rimea4:weidman}) fällt auf, dass der linke Teil bis zu einer Dichte von drei mit dem Diagramm von Weidmann sehr gut übereinstimmt. In der rechten Hälfte steigt die Geschwindigkeit ab einer Dichte von 3 jedoch wieder an. Dies steht im Widerspruch zu den Ergebnissen aus dem Messexperiment von Weidmann. Die Abweichung findet sich auch im Flussdiagramm (Abbildung \ref{fig:rimea4:fluss}). Von kurz nach dem Beginn der Simulation bis Sekunde $40$ (noch hohe Dichte) gibt es unerwartet den größten Fluss.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\linewidth]{abbildungen/fundamentaldiagramm/weidman}
+	\caption{Fundamentaldiagramm nach Weidman. Quelle: U. Weidmann Transporttechnik der Fussgänger, Transporttechnische Eigenschaften des Fussgängerverkehrs (Literturauswertung) Schriftenreihe des IVT Nr. 90, Zweite, ergänzte Auflage, Zürich, März 1993 (109 Seiten)}
+	\label{fig:rimea4:weidman}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\linewidth]{abbildungen/fundamentaldiagramm/diagramm}
+	\caption{Fundamentaldiagramm des Rimea Tests 4}
+	\label{fig:rimea4:diagramm}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\linewidth]{abbildungen/fundamentaldiagramm/fluss}
+	\caption{Fluss des Rimea Test 4 über eine 1m vertikale Linie.}
+	\label{fig:rimea4:fluss}
+\end{figure}
+
+Um zu untersuchen, ob das Entfernen von Personen aus der Simulation einen signifikanten Einfluss auf die mittlere Geschwindigkeit hat, wurden Einzelmessungen mit einer konstanten Dichte durchgeführt. Diese Messungen lagen alle jeweils auf der Kurve, des Fundamentaldiagramms in Abbildung \ref{fig:rimea4:diagramm}. Es wird angenommen, dass das Entfernen von Personen die Messwerte nicht beeinflusst.
+
+Für die nicht validen Ergebnisse ab einer Dichte größer drei wurden die Software und das Modell auf Fehler überprüft. Um die Suche einzuschränken wurde die Simulation ohne Personenpotential ausgeführt. Der Vergleich ist in Abbildung \ref{fig:rimea4:vergleich-ohnep} zu sehen. Das Personenpotential hat nur von Dichte eins bis ca. fünf einen Einfluss auf die Geschwindigkeit.
+Entweder ist das Personenpotential falsch umgesetzt und müsste auch im Bereich für sehr hohen Dichten gelten oder die generelle Zuglogik ist für hohe Dichte falsch. Der Fluss der Simulation ohne Personenpotential sieht aber plausibel aus (Abbildung \ref{fig:rimea4:fluss-ohnep}).
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\linewidth]{abbildungen/fundamentaldiagramm/vergleich-ohnep}
+	\caption{Fundamentaldiagramm des Rimea Test 4 mit (orange) und ohne (blau) Personenpotential}
+	\label{fig:rimea4:vergleich-ohnep}
+\end{figure}
+
+
+
+Eventuell liegt der Fehler auch an der Eigenschaft des zellulären Automaten. 
+Ist eine Person bis auf eine Nachbarzelle komplett von Personen umringt, ist die Änderung des Nutzens durch das Personenpotential an beiden Stellen exakt gleich. So zieht die Person immer, wenn nur der Zellnutzen besser ist. Das könnte auch erklären, warum das Personenpotential bei hohen Dichten nicht greift. Möglicherweise ist die Zellgröße zu grob gewählt.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\linewidth]{abbildungen/fundamentaldiagramm/fluss-ohnep}
+	\caption{Fluss im Rimea Test 4 ohne Personpotential}
+	\label{fig:rimea4:fluss-ohnep}
+\end{figure}
+
+Leider können wir unsere Simulation wegen zu großer Abweichung im gerade interessanten Bereich mit hoher Dichte nicht validieren.
+ 
 \newpage
 \section{Ausblick und Fazit}
 Das Thema der Arbeit war die Bewegung von Personen in der Ebene zu simulieren. Zu Beginn wurde ein Java Programm implementiert, dass abhängig von Übergabeparameter und einer Karte, die das Feld mit Hindernissen beschreibt durchrechnet. Die Resultate wurden in eine Ausgabe Datei geschrieben. Diese konnte anschließend in einer Visualisierung dargestellt werden.

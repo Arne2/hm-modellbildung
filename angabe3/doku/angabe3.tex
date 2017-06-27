@@ -13,7 +13,7 @@
 \tableofcontents
 \section{Einführung}
 Im Zuge der ersten Studienarbeit wurde das Laufverhalten von Probanden in der Ebene und auf der Treppe untersucht. Basierend auf den Erkenntnissen bezüglich der individuellen Wunschgeschwindigkeiten werden in dieser Studienarbeit Personenbewegungen in der Ebene simuliert. Mit Hilfe solcher Simulationen können, beispielsweise im Zuge von Gebäudeplanungen unterschiedliche Gebäude- und Raumgestaltungen simuliert und hinsichtlich schnellster Räumungen im Krisenfall optimiert werden. 
-
+\newpage
 \section{Beschreibung des Modells}
 Für die Simulation der Personenbewegungen wird ein zellulärer Zustandsautomat implementiert. Jede Zelle kann entweder leer oder durch eine Person oder ein Hindernis besetzt sein. Sie kann außerdem ein Ziel oder eine Quelle enthalten. Ein Hindernis kann von keiner Person betreten werden. Die Personen versuchen im Laufe der Simulation von der Quelle (Startposition) zum Ziel zu gelangen. Hierbei können sie sich in der sog. Moore-Umgebung bewegen. Es kann jede Zelle betreten werden, die frei ist und eine Nachbarzelle der aktuellen Zelle ist. Als Nachbarzelle wird jede Zelle bezeichnet, die mit der aktuellen Zelle eine Kante oder Ecke teilt. \\
 Die Ziele werden als attraktiv für die Personen angesehen. Die Personen steigern ihren persönlichen Nutzen, je näher sie dem Ziel kommen. In der Realität fühlt sich eine Person jedoch unwohl, wenn ihr eine fremde Person zu nahe kommt. Im Modell wird dies dadurch berücksichtigt, dass sich der Nutzen einer Person verringert, wenn sie einer anderen zu nahe kommt. Um die Simulation möglichst realistisch zu gestalten, bewegen sich die Personen mit einer individuellen Wunschgeschwindigkeit. Diese wird aus den Ergebnissen der ersten Studienarbeit ermittelt. \\
@@ -22,7 +22,7 @@ Darüber hinaus besteht die Möglichkeit die Personenbewegung mit Hilfe des Floo
 Als dritte Variante erfolgt die Ermittlung der Personenbewegung ebenfalls mit Hilfe des Floor-Flooding. Als Grundlage dient hierbei jedoch die Lösung der Eikonal-Gleichung, die die Ausbreitung einer Welle beschreibt. Hierfür wird der Fast-Marching Algorithmus verwendet.  \\
 Im Laufe der Studienarbeit werden die beschriebenen Modelle anhand unterschiedlicher Tests verglichen und ausgewertet. Eine detaillierte Erläuterung der Tests ist im folgenden Kapitel \ref{AnforderungenTest} beschrieben.
 
-
+\newpage
 \section{Anforderungen/Requirements}
 \label{requirements}
 
@@ -99,7 +99,8 @@ Die Tabelle \ref{tab:parameter} zeigt alle möglichen Parameter, welche die Soft
 	\begin{tabular}{lll}
 		Parameter & Beschreibung  &  Default\\ \hline
 		--free-flow-velocity & Mittelwert der Wunschgeschwindigkeit [m/s] & 1,0 \\
-		--free-flow-deviation & Standardabweichung der Wunschgeschwindigkeiten [m/s] & 0 \\
+		--free-flow-deviation & Standardabweichung der & 0\\
+							  & Wunschgeschwindigkeiten [m/s] &  \\
 		--algorithm & Algorithmus (euclid, dijkstra, fast-marching) & dijkstra \\
 		--output-folder & Ordner in den der Output gespeichert wird & ../data/ \\
 		--cellsize & Größe der einzelnen Zellen [m] & 1 \\
@@ -168,7 +169,7 @@ Es soll die Möglichkeit bestehen, unterschiedliche Testszenarien mittels eines 
 \end{table}
  
 \subsubsection{Testszenario: Freier Fluss}
-Im Zuge dieses Tests soll überprüft werden, ob sich Personen bei freier Bahn (keine Hindernisse zwischen Start und Ziel) mit ihrer jeweiligen Wunschgeschwindigkeit auf das Ziel hin bewegen. Des weiteren soll überprüft werden, ob die Person den kürzesten Weg verwendet. Der Test soll mit allen 3 Betriebsmodi durchgeführt werden. Abbildung \ref{fig:AnforderungenTest_FreierFluss} stellt den Testaufbau schematisch dar.
+Im Zuge dieses Tests soll überprüft werden, ob sich Personen bei freier Bahn (keine Hindernisse zwischen Start und Ziel) mit ihrer jeweiligen Wunschgeschwindigkeit auf das Ziel hin bewegen. Des Weiteren soll überprüft werden, welchen Weg die Person wählt. Es soll der kürzeste Weg gewählt werden. Abbildung \ref{fig:AnforderungenTest_FreierFluss} stellt den Testaufbau schematisch dar.
 
 \begin{figure}[htpb]
 	\centering
@@ -246,7 +247,7 @@ Die Visualisierung soll die errechneten Personenbewegungen graphisch darstellen.
 Die Oberfläche der Visualisierung soll aus 4 verschiedenen Teilen bestehen, welche in der Abbildung durch die blauen Kästen A-D hervorgehoben wurden. Im Teil A sollen Konfigurationsmöglichkeiten für die Visualisierung aufgeführt sein. Beispielsweise soll zwischen einer normalen Darstellung der Simulation und einer Heatmap gewechselt werden können. Darüber hinaus soll die Möglichkeit bestehen, die Visualisierung zu stoppen und schrittweise fortzusetzen. \\
 Teil B enthält die eigentliche Visualisierung der Personen, Hindernisse und Ziele. In Teil C sind alle Informationen bezüglich der Visualisierung aufgeführt und Teil D enthält eine Legende der verwendeten Symbole und Farben. Wird ein Messfeld definiert, soll dieses in der Visualisierung hervorgehoben werden.
 
-
+\newpage
 \section{Beeinflussung durch andere Personen} 
 \label{Personenpotenzial}
 
@@ -269,19 +270,77 @@ Hintergrund dieser Entscheidung ist, dass nach unserer Einschätzung und nach \c
 Außerdem lassen sich in dieser Simulation, durch die Wahl einer geringen Zellgröße des zellulären Automatens von $40 cm$, die Auswirkungen der unterschiedlichen Bereiche auf den Nutzenverlust bzw. das Abstoßungspotenzial der Personen feststellen. \\
 Darüber hinaus beinhalten die Funktionen \ref{Equ:NutzenverlustP} und \ref{Equ:NutzenverlustV} deutlich mehr Parameter. Diese Parameter können an mögliche gesellschaftliche oder länderspezifische Unterschiede angepasst werden und so die Realität besser widerspiegeln. Für diese Studienarbeit wurden die Parameter wie in der Tabelle \ref{tab:parameterNutzenverlust} aufgeführt gewählt. Grundlage hierfür sind die in \cite{VONSIVERS2015104} erläuterten Erkenntnisse aus unterschiedlichen Versuchen. Außerdem zeigten mehrere, in der Gruppe durchgeführten Simulationen mit unterschiedlichen Parameterkombinationen, dass sich das Abstoßungspotenzial durch die Verwendung dieser Parameter so auswirkte, wie man es in der Realität erwarten würde. \\ 
   
-%TODO: VERSUCH DER DAS BEWEIST EINFÜGEN
-
+\newpage
 \section{Softwaredesign}
 
-Der Aufbau der Anwendung wurde im Team diskutiert und anschließend mittels UML spezifiziert.
+Die Aufgaben der Anwendungen wurden in Bereiche (fachlich notwendige Ziele) aufgeteilt und mit UML unterstützt beschrieben. Im Folgenden sind diese Bereiche als Unterkapitel aufgeführt. Die passenden Diagramme sind jeweils im Kapitel eingefügt.
+
+\subsection{Konfiguration}
+
+\includegraphics[width=\textwidth]{abbildungen/uml/config}
+
+Um die Konfiguration dieses Mal besser als in der Vorherigen Abgabe zu gestalten, wird sie als zur Laufzeit nicht mehr veränderbare Klasse angelegt. Um dennoch einfaches Erstellen der Konfiguration zu ermöglichen wurde das Builder Pattern angewandt. Alle Konfigurationsfelder können über die Kommandozeile gesetzt  werden, haben aber auch Standardwerte. Die Zellgröße kann beispielsweise beliebig angepasst werden.
+
+\subsection{Feld}
+
+\includegraphics[width=\textwidth]{abbildungen/uml/field}
+
+Das Field ist eine Datenstruktur für die Simulationsfläche. Es enthält mögliche Locations (Punkte).
+
+Eine Map enthält alle Personen und für jede Person nur genau eine Location. So ist sichergestellt, das es die Person nur einmal auf dem Field gibt. Targets (Ziele) sind eine Menge aus Locations des Fields.
+
+Dieses Speichern in mehreren Listen (denormalisiert) wird absichtlich so gewählt, um das Programm anpassbar und schnell zu halten. Alternative wäre es, jeder Location über Klassenfelder ihre Person und weitere Eigenschaften wie Nutzen zuzuweisen. Das führt zwar zu einer strikten OO Modellierung, fordert aber auch mehr Logik und Rechenzeit zum Lesen der Daten.
+
+\subsection{Nutzenberechnung}
+
+\includegraphics[width=\textwidth]{abbildungen/uml/field-use}
+
+Die verschiedenen Arten zur Nutzenberechnung werden jeweils getrennt implementiert. Sie liefern aber alle eine Map aus Locations mit entsprechenden Nutzenwert nach erfolgreicher Berechnung zurück.
+
+Die Berechnungen benötigen natürlich immer das Field. Zusätzlich benötigt die Berechnung für das Personenpotential (PersonalSpace) die Location der zu betreffenden Person.
+
+\subsection{Zeit}
+
+Es wird analog zur vorherigen Studienarbeit eine Event-Driven Simulation umgesetzt. Es gibt wieder Clock und EventList. Als Events gibt es nur das
+PersonMoveEvent für einen Zug einer Person sowie das MeasureEvent zum Messen und Speichern aller notwendigen Daten.
+
+\includegraphics[width=\textwidth]{abbildungen/uml/time}
+
+Das PersonMoveEvent findet die beste mögliche nächste Position anhand des Nutzens (Schritt 1.1 und 1.2 im nachfolgenden Sequenzdiagramm). Ist der Nutzen für mehrere Positionen gleich, wird die Zelle mit kleinstem euklidischen Abstand gewählt.
+
+Bleibt als bestes Ziel nur die aktuelle Position der Person übrig, muss sie sich eigentlich nicht bewegen. Dennoch wartet sie solang, wie eine Bewegung zu einer benachbarten Zelle benötigt hätte. (Schritt 2)
+
+Ansonsten wird die Person zur gewünschten Position bewegt. Die Wartezeit wird anhand der eigenen Personengeschwindigkeit und der Zelldistanz berechnet. Das nächste PersonMoveEvent wird mit entsprechendem Zeitpunkt nach der Bewegung erstellt. (Schritt 3 und 4)
+
+\includegraphics[width=\textwidth]{abbildungen/uml/moveevent-execute}
 
 
+\subsection{Personen}
+
+\includegraphics[width=\textwidth]{abbildungen/uml/person}
+
+Eine Person hat eine ID und eine zu Beginn gesetzte feste Free Flow Velocity.
+Über die step() Methode wird jede Bewegung registriert. Die Klasse für eine Person speichert keinen Ort. Die Lokalisierung von Personen wird vom Field übernommen.
+
+Mit jeder registrierten Bewegung werden die Messwerte berechnet.
+
+
+\subsection{Oberfläche zur grafischen Darstellung der Simulation}
+
+Die Oberfläche kann eine gespeicherte Simulation laden und sie grafisch abspielen. Sie enthält einen Bereich mit Information über die  Simulationskonfiguration (InfoDrawer) sowie das aktuelle Feld (CanvasDrawer) mit Personen. Die Simulation kann mit einstellbarer Geschwindigkeit  abgespielt werden.
+
+Optional können auch die konstanten Nutzenwerte im Feld durch einen Farbverlauf dargestellt werden.
+
+Die groben Einstellungen für die Darstellungsfarben sowie die Größe der Zellen können über Konstanten in der GuiConfiguration angepasst werden.
+
+\includegraphics[width=\textwidth]{abbildungen/uml/visualisation}
+
+\newpage
 \section{Softwaretest}
-
 
 \input{euklid_fm_vergleich}
 
-
+\newpage
 \subsection{Verifikation}
 
 \subsubsection{Verteilung Wunschgeschwindigkeit in der Ebene}
@@ -297,6 +356,8 @@ Um die korrekte Funktion der Simulation gewährleisten zu können, muss die Gesc
 Dadurch, dass die Normalverteilung nicht das Thema dieser Arbeit ist, wurde von weiteren Tests auf Normalverteilung abgesehen.
 
 In der Simulation ist es möglich einen Seed für die Geschwindigkeiten einzustellen um sicherzugehen, dass bei verschiedenen Durchläufen, die gleichen Verteilung von Personengeschwindigkeiten erfolgt.
+
+\input{freeflow_test}
 
 \subsubsection{Hühnertest}
 Der Hühnertest wurde auf Basis des in Abbildung \ref{fig:HühnertestMap} aufgeführten Feldes durchgeführt. Die einzelnen Farben der einzelnen Elemente sind analog zu den in Tabelle \ref{tab:Farbcodes} beschriebenen gewählt. Personen werden grün, Hindernisse schwarz und das Ziel blau dargestellt. Da mit Hilfe dieses Testes lediglich überprüft werden soll, ob die Personen den Weg aus dem Hindernis finden, ist die Anzahl von $39$ simulierten Personen ausreichend. Der Test wurde dreimal durchgeführt. Zunächst wurde der Euklid Algorithmus, anschließend Dijkstra und zuletzt der Fast-Marching Algorithmus für die Berechnung des Zielnutzens verwendet.
@@ -538,25 +599,103 @@ Die Abbildung \ref{fig:Evak2TminmaxDis2MITE} zeigt einen Ausschnitt der Simulati
 \end{figure}
 
 Abschließend zeigt die Abbildung \ref{fig:Evak2TminmaxDis2ENDE} das Ende der Evakuierung der beiden Räume. Die Evakuierung eines Raumes, bei dem die Türen weit voneinander entfernt sind, verläuft mit einer Dauer von ca. $60,28s$ um ca. $2,3s$ schneller als die eines Raumes, bei dem die Türen nah beieinander liegen ($62,53s$). Durch eine höhere Anzahl an Personen, wirkt sich die Position der Türen somit nur noch sehr gering auf die Evakuierungsdauer aus. Hintergrund hierfür könnte die lange Wartezeit bzw. der große Stau vor den jeweiligen Türen sein. Da die Wartezeit der einzelnen Personen teilweise sehr hoch ist, wirkt sich der längere Weg bis zur Tür kaum auf die Evakuierungsdauer aus.
- 
-\paragraph{Fazit und Vergleich}
+
 
 
 \input{engstelle_test}
 
-
+\newpage
 \subsection{Validation}
 
+Zur Validation wurde der Rimea Test 4 mit unserer Software nachgebaut. Es wurde eine Karte mit $40cm$ großen Zellen erstellt, die $65$x$12m$ aufspannt.
+Die Karte ist in Abbildung \ref{fig:rimea4:map} dargestellt. Der Nutzen wurde mit euklidischem Abstand berechnet, um Fehler zu vermeiden.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\linewidth]{abbildungen/fundamentaldiagramm/map}
+	\caption{Karte für die Simulation des Rimea Test 4. Alle Zellen bis auf die Ziele der rechten Seite sind initial mit Personen befüllt.}
+	\label{fig:rimea4:map}
+\end{figure}
+
+Damit sich die Personen gleichmäßig verteilen und sich wie in einem endlosen Rundgang bewegen, wurde die Implementierung des Feldes angepasst. Von Personen auf der rechten Seite vor dem Ziel werden wieder die Zellen der linken Seite betrachtet. Da es zunächst einige Artefakte bei diesem Sprung gab, wurde sichergestellt, dass freie Zellen so wie das Personenpotential der jeweils anderen Seite berücksichtigt werden. Das heißt, das Personenpotenzial am Rand (also am Ziel) wurde auf die andere Seite (also Quelle) mitübertragen und umgekehrt.
+
+Um eine Änderung der Dichte zu erreichen, werden nach jeder Messung 30 zufällig verteilte Personen aus der Simulation entfernt. Das Messen wird jede Sekunde über das gesamte Feld durchgeführt.
+
+Für das Ermitteln des Flusses wurde eine vertikale Linie über die ganze Höhe gewählt. Die Werte werden aber auf $1m$ normiert.
+
+Die Simulation wurde durchgeführt und es wurde optisch kontrolliert, ob die Personen gleichmäßig verteilt sind. Die vier Ausschnitte aus der Simulation in Abbildung \ref{fig:rimea4:verlauf} zeigen den Verlauf.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\linewidth]{abbildungen/fundamentaldiagramm/verlauf}
+	\caption{Verlauf der Simulation mit dem Entfernen von Personen. Die Information zur Personenanzahl stimmt in diesem Fall nicht.}
+	\label{fig:rimea4:verlauf}
+\end{figure}
+
+Das Fundamentaldiagramm der Simulation ist in Abbildung \ref{fig:rimea4:diagramm} zu sehen. Die Werte für die Personenabstoßung wurden kalibriert ($\mu$ 50.0 $a_p$ 1.0 $b_p$ 2). Vergleicht man es mit dem Fundamentaldiagramm von Weidmann (Abbildung \ref{fig:rimea4:weidman}) fällt auf, dass der linke Teil bis zu einer Dichte von drei mit dem Diagramm von Weidmann sehr gut übereinstimmt. In der rechten Hälfte steigt die Geschwindigkeit ab einer Dichte von 3 jedoch wieder an. Dies steht im Widerspruch zu den Ergebnissen aus dem Messexperiment von Weidmann. Die Abweichung findet sich auch im Flussdiagramm (Abbildung \ref{fig:rimea4:fluss}). Von kurz nach dem Beginn der Simulation bis Sekunde $40$ (noch hohe Dichte) gibt es unerwartet den größten Fluss.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\linewidth]{abbildungen/fundamentaldiagramm/weidman}
+	\caption{Fundamentaldiagramm nach Weidman. Quelle: U. Weidmann Transporttechnik der Fussgänger, Transporttechnische Eigenschaften des Fussgängerverkehrs (Literturauswertung) Schriftenreihe des IVT Nr. 90, Zweite, ergänzte Auflage, Zürich, März 1993 (109 Seiten)}
+	\label{fig:rimea4:weidman}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\linewidth]{abbildungen/fundamentaldiagramm/diagramm}
+	\caption{Fundamentaldiagramm des Rimea Tests 4}
+	\label{fig:rimea4:diagramm}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\linewidth]{abbildungen/fundamentaldiagramm/fluss}
+	\caption{Fluss des Rimea Test 4 über eine 1m vertikale Linie.}
+	\label{fig:rimea4:fluss}
+\end{figure}
+
+Um zu untersuchen, ob das Entfernen von Personen aus der Simulation einen signifikanten Einfluss auf die mittlere Geschwindigkeit hat, wurden Einzelmessungen mit einer konstanten Dichte durchgeführt. Diese Messungen lagen alle jeweils auf der Kurve, des Fundamentaldiagramms in Abbildung \ref{fig:rimea4:diagramm}. Es wird angenommen, dass das Entfernen von Personen die Messwerte nicht beeinflusst.
+
+Für die nicht validen Ergebnisse ab einer Dichte größer drei wurden die Software und das Modell auf Fehler überprüft. Um die Suche einzuschränken wurde die Simulation ohne Personenpotential ausgeführt. Der Vergleich ist in Abbildung \ref{fig:rimea4:vergleich-ohnep} zu sehen. Das Personenpotential hat nur von Dichte eins bis ca. fünf einen Einfluss auf die Geschwindigkeit.
+Entweder ist das Personenpotential falsch umgesetzt und müsste auch im Bereich für sehr hohen Dichten gelten oder die generelle Zuglogik ist für hohe Dichte falsch. Der Fluss der Simulation ohne Personenpotential sieht aber plausibel aus (Abbildung \ref{fig:rimea4:fluss-ohnep}).
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\linewidth]{abbildungen/fundamentaldiagramm/vergleich-ohnep}
+	\caption{Fundamentaldiagramm des Rimea Test 4 mit (orange) und ohne (blau) Personenpotential}
+	\label{fig:rimea4:vergleich-ohnep}
+\end{figure}
+
+
+
+Eventuell liegt der Fehler auch an der Eigenschaft des zellulären Automaten.
+Ist eine Person bis auf eine Nachbarzelle komplett von Personen umringt, ist die Änderung des Nutzens durch das Personenpotential an beiden Stellen exakt gleich. So zieht die Person immer, wenn nur der Zellnutzen besser ist. Das könnte auch erklären, warum das Personenpotential bei hohen Dichten nicht greift. Möglicherweise ist die Zellgröße zu grob gewählt.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\linewidth]{abbildungen/fundamentaldiagramm/fluss-ohnep}
+	\caption{Fluss im Rimea Test 4 ohne Personpotential}
+	\label{fig:rimea4:fluss-ohnep}
+\end{figure}
+
+Leider können wir unsere Simulation wegen zu großer Abweichung im gerade interessanten Bereich mit hoher Dichte nicht validieren.
+
+\newpage
 \section{Ausblick und Fazit}
-Das Thema der Arbeit war die Bewegung von Personen in der Ebene zu simulieren. Zu Beginn wurde ein Java Programm implementiert, dass abhängig von Übergabeparameter und einer Karte, die das Feld mit Hindernissen beschreibt durchrechnet. Die Resultate wurden in eine Ausgabe Datei geschrieben. Diese konnte anschließend in einer Visualisierung dargestellt werden.
+\subsection{Fazit}
+Das Thema der Arbeit war die Bewegung von Personen in der Ebene zu simulieren. Zu Beginn wurde ein Java Programm implementiert, das abhängig von Übergabeparameter und einer Karte, die das Feld mit Hindernissen beschreibt durchrechnet. Die Resultate wurden in eine Ausgabe Datei geschrieben. Diese konnte anschließend in einer Visualisierung dargestellt werden.
 
-Die Personenbewegung wurde mit den Algorithmen Euklid, Dijkstra und Fast Marching berechnet und deren Resultate miteinander verglichen. Zudem wurde eine Personenabstoßung implementiert um  Ergebnisse zu erhalten, die näher an der Realität liegen. Zusätzlich wurde beschrieben wie die Zellgröße Einfluss auf die Ergebnisse nimmt. Zur Verifikation wurden mehrere Tests durchgeführt und dokumentiert. Anschließend ist eine Diskussion erfolgt, ob die implementierte Simulation relevant genug ist um die Realität zu einem gewissen Maße abbilden zu können.
+Die Personenbewegung wurde mit den Algorithmen Euklid, Dijkstra und Fast Marching berechnet und deren Resultate miteinander verglichen. Zudem wurde eine Personenabstoßung implementiert um Ergebnisse zu erhalten, die plausibler erscheinen. Anschließend wurden mehrere Tests zur Überprüfung des Programms durchgeführt.
 
-Die Simulation bietet die Möglichkeit die Startvariablen und den Simulationsbereich frei zu definieren und dadurch verschiedenste Szenarien betrachten zu können. Eine Option ist es, die durchschnittliche individuelle Wunschgeschwindigkeit der Personen anzupassen, wenn beispielsweise die Passanten in der Situation einer gewissen Gruppe (z.B. Rentner) angehören. Um realistische Ergebnisse zu erhalten müssten hierfür nur die entsprechenden Werte vorher ermittelt werden. Eine eigene Auswertung der Daten wie in dem Messexperiment der ersten Studienarbeit bietet die Simulation nicht an. Dies könnte für eine Weiterführung des Projektes eine mögliche Erweiterung sein. Hinzukommt, dass keine Personen generiert werden, die sich absonderlich oder anders als die anderen Verhalten. Ein Beispiel wären Drängler sein. Diese könnten in Zukunft noch hinzugefügt werden.
+Durch die Testfälle konnten einige relevante Erkenntnisse gewonnen werden. Das Evakuierungsszenario ergab, dass sich die Dauer der Evakuierung nahezu halbiert hat, wenn die Anzahl der Fluchttüren von 2 auf 4 erhöht wurden. Des Weiteren zeigte sich, dass die Position der Türen bei einer hohen Menge von Personen eine wesentlich geringere Auswirkung auf die Dauer der Evakuierung hat, als bei wenigen Passanten. Aus dem Test der Engstelle lies sich ab einer gewissen Personenzahl eine Verzögerungen in der Evakuierungszeit konstatieren. Aufgrund der Verteilung von Personen durch die individuellen Geschwindigkeit, verringert ein längerer Gang vor der Engstelle zudem die Staubildung. Wie der Rimea Test darstellte, ist ein Fehler in der Implementierung des Event Handlings anzunehmen. Testfälle mit sehr hohen Dichten lieferten unplausible Resultate. Den Zellulären Automaten beurteilend, lies sich feststellen, dass dieser sich gut eignet um einen Überblick über Situationen mit Personenbewegungen zu bekommen. Die Genauigkeit hängt jedoch zusätzlich von der Wahl der Zellgröße ab. Personen können sich nur direkt auf eine Zelle stellen und sind deshalb weiter eingeschränkt. Außerdem wird die Genauigkeit der Simulation von der Moore-Umgebung beeinflusst, da Menschen in der Realität nicht nur auf 8 mögliche Richtungen beschränkt sind.
+
+\subsection{Ausblick}
+Die Simulation bietet die Möglichkeit Startvariablen und Simulationsbereich frei zu definieren und dadurch verschiedenste Szenarien betrachten zu können. Eine Option ist es, die durchschnittliche individuelle Wunschgeschwindigkeit der Personen anzupassen, wenn beispielsweise die Passanten in der Situation einer gewissen Gruppe (z.B. Rentner) angehören. Um realistische Ergebnisse zu erhalten müssten hierfür nur die entsprechenden Werte vorher ermittelt werden. Eine eigene Auswertung der Daten wie in dem Messexperiment der ersten Studienarbeit bietet die Simulation nicht an. Dies könnte für eine Weiterführung des Projektes eine mögliche Erweiterung sein. Hinzukommt, dass keine Personen generiert werden, die sich absonderlich oder anders als die anderen Verhalten. Ein Beispiel hierfür wären Drängler. Diese könnten in Zukunft noch hinzugefügt werden. Zusätzlich könnte die Pfadwahl, bei mehreren äquivalenten Pfadmöglichkeiten, die durch die Moore-Umgebung entstehen optimiert werden.
 
 \section{Aufgabenverteilung}
 Im folgenden wird die grobe Aufgabenverteilung aufgeführt. Ein strikte Aufgabentrennung gab es nicht. Viele Aufgaben wurden von mehreren Personen zusammen erledigt. Insbesondere wurden Code- und Textreviews durchgeführt. Die folgende Auflistung stellt nur die groben Schwerpunkte dar.
- 
+
 \subsection{Peter Müller}
 \begin{description}
 \item[Implementierung]
@@ -574,6 +713,7 @@ Implementierung:\\
 Implementierung Ausgabedatei, Visualisierung (Laden von Simulationen, Abspielen der Simulation, Geschwindigkeitsregler, komplette Darstellung des Felds sowie Personen, Heatmap, Infopanel mit Legende, Navigation über Scrollbar bei zu Großem Feld), Auswertung Normalverteilung Wunschgeschwindigkeit mit Histogramm, Code Reviews, Dokumentation Code
 Seminararbeit:\\
 Kapitel Normalverteilung Wunschgeschwindigkeit, Ausblick und Fazit, Text Reviews
+
 \subsection{Dimitrie Diez}
 Implementierung:\\
 Implementierung Euklid, Implementierung Fast-Marching, Implementierung Field-Import, Implementierung Measurement-Berechnungen, Implementierung .csv Export (vom letzten Projekt übernommen), Teilimplementierung Visualisierung (Heatmap und Snapshot Funktion), Unit Tests, Code Reviews\\
@@ -581,12 +721,13 @@ Seminararbeit:\\
 Kapitel Vergleich Euklid-Fast-Marching, Testfall Engstelle, Textreviews
 
 \subsection{Daniel Graf}
-Anforderungsmanagement: Definition der Requirements \\ 
+Anforderungsmanagement: Definition der Requirements \\
 Implementierung:\\
-Implementierung Euklid, Implementierung Field-Import, Evaluierung Visualisierungstools (Vadere), Code Reviews 
+Implementierung Euklid, Implementierung Field-Import, Evaluierung Visualisierungstools (Vadere), Code Reviews
 Seminararbeit:\\
 Kapitel Einleitung, Kapitel Modellbeschreibung, Kapitel Anforderung, Kapitel Engstelle, Kapitel Hühnertest, Kapitel Evakuierungsszenarien, Kapitel FreeFlow Test, Textreviews
 
+\newpage
 %----------------------------------------------------------------------------------------
 %\input{References}
 \bibliography{Bibliographie}
